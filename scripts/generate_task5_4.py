@@ -66,6 +66,13 @@ memory_mb = 4096
 storage_mb = 10240
 allow_internet = true
 
+# HF_TOKEN is plumbed in for materials hosted in gated HF datasets (e.g.
+# the _5_3 variant referenced by task_id=22 and task_id=30). Harbor resolves
+# ${{HF_TOKEN}} from the host's environment at trial start; the suite remains
+# runnable for public-only materials when HF_TOKEN is unset.
+[environment.env]
+HF_TOKEN = "${{HF_TOKEN:-}}"
+
 [[steps]]
 name = "solve"
 
@@ -102,6 +109,7 @@ mkdir -p /workspace/materials /workspace/output /workspace/work
 
 curl --fail --silent --show-error --location \\
      --retry 5 --retry-delay 3 --retry-connrefused \\
+     ${{HF_TOKEN:+-H "Authorization: Bearer $HF_TOKEN"}} \\
      "$MATERIALS_URL" -o /tmp/materials.zip
 unzip -q -o /tmp/materials.zip -d /workspace/materials/
 rm -f /tmp/materials.zip

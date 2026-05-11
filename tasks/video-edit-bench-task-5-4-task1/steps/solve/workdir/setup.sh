@@ -9,6 +9,7 @@ mkdir -p /workspace/materials /workspace/output /workspace/work
 
 curl --fail --silent --show-error --location \
      --retry 5 --retry-delay 3 --retry-connrefused \
+     ${HF_TOKEN:+-H "Authorization: Bearer $HF_TOKEN"} \
      "$MATERIALS_URL" -o /tmp/materials.zip
 unzip -q -o /tmp/materials.zip -d /workspace/materials/
 rm -f /tmp/materials.zip
