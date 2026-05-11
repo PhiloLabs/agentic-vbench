@@ -8,12 +8,12 @@ Tasks live in Harbor's task format; Harbor handles agent installation, sandbox o
 
 | Family | Source dataset | Instances generated | Runnable | Integrated |
 |---|---|---|---|---|
-| `video-edit-bench-task-5-4` (clip ordering) | `ameddserM/video_edit_bench_task_5_4` | 31 | 29 | ✅ |
-| `video-edit-bench-task-7-3` (storyboard assembly) | `ameddserM/video_edit_bench_task_7_3` | — | — | planned |
+| `video-edit-bench-task-5-4` (clip ordering) | `ameddserM/video_edit_bench_task_5_4` | 31 | 31 (29 anon + 2 with HF_TOKEN) | ✅ |
+| `video-edit-bench-task-7-3` (storyboard assembly) | `ameddserM/video_edit_bench_task_7_3` | 24 | 24 (all gated; requires HF_TOKEN) | ✅ |
 | `video-edit-bench-task-6` (video repair) | `ameddserM/video_edit_bench_task_6` | — | — | planned |
 | `video-edit-bench-task-4-2` (open-ended editing) | `ameddserM/video_edit_bench_task_4_2` | — | — | planned |
 
-Two task5_4 instances (`task_id` 22 and 30) are emitted but fail at trial start: their `reference_file_urls` rows in the HF dataset point to a retired path (`video_edit_bench_task_5_3`) and return 404. Tracked, upstream fix needed.
+Two task5_4 instances (`task_id` 22 and 30) point at the gated `_5_3` HF dataset. All 24 task7_3 instances point at the gated `_7` HF dataset. Both groups need `HF_TOKEN` to be set on the host that invokes `harbor run` — Harbor's `[environment.env]` block plumbs it into the container. Suite still emits valid task dirs and works for public-only materials if `HF_TOKEN` is unset.
 
 A claude-code (sonnet 4.6) baseline run on Modal at `--n-concurrent 31` completed in 17m 30s, $29.14, with a mean reward of **0.526** across 29 valid trials (range 0.279 – 0.854).
 
@@ -27,8 +27,9 @@ A claude-code (sonnet 4.6) baseline run on Modal at `--n-concurrent 31` complete
 uv venv .venv --python 3.12 && source .venv/bin/activate
 uv pip install datasets huggingface_hub
 
-# 3. Generate the 31 task directories from the HF dataset
-python scripts/generate_task5_4.py --overwrite
+# 3. Generate task directories from the HF datasets
+python scripts/generate_task5_4.py --overwrite     # 31 dirs for task5_4
+python scripts/generate_task7_3.py --overwrite     # 24 dirs for task7_3
 
 # 4. Run on Modal (requires MODAL_TOKEN_ID / MODAL_TOKEN_SECRET / ANTHROPIC_API_KEY)
 harbor run \
@@ -58,10 +59,12 @@ agentic-vbench/
 ├── AGENTS.md / CLAUDE.md     # agent-facing repo policy
 ├── scripts/
 │   ├── install-harbor.sh     # pins Harbor version
-│   ├── generate_task5_4.py   # HF dataset → Harbor task dirs
+│   ├── generate_task5_4.py   # HF dataset → 31 task5_4 dirs
+│   ├── generate_task7_3.py   # HF dataset → 24 task7_3 dirs
 │   └── monitor_job.py        # poll a running job for state changes
 └── tasks/
-    └── video-edit-bench-task-5-4-task<N>/
+    ├── video-edit-bench-task-5-4-task<N>/      # 31 clip-ordering tasks
+    └── video-edit-bench-task-7-3-task<N>/      # 24 storyboard-assembly tasks
         ├── task.toml         # Harbor multi-step task config
         ├── environment/
         │   └── Dockerfile    # python:3.12-slim + ffmpeg
