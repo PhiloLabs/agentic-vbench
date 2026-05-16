@@ -1,6 +1,6 @@
 # Fix Motion-Blurred Frames
 
-I have a short clip where, for a stretch in the middle, the whole
+I have a short clip where, for a stretch in it, the whole
 picture goes blurry — it looks like the camera lost focus or someone
 shook it. Outside that stretch the picture is clean and sharp.
 

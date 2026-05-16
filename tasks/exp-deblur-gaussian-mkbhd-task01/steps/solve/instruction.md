@@ -1,7 +1,7 @@
 # Sharpen A Blurry Patch
 
 I have a short clip where a certain area of the picture goes blurry for
-a stretch in the middle of the clip — it's like there's a soft spot on
+a stretch of the clip — it's like there's a soft spot on
 the lens that only shows up in some frames. Everything outside that
 area, and everything outside that stretch, looks clean.
 

@@ -1,7 +1,7 @@
 # Restore A Muffled Stretch Of Audio
 
 I have a short mono speech recording at `/workspace/materials/noisy.wav`.
-For a stretch in the middle, the audio sounds muffled — like the high
+For a stretch in it, the audio sounds muffled — like the high
 end has been chopped off and the voice lost its sparkle. The rest of
 the recording sounds clean and full.
 

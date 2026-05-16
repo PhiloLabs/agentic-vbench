@@ -1,7 +1,7 @@
 # Restore A Clipped Recording
 
 I have a short mono speech recording at `/workspace/materials/noisy.wav`.
-For a stretch in the middle, the audio sounds harsh and crunchy — like
+For a stretch in it, the audio sounds harsh and crunchy — like
 the peaks of the waveform have been chopped off so the loud parts
 distort. Outside that stretch the recording sounds fine.
 

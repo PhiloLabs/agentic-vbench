@@ -1,7 +1,7 @@
 # Remove Reverb From A Recording
 
 I have a short mono speech recording at `/workspace/materials/noisy.wav`.
-For a stretch in the middle, the voice sounds reverby / echoey, as if
+For a stretch in it, the voice sounds reverby / echoey, as if
 the speaker stepped into a large empty room. The rest of the recording
 is clean and dry.
 

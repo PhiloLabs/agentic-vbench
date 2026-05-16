@@ -1,7 +1,7 @@
 # Fix A Color-Grading Section
 
-The video at `/workspace/materials/source.mp4` has a stretch in the
-middle where the color grading looks off — like someone applied a heavy
+The video at `/workspace/materials/source.mp4` has a stretch in it
+where the color grading looks off — like someone applied a heavy
 filter to that section and forgot to remove it. The rest of the clip
 shows the overall look of the piece.
 
