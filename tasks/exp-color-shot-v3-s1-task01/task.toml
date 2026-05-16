@@ -1,0 +1,29 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/exp-color-shot-v3-s1-task01"
+
+[metadata]
+difficulty = "hard"
+category = "video-color-restore-shot"
+tags = ["color-restore", "cdl", "cold-desat", "v3-source", "video-color", "video-restoration", "windowed"]
+source = "26-color-restore-v3-s1-cold-desat.mp4"
+corruption = "ASC-CDL (sat=0.78, contrast=1.13, RGB=0.91/0.98/1.09) applied to [152.12s, 156.96s)"
+license = "unknown-research-use-only"
+attribution = "see source URL"
+
+[environment]
+build_timeout_sec = 1800.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 16384
+allow_internet = true
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 2700.0
+
+[steps.verifier]
+timeout_sec = 1800.0

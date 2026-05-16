@@ -1,0 +1,31 @@
+{
+  "kind": "disfluency",
+  "unit": "ms",
+  "source_duration_s": 30.029,
+  "tolerance_each_side_s": 0.2,
+  "duration_tolerance_s": 0.1,
+  "ssim_threshold": 0.95,
+  "audio_xcorr_threshold": 0.9,
+  "audio": "required",
+  "cuts": [
+    {
+      "start_ms": 5150,
+      "end_ms": 5950,
+      "reason": "filler 'um/emm'",
+      "forbidden_tokens": [
+        "um"
+      ]
+    },
+    {
+      "start_ms": 22550,
+      "end_ms": 23250,
+      "reason": "filler 'um/emm'",
+      "forbidden_tokens": [
+        "um"
+      ]
+    }
+  ],
+  "source_filler_counts": {
+    "um": 0
+  }
+}

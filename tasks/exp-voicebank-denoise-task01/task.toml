@@ -1,0 +1,27 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/exp-voicebank-denoise-task01"
+
+[metadata]
+difficulty = "medium"
+category = "audio-repair"
+tags = ["speech-enhancement", "denoising", "voicebank-demand", "experiment"]
+source = "Reuters anchor read (clip 5-40s) + VoiceBank-DEMAND-derived noise"
+corruption = "additive DEMAND-derived noise at SNR=10 dB (seed=42)"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240
+allow_internet = true
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 1800.0
+
+[steps.verifier]
+timeout_sec = 600.0

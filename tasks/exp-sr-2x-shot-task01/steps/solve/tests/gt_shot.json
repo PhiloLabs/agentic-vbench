@@ -1,0 +1,9 @@
+{
+  "start_frame": 122,
+  "end_frame": 238,
+  "downsample_factor": 2,
+  "clip_width": 1280,
+  "clip_height": 720,
+  "clip_n_frames": 1440,
+  "fps_rational": "24000/1001"
+}

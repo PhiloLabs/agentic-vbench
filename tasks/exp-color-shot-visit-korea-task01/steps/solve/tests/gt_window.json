@@ -1,0 +1,14 @@
+{
+  "window_start_s": 6.25,
+  "window_end_s": 12.0,
+  "window_start_frame": 150,
+  "window_end_frame": 288,
+  "fps": 24.0,
+  "n_frames_total": 721,
+  "weights": {
+    "in_window": 0.85,
+    "out_window": 0.15
+  },
+  "grade_kind": "lut",
+  "grade_provenance": "Bourbon_64.CUBE"
+}

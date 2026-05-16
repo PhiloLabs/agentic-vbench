@@ -1,0 +1,35 @@
+{
+  "kind": "content_cut",
+  "unit": "ms",
+  "source_duration_s": 90.007,
+  "tolerance_each_side_s": 0.1,
+  "duration_tolerance_s": 0.1,
+  "ssim_threshold": 0.95,
+  "audio_xcorr_threshold": 0.9,
+  "audio": "required",
+  "cuts": [
+    {
+      "start_ms": 55000,
+      "end_ms": 67000,
+      "forbidden_keywords": [
+        "vast",
+        "project",
+        "power",
+        "multiple",
+        "means",
+        "easily",
+        "distances",
+        "compared",
+        "attacks",
+        "areas",
+        "active",
+        "navy",
+        "launch",
+        "carriers",
+        "china's",
+        "aircraft"
+      ],
+      "reason": "off-topic segment per prompt"
+    }
+  ]
+}

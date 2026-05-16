@@ -1,0 +1,24 @@
+{
+  "kind": "content_cut",
+  "unit": "ms",
+  "source_duration_s": 90.007,
+  "tolerance_each_side_s": 0.1,
+  "duration_tolerance_s": 0.1,
+  "ssim_threshold": 0.95,
+  "audio_xcorr_threshold": 0.9,
+  "audio": "required",
+  "cuts": [
+    {
+      "start_ms": 29000,
+      "end_ms": 34000,
+      "forbidden_keywords": [
+        "stand",
+        "film",
+        "case",
+        "ability",
+        "time"
+      ],
+      "reason": "off-topic segment per prompt"
+    }
+  ]
+}
