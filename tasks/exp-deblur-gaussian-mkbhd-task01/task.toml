@@ -1,0 +1,29 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/exp-deblur-gaussian-mkbhd-task01"
+
+[metadata]
+difficulty = "medium"
+category = "video-deblur"
+tags = ["gaussian-blur", "deblur", "mask-region", "time-windowed", "video-restoration"]
+source = "24-deblur-gaussian-waynes-world.mp4"
+corruption = "per-frame cv2.GaussianBlur ksize=15, sigma=3.0 inside bbox (0.3, 0.25, 0.4, 0.5), window 12.47s-21.94s"
+license = "unknown-research-use-only"
+attribution = "see source URL"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 8192
+allow_internet = true
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 1800.0
+
+[steps.verifier]
+timeout_sec = 600.0

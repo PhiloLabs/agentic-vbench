@@ -1,0 +1,614 @@
+"""Precision cut-verifier core.
+
+Ports the single-range verifier from test-shots-cut/ to a multi-range version
+for agentic-vbench cut tasks (disfluency, content_cut, glitch-dup).
+
+Three gates per submission:
+
+  1. Range gate (binary per cut)
+     For each golden range Gi, find the submitted range Sj that minimises
+     |s_start - g_start| + |s_end - g_end| (greedy nearest match, no
+     reuse). Per-cut pass iff |s_start - g_start| <= tol_each_side AND
+     |s_end - g_end| <= tol_each_side. passed_count = number of golden
+     ranges that found a matching submitted range.
+
+  2. Honesty gate (single global SSIM check on multi-range reconstruction)
+     Reconstruct expected_remainder = source minus ALL submitted ranges via
+     ffmpeg select/setpts (multi-range expression). Compare against the
+     agent's output video by per-frame SSIM with +-2-frame lag window. Pass
+     iff mean SSIM >= ssim_threshold AND |duration diff| <= dur_tol.
+
+  3. Audio xcorr gate (single global)
+     Reconstruct expected audio remainder via ffmpeg aselect; compare to
+     agent's output audio via normalised cross-correlation. Pass iff
+     xcorr >= audio_xcorr_threshold. If audio fails -> score 0.
+
+Final score:
+  - if honesty fails OR audio fails -> 0 (they corrupted the content / lied)
+  - else: passed_count / N
+
+GT cuts.json schema (per task):
+  {
+    "kind": "disfluency" | "content_cut" | "glitch_dup",
+    "unit": "ms" | "frames",        # how cuts encode timing
+    "fps": float,                    # required iff unit == "frames"
+    "source_duration_s": float,
+    "tolerance_each_side_s": float,  # per task
+    "duration_tolerance_s": float,
+    "ssim_threshold": float,
+    "audio_xcorr_threshold": float,
+    "audio": "required" | "skip",   # whether to run the audio gate
+    "cuts": [                        # cut tasks
+      {"start_ms": int, "end_ms": int, ...},
+      ...
+    ],
+    "glitches": [                    # glitch_dup tasks (alternative)
+      {"start_frame": int, "end_frame": int, ...},
+      ...
+    ]
+  }
+
+Submission schema:
+  {"cuts":     [{"start_ms": int,    "end_ms": int}, ...]}    # disfluency / content_cut
+  {"glitches": [{"start_frame": int, "end_frame": int}, ...]} # glitch_dup
+"""
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+import tempfile
+from dataclasses import asdict, dataclass, field
+from pathlib import Path
+
+
+# Fallback defaults; per-task GT JSON should set these explicitly.
+DEFAULT_TOLERANCE_EACH_SIDE_S = 0.20
+DEFAULT_DURATION_TOLERANCE_S = 0.10
+DEFAULT_SSIM_THRESHOLD = 0.95
+DEFAULT_AUDIO_XCORR_THRESHOLD = 0.90
+
+
+SSIM_SAMPLE_FPS = 4.0
+SSIM_SCALE_H = 180
+SSIM_LAG_BAND_FRAMES = 2
+
+
+@dataclass
+class CutRange:
+    start_s: float
+    end_s: float
+    # Optional per-endpoint tolerance (GT only). When set, these override the
+    # task-global `tolerance_each_side_s`. None falls back to the global.
+    tol_start_s: float | None = None
+    tol_end_s: float | None = None
+
+
+@dataclass
+class CutReport:
+    score: float
+    reason: str
+    n_gt: int
+    n_submitted: int
+    passed_count: int
+    honesty_pass: bool
+    audio_pass: bool
+    duration_pass: bool
+    per_cut: list[dict] = field(default_factory=list)
+    ssim: float | None = None
+    audio_xcorr: float | None = None
+    expected_duration_s: float | None = None
+    submission_duration_s: float | None = None
+    duration_diff_s: float | None = None
+
+
+def _probe_duration(path: Path) -> float:
+    res = subprocess.run(
+        ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+         "-of", "default=nw=1:nk=1", str(path)],
+        capture_output=True, text=True, check=False,
+    )
+    try:
+        return float(res.stdout.strip())
+    except Exception:
+        return 0.0
+
+
+def _has_audio_stream(path: Path) -> bool:
+    res = subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", "a:0",
+         "-show_entries", "stream=codec_type",
+         "-of", "default=nw=1:nk=1", str(path)],
+        capture_output=True, text=True, check=False,
+    )
+    return res.returncode == 0 and "audio" in res.stdout
+
+
+def _build_between_or(ranges: list[CutRange]) -> str:
+    """Build ffmpeg expression: between(t,s1,e1)+between(t,s2,e2)+...
+
+    Inner commas are escaped for the filter-graph parser.
+    """
+    parts = [f"between(t\\,{r.start_s:.6f}\\,{r.end_s:.6f})" for r in ranges]
+    return "+".join(parts) if parts else "0"
+
+
+def _reconstruct_remainder(
+    source: Path, ranges: list[CutRange], out: Path,
+    include_audio: bool = True,
+) -> None:
+    """Build source minus all `ranges` (union) at `out` via ffmpeg select."""
+    if ranges:
+        vf = f"select='not({_build_between_or(ranges)})',setpts=N/FRAME_RATE/TB"
+        af = f"aselect='not({_build_between_or(ranges)})',asetpts=N/SR/TB"
+    else:
+        # No cuts: pass-through re-encode (we still re-encode for parity).
+        vf = "setpts=N/FRAME_RATE/TB"
+        af = "asetpts=N/SR/TB"
+
+    cmd = [
+        "ffmpeg", "-nostdin", "-y", "-loglevel", "error",
+        "-i", str(source),
+        "-vf", vf,
+        "-c:v", "libx264", "-preset", "ultrafast", "-crf", "20",
+        "-pix_fmt", "yuv420p",
+    ]
+    if include_audio and _has_audio_stream(source):
+        cmd += ["-af", af, "-c:a", "aac", "-b:a", "128k"]
+    else:
+        cmd += ["-an"]
+    cmd += ["-movflags", "+faststart", str(out)]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    if res.returncode != 0:
+        raise RuntimeError(f"reconstruct failed: {res.stderr[-500:]}")
+
+
+def _reconstruct_audio_only(
+    source: Path, ranges: list[CutRange], out_wav: Path,
+) -> bool:
+    """Build expected audio remainder (mono 16k WAV). Returns False if no audio."""
+    if not _has_audio_stream(source):
+        return False
+    af = (f"aselect='not({_build_between_or(ranges)})',asetpts=N/SR/TB"
+          if ranges else "asetpts=N/SR/TB")
+    cmd = [
+        "ffmpeg", "-nostdin", "-y", "-loglevel", "error",
+        "-i", str(source),
+        "-vn", "-af", af,
+        "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le",
+        str(out_wav),
+    ]
+    res = subprocess.run(cmd, capture_output=True, text=True)
+    return res.returncode == 0 and out_wav.exists() and out_wav.stat().st_size > 0
+
+
+def _extract_audio(video: Path, out_wav: Path) -> bool:
+    if not _has_audio_stream(video):
+        return False
+    res = subprocess.run([
+        "ffmpeg", "-nostdin", "-y", "-loglevel", "error",
+        "-i", str(video),
+        "-vn", "-ac", "1", "-ar", "16000", "-c:a", "pcm_s16le",
+        str(out_wav),
+    ], capture_output=True, text=True)
+    return res.returncode == 0 and out_wav.exists() and out_wav.stat().st_size > 0
+
+
+def _read_wav_pcm16_mono(path: Path) -> "np.ndarray":  # type: ignore[name-defined]
+    import numpy as np
+    import wave
+    with wave.open(str(path), "rb") as w:
+        n = w.getnframes()
+        raw = w.readframes(n)
+    return np.frombuffer(raw, dtype=np.int16).astype(np.float32)
+
+
+def _audio_xcorr(ref_wav: Path, sub_wav: Path,
+                 *, win_s: float = 1.0, step_s: float = 0.5,
+                 max_lag_s: float = 0.2) -> float:
+    """Windowed normalised cross-correlation, averaged over the signal.
+
+    Both inputs must be mono 16k PCM. For each 1s window of `ref`, slide
+    `sub` by +- max_lag_s and take the max normalised correlation. Average
+    across windows. This is the audio analogue of the SSIM lag-band match:
+    a re-encoded honest cut lands near 1.0 (small phase / sample jitter
+    absorbed by the per-window lag scan), while a content lie or wrong
+    span averages to <= 0.2.
+    """
+    import numpy as np
+    a = _read_wav_pcm16_mono(ref_wav)
+    b = _read_wav_pcm16_mono(sub_wav)
+    sr = 16000
+    win = int(sr * win_s)
+    step = int(sr * step_s)
+    max_lag = int(sr * max_lag_s)
+
+    n = min(len(a), len(b))
+    if n < win:
+        # Signals too short for a windowed scan; fall back to a single
+        # zero-mean normalised correlation over the entire range.
+        if n < sr // 4:
+            return 0.0
+        x = a[:n] - a[:n].mean()
+        y = b[:n] - b[:n].mean()
+        denom = (np.linalg.norm(x) * np.linalg.norm(y)) + 1e-9
+        return float(np.dot(x, y) / denom)
+
+    scores: list[float] = []
+    pos = 0
+    while pos + win <= n:
+        x = a[pos:pos + win]
+        x_z = x - x.mean()
+        x_norm = np.linalg.norm(x_z)
+        if x_norm < 1e-3:
+            # near-silent window; skip (silence vs silence is uninformative)
+            pos += step
+            continue
+        lo = max(0, pos - max_lag)
+        hi = min(n, pos + win + max_lag)
+        y_chunk = b[lo:hi]
+        y_z = y_chunk - y_chunk.mean()
+        if len(y_z) < win:
+            pos += step
+            continue
+        # Sliding dot-products of x_z over y_z (valid mode).
+        cs = np.correlate(y_z, x_z, mode="valid")
+        # Sliding L2 norms of y_z windows of len(win).
+        y_sq = y_z.astype(np.float64) ** 2
+        cum = np.concatenate(([0.0], np.cumsum(y_sq)))
+        win_energy = cum[win:] - cum[:-win]
+        y_norms = np.sqrt(np.maximum(win_energy, 0.0))
+        denom = x_norm * y_norms + 1e-9
+        cn = cs / denom
+        scores.append(float(np.max(np.abs(cn))))
+        pos += step
+    return float(np.mean(scores)) if scores else 0.0
+
+
+def _sample_gray_frames(video: Path, sample_fps: float, scale_h: int):
+    import numpy as np
+    probe = subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", "v:0",
+         "-show_entries", "stream=width,height",
+         "-of", "csv=p=0", str(video)],
+        capture_output=True, text=True, check=True,
+    )
+    src_w, src_h = (int(x) for x in probe.stdout.strip().split(","))
+    out_w = max(2, int(round(src_w * scale_h / src_h)))
+    out_h = scale_h
+    cmd = [
+        "ffmpeg", "-nostdin", "-loglevel", "error",
+        "-i", str(video),
+        "-vf", f"fps={sample_fps},scale={out_w}:{out_h}",
+        "-f", "rawvideo", "-pix_fmt", "gray",
+        "pipe:1",
+    ]
+    res = subprocess.run(cmd, capture_output=True, check=False)
+    if res.returncode != 0:
+        raise RuntimeError(
+            f"ffmpeg sample failed: {res.stderr.decode('utf-8', 'replace')[-400:]}"
+        )
+    bpf = out_w * out_h
+    n, rem = divmod(len(res.stdout), bpf)
+    if rem != 0 or n == 0:
+        raise RuntimeError(f"unexpected sample buffer: {len(res.stdout)}B, {bpf}B/frame")
+    return np.frombuffer(res.stdout, dtype=np.uint8).reshape(n, out_h, out_w)
+
+
+def _ssim_score(ref: Path, sub: Path,
+                sample_fps: float = SSIM_SAMPLE_FPS,
+                scale_h: int = SSIM_SCALE_H,
+                lag_band_frames: int = SSIM_LAG_BAND_FRAMES) -> float:
+    import numpy as np
+    from skimage.metrics import structural_similarity as ssim
+    a = _sample_gray_frames(ref, sample_fps, scale_h)
+    b = _sample_gray_frames(sub, sample_fps, scale_h)
+    n = min(len(a), len(b))
+    if n == 0:
+        return 0.0
+    per_frame = []
+    for i in range(n):
+        lo = max(0, i - lag_band_frames)
+        hi = min(len(a), i + lag_band_frames + 1)
+        best = 0.0
+        for j in range(lo, hi):
+            s = float(ssim(a[j], b[i], data_range=255))
+            if s > best:
+                best = s
+                if best > 0.999:
+                    break
+        per_frame.append(best)
+    return float(np.mean(per_frame))
+
+
+def _greedy_match(golden: list[CutRange], submitted: list[CutRange],
+                  tol_side: float) -> tuple[int, list[dict]]:
+    """Greedy-nearest match each golden cut to one submitted cut.
+
+    Per-cut tolerance: each golden range may carry `tol_start_s` and
+    `tol_end_s` set per-endpoint. Both default to the task-global `tol_side`
+    when not specified. Pass iff |start_off| <= tol_start AND |end_off| <= tol_end.
+    """
+    used = [False] * len(submitted)
+    per_cut = []
+    passed = 0
+    for gi, g in enumerate(golden):
+        best_j = -1
+        best_cost = float("inf")
+        for j, s in enumerate(submitted):
+            if used[j]:
+                continue
+            cost = abs(s.start_s - g.start_s) + abs(s.end_s - g.end_s)
+            if cost < best_cost:
+                best_cost = cost
+                best_j = j
+        tol_s = g.tol_start_s if g.tol_start_s is not None else tol_side
+        tol_e = g.tol_end_s   if g.tol_end_s   is not None else tol_side
+        if best_j < 0:
+            per_cut.append({
+                "golden_start_s": g.start_s,
+                "golden_end_s": g.end_s,
+                "matched_submitted_idx": None,
+                "start_offset_s": None,
+                "end_offset_s": None,
+                "tol_start_s": tol_s,
+                "tol_end_s": tol_e,
+                "passed": False,
+                "reason": "no submitted cut left to match",
+            })
+            continue
+        used[best_j] = True
+        s = submitted[best_j]
+        start_off = abs(s.start_s - g.start_s)
+        end_off = abs(s.end_s - g.end_s)
+        ok = (start_off <= tol_s) and (end_off <= tol_e)
+        if ok:
+            passed += 1
+        per_cut.append({
+            "golden_start_s": round(g.start_s, 4),
+            "golden_end_s": round(g.end_s, 4),
+            "matched_submitted_idx": best_j,
+            "submitted_start_s": round(s.start_s, 4),
+            "submitted_end_s": round(s.end_s, 4),
+            "start_offset_s": round(start_off, 4),
+            "end_offset_s": round(end_off, 4),
+            "tol_start_s": tol_s,
+            "tol_end_s": tol_e,
+            "passed": bool(ok),
+        })
+    return passed, per_cut
+
+
+def _parse_ranges(payload: dict, unit: str, fps: float) -> list[CutRange]:
+    """Parse a submission/GT cuts list into seconds.
+
+    Frame-indexed cuts (`start_frame`, `end_frame`) follow half-open
+    semantics: the range `[S, E)` should remove frames S..E-1, NOT including
+    frame E. ffmpeg's `between(t, a, b)` is closed on both ends, though, so a
+    naive `end_s = end_frame / fps` ends up including the frame at `end_frame`
+    (one extra frame per cut). To preserve half-open semantics we nudge
+    `end_s` back by half a frame so the closed-interval check excludes the
+    frame at `end_frame` while still safely including frame `E-1`.
+    """
+    if not isinstance(payload, dict):
+        return []
+    if "cuts" in payload:
+        items = payload.get("cuts") or []
+        kind = "cuts"
+    elif "glitches" in payload:
+        items = payload.get("glitches") or []
+        kind = "glitches"
+    else:
+        return []
+    half_frame = 0.5 / fps if fps > 0 else 0.0
+    out = []
+    for it in items:
+        if not isinstance(it, dict):
+            continue
+        ts = it.get("tol_start_s")
+        te = it.get("tol_end_s")
+        ts = float(ts) if ts is not None else None
+        te = float(te) if te is not None else None
+        if unit == "ms":
+            if "start_ms" in it and "end_ms" in it:
+                out.append(CutRange(float(it["start_ms"]) / 1000.0,
+                                    float(it["end_ms"]) / 1000.0, ts, te))
+            elif "start_frame" in it and "end_frame" in it and fps > 0:
+                # Glitch agent may have submitted frames even on a ms task.
+                out.append(CutRange(float(it["start_frame"]) / fps,
+                                    float(it["end_frame"]) / fps - half_frame, ts, te))
+        elif unit == "frames":
+            if "start_frame" in it and "end_frame" in it and fps > 0:
+                out.append(CutRange(float(it["start_frame"]) / fps,
+                                    float(it["end_frame"]) / fps - half_frame, ts, te))
+            elif "start_ms" in it and "end_ms" in it:
+                out.append(CutRange(float(it["start_ms"]) / 1000.0,
+                                    float(it["end_ms"]) / 1000.0, ts, te))
+    # Sort by start time and merge tiny overlaps so reconstruction is valid.
+    out.sort(key=lambda r: r.start_s)
+    merged: list[CutRange] = []
+    for r in out:
+        if merged and r.start_s < merged[-1].end_s:
+            # Carry forward the previous range's per-endpoint tolerances since
+            # merging only happens for overlapping ranges from the same submission.
+            merged[-1] = CutRange(merged[-1].start_s,
+                                  max(merged[-1].end_s, r.end_s),
+                                  merged[-1].tol_start_s,
+                                  merged[-1].tol_end_s)
+        else:
+            merged.append(r)
+    return merged
+
+
+def verify_cuts(
+    source_mp4: Path,
+    output_mp4: Path,
+    submission_json: Path | dict,
+    gt_json: Path | dict,
+) -> CutReport:
+    """Run the multi-range cut verifier. Pure-Python; safe to call from judge.py."""
+    gt = json.loads(gt_json.read_text()) if isinstance(gt_json, Path) else gt_json
+    sub = (json.loads(submission_json.read_text())
+           if isinstance(submission_json, Path) else submission_json)
+
+    unit = str(gt.get("unit", "ms"))
+    fps = float(gt.get("fps", 0.0) or 0.0)
+    tol_side = float(gt.get("tolerance_each_side_s", DEFAULT_TOLERANCE_EACH_SIDE_S))
+    tol_dur = float(gt.get("duration_tolerance_s", DEFAULT_DURATION_TOLERANCE_S))
+    ssim_thresh = float(gt.get("ssim_threshold", DEFAULT_SSIM_THRESHOLD))
+    audio_thresh = float(gt.get("audio_xcorr_threshold",
+                                DEFAULT_AUDIO_XCORR_THRESHOLD))
+    audio_mode = str(gt.get("audio", "required"))  # "required" | "skip"
+
+    golden = _parse_ranges(gt, unit, fps)
+    submitted = _parse_ranges(sub, unit, fps)
+
+    # ---- Range gate (greedy match). ----
+    passed_count, per_cut = _greedy_match(golden, submitted, tol_side)
+    n_gt = len(golden)
+    n_sub = len(submitted)
+
+    # If the agent submitted nothing or the source/output is missing, we can
+    # still try the honesty gate (it will fail) - but short-circuit cleanly
+    # if there's no output to verify.
+    if not output_mp4.exists():
+        return CutReport(
+            score=0.0,
+            reason=f"output.mp4 missing at {output_mp4}",
+            n_gt=n_gt, n_submitted=n_sub, passed_count=passed_count,
+            honesty_pass=False, audio_pass=False, duration_pass=False,
+            per_cut=per_cut,
+        )
+    if not source_mp4.exists():
+        return CutReport(
+            score=0.0,
+            reason=f"source.mp4 missing at {source_mp4}",
+            n_gt=n_gt, n_submitted=n_sub, passed_count=passed_count,
+            honesty_pass=False, audio_pass=False, duration_pass=False,
+            per_cut=per_cut,
+        )
+
+    # ---- Honesty gate (video SSIM on multi-range reconstruction). ----
+    with tempfile.TemporaryDirectory(prefix="cutverify_") as tmp_str:
+        tmp = Path(tmp_str)
+        expected = tmp / "expected_remainder.mp4"
+        try:
+            _reconstruct_remainder(source_mp4, submitted, expected)
+        except RuntimeError as e:
+            return CutReport(
+                score=0.0,
+                reason=f"ffmpeg reconstruct failed: {e}",
+                n_gt=n_gt, n_submitted=n_sub, passed_count=passed_count,
+                honesty_pass=False, audio_pass=False, duration_pass=False,
+                per_cut=per_cut,
+            )
+
+        expected_dur = _probe_duration(expected)
+        sub_dur = _probe_duration(output_mp4)
+        dur_diff = abs(expected_dur - sub_dur)
+        duration_pass = dur_diff <= tol_dur
+
+        ssim_val = None
+        honesty_pass = False
+        if duration_pass:
+            try:
+                ssim_val = _ssim_score(expected, output_mp4)
+            except Exception as e:
+                return CutReport(
+                    score=0.0,
+                    reason=f"ssim sampling failed: {e}",
+                    n_gt=n_gt, n_submitted=n_sub, passed_count=passed_count,
+                    honesty_pass=False, audio_pass=False,
+                    duration_pass=duration_pass,
+                    per_cut=per_cut,
+                    expected_duration_s=round(expected_dur, 4),
+                    submission_duration_s=round(sub_dur, 4),
+                    duration_diff_s=round(dur_diff, 4),
+                )
+            honesty_pass = ssim_val >= ssim_thresh
+
+        # ---- Audio gate (cross-corr on remainder). ----
+        audio_pass = True
+        audio_xcorr = None
+        if audio_mode != "skip" and _has_audio_stream(source_mp4):
+            ref_wav = tmp / "expected.wav"
+            sub_wav = tmp / "submission.wav"
+            ok_ref = _reconstruct_audio_only(source_mp4, submitted, ref_wav)
+            ok_sub = _extract_audio(output_mp4, sub_wav)
+            if ok_ref and ok_sub:
+                try:
+                    audio_xcorr = _audio_xcorr(ref_wav, sub_wav)
+                    audio_pass = audio_xcorr >= audio_thresh
+                except Exception:
+                    audio_pass = False
+            else:
+                # Source has audio but we couldn't reconstruct or extract.
+                # Treat as audio failure only if GT mandated audio.
+                audio_pass = (audio_mode == "skip")
+
+    # ---- Score. ----
+    if not honesty_pass:
+        score = 0.0
+        reason = (
+            f"honesty gate failed: dur_diff={dur_diff:.3f}s "
+            f"(limit {tol_dur}s), ssim="
+            f"{ssim_val:.4f}" if ssim_val is not None else
+            f"honesty gate failed: duration mismatch"
+            f" dur_diff={dur_diff:.3f}s (limit {tol_dur}s)"
+        )
+        if ssim_val is not None and duration_pass:
+            reason = (f"ssim {ssim_val:.4f} < {ssim_thresh} "
+                      f"(content lie suspected)")
+    elif not audio_pass:
+        score = 0.0
+        reason = (f"audio xcorr {audio_xcorr} < {audio_thresh} "
+                  f"(audio corrupted / wrong span)")
+    else:
+        score = (passed_count / n_gt) if n_gt > 0 else 0.0
+        reason = (f"passed {passed_count}/{n_gt} cuts; "
+                  f"ssim={ssim_val:.4f}, audio_xcorr="
+                  f"{audio_xcorr if audio_xcorr is not None else 'n/a'}")
+
+    return CutReport(
+        score=float(score),
+        reason=reason,
+        n_gt=n_gt, n_submitted=n_sub, passed_count=passed_count,
+        honesty_pass=bool(honesty_pass),
+        audio_pass=bool(audio_pass),
+        duration_pass=bool(duration_pass),
+        per_cut=per_cut,
+        ssim=(round(ssim_val, 4) if ssim_val is not None else None),
+        audio_xcorr=(round(audio_xcorr, 4) if audio_xcorr is not None else None),
+        expected_duration_s=round(expected_dur, 4),
+        submission_duration_s=round(sub_dur, 4),
+        duration_diff_s=round(dur_diff, 4),
+    )
+
+
+def _cli():
+    import argparse
+    p = argparse.ArgumentParser()
+    p.add_argument("--source-mp4", required=True, type=Path)
+    p.add_argument("--output-mp4", required=True, type=Path)
+    p.add_argument("--output-cuts", required=True, type=Path)
+    p.add_argument("--gt-cuts", required=True, type=Path)
+    p.add_argument("--reward-json", type=Path)
+    p.add_argument("--reward-txt", type=Path)
+    args = p.parse_args()
+
+    rep = verify_cuts(args.source_mp4, args.output_mp4,
+                      args.output_cuts, args.gt_cuts)
+    result = {
+        "reward": float(rep.score),
+        "details": asdict(rep),
+    }
+    if args.reward_json:
+        args.reward_json.parent.mkdir(parents=True, exist_ok=True)
+        args.reward_json.write_text(json.dumps(result, indent=2))
+    if args.reward_txt:
+        args.reward_txt.write_text(f"{rep.score:.6f}\n")
+    print(json.dumps(result, indent=2))
+
+
+if __name__ == "__main__":
+    _cli()

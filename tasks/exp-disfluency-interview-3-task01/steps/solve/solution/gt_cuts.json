@@ -1,0 +1,28 @@
+{
+  "kind": "disfluency",
+  "unit": "ms",
+  "source_duration_s": 37.0,
+  "tolerance_each_side_s": 0.1,
+  "duration_tolerance_s": 0.1,
+  "ssim_threshold": 0.95,
+  "audio_xcorr_threshold": 0.9,
+  "audio": "required",
+  "cuts": [
+    {
+      "start_ms": 25550,
+      "end_ms": 27150,
+      "reason": "long stuck 'um' (~1.6s) between 'in the' and 'right'",
+      "type": "pause",
+      "pause_duration_ms": 1600,
+      "anchor_before": [
+        "Yeah",
+        "in"
+      ],
+      "anchor_after": [
+        "right",
+        "after"
+      ]
+    }
+  ],
+  "source_filler_counts": {}
+}

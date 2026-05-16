@@ -1,0 +1,20 @@
+{
+  "kind": "disfluency",
+  "unit": "ms",
+  "source_duration_s": 37.0,
+  "tolerance_each_side_s": 0.3,
+  "duration_tolerance_s": 2.0,
+  "ssim_threshold": 0.8,
+  "audio_xcorr_threshold": 0.2,
+  "audio": "required",
+  "cuts": [
+    {
+      "start_ms": 25320,
+      "end_ms": 26205,
+      "tol_start_s": 0.1,
+      "tol_end_s": 0.2,
+      "reason": "stuck 'um' \u2014 start after 'yeah' completes; end before 'right' onset"
+    }
+  ],
+  "source_filler_counts": {}
+}

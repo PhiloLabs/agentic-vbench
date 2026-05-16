@@ -1,0 +1,21 @@
+{
+  "window_start_s": 152.12,
+  "window_end_s": 156.96,
+  "window_start_frame": 3803,
+  "window_end_frame": 3924,
+  "fps": 25.0,
+  "n_frames_total": 5400,
+  "weights": {
+    "in_window": 0.85,
+    "out_window": 0.15
+  },
+  "grade_kind": "cdl",
+  "grade_provenance": {
+    "kind": "asc_cdl",
+    "saturation": 0.78,
+    "contrast": 1.13,
+    "rr": 0.91,
+    "gg": 0.98,
+    "bb": 1.09
+  }
+}

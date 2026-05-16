@@ -1,0 +1,29 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/exp-sr-4x-shot-task01"
+
+[metadata]
+difficulty = "hard"
+category = "video-super-resolution-shot"
+tags = ["super-resolution", "shot-scoped", "4x-downsample", "video-restoration"]
+source = "27-sr-4x-wrights-law.mp4"
+corruption = "shot-scoped SR: target shot [655, 792] in 60s clip downsampled 4× (bicubic) then re-upsampled bicubic to 1280×720; agent must localise + restore"
+license = "unknown-research-use-only"
+attribution = "see source URL"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 8192
+allow_internet = true
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 2400.0
+
+[steps.verifier]
+timeout_sec = 900.0

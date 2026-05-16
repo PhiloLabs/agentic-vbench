@@ -1,0 +1,28 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/exp-disfluency-interview-3-task01"
+
+[metadata]
+difficulty = "medium"
+category = "video-disfluency-cut"
+tags = ["disfluency", "video-cut", "whisper", "interview", "stuck-um", "experiment"]
+source = "21-disfluency-interview-2-mg3ocq_e8os.mp4"
+license = "unknown-research-use-only"
+attribution = "see source URL"
+
+[environment]
+build_timeout_sec = 900.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 8192
+allow_internet = true
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 1800.0
+
+[steps.verifier]
+timeout_sec = 900.0

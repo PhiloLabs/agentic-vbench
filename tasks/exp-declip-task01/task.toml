@@ -1,0 +1,27 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/exp-declip-task01"
+
+[metadata]
+difficulty = "medium"
+category = "audio-repair"
+tags = ["declipping", "speech-enhancement", "urgent2024", "experiment"]
+source = "Casey Neistat marathon vlog speech (clip 120-155s)"
+corruption = "hard clip np.clip(±q) at q=0.9-quantile of |x|, threshold=0.3311, clipped_frac=0.0286 (seed=42)"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240
+allow_internet = true
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 1800.0
+
+[steps.verifier]
+timeout_sec = 600.0

@@ -1,0 +1,28 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/exp-swap-product-task01"
+
+[metadata]
+difficulty = "medium"
+category = "video-shot-restoration"
+tags = ["shot-swap", "shot-reorder", "video-restoration", "shot-boundary"]
+source = "19-swap-product-lg-soundbars.mp4"
+license = "unknown-research-use-only"
+attribution = "see source URL"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 8192
+allow_internet = true
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 1800.0
+
+[steps.verifier]
+timeout_sec = 600.0

@@ -1,0 +1,29 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/exp-color-shot-visit-korea-task01"
+
+[metadata]
+difficulty = "hard"
+category = "video-color-restore-shot"
+tags = ["color-restore", "lut", "pacific-rim", "video-color", "video-restoration", "windowed"]
+source = "23-color-shot-pacific-rim-uprising.mp4"
+corruption = "LUT Bourbon_64.CUBE applied to [6.25s, 12.00s)"
+license = "unknown-research-use-only"
+attribution = "see source URL"
+
+[environment]
+build_timeout_sec = 1800.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 16384
+allow_internet = true
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 2700.0
+
+[steps.verifier]
+timeout_sec = 1800.0

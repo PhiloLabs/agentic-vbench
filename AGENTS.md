@@ -13,12 +13,17 @@ Telegraph style. Root rules only. Read scoped `AGENTS.md` before subtree work.
 
 ## Map
 
+- `tasks/` — Harbor task dirs (one per benchmark instance). `exp-*` are the v4 repair-benchmark tasks (20 active); `video-edit-bench-task-{5-4,7-3}-*` are the earlier Harbor-adapter prototypes (kept).
+- `scripts/` — code that generates Harbor tasks (`build_<family>.py`) and runs the v4 scoring suite. Shared cores: `_<family>_core.py`. Per-family audio judges: `_judges/`. Original Harbor-adapter scripts (`generate_task5_4.py`, `generate_task7_3.py`, `install-harbor.sh`, `monitor_job.py`) live alongside.
+- `scripts/v4/` — v4 verifier framework: universal normalize-improvement scorer + per-family judges (`judge_audio.py`, `judge_video.py`, `judge_passthrough.py`) + drivers (`recompute_all.py`, `recompute_oracle.py`, `validate_anchors.py`, `fix_oracle_solve_sh.py`).
+- `docs/` — design rationale and historical reports. `docs/v4/V4_DESIGN.md` is the load-bearing doc for the v4 verifier math.
+- `sources/`, `clips/`, `noise/`, `.models/` — raw inputs (gitignored; regenerable).
+- `jobs/`, `site/`, `logs/` — runtime outputs (gitignored).
 - Scoped `AGENTS.md` files: none yet. Add one when a subtree has rules that genuinely differ from root.
-- Directory map will grow here as the repo takes shape.
 
 ## Docs
 
-- When `docs/` is created, every doc opens with YAML frontmatter — at minimum `summary:` (one-line description), `read_when:` (natural-language triggers for when this doc is relevant), and `title:`. Keeps the docs tree agent-navigable from day one.
+- Every doc in `docs/` opens with YAML frontmatter — at minimum `summary:` (one-line description), `read_when:` (natural-language triggers for when this doc is relevant), and `title:`. Keeps the docs tree agent-navigable.
 
 ## Code
 

@@ -1,0 +1,11 @@
+{
+  "window_start_s": 7.83,
+  "window_end_s": 17.36,
+  "window_start_frame": 235,
+  "window_end_frame": 521,
+  "fps": 30,
+  "weights": {
+    "in_window": 0.85,
+    "out_window": 0.15
+  }
+}

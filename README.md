@@ -1,21 +1,63 @@
 # agentic-vbench
 
-A benchmark suite for evaluating AI coding agents on video-related tasks, built on top of [Harbor](https://www.harborframework.com/).
+A benchmark suite for evaluating AI coding agents on video and audio **repair**
+tasks, built on top of [Harbor](https://www.harborframework.com/). Each task is
+a single Harbor task directory — Harbor handles agent installation, sandbox
+orchestration on Modal, concurrency, trial lifecycle, and result collection.
+This repo defines the tasks themselves, the verifier (v4), and the local
+tooling that drives rollouts + scoring + reporting.
 
-Tasks live in Harbor's task format; Harbor handles agent installation, sandbox orchestration on Modal, concurrency, trial lifecycle, and result collection. This repo focuses on the tasks themselves.
+## What's in the suite
 
-## Status
+20 active repair tasks across 7 families. Each task is a small video or audio
+clip with a single localised corruption; the agent's job is to restore the
+clip and report which span it fixed.
 
-| Family | Source dataset | Instances generated | Runnable | Integrated |
-|---|---|---|---|---|
-| `video-edit-bench-task-5-4` (clip ordering) | `ameddserM/video_edit_bench_task_5_4` | 31 | 31 (29 anon + 2 with HF_TOKEN) | ✅ |
-| `video-edit-bench-task-7-3` (storyboard assembly) | `ameddserM/video_edit_bench_task_7_3` | 24 | 24 (all gated; requires HF_TOKEN) | ✅ |
-| `video-edit-bench-task-6` (video repair) | `ameddserM/video_edit_bench_task_6` | — | — | planned |
-| `video-edit-bench-task-4-2` (open-ended editing) | `ameddserM/video_edit_bench_task_4_2` | — | — | planned |
+| Family | Tasks | What the agent sees | What it must restore |
+|---|---|---|---|
+| `exp-color-shot-*` | 3 (visit-korea, gobelins, v3-s1) | A clip with a bad colour grade applied to a contiguous window. | Match the overall clip's grade across that window. |
+| `exp-deblur-*` | 2 (motion-f1, gaussian-mkbhd) | Clip with blur over a time window (full-frame or in-mask). | Sharpen the blurred frames. |
+| `exp-sr-*` | 2 (sr-2x, sr-4x) | Clip with one shot downsampled then bicubic-upscaled. | Restore the lower-quality shot's detail. |
+| `exp-swap-*` | 2 (swap-car, swap-product) | Multi-shot clip with two shots in the wrong positions. | Put the shots back in the original order. |
+| `exp-glitch-dup-*` | 2 (short, long) | Clip with stuck-frame stutters. | Cut the duplicated frames. |
+| `exp-content-cut-*` | 2 (mkbhd, wsj) | Video where a specific segment needs removing. | Cut that segment, keep the join smooth. |
+| `exp-disfluency-interview-*` | 2 (3, 4) | Interview clip with brief hesitant moments. | Cut the hesitations without losing content. |
+| audio (5) | dns-denoise, voicebank, dereverb, declip, codec-restore | 16 kHz speech with a windowed corruption. | Clean the in-window audio. |
 
-Two task5_4 instances (`task_id` 22 and 30) point at the gated `_5_3` HF dataset. All 24 task7_3 instances point at the gated `_7` HF dataset. Both groups need `HF_TOKEN` to be set on the host that invokes `harbor run` — Harbor's `[environment.env]` block plumbs it into the container. Suite still emits valid task dirs and works for public-only materials if `HF_TOKEN` is unset.
+The earlier Harbor-adapter prototypes (`tasks/video-edit-bench-task-5-4-*` ×31
+and `tasks/video-edit-bench-task-7-3-*` ×24) are kept in the repo as
+historical context but are no longer the active benchmark.
 
-A claude-code (sonnet 4.6) baseline run on Modal at `--n-concurrent 31` completed in 17m 30s, $29.14, with a mean reward of **0.526** across 29 valid trials (range 0.279 – 0.854).
+## v4 verifier — universal normalize-improvement
+
+Every task scores under the same affine form, anchored at broken=0 / golden=1
+by construction:
+
+- higher-is-better: `score = clip((M_out − M_broken) / (M_golden − M_broken), 0, 1)`
+- lower-is-better: `score = clip((M_broken − M_out) / (M_broken − M_golden), 0, 1)`
+
+Per-family base metrics chosen for paper alignment + clean broken→golden
+spread:
+
+| Family | Metric | Source |
+|---|---|---|
+| dns-denoise / voicebank | PESQ-WB in-window | DNS Challenge / Valentini 2016 |
+| dereverb | SRMR + PESQ-WB sanity gate | REVERB Challenge |
+| declip | masked SI-SDR on clip_mask only | URGENT 2024 |
+| codec-restore | LSD in-window | Codec-SUPERB |
+| color-shot | CIEDE2000 in-window | CIE perceptual standard |
+| deblur | LPIPS (in-mask × in-window) | NTIRE perceptual track |
+| sr | 0.7 × LPIPS + 0.3 × Y-PSNR in-shot | NTIRE 2022+ composite |
+| swap | LPIPS on swap-window, ±5-frame tolerance | — |
+| cut / glitch / disfluency | binary range-F1 + honesty SSIM | — |
+
+Every oracle ships a ceiling-proof `solution/solve.sh` that copies the
+bundled golden reference to the output — all 20 oracles score exactly 1.000
+under v4, validated by `scripts/v4/validate_anchors.py`.
+
+Full design rationale: [`docs/v4/V4_DESIGN.md`](docs/v4/V4_DESIGN.md).
+Per-family metric audit + comparison vs v3: [`docs/v4/V4_RESULTS_SUMMARY.md`](docs/v4/V4_RESULTS_SUMMARY.md).
+Oracle audit + ceiling-proof fixes for 12 tasks: [`docs/v4/ORACLE_AUDIT.md`](docs/v4/ORACLE_AUDIT.md).
 
 ## Quick start
 
@@ -23,66 +65,101 @@ A claude-code (sonnet 4.6) baseline run on Modal at `--n-concurrent 31` complete
 # 1. Install Harbor (pinned)
 ./scripts/install-harbor.sh
 
-# 2. Local Python env for the task generator
-uv venv .venv --python 3.12 && source .venv/bin/activate
-uv pip install datasets huggingface_hub
+# 2. Local Python env for build scripts + scoring
+python3 -m venv .venv
+.venv/bin/pip install lpips pesq pystoi srmrpy speechmos librosa soundfile \
+                     opencv-python-headless scikit-image scikit-learn torch \
+                     torchvision numpy scipy ffmpeg-python
 
-# 3. Generate task directories from the HF datasets
-python scripts/generate_task5_4.py --overwrite     # 31 dirs for task5_4
-python scripts/generate_task7_3.py --overwrite     # 24 dirs for task7_3
+# 3. Build the 20 tasks (idempotent; each script regenerates one task dir)
+for f in scripts/build_codec_restore.py scripts/build_color_shot_*.py \
+         scripts/build_content_cut_*.py scripts/build_deblur_*.py \
+         scripts/build_declip.py scripts/build_dereverb.py \
+         scripts/build_disfluency_interview_*.py scripts/build_dns_denoise.py \
+         scripts/build_glitch_dup_*.py scripts/build_sr_*.py \
+         scripts/build_swap_*.py scripts/build_voicebank_denoise.py; do
+    .venv/bin/python $f
+done
 
-# 4. Run on Modal (requires MODAL_TOKEN_ID / MODAL_TOKEN_SECRET / ANTHROPIC_API_KEY)
-harbor run \
-    -p ./tasks \
-    -a claude-code \
-    -m anthropic/claude-sonnet-4-6 \
-    -e modal \
-    --n-concurrent 31 \
-    --ae ANTHROPIC_API_KEY="$ANTHROPIC_API_KEY" \
-    --job-name <name> \
-    -y
+# 4. Run all 20 tasks on Modal (max 20 parallel)
+export ANTHROPIC_API_KEY=...
+export MODAL_TOKEN_ID=... MODAL_TOKEN_SECRET=...
+.venv/bin/python scripts/parallel_rollout.py \
+    --mode claude --env modal --max-parallel 20 \
+    --tasks $(ls tasks/ | grep ^exp- | tr '\n' ' ')
 
-# 5. Per-trial state and live sandbox count while a run is in flight
-python scripts/monitor_job.py jobs/<name>/
+# 5. Score the artifacts under v4 + build the review dashboard
+.venv/bin/python scripts/v4/recompute_oracle.py     # oracle smoke artifacts
+.venv/bin/python scripts/v4/recompute_all.py        # claude artifacts
+.venv/bin/python scripts/build_site_v4.py
+open site/index-v4.html
 ```
-
-Trial outputs land in `jobs/<name>/<trial>/`:
-- `result.json` — reward, token counts, cost, any exception
-- `steps/solve/agent/trajectory.json` — full ATIF trajectory
-- `steps/solve/artifacts/` — `solution.json`, `solution.mp4`, and the `materials/` listing
-- `steps/solve/verifier/reward.json` — per-metric breakdown (footrule, LIS, adjacency, strict_match)
 
 ## Repo layout
 
 ```
 agentic-vbench/
-├── AGENTS.md / CLAUDE.md     # agent-facing repo policy
+├── AGENTS.md / CLAUDE.md      # repo policy (single source of truth)
+├── tasks/                     # Harbor task dirs
+│   ├── exp-*                  # 20 active v4 repair tasks
+│   └── video-edit-bench-task-* # 55 archived Harbor-adapter prototypes
 ├── scripts/
-│   ├── install-harbor.sh     # pins Harbor version
-│   ├── generate_task5_4.py   # HF dataset → 31 task5_4 dirs
-│   ├── generate_task7_3.py   # HF dataset → 24 task7_3 dirs
-│   └── monitor_job.py        # poll a running job for state changes
-└── tasks/
-    ├── video-edit-bench-task-5-4-task<N>/      # 31 clip-ordering tasks
-    └── video-edit-bench-task-7-3-task<N>/      # 24 storyboard-assembly tasks
-        ├── task.toml         # Harbor multi-step task config
-        ├── environment/
-        │   └── Dockerfile    # python:3.12-slim + ffmpeg
-        └── steps/solve/
-            ├── instruction.md
-            ├── workdir/setup.sh   # pre-agent: curl materials zip from HF
-            ├── tests/{test.sh, judge.py}
-            └── solution/solve.sh  # oracle
+│   ├── install-harbor.sh, monitor_job.py
+│   ├── generate_task5_4.py, generate_task7_3.py   # legacy generators
+│   ├── build_<family>.py × 19                     # v4 task builders
+│   ├── _<family>_core.py × 8 + _judges/           # shared verifier cores
+│   ├── parallel_rollout.py, fetch_noise_pools.py
+│   ├── build_site.py, build_site_v4.py
+│   └── v4/                    # v4 verifier framework
+│       ├── _framework.py      # universal normalize_improvement helper
+│       ├── judge_audio.py     # 5 audio judges
+│       ├── judge_video.py     # 9 video judges
+│       ├── judge_passthrough.py
+│       ├── recompute_all.py, recompute_oracle.py
+│       ├── validate_anchors.py
+│       └── fix_oracle_solve_sh.py
+├── docs/
+│   ├── plan.md, status.md, report.md
+│   └── v4/V4_DESIGN.md, V4_RESULTS_SUMMARY.md, ORACLE_AUDIT.md
+├── sources/, clips/, noise/, .models/    # raw inputs (gitignored)
+├── jobs/, site/, logs/                   # runtime outputs (gitignored)
+└── .venv/                                # python env (gitignored)
 ```
 
-## How it works
+## Validation properties
 
-Each generated task directory is a Harbor multi-step task with a single `solve` step. At trial start, Harbor uploads `steps/solve/workdir/setup.sh` into the Modal sandbox and runs it before the agent — that script curls the per-task materials zip from HuggingFace into `/workspace/materials/`. The agent then has the clips on disk and writes its answer to `/workspace/output/`. After the agent finishes, Harbor copies `tests/` into the same container and runs `test.sh`, which republishes the rollout outputs to `/logs/artifacts/` and scores `solution.json` against the inline ground truth.
+- **Broken = 0, golden = 1 for every task** — verified by
+  `scripts/v4/validate_anchors.py` (replays each judge with broken→broken
+  and golden→golden as the "claude" input; all 14 non-passthrough tasks
+  pass; the 7 cut/glitch tasks are 0/1 by binary range-F1 construction).
+- **Oracle = 1.000 for all 20 tasks** — every `solution/solve.sh` ships a
+  bundled golden reference (`solution/<golden_file>`) and `cp`s it to the
+  output. Re-rolled on Modal and re-scored after each verifier change.
 
-No S3, no per-task Docker images: one shared image per benchmark family, materials fetched at trial start, all communication with the host via Harbor's `/logs/{agent,verifier,artifacts}/` bind mounts.
+## How a task runs
 
-## Known gaps
+Each task is a Harbor multi-step dir with a single `solve` step. At trial
+start, Harbor uploads `steps/solve/workdir/setup.sh` into the Modal sandbox
+and runs it before the agent — that script stages the per-task corruption
+materials (e.g., `corrupted.mp4`, `noisy.wav`, `prompt.txt`) into
+`/workspace/materials/`. The agent then writes its output to
+`/workspace/output/`. Harbor then runs `tests/test.sh`, which invokes the
+baked-in `judge.py` and produces `/logs/verifier/reward.json`.
 
-- Verifier scores `solution.json` only; `solution.mp4` is preserved but not checked against the manifest. Mirrors upstream `video-agent-runner/verifiers/video_order/runner.py` behavior.
-- Other three task families (4_2, 6, 7_3) still pending.
-- No aggregate-results storage in git; per-job `result.json` lives under `jobs/` which is gitignored.
+All `cc-*` and `smoke-*` job artifacts land in `jobs/` (gitignored). The v4
+recompute drivers pick up the latest artifact per task and rescore against
+the current verifier code.
+
+## Known design choices
+
+- **No GPU on Modal** for the v4 suite. All tasks run CPU-only with
+  CPU-feasible libraries (faster-whisper tiny.en, noisereduce, scipy.signal,
+  etc.). GPU-class work (Real-ESRGAN 4× SR, neural deblur) timed out on the
+  agent side in earlier prototypes and isn't a target for this iteration.
+- **Audio sources** (`clips/`, `noise/`) are gitignored; regenerable via
+  `scripts/fetch_noise_pools.py` and direct HF downloads documented in
+  `docs/repair-research.md`.
+- **Video sources** (`sources/`) are gitignored binaries; the per-clip
+  provenance lives in `sources/SOURCE_DIVERSITY_NOTES.md` (also gitignored).
+- **Site assets** (`site/assets/` — 2.2 GB) are regenerated by the dashboard
+  builder; not committed.

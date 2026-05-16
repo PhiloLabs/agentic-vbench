@@ -1,0 +1,23 @@
+{
+  "kind": "glitch_dup",
+  "unit": "frames",
+  "fps": 23.976023976023978,
+  "source_duration_s": 64.564,
+  "tolerance_each_side_s": 0.2,
+  "duration_tolerance_s": 0.1,
+  "ssim_threshold": 0.95,
+  "audio_xcorr_threshold": 0.9,
+  "audio": "required",
+  "glitches": [
+    {
+      "type": "duplicated",
+      "start_frame": 152,
+      "end_frame": 179
+    },
+    {
+      "type": "duplicated",
+      "start_frame": 356,
+      "end_frame": 383
+    }
+  ]
+}
