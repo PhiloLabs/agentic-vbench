@@ -36,11 +36,11 @@ def main() -> int:
         clip_duration_sec=CLIP_DURATION_SEC,
         # Loose tier: agent must find a 17-frame freeze (~340ms @ 50fps).
         tolerance_each_side_s=0.20,
-        # High-motion F1 content + ffmpeg re-encoding produces SSIM ~0.87 on
-        # the honesty check even for a bit-correct cut, so loosen from the
-        # default 0.95 to 0.85. The cut-position + audio + duration gates
-        # remain strict.
-        ssim_threshold=0.85,
+        # Default ssim_threshold (0.95) — see scripts/_glitch_dup_core.py.
+        # Earlier we ran with 0.85 because the verifier's half-open-interval
+        # bug made oracle SSIM crater on high-motion F1 content; that bug is
+        # fixed in scripts/_cut_verifier_core.py:_parse_ranges (half-frame
+        # end_s nudge), and oracle now achieves SSIM ≈ 0.99 on the rejudge.
         # Short freeze: tile the audio of the last video frame across the
         # freeze. Cheap and continuous-sounding.
         audio_fill_mode="loop_one_video_frame",

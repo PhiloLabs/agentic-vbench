@@ -5,7 +5,7 @@
   "source_duration_s": 59.42,
   "tolerance_each_side_s": 0.2,
   "duration_tolerance_s": 0.1,
-  "ssim_threshold": 0.85,
+  "ssim_threshold": 0.95,
   "audio_xcorr_threshold": 0.9,
   "audio": "required",
   "glitches": [

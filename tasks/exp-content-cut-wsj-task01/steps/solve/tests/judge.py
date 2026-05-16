@@ -105,6 +105,10 @@ SSIM_LAG_BAND_FRAMES = 2
 class CutRange:
     start_s: float
     end_s: float
+    # Optional per-endpoint tolerance (GT only). When set, these override the
+    # task-global `tolerance_each_side_s`. None falls back to the global.
+    tol_start_s: float | None = None
+    tol_end_s: float | None = None
 
 
 @dataclass
@@ -348,8 +352,9 @@ def _greedy_match(golden: list[CutRange], submitted: list[CutRange],
                   tol_side: float) -> tuple[int, list[dict]]:
     """Greedy-nearest match each golden cut to one submitted cut.
 
-    Returns (passed_count, per_cut_report). Per-cut pass iff both
-    |start_off| <= tol_side AND |end_off| <= tol_side.
+    Per-cut tolerance: each golden range may carry `tol_start_s` and
+    `tol_end_s` set per-endpoint. Both default to the task-global `tol_side`
+    when not specified. Pass iff |start_off| <= tol_start AND |end_off| <= tol_end.
     """
     used = [False] * len(submitted)
     per_cut = []
@@ -364,6 +369,8 @@ def _greedy_match(golden: list[CutRange], submitted: list[CutRange],
             if cost < best_cost:
                 best_cost = cost
                 best_j = j
+        tol_s = g.tol_start_s if g.tol_start_s is not None else tol_side
+        tol_e = g.tol_end_s   if g.tol_end_s   is not None else tol_side
         if best_j < 0:
             per_cut.append({
                 "golden_start_s": g.start_s,
@@ -371,6 +378,8 @@ def _greedy_match(golden: list[CutRange], submitted: list[CutRange],
                 "matched_submitted_idx": None,
                 "start_offset_s": None,
                 "end_offset_s": None,
+                "tol_start_s": tol_s,
+                "tol_end_s": tol_e,
                 "passed": False,
                 "reason": "no submitted cut left to match",
             })
@@ -379,7 +388,7 @@ def _greedy_match(golden: list[CutRange], submitted: list[CutRange],
         s = submitted[best_j]
         start_off = abs(s.start_s - g.start_s)
         end_off = abs(s.end_s - g.end_s)
-        ok = (start_off <= tol_side) and (end_off <= tol_side)
+        ok = (start_off <= tol_s) and (end_off <= tol_e)
         if ok:
             passed += 1
         per_cut.append({
@@ -390,14 +399,24 @@ def _greedy_match(golden: list[CutRange], submitted: list[CutRange],
             "submitted_end_s": round(s.end_s, 4),
             "start_offset_s": round(start_off, 4),
             "end_offset_s": round(end_off, 4),
-            "tol_side_s": tol_side,
+            "tol_start_s": tol_s,
+            "tol_end_s": tol_e,
             "passed": bool(ok),
         })
     return passed, per_cut
 
 
 def _parse_ranges(payload: dict, unit: str, fps: float) -> list[CutRange]:
-    """Parse a submission/GT cuts list into seconds."""
+    """Parse a submission/GT cuts list into seconds.
+
+    Frame-indexed cuts (`start_frame`, `end_frame`) follow half-open
+    semantics: the range `[S, E)` should remove frames S..E-1, NOT including
+    frame E. ffmpeg's `between(t, a, b)` is closed on both ends, though, so a
+    naive `end_s = end_frame / fps` ends up including the frame at `end_frame`
+    (one extra frame per cut). To preserve half-open semantics we nudge
+    `end_s` back by half a frame so the closed-interval check excludes the
+    frame at `end_frame` while still safely including frame `E-1`.
+    """
     if not isinstance(payload, dict):
         return []
     if "cuts" in payload:
@@ -408,32 +427,41 @@ def _parse_ranges(payload: dict, unit: str, fps: float) -> list[CutRange]:
         kind = "glitches"
     else:
         return []
+    half_frame = 0.5 / fps if fps > 0 else 0.0
     out = []
     for it in items:
         if not isinstance(it, dict):
             continue
+        ts = it.get("tol_start_s")
+        te = it.get("tol_end_s")
+        ts = float(ts) if ts is not None else None
+        te = float(te) if te is not None else None
         if unit == "ms":
             if "start_ms" in it and "end_ms" in it:
                 out.append(CutRange(float(it["start_ms"]) / 1000.0,
-                                    float(it["end_ms"]) / 1000.0))
+                                    float(it["end_ms"]) / 1000.0, ts, te))
             elif "start_frame" in it and "end_frame" in it and fps > 0:
                 # Glitch agent may have submitted frames even on a ms task.
                 out.append(CutRange(float(it["start_frame"]) / fps,
-                                    float(it["end_frame"]) / fps))
+                                    float(it["end_frame"]) / fps - half_frame, ts, te))
         elif unit == "frames":
             if "start_frame" in it and "end_frame" in it and fps > 0:
                 out.append(CutRange(float(it["start_frame"]) / fps,
-                                    float(it["end_frame"]) / fps))
+                                    float(it["end_frame"]) / fps - half_frame, ts, te))
             elif "start_ms" in it and "end_ms" in it:
                 out.append(CutRange(float(it["start_ms"]) / 1000.0,
-                                    float(it["end_ms"]) / 1000.0))
+                                    float(it["end_ms"]) / 1000.0, ts, te))
     # Sort by start time and merge tiny overlaps so reconstruction is valid.
     out.sort(key=lambda r: r.start_s)
     merged: list[CutRange] = []
     for r in out:
         if merged and r.start_s < merged[-1].end_s:
+            # Carry forward the previous range's per-endpoint tolerances since
+            # merging only happens for overlapping ranges from the same submission.
             merged[-1] = CutRange(merged[-1].start_s,
-                                  max(merged[-1].end_s, r.end_s))
+                                  max(merged[-1].end_s, r.end_s),
+                                  merged[-1].tol_start_s,
+                                  merged[-1].tol_end_s)
         else:
             merged.append(r)
     return merged

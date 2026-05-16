@@ -398,7 +398,16 @@ def _greedy_match(golden: list[CutRange], submitted: list[CutRange],
 
 
 def _parse_ranges(payload: dict, unit: str, fps: float) -> list[CutRange]:
-    """Parse a submission/GT cuts list into seconds."""
+    """Parse a submission/GT cuts list into seconds.
+
+    Frame-indexed cuts (`start_frame`, `end_frame`) follow half-open
+    semantics: the range `[S, E)` should remove frames S..E-1, NOT including
+    frame E. ffmpeg's `between(t, a, b)` is closed on both ends, though, so a
+    naive `end_s = end_frame / fps` ends up including the frame at `end_frame`
+    (one extra frame per cut). To preserve half-open semantics we nudge
+    `end_s` back by half a frame so the closed-interval check excludes the
+    frame at `end_frame` while still safely including frame `E-1`.
+    """
     if not isinstance(payload, dict):
         return []
     if "cuts" in payload:
@@ -409,6 +418,7 @@ def _parse_ranges(payload: dict, unit: str, fps: float) -> list[CutRange]:
         kind = "glitches"
     else:
         return []
+    half_frame = 0.5 / fps if fps > 0 else 0.0
     out = []
     for it in items:
         if not isinstance(it, dict):
@@ -424,11 +434,11 @@ def _parse_ranges(payload: dict, unit: str, fps: float) -> list[CutRange]:
             elif "start_frame" in it and "end_frame" in it and fps > 0:
                 # Glitch agent may have submitted frames even on a ms task.
                 out.append(CutRange(float(it["start_frame"]) / fps,
-                                    float(it["end_frame"]) / fps, ts, te))
+                                    float(it["end_frame"]) / fps - half_frame, ts, te))
         elif unit == "frames":
             if "start_frame" in it and "end_frame" in it and fps > 0:
                 out.append(CutRange(float(it["start_frame"]) / fps,
-                                    float(it["end_frame"]) / fps, ts, te))
+                                    float(it["end_frame"]) / fps - half_frame, ts, te))
             elif "start_ms" in it and "end_ms" in it:
                 out.append(CutRange(float(it["start_ms"]) / 1000.0,
                                     float(it["end_ms"]) / 1000.0, ts, te))

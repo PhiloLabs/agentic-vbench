@@ -44,8 +44,8 @@ TASK_TYPES = {
     "dereverb":                 ("audio_inj",  "🌀", "pyroomacoustics RIR convolution"),
     "declip":                   ("audio_inj",  "🔊", "Quantile hard-clipping (URGENT-2024 recipe)"),
     "codec-restore":            ("audio_inj",  "📻", "Opus 12 kbps roundtrip"),
-    "glitch-dup-short":         ("glitch",     "🎬", "5-frame freeze injection at 2 spots"),
-    "glitch-dup-long":          ("glitch",     "🎬", "30-frame freeze injection at 2 spots"),
+    "glitch-dup-short":         ("glitch",     "🎬", "frame-freeze stutters at 2 spots (~0.7s each)"),
+    "glitch-dup-long":          ("glitch",     "🎬", "frame-freeze stutters at 2 spots (~1.1s each)"),
     "disfluency-pitch-meeting": ("cut",        "✂️", "Natural fillers — agent must cut them"),
     "disfluency-interview-3":   ("cut",        "✂️", "Stuck-um (~1.6 s sustained 'ummm') — agent must cut it"),
     "disfluency-interview-4":   ("cut",        "✂️", "Two visible umm/emm fillers — agent must cut both"),
@@ -295,26 +295,31 @@ def gather_task_assets(task_id: str) -> dict:
 
         # Mux each audio variant onto the silent video clip from the source.
         # This is a video benchmark — review pages should show video.
+        # `sources/` is gitignored, so on a clean checkout the raw source mp4
+        # may be missing. Fall back to cached `_silent.mp4` / muxed `.mp4`s
+        # in the asset dir from a prior build instead of dropping to audio-only.
         if task_id in AUDIO_CLIP_RANGES:
             rel_src, start, duration = AUDIO_CLIP_RANGES[task_id]
             source_mp4 = EXP / rel_src
             silent_mp4 = asset_dir / "_silent.mp4"
-            if source_mp4.exists() and extract_silent_video(source_mp4, start, duration, silent_mp4):
-                # Mux each audio variant
-                variants = [
-                    ("clean.wav",            "clean.mp4",         "clean"),
-                    ("noisy.wav",            "corrupted.mp4",     "corrupted"),
-                    ("noise-only.wav",       "noise-only.mp4",    "noise_only"),
-                    ("oracle-enhanced.wav",  "oracle-output.mp4", "oracle_output"),
-                    ("claude-enhanced.wav",  "claude-output.mp4", "claude_output"),
-                ]
-                for wav, mp4, key in variants:
-                    wav_path = asset_dir / wav
-                    mp4_path = asset_dir / mp4
-                    if wav_path.exists():
-                        if mux_audio_into_video(silent_mp4, wav_path, mp4_path):
-                            meta["files"][key] = mp4
-                # Treat audio_inj tasks as video for media rendering
+            if not silent_mp4.exists() and source_mp4.exists():
+                extract_silent_video(source_mp4, start, duration, silent_mp4)
+            variants = [
+                ("clean.wav",            "clean.mp4",         "clean"),
+                ("noisy.wav",            "corrupted.mp4",     "corrupted"),
+                ("noise-only.wav",       "noise-only.mp4",    "noise_only"),
+                ("oracle-enhanced.wav",  "oracle-output.mp4", "oracle_output"),
+                ("claude-enhanced.wav",  "claude-output.mp4", "claude_output"),
+            ]
+            for wav, mp4, key in variants:
+                wav_path = asset_dir / wav
+                mp4_path = asset_dir / mp4
+                if not mp4_path.exists() and wav_path.exists() and silent_mp4.exists():
+                    mux_audio_into_video(silent_mp4, wav_path, mp4_path)
+                if mp4_path.exists():
+                    meta["files"][key] = mp4
+            if any(meta["files"].get(k) for k in
+                   ("clean", "corrupted", "oracle_output", "claude_output")):
                 meta["render_as"] = "video"
         # If muxing didn't run (no source / extraction failed), fall back to audio-only.
         if "clean" not in meta["files"] and (asset_dir / "clean.wav").exists():
@@ -797,12 +802,42 @@ def _load_reward_details(task_id: str, mode: str) -> dict | None:
         return None
 
 
-def _render_v4_sub_scores(family: str, v4d: dict, claude_reward: float | None) -> str:
+def _cut_glitch_rows(details: dict | None) -> list[str]:
+    """Shared per-cut credit + honesty + reason rows for cut/glitch outputs.
+
+    Used by both the v3 oracle renderer and the v4 claude renderer so the two
+    cells show the same breakdown depth for passthrough (binary_range_f1)
+    families. Returns a list of <li> strings (no <ul> wrapper).
+    """
+    if not details: return []
+    rows = []
+    ng = details.get("n_gt"); pc = details.get("passed_count")
+    if ng is not None:
+        rows.append(f"<li>per-cut credit: <b>{pc}/{ng}</b></li>")
+    ssim = details.get("ssim"); xc = details.get("audio_xcorr")
+    dd = details.get("duration_diff_s")
+    diag = []
+    if ssim is not None: diag.append(f"SSIM={ssim:.3f}")
+    if xc is not None: diag.append(f"audio xcorr={xc:.3f}")
+    if dd is not None: diag.append(f"dur Δ={dd:.3f}s")
+    if diag:
+        rows.append(f"<li>honesty: {' · '.join(diag)}</li>")
+    if details.get("reason"):
+        rows.append(f"<li class='reason'>{escape(str(details['reason']))}</li>")
+    return rows
+
+
+def _render_v4_sub_scores(family: str, v4d: dict, claude_reward: float | None,
+                          claude_details: dict | None = None) -> str:
     """Render the v4-aware sub-score block for the claude output cell.
 
     Replaces the v3 in-window/out-window breakdown with the universal
     normalize-improvement template: metric, m_broken, m_golden, m_claude, and
     the calibrated reward. Concise — 3 short lines max for non-sr_shot families.
+
+    For passthrough (cut/glitch) families, also surfaces the per-cut credit +
+    honesty diagnostics from the claude reward.json so the claude cell matches
+    the oracle cell's depth — see _cut_glitch_rows.
     """
     mu = v4d.get("metric_used", "?")
     mb = v4d.get("m_broken")
@@ -854,6 +889,7 @@ def _render_v4_sub_scores(family: str, v4d: dict, claude_reward: float | None) -
             f"<li>metric: <code>{escape(str(mu) if mu and mu != '?' else 'binary_range_f1')}</code>"
             f" — v4 uses v3 logic unchanged (passthrough)</li>"
         )
+        rows.extend(_cut_glitch_rows(claude_details))
     else:
         rows.append(
             f"<li>metric: <code>{escape(str(mu))}</code> — "
@@ -897,19 +933,7 @@ def _render_sub_scores(family: str, details: dict | None) -> str:
                 legacy_out = details.get("out_score", 0)
                 rows.append(f"<li>preservation (×0.1, legacy): <b>{legacy_out:.3f}</b></li>")
     elif family == "cut" or family == "glitch":
-        ng = details.get("n_gt"); pc = details.get("passed_count")
-        if ng is not None:
-            rows.append(f"<li>per-cut credit: <b>{pc}/{ng}</b></li>")
-        ssim = details.get("ssim"); xc = details.get("audio_xcorr")
-        dd = details.get("duration_diff_s")
-        diag = []
-        if ssim is not None: diag.append(f"SSIM={ssim:.3f}")
-        if xc is not None: diag.append(f"audio xcorr={xc:.3f}")
-        if dd is not None: diag.append(f"dur Δ={dd:.3f}s")
-        if diag:
-            rows.append(f"<li>honesty: {' · '.join(diag)}</li>")
-        if details.get("reason"):
-            rows.append(f"<li class='reason'>{escape(str(details['reason']))}</li>")
+        rows.extend(_cut_glitch_rows(details))
     elif family == "sr_shot":
         for k in ("localization_iou", "in_shot_psnr_db", "in_shot_lpips", "preservation_psnr_db"):
             if k in details and details[k] is not None:
@@ -1070,7 +1094,10 @@ def render_task_section(meta: dict, oracle: dict, claude: dict, costs: dict, gol
     oracle_reward_str = f"{o:.3f}" if o is not None else "smoke failed / pending"
     oracle_subs = _render_sub_scores(meta["family"], _load_reward_details(tid, "oracle"))
     if v4d:
-        claude_subs = _render_v4_sub_scores(meta["family"], v4d, c)
+        claude_subs = _render_v4_sub_scores(
+            meta["family"], v4d, c,
+            _load_reward_details(tid, "claude") if meta["family"] in ("cut", "glitch") else None,
+        )
     else:
         claude_subs = _render_sub_scores(meta["family"], _load_reward_details(tid, "claude"))
     if "oracle_output" in f:
