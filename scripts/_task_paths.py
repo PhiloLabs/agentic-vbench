@@ -1,9 +1,9 @@
-"""Lookup helper for task dirs after the `tasks/<family>/<task>` reorganization.
+"""Lookup helper for task dirs under `tasks/<family>/<task>`.
 
-Tasks live under one of four family subdirectories — `agentic_vbench_repair`, `task5_4`,
-`task5_5`, `task7_3` — but downstream tooling generally only knows the task
-name, not the family. This module resolves names → paths and lists tasks
-by family.
+Tasks live under one of three family subdirectories — `agentic_vbench_repair`,
+`agentic_vbench_assembly`, `agentic_vbench_sequencing` — but downstream tooling
+generally only knows the task name, not the family. This module resolves names
+→ paths and lists tasks by family.
 """
 from __future__ import annotations
 
@@ -15,9 +15,6 @@ FAMILIES = (
     "agentic_vbench_repair",
     "agentic_vbench_assembly",
     "agentic_vbench_sequencing",
-    "task5_4",
-    "task5_5",
-    "task7_3",
 )
 
 
