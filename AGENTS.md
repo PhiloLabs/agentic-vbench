@@ -13,17 +13,14 @@ Telegraph style. Root rules only. Read scoped `AGENTS.md` before subtree work.
 
 ## Map
 
-- `tasks/` — Harbor task dirs, grouped into 4 family subdirs:
-  - `tasks/agentic_vbench_repair/` — 20 `exp-*` v4 repair-benchmark tasks (audio / color / deblur / sr / swap / glitch / cut / disfluency).
-  - `tasks/task5_4/` — 31 `video-edit-bench-task-5-4-*` video-ordering tasks (HF dataset).
-  - `tasks/task5_5/` — 22 `video-edit-bench-task-5-5-*` video-ordering tasks (local `~/Downloads/sequencing_batch2` bundle).
-  - `tasks/task7_3/` — 24 `video-edit-bench-task-7-3-*` video-assembly tasks.
+- `tasks/` — Harbor task dirs, grouped into 3 family subdirs:
+  - `tasks/agentic_vbench_repair/` — 20 `exp-*` audio/video repair tasks (audio / color / deblur / sr / swap / glitch / cut / disfluency).
+  - `tasks/agentic_vbench_assembly/` — 18 video-assembly tasks (`agentic-vbench-assembly-task<N>`).
+  - `tasks/agentic_vbench_sequencing/` — 31 video-ordering tasks (`agentic-vbench-sequencing-task<N>`).
   Downstream tools resolve task names to paths via `scripts/_task_paths.py` (`task_dir(name)`, `all_tasks(family=…)`), so adding/renaming families means touching one file.
-- `scripts/` — code that generates Harbor tasks (`build_<family>.py` → emits into `tasks/agentic_vbench_repair/`) and runs the v4 scoring suite. Shared cores: `_<family>_core.py`. Per-family audio judges: `_judges/`. Video-ordering generators (`generate_task5_4.py`, `generate_task5_5.py`, `generate_task7_3.py`) emit into their respective family subdirs. The Harbor bootstrap (`install-harbor.sh`, `monitor_job.py`) lives alongside. `generate_task5_5.py` also builds per-task materials zips under `dist/task5_5_materials/` for upload to the HF dataset baked into each task's setup.sh.
-- `scripts/v4/` — v4 verifier framework: universal normalize-improvement scorer + per-family judges (`judge_audio.py`, `judge_video.py`, `judge_passthrough.py`) + drivers (`recompute_all.py`, `recompute_oracle.py`, `validate_anchors.py`, `fix_oracle_solve_sh.py`).
-- `docs/` — design rationale and historical reports. `docs/v4/V4_DESIGN.md` is the load-bearing doc for the v4 verifier math.
-- `sources/`, `clips/`, `noise/`, `.models/` — raw inputs (gitignored; regenerable).
-- `jobs/`, `site/`, `logs/` — runtime outputs (gitignored).
+- `scripts/` — the Harbor wrapper. `install-harbor.sh` pins the Harbor CLI; `parallel_rollout.py` schedules `harbor run` across many tasks against either local Docker or Modal; `monitor_job.py` tails a running trial; `_task_paths.py` is the name→path resolver. Task-generation code (`build_*.py`, `create_agentic_vbench_*.py`, `_<family>_core.py`, `_judges/`, `scripts/v4/`) is **not** in the public tree — it lives offline in `~/Downloads/legacy_vbench/`. Tasks are evaluated using the verifier code baked into each task's `tests/judge.py` at build time; Harbor produces the per-trial `reward.json`.
+- `docs/v4/V4_DESIGN.md` — load-bearing doc for the v4 verifier math (universal normalize-improvement).
+- `jobs/`, `site/`, `logs/`, `experiments/` — runtime / local-only outputs (gitignored).
 - Scoped `AGENTS.md` files: none yet. Add one when a subtree has rules that genuinely differ from root.
 
 ## Docs
