@@ -26,7 +26,7 @@ import tempfile
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent  # experiment/
-TASKS_DIR = REPO_ROOT / "tasks"
+TASKS_DIR = REPO_ROOT / "tasks" / "agentic_vbench_repair"
 SOURCES_DIR = REPO_ROOT / "sources"
 
 CLIP_OFFSET_SEC = 5  # skip first 5 s (intro frame, fade-in, etc.)

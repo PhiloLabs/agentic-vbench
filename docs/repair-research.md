@@ -6,7 +6,11 @@ read_when: Adding a new "repair" task family, deciding whether to port task6 nex
 
 # Repair-task benchmarks — feasibility map
 
-Input source: `/Users/zonghengcao/Downloads/vlm_benchmark/REPAIR_TOOLS_INTEGRATION.md`. Goal: which "repair" benchmarks can land in our existing Harbor pattern (CPU sandbox, deterministic judge, materials curl/vendor) with claude-code + sonnet as the rollout agent.
+Goal: which "repair" benchmarks can land in our existing Harbor pattern
+(CPU sandbox, deterministic judge, materials curl/vendor) with claude-code
++ sonnet as the rollout agent. The active v4 suite (`docs/v4/V4_DESIGN.md`)
+is the shipped subset; this file tracks candidates considered along the
+way.
 
 ## Verified working today
 

@@ -18,7 +18,12 @@ from typing import Iterator, Optional
 import numpy as np
 
 EXPERIMENT_ROOT = Path(__file__).resolve().parents[2]
-TASKS_DIR = EXPERIMENT_ROOT / "tasks"
+# v4 tasks live under tasks/agentic_vbench_repair/<task> after the family-subdir
+# reorganization. Use the helper so a future re-shuffle just touches one file.
+import sys as _sys
+_sys.path.insert(0, str(EXPERIMENT_ROOT / "scripts"))
+from _task_paths import task_dir as _task_dir, TASKS_ROOT as _TASKS_ROOT  # noqa: E402
+TASKS_DIR = _TASKS_ROOT / "agentic_vbench_repair"   # v4 family pool
 JOBS_DIR = EXPERIMENT_ROOT / "jobs"
 LOGS_DIR = EXPERIMENT_ROOT / "logs"
 V4_RESULTS_TSV = LOGS_DIR / "v4-results.tsv"

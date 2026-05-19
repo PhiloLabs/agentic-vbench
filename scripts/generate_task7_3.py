@@ -36,7 +36,7 @@ from datasets import load_dataset
 DATASET = "ameddserM/video_edit_bench_task_7_3"
 SPLIT = "train"
 REPO_ROOT = Path(__file__).resolve().parent.parent
-TASKS_DIR = REPO_ROOT / "tasks"
+TASKS_DIR = REPO_ROOT / "tasks" / "task7_3"
 TASK_PREFIX = "video-edit-bench-task-7-3-task"
 
 INSTRUCTION_FOOTER = """

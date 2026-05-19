@@ -1,12 +1,17 @@
 ---
-title: v2 19-task repair suite — locked spec
-summary: Per-task contract (source video, clip range, corruption recipe, judge, oracle) for the 19-task v2 repair benchmark grounded in `video_100/` source corpus.
-read_when: Building any new task in the v2 19, dispatching a multi-agent build job, deciding which existing v1 task can be retired, evaluating whether a new request fits inside the v2 scope or is out-of-scope.
+title: v2 19-task repair suite — historical spec
+summary: Per-task contract (source video, clip range, corruption recipe, judge, oracle) for the 19-task v2 repair benchmark. Superseded by the v4 suite — see `docs/v4/V4_DESIGN.md`.
+read_when: Tracing the design lineage of an active task back to its v2 origin, or cherry-picking a v2 corruption recipe for a new family.
 ---
 
-# v2 19-task repair suite
+# v2 19-task repair suite (historical)
 
-Locked 2026-05-12. Source corpus: `/Users/zonghengcao/Downloads/vlm_benchmark/video_100/` (ignore `ai_films/`, use `films/` + `ads/` + `others/`). Existing v1 tasks (`dns-denoise-task*`, `voicebank-demand-task*`, `disfluency-clean-task*`, `div4k-50-task*`, `davis-vos-task*`, `gopro-deblur-task*`, `video-edit-bench-*`) remain alongside as the v1 baseline.
+**Status: superseded by v4.** The active benchmark lives at
+`tasks/agentic_vbench_repair/` (20 tasks); see `docs/v4/V4_DESIGN.md` for the current
+verifier framework. This file documents the v2 contract as it stood
+during the build cycle that immediately preceded v4 — kept for design
+lineage. Source corpus paths in this doc are illustrative; in the
+current layout, video sources live under `sources/` (gitignored).
 
 ## Conventions
 

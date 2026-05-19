@@ -23,7 +23,7 @@ from _audio_window import pick_window  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 CLIP = ROOT / "clips" / "04-casey.wav"
-TASK_DIR = ROOT / "tasks" / "exp-declip-task01"
+TASK_DIR = ROOT / "tasks" / "agentic_vbench_repair" / "exp-declip-task01"
 JUDGE_SRC = Path(__file__).resolve().parent / "_judges" / "declip.py"
 
 SEED = 42

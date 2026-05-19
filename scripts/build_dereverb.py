@@ -28,7 +28,7 @@ from _audio_window import pick_window, equal_power_crossfade_splice  # noqa: E40
 
 ROOT = Path(__file__).resolve().parents[1]
 CLIP = ROOT / "clips" / "03-snl.wav"
-TASK_DIR = ROOT / "tasks" / "exp-dereverb-task01"
+TASK_DIR = ROOT / "tasks" / "agentic_vbench_repair" / "exp-dereverb-task01"
 JUDGE_SRC = Path(__file__).resolve().parent / "_judges" / "dereverb.py"
 
 SEED = 42

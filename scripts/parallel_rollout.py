@@ -24,6 +24,12 @@ TASKS_DIR = EXP / "tasks"
 JOBS_DIR = EXP / "jobs"
 LOGS_DIR = EXP / "logs"
 
+# Task dirs were moved into family subdirs (`tasks/<family>/<task>`). Use
+# _task_paths to resolve task names → absolute paths regardless of family.
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from _task_paths import task_dir as _task_path  # noqa: E402
+
 # Per-task memory (MiB) — tuned to Docker host 7.65 GiB.
 # Sums of any concurrent set must fit under ~7000 MiB.
 WEIGHT = {
@@ -89,8 +95,7 @@ class Scheduler:
 
         cmd = [
             "harbor", "run",
-            "-p", str(TASKS_DIR),
-            "-i", task_id,
+            "-p", str(_task_path(task_id)),
             "-e", self.env,
             "-y",
             "--job-name", job_name,
