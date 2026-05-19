@@ -30,7 +30,7 @@ import tempfile
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent  # experiment/
-TASKS_DIR = REPO_ROOT / "tasks"
+TASKS_DIR = REPO_ROOT / "tasks" / "repair_v4"
 SOURCES_DIR = REPO_ROOT / "sources"
 
 

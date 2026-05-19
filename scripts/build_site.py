@@ -210,7 +210,7 @@ def compute_noise_only(noisy_wav: Path, clean_wav: Path, out_wav: Path) -> bool:
 
 def gather_task_assets(task_id: str) -> dict:
     """Copy assets for one task into site/assets/<task_id>/ and return a metadata dict."""
-    task_dir = EXP / "tasks" / task_id
+    task_dir = EXP / "tasks" / "repair_v4" / task_id
     if not task_dir.exists():
         return {"missing": True}
 
@@ -884,7 +884,7 @@ def render_task_section(meta: dict, oracle: dict, claude: dict, costs: dict, gol
                                               video_dom_id=corrupted_dom_id, ref_video_path=ref)
     elif meta["family"] == "audio_inj":
         # window.json lives in the task's tests/ dir; copy/read it lazily.
-        win_path = EXP / "tasks" / tid / "steps/solve/tests/window.json"
+        win_path = EXP / "tasks" / "repair_v4" / tid / "steps/solve/tests/window.json"
         ref = asset_dir / f.get("corrupted", "")
         if win_path.exists() and ref.exists():
             gt_events_html = render_gt_events("audio_inj", win_path, probe_duration_seconds(ref),
@@ -993,7 +993,7 @@ def render_task_section(meta: dict, oracle: dict, claude: dict, costs: dict, gol
     #   2. instruction.md "## Task prompt" section (content-cut uses this —
     #      a per-task prompt embedded inline in the markdown)
     prompt_html = ""
-    prompt_path = EXP / "tasks" / tid / "steps/solve/workdir/prompt.txt"
+    prompt_path = EXP / "tasks" / "repair_v4" / tid / "steps/solve/workdir/prompt.txt"
     prompt_text = None
     prompt_src = None
     if prompt_path.exists():
@@ -1005,7 +1005,7 @@ def render_task_section(meta: dict, oracle: dict, claude: dict, costs: dict, gol
         except Exception:
             pass
     if not prompt_text:
-        inst_path = EXP / "tasks" / tid / "steps/solve/instruction.md"
+        inst_path = EXP / "tasks" / "repair_v4" / tid / "steps/solve/instruction.md"
         if inst_path.exists():
             try:
                 md = inst_path.read_text()
@@ -1202,7 +1202,7 @@ def build_site():
     oracle, claude, costs, golden, corrupted, v3_formula = load_results()
     print(f"Loaded results: oracle={len(oracle)} claude={len(claude)} costs={len(costs)} golden={len(golden)} corrupted={len(corrupted)} v3={len(v3_formula)}")
 
-    task_ids = sorted([d.name for d in (EXP / "tasks").iterdir() if d.is_dir() and d.name.startswith("exp-")])
+    task_ids = sorted([d.name for d in (EXP / "tasks" / "repair_v4").iterdir() if d.is_dir() and d.name.startswith("exp-")])
     metas = []
     for tid in task_ids:
         print(f"  gathering {tid} ...")

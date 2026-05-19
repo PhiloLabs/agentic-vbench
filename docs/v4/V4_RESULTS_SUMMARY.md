@@ -99,15 +99,13 @@ paper-canonical primaries that have wider broken→golden spreads.
 - `experiment/site/index-v3.html` and `experiment/site/index.html` — v3 archived for comparison
 
 **v3 archive:**
-- `experiment/scripts/_archive_v3_2026_05_15/` — copy of all v3 `_*_core.py`, `compute_baselines.py`, `build_site.py`
-- `experiment/logs/v4-archive/rollout-results-v3.tsv` — v3 final rollout TSV
-- `experiment/logs/v4-archive/baselines-v3.tsv` — v3 baseline TSV
+- `logs/v4-archive/rollout-results-v3.tsv` — v3 final rollout TSV (gitignored — local only)
+- `logs/v4-archive/baselines-v3.tsv` — v3 baseline TSV (gitignored — local only)
 
 ## How to re-run
 
 ```bash
-cd /Users/zonghengcao/git/agentic-vbench/experiment
-.venv/bin/python scripts/v4/recompute_all.py        # ~4 min, scores all 21 tasks
+.venv/bin/python scripts/v4/recompute_all.py        # ~4 min, scores all tasks
 .venv/bin/python scripts/v4/validate_anchors.py     # ~10 min, sanity-checks broken=0/golden=1
 .venv/bin/python scripts/build_site_v4.py           # ~30s, rebuilds index-v4.html
 open site/index-v4.html

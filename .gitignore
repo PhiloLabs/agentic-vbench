@@ -40,6 +40,12 @@ dist/
 # Claude Code session state (slash-command scheduler locks, etc.).
 .claude/
 
+# Exploratory work — one subdirectory per ad-hoc experiment, often including
+# scratch task dirs, scripts, and write-ups. Promoted into `scripts/` /
+# `tasks/` / `docs/` only when an experiment lands. See `experiments/*/REPORT.md`
+# in each subtree for what's there.
+experiments/
+
 # Editor / OS cruft
 .DS_Store
 .idea/

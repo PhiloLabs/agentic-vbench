@@ -18,7 +18,7 @@ import shutil
 import sys
 from pathlib import Path
 
-TASKS_DIR = Path(__file__).resolve().parents[2] / "tasks"
+TASKS_DIR = Path(__file__).resolve().parents[2] / "tasks" / "repair_v4"
 
 # Map: task_id -> (golden_in_tests, output_artifact_name)
 FIXES = {

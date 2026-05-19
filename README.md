@@ -24,9 +24,10 @@ clip and report which span it fixed.
 | `exp-disfluency-interview-*` | 2 (3, 4) | Interview clip with brief hesitant moments. | Cut the hesitations without losing content. |
 | audio (5) | dns-denoise, voicebank, dereverb, declip, codec-restore | 16 kHz speech with a windowed corruption. | Clean the in-window audio. |
 
-The earlier Harbor-adapter prototypes (`tasks/video-edit-bench-task-5-4-*` ×31
-and `tasks/video-edit-bench-task-7-3-*` ×24) are kept in the repo as
-historical context but are no longer the active benchmark.
+The earlier Harbor-adapter prototypes (`tasks/task5_4/*` ×31 and
+`tasks/task7_3/*` ×24) are kept in the repo as historical context but are no
+longer the active benchmark. A newer video-ordering family (`tasks/task5_5/*`
+×22, built from a local `~/Downloads/sequencing_batch2` bundle) lives alongside.
 
 ## v4 verifier — universal normalize-improvement
 
@@ -86,7 +87,7 @@ export ANTHROPIC_API_KEY=...
 export MODAL_TOKEN_ID=... MODAL_TOKEN_SECRET=...
 .venv/bin/python scripts/parallel_rollout.py \
     --mode claude --env modal --max-parallel 20 \
-    --tasks $(ls tasks/ | grep ^exp- | tr '\n' ' ')
+    --tasks $(ls tasks/repair_v4/ | tr '\n' ' ')
 
 # 5. Score the artifacts under v4 + build the review dashboard
 .venv/bin/python scripts/v4/recompute_oracle.py     # oracle smoke artifacts
@@ -100,12 +101,15 @@ open site/index-v4.html
 ```
 agentic-vbench/
 ├── AGENTS.md / CLAUDE.md      # repo policy (single source of truth)
-├── tasks/                     # Harbor task dirs
-│   ├── exp-*                  # 20 active v4 repair tasks
-│   └── video-edit-bench-task-* # 55 archived Harbor-adapter prototypes
+├── tasks/                     # Harbor task dirs, one subdir per family
+│   ├── repair_v4/             # 20 active v4 repair tasks (exp-*)
+│   ├── task5_4/               # 31 video-ordering tasks (HF dataset)
+│   ├── task5_5/               # 22 video-ordering tasks (local sequencing_batch2)
+│   └── task7_3/               # 24 video-assembly tasks
 ├── scripts/
+│   ├── _task_paths.py         # task-name → path resolver across families
 │   ├── install-harbor.sh, monitor_job.py
-│   ├── generate_task5_4.py, generate_task7_3.py   # legacy generators
+│   ├── generate_task5_4.py, generate_task5_5.py, generate_task7_3.py
 │   ├── build_<family>.py × 19                     # v4 task builders
 │   ├── _<family>_core.py × 8 + _judges/           # shared verifier cores
 │   ├── parallel_rollout.py, fetch_noise_pools.py

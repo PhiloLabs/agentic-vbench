@@ -22,10 +22,18 @@ from _color_restore_core import (  # noqa: E402
     SOURCES_DIR, ColorRestoreTaskSpec, build_task,
 )
 
-FULL_GOBELINS = Path(
-    "/Users/zonghengcao/Downloads/vlm_benchmark/videos/07_animation/"
-    "DARE_TO_BE_FABULOUS_-_Animation_Short_Film_2024_-_GOBELINS_"
-    "23Mz2j2VQtw.mp4")
+# Full GOBELINS short clip — points at the user's local copy by default,
+# overridable via env var so anyone re-running on a fresh machine can drop
+# the file anywhere on disk. The script aborts with a clear message if the
+# file isn't found, so a missing source doesn't silently produce a bad task.
+import os
+FULL_GOBELINS = Path(os.environ.get(
+    "AGENTIC_VBENCH_GOBELINS_SOURCE",
+    str(Path.home() / "Downloads" / "vlm_benchmark" / "videos"
+        / "07_animation"
+        / "DARE_TO_BE_FABULOUS_-_Animation_Short_Film_2024_-_GOBELINS_"
+          "23Mz2j2VQtw.mp4"),
+))
 TASK_NAME = "exp-color-shot-gobelins-task01"
 GRADE_LUT = SOURCES_DIR / "luts" / "CINEMA_NOIR.cube"
 
