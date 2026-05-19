@@ -21,7 +21,7 @@ fetched at trial start by the task's `workdir/setup.sh`. The verifier is
 baked into each task's `tests/judge.py` at build time and runs at trial
 end — Harbor writes the per-trial reward to `/logs/verifier/reward.json`.
 
-## v4 verifier — universal normalize-improvement
+## How repair tasks are scored
 
 For repair tasks, every metric is normalized so that the broken input scores
 0 and the bundled golden scores 1 by construction:
@@ -33,7 +33,7 @@ Per-family metrics: PESQ-WB (denoise), SRMR (dereverb), SI-SDR (declip), LSD
 (codec), CIEDE2000 (color), LPIPS (deblur, swap), LPIPS+Y-PSNR composite
 (super-res), binary range-F1 + SSIM honesty gate (cut / glitch / disfluency).
 
-Full math + per-family audit: [`docs/v4/V4_DESIGN.md`](docs/v4/V4_DESIGN.md).
+Full math + per-family details: [`docs/VERIFIER_DESIGN.md`](docs/VERIFIER_DESIGN.md).
 
 Assembly and sequencing tasks score deterministically off the agent's
 reported ordering — assembly uses exact-slot accuracy with `.mp4`
@@ -86,7 +86,7 @@ agentic-vbench/
 │   ├── parallel_rollout.py           # run + collect rewards across tasks
 │   ├── monitor_job.py                # tail a running trial
 │   └── _task_paths.py                # task-name → path resolver
-├── docs/v4/V4_DESIGN.md              # verifier math
+├── docs/VERIFIER_DESIGN.md           # verifier math (repair tasks)
 └── jobs/, logs/, site/               # runtime outputs (gitignored)
 ```
 
