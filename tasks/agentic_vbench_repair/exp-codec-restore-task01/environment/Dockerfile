@@ -7,5 +7,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python3-dev \
         libsndfile1 \
     && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends unzip && rm -rf /var/lib/apt/lists/*
 WORKDIR /workspace
 RUN mkdir -p /workspace/materials /workspace/output /workspace/work
