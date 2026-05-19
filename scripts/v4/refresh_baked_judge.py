@@ -19,8 +19,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 CORE = ROOT / "scripts" / "_cut_verifier_core.py"
-# v4 tasks live under tasks/repair_v4/<task>; only repair_v4 has baked judges.
-TASKS = ROOT / "tasks" / "repair_v4"
+# v4 tasks live under tasks/agentic_vbench_repair/<task>; only agentic_vbench_repair has baked judges.
+TASKS = ROOT / "tasks" / "agentic_vbench_repair"
 
 BEGIN = "# ---- BEGIN EMBEDDED VERIFIER CORE ----"
 END = "# ---- END EMBEDDED VERIFIER CORE ----"

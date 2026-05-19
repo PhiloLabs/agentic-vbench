@@ -7,7 +7,7 @@ read_when: Tracing the design lineage of an active task back to its v2 origin, o
 # v2 19-task repair suite (historical)
 
 **Status: superseded by v4.** The active benchmark lives at
-`tasks/repair_v4/` (20 tasks); see `docs/v4/V4_DESIGN.md` for the current
+`tasks/agentic_vbench_repair/` (20 tasks); see `docs/v4/V4_DESIGN.md` for the current
 verifier framework. This file documents the v2 contract as it stood
 during the build cycle that immediately preceded v4 — kept for design
 lineage. Source corpus paths in this doc are illustrative; in the

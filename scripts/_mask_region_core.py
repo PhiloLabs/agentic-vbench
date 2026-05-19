@@ -27,7 +27,7 @@ import cv2
 import numpy as np
 
 REPO_ROOT = Path(__file__).resolve().parent.parent  # experiment/
-TASKS_DIR = REPO_ROOT / "tasks" / "repair_v4"
+TASKS_DIR = REPO_ROOT / "tasks" / "agentic_vbench_repair"
 SOURCES_DIR = REPO_ROOT / "sources"
 
 TARGET_W = 854

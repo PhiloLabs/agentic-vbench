@@ -87,7 +87,7 @@ export ANTHROPIC_API_KEY=...
 export MODAL_TOKEN_ID=... MODAL_TOKEN_SECRET=...
 .venv/bin/python scripts/parallel_rollout.py \
     --mode claude --env modal --max-parallel 20 \
-    --tasks $(ls tasks/repair_v4/ | tr '\n' ' ')
+    --tasks $(ls tasks/agentic_vbench_repair/ | tr '\n' ' ')
 
 # 5. Score the artifacts under v4 + build the review dashboard
 .venv/bin/python scripts/v4/recompute_oracle.py     # oracle smoke artifacts
@@ -102,7 +102,7 @@ open site/index-v4.html
 agentic-vbench/
 ├── AGENTS.md / CLAUDE.md      # repo policy (single source of truth)
 ├── tasks/                     # Harbor task dirs, one subdir per family
-│   ├── repair_v4/             # 20 active v4 repair tasks (exp-*)
+│   ├── agentic_vbench_repair/             # 20 active v4 repair tasks (exp-*)
 │   ├── task5_4/               # 31 video-ordering tasks (HF dataset)
 │   ├── task5_5/               # 22 video-ordering tasks (local sequencing_batch2)
 │   └── task7_3/               # 24 video-assembly tasks

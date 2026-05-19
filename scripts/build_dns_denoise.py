@@ -31,7 +31,7 @@ from _audio_window import pick_window  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 CLIP = ROOT / "clips" / "01-veritasium.wav"
 NOISE_DIR = ROOT / "noise" / "dns"
-TASK_DIR = ROOT / "tasks" / "repair_v4" / "exp-dns-denoise-task01"
+TASK_DIR = ROOT / "tasks" / "agentic_vbench_repair" / "exp-dns-denoise-task01"
 
 SEED = 42
 WINDOW_S = 10.0

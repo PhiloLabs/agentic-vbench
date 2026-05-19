@@ -22,7 +22,7 @@ from _audio_window import pick_window  # noqa: E402
 ROOT = Path(__file__).resolve().parents[1]
 CLIP = ROOT / "clips" / "02-reuters.wav"
 NOISE_DIR = ROOT / "noise" / "demand"
-TASK_DIR = ROOT / "tasks" / "repair_v4" / "exp-voicebank-denoise-task01"
+TASK_DIR = ROOT / "tasks" / "agentic_vbench_repair" / "exp-voicebank-denoise-task01"
 JUDGE_SRC = Path(__file__).resolve().parent / "_judges" / "voicebank_denoise.py"
 
 SEED = 42

@@ -1,0 +1,29 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/agentic-vbench-sequencing-task21"
+
+[metadata]
+difficulty = "medium"
+category = "video-editing"
+tags = ["video-ordering", "agentic-vbench-sequencing"]
+source = "ameddserM/agentic_vbench_sequencing (row task_id=21, upstream=task5_5: video-edit-bench-task-5-5-task21)"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 10240
+allow_internet = true
+
+[environment.env]
+HF_TOKEN = "${HF_TOKEN:-}"
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 1800.0
+
+[steps.verifier]
+timeout_sec = 600.0

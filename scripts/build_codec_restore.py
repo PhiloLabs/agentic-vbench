@@ -26,7 +26,7 @@ from _audio_window import pick_window, equal_power_crossfade_splice  # noqa: E40
 
 ROOT = Path(__file__).resolve().parents[1]
 CLIP = ROOT / "clips" / "05-korea.wav"
-TASK_DIR = ROOT / "tasks" / "repair_v4" / "exp-codec-restore-task01"
+TASK_DIR = ROOT / "tasks" / "agentic_vbench_repair" / "exp-codec-restore-task01"
 JUDGE_SRC = Path(__file__).resolve().parent / "_judges" / "codec_restore.py"
 
 SEED = 42
