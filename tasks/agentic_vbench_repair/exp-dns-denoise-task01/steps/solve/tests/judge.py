@@ -19,8 +19,12 @@ In-window composite (DNS-Challenge convention; DNSMOS-OVL is the headline):
 If DNSMOS fails (model missing / onnxruntime missing), fall back to:
 
   in_window_reward = 0.4 * clip01((PESQ_wb - 1) / 3.5)
-                   + 0.3 * STOI
-                   + 0.3 * clip01((SI-SDR + 10) / 30)
+                   + 0.3 * clip01((STOI - 0.86) / 0.14)
+                   + 0.3 * clip01((SI-SDR - 4) / 16)
+
+(Per-task LO anchors: STOI=0.86, SI-SDR=4 dB — derived from the
+broken passthrough measurements. PESQ already lands near 0
+naturally on a noisy signal.)
 
 Out-of-window check (catches over-enhancement of clean regions):
 
@@ -28,7 +32,7 @@ Out-of-window check (catches over-enhancement of clean regions):
 
 Final reward (convex combination, fixed mass):
 
-  reward = 0.85 * in_window_reward + 0.15 * out_window_reward
+  reward = 0.90 * in_window_reward + 0.10 * out_window_reward
 """
 from __future__ import annotations
 
@@ -46,8 +50,8 @@ from pystoi import stoi
 DNSMOS_MODEL_PATH = Path("/tests/sig_bak_ovr.onnx")
 WINDOW_JSON_PATH = Path("/tests/window.json")
 DNSMOS_INPUT_SAMPLES = int(9.01 * 16000)  # 144160
-IN_WEIGHT = 0.85
-OUT_WEIGHT = 0.15
+IN_WEIGHT = 0.90
+OUT_WEIGHT = 0.10
 
 
 def _clip01(x: float) -> float:
@@ -147,8 +151,8 @@ def _score_in_window(est: np.ndarray, ref: np.ndarray,
 
     if dnsmos_ok:
         ovl_n = _clip01((details["dnsmos_ovl"] - 1.0) / 4.0)
-        stoi_n = _clip01(stoi_v)
-        sisdr_n = _clip01((sisdr_db + 10.0) / 30.0)
+        stoi_n = _clip01((stoi_v - 0.86) / 0.14)
+        sisdr_n = _clip01((sisdr_db - 4.0) / 16.0)
         reward = 0.5 * ovl_n + 0.3 * stoi_n + 0.2 * sisdr_n
         details["composite_formula"] = (
             "0.5*clip01((DNSMOS_OVL-1)/4) + 0.3*STOI + 0.2*clip01((SI-SDR+10)/30)"
@@ -156,11 +160,11 @@ def _score_in_window(est: np.ndarray, ref: np.ndarray,
         details.update({"ovl_n": ovl_n, "stoi_n": stoi_n, "sisdr_n": sisdr_n})
     else:
         pesq_n = _clip01((pesq_wb - 1.0) / 3.5)
-        stoi_n = _clip01(stoi_v)
-        sisdr_n = _clip01((sisdr_db + 10.0) / 30.0)
+        stoi_n = _clip01((stoi_v - 0.86) / 0.14)
+        sisdr_n = _clip01((sisdr_db - 4.0) / 16.0)
         reward = 0.4 * pesq_n + 0.3 * stoi_n + 0.3 * sisdr_n
         details["composite_formula"] = (
-            "0.4*clip01((PESQ_wb-1)/3.5) + 0.3*STOI + 0.3*clip01((SI-SDR+10)/30) "
+            "0.4*clip01((PESQ_wb-1)/3.5) + 0.3*clip01((STOI-0.86)/0.14) + 0.3*clip01((SI-SDR-4)/16) "
             "[DNSMOS unavailable fallback]"
         )
         details.update({"pesq_n": pesq_n, "stoi_n": stoi_n, "sisdr_n": sisdr_n})

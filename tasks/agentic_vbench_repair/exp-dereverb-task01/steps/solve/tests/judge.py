@@ -12,9 +12,12 @@ Paper-standard metric battery (REVERB Challenge 2014; Kinoshita et al.):
 
 In-window composite (REVERB-Challenge style):
 
-  in_window_reward = 0.4 * clip01((PESQ_wb - 1) / 3.5)
-                   + 0.3 * STOI
-                   + 0.3 * clip01(1 - CD/8)
+  in_window_reward = 0.4 * clip01((PESQ_wb - 1.3) / 3.2)
+                   + 0.3 * clip01((STOI - 0.20) / 0.80)
+                   + 0.3 * clip01(1 - CD/5)
+
+(Per-task LO anchors: PESQ=1.3, STOI=0.20, CD divisor=5 —
+derived from the broken passthrough measurements.)
 
 Out-of-window check (catches over-enhancement of clean regions):
 
@@ -22,7 +25,7 @@ Out-of-window check (catches over-enhancement of clean regions):
 
 Final reward:
 
-  reward = 0.85 * in_window_reward + 0.15 * out_window_reward
+  reward = 0.90 * in_window_reward + 0.10 * out_window_reward
 """
 from __future__ import annotations
 
@@ -38,8 +41,8 @@ from pystoi import stoi
 
 
 WINDOW_JSON_PATH = Path("/tests/window.json")
-IN_WEIGHT = 0.85
-OUT_WEIGHT = 0.15
+IN_WEIGHT = 0.90
+OUT_WEIGHT = 0.10
 
 
 def _clip01(x: float) -> float:
@@ -96,16 +99,16 @@ def _score_in_window(est: np.ndarray, ref: np.ndarray) -> tuple[float, dict]:
     except Exception as e:
         details["srmr_error"] = str(e)
 
-    pesq_n = _clip01((pesq_wb - 1.0) / 3.5)
-    stoi_n = _clip01(stoi_v)
-    cd_n = _clip01(1.0 - cd_val / 8.0)
+    pesq_n = _clip01((pesq_wb - 1.3) / 3.2)
+    stoi_n = _clip01((stoi_v - 0.20) / 0.80)
+    cd_n = _clip01(1.0 - cd_val / 5.0)
     reward = 0.4 * pesq_n + 0.3 * stoi_n + 0.3 * cd_n
     details.update({
         "pesq_n": pesq_n,
         "stoi_n": stoi_n,
         "cd_n": cd_n,
         "composite_formula": (
-            "0.4*clip01((PESQ_wb-1)/3.5) + 0.3*STOI + 0.3*clip01(1 - CD/8)"
+            "0.4*clip01((PESQ_wb-1.3)/3.2) + 0.3*clip01((STOI-0.20)/0.80) + 0.3*clip01(1 - CD/5)"
         ),
     })
     return float(reward), details

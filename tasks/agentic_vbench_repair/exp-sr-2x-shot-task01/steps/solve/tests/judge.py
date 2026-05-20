@@ -4,8 +4,8 @@
 Components:
   - localization_iou: 1-D IoU between agent range and GT range.
   - quality_score:    in-shot PSNR-Y + SSIM-Y vs held-out original.
-                      psnr_n = clip01((mean_PSNR - 15) / 25)
-                      ssim_n = clip01(mean_SSIM)
+                      psnr_n = clip01((mean_PSNR - 38) / 7)
+                      ssim_n = clip01((mean_SSIM - 0.975) / 0.025)
                       quality_score = 0.5 * psnr_n + 0.5 * ssim_n
   - out_score:        min(mean_PSNR(input, output, frames OUTSIDE agent
                                     range) / 50, 1.0)
@@ -153,8 +153,8 @@ def score(output_mp4: Path, output_json: Path, gt_shot_json: Path,
                      agent_range=[agent_lo, agent_hi], gt_range=[gt_lo, gt_hi])
     mean_psnr_in = float(np.mean(psnrs))
     mean_ssim_in = float(np.mean(ssims))
-    psnr_n = _clip01((mean_psnr_in - 15.0) / 25.0)
-    ssim_n = _clip01(mean_ssim_in)
+    psnr_n = _clip01((mean_psnr_in - 38.0) / 7.0)
+    ssim_n = _clip01((mean_ssim_in - 0.975) / 0.025)
     quality_score = 0.5 * psnr_n + 0.5 * ssim_n
 
     # ---- preservation: out-of-range SSIM between corrupted input and output ----

@@ -5,7 +5,7 @@
   "window_end_frame": 521,
   "fps": 30,
   "weights": {
-    "in_window": 0.85,
-    "out_window": 0.15
+    "in_window": 0.9,
+    "out_window": 0.1
   }
 }

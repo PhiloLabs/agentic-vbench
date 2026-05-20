@@ -86,3 +86,9 @@ tasks/gopro-deblur-task*/steps/solve/workdir/blur/
 tasks/gopro-deblur-task*/steps/solve/tests/sharp/
 results/
 scripts/_internal/
+
+# Method-1 repair tasks: GT JSON files live in the HF materials zip and
+# are extracted by setup.sh at trial time, never checked in. Currently
+# only codec-restore-task01 is Method-1 — extend this list as the
+# remaining 18 Method-2 repair tasks are migrated.
+tasks/agentic_vbench_repair/exp-codec-restore-task*/steps/solve/tests/window.json

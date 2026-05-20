@@ -6,8 +6,8 @@
   "fps": 25.0,
   "n_frames_total": 5400,
   "weights": {
-    "in_window": 0.85,
-    "out_window": 0.15
+    "in_window": 0.9,
+    "out_window": 0.1
   },
   "grade_kind": "cdl",
   "grade_provenance": {

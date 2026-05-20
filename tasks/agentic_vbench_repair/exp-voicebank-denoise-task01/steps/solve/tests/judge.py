@@ -10,9 +10,17 @@ Paper-standard metric battery (Valentini-Botinhao SSW 2016 + Hu & Loizou
   - COVL     (composite overall MOS, 1-5)
   - SSNR     (segmental SNR in dB)
 
-In-window composite (Valentini-Botinhao convention):
+In-window composite (Valentini-Botinhao convention,
+per-component LO-anchored mean):
 
-  in_window_reward = clip01((CSIG + CBAK + COVL) / 15)
+  in_window_reward = clip01(
+      ( clip01((CSIG - 4.0) / 1.0)
+      + clip01((CBAK - 2.8) / 2.2)
+      + clip01((COVL - 3.1) / 1.9) ) / 3
+  )
+
+(Per-task LO anchors derived from the broken passthrough
+measurements; flat (CSIG+CBAK+COVL)/15 gave broken floor 0.66.)
 
 Out-of-window check (catches over-enhancement of clean regions):
 
@@ -20,7 +28,7 @@ Out-of-window check (catches over-enhancement of clean regions):
 
 Final reward:
 
-  reward = 0.85 * in_window_reward + 0.15 * out_window_reward
+  reward = 0.90 * in_window_reward + 0.10 * out_window_reward
 """
 from __future__ import annotations
 
@@ -35,8 +43,8 @@ from pesq import pesq
 
 
 WINDOW_JSON_PATH = Path("/tests/window.json")
-IN_WEIGHT = 0.85
-OUT_WEIGHT = 0.15
+IN_WEIGHT = 0.90
+OUT_WEIGHT = 0.10
 
 
 def _clip01(x: float) -> float:
@@ -79,8 +87,8 @@ def _score_in_window(est: np.ndarray, ref: np.ndarray) -> tuple[float, dict]:
         details["ssnr_db"] = float(pysepm.SNRseg(ref_f, est_f, 16000))
     except Exception as e:
         details["ssnr_error"] = str(e)
-    reward = _clip01((csig + cbak + covl) / 15.0)
-    details["composite_formula"] = "(CSIG + CBAK + COVL) / 15"
+    reward = _clip01((_clip01((csig - 4.0) / 1.0) + _clip01((cbak - 2.8) / 2.2) + _clip01((covl - 3.1) / 1.9)) / 3.0)
+    details["composite_formula"] = "(clip01((CSIG-4)/1) + clip01((CBAK-2.8)/2.2) + clip01((COVL-3.1)/1.9)) / 3"
     return float(reward), details
 
 
