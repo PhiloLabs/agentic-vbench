@@ -3,13 +3,18 @@
 
 For each frame i:
     if window_start_frame <= i < window_end_frame  (in-window):
-        dE_in[i]  = mean ΔE(output[i], original[i])    -- restoration
+        dE_in[i]   = mean ΔE(output[i], original[i])   -- restoration quality
     else                                                (out-window):
-        dE_out[i] = mean ΔE(output[i], source[i])      -- preservation
+        ssim_out[i] = SSIM(output[i], source[i])       -- preservation gate
 
-    in_window_score  = 1 - clip(mean(dE_in)  / 10.0, 0, 1)
-    out_window_score = 1 - clip(mean(dE_out) / 5.0,  0, 1)
+    in_window_score  = 1 - clip(mean(dE_in) / 10.0, 0, 1)   -- ΔE: color-faithful
+    out_window_score = 1 if mean(ssim_out) >= 0.95 else 0   -- SSIM: identity gate
     reward = 0.85 * in_window_score + 0.15 * out_window_score
+
+Each window uses the metric appropriate to the question it asks: ΔE for
+restoration quality (in-window), SSIM for content preservation (out-window).
+SSIM tolerates re-encoding noise (~0.98 on clean re-encode); ΔE doesn't (~0.5-1
+even on clean re-encode), which previously dragged the oracle ceiling below 1.0.
 
 Deterministic single-threaded OpenCV decode (matches the deblur judge fix).
 """
@@ -31,11 +36,35 @@ cv2.setNumThreads(1)
 
 
 DELTAE_IN_NORM = 10.0   # in-window ΔE / 10 -> 0 (restoration mapping)
-DELTAE_OUT_NORM = 5.0   # out-window ΔE / 5  -> 0 (preservation, tighter)
+OUT_WINDOW_SSIM_THRESHOLD = 0.95  # out-window: binary "preservation passes" gate
 
 
 def _clip01(x: float) -> float:
     return float(max(0.0, min(1.0, x)))
+
+
+def _ssim_gray(a_bgr: np.ndarray, b_bgr: np.ndarray) -> float:
+    """Mean SSIM on grayscale frames. Std implementation (Wang 2004) using
+    11×11 Gaussian kernel with σ=1.5. Robust to encoder noise — a clean
+    re-encode of the same content scores ≥ 0.98; an agent that actually
+    corrupts pixels (filter, brightness shift) drops below 0.95.
+    """
+    if a_bgr.shape != b_bgr.shape:
+        b_bgr = cv2.resize(b_bgr, (a_bgr.shape[1], a_bgr.shape[0]),
+                           interpolation=cv2.INTER_AREA)
+    a = cv2.cvtColor(a_bgr, cv2.COLOR_BGR2GRAY).astype(np.float32)
+    b = cv2.cvtColor(b_bgr, cv2.COLOR_BGR2GRAY).astype(np.float32)
+    C1 = (0.01 * 255) ** 2
+    C2 = (0.03 * 255) ** 2
+    mu_a = cv2.GaussianBlur(a, (11, 11), 1.5)
+    mu_b = cv2.GaussianBlur(b, (11, 11), 1.5)
+    mu_a_sq, mu_b_sq, mu_ab = mu_a * mu_a, mu_b * mu_b, mu_a * mu_b
+    s_a = cv2.GaussianBlur(a * a, (11, 11), 1.5) - mu_a_sq
+    s_b = cv2.GaussianBlur(b * b, (11, 11), 1.5) - mu_b_sq
+    s_ab = cv2.GaussianBlur(a * b, (11, 11), 1.5) - mu_ab
+    num = (2 * mu_ab + C1) * (2 * s_ab + C2)
+    den = (mu_a_sq + mu_b_sq + C1) * (s_a + s_b + C2)
+    return float(np.mean(num / den))
 
 
 def _zero(reason: str) -> dict:
@@ -98,7 +127,11 @@ def main():
             start_f = max(0, int(round(w_start_s * fps)))
             end_f = max(start_f, int(round(w_end_s * fps)))
             dE_in_sum = 0.0; dE_in_n = 0
-            dE_out_sum = 0.0; dE_out_n = 0
+            # Out-window switches to SSIM as a binary preservation gate
+            # (ΔE was too sensitive to encoder-floor noise; honest re-encode
+            # → ΔE ~0.5-1 but SSIM ~0.98).
+            ssim_out_sum = 0.0; ssim_out_n = 0
+            dE_out_sum = 0.0  # kept for diagnostic only
             i = 0
             while True:
                 ok_o, of = out_cap.read()
@@ -110,8 +143,9 @@ def main():
                     dE_in_sum += _delta_e_lab(of, orf)
                     dE_in_n += 1
                 else:
+                    ssim_out_sum += _ssim_gray(of, sf)
                     dE_out_sum += _delta_e_lab(of, sf)
-                    dE_out_n += 1
+                    ssim_out_n += 1
                 i += 1
             n = i
         finally:
@@ -136,15 +170,18 @@ def main():
             src_total = int(src_cap.get(cv2.CAP_PROP_FRAME_COUNT)) or n
             expected_out = max(0, src_total - expected_in)
             in_coverage = (dE_in_n / expected_in) if expected_in > 0 else 1.0
-            out_coverage = (dE_out_n / expected_out) if expected_out > 0 else 1.0
+            out_coverage = (ssim_out_n / expected_out) if expected_out > 0 else 1.0
             in_coverage = _clip01(in_coverage)
             out_coverage = _clip01(out_coverage)
 
             end_f_eff = min(end_f, n)
             mean_in = (dE_in_sum / dE_in_n) if dE_in_n else 0.0
-            mean_out = (dE_out_sum / dE_out_n) if dE_out_n else 0.0
+            mean_ssim_out = (ssim_out_sum / ssim_out_n) if ssim_out_n else 1.0
+            mean_dE_out = (dE_out_sum / ssim_out_n) if ssim_out_n else 0.0
             raw_in = _clip01(1.0 - mean_in / DELTAE_IN_NORM) if dE_in_n else 0.0
-            raw_out = _clip01(1.0 - mean_out / DELTAE_OUT_NORM) if dE_out_n else 0.0
+            # Binary preservation gate.
+            out_pass = mean_ssim_out >= OUT_WINDOW_SSIM_THRESHOLD
+            raw_out = 1.0 if out_pass else 0.0
             in_score = raw_in * in_coverage
             out_score = raw_out * out_coverage
             reward = w_in * in_score + w_out * out_score
@@ -158,13 +195,16 @@ def main():
                     "window_start_frame": start_f,
                     "window_end_frame": end_f_eff,
                     "n_in_window_frames": dE_in_n,
-                    "n_out_window_frames": dE_out_n,
+                    "n_out_window_frames": ssim_out_n,
                     "expected_in_window_frames": expected_in,
                     "expected_out_window_frames": expected_out,
                     "in_window_coverage": in_coverage,
                     "out_window_coverage": out_coverage,
                     "mean_deltaE_in_window_vs_original": mean_in,
-                    "mean_deltaE_out_window_vs_source": mean_out,
+                    "mean_ssim_out_window_vs_source": mean_ssim_out,
+                    "mean_deltaE_out_window_vs_source_diag": mean_dE_out,
+                    "out_window_ssim_threshold": OUT_WINDOW_SSIM_THRESHOLD,
+                    "out_window_preservation_pass": bool(out_pass),
                     "raw_in_window_score": raw_in,
                     "raw_out_window_score": raw_out,
                     "in_window_score": in_score,

@@ -84,3 +84,5 @@ tasks/davis-vos-task*/steps/solve/tests/gt_masks/
 # HF zip). ~30MB workdir (30 blur PNGs) + ~30MB tests (30 sharp PNGs).
 tasks/gopro-deblur-task*/steps/solve/workdir/blur/
 tasks/gopro-deblur-task*/steps/solve/tests/sharp/
+results/
+scripts/_internal/

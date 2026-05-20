@@ -221,6 +221,9 @@ def score_color(out_frames, clean_frames, corr_frames, mask, window) -> dict:
     }
 
 
+OUT_WINDOW_SSIM_THRESHOLD = 0.95  # binary preservation gate on out-window
+
+
 def score_deblur(out_frames, clean_frames, corr_frames, mask, window) -> dict:
     n = min(len(out_frames), len(clean_frames), len(corr_frames))
     if n == 0:
@@ -233,8 +236,14 @@ def score_deblur(out_frames, clean_frames, corr_frames, mask, window) -> dict:
     win = window if window else (0, n, 1.0, 0.0)
     start_f, end_f, w_in_win, w_out_win = win
     in_win_psnr, in_win_ssim = [], []
-    in_win_preserve_psnr = []
-    out_win_psnr = []
+    # In-window-out-of-mask "preserve" check: same encoder-noise problem as
+    # the out-window — agent is supposed to leave these pixels alone, but
+    # PSNR(out, corrupted) gets dinged for re-encoding noise. Switch to
+    # SSIM binary gate (same threshold as out-window).
+    in_win_preserve_ssim = []
+    # Out-window now scored by SSIM (binary preservation gate); PSNR was
+    # too sensitive to encoder-floor noise on an honest re-encode.
+    out_win_ssim = []
     full_mask = np.ones_like(mask)
     for i in range(n):
         out = _resize_to(out_frames[i], h, w)
@@ -248,11 +257,11 @@ def score_deblur(out_frames, clean_frames, corr_frames, mask, window) -> dict:
             in_win_psnr.append(p_in)
             in_win_ssim.append(s_in)
             if has_out_px:
-                p_out, _ = _masked_psnr_ssim(out_y, corr_y, inv)
-                in_win_preserve_psnr.append(p_out)
+                _, s_inv = _masked_psnr_ssim(out_y, corr_y, inv)
+                in_win_preserve_ssim.append(s_inv)
         else:
-            p_full, _ = _masked_psnr_ssim(out_y, corr_y, full_mask)
-            out_win_psnr.append(p_full)
+            _, s_full = _masked_psnr_ssim(out_y, corr_y, full_mask)
+            out_win_ssim.append(s_full)
     mean_psnr_in = float(np.mean(in_win_psnr)) if in_win_psnr else 0.0
     mean_ssim_in = float(np.mean(in_win_ssim)) if in_win_ssim else 0.0
     if in_win_psnr:
@@ -261,15 +270,17 @@ def score_deblur(out_frames, clean_frames, corr_frames, mask, window) -> dict:
         restore = 0.5 * psnr_part + 0.5 * ssim_part
     else:
         restore = 1.0
-    mean_in_win_preserve = float(np.mean(in_win_preserve_psnr)) if in_win_preserve_psnr else 0.0
-    in_win_preserve = _clip01((mean_in_win_preserve - 30.0) / 20.0) if in_win_preserve_psnr else 1.0
-    if in_win_preserve_psnr:
+    mean_in_win_preserve_ssim = float(np.mean(in_win_preserve_ssim)) if in_win_preserve_ssim else 1.0
+    in_win_preserve_pass = mean_in_win_preserve_ssim >= OUT_WINDOW_SSIM_THRESHOLD
+    in_win_preserve = 1.0 if in_win_preserve_pass else 0.0
+    if in_win_preserve_ssim:
         in_window_score = 0.7 * restore + 0.3 * in_win_preserve
     else:
         in_window_score = restore  # full-frame mask
-    mean_out_win_psnr = float(np.mean(out_win_psnr)) if out_win_psnr else 0.0
-    out_window_score = _clip01((mean_out_win_psnr - 30.0) / 20.0) if out_win_psnr else 1.0
-    if out_win_psnr:
+    mean_out_win_ssim = float(np.mean(out_win_ssim)) if out_win_ssim else 1.0
+    out_pass = mean_out_win_ssim >= OUT_WINDOW_SSIM_THRESHOLD
+    out_window_score = 1.0 if out_pass else 0.0
+    if out_win_ssim:
         reward = w_in_win * in_window_score + w_out_win * out_window_score
     else:
         reward = in_window_score
@@ -282,11 +293,14 @@ def score_deblur(out_frames, clean_frames, corr_frames, mask, window) -> dict:
             "window_start_frame": start_f,
             "window_end_frame": end_f,
             "n_in_window_frames": len(in_win_psnr),
-            "n_out_window_frames": len(out_win_psnr),
+            "n_out_window_frames": len(out_win_ssim),
             "mean_psnr_in_window_in_mask_vs_clean": mean_psnr_in,
             "mean_ssim_in_window_in_mask_vs_clean": mean_ssim_in,
-            "mean_psnr_in_window_out_mask_vs_corrupted": mean_in_win_preserve,
-            "mean_psnr_out_window_vs_corrupted": mean_out_win_psnr,
+            "mean_ssim_in_window_out_mask_vs_corrupted": mean_in_win_preserve_ssim,
+            "in_window_out_mask_preservation_pass": bool(in_win_preserve_pass),
+            "mean_ssim_out_window_vs_corrupted": mean_out_win_ssim,
+            "out_window_ssim_threshold": OUT_WINDOW_SSIM_THRESHOLD,
+            "out_window_preservation_pass": bool(out_pass),
             "in_window_score": in_window_score,
             "out_window_score": out_window_score,
             "weights": {"in_window": w_in_win, "out_window": w_out_win},
