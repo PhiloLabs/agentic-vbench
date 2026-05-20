@@ -42,44 +42,28 @@ normalization; sequencing uses a composite
 
 ## Quick start
 
-### Install
-
 ```bash
-# Installs Harbor (pinned to a known version) with the Modal + Daytona
-# cloud extras. `-e docker` (local) needs no extras. See
-# `scripts/install-harbor.sh` for what's pinned and how to add more
-# cloud executors (e2b, runloop, gke, etc.).
+# 1. Install Harbor (pinned)
 ./scripts/install-harbor.sh
-```
 
-That single command is the full dependency setup — the rollout wrapper
-(`scripts/parallel_rollout.py`) uses only the Python stdlib.
+# 2. Local Python env (only needed for the rollout wrapper)
+python3 -m venv .venv
+.venv/bin/pip install --upgrade pip
 
-### Smoke-test one task locally
-
-```bash
-# Expect reward ≈ 1.0 (oracle ships the golden answer).
+# 3. Run one task locally on Docker, oracle mode (sanity check — expect reward ≈ 1.0)
 harbor run -p tasks/agentic_vbench_repair/exp-codec-restore-task01 \
            -e docker -a oracle
-```
 
-### Run the full suite on a cloud executor
-
-```bash
+# 4. Run the full suite on Modal with claude-code as the agent
 export ANTHROPIC_API_KEY=...
-
-# Modal (default cloud target — set up via `modal token new`)
 export MODAL_TOKEN_ID=... MODAL_TOKEN_SECRET=...
 
-# OR Daytona
-export DAYTONA_API_KEY=...
-
-python scripts/parallel_rollout.py \
+.venv/bin/python scripts/parallel_rollout.py \
     --mode claude --env modal --max-parallel 20 \
     --tasks $(ls tasks/agentic_vbench_repair/ | tr '\n' ' ')
 
 # Same pattern for the other two families:
-python scripts/parallel_rollout.py \
+.venv/bin/python scripts/parallel_rollout.py \
     --mode claude --env modal --max-parallel 20 \
     --tasks $(ls tasks/agentic_vbench_assembly/ | tr '\n' ' ')
 ```
