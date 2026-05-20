@@ -1,35 +1,29 @@
 #!/usr/bin/env python3
-"""Masked-region video repair judge.
+"""Masked-region deblur judge.
 
 Loads `output.mp4`, `clean.mp4`, `corrupted.mp4`, and `mask.png`. For each
-frame pair, computes:
+frame pair, computes PSNR-Y and SSIM-Y over masked pixels (restoration
+quality) plus SSIM gates outside the mask (preservation).
 
-  * in-mask metric: distance from agent output to CLEAN reference
-    - color task: mean CIEDE2000 (ΔE2000) over masked pixels
-    - deblur task: PSNR-Y and SSIM-Y over masked pixels
-  * out-mask preservation metric: agent output vs the (corrupted) input
-    in non-masked pixels. The agent should not touch outside the mask;
-    untouched pixels score perfectly here.
-    - color task: mean ΔE2000 (lower = closer to corrupted = better
-      preservation)
-    - deblur task: PSNR (higher = closer to corrupted = better
-      preservation)
+In-window restoration (in-mask, output vs clean):
 
-Mapping to [0, 1]:
-  color   in_score  = clip01(1 - mean_dE_in / 10)   # tightened from /30
-  color   out_score = clip01(1 - mean_dE_out / 5)
-  deblur  in_score  = clip01((PSNR_in - 18) / 14)   # tightened from (PSNR-15)/25
-                       blended 0.5/0.5 with clip01((SSIM_in - 0.6) / 0.4)
-  deblur  out_score = clip01((PSNR_out - 30) / 20)
+  psnr_n  = clip01((mean_PSNR_in - 31.0) / 9.0)
+  ssim_n  = clip01((mean_SSIM_in - 0.93) / 0.07)
+  restore = 0.5 * psnr_n + 0.5 * ssim_n
 
-Composite: reward = 0.7 * in_score + 0.3 * out_score.
+In-window preservation (in-window, out-of-mask, output vs corrupted) and
+out-of-window preservation are binary SSIM gates at 0.95. The in-window
+preservation gate is multiplicative: a fail zeroes the in-window score.
+The out-window preservation gate contributes the 10% preservation mass.
 
-Why tightened: the user's nominal corruption recipe (hue ±10-15deg, sat
-x0.5/x1.2; Gaussian sigma=3 ksize=15; motion length=15px) produces mild
-perceptual deltas (mean dE2000 ~3-6; mean masked PSNR ~25-27 dB). Under
-the original /30 and /25 divisors a do-nothing passthrough scored
-0.74-0.92, leaving no signal for the agent. Tightened divisors land the
-passthrough baseline near 0.50, matching the spec target ~0.51.
+Final:
+
+  in_window_score = restore if in_win_preserve_pass else 0
+  reward = 0.90 * in_window_score + 0.10 * out_window_score
+
+Per-task anchors (PSNR LO=31 dB, SSIM LO=0.93) derived from broken
+passthrough measurements (~28-30 dB / ~0.87-0.93). Broken floor lands
+at 0.10 (preservation mass only); golden identity lands at 1.0.
 """
 from __future__ import annotations
 
@@ -139,7 +133,7 @@ def _load_window(path: Path | None, n_frames: int, fps_hint: float):
 
     gt_window.json shape:
       {"window_start_s": float, "window_end_s": float, "fps": float,
-       "weights": {"in_window": 0.85, "out_window": 0.15}}
+       "weights": {"in_window": 0.90, "out_window": 0.10}}
     """
     if path is None or not path.exists():
         return None
@@ -152,8 +146,8 @@ def _load_window(path: Path | None, n_frames: int, fps_hint: float):
     if end_f <= start_f:
         return None
     w = data.get("weights") or {}
-    w_in = float(w.get("in_window", 0.85))
-    w_out = float(w.get("out_window", 0.15))
+    w_in = float(w.get("in_window", 0.90))
+    w_out = float(w.get("out_window", 0.10))
     return start_f, end_f, w_in, w_out
 
 
@@ -265,16 +259,17 @@ def score_deblur(out_frames, clean_frames, corr_frames, mask, window) -> dict:
     mean_psnr_in = float(np.mean(in_win_psnr)) if in_win_psnr else 0.0
     mean_ssim_in = float(np.mean(in_win_ssim)) if in_win_ssim else 0.0
     if in_win_psnr:
-        psnr_part = _clip01((mean_psnr_in - 22.0) / 13.0)
-        ssim_part = _clip01((mean_ssim_in - 0.75) / 0.25)
+        psnr_part = _clip01((mean_psnr_in - 31.0) / 9.0)
+        ssim_part = _clip01((mean_ssim_in - 0.93) / 0.07)
         restore = 0.5 * psnr_part + 0.5 * ssim_part
     else:
         restore = 1.0
     mean_in_win_preserve_ssim = float(np.mean(in_win_preserve_ssim)) if in_win_preserve_ssim else 1.0
     in_win_preserve_pass = mean_in_win_preserve_ssim >= OUT_WINDOW_SSIM_THRESHOLD
     in_win_preserve = 1.0 if in_win_preserve_pass else 0.0
+    # Preservation is a binary GATE, not a score component — pass-or-zero.
     if in_win_preserve_ssim:
-        in_window_score = 0.7 * restore + 0.3 * in_win_preserve
+        in_window_score = restore if in_win_preserve_pass else 0.0
     else:
         in_window_score = restore  # full-frame mask
     mean_out_win_ssim = float(np.mean(out_win_ssim)) if out_win_ssim else 1.0

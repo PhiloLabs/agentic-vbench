@@ -12,9 +12,12 @@ Transformer 2024):
 
 In-window composite (URGENT 2024 + SDT 2024 convention):
 
-  in_window_reward = 0.5 * clip01((masked_SI_SDR + 5) / 25)
-                   + 0.3 * ESTOI
-                   + 0.2 * clip01((PESQ_wb - 1) / 3.5)
+  in_window_reward = 0.5 * clip01((masked_SI_SDR - 14) / 16)
+                   + 0.3 * clip01((ESTOI - 0.96) / 0.04)
+                   + 0.2 * clip01((PESQ_wb - 3.4) / 1.1)
+
+(Per-task LO anchors: msSI-SDR=14 dB, ESTOI=0.96, PESQ=3.4 —
+derived from the broken passthrough measurements.)
 
 Out-of-window check (catches over-enhancement of clean regions):
 
@@ -22,7 +25,7 @@ Out-of-window check (catches over-enhancement of clean regions):
 
 Final reward:
 
-  reward = 0.85 * in_window_reward + 0.15 * out_window_reward
+  reward = 0.90 * in_window_reward + 0.10 * out_window_reward
 """
 from __future__ import annotations
 
@@ -38,8 +41,8 @@ from pystoi import stoi
 
 
 WINDOW_JSON_PATH = Path("/tests/window.json")
-IN_WEIGHT = 0.85
-OUT_WEIGHT = 0.15
+IN_WEIGHT = 0.90
+OUT_WEIGHT = 0.10
 
 
 def _clip01(x: float) -> float:
@@ -94,17 +97,17 @@ def _score_in_window(est: np.ndarray, ref: np.ndarray,
         msisdr = _masked_si_sdr(ref, est, mask)
     details["masked_si_sdr_db"] = msisdr
 
-    msisdr_n = _clip01((msisdr + 5.0) / 25.0)
-    estoi_n = _clip01(estoi_v)
-    pesq_n = _clip01((pesq_wb - 1.0) / 3.5)
+    msisdr_n = _clip01((msisdr - 14.0) / 16.0)
+    estoi_n = _clip01((estoi_v - 0.96) / 0.04)
+    pesq_n = _clip01((pesq_wb - 3.4) / 1.1)
     reward = 0.5 * msisdr_n + 0.3 * estoi_n + 0.2 * pesq_n
     details.update({
         "msisdr_n": msisdr_n,
         "estoi_n": estoi_n,
         "pesq_n": pesq_n,
         "composite_formula": (
-            "0.5*clip01((masked_SI_SDR+5)/25) + 0.3*ESTOI "
-            "+ 0.2*clip01((PESQ_wb-1)/3.5)"
+            "0.5*clip01((masked_SI_SDR-14)/16) + 0.3*clip01((ESTOI-0.96)/0.04) "
+            "+ 0.2*clip01((PESQ_wb-3.4)/1.1)"
         ),
     })
     return float(reward), details

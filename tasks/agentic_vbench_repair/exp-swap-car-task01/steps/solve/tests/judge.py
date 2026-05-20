@@ -2,7 +2,9 @@
 """Shot-swap restoration judge.
 
 Composite reward = whole-video mean PSNR (output.mp4 vs original.mp4),
-normalised to [0, 1] via linear map of [10, 40] dB.
+normalised to [0, 1] via linear map of [17, 40] dB.
+(LO=17 dB anchors broken-passthrough whole-video PSNR≈16 dB
+→ broken floor 0.0; identity → 1.0.)
 
 Diagnostics (NOT in composite, reported in details):
 - detection_score: IoU between agent-reported swap ranges and GT swap
@@ -20,7 +22,7 @@ from pathlib import Path
 import cv2
 import numpy as np
 
-PSNR_LO = 10.0
+PSNR_LO = 17.0
 PSNR_HI = 40.0
 LEN_TOL = 0.10  # 10% length deviation = heavy penalty
 

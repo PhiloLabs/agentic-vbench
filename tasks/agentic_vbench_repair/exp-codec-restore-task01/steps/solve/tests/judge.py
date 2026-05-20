@@ -19,8 +19,11 @@ In-window composite (Codec-SUPERB convention; DNSMOS-OVL headline):
 
 Fallback when DNSMOS is unavailable / out-of-distribution:
 
-  in_window_reward = 0.5 * clip01((PESQ_wb - 1) / 3.5)
-                   + 0.5 * clip01(1 - LSD_4_8kHz / 5)
+  in_window_reward = 0.5 * clip01((PESQ_wb - 2.6) / 1.9)
+                   + 0.5 * clip01(1 - LSD_4_8kHz / 0.9)
+
+(LO=2.6 PESQ and LSD/0.9 are per-task anchors so broken
+passthrough → 0 on the restoration component.)
 
 Out-of-window check (catches over-enhancement of clean regions):
 
@@ -28,7 +31,7 @@ Out-of-window check (catches over-enhancement of clean regions):
 
 Final reward:
 
-  reward = 0.85 * in_window_reward + 0.15 * out_window_reward
+  reward = 0.90 * in_window_reward + 0.10 * out_window_reward
 """
 from __future__ import annotations
 
@@ -47,8 +50,8 @@ from pystoi import stoi
 DNSMOS_MODEL_PATH = Path("/tests/sig_bak_ovr.onnx")
 WINDOW_JSON_PATH = Path("/tests/window.json")
 DNSMOS_INPUT_SAMPLES = int(9.01 * 16000)  # 144160
-IN_WEIGHT = 0.85
-OUT_WEIGHT = 0.15
+IN_WEIGHT = 0.90
+OUT_WEIGHT = 0.10
 
 
 def _clip01(x: float) -> float:
@@ -168,7 +171,7 @@ def _score_in_window(est: np.ndarray, ref: np.ndarray,
     except Exception as e:
         details["dnsmos_error"] = str(e)
 
-    lsd_hi_n = _clip01(1.0 - lsd_hi / 5.0)
+    lsd_hi_n = _clip01(1.0 - lsd_hi / 0.9)
     if dnsmos_ok:
         ovl_n = _clip01((details["dnsmos_ovl"] - 1.0) / 4.0)
         stoi_n = _clip01(stoi_v)
@@ -182,13 +185,13 @@ def _score_in_window(est: np.ndarray, ref: np.ndarray,
             ),
         })
     else:
-        pesq_n = _clip01((pesq_wb - 1.0) / 3.5)
+        pesq_n = _clip01((pesq_wb - 2.6) / 1.9)
         reward = 0.5 * pesq_n + 0.5 * lsd_hi_n
         details.update({
             "pesq_n": pesq_n,
             "lsd_n": lsd_hi_n,
             "composite_formula": (
-                "0.5*clip01((PESQ_wb-1)/3.5) + 0.5*clip01(1 - LSD_4_8kHz/5) "
+                "0.5*clip01((PESQ_wb-2.6)/1.9) + 0.5*clip01(1 - LSD_4_8kHz/0.9) "
                 "[DNSMOS unavailable fallback]"
             ),
         })

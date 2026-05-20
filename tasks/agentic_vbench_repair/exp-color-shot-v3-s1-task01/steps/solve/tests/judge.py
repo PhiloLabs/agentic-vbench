@@ -9,7 +9,7 @@ For each frame i:
 
     in_window_score  = 1 - clip(mean(dE_in) / 10.0, 0, 1)   -- ΔE: color-faithful
     out_window_score = 1 if mean(ssim_out) >= 0.95 else 0   -- SSIM: identity gate
-    reward = 0.85 * in_window_score + 0.15 * out_window_score
+    reward = 0.90 * in_window_score + 0.10 * out_window_score
 
 Each window uses the metric appropriate to the question it asks: ΔE for
 restoration quality (in-window), SSIM for content preservation (out-window).
@@ -112,8 +112,8 @@ def main():
         w_start_s = float(win["window_start_s"])
         w_end_s = float(win["window_end_s"])
         w = win.get("weights") or {}
-        w_in = float(w.get("in_window", 0.85))
-        w_out = float(w.get("out_window", 0.15))
+        w_in = float(w.get("in_window", 0.90))
+        w_out = float(w.get("out_window", 0.10))
 
         # Stream-decode all 3 videos frame-by-frame to keep memory bounded
         # (an earlier all-in-memory version OOM'd the 4 GiB container on

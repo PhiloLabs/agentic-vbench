@@ -6,8 +6,8 @@
   "fps": 24.0,
   "n_frames_total": 721,
   "weights": {
-    "in_window": 0.85,
-    "out_window": 0.15
+    "in_window": 0.9,
+    "out_window": 0.1
   },
   "grade_kind": "lut",
   "grade_provenance": "Bourbon_64.CUBE"
