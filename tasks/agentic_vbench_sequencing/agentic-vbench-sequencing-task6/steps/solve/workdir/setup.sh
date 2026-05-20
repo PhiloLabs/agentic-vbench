@@ -2,7 +2,7 @@
 # Pre-agent fetch: pulls the per-task materials zip into /workspace/materials/.
 set -euo pipefail
 
-MATERIALS_URL="https://huggingface.co/datasets/ameddserM/video_edit_bench_task_5_5/resolve/main/materials/6.zip"
+MATERIALS_URL="https://huggingface.co/datasets/ameddserM/agentic_vbench_sequencing/resolve/main/materials/6.zip"
 
 mkdir -p /workspace/materials /workspace/output /workspace/work
 
