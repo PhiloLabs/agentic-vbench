@@ -1,7 +1,11 @@
 #!/bin/bash
-# Oracle solver: baked-in GT cut points. Uses ffmpeg select filter to
-# drop the duplicate copy of each GT glitch block, then writes
-# output.mp4 + cuts.json.
+# Oracle solver: drop the GT glitch ranges using the EXACT same ffmpeg
+# invocation the verifier's _reconstruct_remainder uses for the honesty
+# gate (preset ultrafast, crf 20, time-based select, aac 128k, +faststart).
+# The earlier `-preset veryfast` + frame-based select + 16k mono audio
+# produced an output that drifted from the verifier's reconstruction by
+# enough to land SSIM at 0.887 — below the 0.95 honesty gate, so the
+# oracle scored 0.
 set -euo pipefail
 
 mkdir -p /workspace/output /workspace/work
@@ -14,41 +18,29 @@ OUTPUT_CUTS=/workspace/output/cuts.json
 cat > "$OUTPUT_CUTS" <<'JSONEOF'
 {
   "glitches": [
-    {
-      "type": "duplicated",
-      "start_frame": 152,
-      "end_frame": 179
-    },
-    {
-      "type": "duplicated",
-      "start_frame": 356,
-      "end_frame": 383
-    }
+    {"type": "duplicated", "start_frame": 152, "end_frame": 179},
+    {"type": "duplicated", "start_frame": 356, "end_frame": 383}
   ]
 }
 JSONEOF
 
-# Source fps as a rational; pass through to -r and use a guarded
-# `setpts=N/(FPS)/TB` (parens so fractional FPS like 24000/1001 isn't
-# parsed as `N/24000/1001/TB`).
-FPS=24000/1001
+# Convert frame ranges to time the same way _parse_ranges does — closed
+# `between(t,s,e)` with a half-frame nudge on the end (0.5/fps) so the
+# half-open semantics [start_frame, end_frame) survive the closed-interval
+# match:
+#   fps = 24000/1001 ≈ 23.97603
+#   152 / fps                = 6.339667
+#   (179 - 0.5) / fps        = 7.444792
+#   356 / fps                = 14.848167
+#   (383 - 0.5) / fps        = 15.953292
+SEL='not(between(t\,6.339667\,7.444792)+between(t\,14.848167\,15.953292))'
 
-# Build ffmpeg select expression: keep frame n iff n not in any [s, e).
-# Each glitch contributes a sub-expr "between(n,s,e-1)"; we OR them and negate.
-SELECT_EXPR='not(between(n\,152\,178)+between(n\,356\,382))'
-
-# Audio cut spans (time, in seconds, in input). Each freeze block at
-# post-injection frames [s, e) corresponds to audio span
-# [s/FPS, e/FPS). We drop those audio samples so audio stays in sync
-# with the cleaned video.
-ASELECT_EXPR='not(between(t\,6.339667\,7.465792)+between(t\,14.848167\,15.974292))'
-
-ffmpeg -y -i "$INPUT" \
-    -vf "select=${SELECT_EXPR},setpts=N/(${FPS})/TB" \
-    -af "aselect=${ASELECT_EXPR},asetpts=N/SR/TB" \
-    -r "${FPS}" \
-    -c:v libx264 -pix_fmt yuv420p -preset veryfast \
-    -c:a aac -ac 1 -ar 16000 \
+ffmpeg -nostdin -y -loglevel error -i "$INPUT" \
+    -vf "select='${SEL}',setpts=N/FRAME_RATE/TB" \
+    -af "aselect='${SEL}',asetpts=N/SR/TB" \
+    -c:v libx264 -preset ultrafast -crf 20 -pix_fmt yuv420p \
+    -c:a aac -b:a 128k \
+    -movflags +faststart \
     "$OUTPUT"
 
 echo "oracle: wrote $OUTPUT and $OUTPUT_CUTS"

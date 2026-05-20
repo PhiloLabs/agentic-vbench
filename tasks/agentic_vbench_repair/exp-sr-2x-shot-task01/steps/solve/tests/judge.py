@@ -157,12 +157,14 @@ def score(output_mp4: Path, output_json: Path, gt_shot_json: Path,
     ssim_n = _clip01(mean_ssim_in)
     quality_score = 0.5 * psnr_n + 0.5 * ssim_n
 
-    # ---- preservation: out-of-range PSNR between corrupted input and output ----
+    # ---- preservation: out-of-range SSIM between corrupted input and output ----
+    # SSIM rather than PSNR — robust to encoder noise on an honest re-encode
+    # (oracle floor ~0.98), drops below 0.95 only on real out-of-shot tampering.
+    OUT_WINDOW_SSIM_THRESHOLD = 0.95
     cap_in = cv2.VideoCapture(str(corrupted_mp4))
     cap_out = cv2.VideoCapture(str(output_mp4))
-    out_psnrs = []
+    out_ssims = []
     n_compare = min(n_out, n_corr)
-    # If agent_lo / agent_hi are invalid, treat as empty → score whole video.
     has_valid_agent = agent_hi >= agent_lo and agent_lo >= 0
     for fi in range(n_compare):
         if has_valid_agent and agent_lo <= fi <= agent_hi:
@@ -174,17 +176,18 @@ def score(output_mp4: Path, output_json: Path, gt_shot_json: Path,
         if not ok1 or not ok2:
             continue
         try:
-            out_psnrs.append(_psnr_y(in_f, out_f))
+            out_ssims.append(_ssim_y(in_f, out_f))
         except Exception:
             continue
     cap_in.release()
     cap_out.release()
-    if out_psnrs:
-        mean_psnr_out = float(np.mean(out_psnrs))
+    if out_ssims:
+        mean_ssim_out = float(np.mean(out_ssims))
     else:
         # agent claimed whole video → treat as full credit.
-        mean_psnr_out = 100.0
-    out_score = _clip01(mean_psnr_out / 50.0)
+        mean_ssim_out = 1.0
+    out_pass = mean_ssim_out >= OUT_WINDOW_SSIM_THRESHOLD
+    out_score = 1.0 if out_pass else 0.0
 
     reward = 0.7 * quality_score + 0.2 * iou + 0.1 * out_score
     return {
@@ -205,8 +208,10 @@ def score(output_mp4: Path, output_json: Path, gt_shot_json: Path,
                 "quality_score": quality_score,
             },
             "preservation": {
-                "n_compared": len(out_psnrs),
-                "mean_psnr_db": mean_psnr_out,
+                "n_compared": len(out_ssims),
+                "mean_ssim_y": mean_ssim_out,
+                "ssim_threshold": OUT_WINDOW_SSIM_THRESHOLD,
+                "preservation_pass": bool(out_pass),
                 "out_score": out_score,
             },
             "weights": {"quality": 0.7, "iou": 0.2, "preservation": 0.1},
