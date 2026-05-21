@@ -14,7 +14,7 @@ corruption = "hard clip np.clip(±q) at q=0.9-quantile of |x|, threshold=0.3311,
 build_timeout_sec = 600.0
 cpus = 2
 memory_mb = 4096
-storage_mb = 10240
+storage_mb = 8192
 allow_internet = true
 
 [[steps]]
