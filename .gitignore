@@ -54,41 +54,29 @@ experiments/
 # Local-only logs
 *.log
 
-# DNS denoise materials: regenerated from the upstream HF dataset by
-# `scripts/generate_dns_denoise.py`. ~150KB per WAV × 600 WAVs ≈ 90MB
-# total, plus they would round-trip through git as opaque binary blobs.
-tasks/dns-denoise-task*/steps/solve/workdir/noisy.wav
-tasks/dns-denoise-task*/steps/solve/tests/clean.wav
-
-# VoiceBank-DEMAND materials: regenerated from JacobLinCool/VoiceBank-DEMAND-16k.
-tasks/voicebank-demand-task*/steps/solve/workdir/noisy.wav
-tasks/voicebank-demand-task*/steps/solve/tests/clean.wav
-
-# DisfluencySpeech materials: regenerated from amaai-lab/DisfluencySpeech.
-# WAVs are ~340KB each; transcripts are tiny but kept gitignored for
-# consistency (the generator is the canonical source).
-tasks/disfluency-clean-task*/steps/solve/workdir/utterance.wav
-
-# DIV4K-50 materials: regenerated from YSZuo/DIV4K-50. HQ refs are ~24MB
-# each (4096×4096 PNG); LQ inputs are ~100KB each (256×256 degraded PNG).
-tasks/div4k-50-task*/steps/solve/workdir/lq.png
-tasks/div4k-50-task*/steps/solve/tests/hq.png
-
-# DAVIS 2017 materials: regenerated from the ETH 480p ZIP. ~8MB workdir
-# (50 JPEG frames) + ~500KB tests (50 indexed-palette mask PNGs).
-tasks/davis-vos-task*/steps/solve/workdir/frames/
-tasks/davis-vos-task*/steps/solve/workdir/first_mask.png
-tasks/davis-vos-task*/steps/solve/tests/gt_masks/
-
-# GoPro deblur materials: regenerated from snah/GOPRO_Large (9.5 GB direct
-# HF zip). ~30MB workdir (30 blur PNGs) + ~30MB tests (30 sharp PNGs).
-tasks/gopro-deblur-task*/steps/solve/workdir/blur/
-tasks/gopro-deblur-task*/steps/solve/tests/sharp/
 results/
 scripts/_internal/
 
-# Method-1 repair tasks: GT JSON files live in the HF materials zip and
-# are extracted by setup.sh at trial time, never checked in. Currently
-# only codec-restore-task01 is Method-1 — extend this list as the
-# remaining 18 Method-2 repair tasks are migrated.
-tasks/agentic_vbench_repair/exp-codec-restore-task*/steps/solve/tests/window.json
+# Per-task media + ground-truth files. Everything lives on the public
+# HF datasets `ameddserM/agentic_vbench_video_{assembly,sequencing,
+# repair}` and is baked into the Docker image at build time. Keep the
+# OSS repo free of GT data the agent shouldn't see and of binary
+# blobs that would bloat `git clone`. Tracked task files are limited
+# to: `task.toml`, `instruction.md`, `environment/Dockerfile`,
+# `steps/solve/{workdir/setup.sh, tests/{test.sh, judge.py},
+# solution/solve.sh}`.
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/workdir/*.mp4
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/workdir/*.wav
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/workdir/*.png
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/workdir/*.txt
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/tests/*.mp4
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/tests/*.wav
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/tests/*.png
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/tests/*.npy
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/tests/*.onnx
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/tests/*.json
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/solution/*.mp4
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/solution/*.wav
+tasks/agentic_vbench_repair/exp-*-task*/steps/solve/solution/*.json
+tasks/agentic_vbench_assembly/*/steps/solve/workdir/*.mp4
+tasks/agentic_vbench_sequencing/*/steps/solve/workdir/*.mp4
