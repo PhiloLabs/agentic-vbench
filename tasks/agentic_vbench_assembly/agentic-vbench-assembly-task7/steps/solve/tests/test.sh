@@ -1,7 +1,8 @@
 #!/bin/bash
-# Verifier: scores /workspace/output/solution.json against the inline
-# CORRECT_PICKS baked into judge.py. Writes 0–1 reward to
-# /logs/verifier/reward.json (and reward.txt for legacy readers).
+# Verifier: per-slot scoring with SSIM-honesty gate. Judges both
+# /workspace/output/solution.json (slot picks) AND
+# /workspace/output/solution.mp4 (actual concatenated video) against
+# the materials in /workspace/materials/.
 set -euo pipefail
 
 mkdir -p /logs/verifier /logs/artifacts
@@ -12,5 +13,7 @@ fi
 
 python3 /tests/judge.py \
         --solution /workspace/output/solution.json \
+        --solution-mp4 /workspace/output/solution.mp4 \
+        --materials-dir /workspace/materials \
         --reward-json /logs/verifier/reward.json \
         --reward-txt /logs/verifier/reward.txt
