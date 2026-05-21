@@ -1,11 +1,13 @@
 #!/bin/bash
-# Oracle: writes the ground-truth solution.json directly.
+# Oracle: writes the ground-truth solution.json AND solution.mp4
+# (concat of the correct picks in slot order). Failure-loud — no
+# stderr suppression, no check=False.
 set -euo pipefail
 
-mkdir -p /workspace/output
+mkdir -p /workspace/output /workspace/work
 
 python3 - <<'PY'
-import json, subprocess
+import json, subprocess, sys
 from pathlib import Path
 
 CORRECT = ['2.mp4', '12.mp4', '9.mp4', '10.mp4']
@@ -19,7 +21,6 @@ def duration(p):
     return float(out)
 
 durs = {c: duration(materials / c) for c in CORRECT}
-
 t = 0.0
 segments = []
 for c in CORRECT:
@@ -41,10 +42,22 @@ list_file.write_text(
     "\n".join(f"file '{materials / c}'" for c in CORRECT) + "\n"
 )
 
-subprocess.run([
-    "ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(list_file),
-    "-c", "copy", "/workspace/output/solution.mp4",
-], check=False, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+# Try stream-copy concat first (fastest, identical pixels). If clips
+# differ in codec/params, fall back to a re-encode that the SSIM gate
+# tolerates (≥0.98 on honest re-encode).
+copy_cmd = ["ffmpeg", "-y", "-f", "concat", "-safe", "0",
+            "-i", str(list_file), "-c", "copy",
+            "/workspace/output/solution.mp4"]
+r = subprocess.run(copy_cmd, capture_output=True)
+if r.returncode != 0:
+    print("stream-copy concat failed, falling back to re-encode", file=sys.stderr)
+    print(r.stderr.decode()[-400:], file=sys.stderr)
+    reenc_cmd = ["ffmpeg", "-y", "-f", "concat", "-safe", "0",
+                 "-i", str(list_file),
+                 "-c:v", "libx264", "-preset", "veryfast", "-crf", "18",
+                 "-c:a", "aac", "-b:a", "192k",
+                 "/workspace/output/solution.mp4"]
+    subprocess.run(reenc_cmd, check=True)
 PY
 
-echo "oracle: wrote /workspace/output/solution.json and (best-effort) solution.mp4"
+echo "oracle: wrote /workspace/output/solution.json + solution.mp4"
