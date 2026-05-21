@@ -1,20 +1,12 @@
 #!/bin/bash
+# Pre-agent stage: copy pre-baked input files into the agent's workspace.
+# (Materials were baked into the image at `docker build` time — see Dockerfile.)
 set -euo pipefail
 
-HERE="$(cd "$(dirname "$0")" && pwd)"
-
 mkdir -p /workspace/materials /workspace/output /workspace/work
-cp "$HERE/source.mp4" /workspace/materials/source.mp4
-
-if [ ! -s /workspace/materials/source.mp4 ]; then
-    echo "ERROR: source.mp4 missing or empty" >&2
-    exit 1
-fi
+cp -r /baked/input/. /workspace/materials/
 
 mkdir -p /logs/artifacts
-ffprobe -v error -show_entries stream=duration,r_frame_rate \
-        -select_streams v:0 \
-        /workspace/materials/source.mp4 \
-        > /logs/artifacts/input-probe.txt 2>&1 || true
+ls -la /workspace/materials/ > /logs/artifacts/materials-listing.txt
 
-rm -rf -- "$HERE/source.mp4" "$0"
+rm -- "$0"

@@ -12,6 +12,8 @@ fi
 python3 -c "import cv2, numpy" 2>/dev/null || \
     pip install --quiet --no-cache-dir "numpy<3" "opencv-python-headless==4.13.*"
 
+cp -r /baked/golden/. /tests/
+
 python3 /tests/judge.py \
         --output-mp4 /workspace/output/output.mp4 \
         --output-json /workspace/output/output.json \

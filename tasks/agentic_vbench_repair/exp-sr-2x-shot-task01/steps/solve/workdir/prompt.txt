@@ -1,1 +1,0 @@
-One shot in this multi-shot war-film clip has been downsampled 2× and re-upsampled, leaving it visibly blurrier than the surrounding shots — rubble texture, helmet netting and face detail all soften noticeably. Identify the corrupted shot and restore it to match the source quality. The remaining shots should pass through unchanged.

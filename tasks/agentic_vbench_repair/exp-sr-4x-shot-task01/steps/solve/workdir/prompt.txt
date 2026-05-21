@@ -1,1 +1,0 @@
-One shot in this documentary-style classroom video has been downsampled 4× and re-upsampled, destroying the fine detail (chalkboard writing, poster text, faces) that distinguishes it from the surrounding shots. Identify the corrupted shot and restore its sharpness; leave the other shots untouched.
