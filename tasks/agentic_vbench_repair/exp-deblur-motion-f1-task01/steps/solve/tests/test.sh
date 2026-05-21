@@ -19,6 +19,8 @@ if [ -f /tests/gt_window.json ]; then
     WIN_ARG=(--gt-window-json /tests/gt_window.json)
 fi
 
+cp -r /baked/golden/. /tests/
+
 python3 /tests/judge.py \
         --output-mp4 /workspace/output/output.mp4 \
         --clean-mp4 /tests/clean.mp4 \

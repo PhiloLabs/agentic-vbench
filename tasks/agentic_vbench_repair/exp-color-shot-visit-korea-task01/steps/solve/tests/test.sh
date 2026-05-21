@@ -8,6 +8,8 @@ if [ -d /workspace/output ]; then
     cp -a /workspace/output/. /logs/artifacts/ 2>/dev/null || true
 fi
 
+cp -r /baked/golden/. /tests/
+
 python3 /tests/judge.py \
         --output-mp4 /workspace/output/output.mp4 \
         --source-mp4 /workspace/materials/source.mp4 \

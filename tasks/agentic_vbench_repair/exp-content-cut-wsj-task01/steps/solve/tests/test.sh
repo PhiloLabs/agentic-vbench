@@ -9,8 +9,7 @@ if [ -d /workspace/output ]; then
     cp -a /workspace/output/. /logs/artifacts/ 2>/dev/null || true
 fi
 
-python3 -c "import skimage, numpy" 2>/dev/null || \
-    pip install --quiet --no-cache-dir "numpy<3" "scikit-image>=0.22,<1.0"
+cp -r /baked/golden/. /tests/
 
 python3 /tests/judge.py \
         --source-mp4 /workspace/materials/source.mp4 \

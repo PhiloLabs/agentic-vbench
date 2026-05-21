@@ -1,9 +1,7 @@
 #!/bin/bash
-# Oracle: copy the bundled golden reference straight to the output.
-# This is the ceiling-proof oracle — it shows the verifier returns 1.0
-# when given the correct answer.
+# Oracle: copy the pre-baked golden into the agent-output path.
+# Golden was baked into /baked/golden/ at `docker build` time.
 set -euo pipefail
 mkdir -p /workspace/output
-HERE="$(cd "$(dirname "$0")" && pwd)"
-cp "$HERE/clean.wav" /workspace/output/enhanced.wav
-echo "oracle: copied bundled golden $HERE/clean.wav -> /workspace/output/enhanced.wav"
+cp /baked/golden/clean.wav /workspace/output/enhanced.wav
+echo "oracle: copied /baked/golden/clean.wav -> /workspace/output/enhanced.wav"

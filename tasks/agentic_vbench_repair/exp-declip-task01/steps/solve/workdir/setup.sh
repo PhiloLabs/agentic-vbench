@@ -1,8 +1,12 @@
 #!/bin/bash
+# Pre-agent stage: copy pre-baked input files into the agent's workspace.
+# (Materials were baked into the image at `docker build` time — see Dockerfile.)
 set -euo pipefail
-HERE="$(cd "$(dirname "$0")" && pwd)"
+
 mkdir -p /workspace/materials /workspace/output /workspace/work
-cp "$HERE/noisy.wav" /workspace/materials/noisy.wav
+cp -r /baked/input/. /workspace/materials/
+
 mkdir -p /logs/artifacts
 ls -la /workspace/materials/ > /logs/artifacts/materials-listing.txt
-rm -f -- "$HERE/noisy.wav" "$0"
+
+rm -- "$0"

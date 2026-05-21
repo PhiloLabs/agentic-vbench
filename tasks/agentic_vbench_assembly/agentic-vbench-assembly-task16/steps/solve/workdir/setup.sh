@@ -1,17 +1,10 @@
 #!/bin/bash
-# Pre-agent fetch: pulls the per-task materials zip into /workspace/materials/.
+# Pre-agent stage: copy pre-baked materials into the agent's workspace.
+# (Materials were baked into the image at `docker build` time — see Dockerfile.)
 set -euo pipefail
 
-MATERIALS_URL="https://huggingface.co/datasets/ameddserM/agentic_vbench_assembly/resolve/main/materials/16.zip"
-
 mkdir -p /workspace/materials /workspace/output /workspace/work
-
-curl --fail --silent --show-error --location \
-     --retry 5 --retry-delay 3 --retry-connrefused \
-     ${HF_TOKEN:+-H "Authorization: Bearer $HF_TOKEN"} \
-     "$MATERIALS_URL" -o /tmp/materials.zip
-unzip -q -o /tmp/materials.zip -d /workspace/materials/
-rm -f /tmp/materials.zip
+cp -r /baked/materials/. /workspace/materials/
 
 mkdir -p /logs/artifacts
 ls -la /workspace/materials/ > /logs/artifacts/materials-listing.txt
