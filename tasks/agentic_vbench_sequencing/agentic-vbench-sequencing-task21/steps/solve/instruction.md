@@ -1,6 +1,6 @@
-# Video Ordering Task — Nuphy Air75
+# Video Ordering Task — The Snowflake Discovery
 
-You are given **12 candidate video clips**: `1.mp4`, `2.mp4`, `3.mp4`, `4.mp4`, `5.mp4`, `6.mp4`, `7.mp4`, `8.mp4`, `9.mp4`, `10.mp4`, `11.mp4`, `12.mp4`.
+You are given **13 candidate video clips**: `1.mp4`, `2.mp4`, …, `13.mp4`.
 
 These clips are the shots of a single chapter from a short film, **renamed and shuffled into a random order**. Each clip appears **exactly once** in the correct ordering — there are no extra clips and no duplicates.
 
@@ -10,7 +10,7 @@ Reassemble the clips into the original narrative order described below.
 
 ## Story overview
 
-A person unboxes a white mechanical keyboard, removes protective films, explores accessories like a keycap puller, replaces a keycap with an orange one, and types.
+A woman in a white blouse catches a snowflake, discovers a world of dancers inside, and then winks from inside the moon.
 
 ## Additional notes
 
@@ -24,7 +24,7 @@ A person unboxes a white mechanical keyboard, removes protective films, explores
 
 ## What to submit
 
-1. **`/workspace/output/solution.mp4`** — the 12 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
+1. **`/workspace/output/solution.mp4`** — the 13 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
 2. **`/workspace/output/solution.json`** — a manifest describing the order you chose.
 
 ### `solution.json` format
@@ -40,8 +40,8 @@ A person unboxes a white mechanical keyboard, removes protective films, explores
 
 ### Rules
 
-- Exactly **12 entries**, one per slot, in slot order.
-- Each clip number from `"1"` to `"12"` must appear **exactly once** as a `source`.
+- Exactly **13 entries**, one per slot, in slot order.
+- Each clip number from `"1"` to `"13"` must appear **exactly once** as a `source`.
 - Intervals are **half-open** `[start, end)` — end is exclusive.
 - `output` — time range where this clip appears in `solution.mp4`.
 - `source` — clip number as a string (e.g. `"3"` for `3.mp4`).

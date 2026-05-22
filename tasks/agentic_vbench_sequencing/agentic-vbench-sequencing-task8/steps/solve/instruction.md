@@ -1,6 +1,6 @@
-# Video Ordering Task — Poverty Trap
+# Video Ordering Task — 63 Up 2019
 
-You are given **19 candidate video clips**: `1.mp4`, `2.mp4`, `3.mp4`, `4.mp4`, `5.mp4`, `6.mp4`, `7.mp4`, `8.mp4`, `9.mp4`, `10.mp4`, `11.mp4`, `12.mp4`, `13.mp4`, `14.mp4`, `15.mp4`, `16.mp4`, `17.mp4`, `18.mp4`, `19.mp4`.
+You are given **18 candidate video clips**: `1.mp4`, `2.mp4`, `3.mp4`, `4.mp4`, `5.mp4`, `6.mp4`, `7.mp4`, `8.mp4`, `9.mp4`, `10.mp4`, `11.mp4`, `12.mp4`, `13.mp4`, `14.mp4`, `15.mp4`, `16.mp4`, `17.mp4`, `18.mp4`.
 
 These clips are the shots of a single chapter from a short film, **renamed and shuffled into a random order**. Each clip appears **exactly once** in the correct ordering — there are no extra clips and no duplicates.
 
@@ -10,7 +10,7 @@ Reassemble the clips into the original narrative order described below.
 
 ## Story overview
 
-This video explores the "welfare trap," where government assistance programs inadvertently discourage employment by cutting off benefits as income rises, creating a cycle of poverty.
+John follows a prestigious educational path to become a successful barrister. He founds a charity for Bulgaria, continuing a family tradition of service and philanthropy.
 
 ## Additional notes
 
@@ -24,7 +24,7 @@ This video explores the "welfare trap," where government assistance programs ina
 
 ## What to submit
 
-1. **`/workspace/output/solution.mp4`** — the 19 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
+1. **`/workspace/output/solution.mp4`** — the 18 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
 2. **`/workspace/output/solution.json`** — a manifest describing the order you chose.
 
 ### `solution.json` format
@@ -40,8 +40,8 @@ This video explores the "welfare trap," where government assistance programs ina
 
 ### Rules
 
-- Exactly **19 entries**, one per slot, in slot order.
-- Each clip number from `"1"` to `"19"` must appear **exactly once** as a `source`.
+- Exactly **18 entries**, one per slot, in slot order.
+- Each clip number from `"1"` to `"18"` must appear **exactly once** as a `source`.
 - Intervals are **half-open** `[start, end)` — end is exclusive.
 - `output` — time range where this clip appears in `solution.mp4`.
 - `source` — clip number as a string (e.g. `"3"` for `3.mp4`).

@@ -1,6 +1,6 @@
-# Video Ordering Task — Forest Ambush
+# Video Ordering Task — Delivery And Reveal Of Gift
 
-You are given **12 candidate video clips**: `1.mp4`, `2.mp4`, …, `12.mp4`.
+You are given **15 candidate video clips**: `1.mp4`, `2.mp4`, …, `15.mp4`.
 
 These clips are the shots of a single chapter from a short film, **renamed and shuffled into a random order**. Each clip appears **exactly once** in the correct ordering — there are no extra clips and no duplicates.
 
@@ -10,7 +10,7 @@ Reassemble the clips into the original narrative order described below.
 
 ## Story overview
 
-A silver-haired warrior urges a woman in a floral wreath to flee the misty woods, then enters a dark cavern and drinks a potion to prepare for battle. She fights a large, multi-limbed monster with a sword and orange magic but is thrown to the ground and crawls away as the beast looms over her.
+A man delivers a blue box to a diner, where a woman receives a coffee maker and then holds the gift box outside.
 
 ## Additional notes
 
@@ -24,7 +24,7 @@ A silver-haired warrior urges a woman in a floral wreath to flee the misty woods
 
 ## What to submit
 
-1. **`/workspace/output/solution.mp4`** — the 12 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
+1. **`/workspace/output/solution.mp4`** — the 15 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
 2. **`/workspace/output/solution.json`** — a manifest describing the order you chose.
 
 ### `solution.json` format
@@ -40,8 +40,8 @@ A silver-haired warrior urges a woman in a floral wreath to flee the misty woods
 
 ### Rules
 
-- Exactly **12 entries**, one per slot, in slot order.
-- Each clip number from `"1"` to `"12"` must appear **exactly once** as a `source`.
+- Exactly **15 entries**, one per slot, in slot order.
+- Each clip number from `"1"` to `"15"` must appear **exactly once** as a `source`.
 - Intervals are **half-open** `[start, end)` — end is exclusive.
 - `output` — time range where this clip appears in `solution.mp4`.
 - `source` — clip number as a string (e.g. `"3"` for `3.mp4`).

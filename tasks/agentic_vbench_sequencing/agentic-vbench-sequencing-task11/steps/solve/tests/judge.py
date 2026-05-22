@@ -29,7 +29,7 @@ import numpy as np
 
 cv2.setNumThreads(1)
 
-CORRECT_ORDER = ['13', '5', '8', '7', '10', '3', '11', '14', '6', '15', '9', '1', '4', '2', '12']
+CORRECT_ORDER = ['19', '20', '15', '18', '1', '3', '5', '10', '7', '14', '17', '8', '4', '11', '13', '9', '2', '12', '6', '16']
 
 SSIM_THRESHOLD = 0.95
 N_SAMPLES = 3  # at 25%, 50%, 75% through each segment

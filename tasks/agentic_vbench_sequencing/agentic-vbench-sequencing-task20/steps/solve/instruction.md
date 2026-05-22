@@ -1,6 +1,6 @@
-# Video Ordering Task — Calhoun Effect
+# Video Ordering Task — Korean Culture Montage
 
-You are given **13 candidate video clips**: `1.mp4`, `2.mp4`, `3.mp4`, `4.mp4`, `5.mp4`, `6.mp4`, `7.mp4`, `8.mp4`, `9.mp4`, `10.mp4`, `11.mp4`, `12.mp4`, `13.mp4`.
+You are given **13 candidate video clips**: `1.mp4`, `2.mp4`, …, `13.mp4`.
 
 These clips are the shots of a single chapter from a short film, **renamed and shuffled into a random order**. Each clip appears **exactly once** in the correct ordering — there are no extra clips and no duplicates.
 
@@ -10,7 +10,7 @@ Reassemble the clips into the original narrative order described below.
 
 ## Story overview
 
-In the mouse colony experiment, social collapse leads to high infant mortality and a generation of isolated mice that only eat, sleep, and groom themselves.
+A woman explores a market with her phone, a man surfs, dancers perform, and another man shops for clothes.
 
 ## Additional notes
 

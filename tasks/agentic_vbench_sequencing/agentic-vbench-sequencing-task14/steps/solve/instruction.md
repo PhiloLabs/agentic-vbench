@@ -1,6 +1,6 @@
-# Video Ordering Task — Evangelion Teaser
+# Video Ordering Task — Altman Musk Trial
 
-You are given **10 candidate video clips**: `1.mp4`, `2.mp4`, `3.mp4`, `4.mp4`, `5.mp4`, `6.mp4`, `7.mp4`, `8.mp4`, `9.mp4`, `10.mp4`.
+You are given **18 candidate video clips**: `1.mp4`, `2.mp4`, `3.mp4`, `4.mp4`, `5.mp4`, `6.mp4`, `7.mp4`, `8.mp4`, `9.mp4`, `10.mp4`, `11.mp4`, `12.mp4`, `13.mp4`, `14.mp4`, `15.mp4`, `16.mp4`, `17.mp4`, `18.mp4`.
 
 These clips are the shots of a single chapter from a short film, **renamed and shuffled into a random order**. Each clip appears **exactly once** in the correct ordering — there are no extra clips and no duplicates.
 
@@ -10,7 +10,7 @@ Reassemble the clips into the original narrative order described below.
 
 ## Story overview
 
-Japanese text and logos transition to scenes of overgrown musical instruments in a flooded ruin. A mechanical creature appears briefly before the video ends with text.
+This video reports on the 2026 trial between Elon Musk and Sam Altman, detailing the history of OpenAI, allegations of stolen charity, and internal evidence.
 
 ## Additional notes
 
@@ -24,7 +24,7 @@ Japanese text and logos transition to scenes of overgrown musical instruments in
 
 ## What to submit
 
-1. **`/workspace/output/solution.mp4`** — the 10 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
+1. **`/workspace/output/solution.mp4`** — the 18 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
 2. **`/workspace/output/solution.json`** — a manifest describing the order you chose.
 
 ### `solution.json` format
@@ -40,8 +40,8 @@ Japanese text and logos transition to scenes of overgrown musical instruments in
 
 ### Rules
 
-- Exactly **10 entries**, one per slot, in slot order.
-- Each clip number from `"1"` to `"10"` must appear **exactly once** as a `source`.
+- Exactly **18 entries**, one per slot, in slot order.
+- Each clip number from `"1"` to `"18"` must appear **exactly once** as a `source`.
 - Intervals are **half-open** `[start, end)` — end is exclusive.
 - `output` — time range where this clip appears in `solution.mp4`.
 - `source` — clip number as a string (e.g. `"3"` for `3.mp4`).
