@@ -17,7 +17,7 @@ ARG MATERIALS_URL=https://huggingface.co/datasets/ameddserM/agentic_vbench_video
 RUN mkdir -p /baked \
  && curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
       "$MATERIALS_URL" -o /tmp/m.zip \
- && unzip -q /tmp/m.zip -d /baked \
+ && unzip -q /tmp/m.zip "input/*" -d /baked \
  && rm /tmp/m.zip
 
 WORKDIR /workspace

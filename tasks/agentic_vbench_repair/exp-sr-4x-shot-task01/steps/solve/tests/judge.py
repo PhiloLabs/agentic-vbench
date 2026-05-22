@@ -130,17 +130,22 @@ def score(output_mp4: Path, output_json: Path, gt_shot_json: Path,
     iou = _iou_ranges(agent_lo, agent_hi, gt_lo, gt_hi)
 
     # ---- in-shot quality (PSNR-Y + SSIM-Y vs ORIGINAL on GT range) ----
+    # Sequential streaming: one POS_FRAMES seek to in_lo, then read forward.
+    # The naive `cap.set(POS_FRAMES, fi)` per frame forces OpenCV to seek to
+    # the nearest keyframe and re-decode the GOP each iteration — ~12× slower.
     cap_out = cv2.VideoCapture(str(output_mp4))
     cap_orig = cv2.VideoCapture(str(original_mp4))
     psnrs = []
     ssims = []
     in_lo = max(0, min(n_out - 1, gt_lo))
     in_hi = max(in_lo, min(n_out - 1, gt_hi))
-    for fi in range(in_lo, in_hi + 1):
-        of = _read_frame(cap_out, fi)
-        gf = _read_frame(cap_orig, fi)
-        if of is None or gf is None:
-            continue
+    cap_out.set(cv2.CAP_PROP_POS_FRAMES, in_lo)
+    cap_orig.set(cv2.CAP_PROP_POS_FRAMES, in_lo)
+    for _ in range(in_lo, in_hi + 1):
+        ok_o, of = cap_out.read()
+        ok_g, gf = cap_orig.read()
+        if not ok_o or not ok_g:
+            break
         try:
             psnrs.append(_psnr_y(gf, of))
             ssims.append(_ssim_y(gf, of))
@@ -166,15 +171,22 @@ def score(output_mp4: Path, output_json: Path, gt_shot_json: Path,
     out_ssims = []
     n_compare = min(n_out, n_corr)
     has_valid_agent = agent_hi >= agent_lo and agent_lo >= 0
+    # Sequential streaming: read both videos in lockstep; SSIM only the
+    # out-of-range frames. Skipping in-range frames still requires reading
+    # them to keep the decode position aligned, but `cap.grab()` decodes
+    # without the BGR copy — ~5× cheaper than `read()`.
     for fi in range(n_compare):
-        if has_valid_agent and agent_lo <= fi <= agent_hi:
+        skip = has_valid_agent and agent_lo <= fi <= agent_hi
+        if skip:
+            ok1 = cap_in.grab()
+            ok2 = cap_out.grab()
+            if not ok1 or not ok2:
+                break
             continue
-        cap_in.set(cv2.CAP_PROP_POS_FRAMES, fi)
         ok1, in_f = cap_in.read()
-        cap_out.set(cv2.CAP_PROP_POS_FRAMES, fi)
         ok2, out_f = cap_out.read()
         if not ok1 or not ok2:
-            continue
+            break
         try:
             out_ssims.append(_ssim_y(in_f, out_f))
         except Exception:

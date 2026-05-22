@@ -41,8 +41,6 @@ RUN mkdir -p /baked \
  && ls -lh /baked/source.mp4
 
 COPY brief.md     /baked/brief.md
-COPY rubric.json  /baked/rubric.json
-COPY config.yaml  /baked/config.yaml
 
 WORKDIR /workspace
 RUN mkdir -p /workspace/materials /workspace/output /workspace/work

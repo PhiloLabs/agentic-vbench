@@ -26,4 +26,7 @@ name = "solve"
 timeout_sec = 1800.0
 
 [steps.verifier]
-timeout_sec = 600.0
+timeout_sec = 1800.0
+
+[steps.verifier.env]
+MATERIALS_URL = "https://huggingface.co/datasets/ameddserM/agentic_vbench_video_repair/resolve/main/materials/exp-deblur-motion-f1-task01.zip"

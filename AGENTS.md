@@ -13,10 +13,11 @@ Telegraph style. Root rules only. Read scoped `AGENTS.md` before subtree work.
 
 ## Map
 
-- `tasks/` — Harbor task dirs, grouped into 3 family subdirs:
-  - `tasks/agentic_vbench_repair/` — 20 `exp-*` audio/video repair tasks (audio / color / deblur / sr / swap / glitch / cut / disfluency).
+- `tasks/` — Harbor task dirs, grouped into 4 family subdirs:
+  - `tasks/agentic_vbench_repair/` — 18 `exp-*` audio/video repair tasks (audio / color / deblur / sr / swap / glitch / cut / disfluency).
   - `tasks/agentic_vbench_assembly/` — 18 video-assembly tasks (`agentic-vbench-assembly-task<N>`).
-  - `tasks/agentic_vbench_sequencing/` — 31 video-ordering tasks (`agentic-vbench-sequencing-task<N>`).
+  - `tasks/agentic_vbench_sequencing/` — 28 video-ordering tasks (`agentic-vbench-sequencing-task<N>`).
+  - `tasks/agentic_vbench_repurpose/` — 36 long-form-to-short-vertical repurpose tasks (per-task creative brief + LLM-judged rubric).
   Downstream tools resolve task names to paths via `scripts/_task_paths.py` (`task_dir(name)`, `all_tasks(family=…)`), so adding/renaming families means touching one file.
 - `scripts/` — the Harbor wrapper. `install-harbor.sh` pins the Harbor CLI; `parallel_rollout.py` schedules `harbor run` across many tasks against either local Docker or Modal; `monitor_job.py` tails a running trial; `_task_paths.py` is the name→path resolver. Task-generation code (`build_*.py`, `create_agentic_vbench_*.py`, `_<family>_core.py`, `_judges/`, `scripts/v4/`) is **not** in the public tree — it lives offline in `~/Downloads/legacy_vbench/`. Tasks are evaluated using the verifier code baked into each task's `tests/judge.py` at build time; Harbor produces the per-trial `reward.json`.
 - `docs/VERIFIER_DESIGN.md` — load-bearing doc for the verifier math (universal normalize-improvement).
