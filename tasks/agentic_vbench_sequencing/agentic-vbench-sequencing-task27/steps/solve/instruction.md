@@ -1,6 +1,6 @@
-# Video Ordering Task — Cabin Attack And Fire
+# Video Ordering Task — Discovery Of The Error
 
-You are given **10 candidate video clips**: `1.mp4`, `2.mp4`, …, `10.mp4`.
+You are given **11 candidate video clips**: `1.mp4`, `2.mp4`, …, `11.mp4`.
 
 These clips are the shots of a single chapter from a short film, **renamed and shuffled into a random order**. Each clip appears **exactly once** in the correct ordering — there are no extra clips and no duplicates.
 
@@ -10,7 +10,7 @@ Reassemble the clips into the original narrative order described below.
 
 ## Story overview
 
-A rooster warrior in yellow robes battles armored foxes, then charges screaming into his burning home toward a taunting, purple-armored fox.
+Newspaper clippings about a flawed question on a standardized test appear, after which a man in a black sweatshirt recalls writing a letter to the testing service about it. More articles show the students proved the error, and the man explains he was told he was correct, as a man in a blue shirt smiles and nods.
 
 ## Additional notes
 
@@ -24,7 +24,7 @@ A rooster warrior in yellow robes battles armored foxes, then charges screaming 
 
 ## What to submit
 
-1. **`/workspace/output/solution.mp4`** — the 10 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
+1. **`/workspace/output/solution.mp4`** — the 11 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
 2. **`/workspace/output/solution.json`** — a manifest describing the order you chose.
 
 ### `solution.json` format
@@ -40,8 +40,8 @@ A rooster warrior in yellow robes battles armored foxes, then charges screaming 
 
 ### Rules
 
-- Exactly **10 entries**, one per slot, in slot order.
-- Each clip number from `"1"` to `"10"` must appear **exactly once** as a `source`.
+- Exactly **11 entries**, one per slot, in slot order.
+- Each clip number from `"1"` to `"11"` must appear **exactly once** as a `source`.
 - Intervals are **half-open** `[start, end)` — end is exclusive.
 - `output` — time range where this clip appears in `solution.mp4`.
 - `source` — clip number as a string (e.g. `"3"` for `3.mp4`).

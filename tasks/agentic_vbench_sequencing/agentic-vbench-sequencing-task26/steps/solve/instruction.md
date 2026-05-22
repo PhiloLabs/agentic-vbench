@@ -1,6 +1,6 @@
-# Video Ordering Task — Ship Exploration And Discovery
+# Video Ordering Task — Giant Robots And Coastal Arrival
 
-You are given **9 candidate video clips**: `1.mp4`, `2.mp4`, …, `9.mp4`.
+You are given **12 candidate video clips**: `1.mp4`, `2.mp4`, …, `12.mp4`.
 
 These clips are the shots of a single chapter from a short film, **renamed and shuffled into a random order**. Each clip appears **exactly once** in the correct ordering — there are no extra clips and no duplicates.
 
@@ -10,7 +10,7 @@ Reassemble the clips into the original narrative order described below.
 
 ## Story overview
 
-A woman in a white jumpsuit explores the ruined interior of a dark shipwreck, navigating through debris-filled corridors until she discovers a tube of red lipstick on the ground. Standing on a misty shoreline, she applies the lipstick and cries while looking out at the gray sea with a sorrowful expression on her face.
+Giant robots wade onto a desolate, shipwreck-strewn coast, where a red-haired woman in a jumpsuit exits a large vehicle to observe the scene from a high platform. She then descends to the beach, walking in her heavy boots across the sand and pebbles toward the massive, rusted hull of a grounded ship on the shore.
 
 ## Additional notes
 
@@ -24,7 +24,7 @@ A woman in a white jumpsuit explores the ruined interior of a dark shipwreck, na
 
 ## What to submit
 
-1. **`/workspace/output/solution.mp4`** — the 9 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
+1. **`/workspace/output/solution.mp4`** — the 12 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
 2. **`/workspace/output/solution.json`** — a manifest describing the order you chose.
 
 ### `solution.json` format
@@ -40,8 +40,8 @@ A woman in a white jumpsuit explores the ruined interior of a dark shipwreck, na
 
 ### Rules
 
-- Exactly **9 entries**, one per slot, in slot order.
-- Each clip number from `"1"` to `"9"` must appear **exactly once** as a `source`.
+- Exactly **12 entries**, one per slot, in slot order.
+- Each clip number from `"1"` to `"12"` must appear **exactly once** as a `source`.
 - Intervals are **half-open** `[start, end)` — end is exclusive.
 - `output` — time range where this clip appears in `solution.mp4`.
 - `source` — clip number as a string (e.g. `"3"` for `3.mp4`).

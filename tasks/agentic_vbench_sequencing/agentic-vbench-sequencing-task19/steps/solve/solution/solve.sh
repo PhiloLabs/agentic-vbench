@@ -10,7 +10,7 @@ python3 - <<'PY'
 import json, subprocess, sys
 from pathlib import Path
 
-CORRECT = ['5', '9', '1', '7', '2', '8', '4', '6', '3']
+CORRECT = ['15', '11', '17', '7', '1', '10', '4', '16', '12', '2', '5', '9', '18', '6', '3', '8', '14', '13']
 materials = Path("/workspace/materials")
 
 def duration(p):

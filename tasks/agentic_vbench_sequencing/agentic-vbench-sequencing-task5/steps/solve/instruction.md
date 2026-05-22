@@ -1,6 +1,6 @@
-# Video Ordering Task — McLaren P1
+# Video Ordering Task — Immigrant Standup
 
-You are given **10 candidate video clips**: `1.mp4`, `2.mp4`, `3.mp4`, `4.mp4`, `5.mp4`, `6.mp4`, `7.mp4`, `8.mp4`, `9.mp4`, `10.mp4`.
+You are given **16 candidate video clips**: `1.mp4`, `2.mp4`, `3.mp4`, `4.mp4`, `5.mp4`, `6.mp4`, `7.mp4`, `8.mp4`, `9.mp4`, `10.mp4`, `11.mp4`, `12.mp4`, `13.mp4`, `14.mp4`, `15.mp4`, `16.mp4`.
 
 These clips are the shots of a single chapter from a short film, **renamed and shuffled into a random order**. Each clip appears **exactly once** in the correct ordering — there are no extra clips and no duplicates.
 
@@ -10,7 +10,7 @@ Reassemble the clips into the original narrative order described below.
 
 ## Story overview
 
-A red McLaren P1 is showcased in a forest setting, revving its engine and deploying its spoiler before speeding through scenic roads and mountain curves.
+Jimmy Fallon introduces comedian Zarna Garg on The Tonight Show. She performs a stand-up routine about her immigrant background, her children, therapy, and her daughter’s dating.
 
 ## Additional notes
 
@@ -24,7 +24,7 @@ A red McLaren P1 is showcased in a forest setting, revving its engine and deploy
 
 ## What to submit
 
-1. **`/workspace/output/solution.mp4`** — the 10 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
+1. **`/workspace/output/solution.mp4`** — the 16 clips concatenated in the correct narrative order, in this folder. Each clip is used in full, exactly once.
 2. **`/workspace/output/solution.json`** — a manifest describing the order you chose.
 
 ### `solution.json` format
@@ -40,8 +40,8 @@ A red McLaren P1 is showcased in a forest setting, revving its engine and deploy
 
 ### Rules
 
-- Exactly **10 entries**, one per slot, in slot order.
-- Each clip number from `"1"` to `"10"` must appear **exactly once** as a `source`.
+- Exactly **16 entries**, one per slot, in slot order.
+- Each clip number from `"1"` to `"16"` must appear **exactly once** as a `source`.
 - Intervals are **half-open** `[start, end)` — end is exclusive.
 - `output` — time range where this clip appears in `solution.mp4`.
 - `source` — clip number as a string (e.g. `"3"` for `3.mp4`).

@@ -7,7 +7,7 @@ name = "agentic-vbench/agentic-vbench-sequencing-task23"
 difficulty = "medium"
 category = "video-editing"
 tags = ["video-ordering", "agentic-vbench-sequencing"]
-source = "ameddserM/agentic_vbench_sequencing (row task_id=23, upstream=task5_4 task_id=25 (AgenticVBench_100 sequencing idx 24))"
+source = "ameddserM/agentic_vbench_sequencing (row task_id=23, upstream=task5_4 task_id=11 (AgenticVBench_100 sequencing idx 10))"
 
 [environment]
 build_timeout_sec = 600.0
