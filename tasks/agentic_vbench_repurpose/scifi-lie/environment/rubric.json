@@ -1,0 +1,293 @@
+{
+  "task_id": "scifi_lie",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "ffprobe format duration is between 59.9 and 60.1 seconds.",
+      "why": "brief mandates exactly 60s; a tight tolerance prevents 59s/61s gaming.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 59.9 \u2264 d \u2264 60.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Video resolution is exactly 1920\u00d71080.",
+      "why": "brief specifies 1920\u00d71080 horizontal delivery.",
+      "check": "`ffprobe -v error -select_streams v:0 -show_entries stream=width,height` \u2192 1920\u00d71080.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Container is MP4.",
+      "why": "brief specifies MP4 delivery.",
+      "check": "file extension is .mp4 AND `ffprobe -show_format` reports `format_name` containing \"mp4\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Video codec is H.264 (avc1).",
+      "why": "brief specifies H.264.",
+      "check": "`ffprobe -select_streams v:0 -show_entries stream=codec_name` \u2192 \"h264\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Frame rate is 24 fps (23.976\u201324.000 acceptable).",
+      "why": "brief specifies 24 fps.",
+      "check": "`ffprobe -select_streams v:0 -show_entries stream=r_frame_rate` \u2192 23.976 or 24.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-06",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Stereo audio track present (\u22652 channels, non-silent).",
+      "why": "brief specifies stereo audio.",
+      "check": "`ffprobe -select_streams a:0 -show_entries stream=channels` \u22652 AND `ffmpeg -i repurpose.mp4 -af volumedetect` mean_volume > -60 dB.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-09",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No internal black-frame or solid-color pad longer than 1 second between the opening and closing card.",
+      "why": "anti-padding inside the body of the repurposed cut.",
+      "check": "opus-vision scans frames at 1 fps from t=2s to t=57s; pass iff no contiguous run of \u22652 black/solid frames inside that window.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-10",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "A voice-over track is present (transcribable speech for \u226530s of the 60s).",
+      "why": "brief specifies a single narrator carrying the piece.",
+      "check": "whisper transcribe repurpose audio; pass iff \u226530s of transcribed speech spans the repurposed cut.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The book is treated as the film's central object, not background. At least one shot in the repurposed cut foregrounds a physical book or manuscript (open page, hands turning a page, written text legible or near-legible) for \u22651.5 continuous seconds, in focus, occupying a meaningful portion of frame.",
+      "why": "every act of the source is anchored on a book; the repurposed cut that treats books as B-roll has missed the film.",
+      "check": "opus-vision inspects repurposed cut frames at 1 fps; pass iff at least one shot \u22651.5s clearly foregrounds a book/manuscript/page, in focus, not in a corner.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The film's parallel-color signature is preserved: the repurposed cut contains BOTH a warm-amber cabin/interior shot (lamplight on wood) AND a cold-blue facility shot (silhouettes against a blue gradient or blue-lit corridor). One without the other drops half the film's visual vocabulary.",
+      "why": "style. The warm/cold parallel between Scenes 3\u20134 and Scene 5 is the source's most distinctive visual choice.",
+      "check": "opus-vision sampling repurpose at 1 fps; pass iff at least one frame is unambiguously warm-amber-interior AND at least one frame is unambiguously cold-blue-facility.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Enny's authorship is shown, not just told. At least one shot in the repurposed cut visibly depicts hand-writing, ink-stained fingers, or a pen on the page.",
+      "why": "the ink/writing motif is what makes Enny's death legible as the death of an author.",
+      "check": "opus-vision sampling repurpose at 1 fps; pass iff at least one frame clearly shows pen/ink/hand-on-page in close-up (not just a closed book).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The closing reading is staged in the repurposed cut: in the final third of the repurposed cut runtime (after t=40s), at least one shot clearly shows the older Ina (~6\u20138 yrs, curly hair) with a book or manuscript in front of her, in the safehouse setting (warm interior, daylight window).",
+      "why": "most-important-moment. The closing reading is the spine of the resolution.",
+      "check": "opus-vision inspects repurposed cut frames sampled at 1 fps in the t=40\u201360s window; pass iff at least one frame clearly shows the older child (curly hair) with a book in a warm interior.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Scene-to-scene transitions are legible. No strobe-cuts under 3 frames, no whip-flash that obliterates the incoming shot, no cross-fade so long it doubles as padding (\u22651.5s on a single dissolve).",
+      "why": "editorial competence. Reviewer-level visible craft.",
+      "check": "opus-vision scans repurposed cut at 4 fps for 0\u201360s; pass iff there is no detectable sub-3-frame shot AND no single dissolve longer than 1.5s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No vertical-source pillar bars, no visible upscale artifacts, no inadvertent letterboxing inside the 1080p frame.",
+      "why": "spec compliance. Horizontal delivery means horizontal usage.",
+      "check": "opus-vision inspects 5 frames evenly across repurposed cut; pass iff no frame shows black bars on left/right or visible upscale blockiness.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "Closing title card or end card occupies no more than 3 seconds of total runtime.",
+      "why": "brief is explicit that the close shouldn't be a multi-second pad. Anti-padding for the closing title.",
+      "check": "opus-vision samples the last 6s of repurpose at 1fps; pass iff frames showing only title-card content (text on solid or static background, no source footage behind) span \u2264 3s of runtime.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MIN-SHOT-DURATION",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No individual shot in the repurposed cut content body is shorter than 1.0 second, OR \u2014 if the repurposed cut uses a deliberate rapid-cut sequence \u2014 no more than 3 consecutive shots <1.0s within any 5-second window.",
+      "why": "shots shorter than ~1s read as a frantic reel rather than a repurposed cut; allows a deliberate rapid-cut burst as long as it doesn't dominate.",
+      "check": "scenedetect content-detector on the repurposed cut excluding the closing title card; pass iff the rule above holds.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TRANSITION-NATURAL",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "most cuts in the repurposed cut read as deliberate transitions \u2014 subject continuity, motion match, lighting/color match, OR a clearly intentional jump-cut for emphasis \u2014 rather than jarring splices between unrelated images.",
+      "why": "deliberate transitions are what separates an edit from a shuffle. Random splices break the repurposed cut.",
+      "check": "scenedetect identifies cuts; opus-vision samples the last frame before and the first frame after each cut; pass iff \u226580% of cuts read as deliberate per the criterion above.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MOTION-MATCH",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Motion-direction or subject-position continuity (eye-trace) is preserved across cuts. most cuts preserve eye-trace OR violate it for a discernible emphatic reason.",
+      "why": "eye-trace continuity is what makes cutting feel like cinema rather than a slideshow with shuffle-mode pacing.",
+      "check": "for each scenedetect cut, opus-vision compares last-frame-before and first-frame-after; pass iff \u226580% preserve motion-direction or subject-position continuity, or violate it intentionally.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": -60,
+      "criterion": "The closing reading lands as the film's resolution, not as a tag, not as a montage flash. In the final third of the repurposed cut (after t=40s), the older Ina is shown reading from a book to Noah, AND a VO line at the same moment articulates what the book is or what it costs (a phrase referencing the mother's writing, the manuscript, the title, OR directly speaking the words she wrote). The viewer leaves the repurposed cut with the act of a child reading as the last emotional beat, not the gunshot, not the shootout.",
+      "why": "most-important-moment. Without the closing reading the film has nothing to redeem its tragedy. This is the single beat the repurposed cut can't drop.",
+      "check": "opus-vision with synced audio at 1 fps; pass iff (a) t\u226540s contains a shot of older Ina with book/manuscript, AND (b) a VO line within \u00b15s of that shot mentions the mother's book / writing / manuscript / the title, AND (c) the repurposed cut's final on-screen action (before any title card) is the reading scene rather than gunfire/burning.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "A cold viewer, coming to the repurposed cut with no prior exposure to *The Greatest Lie*, can answer all three from the repurposed cut alone: (a) identify NOAH (older man, gray hair, dark sweater) and/or ENNY (the mother) as the protagonist track AND IDENTIFY INA (the daughter / child) as the surviving figure; (b) name the central conflict in one sentence \u2014 a regime has banned reading/books, and the family hides or makes books in defiance; (c) name the resolution \u2014 the mother's book survives her and her daughter reads it. The repurposed cut doesn't require the source to make sense.",
+      "why": "baseline comprehension. Conflict lists these three as the film's stakes/arc/resolution.",
+      "check": "opus-vision given repurpose frames at 1 fps + the full transcript; judge answers (a), (b), (c) above. Pass iff all three are answerable from the repurposed cut alone.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The turn \u2014 Enny's death \u2014 is present and is felt as loss, not staged as action. Either (a) the off-screen gunshot (or its visual aftermath: Noah finding Enny, or the cabin exterior held in silence) appears in the repurposed cut, AND (b) the moment is not buried in a music swell or a fast cut. It's given air (a held shot \u22651.5s, a pause in VO, a drop in audio bed, or a tonal break that a viewer would register as a death beat). \u2014 cut INTO this beat with a slight beat of held breath, or a cut that arrives slightly later than the eye expects.",
+      "why": "the gunshot is the film's emotional pivot. A repurposed cut that races past it is a repurposed cut of plot, not story.",
+      "check": "opus-vision with synced audio; pass iff (a) the death is conveyed (gunshot SFX, body discovery, or unmistakable aftermath shot) AND (b) the moment receives \u22651.5s of held image OR a clear audio drop / VO pause.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "Source coverage is broad. The repurposed cut shows content from at least 4 of these 10 named source scenes: opening attic / dystopian raid; Noah departs in flying car / meets George; Enny writes in the cabin kitchen; Slade's interrogation; the cold-blue facility heist; the gunshot / death; Noah finds Ina; the book-burn in the yard; the driveway shootout; the safehouse closing reading. A repurposed cut that lives in only two scenes has flattened the film.",
+      "why": "scene-inventory. The brief says \"tell the story\" \u2014 narrative breadth is required.",
+      "check": "opus-vision sampling repurpose at 1 fps; judge identifies which of the 10 named scenes each frame belongs to; pass iff \u22654 distinct named scenes are represented by \u22651 second of footage each.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut opens on curiosity, not on the source's literal beginning. The first 8 seconds of the repurposed cut are NOT the toddler-being-read-to opening played straight; they're either a later moment, a montage hook, or a question-posing image that doesn't tell a cold viewer \"this is going to be a literacy parable\" in the first beat.",
+      "why": "brief: \"Don't open on setup; open on a moment that makes a stranger want to lean in.\"",
+      "check": "opus-vision compares repurposed cut 0\u20138s frames against source 00:00\u201300:30 frames; pass iff the repurposed cut opening is NOT a straight chronological replay of the source's opening (a brief reference shot is fine; a verbatim reproduction is not).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-06",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The VO carries emotional restraint, not literal plot exposition. No VO line in the repurposed cut reads like a Wikipedia summary (\"In a future where reading is banned, a mother writes a book\u2026\") and no line spoils the death by naming it (\"Enny is killed,\" \"the mother dies\"). The narrator describes feeling and image, not events.",
+      "why": "brief: \"earns its emotion the way grown-up sci-fi does \u2014 through restraint, not exposition.\" Counter-pattern of LLM-generated trailers that over-narrate.",
+      "check": "gemini-audio + transcript; pass iff no VO line in the repurposed cut (i) names a character's death directly OR (ii) delivers a Wikipedia-style logline in the first 12s.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "The title *The Greatest Lie* appears in the repurposed cut, either as an on-screen title card OR spoken in the VO. The viewer leaves with the title in their head.",
+      "why": "brief: \"leaving the viewer with the title in their head.\" Source title appears at 01:55 + 20:51.",
+      "check": "opus-vision scans repurposed cut for any visible title text \"THE GREATEST LIE\" (case-insensitive substring) AND transcript searched for \"greatest lie\" substring; pass iff at least one of the two is true.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "The repurposed cut ends on the reading, not on violence. The final \u22653 seconds of source-derived footage (before any title card) is NOT a gunfire shot, a body shot, or the book-burn pile. The closing image of the film proper is a reading / safehouse / Ina / Noah-and-Ina shot.",
+      "why": "arc. The film closes on the redemption beat, not the violence; a repurposed cut that ends on the shootout has inverted the arc.",
+      "check": "opus-vision inspects repurposed cut frames at 1 fps from t=54s up to the start of the title card; pass iff no frame in that window shows gunfire, a corpse, or the book-burn fire.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "A single, consistent narrator voice carries the repurposed cut end-to-end. No audible speaker swap, no mid-repurpose change in voice timbre or character (e.g., a male voice giving way to a female voice mid-piece), no overlay of a second narrator reading over the first. The voice at the close is the same voice that opened the piece.",
+      "why": "brief: \"A single narrator carries the repurposed cut end-to-end \u2014 one voice.\" Multi-voice TTS swaps are a common LLM failure mode that breaks the trailer's illusion.",
+      "check": "gemini-audio on repurpose audio only; pass iff the entire VO track is a single continuous voice identity.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "The voice-over sounds like a person reading for cinema, not a machine reading a script.",
+      "why": "brief: \"warm but careful, the kind of voice that knows what's coming and doesn't oversell it.\" Flat TTS sabotages everything else the repurposed cut does.",
+      "check": "gemini-audio on repurpose audio only; pass iff VO delivery audibly varies (pace, pitch, dynamics) across \u22652 distinct emotional beats AND no audible TTS artifact (clipping, mispronounced phoneme, robotic stretch >3s).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "Every word of the VO is intelligible end-to-end. No stretch where a viewer would strain to parse the line, no word clipped by a splice, no line buried under a music peak. A subtitle-free first-time viewer can write down the script.",
+      "why": "the repurposed cut's narrative depends on the VO being followable. A single unintelligible line drops the viewer out.",
+      "check": "whisper transcribe repurpose audio; gemini-audio confirms; pass iff transcript is internally coherent (no garbled-text spans) AND no \u22651s VO span is unmasked by music to inaudibility.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "Any music or source-audio bed used in the repurposed cut ends cleanly. No mid-phrase music cut, no abrupt stop mid-measure at a splice, no jarring silence at the close. If the music ends before the repurposed cut does, it fades out; if the repurposed cut ends while music is still playing, the music is gracefully resolved.",
+      "why": "a music cut that leaves a phrase hanging mid-measure is perceptible to any listener and reads as amateur. Especially important at the 60s mark and at scene splices between cabin/facility/safehouse.",
+      "check": "gemini-audio on repurpose audio only; pass iff there is no audible abrupt music truncation in the body or at the close, AND no >0.5s of dead-silent gap at a splice.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-AUDIO-ARC",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "The audio bed shifts with the beats: quieter or warmer in the opening / reading scenes, restrained around the death, softening into the resolution. Not a single flat ambient track underneath narration.",
+      "why": "character. The source's score shifts across acts; a repurposed cut with one looped pad has lost the emotional arc.",
+      "check": "gemini-audio on repurpose audio only; pass iff the audio bed is audibly different across at least 3 distinct emotional beats of the repurposed cut (e.g., opening vs. death-beat vs. closing).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOICE-MOOD",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "Narrator's tone is aligned with the repurposed cut's emotional register: warm where the film warms, restrained where it hurts, energetic where it accelerates. A flat, unrelenting TTS read on a piece with real emotional shape fails this.",
+      "why": "brief asks for narration that moves with the story. A monotone read flattens an emotional arc into an explainer.",
+      "check": "gemini-audio on repurpose audio only; pass iff VO delivery audibly shifts emotional register across at least 2 distinct beats AND no flat-monotone stretch covers the repurposed cut's turning point.",
+      "judge": "gemini-audio"
+    }
+  ]
+}

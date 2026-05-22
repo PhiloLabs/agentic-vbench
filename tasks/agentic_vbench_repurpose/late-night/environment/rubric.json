@@ -1,0 +1,203 @@
+{
+  "task_id": "late_night",
+  "items": [
+    {
+      "id": "F-DUR",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR Format duration is 80.0s within tolerance.",
+      "why": "brief committed to \"eighty seconds long.\" A loose tolerance invites padding.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 |d \u2212 80.0| \u2264 0.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-RES",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-RES Video stream resolution is exactly 1920x1080.",
+      "why": "brief mandates 1920\u00d71080 horizontal delivery.",
+      "check": "`ffprobe -select_streams v:0 -show_entries stream=width,height` \u2192 1920 and 1080.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-CODEC",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CODEC Video codec is H.264 in an MP4 container; audio is AAC.",
+      "why": "brief specifies \"H.264 MP4.\" YouTube CDN expects this.",
+      "check": "ffprobe codec_name v0 == h264, codec_name a0 == aac, format_name contains \"mp4\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-AUDIO-PRESENT",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-AUDIO-PRESENT The reel contains a non-silent audio track for the bulk of its content body.",
+      "why": "a captioned-creator-short that ships silent has lost its primary track, the speaker's voice.",
+      "check": "extract repurpose audio; mean RMS over the [1.0s, 78.0s] window > \u221245 dBFS; pass iff true.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-NO-NOVEL-VO",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-NO-NOVEL-VO Every spoken phrase audible in the reel is present in the source episode. The reel does not introduce a new narrator summarizing what Kimmel said, no synthesized voiceover bridging clips, no AI-cloned Kimmel line that wasn't in the original episode.",
+      "why": "the brief asks for Kimmel's voice end to end. A novel VO collapses the genre. Genre keystone, gets 2 pt while other Format items get 1.",
+      "check": "deterministic. Whisper-transcribe repurpose audio, normalize phrases (lowercase, strip punctuation), require \u226590% of repurpose phrases substring-findable in `the source transcript` with Levenshtein edit-distance tolerance \u226410% per phrase.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-NO-DEAD-AIR",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-NO-DEAD-AIR No silence stretch exceeds 2.0 seconds within the content body.",
+      "why": "dead air is the cheapest way to hit the duration target. A sound-off-by-default audience won't notice silence, so the rubric must.",
+      "check": "deterministic. Librosa onset/RMS gate at \u221240 dBFS on repurpose audio; identify silent stretches in [0, 77]; pass iff longest silent stretch \u2264 2.0s.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-TITLECARD-CAP Closing title card / end card occupies no more than 3 seconds of runtime.",
+      "why": "brief explicitly limits the end card to \"a one-second end card with show and episode.\" Anything longer is pad.",
+      "check": "opus-vision samples the last 5s of the repurposed cut at 5 fps; flag the contiguous static-end-card span; pass iff that span \u2264 3.0s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CAPTIONS-PRESENT",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-CAPTIONS-PRESENT Burned-in English captions are visible on screen during every stretch of spoken audio in the reel: Kimmel's stand-up, the news clips he reacts to, AND the Lindell parody dialogue. Cold-opens with silence/music and the end-title card are exempt.",
+      "why": "brief explicitly requires \"burn in English captions across every second of speech.\" YouTube sound-off scrollers need them to land the joke.",
+      "check": "gemini-video reviews the repurposed cut; for every second where audio contains intelligible speech, verify on-screen caption text is visible (any size, any style, presence only). Pass iff every speech-bearing second has an on-screen caption.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-CAPTIONS-SYNC-STRICT",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-CAPTIONS-SYNC-STRICT The caption text on screen matches the spoken word, and a caption line does not carry over a speaker-clip cut after the audio has changed speakers.",
+      "why": "a sync-broken caption layer actively misinforms the sound-off viewer, a worse experience than no captions at all. Highest-weight Pillar 1 item; 4 pt because this is the failure mode that ruins a captioned reel.",
+      "check": "gemini-video samples \u22655 evenly-spaced moments across [0, 77s] PLUS the moment immediately after every speaker-clip cut; at each sample, compare displayed caption text to concurrent audio (paraphrase OK, \u22643 words of drift, \u22640.3s temporal drift). Pass iff all sampled moments align.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-CAPTIONS-LEGIBLE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-CAPTIONS-LEGIBLE Captions are legible. Body text is large enough to read at 1080p with high-contrast stroke or background plate even on busy frames (LA-skyline backdrop, the Lindell-kitchen yellow lower-third), no clipping outside the title-safe area.",
+      "why": "a caption that is technically present but illegible fails the brief's \"legible against the skyline backdrop and news graphics\" line.",
+      "check": "opus-vision samples \u22655 caption-bearing frames; for each, measure body-text height in pixels and verify contrast (foreground/background luminance ratio \u22654.5:1 OR a solid background plate is present). Pass iff all sampled frames meet both criteria.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-THESIS-ON-CAMERA",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-THESIS-ON-CAMERA At the moment Kimmel delivers the thesis-anchor line \"Who are you going to believe? Him, or math?\", he is visibly on camera in his signature LA-skyline desk shot. Not over an inserted news clip, not over the Lindell parody footage. The take of the night is delivered by the take's author, on camera.",
+      "why": "keynote-and-monologue reels live or die on the host's presence at the moment they make the show's argument. Hiding Kimmel under a B-roll layer at the thesis line would read as cowardly editing. Pillar 1 second-tentpole at 3 pt.",
+      "check": "gemini-video locates the audio frame containing the substring \"him, or math\" (paraphrase-tolerant); inspects the concurrent \u00b11s of video; pass iff Kimmel's face is visible against the LA-skyline backdrop AND no inserted clip or graphic occupies >50% of frame area at that moment.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-EVIDENCE-VISIBLE",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-EVIDENCE-VISIBLE When Kimmel's audio in the reel cites a specific number, name, or quoted post, the corresponding source graphic is on screen near the citation. Examples: a \"600%\" or \"98% not 600%\" citation pairs with the PBS / on-screen correction graphic; \"James\" / \"wiener shields\" pairs with the James tweet screenshot or the Citi Field urinal photo; \"Atlantic\" / \"blacked out\" pairs with the Atlantic-tweet card.",
+      "why": "a cited statistic that floats with no visual support reads as an aside instead of evidence. YouTube sound-off viewers can't pick the number out of audio.",
+      "check": "opus-vision with AV-aligned repurpose frames at 1 fps + repurpose whisper transcript; for each audible citation in the transcript, verify the matching source graphic appears within \u00b12s of the citation timestamp; pass iff at least 2 such citations exist in the reel AND each has its matching graphic visible. Auto-pass if 0 citations exist in the reel (the reel has no numeric/quoted citations, so there is nothing to support).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-THESIS",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-THESIS The thesis-anchor line \"Who are you going to believe? Him, or math?\" is audibly in the reel, delivered in Kimmel's own voice (not paraphrased by an editor's narrator), and lands near the open or the close of the reel. This is the take of the night reduced to one sentence. If the reel does not carry it in Kimmel's voice, the reel does not have the show's argument.",
+      "why": "\"Who are you going to believe? Him, or math?\" (05:55-06:00) as the single most important line in the monologue. Pillar 2 tentpole at 5 pt.",
+      "check": "gemini-video on the repurposed cut; locate the substring \"him, or math\" (paraphrase-tolerant \u22643 words drift) in the repurposed cut's whisper transcript; verify the voice at that timestamp matches Kimmel's source timbre (not a TTS narrator); verify timestamp \u2208 [0, 30] \u222a [65, 80]. Pass iff all three.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "N-COLD-VIEWER-COMPREHENSION",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-COLD-VIEWER-COMPREHENSION A YouTube viewer coming to the reel cold, no prior exposure to last night's show, can, after one watch with sound on, answer all three: (a) state the take of the night in one sentence in roughly Kimmel's own words (\"the people running things in 2026 are visibly unwell\" / \"the news cycle is a drug-addled circus\"); (b) name TWO of the night's specific bits, i.e. two of {RFK Jr. fake-math defense, Cash Patel drinking allegations, the Mets urinal-partitions runner, the Trump \"war is over\" montage, the Lindell-for-Gubbener parody}; (c) state the punchline / take-line the reel lands on. Pass iff all three are recoverable from the reel alone.",
+      "why": "structure enumerates the bits. This is the genre's whole point. A sound-on first-time viewer should walk away knowing what last night's monologue argued. Pillar 2 tentpole at 5 pt.",
+      "check": "opus-vision given repurpose frames at 1 fps + repurpose whisper transcript; the judge answers each of (a)/(b)/(c) using ONLY repurpose content. Pass iff all three answer \"yes, recoverable.\"",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-CLAIM-SUPPORT-WITH-NAMED-EVIDENCE",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-CLAIM-SUPPORT-WITH-NAMED-EVIDENCE At least 2 of the monologue's bits in the reel pair the audible claim with its specific named evidence. Named evidence means one of: (i) a named source: the Atlantic / Sarah Fitzpatrick story for Patel, the BBC Strait-of-Hormuz graphic for the condom bit, OAN for the Lindell self-endorsement; (ii) a specific number: RFK Jr.'s \"600%\" or the on-screen \"98% not 600%\" correction, the condom-price hike percentage, the Mets' losing-streak count; (iii) a concrete named anecdote: Patel calling 9 people convinced he was fired, the James tweet asking for urinal partitions; (iv) the source's on-screen graphic carrying the cited number. A claim paired only with a vague gesture (\"the news\") does NOT count.",
+      "why": "structure lists the specific evidence each bit rests on. Without it the reel reads as opinion, not the monologue's actual argument. 4 pt: important-tier; not a tentpole but the rubric's third-highest positive item.",
+      "check": "opus-vision + repurpose whisper transcript; for each of the 5 bits enumerated in bit's audible claim in the reel is paired within \u00b15s with one of its named-evidence types listed above. Pass iff \u22652 bits have a named-evidence pairing.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-OPENS-ON-SUBSTANCE",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-OPENS-ON-SUBSTANCE The opening of the reel carries argument content: one of the monologue's signature lines (the Earth-Day / Kanye-Hanukkah simile, cocaine-salmon punch, \"blacked out more than the President's name\", \"Him, or math?\", the condom-metaphor punchline, \"wiener shields\", \"I am him\") OR a source news-clip that carries argument content. NOT acceptable as opener: Kimmel's housekeeping intro (\"I'm Jimmy, I'm the host of the show...sunny Los Angeles\"), a slow fade from black, a logo-only card, an extended music-only cold-open.",
+      "why": "hook flags 00:00-00:13 as housekeeping the reel must drop. The brief calls for \"a hard line, not 'thanks for watching.'\"",
+      "check": "opus-vision + repurpose transcript; inspect the repurposed cut's [0, 5.0s] window. Pass iff the audio contains a substring (paraphrase-tolerant) from moments OR a source-news-clip with argument content; FAIL if [0, 5.0s] contains the \"I'm Jimmy, I'm the host\" housekeeping or is a silent / music-only stretch >2s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-FABRICATION",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-NO-FABRICATION Each of the load-bearing-context risk moments, IF it appears in the reel, appears with its qualifier nearby. Specifically: (i) \"Him, or math?\" requires the \"600%\" claim or the \"98% not 600%\" correction nearby; (ii) \"blacked out more than the President's name\" requires the Atlantic-drinking-allegation setup; (iii) \"screwing us without condoms\" requires the Strait-of-Hormuz / Karex setup; (iv) \"wiener shields\" requires the James tweet OR the urinal-photo; (v) any Lindell-parody-commercial footage requires Kimmel's parody-framing intro OR a clear \"parody / fake commercial\" marker on screen.",
+      "why": "pulled alone, each misfires (and the Lindell deepfake especially could be mistaken for a real political ad).",
+      "check": "opus-vision + repurpose transcript + repurpose frames at 1 fps; for each of the 5 risk-moments, locate any occurrence in the reel; if found, verify the matching qualifier appears within \u00b110s; pass iff every occurring risk-moment has its qualifier. Auto-pass if zero of the 5 risk-moments appear in the reel (rare in practice; most reels include at least one of these).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-CLOSES-ON-LANDING",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-CLOSES-ON-LANDING The reel lands somewhere at its end: a punchline, a callback to the thesis-anchor line, a bold tag. NOT acceptable: a slow fade with no spoken content, a random mid-clip truncation, or Kimmel's source close (\"Governor Tim Walz is here with us tonight...and Adam Scott\") which is guest-intro housekeeping, not content.",
+      "why": "the source's last 60s is housekeeping. The reel must instead end on a punchline-landing.",
+      "check": "opus-vision + repurpose transcript; inspect the repurposed cut [70.0, 80.0s] window; FAIL if the repurposed cut audio contains the substring \"Governor Tim Walz\" / \"Adam Scott\" / \"Frankie Perez\" or is silent >3s; PASS if the window contains a substring from.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-GUEST-INTRO-PAD",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-NO-GUEST-INTRO-PAD The Tim-Walz-and-Adam-Scott guest-introduction beat is NOT in the reel at all: not as the open, not as the close, not as a bridge. This is housekeeping that a \"Monologue Highlights\" cut should never carry.",
+      "why": "it's pure guest-intro housekeeping; the highlights feed cuts it.",
+      "check": "deterministic. Search repurpose whisper transcript for substrings \"Governor Tim Walz\" / \"Adam Scott\" / \"Frankie Perez\" / \"Cletones\"; pass iff none are present.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "S-SEAM-QUALITY",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-SEAM-QUALITY Cuts in the repurposed cut land at natural sentence/word boundaries (and natural laugh-break boundaries), not mid-sentence or mid-word or mid-laugh. The repurposed cut reads as a clean assembly, not a chopped one.",
+      "why": "a heavily-cut reel will have many seams. Sloppy seams read as amateur editing.",
+      "check": "gemini-audio on repurpose audio only; pass iff there are no audibly jarring loudness/tone transitions at cut points. No >6 dB sudden RMS jump within 50 ms of a cut, no abrupt room-tone change at a cut.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-CAPTIONS-ASYNC",
+      "pillar": 4,
+      "weight": -50,
+      "criterion": "P4-CAPTIONS-ASYNC The on-screen caption text disagrees with what the speaker is audibly saying at any point in the content body: at any speaker-clip cut where the caption line from the prior clip persists past the cut, at any moment where the caption drifts from the spoken audio, or at any continuous caption line whose text does not correspond (even paraphrased) to what the speaker is saying. A muted YouTube viewer reading captions should not at any point be misinformed about what Kimmel, the news clip, or the Lindell parody actor just said.",
+      "why": "a captioned reel whose caption layer is async is worse for the sound-off audience than no captions at all. It actively misinforms. \u221220 because this destroys the brief's primary deliverable for the sound-off audience.",
+      "check": "fire iff gemini-video, examining EVERY speaker-clip transition AND every continuous caption line in the repurposed cut, finds ANY of: (a) a caption line drifting >0.5s from concurrent audio; (b) a caption line persisting across a speaker-clip cut where the new clip's audio no longer matches; (c) a caption line with text that doesn't correspond (paraphrase-tolerant) to concurrent audio. Exhaustive, not a sample.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "P4-CAPTIONS-UNREADABLE",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "P4-CAPTIONS-UNREADABLE Captions are present but functionally unreadable. Body text too small to read at 1080p, dark-on-dark contrast for sustained stretches (e.g. over the LA-skyline night-sky backdrop or the Lindell-kitchen counter), or clipped off the edge of the frame.",
+      "why": "present-but-unreadable captions are a hidden failure mode that the V-CAPTIONS-LEGIBLE positive item only weakly catches. The magnitude here (\u22128) reflects that a sound-off viewer literally cannot consume the reel.",
+      "check": "fire iff opus-vision, sampling \u226510 caption-bearing frames evenly across the content body, finds \u22652 frames where ANY of: body text height <30 px; foreground/background luminance ratio <2:1 with no background plate; caption-text bounding box extends outside the 1920\u00d71080 frame area.",
+      "judge": "opus-vision"
+    }
+  ]
+}

@@ -1,0 +1,329 @@
+{
+  "task_id": "football",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR  ffprobe format duration is within 0.1 s of the 75s the brief committed to (74.9s \u2264 duration \u2264 75.1s).",
+      "why": "brief mandates a specific runtime. A loose tolerance invites padding.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 |d \u2212 75| \u2264 0.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-VERTICAL  The video stream resolution is exactly 720\u00d71280 (vertical 9:16).",
+      "why": "brief commits to a vertical Instagram Reels deliverable.",
+      "check": "ffprobe video stream width=720, height=1280.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CONTAINER  The deliverable is an mp4 container.",
+      "why": "brief asks for mp4 delivery.",
+      "check": "ffprobe format_name includes \"mp4\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-VCODEC  Video codec is H.264.",
+      "why": "brief asks for H.264 + AAC mp4.",
+      "check": "ffprobe video codec_name == \"h264\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-ACODEC  Audio codec is AAC and at least one audio stream is present.",
+      "why": "the reel is a broadcast-audio reel. A container with no audio stream isn't deliverable.",
+      "check": "ffprobe audio codec_name == \"aac\" on exactly one audio stream.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-09",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-NO-NOVEL-VO  Every spoken word in the reel is present in the source broadcast transcript (Ryan Castle / Jesse Holley pregame intro at source 0:30\u20132:52, or a stadium-PA line from the same window). The reel doesn't introduce a new narrator, synthesized TTS voice-over, or a rewritten-and-reread version of the commentators' lines. Exception: a reel with no speech at all (music + crowd / ambient only) auto-passes.",
+      "why": "the broadcast's commentary ends at source 3:42 and the remaining game footage is silent. Any spoken word in the reel that is NOT from the first 3:42 of source is, by construction, fabricated. This is the sports-reel keystone.",
+      "check": "deterministic \u2014 whisper the reel audio, whisper the source audio (first 3:42), normalize (lowercase, strip punctuation), chunk the reel transcript into \u2265 4-word phrases; pass iff \u2265 90% of reel phrases are substring- findable in the source transcript with \u2264 10% character edit-distance tolerance. If the reel transcript is empty (no speech), pass.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-10",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-NO-DEAD-AUDIO  No silence-AND-no-music-AND-no-crowd stretch > 1.5s within the reel's content body (first (duration \u2212 3)s). Dead air in a sports reel breaks the live feel.",
+      "why": "since the game audio in the source is entirely silent, the reel's music / ambient bed is what keeps it alive. A stretch of true silence is a delivery defect.",
+      "check": "deterministic \u2014 compute RMS loudness in 100ms windows; flag any run of > 1.5s where RMS < \u221250 dBFS continuously. Pass iff no such run exists within the content body.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-TITLECARD-CAP  The end title card (final score + team shields / bowl logo) takes up no more than ~3.0s of runtime.",
+      "why": "brief says \"a second or two, not a dragged-out pad\". A 10s title card is padding that eats the reel's 75s budget.",
+      "check": "opus-vision samples the last 5s at 0.5s intervals; flag the earliest frame that is a mostly-static title-card composition (score text, team shields, or end slate, not live game footage). Pass iff (duration \u2212 earliest title-card timestamp) \u2264 3.0s. If no end card at all, pass.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-SIGNATURE-PLAY-LANDS EAST's opening touchdown (the single decisive moment named in most-decisive-moment, at source ~19:19, 1st quarter, game-clock ~14:00 remaining, short rushing plunge from near the ~1-yard line, score 0\u20130 \u2192 7\u20130 after #27's extra point at source ~19:38) is in the reel AND lands. The scoring action (ball carrier, goal line, end-zone or post-play celebration) is fully within the 9:16 frame, the clip runs \u2265 3.0 continuous seconds so the play unfolds, AND at least one of (a) the scoreboard visibly updating from 0 to 7 is shown, (b) the on-field celebration cut is shown, or (c) the \"EAST 7 WEST 0\" scoreboard frame that first appears at source 20:55 is shown confirming the score change.",
+      "why": "the game's only visible touchdown. Without it the reel has no 6-point scoring moment and the claim \"EAST took command\" has no visual anchor.",
+      "check": "opus-vision inspects the reel at 2 fps for a \u22653s window whose content is recognizably the EAST red-zone TD from source ~19:00\u201320:00 (goal-line formation, short rush, end-zone resolution, or visible celebration immediately after). Pass iff (a) such a window exists AND lasts \u2265 3.0s continuous, (b) the ball carrier / goal-line is in-frame (not cropped out), AND (c) at least one of the three confirm cues is visible.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-ACTION-CENTERED  Across a 1 fps sample of action frames in the reel's content body, the primary action subject (ball carrier, kicker, ball in motion) sits inside the central 80% horizontal band of the 9:16 frame.",
+      "why": "vertical reframing's first failure mode is letting the action drift to the edge or off-frame. Brief asks the field to \"matter,\" which it can't if the action isn't centered.",
+      "check": "opus-vision samples the content body at 1 fps, identifies frames with visible action, and measures the primary subject's horizontal position as a fraction of the frame width. Pass iff \u2265 90% of action-present sampled frames have the subject inside the central 80% band (subject_x \u2208 [0.10, 0.90]).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-TRACKING-SMOOTH  No mid-clip reframe judder. Within a single clip (not across cuts; cut-to-cut reframe jumps are a separate beat), the reframe center doesn't stutter back-and-forth by visibly large fractions of the frame width from one sampled frame to the next.",
+      "why": "the reel's reframe craft should feel invisible, not announce itself as \"I'm a horizontal video squeezed into vertical.\"",
+      "check": "opus-vision samples 3 mid-clip frames per clip of \u2265 3s (across 6 clips or all of them if fewer). Pass iff no sampled clip shows the reframe center shifting by more than ~25% of the 1080-pixel frame width between adjacent (\u22641s apart) sampled mid-clip frames. The reframe tracks continuously, not in jumpy steps.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-TRACKING-RESPONSIVE  When the action moves horizontally across the field in the source (a ball carrier runs sideline-to-sideline, a kicked ball travels through the air), the reframe follows it rather than remaining fixed on one part of the 16:9 source. Distinct from V-02, which checks centering across all action frames. V-04 specifically tests whether the reframe RESPONDS to motion, not just whether it's centered on a static shot.",
+      "why": "a static center-crop of a 16:9 broadcast into 9:16 passes V-02 on the stationary frames but fails the viewer on motion clips. The ball drifts off-frame on every horizontal travel.",
+      "check": "opus-vision selects the single motion clip in the reel where the ball / ball-carrier travels the greatest horizontal distance within the source frame (candidates: the opening TD carry ~source 19:19, a FG kick where the ball travels from holder to goal posts ~source 27:01, or the WEST open-field run ~source 45:00). Pass iff, across samples at 2 fps during that clip, the subject stays inside the central 80% horizontal band on \u2265 90% of sampled frames, which requires the reframe to track the subject's horizontal motion in the source. If no motion clip is present in the reel, this item fails.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-REFRAME-CONSISTENT  The reel uses one reframe strategy throughout (tracking-crop, blur-fill, or center-crop). Not a mixed bag that announces the edit.",
+      "why": "inconsistent reframing reads as edit-panic rather than a single craft choice.",
+      "check": "opus-vision samples 6 frames evenly across the reel (including at least one crowd-or-huddle shot and one action shot). Pass iff all sampled frames show the same reframe strategy (same blur-fill, same crop logic).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-SCOREBOARD-LEGIBLE  At least one frame in the reel shows the broadcast's scoreboard overlay (the EAST / WEST bar at the bottom of the 16:9 source, e.g. at source 20:55, 30:00, 50:31, 59:59) clearly enough that a viewer can read the score at that moment.",
+      "why": "the source has no audio in the game body, so the scoreboard is the ONLY in-game information channel. A reel that crops it all out leaves a viewer unable to answer \"what's the score.\"",
+      "check": "opus-vision at 1 fps looking for the broadcast's \"EAST N WEST M\" overlay. Pass iff at least one frame in the content body contains that overlay with both scores legible (numerals readable at output res).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-07",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-STADIUM-READ  The reel establishes the venue is AT&T Stadium. At least one shot shows the midfield Cowboys star, the \"COWBOYS\" endzone lettering, the goalposts against the interior bowl, OR the pregame tunnel with the stadium exit lighting (e.g. source ~3:09 tunnel, ~6:00 midfield star, ~19:35 goal-line-vs-endzone).",
+      "why": "brief commits to \"under the Cowboys' roof\". If the venue is never legible, the reel loses the \"this was an NFL stadium\" premise the bowl's social team cares about.",
+      "check": "opus-vision samples 1 fps. Pass iff \u2265 1 frame shows the Cowboys star at midfield, the blue/silver \"D\" or \"COWBOYS\" endzone lettering, the empty-bowl stadium seating with stars on the fa\u00e7ade, OR the tunnel-entry shot with the \"EXIT\" sign above (these are all source-legible venue tells).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-08",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-SECOND-SCORE  At least one of EAST's two field goals (the source ~27:01 kick by #27 that made it 10\u20130 OR the source ~49:03 kick by #27 that made it 13\u20130 across the 1Q\u21922Q transition) is represented in the reel. Either by an on-field FG clip (kick line-up, ball through posts, celebration) OR by a scoreboard beat that clearly updates 7\u219210 or 10\u219213.",
+      "why": "the reel's claim that EAST \"stretched the lead\" only lands if a second scoring beat exists beyond the opening TD. One TD alone could read as a single-score reel. The field goals are what make the arc read as \"pulling away.\"",
+      "check": "opus-vision scans the reel for (a) a FG-setup frame (goalposts-framed endzone angle, kick-holder stance, ball-through-posts angle) OR (b) a scoreboard transition frame showing the score advancing 7\u219210 or 10\u219213. Pass iff either is present for \u2265 1.5s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-09",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-WEST-PRESENT  The reel shows WEST players on screen, in their white ALL-AMERICAN jerseys, for at least one distinct beat (a defensive moment, the sideline, an open-field run such as the source ~45:00 WEST #36 slow-motion replay). The reel isn't an EAST-only cut.",
+      "why": "the bowl is East vs West. A reel that shows only EAST loses the game's face-off structure and misrepresents the bowl as a single-team highlight.",
+      "check": "opus-vision samples 1 fps and identifies frames where WEST players (white \"ALL-AMERICAN\" jersey, navy numbers, stars trim on pants) are the central subject. Pass iff at least one contiguous \u2265 1.5s beat features a WEST player centrally framed (not just a background blur behind an EAST carrier).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-10",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-SLOWMO-OR-CELEBRATION  The reel uses at least one broadcast replay / slow-motion shot OR one visible player-celebration beat to give a scoring play weight. A reel of live-only cuts with no slowdown and no celebration reads as a clips-only montage.",
+      "why": "brief asks \"scoring beats should land with weight\". In the source's grammar, weight is delivered via slow-mo (present around source ~45:00) or post-play celebration cuts (the opening TD celebration around source 19:40).",
+      "check": "opus-vision inspects the reel for (a) a slow-motion stretch (visibly slower motion than live play) of \u2265 1.0s, OR (b) a post-play celebration cut (players jumping / pointing / hugging, not live game action) of \u2265 1.0s. Pass iff at least one is present.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-GAME-IDENTITY  A cold viewer (scrolling past, knowing nothing about this game) can, from the reel alone, name (a) that this is the Blue Grey All-American Bowl (or at minimum \"All-American Bowl at AT&T Stadium\"), (b) that the teams are EAST and WEST, AND (c) state the scoreboard as it stood at the end of the broadcast tape, \"EAST 13, WEST 0\" (through the first quarter / early second quarter). At least two of the three facts must be legible from: audible pregame commentary (Ryan Castle naming the Bowl / AT&T / the booth), a readable scoreboard frame, the end-title card.",
+      "why": "the baseline a highlight reel owes a viewer. Who played and where the scoreboard sat. Without this the reel is an anonymous football montage.",
+      "check": "opus-vision inspects the reel's end card + scoreboard frames and gemini-audio inspects the reel's speech. Pass iff the reviewer, given the reel alone, can name \"Blue Grey / All-American Bowl / AT&T\" AND \"EAST vs WEST\" AND the 13\u20130 EAST lead with a tape-end framing (NOT as a fabricated final) from at least two of the three channels.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-ARC  The reel carries the game's arc in its ordering and weighting. A cold viewer can say in one sentence what happened: \"EAST jumped ahead with an opening touchdown, kept the lead with field goals, and was up 13\u20130 through the first when the tape ended.\" The reel doesn't flatten this into a chronological string of equal-weight clips with no sense that EAST built the lead.",
+      "why": "an arc-less highlight reel is a scoring compilation. Brief asks \"we want a cold viewer to feel the game's arc, not just see a scoring compilation.\"",
+      "check": "opus-vision given the reel's ordered frames + reel transcript; pass iff the reviewer can state the arc in one legible sentence consistent with arc (EAST leads from the opening TD, extends with FGs, tape ends with EAST 13\u20130 in 2Q). The arc must be inferable from the reel's sequencing, not from the end card text alone.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-PIVOT  The game's pivot, EAST's opening touchdown, is in the reel with room to land. The clip runs \u2265 3 continuous seconds, the play unfolds from snap-or-near-snap to resolution, and a consequence beat (scoreboard tick, celebration, or pregame-booth line laid over the clip) lands concurrent. A pivot treated as a 0.8-second flash isn't preserved.",
+      "why": "most-decisive-moment. This item checks the arc of the pivot, distinct from V-01 which checks its visual framing.",
+      "check": "opus-vision identifies the TD clip in the reel (as per V-01) and verifies that within 2.0s of the TD resolution there is a consequence beat: a scoreboard update frame, an on-field celebration frame, or a booth audio line playing over the beat. Pass iff \u2265 3s continuous AND \u2265 1 consequence beat within 2s of resolution.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-NO-FABRICATED-FINAL  The reel does NOT claim or imply a final score beyond what the source tape shows. The source ends with EAST 13 \u2013 WEST 0 in the 2nd quarter with 11:05 remaining. Any on-screen caption, graphic, or voice-over that reads \"Final: EAST 13 WEST 0\", \"EAST wins\", a made-up later score, \"W / L\" team indicators, or any other \"the game ended here\" framing is a fail.",
+      "why": "moments. The source is a partial broadcast. Inventing a final is the specific fabrication this genre most commonly ships.",
+      "check": "opus-vision inspects all end-card + scoreboard + caption text in the reel and gemini-audio inspects the reel's speech. Pass iff none of the text or speech asserts the game's completion (no \"final\", no made-up second-half scores, no \"EAST wins / defeats WEST\" voice-over). A tape-honest framing like \"13\u20130 through the first\", \"EAST 13 \u2013 WEST 0 (2Q)\", or simply showing the 13\u20130 scoreboard with the 2ND-quarter indicator still visible is fine.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-NO-FABRICATED-ATTRIBUTION  Every scoring event shown in the reel matches the source on (a) who scored (EAST, never WEST. WEST is shut out in the source), (b) the method (the opening score is a short rushing TD from the goal line; the two later scores are field goals, not TDs), AND (c) the resulting score. A reel that shows a WEST player scoring, or stitches the source ~45:00 WEST #36 open-field replay as if it were a scoring play, is a fail.",
+      "why": "risks. Stitching clips in a misleading order is the most common way a highlight reel quietly misrepresents a game.",
+      "check": "opus-vision cross-references each scoring-looking moment in the reel against events. Pass iff no shown scoring event disagrees with the source on WHO scored, METHOD, or RESULTING SCORE, and no non-scoring WEST clip (the #36 open-field run, a sideline interview) is presented as a scoring play.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-06",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-OPENS-ON-SUBSTANCE  The first 5 seconds of the reel carry game or venue substance. A pregame-booth line from Ryan Castle / Jesse Holley, a wide shot of AT&T Stadium, the tunnel entry, a play, or the first score. Not a league bumper, sponsor card, or \"presented by\" slate.",
+      "why": "brief says \"let our booth set the stage, not a league bumper or a sponsor card\". This is the hook.",
+      "check": "opus-vision + gemini-audio on the first 5s of the reel. Pass iff the opening contains at least one of: broadcast booth audio (Castle / Holley from the pregame), a legible AT&T-Stadium venue shot, the EAST tunnel entry, or a game-action beat. A sponsor slate, league logo, a solid-color hold, or a generated \"presented by\" card is a fail.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-SHUTOUT-CONSISTENT  The reel doesn't show or imply a WEST score at any point. The source shows WEST with 0 on the scoreboard in every visible frame. Any scoreboard frame in the reel that reads \"WEST 3\", \"WEST 7\", or anything other than \"WEST 0\", AND any cut that presents a WEST play as if it resulted in points, is a fail.",
+      "why": "events. WEST is shut out in the recorded window. A WEST-score graphic is fabrication.",
+      "check": "opus-vision samples all scoreboard-containing frames in the reel and all celebration / scoring-looking beats. Pass iff every scoreboard reading of WEST's column is \"0\" AND no WEST player is shown celebrating a score with a graphic / overlay attributing points to WEST.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-TAPE-HONEST-END  The end of the reel (the closing 1\u20133 seconds before any title card, OR the title card itself) frames the score in a tape-honest way. Either carries a live scoreboard frame showing \"EAST 13 WEST 0, 2ND \u2026\", or the end card writes the score with a quarter / \"through the first\" qualifier. NOT as a flat \"FINAL EAST 13 WEST 0\".",
+      "why": "this is the positive counterpart to N-04. Rewards the editor who made the tape-honest framing choice actively, not just who avoided inventing one.",
+      "check": "opus-vision inspects the reel's last 3 seconds + end card. Pass iff the score appears on screen with a quarter indicator, tape-state label, or a visible 2ND / 1ST quarter graphic from the source, OR the reel ends on a live scoreboard frame (not a clean \"FINAL\" slate).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "S-BROADCAST-VOICE  At least one identifiable line from the broadcast's own booth (Ryan Castle or Jesse Holley from the source 0:30\u20132:52 pregame window) is audible in the reel (e.g. \"welcome inside AT&T Stadium\", \"Blue Grey All-American Bowl\", \"home of the star\", \"16-minute quarters\", \"the kickoff here from AT&T Stadium is coming right up\"). A reel that lays only a music bed and never lets the broadcast's voice land has thrown away the genre's authority.",
+      "why": "the source's only live commentary is this pregame window. Preserving at least one line is how the reel keeps the broadcast's sonic authority even when the game footage is silent. Brief specifically asks \"let our booth set the stage\".",
+      "check": "gemini-audio on the reel audio; whisper the reel audio and check that at least one \u2265 4-word phrase from the source 0:30\u20132:52 transcript is substring- present in the reel transcript. Pass iff \u2265 1 match.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-NO-NARRATOR  No second-narrator voice is laid over the reel. No explainer-style VO introducing plays, no AI-generated script-reader over the game, no documentary narration. The only human voices audible in the reel are (a) broadcast commentators Ryan Castle or Jesse Holley, (b) the stadium PA, or (c) mic'd players / coaches captured on the broadcast. A distinct studio-narrator or TTS voice is a fail.",
+      "why": "a new narrator collapses the reel to narrative-repurpose shape and voids the \"we ran this game inside AT&T Stadium with Ryan Castle and Jesse Holley on the call\" premise. Audio counterpart to F-NO-NOVEL-VO.",
+      "check": "gemini-audio inspects the reel audio for spoken-word segments. Pass iff no segment contains a voice whose timbre / delivery / phrasing is distinct from the source pregame booth (Castle / Holley) or source PA, AND no segment shows TTS markers (robotic cadence, perfect fricatives, missing breath noise).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "S-BED-CARRIES-SILENT-FOOTAGE  A continuous music and/or ambient bed underlies the reel's silent-game-footage stretches so that the reel doesn't decay into long true-silent gaps over the game-action cuts (which are themselves silent in the source).",
+      "why": "the source's game footage is entirely silent after source 3:42. Without a bed, every game-action cut in the reel sits in true silence and the reel feels broken on a Reels feed.",
+      "check": "gemini-audio inspects the reel over the content body; compute the fraction of the content body where some audio track (music, crowd ambient, booth voice, PA) is audible at \u2265 \u221240 dBFS. Pass iff \u2265 85% of the content body has audible audio at that threshold.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "S-SEAM  Commentary levels (where preserved), music-bed volume, and cut transitions are balanced. No mid-word truncation of a Castle / Holley phrase, no abrupt music cut that drops the viewer, no jarring volume jump at a cut.",
+      "why": "seam craft is a polish concern. A reel can land the big items and still feel rough if its transitions clip mid-word.",
+      "check": "gemini-audio inspects audio at every video cut (sampled across 6 cuts or all cuts if fewer); pass iff no cut shows (a) a spoken word truncated mid-syllable, or (b) a > 12 dB volume jump between the 0.2s before and 0.2s after the cut.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-COMMENTARY-MOOD",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "S-COMMENTARY-MOOD  Broadcast commentary tone tracks the actual highs of the play. The commentary call rises into the decisive moment and registers the energy of the action; flat reading or wrong-energy commentary (calm voice over the climax, hyped voice over a dead beat) fails this.",
+      "why": "the genre's emotional authority lives in the booth's pacing and intensity. A reel that preserves commentary words but flattens their delivery has thrown away the live-broadcast register the brief asks for.",
+      "check": "gemini-audio on repurpose audio. For each commentary-bearing window, judge whether the commentator's intensity tracks the visual action (rising into the decisive moment, restrained on slower beats). Pass iff no mismatched window (flat reading over a peak, or hyped delivery over a non-event) is observed.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOICE-CONSISTENCY",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-VOICE-CONSISTENCY  If the repurposed cut uses broadcast commentary, no audible swap between unrelated commentary teams (no cut from one network's booth to another's). If the repurposed cut adds narration, a single narrator voice is used throughout the content body, with no audible speaker swap.",
+      "why": "commentary identity is part of the broadcast's authority. Stitching two different booths together, or cycling between two narrators, breaks the reel's sonic spine and reads as assembled-from-parts.",
+      "check": "gemini-audio on repurpose audio. Enumerate distinct human voices in the content body. Pass iff (a) all commentary voices match a single broadcast booth (or set of booth voices that always travel together), AND (b) any added narration is delivered by exactly one consistent voice across the reel.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-01",
+      "pillar": 4,
+      "weight": -30,
+      "criterion": "P4-PILLARBOX-SEVERE  Horizontal black (or solid-color) bars occupy > 30% of frame height on the majority of the reel's content body frames. This is the \"lazy reframe\" failure. The editor didn't reframe; they letterboxed 16:9 content into a 9:16 container.",
+      "why": "brief commits to 1080\u00d71920 vertical Reels. A pillar-boxed lazy letterbox wastes half the frame and signals the editor dropped the reframe task entirely.",
+      "check": "opus-vision samples the content body at 1 fps, measures the vertical extent of uniform black or solid-color bars at the top and bottom of each sampled frame, and computes the bar fraction of the total 1920 frame height. Fire iff \u2265 50% of sampled frames have bars > 30% of frame height.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-02",
+      "pillar": 4,
+      "weight": -15,
+      "criterion": "P4-PILLARBOX-MILD  Horizontal bars occupy 10\u201330% of frame height on the majority of the reel's content body. The reel reframed something but still wastes visible pixels. Mutually exclusive with P4-01: if P4-01 fires, P4-02 does NOT also fire.",
+      "why": "middle-ground reframe laziness. Still visibly wastes pixels even if not as severe.",
+      "check": "opus-vision samples 1 fps; fire iff (a) 10\u201330% of frame height is bars on \u2265 50% of sampled frames AND (b) P4-01 does not fire.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-03",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "P4-SQUISHED  The 16:9 source content is visibly squished into 9:16 (aspect-distorted). Players appear compressed horizontally or stretched vertically. The football looks oval rather than ellipsoid-prolate. The Cowboys midfield star's circumscribed circle looks flat.",
+      "why": "a distorted aspect ratio is an unrecoverable delivery defect. Players and field geometry look wrong for the whole runtime.",
+      "check": "opus-vision inspects \u2265 3 representative frames (a player close-up, a wide game shot, the midfield-star shot). Fire iff proportions are visibly distorted in \u2265 2 of the 3 sampled frames (player shoulders narrower than reality, ball visibly elongated, circular field markings visibly elliptical).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-04",
+      "pillar": 4,
+      "weight": -50,
+      "criterion": "P4-ACTION-OFF-FRAME  At \u2265 3 moments in the content body, the primary action subject (ball carrier, kicker, ball-in-flight) drifts out of or off the edge of the 9:16 frame because the reframe doesn't follow the play.",
+      "why": "reframes that fail to track the action turn scoring clips into shots of empty grass. This is the failure mode V-02 / V-04 test positively for, surfaced as a heavy negative when it happens repeatedly.",
+      "check": "opus-vision samples action moments (TD clip, FG clip, WEST run clip); fire iff the primary action subject is off-frame or at the extreme horizontal edge of the frame in \u2265 3 sampled moments.",
+      "judge": "opus-vision"
+    }
+  ]
+}

@@ -1,0 +1,248 @@
+{
+  "task_id": "this_is_america",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Output runtime is within the brief's stated 75 s window (73 to 77 seconds).",
+      "why": "brief.md commits to 75 s \u00b1 2 s. Out-of-window means the deliverable is the wrong length for Reels.",
+      "check": "ffprobe -v error -show_entries format=duration -of csv=p=0 on the repurposed cut; numeric compare.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Container is mp4 (ISO Media / MPEG-4).",
+      "why": "brief.md asks for MP4; Reels accepts mp4 first.",
+      "check": "ffprobe format_name field contains \"mp4\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Frame is vertical 1080\u00d71920 (portrait).",
+      "why": "brief.md asks for vertical 1080\u00d71920 for Reels; horizontal output is the wrong format for the platform.",
+      "check": "ffprobe stream width = 1080 AND height = 1920.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Frame rate is at least 24 fps.",
+      "why": "brief.md asks for \u2265 24 fps; lower rates stutter on Reels.",
+      "check": "ffprobe avg_frame_rate \u2265 24.0 (eval the rational).",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "An audio track is present in the output.",
+      "why": "a music-video repurpose with no audio isn't a music-video repurpose. This is the prerequisite for every Pillar 3 item.",
+      "check": "ffprobe shows \u2265 1 stream with codec_type=audio.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The repurposed cut looks like the source music video: cool / desaturated palette, dominant warehouse interior with overhead industrial lighting, and Donald Glover (shirtless, beard, gold chains) centered or near-centered when on-screen.",
+      "why": "the \"look\" of this video is one of its most-discussed properties. A repurposed cut that loses the warehouse and the cool palette has lost the artwork's visual identity.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff \u2265 80% of sampled frames depicting Glover are inside the warehouse location AND palette is dominantly cool/desaturated.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The repurposed cut preserves at least one long-take feel: at least one shot is held continuously for \u2265 4 seconds with visible in-frame motion (camera, dance, or action).",
+      "why": "source has only 7 cuts in 4:05. Steadicam long takes are the editorial signature; cutting every shot to < 1 s flattens the source's rhythmic spine.",
+      "check": "scenedetect on repurpose; pass iff \u2265 1 detected scene segment is \u2265 4.0 s long.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Captions, lyric-bars, or persistent text overlays do not sit in the central 50% of the frame for \u2265 5% of runtime.",
+      "why": "brief is explicit about letting the picture do the talking. The video has no on-screen text in the source, and a Reels caption bar parked over Glover's face would obscure signature framing.",
+      "check": "pytesseract OCR on frame samples at 2 fps in the central crop; pass iff text is present in < 5% of sampled frames.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Vertical reframing keeps Donald Glover's head in-frame whenever Glover is on-screen for \u2265 0.5 s.",
+      "why": "brief explicitly requires this. A 16:9-to-9:16 reframe that crops Glover's head off destroys every signature shot.",
+      "check": "opus-vision detects Glover and verifies head-bounding-box is within the visible 1080\u00d71920 area for every continuous on-screen segment \u2265 0.5 s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Output video bitrate is at least 1 Mbps so the warehouse blacks and choir reds do not block up under Reels recompression.",
+      "why": "at < 1 Mbps the warehouse blacks block up and the choir red turns into an artifact. Reels recompresses on upload, so the delivered file shouldn't start already-degraded.",
+      "check": "ffprobe bit_rate \u2265 1_000_000.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "Any closing title card, end card, or final-shot hold occupies \u2264 3 s of runtime; the repurposed cut must not surrender its climax to a logo card or credits crawl.",
+      "why": "the brief asks the repurposed cut to close on the source's terror climax (final dark-corridor sprint, choir massacre, car-roof dance, or hook-drop crash per N-04). A 6+ s logo card has stolen the climax.",
+      "check": "opus-vision samples last 6 s at 1 fps; pass iff frames showing only title-card content (text on solid or static background, no source footage behind) span \u22643 s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-06",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Burned-in caption / lower-third / overlay text does not cover more than 25% of the frame area for more than 1 continuous second.",
+      "why": "heavy chrome destroys the music-video aesthetic and the Murai-style image. The brief asks for the picture to do the talking, not chyrons.",
+      "check": "opus-vision samples 1 fps; pass iff at no sampled frame does burned-in text exceed 25% of frame area for \u2265 1 s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "A cold viewer (no prior knowledge of the source) can identify from the repurposed cut alone that the video performs a shooting-then-dancing inversion: violence happens, dancing immediately continues. This is the video's central argument.",
+      "why": "the shooting/dancing inversion at 0:52 \u2192 0:53 IS the argument. A repurposed cut where this can't be read isn't a repurposed cut of THIS video.",
+      "check": "opus-vision is shown the repurposed cut with no source context and asked \"does this video include a shooting that is immediately followed by dancing/performance?\" Pass iff answer is yes.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut follows the source's tonal arc: the opening 15 s reads as peace or set-up (calm warehouse, guitarist, melodic intro feel) and the closing 15 s reads as terror or escalation (final sprint, chase, dark hallway, or chaotic climax).",
+      "why": "the cyclical false-peace \u2192 shock \u2192 distraction \u2192 terror arc is the song's emotional shape. A repurposed cut that opens climactic and closes calm has inverted the arc.",
+      "check": "opus-vision rates first-15s and last-15s tonal feel from a fixed list {peace, set-up, distraction, escalation, shock, silence, terror}. Pass iff first \u2208 {peace, set-up} AND last \u2208 {terror, escalation, shock, climax}.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "At least 2 distinct on-screen shooting events (or shooting-aftermath events) appear in the repurposed cut.",
+      "why": "source has three shock/silence moments tied to violence (0:48 first shot, 1:56 choir, 2:44 finger-gun). A repurposed cut with only one shock loses the cyclical structure.",
+      "check": "opus-vision counts on-screen shooting OR aftermath events (gun fired, body falling, body being dragged, AK-47 in Glover's hands aimed at choir, finger-gun gesture in silence). Pass iff count \u2265 2.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "The repurposed cut closes on a high-impact image from the source's terror climax or escalation: one of {final dark-corridor sprint close-up, AK-47 choir massacre, car-roof dance, hook-drop crash}.",
+      "why": "a repurposed cut of THIS video that ends on a static logo, an ambient warehouse pan, or a credits crawl has thrown away the source's cyclical-terror payoff.",
+      "check": "opus-vision examines the final 5 s of the repurposed cut; pass iff one of the four named source moments is recognizably present in that window.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "At least one shot in the repurposed cut shows the source's foreground-performance / background-chaos tension: dancers or Glover performing in the foreground while violence, fire, riot, or chaos plays out behind them.",
+      "why": "this fg/bg tension is one of the most-cited compositional ideas in the video. Losing it loses the video's argument about distraction.",
+      "check": "opus-vision inspects all shots in the repurposed cut; pass iff \u2265 1 shot has visible performance/dance in the foreground AND visible chaos (fire, police, riot, fleeing figures) in the background simultaneously.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-06",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "The repurposed cut opens with an attention-capturing image, not a slow ambient warehouse establish: the first 5 s contains Glover on-screen, a shooting, the hook-drop, or a dance move.",
+      "why": "Reels feed grants ~2 s of attention. A 5-second silent warehouse pan loses the cold scroller before the repurposed cut has said anything.",
+      "check": "opus-vision examines first 5 s of repurpose; pass iff at least one frame in that window shows {Glover, gun, body, dance move with multiple figures}.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "The original song \"This Is America\" by Childish Gambino is the audio of the repurposed cut. Trims and fades are fine. The song is not replaced with a different track, not layered with narration, not crossfaded with stock music.",
+      "why": "this is the single most important constraint on the deliverable. A music-video repurpose that overdubs VO or swaps the song destroys the artwork. Brief states this directly.",
+      "check": "gemini-audio listens to repurpose audio only; pass iff the repurposed cut audio is recognizable as Childish Gambino's \"This Is America\" AND no other voice-over track is audible above the song.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "HOOK-PRESERVED The hook \u2014 \"This is America / Don't catch you slippin' now\" \u2014 appears in the repurposed cut, in full, recognizable, on-pitch, not truncated mid-syllable or mid-phrase.",
+      "why": "the hook lands at source 0:53 on the trap-beat drop after the first shooting silence. This is the line the audience came for and the structural payoff of the silence-then-drop. A repurposed cut missing this is missing the song.",
+      "check": "gemini-audio scans repurposed cut audio for the lyric \"This is America / Don't catch you slippin' now\"; pass iff phrase is present in full and not chopped mid-word.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "SEAM-QUALITY Cuts in the repurposed cut land at natural musical-phrase, bar, or lyric-line boundaries \u2014 not mid-phrase, mid-beat, or in the middle of a vocal line. At least 70% of visible cuts fall within \u00b1150 ms of a beat onset OR within \u00b1200 ms of a phrase boundary, so the repurposed cut reads as a clean musical assembly with the song's groove intact.",
+      "why": "choreography in the source locks to the bass hits. Glover's movements snap into place exactly on the bass hits at 117 BPM. Cuts that ignore the beat will feel wrong against this song and betray the song's rhythmic spine.",
+      "check": "scenedetect \u2192 list of repurpose cut times; librosa beat-track on repurpose audio \u2192 beat times. Compute the fraction of cuts within tolerance; pass iff fraction \u2265 0.70.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "Repurpose audio enters cleanly and exits cleanly: the opening begins on a downbeat, phrase start, or silence (not mid-word or mid-bass-roll); the closing ends on a phrase end, fade (\u2265 0.5 s), or musical drop \u2014 not a hard cut mid-phrase.",
+      "why": "a mid-phrase audio chop announces \"this is a clip,\" not a repurposed cut. The audio inversion fails when the song sounds damaged.",
+      "check": "gemini-audio listens to first 1.5 s and last 1.5 s of repurpose; pass iff both transitions are clean per definition.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-05",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "Output audio is stereo (2 channels) and sample rate is 44100 Hz or 48000 Hz, preserving the source mix.",
+      "why": "source is stereo 44.1 kHz. Downmixing to mono or resampling to 22050 collapses the song's mix.",
+      "check": "ffprobe channels = 2 AND sample_rate \u2208 {44100, 48000}.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "P4-01",
+      "pillar": 4,
+      "weight": -30,
+      "criterion": "VO-OVER-MUSIC The repurposed cut layers narration, voice-over, announcer line, or spoken caption-track over the song at any point.",
+      "why": "voice-over over a music-video repurpose is the signature failure of this task family; brief explicitly forbids narration over the music.",
+      "check": "whisper transcribes repurposed cut audio; pass iff no transcribed speech segments exist that are not part of the source recording's vocal performance (i.e. no added narration distinct from Childish Gambino's vocal track).",
+      "judge": "deterministic"
+    },
+    {
+      "id": "P4-02",
+      "pillar": 4,
+      "weight": -30,
+      "criterion": "MUSIC-REPLACED The repurposed cut's audio is not the source recording \u2014 it has been replaced with a different piece, a re-recorded cover, royalty-free music, instrumental score, or a re-mastered version.",
+      "why": "the entire premise is to repurpose *this* recording. Different audio is a categorical failure; brief states 'the song is the audio.'",
+      "check": "gemini-audio listens to the repurposed cut and confirms the audio is the original Childish Gambino studio recording of 'This Is America' (2018), not a cover, remix, instrumental, or replacement track.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-03",
+      "pillar": 4,
+      "weight": -25,
+      "criterion": "MID-BAR-CHOP Three or more cuts in the repurposed cut land mid-bar / mid-vocal-line / mid-chorus \u2014 i.e. away from any beat onset or lyric-line boundary AND not at a perceivable phrase end. This is qualitatively worse than the 30% off-grid allowance under S-03.",
+      "why": "three or more clueless cuts in a 75 s repurposed cut of a song this rhythmically locked aren't a slip \u2014 they say the editor ignored the beat and bar grid entirely. The source's choreography snaps to the bass at 117 BPM; off-grid cuts betray the song's spine.",
+      "check": "gemini-audio reviews the repurposed cut with cut times from scenedetect and flags cuts that fall mid-bar, mid-vocal-line, or mid-chorus (not at any beat onset, lyric boundary, or phrase end). Fail iff \u2265 3 such cuts are identified.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-04",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "HOOK-MISPLACED The hook \u2014 'This is America / Don't catch you slippin' now' \u2014 does not land on its original beat-drop the way it does at source 0:53: it is delayed, anticipated, faded under, talked over, or otherwise stripped of its drop-impact in the repurposed cut.",
+      "why": "brief is explicit: 'The hook \u2026 has to land, in full, on its original beat-drop, the way it does in the source at 0:53.' A repurposed cut that includes the hook lyrics but breaks their alignment with the trap-beat drop has lost the song's structural payoff \u2014 the silence-then-drop inversion that the hook is built around. This is the music-video-specific catastrophic failure that DYNAMIC-CRUSHED would catch in a classical piece.",
+      "check": "gemini-audio listens to the repurposed cut, locates the hook 'This is America / Don't catch you slippin\u2019 now', and verifies the lyric onset is aligned with the trap-beat drop (within \u00b1150 ms) and not buried, faded, or over-spoken. Fail iff hook is present but mis-aligned to the drop or audibly de-emphasized.",
+      "judge": "gemini-audio"
+    }
+  ]
+}

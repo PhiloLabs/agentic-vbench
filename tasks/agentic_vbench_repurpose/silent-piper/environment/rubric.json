@@ -1,0 +1,284 @@
+{
+  "task_id": "silent_piper",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR  ffprobe format duration is between 59.9 s and 60.1 s.",
+      "why": "brief mandates exactly 60 s; a tight tolerance prevents gaming.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 59.9 \u2264 d \u2264 60.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-RES  the repurposed cut is delivered at 1920\u00d71080.",
+      "why": "brief specifies horizontal HD for YouTube. Animation Library publishes only at 1920\u00d71080.",
+      "check": "`ffprobe -show_entries stream=width,height` \u2192 1920 and 1080.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CONTAINER  the deliverable is an h.264-encoded MP4 file.",
+      "why": "brief specifies MP4 for upload to the channel.",
+      "check": "`ffprobe` \u2192 format_name contains \"mp4\" AND video codec is \"h264\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-AUDIO-STEREO  the repurposed cut has a stereo audio track.",
+      "why": "brief explicitly requests stereo audio.",
+      "check": "`ffprobe -show_entries stream=codec_type,channels` \u2192 at least one audio stream with channels = 2.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-06",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-AUDIO-PRESENT  the audio track is non-silent across the repurposed cut. At least 85 % of 1-second windows carry RMS energy above \u221250 dBFS.",
+      "why": "a repurposed cut with VO that drops out for long stretches or with a silent track entirely is a delivery failure, not a craft note.",
+      "check": "ffmpeg `astats` per-second; pass iff \u226551 of 60 windows have RMS > \u221250 dBFS.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-09",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "F-NO-LETTERBOX  no improper-aspect black bars (letterbox or pillarbox) above ~5 % of frame height/width.",
+      "why": "a vertically-cropped or pillarboxed delivery in a 1920\u00d71080 container reads as a re-encode mistake.",
+      "check": "opus-vision on three sampled frames (00:05, 00:30, 00:55); pass iff none has a black band \u22655 % of frame edge.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-10",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "F-NO-FREEZE  no static-frame dwell longer than 2.0 s mid-repurpose (the closing title card is exempt \u2014 see F-07).",
+      "why": "a 4-second freeze inside the body of a 60 s repurposed cut is padding, not a creative choice.",
+      "check": "ffmpeg `mpdecimate` or scenedetect to flag intervals of near-zero pixel difference; pass iff no run \u22652.0 s exists inside 0:00 \u2013 the last 5 s.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-FOAM  The film's hunting rhythm is legible in the repurposed cut. The rhythm is the receding-foam line as the window in which a sandpiper feeds. Not a single establishing wave: at least one shot of foam pushing in AND at least one shot of foam pulling back, so the viewer reads the ocean as both threat and harvest.",
+      "why": "inventory. The receding-foam line is the temporal motif the whole story turns on.",
+      "check": "opus-vision on repurpose at 1 fps; pass iff at least one frame shows wave water advancing toward shore AND at least one distinct frame shows wave water receding (foam line moving seaward, exposed wet sand visible).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "V-MOTIF-BUBBLES  The bubbles-in-wet-sand motif is given visible space in the repurposed cut. The motif is the cue that a clam is hidden underneath, the visual language Piper has to learn to read. At least one shot foregrounds the bubble-pocked sand surface in focus, in frame, held \u22651 s. Not blurred motion in a corner.",
+      "why": "inventory. The bubbles ARE the story's \"X marks the spot,\" and a repurposed cut that drops them drops the visual machinery of the turn.",
+      "check": "opus-vision sampling repurpose at 1 fps; pass iff at least one sampled frame clearly foregrounds wet sand with visible surface bubbles (or a clam visibly emerging) in focus, occupying at least the central third of the frame.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-WAVE-IS-BIG  The film's empathy trick is preserved by at least one low-angle shot where the breaking water fills most of the frame and the bird (or her POV) is clearly small relative to it. The trick is wave as towering, Piper as tiny. Not a wide landscape with the wave in the distance.",
+      "why": "vs-macro. The lens-near-the-ground composition is the engine of the fear; without it the wave is just weather.",
+      "check": "opus-vision; pass iff at least one repurpose frame is a low-angle composition where wave water occupies \u226540 % of frame height with visible looming geometry (curling lip, foam wall, green-glass) \u2014 not a long-lens distant wave.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-COLOR-ARC  The repurposed cut's palette travels. At least one shot in cool/grey/wet register (the wave-hit world) AND at least one shot in warm golden-hour register (the resolution world). Not flat colour-graded across.",
+      "why": "style. Piper's emotional turn is underlined by a palette pivot from cold to warm.",
+      "check": "opus-vision on three frames sampled across the back two-thirds of the repurposed cut; pass iff at least one frame reads cool/desaturated AND at least one frame reads warm/golden.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-PROTAGONIST-LEGIBLE  Hatchling Piper, the protagonist, is visually distinguishable from the adult flock in the repurposed cut. At least one shot foregrounds the smaller, fluffier, round-eyed bird alone in frame (or clearly in front of, smaller than, the adults), so a cold viewer can lock onto her as the lead.",
+      "why": "the cast is six identically-shaped birds; the repurposed cut can't assume the viewer pre-knows who to follow.",
+      "check": "opus-vision; pass iff at least one frame shows a hatchling sandpiper (fluffy, rounder, smaller, no adult tail feathers) in foreground, isolated or visibly distinct from adults in the same frame.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "V-POLISH  The repurposed cut is free of obvious encode artefacts. No warped frames, no double-exposure ghosting from a fade-cross gone wrong, no frozen black flashes mid-cut.",
+      "why": "a polish item. Reviewers don't tank a repurposed cut on it but they notice.",
+      "check": "opus-vision on five frames at 0:10 / 0:20 / 0:30 / 0:40 / 0:50; pass iff none shows visible compression breakage, warping, or ghost-doubling.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "Closing title card or end card occupies no more than 3 seconds of total runtime.",
+      "why": "brief is explicit that the close shouldn't be a multi-second pad. Anti-padding for the closing title.",
+      "check": "opus-vision samples the last 6s of repurpose at 1fps; pass iff frames showing only title-card content (text on solid or static background, no source footage behind) span \u2264 3s of runtime.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MIN-SHOT-DURATION",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No individual shot in the repurposed cut content body is shorter than 1.0 second, OR \u2014 if the repurposed cut uses a deliberate rapid-cut sequence \u2014 no more than 3 consecutive shots <1.0s within any 5-second window.",
+      "why": "shots shorter than ~1s read as a frantic reel rather than a repurposed cut; allows a deliberate rapid-cut burst as long as it doesn't dominate.",
+      "check": "scenedetect content-detector on the repurposed cut excluding the closing title card; pass iff the rule above holds.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TRANSITION-NATURAL",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "most cuts in the repurposed cut read as deliberate transitions \u2014 subject continuity, motion match, lighting/color match, OR a clearly intentional jump-cut for emphasis \u2014 rather than jarring splices between unrelated images.",
+      "why": "deliberate transitions are what separates an edit from a shuffle. Random splices break the repurposed cut.",
+      "check": "scenedetect identifies cuts; opus-vision samples the last frame before and the first frame after each cut; pass iff \u226580% of cuts read as deliberate per the criterion above.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MOTION-MATCH",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Motion-direction or subject-position continuity (eye-trace) is preserved across cuts. most cuts preserve eye-trace OR violate it for a discernible emphatic reason.",
+      "why": "eye-trace continuity is what makes cutting feel like cinema rather than a slideshow with shuffle-mode pacing.",
+      "check": "for each scenedetect cut, opus-vision compares last-frame-before and first-frame-after; pass iff \u226580% preserve motion-direction or subject-position continuity, or violate it intentionally.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": -55,
+      "criterion": "N-TURN  The film's central turn is in the repurposed cut, is given room to register, and lands as a turn rather than a cold-open spectacle. The turn is the moment Piper opens her eyes underwater and sees the clams the wave has revealed. The underwater shot (or its immediate emergence beat) is held for at least 1.5 s AND it appears after the 35-second mark of the repurposed cut, so a viewer reads it as a discovery the bird has earned, not a thumbnail. \u2014 cut INTO this beat with a slight beat of held breath, or a cut that arrives slightly later than the eye expects.",
+      "why": "most-important-moment. The open-eyes-underwater beat is the film's hinge.",
+      "check": "opus-vision on AV-aligned repurpose at 1 fps; pass iff (a) at least one frame after repurpose timestamp 0:35 clearly shows underwater perspective with shimmering surface above and/or visible clams/seabed below, AND (b) that frame's shot dwells for \u22651.5 s without a hard cut away.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-COLD  A viewer coming to the repurposed cut cold, with no prior exposure to *Piper*, can answer all three: (a) the protagonist is the small fluffy hatchling sandpiper too young to feed herself; (b) the central conflict is that the first wave knocks her down on her first hunt and afterwards she's afraid to feed at the place the food is; (c) the resolution is that she learns, by copying a hermit crab, to dig under the wave instead of running from it, and ends the day as a confident hunter at home in the surf. The repurposed cut doesn't require the source to make sense; all three answers come from inside it.",
+      "why": "baseline comprehension. Turn-resolution names the three required answers.",
+      "check": "opus-vision given repurpose frames at 1 fps + the repurposed cut audio transcript; judge attempts all three answers from the repurposed cut alone. Pass iff (a), (b), and (c) are all independently recoverable.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-SCENES The repurposed cut visually draws from at least three of the six named source scenes: beach-grass nest with hatchling, the wave hit, the hermit-crab encounter, the burrow / underwater turn, mastery hunting, and golden-hour sunset close.",
+      "why": "scene-inventory. Three or more named scenes are the floor for a repurposed cut that travels.",
+      "check": "opus-vision at 1 fps over the full repurpose; tag each sampled frame with the source scene it came from (or \"title/end-card/none\"); pass iff \u22653 distinct scenes from the named set above appear at least once.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-FEAR-LEGIBLE  The fear half of the arc is shown, not just narrated. At least one shot in the repurposed cut reads as Piper post-wave-hit: matted-wet feathers, retreat, hiding in dune grass, or visible shivering. A repurposed cut that says \"she was afraid\" in VO over only sunny imagery fails this.",
+      "why": "arc. The wonder at 1:59 only works because the soaked-and-shivering beat earned it.",
+      "check": "opus-vision at 1 fps; pass iff at least one frame in the repurposed cut clearly shows the hatchling either soaked / matted-feathered / hiding-in-grass / visibly distressed.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-06",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-CRAB-AS-MENTOR  The hermit crab is shown not as random ambient fauna but as the agent of the turn: the repurposed cut contains a shot of the crab burrowing AND a shot of Piper imitating the burrow, in that temporal order. (One without the other or in the wrong order doesn't pass.)",
+      "why": "inventory. The crab is the entire hinge mechanism; a repurposed cut that omits the imitation chain loses the cause of the discovery.",
+      "check": "opus-vision at 1 fps with timestamps; pass iff the repurposed cut contains, in order, (a) at least one frame showing a hermit crab digging into wet sand, AND (b) at least one later frame showing Piper digging into wet sand or mostly-buried in it.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-MASTERY-PAYOFF  The repurposed cut shows the *consequence* of the turn, not just the turn. At least one shot of Piper hunting confidently after the discovery: scampering after a receding wave with adult body language, holding a clam, or otherwise visibly feeding. Not a cut from \"underwater eyes open\" straight to \"sunset wide.\"",
+      "why": "arc. Wonder without payoff feels truncated; the mastery sequence is what cashes the reveal.",
+      "check": "opus-vision at 1 fps after the underwater beat; pass iff at least one later frame shows the hatchling with confident hunting body language (chasing foam line, beak in sand at a clam, holding food in beak).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-OPEN-ON-CURIOSITY  The first 5 s of the repurposed cut is not the \"piper\" title card, not a slow empty-beach establishing landscape: it opens on a beat that pulls a cold viewer in.",
+      "why": "brief explicitly asks the repurposed cut to open on something that pulls a cold viewer in immediately rather than a slow setup. Inventory: Scene 1 (empty shoreline) is the source's slow open and would be the default trap.",
+      "check": "opus-vision on the first 5 frames at 1 fps (0:00\u20130:04); pass iff at least one of those frames shows Piper, the crab, the wave-hit, or the underwater beat. The repurposed cut does NOT spend its first 5 s on title-card text or on people-less landscape only.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-VOICE-ONLY  A single, consistent narrator voice carries the repurposed cut end-to-end. No audible speaker swap, no mid-repurpose change in voice timbre or character, no overlay of a second narrator reading over the first. The voice at 0:55 is the same voice that opened at 0:01.",
+      "why": "brief explicitly asks for one narrator carrying the piece. Multi-voice swaps are a known failure mode.",
+      "check": "gemini-audio on repurpose audio only; pass iff the entire VO track is a single continuous voice identity.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-VO-CRAFT  The voice-over sounds like a person reading for cinema, not a flat machine reading a script.",
+      "why": "brief asks for warmth, hush, unhurried wonder. Voice character is the thing the client most cares about.",
+      "check": "gemini-audio listens to repurpose audio only; pass iff VO delivery audibly varies across at least three distinct emotional beats AND no audible TTS glitches (truncations, syllable stutters, robotic prosody).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-VO-INTELLIGIBILITY  Every word of the VO is legible end-to-end. No stretch where a viewer would strain to parse the line, no word clipped by a splice, no syllable buried under a music peak.",
+      "why": "the repurposed cut's narrative depends on the VO being followable. An unintelligible line drops the cold viewer out of the story.",
+      "check": "gemini-audio transcribes the repurposed cut VO; pass iff the transcription matches the VO at \u226595 % word-level accuracy AND no contiguous span \u22653 s is unintelligible.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-MUSIC-CONTINUITY  Any music or source-audio bed in the repurposed cut ends cleanly. No mid-phrase cut, no abrupt stop mid-measure, no jarring splice-point silence. If the music ends before the repurposed cut does, it fades out; if the repurposed cut ends while the music is still playing, the music is gracefully resolved rather than chopped off.",
+      "why": "a cut that leaves the music hanging mid-phrase reads as amateur and is a known failure mode for splice-heavy cuts.",
+      "check": "gemini-audio on repurpose audio only; pass iff there is no audible abrupt music cut or mid-phrase truncation in the repurposed cut body or at the close.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-05",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "S-AUDIO-ARC  The audio bed travels with the beats: quieter and tentative under the early venture, dampened under the wave hit, lifted at the underwater reveal, supported and warmer through mastery and the sunset close. Not flat ambience beneath narration.",
+      "why": "character. The source is score-driven; the repurposed cut can't carry a flat bed and still feel like *Piper*.",
+      "check": "gemini-audio on repurpose audio only; pass iff the audio bed audibly shifts (volume, instrumentation, or character) across at least three distinct beats, not a single cue held flat.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-06",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-NO-OUTRO-LEAK  The repurposed cut audio does NOT contain the uploader-appended pop song (\"We Don't Talk Anymore\" / pop vocal with lyrics) nor any \"thanks for watching / subscribe\" voice-over text. A repurposed cut that grabs source audio across the full file and leaks the pop chorus fails this.",
+      "why": "facts. 3:09\u20133:18 of source is uploader furniture, not part of the film; lifting it into the repurposed cut is a content-bleed bug.",
+      "check": "gemini-audio on repurpose audio only; pass iff no intelligible English-language lyric line is audible in the repurposed cut (apart from the narrator), AND no \"subscribe\" / \"thanks for watching\" voice-over text is read out.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOICE-MOOD",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "Narrator's tone is aligned with the repurposed cut's emotional register: warm where the film warms, restrained where it hurts, energetic where it accelerates. A flat, unrelenting TTS read on a piece with real emotional shape fails this.",
+      "why": "brief asks for narration that moves with the story. A monotone read flattens an emotional arc into an explainer.",
+      "check": "gemini-audio on repurpose audio only; pass iff VO delivery audibly shifts emotional register across at least 2 distinct beats AND no flat-monotone stretch covers the repurposed cut's turning point.",
+      "judge": "gemini-audio"
+    }
+  ]
+}

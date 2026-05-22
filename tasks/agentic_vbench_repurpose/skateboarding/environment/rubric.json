@@ -1,0 +1,329 @@
+{
+  "task_id": "skateboarding",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "ffprobe format duration is within 0.1 s of the 75s the brief committed to.",
+      "why": "brief commits to 75 seconds. A loose tolerance invites padding.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 |d \u2212 75.0| \u2264 0.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Video stream resolution is exactly 720\u00d71280 (vertical 9:16).",
+      "why": "brief commits to a 720\u00d71280 TikTok deliverable.",
+      "check": "ffprobe width=720, height=1280.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Container is MP4 and the video codec is H.264 (as the brief asks).",
+      "why": "brief commits to an H.264 MP4.",
+      "check": "ffprobe format_name contains \"mp4\"; stream codec_name == \"h264\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Every spoken word in the reel is present in the source broadcast transcript. No newly written narrator script, no TTS voice-over, no rewritten-and-reread commentary. Exception: a reel with no speech at all (crowd + music only) auto-passes.",
+      "why": "the brief says the commentary stays in James and Rune's voice. Rewritten VO defeats the point.",
+      "check": "deterministic \u2014 whisper the repurposed cut audio, normalize (lowercase, strip punctuation), chunk into \u2265 4-word phrases; pass iff \u2265 90% of repurpose phrases are substring-findable in `the source transcript` with \u2264 10% character edit-distance tolerance.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-08",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "No silence-AND-no-crowd stretch runs longer than 1.5s within the content body (first 2s and last 3s excluded).",
+      "why": "dead air breaks the live-session feel. A sports reel needs continuous sonic floor.",
+      "check": "deterministic \u2014 librosa RMS on the repurposed cut audio, threshold at \u221250 dBFS; pass iff no contiguous below-threshold span > 1.5s in [2.0s, runtime \u2212 3.0s].",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-09",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "An audio track is present and non-silent across the full runtime.",
+      "why": "a silent reel fails the genre outright.",
+      "check": "ffprobe shows an audio stream; mean RMS of full track > \u221255 dBFS.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-10",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The first 0.5 seconds don't contain a black-leader / solid-color pad. The reel starts on content.",
+      "why": "brief asks the first five seconds to \"earn what comes after\". A fade-from-black pad wastes feed attention.",
+      "check": "ffmpeg mean brightness on frame 0.0s, 0.1s, 0.3s; pass iff mean brightness > 15 (on 0-255) at 2 of 3 sampled frames.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "The end title card (leaderboard / Simple Session 25 mark) takes up no more than 3.0 seconds of runtime.",
+      "why": "brief asks for \"a second or two, not a long pad.\"",
+      "check": "opus-vision on the last 8 seconds; pass iff the title-card frames (a static graphic with no moving broadcast footage) run \u2264 3.0s continuous.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-SIGNATURE-PLAY-LANDS  Christopher Kroon's Run 1, specifically the crook-to-bonk 5-0 on the pyramid rail at source ~33:00 (seconds 1975-1982 of the broadcast), is in the reel AND lands. The skater + board + rail are fully within the 9:16 frame at the trick impact, the clip runs \u2265 3.0 continuous seconds so the trick unfolds rather than flashing, AND at least one of (a) Rune's audible call on the trick or the follow-up 85.16 score reveal, (b) the crook-to-5-0 being recognizable as a rail trick not a generic slide, (c) the \"85.16\" score chyron visible adjacent in time. Not a 0.8-second flash in a montage.",
+      "why": "most-decisive-moment. Kroon's 85.16 is the contest-defining beat. If it's not on screen with weight, the reel has no winner.",
+      "check": "opus-vision on the repurposed cut + source-aligned commentary; pass iff all three conditions (moment present, impact fully framed, \u2265 3s continuous, at least one of the three context proofs).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-ACTION-CENTERED  The primary action (skater + board + the obstacle being hit) stays within the central 80% of the 9:16 frame across a 1fps sample of action frames. The reframe doesn't park the camera on an empty stripe of arena floor while a trick is happening at the edge.",
+      "why": "vertical reframing is the primary craft risk. A center-crop that loses the skater defeats the reel.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff \u2265 90% of action-present frames (frames where a rider is on course mid-run) have the skater's torso within the central 80% horizontal band of the 9:16 frame.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-TRACKING-SMOOTH  No visible reframe jitter between cuts and within clips. The reframe center doesn't snap erratically at a play-to-play cut, and the reframe doesn't judder mid-clip as the skater moves.",
+      "why": "a jittery reframe announces the edit and breaks the viewer out of the session.",
+      "check": "opus-vision inspects the six cut-transition frames nearest the content-body midpoint and six mid-clip windows during active tracking; pass iff none of the sampled moments show a jarring reframe snap or mid-clip judder.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-TRACKING-RESPONSIVE  The reframe follows the skater as they move across the course, not a fixed center. On a traversal clip (skater rolling from rail section to bowl, or from drop-in to box), the reframe tracks with the subject rather than letting them drift to the edge.",
+      "why": "a static center-crop fails Simple Session's course geometry. The course spans a wide 16:9 floor and a good reframe must pan.",
+      "check": "opus-vision on at least one clip \u2265 3s long where the skater traverses laterally; pass iff the skater stays within the central 70% horizontal band across the full traversal.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-REFRAME-CONSISTENT  The reel uses one reframe strategy throughout (tracking crop OR blur-fill OR center crop OR any single consistent choice). Not a mixed bag that announces the edit.",
+      "why": "mixed strategies make the reel look assembled, not cut.",
+      "check": "opus-vision samples 6 frames evenly across the content body; pass iff all sampled frames show the same reframe strategy.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-SCOREBOARD-LEGIBLE At least one moment in the reel shows an on-screen score graphic clearly enough that a viewer can read it. This is Kroon's 85.16 reveal, the top-6 standings panel (see `source analysis` `overview/kf_20`), or a rider's post-run score chyron (e.g. the Beaver Fleming 82.50 chyron in `detail/post_040`).",
+      "why": "\"what's the score\" is a first-order viewer question. Without a legible score, the reel is a stunt compilation, not a contest repurpose.",
+      "check": "opus-vision at 1 fps across the content body; pass iff at least one frame contains a broadcast-native score graphic with numerals clearly readable at 1080\u00d71920 resolution.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-07",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-KEY-RIDER-FRAMED  The skater's face or full-body silhouette is visible and identifiable during the trick impact of each of the reel's top-3 moments. When Kroon's pyramid-rail trick, Fletcher's 84.16 run, or Fleming's backflip-on-the-box hit the key frame, the skater isn't cropped to a disembodied board or a head-only shot.",
+      "why": "a highlight reel that crops riders to anonymous footage loses the \"who\" that a contest repurpose depends on.",
+      "check": "opus-vision on the peak-impact frame of each of the three signature-run clips in the reel; pass iff the skater's head and torso are visible in at least 2 of 3.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-08",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-OPENS-ON-SUBSTANCE  The first 5 seconds of the reel carry finals content. A visible trick in the broadcast's own call, a rider dropping in, or a commentator call. Not a Red Bull slate, not a Simple Session logo bumper, not a \"highlights presented by\" sponsor card.",
+      "why": "brief says the first five seconds \"have to earn what comes after\". A logo intro wastes feed attention on TikTok.",
+      "check": "opus-vision samples frames at 0.0s, 1.5s, 3.0s, 4.5s; pass iff at least 3 of 4 sampled frames show broadcast-source finals content (rider on course, scoreboard, interview, commentator booth), not a full-screen logo / sponsor slate.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-09",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-NO-BAIL-AS-MAKE  A bail or fall isn't cut to imply a landed trick. Specifically: Elias Nilsen's nose-blunt attempt (source ~29:30, transcript 452-459 is a fall, \"weight was maybe under it\"), and Julian Agliardi's kickflip-backflip-to-backsmith attempt (source ~42:00, transcript 625-626 is a fall, \"yeah he's just confused\"), if either appears in the reel, must not be cut on the impact frame in a way that suggests the trick was landed.",
+      "why": "moments. Stitching a bail as a make is the most common way a skate reel misrepresents what happened.",
+      "check": "opus-vision on any Nilsen / Agliardi frames in the reel (identify via board-color / jersey / chyron-context); pass iff no falling moment is paired with a title / score chyron / commentary call implying a landed trick.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-IDENTITY  A cold viewer (scrolling past, knowing nothing about Simple Session) can, from the reel alone, name the winning skater (**Kroon**, with first name either \"Kristoffer\" per the broadcast chyron or \"Christopher\" per the commentary rendering, accept either) and the winning score (**85.16**). This is legible from at least two of: audible commentary naming Kroon as the leader, a readable scoreboard / standings frame showing \"KROON 85.16\" or \"KRISTOFFER KROON 85.16,\" or the end-title card listing the leaderboard with Kroon on top.",
+      "why": "the baseline a contest repurpose owes a viewer. Who won, with what score. Without this, the reel is a skate montage, not a repurposed cut.",
+      "check": "opus-vision + gemini-audio on the repurposed cut; pass iff at least two of (commentary call of \"Kroon\" / \"new leader\" / \"85.16,\" readable on-screen Kroon graphic, end-title card with Kroon-1st) are present and legible.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-ARC  The reel carries the contest's actual arc: Grayson Fletcher posted the first big score of the finals (84.16), Kroon dropped the street-tech run and bumped him out of first with 85.16, and the chase that followed didn't catch him. A viewer should leave able to say in one sentence that \"Fletcher led, Kroon took it, the rest couldn't close.\" The ordering and beat-weighting should reflect this arc, not a flat chronological parade of runs.",
+      "why": "arc. The arc is what makes a repurposed cut more than a scoring compilation. If a viewer can't tell that Kroon came from behind Fletcher, the reel has decayed into clips-next-to-clips.",
+      "check": "opus-vision on repurpose frames at 1 fps + repurpose transcript; pass iff the reel contains both Fletcher's 84.16 beat (run or score chyron) AND Kroon's 85.16 beat (run or score chyron), in that broadcast-true order, with at least one subsequent rider chasing after Kroon.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-PIVOT-PRESERVED  The \"new leader\" moment, Kroon's 85.16 score reveal at source 34:58 (seconds 2098-2108) with Rune Glifburg's call \"we have a new leader, Christopher Kroon\", is in the reel AND given room. The clip around it runs \u2265 3.0 continuous seconds, Rune's call is audible concurrent with either the score chyron or Kroon reacting, and a crowd response is audible. A pivot condensed to a 0.8-second flash isn't preserved.",
+      "why": "most-decisive-moment. The reel's implicit claim that Kroon won is only credible if the moment that made it true is given weight.",
+      "check": "opus-vision + gemini-audio; verify a clip in the reel aligned with source 2098-2108 runs \u2265 3s continuously AND has audible commentary (Rune's call or substring \"new leader\" or \"Kroon\" or \"85\") overlapping.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-DECISIVE-TRICK  The specific trick Kroon used to seal the run, the **crook-to-bonk 5-0 on the pyramid rail** (source ~33:00, transcript 470), is identifiable in the reel as a rail trick on a specific obstacle. Not a generic slide cut so short it could be any rail from any run.",
+      "why": "moments #1. Rune calls this trick out by name on the broadcast. Preserving it is the difference between a repurposed cut that names the moment and a repurposed cut that just shows a rider winning.",
+      "check": "opus-vision inspects the Kroon clip(s) in the reel; pass iff at least one clip runs \u2265 2.0 continuous seconds on a rail trick where the skater is on the rail in the start-frame and in the land-frame (not just a flying shot or a post-bonk rollaway).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-NO-FABRICATION  No scoring event or contest-state claim in the reel contradicts the source. Specifically: (a) a score chyron must match the rider shown (Solmunde 71.16, Fleming 82.50, Winberg 83.31, Fletcher 84.16, Kroon 85.16), (b) no end-title card names anyone other than Kroon as the leader / winner after the Kroon beat, (c) no bail is titled as a make (see V-09), (d) Danny Leon doesn't appear next to a \"winner\" framing (his Run 1 is incomplete in the source file and his score is never announced in the broadcast).",
+      "why": "moments. Stitching skate footage out of order is the most common way a contest repurpose quietly lies about what happened.",
+      "check": "opus-vision cross-references each score chyron / title card / commentary claim in the reel against `source analysis`; pass iff none of (a) \u2014 (d) is violated.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-06",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-MULTI-RIDER  At least 3 of the top-6 standings riders (Kroon, Fletcher, Winberg, Fleming, Agliardi, Solmunde) are each shown on at least one distinct trick, run clip, post-run interview, or legible score chyron.",
+      "why": "a one-rider reel reads as a Kroon edit, not a contest repurpose. The brief asks for the chase.",
+      "check": "opus-vision identifies riders via jersey / lower-third / board graphics; pass iff \u2265 3 distinct top-6 riders appear across the reel's content body.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-SAKURAI-TIMELINE  Issei Sakurai (the #1 qualifier) does NOT appear in the reel framed as a \"today's finals\" live moment. The broadcast cuts off before Sakurai's finals Run 1. Any Sakurai footage in the reel must either be clearly pre-show / warm-up / qualifier-repurpose context (e.g. the qualifier-repurpose montage at source 1:25-2:30) or a post-run interview he doesn't appear in.",
+      "why": "moments. A reel that presents Sakurai dropping in \"today\" is a fabrication because the source doesn't contain that footage.",
+      "check": "opus-vision inspects any Sakurai-identified frames in the reel (identified via the chyron in `scoreboard/sb_015` or the qualifier-repurpose context); pass iff none is framed as a live finals trick on run-clock graphic today.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-NOT-A-BMX-REEL  Footage from the BMX / skate / ice-hockey cross-promo segment (source ~6:00-9:30) and the simple-session-bell best-trick repurpose (source ~4:15-5:30) isn't presented as skate-finals content. If either appears, it is \u2264 2 seconds of repurpose-context / B-roll and isn't mixed into the primary finals sequence without a clear contextual cue.",
+      "why": "moments. Those tangents aren't the skate finals. Pulling from them and presenting them as finals footage is the single largest off-topic risk.",
+      "check": "opus-vision samples all non-skater-on-course footage in the reel; pass iff no BMX shot or the ice-hockey rink is cut into the finals primary sequence (a brief context cue is allowed if titled clearly, not labeled as a finals run).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "S-COMMENTARY  The broadcast commentary is audible on Kroon's decisive beat. Specifically Rune Glifburg's \"we have a new leader, Christopher Kroon\" (source 2098-2108), OR an equivalent commentary call naming Kroon OR naming the 85.16 score is audible on the Kroon footage. A reel that mutes the booth on the moment it is celebrating has thrown away the genre's authority.",
+      "why": "character. Rune's call on Kroon is the single most reel-useful piece of audio in the hour. Muting it turns a contest repurpose into a silent compilation.",
+      "check": "gemini-audio on the repurposed cut audio only; pass iff, over the Kroon-showing window, an audible commentator voice is present AND the transcript of that window contains at least one of {\"new leader\", \"Kroon\", \"Krune\", \"Crune\", \"Kristoffer\", \"Christopher\", \"85\"}.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-NO-NARRATOR  No second-narrator voice is laid over the broadcast. The only human voices audible are the broadcast's own: James Threlford / Rune Glifburg in the booth, Tuli F. Stigneov on sideline interviews, the riders themselves in post-run interviews, PA announcer or crowd. No explainer-style VO over the session, no AI-TTS voice reading the leaderboard, no documentary narration.",
+      "why": "character + brief. Collapsing to a narrative-repurpose shape by adding a second narrator voids the reason to watch a sports reel rather than read a results article.",
+      "check": "gemini-audio on the repurposed cut; pass iff the only intelligible human voices are plausibly the broadcast's own (British-English booth, Tuli's sideline-English, riders' interview audio, or crowd), AND there is no studio-acoustic narrator distinct from those.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "S-CROWD  Arena crowd ambience is audible across at least one trick-impact beat in the reel. The room reaction on Kroon's crook-to-bonk 5-0, or Fletcher's crowd grab, or Beaver's backflip-on-the-box. The reel doesn't drop the ambient track to run a music-only clip across a signature trick.",
+      "why": "crowd reaction is the sonic anchor that tells a viewer a trick landed. Without it, the reel feels like footage rather than a session.",
+      "check": "gemini-audio on the repurposed cut; pass iff a non-music, non-commentary crowd bed is audible across at least one of the reel's trick-impact windows.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-SEAM-LEVEL  Cuts don't truncate commentary mid-word, and there's no jarring audio-level drop across a cut. A booth call that starts in one clip should either finish in that clip or cross-fade smoothly.",
+      "why": "a mid-word truncation pulls a viewer out of the session.",
+      "check": "gemini-audio; pass iff no truncation of a commentary word is audible at any cut boundary in the content body.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-05",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-MUSIC-BED-SUBORDINATE  If a music bed is used underneath, it is mixed subordinate to the commentary on key calls. A viewer can clearly hear Rune's \"new leader\" call over the bed. No music is required. A commentary-plus-crowd reel also passes.",
+      "why": "a music bed that drowns the booth collapses the reel to a silent-edit genre.",
+      "check": "gemini-audio on the Kroon-decisive-beat window; pass iff either (a) no music bed is present on that window, or (b) a music bed is present but the commentary remains intelligible (\u2265 \u22126 dB relative to the bed on the call).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-COMMENTARY-MOOD",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-COMMENTARY-MOOD  Broadcast commentary tone tracks the actual highs of the play. The commentary call rises into the decisive moment and registers the energy of the action; flat reading or wrong-energy commentary (calm voice over the climax, hyped voice over a dead beat) fails this.",
+      "why": "the genre's emotional authority lives in the booth's pacing and intensity. A reel that preserves commentary words but flattens their delivery has thrown away the live-broadcast register the brief asks for.",
+      "check": "gemini-audio on repurpose audio. For each commentary-bearing window, judge whether the commentator's intensity tracks the visual action (rising into the decisive moment, restrained on slower beats). Pass iff no mismatched window (flat reading over a peak, or hyped delivery over a non-event) is observed.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOICE-CONSISTENCY",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-VOICE-CONSISTENCY  If the repurposed cut uses broadcast commentary, no audible swap between unrelated commentary teams (no cut from one network's booth to another's). If the repurposed cut adds narration, a single narrator voice is used throughout the content body, with no audible speaker swap.",
+      "why": "commentary identity is part of the broadcast's authority. Stitching two different booths together, or cycling between two narrators, breaks the reel's sonic spine and reads as assembled-from-parts.",
+      "check": "gemini-audio on repurpose audio. Enumerate distinct human voices in the content body. Pass iff (a) all commentary voices match a single broadcast booth (or set of booth voices that always travel together), AND (b) any added narration is delivered by exactly one consistent voice across the reel.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-PILLARBOX-SEVERE",
+      "pillar": 4,
+      "weight": -30,
+      "criterion": "Horizontal black bars (or solid-color bars) occupy more than 30% of frame height for a majority (\u2265 50%) of the reel's content body. This is the \"lazy reframe\" failure. The editor didn't reframe; they letterboxed the 16:9 broadcast into a 9:16 container.",
+      "why": "pillarboxing 16:9 into 9:16 is the single largest reframe failure mode and throws away most of the TikTok deliverable's pixels.",
+      "check": "opus-vision samples repurposed cut frames at 1 fps and measures the vertical extent of contiguous black / near-black / solid-color bars at frame top + frame bottom; fire iff bars > 30% of the 1920-pixel frame height on \u2265 50% of sampled content-body frames.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-PILLARBOX-MILD",
+      "pillar": 4,
+      "weight": -15,
+      "criterion": "Horizontal bars occupy 10-30% of frame height on a majority (\u2265 50%) of sampled content-body frames. The reel has reframed something but is still wasting visible pixels. Severe and mild are mutually exclusive: a reel that meets the severe threshold does not additionally trigger mild.",
+      "why": "mild pillarboxing still reads as lazy on a vertical feed, even if less egregious than full letterboxing.",
+      "check": "opus-vision on the same sample as P4-PILLARBOX-SEVERE; fire iff 10% \u2264 bars \u2264 30% on \u2265 50% of sampled frames AND P4-PILLARBOX-SEVERE didn't fire.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-SQUISHED",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "The 16:9 content is visibly squished into 9:16. Aspect-distorted rather than cropped. Skaters look horizontally compressed / vertically stretched. A skateboard deck appears narrower than normal. Heads look elongated. The ratio distortion is readable on \u2265 50% of sampled content-body frames.",
+      "why": "aspect-distorted skaters make the whole reel look amateurishly scaled and are immediately disqualifying on any social platform.",
+      "check": "opus-vision inspects representative rider / board / face shots in the reel (\u2265 6 sampled frames across the content body); fire iff proportions are visibly distorted on \u2265 3 of 6 sampled frames.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-ACTION-OFF-FRAME",
+      "pillar": 4,
+      "weight": -50,
+      "criterion": "At \u2265 3 moments in the reel's content body, the action (skater, board, or the obstacle they are hitting) drifts out of or clips at the edge of the 9:16 frame because the reframe didn't follow the play. Different failure mode from pillarbox / squish: the reel has attempted a crop but the crop doesn't track.",
+      "why": "a reframe that loses the action is worse than no reframe at all. The viewer loses the moment the reel is supposed to be delivering.",
+      "check": "opus-vision samples the repurposed cut at 1 fps during action windows (skater-on-course frames); fire iff on \u2265 3 sampled moments the primary subject is at the frame edge (within 10 pixels of the left or right boundary) or completely out of frame while a trick is in progress.",
+      "judge": "opus-vision"
+    }
+  ]
+}

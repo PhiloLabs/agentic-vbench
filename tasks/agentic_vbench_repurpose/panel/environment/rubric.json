@@ -1,0 +1,212 @@
+{
+  "task_id": "panel",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Reel runtime is 78 seconds within 0.1 s tolerance.",
+      "why": "brief commits to a single concrete runtime. A loose tolerance invites padding the body to make a length quota.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 |d \u2212 78| \u2264 0.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Reel is delivered at 1280x720 resolution.",
+      "why": "brief commits to horizontal LinkedIn feed. Vertical or non-720 frames silently break the publishing pipeline.",
+      "check": "`ffprobe -show_entries stream=width,height` \u2192 1280\u00d7720.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Video codec is H.264 in an .mp4 container.",
+      "why": "brief specifies H.264. Alternate codecs (HEVC, VP9, AV1) break LinkedIn's automatic upload preview.",
+      "check": "ffprobe stream codec_name == \"h264\" AND container is mp4/mov.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Reel has a stereo audio track at 44.1 or 48 kHz sample rate.",
+      "why": "a panel reel published with a silent track or with a mono-only track ships broken. The speakers are the whole point.",
+      "check": "ffprobe shows \u22651 audio stream with channels==2 and sample_rate \u2208 {44100, 48000}.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-06",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Every spoken word in the reel is present in the source-panel transcript. The reel stays in the panelists' own words.",
+      "why": "the brief asks to \"stay in the panelists' own voices.\" A rewritten paraphrase VO, even one timbre-cloned from a panelist, would defeat the genre because the words themselves are no longer the source's.",
+      "check": "deterministic. Whisper the repurposed cut audio, whisper the source film.mp4, normalize and compare phrase overlap; pass if \u226590% of repurpose phrases are substring-findable (10% edit-distance tolerance) in the source transcript.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-10",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No video-editor watermark, \"Made with X\" badge, or AI-generation provenance overlay is visible anywhere in the reel.",
+      "why": "a publishable LinkedIn-feed asset cannot ship with a free-tier editor watermark. It reads as amateur.",
+      "check": "opus-vision samples the frame's corners across 1 fps; pass if no persistent badge or \"made with [tool]\" mark is visible.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Closing title card / end card occupies 3 seconds or less of runtime. The end card is a beat or two, not a dragged-out pad.",
+      "why": "brief asks for a brief end card \"a beat or two, not a dragged-out pad.\" A 5-second logo card eats audible panel time.",
+      "check": "opus-vision or scenedetect identifies the trailing title-card span (continuous static-text frame at end); pass if span \u2264 3.0 s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Burned-in English captions are visible during every stretch of spoken audio. A sound-off viewer can read the argument throughout.",
+      "why": "brief explicitly asks for captions across every second of speaking. A viewer scrolling LinkedIn with sound off must still get the argument.",
+      "check": "gemini-video samples the repurposed cut at 1 fps and compares against the audio; pass if every frame with non-silent panelist speech has on-screen caption text visible.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "Caption text matches the spoken word at every moment in the reel, and never carries over a stale line from a prior clip after a cut.",
+      "why": "a captioned reel that drifts is worse than one without captions. A sound-off viewer reads one panelist's claim attached to another panelist's face. The brief specifically asks for in-sync captions.",
+      "check": "gemini-video. At \u22655 evenly-spaced moments inside the content body AND at every detected panelist-clip cut, compare on-screen caption text to concurrent audio; pass if all sampled moments align (paraphrase-OK, \u22643 words drift, \u22640.3 s temporal drift) AND no caption line persists past a cut where the new clip's audio no longer matches it.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Captions are legible against the stage footage: large enough body text, high-contrast against the gradient backdrop, and within safe area.",
+      "why": "the panel's gradient-pink backdrop will eat thin captions. Bad legibility means the reel fails its sound-off use case even when the captions are correct.",
+      "check": "opus-vision samples 5 caption frames at 1 fps spaced across the reel; pass if all 5 satisfy \u226540 px body, visible contrast (black stroke OR solid backplate), and full-line within 90% safe area.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "When the reel's thesis line plays (Mike Knoop's teaching-vs-configuring software beat), Mike is visually identifiable on screen, so the viewer registers who is making the panel's central claim.",
+      "why": "keynote-style insight reels live or die on the speaker appearing on camera at their thesis moment. If Mike's thesis line plays over an audience cutaway or over Jerry on-screen, the reel's spine is visually misattributed.",
+      "check": "opus-vision. Locate the repurposed cut audio span containing the thesis line via whisper substring (paraphrase-OK on \"teach\"/\"educate\" + \"configure\"); pass if the frames inside that span show either an identifiable Mike close-crop OR the wide stage with Mike legibly in it.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "At least 2 of the 4 named panelists (Elad / Mike / Jerry / Tuhin) are visually identifiable on screen while their own claim is audible \u2014 by clear framing, name graphic, or recognizable position in the wide shot.",
+      "why": "the source has no lower-third name graphics. Without some visual attribution, a sound-off viewer cannot tell who said which claim, and a panel reel that conflates its panelists collapses into anonymous \"AI guys said things.\"",
+      "check": "opus-vision. For each distinct claim audible in the reel, identify which panelist's voice it is (via timbre / via reference to source) and whether the on-screen frame allows that panelist to be picked out; pass if \u22652 of the 4 panelists are visually identifiable concurrently with their own audio.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Every frame in the content body is sourced from the panel footage \u2014 panel stage, panelists, audience, AI Day venue. No third-party stock B-roll, generated graphics, or kinetic-typography panels replacing the panel itself.",
+      "why": "the brief asks for footage that \"feels like it IS the panel.\" Inserted stock or generated visuals rewrite the reel into something else, and at 78 s of runtime, even a 10 s stock-footage detour collapses the format.",
+      "check": "opus-vision. Sample at 1 fps; pass if all body frames (excluding the end title card) are visually consistent with the panel-stage source (the four armchairs, gradient backdrop, audience steps, or a digital crop thereof).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-07",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Cut points between panelist clips do not produce jarring visual artifacts: no held mid-blink frames, no stretched aspect crops, no color-grade jumps that announce a splice.",
+      "why": "the source is a single locked wide shot, so every cut is on the same setup. Visual artifacts are easy to avoid and embarrassing when they leak through.",
+      "check": "opus-vision samples the 4-6 cut points (detected via scenedetect on repurpose.mp4); pass if no sampled cut frame shows a held-mid-blink, a distorted aspect, or a one-frame flash of color/exposure mismatch.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "The panel's thesis line (Mike Knoop's teaching-vs-configuring software beat) is audible in Mike's own voice, and lands either in the opening or the closing of the reel. A cold viewer hears, in roughly Mike's words, that software is moving from being configured to being taught.",
+      "why": "this single sentence is the panel's spine. A panel reel that opens on Tuhin's recruiting hot-take and lands on the Unity-engineers joke without ever hitting the teach-vs-configure beat has no subject. It's highlights, not an argument.",
+      "check": "gemini-video. Whisper the repurposed cut audio, search for a substring matching the {teach OR educat*} AND {configur*} pair within one sentence (paraphrase tolerance \u22643 words drift); pass if found AND the timestamp of the match falls within [0, 20] seconds OR within [duration\u221215, duration] seconds AND the on-screen speaker concurrent with the audio is identifiable as Mike (white tee, viewer-right position in the wide shot).",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "A viewer coming to the reel cold can answer all three: (a) state the panel's thesis in one sentence, in roughly Mike's own words; (b) name at least two of the panel's supporting claims; (c) attribute at least one claim to its panelist (Mike, Jerry, or Tuhin) rather than a generic \"they said.\"",
+      "why": "baseline standalone-comprehension. The reel must function as a 78-second persuasion piece on its own, not as a trailer that requires the viewer to go watch the 43-minute panel.",
+      "check": "opus-vision is given the repurposed cut.mp4 frames at 1 fps plus the repurposed cut whisper transcript and answers (a)/(b)/(c). Pass iff all three answers are recoverable from the reel alone: (a) the thesis sentence is statable; (b) at least two distinct claims from the candidate set are present in the repurposed cut transcript; (c) at least one claim is attributable to its panelist (by name, by visual identification of the speaker concurrent with the audio, or by an on-screen panelist-name graphic).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "At least 2 claims audible in the reel are paired with their specific named evidence \u2014 a named customer/company, a specific number, a named industry reference, or a concrete use-case. A claim paired only with a vague gesture (\"we see this all the time\") does not count.",
+      "why": "a panel claim without its named evidence reads as an opinion. The panel earned each claim with concrete customer/number/anecdote material, and the reel should carry at least two claims paired with that material.",
+      "check": "opus-vision. Repurpose whisper transcript is parsed for distinct claims; for each claim, scan the surrounding \u00b15 s window for one of the four evidence types listed above (literal substring or paraphrase of a named entity / number / named industry / named use-case from structure); pass iff at least 2 distinct claims are paired with such named evidence.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "The first 5 seconds of the reel carry argument content in a panelist's own voice: a thesis line, a specific number, a striking declarative claim, or a vivid metaphor. The opener earns the next ten seconds.",
+      "why": "scrolling-feed retention is decided in the first 3-5 seconds. The brief specifically asks for an opener that \"earns the next ten seconds,\" so the reel must not burn its opener on housekeeping.",
+      "check": "opus-vision. Examine the first 5 s of repurpose; pass if a panelist is audibly speaking argument-content (a claim, number, metaphor, or thesis line) in their own voice within those 5 s, and fail if the only audio is housekeeping, music, or silence.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "Every claim audible in the reel is traceable to the source AND is not lifted out of its load-bearing context. Specifically: Tuhin's \"not machine learning researchers\" line carries its \"for shipping AI products\" qualifier; Tuhin's \"Unity engineers\" line carries its GPU-experience setup; Tuhin's \"9 out of 10\" stat carries its \"mid-market or enterprise\" qualifier; Mike's \"teach vs configure\" line carries at least one feedback-loop / course-correct elaboration; Elad's \"stochastic genie\" line carries its deterministic-vs-non-deterministic framing.",
+      "why": "stitch-cut panel reels are exactly where claims get weaponized into something the panelist did not say. The five risk-moments above are the highest-leverage miscut hazards in this source.",
+      "check": "opus-vision. Repurpose transcript is checked against each risk-moment in. Fire FAIL iff any listed risk-moment claim appears in the reel without its named qualifier (the qualifier text, paraphrase-OK with \u22644 words drift, must be audible or on-screen as captions within \u00b15 s of the risk-moment claim).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "The last 10 seconds of the reel land somewhere: the thesis restated, a panelist's punchline, a striking number, or a clean end title card. The reel does not end on Elad's event housekeeping (\"thanks to our panel, next up...\").",
+      "why": "panels naturally end on logistics, not on argument. A reel that mechanically uses the source's last seconds imports that logistics-ending and undercuts itself.",
+      "check": "opus-vision. Repurpose whisper transcript's last 10 s is examined; pass if it contains argument content (claim, number, panelist punchline, or thesis restatement) OR a clean end-title card with no \"thanks for joining / next up we have\" text. Fail if the audible last 10 s is Elad's event wrap.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "Cuts in the repurposed cut land at natural sentence/word boundaries (and natural speaker-turn boundaries), not mid-sentence or mid-word. The repurposed cut reads as a clean assembly, not a chopped one.",
+      "why": "distinct from S-02. That catches grammatical incompleteness; this catches loudness/tone artifacts even when sentences are complete. A panel reel can pass S-02 (every sentence resolves) and still fail S-04 (the seams jump 6 dB louder on every cut).",
+      "check": "gemini-audio on repurpose audio only; pass if no cut point produces an audibly jarring artifact: consistent room tone across cuts, no >6 dB jumps at boundaries, no clipped consonants at splice points.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-01",
+      "pillar": 4,
+      "weight": -50,
+      "criterion": "Caption text disagrees with what the panelist is saying at any point in the content body \u2014 either the line drifts off the spoken audio, persists across a cut into the wrong clip, or shows text that does not correspond to what is being said. A sound-off viewer reading captions on a panel reel must never be misinformed about which panelist said what.",
+      "why": "a sound-off LinkedIn viewer reading captions on a panel reel must NEVER be misinformed about which panelist said what, or about what was said. This is the captioned-creator-short genre's keystone failure mode, and on a panel with four near-identical wide-shot frames, async captions cause confident mis-attribution of claims to the wrong panelist. A misinformed viewer takes a wrong belief away from the reel and shares it; the cost outpaces the reward of having captions at all.",
+      "check": "gemini-video. Examine every detected panelist-clip transition (via scenedetect on repurpose.mp4) and every continuous caption line in the content body; for each, compare the on-screen caption text against the concurrent audio (paraphrase-OK, \u22643 words drift); fire iff any of conditions (a), (b), or (c) is met at any examined moment.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "P4-02",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "Captions are present but functionally unreadable: tiny body text, dark-on-dark stretches, text clipped off the safe area, or illegibly stylized fonts against the gradient backdrop. Captions that the viewer cannot read are worse than no captions.",
+      "why": "captions that are technically present but unreadable are worse than no captions. The viewer thinks they should be able to read along, the brain spends effort trying, and the reel feels broken. The brief calls out legibility specifically.",
+      "check": "opus-vision. Sample 6 caption frames evenly across the reel; fire iff \u22652 of the 6 sampled frames have captions that are illegible by any one of: body height <30 px at 1080p, foreground/background contrast insufficient to parse, line clipped off the safe area, or stylization that breaks reading.",
+      "judge": "opus-vision"
+    }
+  ]
+}

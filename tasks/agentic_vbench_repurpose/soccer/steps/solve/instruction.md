@@ -1,0 +1,14 @@
+You're cutting a highlight reel for CCX Sports' TikTok feed. The commissioner is our digital social desk. The audience is a scroller on TikTok: a Falcons or Pirates family that missed the night at Park Center, a Northwest Suburban Conference follower seeing how the early season is shaping up, someone thumbing past #mnsoccer for a reason to stop. We want them to stop on this.
+
+What we have is our broadcast of Armstrong at Park Center, boys' soccer. A tight, one-goal game that built through a summer-evening first half into a halftime lead the Falcons carry into the break. Cut it down to seventy-five seconds, vertical, and carry the shape of the game: Armstrong scored first, Park Center pulled level, and the Falcons went ahead again before the half. The reel should feel tense and close, not a victory lap. This is a conference game where nobody had the result in hand at the break, and we don't want the cut to pretend otherwise.
+
+Jay and Sig set this game up well at the top of our broadcast. Let their voices land the teams and the conference in the first stretch, so a viewer knows inside ten seconds who these two sides are. From there, let the game breathe. The three goals with their build-up, a Park Center press that doesn't quite turn into an equaliser, the pitch shifting from golden sunset into stadium lights as the second half kicks off. Close on a brief halftime card with the teams and the score at the break. A second or two, not a long pad, and honest about what it is: halftime, not a final.
+
+This should feel like you were in the bleachers at Park Center. Cut from our broadcast itself, in our broadcast's own voice. Deliver it as a vertical 720×1280 MP4, seventy-five seconds, ready to post to our TikTok.
+
+## Deliverables
+
+- The source video is at `/workspace/materials/source.mp4`.
+- Write your final repurposed cut to **`/workspace/output/repurpose.mp4`** (this exact path and filename).
+- The container has `ffmpeg`, `python3`, and a pre-cached Whisper "base" model. Internet is available for `pip install`.
+- You have ~30 minutes for the agent step. Aim for a watchable output rather than the perfect cut.

@@ -1,0 +1,203 @@
+{
+  "task_id": "ted",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR Runtime is 75 seconds, within 0.1 second tolerance.",
+      "why": "brief mandates a single specific runtime. A loose tolerance invites padding.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 |d \u2212 75| \u2264 0.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-RES Video stream is 1920\u00d71080.",
+      "why": "brief commits to horizontal 1920\u00d71080 for LinkedIn feed.",
+      "check": "`ffprobe -show_streams` \u2192 width=1920 AND height=1080.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-ASPECT Display aspect ratio is 16:9 horizontal.",
+      "why": "feed convention for LinkedIn talk-highlight account is horizontal. A 9:16 re-cut punts the whole brief.",
+      "check": "ffprobe display_aspect_ratio = 16:9 and width > height.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-FRAMERATE Frame rate is at least 24 fps.",
+      "why": "talk footage below 24 fps reads as stuttered on modern feeds.",
+      "check": "ffprobe avg_frame_rate \u2265 24.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CODEC Video codec is H.264 in an mp4 container; audio codec is AAC.",
+      "why": "LinkedIn and YouTube ingest path assumes H.264/AAC mp4.",
+      "check": "ffprobe codec_name=h264 AND codec_name=aac AND format_name contains mp4.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-06",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-AUDIO-PRESENT An audio track is present and carries non-silent content in the content body before the end title card.",
+      "why": "a silent reel defeats the speaker-voice brief.",
+      "check": "ffprobe shows \u22651 audio stream AND a loudness scan of the first 72 s yields at least one 5 s window with integrated LUFS > \u221250.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-TITLECARD-CAP The end title card (speaker name, talk title, logo) occupies no more than 3 seconds of runtime.",
+      "why": "anti-padding. A 10 s title card is a way to hit 75 s without delivering source content.",
+      "check": "opus-vision samples the last 5 s at 1 fps; pass iff \u2264 3 consecutive seconds are dominated by end-card text/logo without source footage.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-CAPTIONS-PRESENT Burned-in English captions are visible on screen during every stretch of spoken audio in the reel. A viewer scrolling with the sound off sees the argument written out as Ken speaks it. The end title card is exempt.",
+      "why": "brief's central platform requirement. LinkedIn feed viewers scroll muted; no captions means the argument doesn't land.",
+      "check": "gemini-video receives the full repurpose; pass iff every sampled frame with non-silent speaker audio has on-screen caption text visible, with at most one brief (<1 s) gap at a cut.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-CAPTIONS-SYNC-STRICT The on-screen caption matches what Ken is audibly saying within \u00b10.3 s, and does not carry over a line from a prior clip after a cut. A viewer reading the captions would hear the same sentence if they turned sound on.",
+      "why": "captions are the primary conveyance for the muted feed viewer. Drift or stale lines misinform them about what Ken just said.",
+      "check": "gemini-video with full repurpose; sample \u2265 5 evenly-spaced moments in the content body. Pass iff at every sampled moment the on-screen caption matches the concurrent audio (paraphrase-ok, \u2264 3 words of drift, \u2264 0.3 s temporal drift) AND no sampled moment shows a caption line carried over from the prior speaker clip after a visible cut.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-CAPTIONS-LEGIBLE Captions are legible: body text large enough to read on a phone (\u2265 40 px at 1080p), with a stroke or background plate keeping them readable against the dark-stage / warm-keylight footage, and sitting above the bottom safe-area.",
+      "why": "craft check. Captions that are technically present but dark-grey-on-dark-stage defeat the muted-viewer use case.",
+      "check": "opus-vision samples 5 frames with captions visible; pass iff all 5 have body text \u2265 40 px (roughly \u2265 3.7% of frame height) AND have readable contrast (estimated contrast ratio \u2265 4.5:1 against the background plate or a stroke present) AND the bottom of the caption sits above the bottom 3% safe-area.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-SPEAKER-HELD-SHOT The reel includes at least one held shot of Ken of \u2265 3 s uninterrupted, face in focus and readable, inside the content body. A viewer registers WHO is making these claims, not just a collage of half-second face flashes.",
+      "why": "the talk is one sustained voice. A rapid-cut montage of quarter-second flashes of Ken loses the delivery character (dry British pace, comic pauses) that is half the reason this talk is the most-viewed TED.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff at least one \u2265 3 s continuous window inside [0 s, runtime \u2212 3 s] shows Ken's face clearly framed, with no cut interrupting.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-07",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-NO-INTRUSIVE-CUTAWAY The reel stays with footage from the source film. Audience cutaways that exist in the source are fine; newly introduced unrelated footage (stock classrooms, kids, generic creativity imagery) is not.",
+      "why": "the brief says \"stay mostly with Ken on the TED stage; cutaways to the audience are welcome where the room's laughter earns them.\" A cut to a stock shot of kids finger-painting betrays the reel's voice.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff \u2265 95% of sampled frames show content traceable to the source film (speaker, TED2006 stage, TED-source audience cutaway, TED intro/outro wrapper, end title card) rather than newly introduced footage not present in the source.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-THESIS The reel's spine is Ken's thesis, *\"My contention is that creativity now is as important in education as literacy, and we should treat it with the same status\"*, delivered audibly in Ken's own voice and landing in either the first 30 seconds or the last 15 seconds of the content body. A viewer who has never seen the source can, after one watch, state what Ken is arguing for in one sentence, because he has literally said it.",
+      "why": "this is the single most important claim in the talk. The rubric's tentpole. If the reel doesn't carry this sentence in Ken's voice it has no subject.",
+      "check": "gemini-video on the full repurpose. Substring-search the repurposed cut's whisper transcript for *\"creativity\"* + *\"as important\"* + *\"literacy\"* (or an equivalent paraphrase with \u2264 3 words of drift from the canonical sentence); pass iff the match is present AND the concurrent audio is a single human speaker whose voice matches Ken's source timbre AND the match lands at t \u2264 30 s or t \u2265 (runtime \u2212 15 s).",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-COLD-VIEWER-COMPREHENSION A viewer coming to the reel cold (no prior exposure to Ken or to the source) can, after one watch, answer all three: (a) state the thesis in roughly Ken's words (\"creativity is as important in education as literacy\", or a \u2264 3-word-drift paraphrase); (b) name at least two of the following supporting claims: the \"if you're not prepared to be wrong you will never come up with anything original\" point, the universal subject-hierarchy with arts at the bottom, academic inflation with the BA \u2192 MA \u2192 PhD ladder, or the Gillian Lynne / dancer-not-sick story; (c) state the reel's landing: the call-to-action, the provocation, or the beat the reel closes on.",
+      "why": "the baseline comprehension test for a standalone insight reel. It exists to let a stranger walk away with the shape of the argument.",
+      "check": "opus-vision given repurpose frames at 1 fps + full repurpose transcript; judge answers (a) (b) (c) independently with quoted repurpose-text evidence for each; pass iff all three yes.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-CLAIM-SUPPORT-WITH-NAMED-EVIDENCE At least 2 of Ken's structural claims appear in the reel with their specific named evidence adjacent (within \u00b15 s of the claim). Named evidence is one of: the drawing-God anecdote (the child's \"They will in a minute\" punchline); the nativity-play \"Frank sent this\" punchline; the Gillian Lynne named career as choreographer (Cats / Phantom / Andrew Lloyd Webber); the BA \u2192 MA \u2192 PhD academic-inflation ladder; or the \"body as a form of transport for their heads\" professors metaphor. A claim paired only with a vague phrase like \"research shows\" or \"in my experience\" does not count.",
+      "why": "Ken earns each claim with a specific, named, verifiable anecdote or example. The reel should too. A claim without its anchor reads as an opinion rather than the argument Ken delivered.",
+      "check": "opus-vision reads repurposed cut frames at 1 fps + repurpose transcript; for each audible claim in the repurposed cut, enumerate whether its adjacent \u00b15 s window carries one of the five named-evidence types listed above. Pass iff \u2265 2 distinct claims are paired with one of those named-evidence types.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-OPENS-ON-SUBSTANCE The first 5 seconds of the reel carry argument content: Ken's thesis sentence, one of his signature declaratives (the \"prepared to be wrong\" line, a claim about creativity in education), or a striking setup line delivered in his own voice. Housekeeping (\"Good morning. How are you?\"), self-introduction, music-only cold-opens past 5 s, slow fades from black, and logo-only cards do not count as openers.",
+      "why": "Ken's real opening is weak reel material; the strong opener material is 30 s deeper into the source. A reel that opens where Ken opens has wasted its first five seconds.",
+      "check": "opus-vision + repurpose transcript; inspect repurpose [0 s, 5 s]; pass iff the frames carry Ken delivering argument content per the definitions above, not housekeeping / intro / pad / silence.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-NO-FABRICATION Every claim audible in the reel is traceable to the source AND is not lifted out of its load-bearing context. Three risk lines must keep their qualifiers: (R1) the \"body as a form of transport for their heads\" line must appear with its setup framing this as a critique of the education system's academic hierarchy, not as an ad-hominem at professors as people; (R2) the academic-inflation line (\"you need an MA where the previous job required a BA\") must appear with Ken's framing word \"academic inflation\" or the narrowing-of-intelligence qualifier, not stitched into a stand-alone anti-college soundbite; (R3) the 1930s-ADHD aside in the Gillian Lynne story must appear with the \"she's a dancer\" reframe, not lifted as a free-standing statement about ADHD.",
+      "why": "an editor cutting 20 min into 75 s will be tempted by these three lines. Each, out of its setup, means something Ken isn't saying.",
+      "check": "opus-vision + repurpose transcript; for each of R1/R2/R3, substring-check the repurposed cut for the risk-line and then check the surrounding \u00b110 s window for the qualifier phrase. Pass iff for every risk-line present, its qualifier is present in the \u00b110 s window.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-CLOSES-ON-LANDING The last 10 seconds of the reel land somewhere: the thesis restated, the \"prepared to be wrong\" declarative as a CTA, the Gillian \"she's a dancer\" reframe, a Ken-delivered provocation, or a clean declarative into the end-title card. A random mid-clip truncation or a slow fade to black with no spoken content does not count as a landing.",
+      "why": "an insight reel without a landing reads as an arbitrary cut, not an argument. The editor chooses the landing, but it must be A landing.",
+      "check": "opus-vision + repurpose transcript; inspect repurpose [runtime \u2212 10 s, runtime \u2212 3 s] (i.e. the last 10 s before the end-title window); pass iff a Ken-delivered declarative matching one of the candidate landings above is audible in that window.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-HUMOR-LANDS At least one of Ken's comedic beats survives intact: a laugh line delivered with the source timing (the pause is preserved, not cut), and ideally with the source's audience laugh audible underneath. The reel keeps the talk's register.",
+      "why": "the talk's argument rides on humor. A reel that keeps only the serious declaratives loses the reason Ken's version of this argument, specifically, went viral.",
+      "check": "gemini-audio on the full repurpose audio; pass iff at least one recognisable laugh-shaped beat (a Ken line followed by a \u2265 0.8 s pause OR an audible audience laugh in the bed) is present in the content body.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-SEAM-QUALITY",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-SEAM-QUALITY Cuts in the repurposed cut land at natural sentence/word boundaries, not mid-sentence or mid-word. The repurposed cut reads as a clean assembly, not a chopped one.",
+      "why": "a reel cut from 15+ source clips will have many seams. The one thing the editor controls about audio is where those seams fall; a seam mid-word or mid-clause announces the cut and breaks the illusion that this is a continuous piece.",
+      "check": "gemini-audio on repurpose audio; pass iff every cut point falls at a natural sentence or word boundary, with no mid-word truncation, no grammatical clause severed at a cut, and no audibly jarring loudness/room-tone steps at seams.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-CAPTIONS-ASYNC",
+      "pillar": 4,
+      "weight": -50,
+      "criterion": "P4-CAPTIONS-ASYNC The caption text on screen disagrees with what Ken is saying at that moment, at any point in the content body. Fire iff any caption line in the reel either (a) drifts more than 0.5 seconds from the spoken audio, (b) persists across a speaker-clip cut where the new clip's audio no longer matches the displayed caption, or (c) shows text that doesn't correspond (even paraphrased) to what Ken is audibly saying. A muted viewer reading the captions should not at any point be misinformed about what Ken just said.",
+      "why": "brief makes the captions a load-bearing deliverable for a muted-feed audience. Async captions actively misinform the primary audience of this reel, which is worse than a reel without captions (that would simply fail V-01).",
+      "check": "gemini-video on the full repurpose (picture + synchronized audio) walking every speaker-clip transition and every continuous caption line. Fire iff any of conditions (a)/(b)/(c) above is observed anywhere in [0 s, runtime \u2212 3 s].",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "P4-CAPTIONS-UNREADABLE",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "P4-CAPTIONS-UNREADABLE Captions are present but functionally unreadable: tiny (body text < 30 px at 1080p), dark-on-dark for multi-second stretches, or clipped off the edge of the frame.",
+      "why": "the second muted-feed failure mode. Captions exist but the viewer cannot parse them; indistinguishable in effect from captions missing, but with the added insult of ambient visual clutter.",
+      "check": "opus-vision samples \u2265 10 frames with captions visible; fire iff \u2265 2 sampled frames have captions illegible by any of: body text < 30 px, estimated contrast ratio < 3:1 with no stroke/plate, or caption line clipped off the bottom/side edge.",
+      "judge": "opus-vision"
+    }
+  ]
+}

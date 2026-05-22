@@ -1,0 +1,320 @@
+{
+  "task_id": "boxing",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR  ffprobe format duration matches 75 s within 0.1 s tolerance.",
+      "why": "brief commits to a single concrete 75 s runtime. A loose tolerance invites padding.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 |d \u2212 75| \u2264 0.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-VERTICAL  Video stream resolution is exactly 1080 wide by 1920 tall.",
+      "why": "brief commits to vertical TikTok delivery. A rotated or letterboxed horizontal container misses the platform.",
+      "check": "`ffprobe -show_entries stream=width,height` on the video stream \u2192 width=1080, height=1920.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CONTAINER-CODEC  Video is MP4 container with H.264 or H.265 video stream and AAC (or AC-3) audio stream. Standard TikTok-ingestible payload.",
+      "why": "brief asks for an MP4 that TikTok will accept on upload without transcode failure.",
+      "check": "ffprobe format_name contains \"mp4\"; video codec_name in {h264, hevc}; audio codec_name in {aac, ac3}.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-06",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-NO-NOVEL-VO  Every spoken word audible in the reel is present in the source broadcast transcript. The reel doesn't introduce a new narrator, a synthesised voice-over, or a rewritten re-reading of the host's or announcer's lines. Auto-pass if the reel has no speech at all (crowd plus music only).",
+      "why": "brief asks for the reel to stay in the broadcast's own voice. A rewritten VO would void the genre.",
+      "check": "deterministic \u2014 whisper the reel audio, normalise lowercase + strip punctuation, chunk into \u22654-word phrases; pass iff \u226590 % of reel phrases are substring-findable in `the source transcript` with \u226410 % character edit-distance tolerance.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-08",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-NO-DEAD-AUDIO  No stretch longer than 1.5 s of simultaneous silence on speech and silence on crowd/ambience/music, within the reel's content body.",
+      "why": "dead air in a sports reel breaks the live feel and signals a botched edit seam.",
+      "check": "deterministic \u2014 compute rms energy in 100 ms windows over reel audio; flag windows below \u221245 dBFS on all channels; pass iff longest contiguous flagged run \u22641.5 s.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-09",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-AUDIO-STEREO  Audio stream is stereo (2 channels) at a TikTok-standard sample rate (44.1 kHz or 48 kHz).",
+      "why": "TikTok up-mixes mono to a stereo centre channel. Native stereo preserves crowd ambience from the broadcast feed.",
+      "check": "ffprobe channels=2, sample_rate in {44100, 48000}.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-TITLECARD-CAP  The end title card (winner / score / logo card) takes up no more than 3.0 s of runtime.",
+      "why": "brief says a \"second or two, not a dragged-out pad\". A 10-second title card pads the reel.",
+      "check": "opus-vision samples the last 5 s at 0.5 s intervals; identify the frame boundary where the title card begins; pass iff (75 \u2212 start) \u2264 3.0.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-SIGNATURE-PLAY-LANDS  The standing eight-count on Daniel Radford (source 05:38\u201305:55, Round 2: referee steps between the fighters and counts Radford down after a Harhoff flurry) is in the reel AND lands visually. \"Lands\" means (a) the moment appears on screen for \u22653.0 s continuous runtime, (b) the referee's body between or beside the fighters is visible inside the 9:16 frame (not cropped out to a ring post), AND (c) the referee's counting motion is visible. Either the referee's raised hand or finger count, OR Radford's gloves-up stance facing the referee at close range in the centre of the ring. V-01 is the visual version of this check; N-03 owns the audio/duration-for-narrative-room check.",
+      "why": "most-decisive-moment. This is the only scoring-equivalent event in a 9-minute fight. A reel without it doesn't carry the fight.",
+      "check": "opus-vision. Identify the contiguous span in the reel that corresponds to source 05:32\u201305:58; measure its duration; verify referee-between-fighters framing on the 9:16 crop; verify counting-motion or ref-facing-Radford posture. Pass iff all three conditions (present, \u22653.0 s, referee visibly counting).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-ACTION-CENTERED  Across the reel's action frames, the primary action (the two boxers exchanging, or the landing punch) stays within the central 80 % horizontal band of the 1080\u00d71920 frame. The vertical reframe follows the fight. It doesn't drop the action to the edge of the frame.",
+      "why": "grammar. Source is 16:9 with fighters near frame centre. A lazy crop that parks on one rope would push the action off-screen.",
+      "check": "opus-vision samples reel at 1 fps; restrict to frames where both boxers are in-frame on source; pass iff \u226590 % of sampled action frames have the fight's centre-of-mass (midpoint between the two boxers) inside the central 80 % horizontal band of the 9:16 frame.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-TRACKING-SMOOTH  The vertical reframe doesn't visibly snap or judder mid-clip. Between consecutive frames within a single clip, the reframe centre drifts smoothly. It doesn't jerk laterally.",
+      "why": "grammar. The source camera is slightly shaky hand-held. A reframe that amplifies that into snapping motion announces the crop and distracts from the punch.",
+      "check": "opus-vision inspects 3 randomly sampled 1-second windows inside action clips (not at cut boundaries); pass iff no sampled window shows a reframe snap exceeding ~15 % of frame width within 200 ms.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-TRACKING-RESPONSIVE  When the action moves laterally in the source (e.g. Harhoff pressing Radford toward the ropes, source 03:33; the corner exchange, source 08:00), the 9:16 reframe tracks the moving subject rather than letting it drift to the edge.",
+      "why": "events. The fight's memorable punches happen in corners and on the ropes. A fixed centre-crop misses them by definition.",
+      "check": "opus-vision inspects any reel clip aligned with a source segment containing lateral action (03:30\u201303:45, 08:00\u201308:15, or the closing flurry 09:10\u201309:26 if used); pass iff the reframe centre moves with the action (boxers remain inside the central 60 % band) rather than the action drifting to \u226410 % of frame edge.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-REFRAME-CONSISTENT  The reel uses one reframe strategy throughout (tracking crop OR blur-fill OR static centre crop). It doesn't switch mid-reel in a way that announces the edit.",
+      "why": "mixed reframe strategies read as an editor who couldn't decide. One committed choice reads as craft.",
+      "check": "opus-vision samples 6 frames evenly spaced across the reel; classify each into {tracking-crop, blur-fill, static-centre-crop, pillarbox}; pass iff at least 5 of 6 samples fall in the same category.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-NAMEPLATE-OR-WINNER-GRAPHIC  At least one of the broadcast's identifying graphics is visible and legible in the reel: the full-screen introduction nameplate (\"Jack Harhoff Athletic boxing\" / \"Daniel Radford Fox & Co\", source 02:11\u201302:36) OR the winner card (\"Winner \u2014 Jack Harhoff / Athletic boxing\", source 10:25\u201310:28).",
+      "why": "grammar. There's no scoreboard HUD during action, so the identifying graphics are the reel's only visual handle on who is who. Without one, a cold viewer can't name the boxers.",
+      "check": "opus-vision samples the reel at 1 fps; pass iff at least one sampled frame contains readable text matching one of {\"Jack Harhoff\", \"Daniel Radford\", \"Winner\"} at a size that occupies \u226515 % of the 9:16 frame width.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-07",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-KEY-FIGHTER-IDENTIFIABLE  Jack Harhoff is visibly and unambiguously identifiable in the reel. Red headgear plus black/red vest visible on screen for enough frames that a cold viewer can pair the winner name with the person on screen.",
+      "why": "identity. The reel announces Harhoff the winner. If the viewer can't match that name to a face, the win is an abstraction.",
+      "check": "opus-vision samples reel at 1 fps; pass iff \u226510 sampled frames show a fighter clearly wearing red headgear (with or without the black/red vest visible) in action or in celebration.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-08",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-RING-GRAMMAR  The reel's visual grammar is predominantly the broadcast's wide ringside angle. The ring, the ropes, two gloved fighters. Not a pile of tight close-ups or crowd cutaways stitched as a mood piece.",
+      "why": "grammar. 80 % of source runtime is the ringside wide. A reel that inverts that ratio into 80 % close-ups misrepresents the broadcast's actual shape.",
+      "check": "opus-vision samples reel at 1 fps; classify each frame into {ringside-wide, tight-fighter, corner, crowd, graphic, interview, other}; pass iff ringside-wide \u226550 % of content-body frames.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-09",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-OUTCOME-VISIBLE  Harhoff's winner status is visually legible somewhere in the reel. Either through the on-screen winner card at source 10:25, OR through a clear celebration shot (source 09:26\u201309:35 Harhoff's leap / source 10:29 \"Come on!\" moment) where Harhoff visibly celebrates with arms up or similar victor body language framed inside the 9:16 crop.",
+      "why": "arc. The fight ends on a decision, not a KO. The viewer needs a visual cue to close the arc alongside the announced verdict.",
+      "check": "opus-vision samples reel; pass iff at least one frame shows either (a) a winner graphic naming Harhoff, or (b) Harhoff in identifiable celebration (arms up, jumping, arms raised by referee).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-10",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-OPENING-IS-SUBSTANCE  The first 3 s of the reel is source-derived fight or broadcast content. A punch, an intro graphic, the ring announcer on camera, a pre-fight wide. Not a Tigertanz channel logo card, a \"presented by\" sponsor slate, or a countdown animation.",
+      "why": "brief asks to \"open on something that earns the next fifteen seconds \u2014 a punch landing in the broadcast's own voice, not a channel logo or sponsor card.\"",
+      "check": "opus-vision examines reel 0.0\u20133.0 s; pass iff every sampled frame in that window is labelable as source-derived content (fight footage, broadcast graphic, or announcer on camera).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-GAME-IDENTITY  A cold viewer (scrolling past, knowing nothing about this fight) can, from the reel alone, recover all three of: (a) the two boxers' names (Jack Harhoff and Daniel Radford), (b) their clubs (Athletic Boxing and Fox & Co), and (c) the result (Jack Harhoff won by unanimous decision). Legible by at least two of: audible announcer speech, a readable full-screen nameplate, the readable winner card, or the post-fight interview caption.",
+      "why": "identity. The baseline a sports reel owes a viewer. Without this, the reel is a montage without stakes.",
+      "check": "opus-vision + gemini-audio. Run the reel; list all on-screen text and all audible speech; pass iff at least two of the three identity facts (both names, both clubs, the unanimous-decision result) are independently recoverable from two different sources (audio vs graphic, or two different graphics).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-ARC The reel carries the fight's actual arc. Harhoff dominant start to finish, pressure building, referee stepping in at the pivot, Harhoff closing it out. Not a balanced two-sided montage that implies a close fight. A reviewer should be able to state the arc in one sentence consistent with arc (e.g. \"Harhoff ran this one-sided; the ref had to step in in Round 2; he closed it out and won unanimously\").",
+      "why": "arc. This bout was one-sided with one clear pivot. A reel that evenly weights Harhoff and Radford punches misrepresents it.",
+      "check": "opus-vision given reel frames + reel transcript; reviewer states the arc in one sentence; pass iff the stated arc is consistent with arc (Harhoff-dominant, ref-intervention pivot, unanimous decision) and does not imply a close / two-way fight.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-PIVOT  The standing 8-count sequence (source 05:38\u201305:55) is given audio-narrative room in the reel. At least 3.0 s of continuous runtime AND at least one of the referee's voice counting OR the audible crowd lift overlapping that footage. Not muted under a music swell. V-01 owns the visual-framing check on the same moment; N-03 owns the audio context + narrative-duration check.",
+      "why": "most-decisive-moment. The pivot only \"lands\" as a pivot if the reel carries its live sound. Visual presence without the ref's voice or crowd lift reads as an ordinary montage beat.",
+      "check": "opus-vision + gemini-audio. Locate the reel span aligned with source 05:32\u201305:58; measure duration; verify overlap with audible count OR crowd lift; pass iff \u22653.0 s AND audio context present.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-NO-FABRICATION  No scoring or game-state claim in the reel contradicts the source. Specifically: Radford isn't shown landing a sustained flurry on Harhoff (the source has no such sequence; only one clean Radford counter at source 08:35 exists, and that was answered); no cutaway is captioned with the wrong boxer; no shot implies a knockdown on Harhoff (there was none); the reel doesn't imply a Radford win via ordering.",
+      "why": "moments. The dominant fabrication risks on this bout are (i) flipping the counter direction via careless caption/edit, (ii) implying a close fight by using only Radford's one good counter-punch, (iii) misattributing the 8-count to Harhoff.",
+      "check": "opus-vision cross-references every action beat in the reel against events. Pass iff (a) no shown flurry is attributed to Radford beyond the 08:35 counter, (b) no reel graphic/caption names the wrong boxer on a shown punch, (c) no shot or caption implies a knockdown/count on Harhoff.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-DECISION-LEGIBLE  The fight's outcome reaches the viewer as an explicit call, not inference. Either (a) the ring-announcer's audio \"our winner... Jack Harhoff\" (source 10:17\u201310:24) is audible in the reel, OR (b) the winner card \"Winner \u2014 Jack Harhoff\" (source 10:25) is on screen and legible, OR both. The result isn't left as \"Harhoff looks happy, maybe he won.\"",
+      "why": "identity. This is how the verdict makes its way to the viewer. Distinct from N-01 (which tests whether a cold viewer can recover all three identity facts across the whole reel). N-05 tests specifically whether the result is delivered as a direct call.",
+      "check": "opus-vision + gemini-audio. Pass iff the reel carries either the announcer's \"our winner Jack Harhoff\" audio within \u226410 % paraphrase, OR a visible on-screen winner graphic naming Harhoff, OR both.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-06",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-OPENS-ON-FIGHT  The reel's opening doesn't lead with a promotional hook (Tigertanz logo, \"subscribe\" card, \"presented by\" sponsor slate, pre-fight goody-bag banter). The first beat of substance is a fight or ring moment, not channel branding.",
+      "why": "brief asks the opening to \"earn the next fifteen seconds \u2014 a punch landing in the broadcast's own voice, not a channel logo or sponsor card.\" A reel opening on a 4-second Tigertanz logo will be swiped past.",
+      "check": "opus-vision examines reel 0.0\u20135.0 s; pass iff the first substance beat (first fight action, first announcer-in-ring shot, first nameplate) appears within the first 5.0 s AND isn't preceded by more than 2.0 s of pure branding.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-ROUND-STRUCTURE  The reel conveys that this was a multi-round fight (rather than a single continuous scramble). Evidence can be any of: footage from at least two distinct rounds (visible by the round breaks at source 05:10 and 07:27), a visible round-break shot (fighters returning to corners, source 04:55 or 07:12), the announcer's \"three rounds, two minutes each\" intro audio, or an on-reel round indicator.",
+      "why": "arc. A 3-round arc compressed to a continuous flurry reads as a street-fight scramble and hides the referee-intervention pivot's structural weight.",
+      "check": "opus-vision + gemini-audio. Pass iff at least one of (a) footage aligned with \u22652 distinct source round windows (02:45\u201305:10, 05:10\u201307:27, 07:27\u201309:26), (b) a corner-break shot, (c) announcer audio naming \"three rounds\", (d) an on-reel round graphic.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-REFEREE-COUNT-AUDIBLE  The referee's standing-eight count (source 05:38\u201305:55, words \"One, two, three, four ... Are you alright? Yeah? Box!\") is audibly carried in the reel. The count itself, or at least the referee's voice intervening and the crowd lift around it. Not muted under a music bed.",
+      "why": "character. This bout has no play-by-play. The referee's count is the only live broadcast voice on the fight's single decisive moment. Muting it under music throws away the genre's authority.",
+      "check": "gemini-audio on reel audio only. Locate the reel segment aligned with source 05:38\u201305:55; pass iff the referee's voice is audible at a level comparable to or above the music bed (transcribable as a count or clear referee speech by whisper on the reel audio), OR pass if the reel's musical floor under that segment dips enough that the crowd/count dominates.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-NO-NARRATOR  No second narrator voice is laid over the broadcast. No explainer-style VO (\"and here's where the fight turned\"), no AI-generated script reader introducing rounds, no documentary narration. The only human voices in the reel are (a) the Tigertanz interviewer on pre-fight or post-fight source, (b) the ring announcer, (c) the referee, (d) Jack Harhoff speaking in the pre/post-fight interview or in-ring exclamation.",
+      "why": "character. A new narrator collapses the reel to narrative-repurpose shape and voids the reason to watch a reel rather than read a caption.",
+      "check": "gemini-audio on reel audio only. List every distinct human voice; pass iff every voice matches one of the four source voices (Tigertanz interviewer / ring announcer / referee / Harhoff).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "S-ANNOUNCER-IDENTIFIES  Ring-announcer speech identifying at least one of the boxers or the verdict is audible somewhere in the reel. Either the intro (\"in the red corner ... Jack Harhoff\" / \"in the blue corner ... Daniel Radford\", source 02:08\u201302:42), or the decision call (\"our winner ... Jack Harhoff\", source 10:17\u201310:24), or both.",
+      "why": "character. The announcer is the only voice in this broadcast naming the boxers on mic during the event. Dropping every announcer bite and letting a graphic carry all identification is possible but thin. Distinct from S-01 (the referee's count) and from N-01 (the cold-viewer recoverability check across modalities).",
+      "check": "gemini-audio; whisper the reel; pass iff the reel transcript contains a clear match for at least one of the three announcer phrases: \"Jack Harhoff\", \"Daniel Radford\", or \"our winner\" (\u226410 % paraphrase tolerance) in a voice matching the ring announcer.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-CROWD-PRESENT  The broadcast's crowd ambience (claps, cheers, reactions during punches) is audibly present in the reel under at least one action beat. The reel isn't a music-only track with all room tone stripped.",
+      "why": "character. The crowd lift is the reel's proxy for live tension in the absence of play-by-play. Stripping it kills the live feel.",
+      "check": "gemini-audio. Pass iff the reel contains at least one \u22651.0 s stretch during in-ring action where crowd ambience (cheers / claps / crowd noise distinct from music) is audible above the music bed.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-05",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "S-NO-MID-WORD-CUT  No seam in the reel truncates a referee count, an announcer phrase, or an interview line mid-word. Cuts land at natural audio boundaries (between words, on a silence, on a bell).",
+      "why": "mid-word seams read as a rushed edit and undercut the authority of the broadcast voice you chose to preserve.",
+      "check": "gemini-audio inspects reel seams (detected via scene-change points); pass iff no seam cuts across a word inside an announcer, referee, or interview utterance.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-COMMENTARY-MOOD",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-COMMENTARY-MOOD  Broadcast commentary tone tracks the actual highs of the play. The commentary call rises into the decisive moment and registers the energy of the action; flat reading or wrong-energy commentary (calm voice over the climax, hyped voice over a dead beat) fails this.",
+      "why": "the genre's emotional authority lives in the booth's pacing and intensity. A reel that preserves commentary words but flattens their delivery has thrown away the live-broadcast register the brief asks for.",
+      "check": "gemini-audio on repurpose audio. For each commentary-bearing window, judge whether the commentator's intensity tracks the visual action (rising into the decisive moment, restrained on slower beats). Pass iff no mismatched window (flat reading over a peak, or hyped delivery over a non-event) is observed.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOICE-CONSISTENCY",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-VOICE-CONSISTENCY  If the repurposed cut uses broadcast commentary, no audible swap between unrelated commentary teams (no cut from one network's booth to another's). If the repurposed cut adds narration, a single narrator voice is used throughout the content body, with no audible speaker swap.",
+      "why": "commentary identity is part of the broadcast's authority. Stitching two different booths together, or cycling between two narrators, breaks the reel's sonic spine and reads as assembled-from-parts.",
+      "check": "gemini-audio on repurpose audio. Enumerate distinct human voices in the content body. Pass iff (a) all commentary voices match a single broadcast booth (or set of booth voices that always travel together), AND (b) any added narration is delivered by exactly one consistent voice across the reel.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-01",
+      "pillar": 4,
+      "weight": -30,
+      "criterion": "P4-PILLARBOX-SEVERE  Horizontal black bars (or solid-colour bars) occupy >30 % of frame height for a majority of the reel's content body. This is the \"lazy reframe\" failure mode. The editor didn't reframe at all; they letterboxed 16:9 source into a 9:16 container.",
+      "why": "brief commits to vertical TikTok delivery. A pillarboxed reel reads on TikTok as a desktop-era clip and signals the editor didn't do the vertical work.",
+      "check": "opus-vision samples reel at 1 fps; for each sampled frame, measure the vertical extent of contiguous black/solid bars at top and bottom; fire iff bars occupy >30 % of frame height on \u226550 % of sampled frames.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-02",
+      "pillar": 4,
+      "weight": -15,
+      "criterion": "P4-PILLARBOX-MILD  Horizontal bars occupy 10\u201330 % of frame height on \u226550 % of sampled frames. A partial pillarbox. The editor reframed something but still wastes visible pixels. Mutually exclusive with P4-01: if P4-01 fires, P4-02 does NOT also fire.",
+      "why": "a half-reframe is a detectable craft deficit visible to any TikTok viewer at a glance.",
+      "check": "opus-vision samples reel at 1 fps; fire iff bars occupy 10\u201330 % of frame height on \u226550 % of sampled frames AND P4-01 does not fire on the same reel.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-03",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "P4-SQUISHED  The 16:9 source content is visibly squished into 9:16 (aspect-distorted). Fighters look compressed horizontally / stretched vertically. The ring ropes form an unnatural tall rectangle. The boxers' heads look elongated.",
+      "why": "grammar. The source is 16:9 with natural fighter proportions. A non-uniform rescale into 9:16 produces visibly wrong-shape humans.",
+      "check": "opus-vision inspects 3 representative fighter / ring-rope frames; fire iff proportions are visibly distorted relative to the known source (head-height-to-width ratio off by >20 %, or ring ropes visibly non-parallel to the source).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-04",
+      "pillar": 4,
+      "weight": -50,
+      "criterion": "P4-ACTION-OFF-FRAME  At 3 or more moments in the reel's content body, the primary action (landing punch, ref intervention, closing flurry) drifts off the edge of the 9:16 frame or is partially cropped out because the reframe doesn't follow the fight.",
+      "why": "events. Most Harhoff scoring punches happen in the right-hand ring quarter near the ropes. A static left-edge crop will lose them by definition.",
+      "check": "opus-vision samples every clip in the reel aligned with a source scoring event (from events); fire iff \u22653 sampled action moments have the primary action at or beyond the 9:16 frame edge.",
+      "judge": "opus-vision"
+    }
+  ]
+}

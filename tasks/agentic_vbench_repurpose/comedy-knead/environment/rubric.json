@@ -1,0 +1,293 @@
+{
+  "task_id": "comedy_knead",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR  ffprobe format duration is between 59.9 and 60.1 seconds.",
+      "why": "brief mandates exactly 60s; a tight tolerance prevents padded inflation.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 59.9 \u2264 d \u2264 60.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-RES  the repurposed cut is encoded at 1920\u00d71080.",
+      "why": "brief specifies horizontal HD for the YouTube feed.",
+      "check": "`ffprobe -select_streams v:0 -show_entries stream=width,height` \u2192 width=1920, height=1080.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-FPS  the repurposed cut's video frame rate is around 24 fps (23.97\u201324.0).",
+      "why": "brief specifies 24 fps to match the source.",
+      "check": "ffprobe stream r_frame_rate; pass iff value evaluates to between 23.97 and 24.001.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-VCODEC  the video stream is encoded in H.264.",
+      "why": "brief specifies H.264 .mp4.",
+      "check": "`ffprobe -select_streams v:0 -show_entries stream=codec_name` \u2192 codec_name = h264.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CONT  the file is a valid MP4 with both a video and an audio stream.",
+      "why": "brief specifies a single .mp4 deliverable with stereo audio.",
+      "check": "ffprobe shows format_name containing 'mp4' AND \u22651 video stream AND \u22651 audio stream.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-06",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-AUD-STEREO  the audio track is 2-channel stereo.",
+      "why": "brief specifies stereo audio.",
+      "check": "ffprobe audio stream channels = 2.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-07",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-AUD-NONSILENT  audio is non-silent through the body of the repurposed cut.",
+      "why": "a repurposed cut with no narration or score is functionally a slideshow. Rules out an empty audio track.",
+      "check": "librosa RMS over 5s\u201355s of repurpose audio; pass iff mean RMS > -50 dBFS.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-KNEAD-MOTIF  The kneading-dough close-up that gives the film its title appears in the repurposed cut as a real shot, not a half-second blur. Hands working pale wet dough on the kitchen counter. The shot is held long enough to land as the title image, and reads as kneading rather than an indistinct food-prep flash.",
+      "why": "Stage 1 motif inventory + most-important-moment. The kneading hands ARE the title; a repurposed cut that drops this image is no longer a repurposed cut of *KNEAD*.",
+      "check": "opus-vision on repurpose frames sampled at 1 fps; pass iff at least one shot clearly shows hands-in-dough close-up resembling source 8:10\u20138:32 AND that shot occupies \u22651s of repurpose runtime.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-COSTUME-ARC  Both of Olive's signature costume states appear in the repurposed cut: the locked-in housewife (red satin headscarf + pink shirt + floral apron) and the post-decision Olive (pink/magenta coat with hair down, no headscarf). The repurposed cut shows visually that she's changed.",
+      "why": "Stage 1 motif inventory. Costume is the only language the film trusts for inner-state shifts; without both bookend looks the resolution reads as a non-event.",
+      "check": "opus-vision on repurpose frames at 1 fps; pass iff at least one frame shows Olive in red-headscarf-and-apron AND at least one frame shows her in the pink-coat / hair-down state.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-PERIOD-LOOK  The 1950s/early-60s register the film commits to carries through the repurposed cut: pastel and floral palette, mid-century wardrobe, glass cake stand on patterned tablecloths.",
+      "why": "the period look is what lets the satire read. A flat-graded or graphic-heavy repurpose would sell a different film.",
+      "check": "opus-vision on repurpose frames at 1 fps; pass iff palette and wardrobe across the repurposed cut remain consistent with source frames (no repurpose-wide desaturation, no fluorescent overlays, no replaced backgrounds, no out-of-period graphic chrome covering >10% of frame for >2s).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "V-CAKE  At least one image of Olive's pastry-craft appears as a real shot in the repurposed cut: the rum cake on its glass stand, Helen's plate at the party, the cake-on-the-floor lick, or the bake-frenzy candy-colored pastries. Pastry is Olive's voice in this film; a repurposed cut with no cake imagery has lost what makes Olive Olive.",
+      "why": "Stage 1 motif inventory. Pastry-as-language is the central recurring image; the kneading scene is the climax of that motif but not its only face.",
+      "check": "opus-vision on repurpose frames at 1 fps; pass iff at least one shot clearly shows a finished cake, frosted pastries, or Olive plating/decorating for \u22651s. Distinct from V-KNEAD-MOTIF \u2014 the kneading-dough close-up does not satisfy this item.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-OPENS-CURIOUS  The repurposed cut's first 3 seconds drop the viewer into an in-world moment from the film. Not the KNEAD title card, not a black-on-Omeleto plate, not a logo bumper. The open is something to watch, not something to read.",
+      "why": "brief explicitly asks the piece to earn curiosity at the open rather than land on the title.",
+      "check": "opus-vision on repurpose frames at 0:00, 0:01, 0:02; pass iff each frame shows in-world source-derived footage (a person, a room, an object from the film) and not a title card, logo, channel ident, or solid color.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-FACE-LEGIBLE  At least one close-up of Olive's face during an essential decision moment is in focus and large enough to read a reaction. Essential moments: the dream-dismissed reaction, the cake-on-the-floor lick, the kneading scream, the fake-possession, or the pink-coat return.",
+      "why": "the film hangs on Olive's reactions. A repurposed cut where every shot of her is wide or blurred loses the protagonist as a face.",
+      "check": "opus-vision on repurpose frames at 1 fps; pass iff at least one frame shows Olive's face at \u2265\u00bc of frame area, in focus, during one of the listed source beats.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "Closing title card or end card occupies no more than 3 seconds of total runtime.",
+      "why": "brief is explicit that the close shouldn't be a multi-second pad. Anti-padding for the closing title.",
+      "check": "opus-vision samples the last 6s of repurpose at 1fps; pass iff frames showing only title-card content (text on solid or static background, no source footage behind) span \u2264 3s of runtime.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MIN-SHOT-DURATION",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No individual shot in the repurposed cut content body is shorter than 1.0 second, OR, if the repurposed cut uses a deliberate rapid-cut sequence, no more than 3 consecutive shots <1.0s within any 5-second window.",
+      "why": "shots shorter than ~1s read as a frantic reel rather than a repurposed cut; allows a deliberate rapid-cut burst as long as it doesn't dominate.",
+      "check": "scenedetect content-detector on the repurposed cut excluding the closing title card; pass iff the rule above holds.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TRANSITION-NATURAL",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "most cuts in the repurposed cut read as deliberate transitions, subject continuity, motion match, lighting/color match, OR a clearly intentional jump-cut for emphasis, rather than jarring splices between unrelated images.",
+      "why": "deliberate transitions are what separates an edit from a shuffle. Random splices break the repurposed cut.",
+      "check": "scenedetect identifies cuts; opus-vision samples the last frame before and the first frame after each cut; pass iff \u226580% of cuts read as deliberate per the criterion above.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MOTION-MATCH",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "Motion-direction or subject-position continuity (eye-trace) is preserved across cuts.",
+      "why": "eye-trace continuity is what makes cutting feel like cinema rather than a slideshow with shuffle-mode pacing.",
+      "check": "for each scenedetect cut, opus-vision compares last-frame-before and first-frame-after; pass iff \u226580% preserve motion-direction or subject-position continuity, or violate it intentionally.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-08",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "F-TITLE  the word \"KNEAD\" is legible on screen at the close of the repurposed cut.",
+      "why": "brief asks for a brief title card landing the close.",
+      "check": "opus-vision on the last 3s sampled at 1 fps; pass iff \"KNEAD\" is legibly displayed in at least one frame (correct spelling, readable size).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": -45,
+      "criterion": "N-TURN  The film's central turn is in the repurposed cut, given room to land. The turn is Olive's fake-possession in the hallway: the body contortion, the eyes rolling back, the rhyming chant \"I need to run, I need to find the dream that sings, the song that's mine.\" The shot either lands in the final third of repurpose runtime (after 0:40 of the 60s repurposed cut) and is held for \u22652 seconds, or at the beginning. A viewer sees the contortion clearly enough to recognize it as performance, or with the VO's help.",
+      "why": "most-important-moment. The fake-possession is the film's argument; the repurposed cut that drops or rushes it has lost the film.",
+      "check": "opus-vision with AV-aligned inputs at 1 fps + repurpose audio; pass iff (a) Olive's possessed-physicality (eye-roll + body contortion) is visible in the final third of repurpose runtime, AND (b) that shot is held for \u22652s OR a VO line concurrent with the shot names the performance.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-COLD  A viewer coming to the repurposed cut cold, with no prior exposure to the source, can answer all three: (a) identify OLIVE, the 1950s housewife in the red headscarf and floral apron (and later, the pink coat), as the protagonist; (b) name the central conflict (her dream of pastry school in Paris is dismissed by her husband, AND aliens that grant other people their \"true calling\" are leaving Earth without giving her one); (c) name the resolution (she fakes her own possession and uses the alien excuse to walk out for Paris, \"the slugs said so\"). The repurposed cut doesn't need the source to make sense. All three answers come from inside it.",
+      "why": "baseline comprehension. What a cold viewer must come away with.",
+      "check": "opus-vision given repurpose frames at 1 fps + full VO transcript; judge answers (a), (b), (c) yes/no using only what the repurposed cut shows or says. Pass iff all three yes.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-PREMISE  The repurposed cut establishes the absurd premise before the turn: that aliens or \"slugs\" are possessing people and giving them their \"true calling.\" Without this, Olive's fake-possession lands as random behavior rather than as a strategic mimicry of a known phenomenon.",
+      "why": "Stage 1 beats 1:45\u20132:30 (radio bulletin), 3:00\u20133:30 (Helen's possession), and the radio-host chorus throughout. The slug premise is the world the resolution borrows from.",
+      "check": "opus-vision + gemini-audio; pass iff before repurpose timestamp 0:40, the repurposed cut either (a) shows Helen or Kenneth being possessed (eye-glaze + rhyming-chant + plate-drop / twitch) OR (b) audibly references aliens/slugs/possession/\"true calling\" via VO, radio clip, or an on-screen text element.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-DREAM-NAMED  The repurposed cut names Olive's specific dream concretely. At minimum one of \"pastry school,\" \"Paris,\" \"Le Cordon Bleu,\" or her bakery name \"Olive's\" appears in the VO or in a source-dialogue clip. A repurposed cut that conveys the dream as generic (\"she wanted out\") has stripped what makes Olive's ambition particular.",
+      "why": "Stage 1 beat 0:39\u20131:08. The specificity of \"Paris / Cordon Bleu / a bakery called Olive's\" is what makes the resolution feel earned rather than arbitrary.",
+      "check": "whisper-transcribe repurpose audio; pass iff the transcript contains at least one of: \"pastry school\", \"Paris\", \"Cordon Bleu\", \"Olive's\" (case-insensitive substring).",
+      "judge": "deterministic"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-PROGRESSION  The repurposed cut carries an emotional progression that maps to the film's arc. It opens stifled or wry, sharpens into longing or escalation in the middle, and lands on a small private win at the close. The repurposed cut doesn't flatten the film into a single tone (only-funny, only-sad, only-quirky).",
+      "why": "brief explicitly asks the repurposed cut to feel claustrophobic at the open, tilt absurd in the middle, and resolve as a quiet win. Arc.",
+      "check": "gemini-audio on the full repurpose (visuals + audio + VO); judge identifies the repurposed cut's tone at three sample windows \u2014 0:00\u20130:10, 0:25\u20130:35, 0:50\u20131:00 \u2014 and passes iff the three windows show distinguishable tones consistent with stifled / escalating / quiet-win progression (in any close ordering).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-CAUSAL-ORDER  The repurposed cut's internal sequence places the fake-possession turn before the pink-coat return. The contortion-and-chant moment appears earlier in repurpose runtime than the calm-coat-on-Olive declaration. A repurposed cut that reverses the order, or presents them simultaneously without a clear before/after, breaks the narrative logic.",
+      "why": "the resolution only re-colors what came before if it follows the turn. Reversed order destroys the film's irony.",
+      "check": "opus-vision identifies the repurposed cut timestamp of (a) the first frame containing Olive in possessed-physicality (Scene 14 source), and (b) the first frame containing Olive in the pink coat (Scene 16 source); pass iff (a) < (b).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-NO-PRESPOIL  The narrator doesn't pre-state the resolution before the repurposed cut visually shows the fake-possession or the pink-coat return.",
+      "why": "a repurposed cut that summarizes the punchline before it shows the punchline kills its own joke.",
+      "check": "whisper-transcribe repurpose audio with timestamps; pass iff none of the substrings \"fake\", \"fakes\", \"faking\", \"pretend\", \"pretends\", \"the slugs said so\", \"Paris\" appear in any VO line whose start_time < 30s. (The dream may be NAMED for N-04 only after 0:30.)",
+      "judge": "deterministic"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "S-VOICE-ONLY  A single, consistent narrator voice carries the repurposed cut end-to-end. No audible speaker swap, no mid-repurpose change in voice timbre or character, no overlay of a second narrator reading over the first. The voice that opens the piece is the same voice that closes it.",
+      "why": "brief explicitly asks for one narrator carrying the whole minute. Multi-voice TTS swaps are a common failure mode and break the film's illusion in seconds.",
+      "check": "gemini-audio on repurpose audio only; pass iff the entire VO track is a single continuous voice identity across all VO segments. Source-dialogue clips lifted from the original film do not count as a \"second narrator\" for this item.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-VO-CRAFT  The voice-over sounds like a person reading for cinema, not a machine reading a script. Pitch and pace shift with the beats.",
+      "why": "a flat or mechanical TTS read sabotages everything else. The narrator is the spine of a 60s repurposed cut; brief specifies tone moves with the story.",
+      "check": "gemini-audio listens to repurpose audio only; pass iff VO delivery audibly varies in pitch and pace across at least three distinct emotional beats AND there are no audible TTS glitches (clipped phonemes, dropped syllables, unnatural splices).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-VO-INTELL  Every word of the VO is legible end-to-end. No stretch where a viewer would strain to parse the line, no word clipped by a splice, no syllable smeared.",
+      "why": "the repurposed cut's narrative depends on the VO being followable. An unintelligible line drops the viewer out of the story even if everything visual is right.",
+      "check": "gemini-audio transcribes the VO; pass iff the gemini-audio transcription matches the intended narrator script at \u226595% word-level accuracy AND no single VO word is reported as inaudible/uncertain by the judge.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-MUSIC-CONTINUITY  Any music or source-audio bed in the repurposed cut ends cleanly. No mid-phrase cut, no abrupt stop mid-measure, no jarring splice-point silence at the close. If the music ends before the repurposed cut does, it fades or resolves; if the repurposed cut ends while the music is still playing, the music is gracefully closed rather than chopped off.",
+      "why": "a music cue left hanging mid-phrase is perceptible to any viewer and reads as amateur. Brief explicitly asks the score to be resolved at the close.",
+      "check": "gemini-audio on repurpose audio only; pass iff there is no audible abrupt music cut or mid-phrase truncation in the repurposed cut body OR at the final ~2 seconds.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-05",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-MUSIC-VS-VO  The music bed never peaks above the VO such that the narrator is covered or has to be strained for. The mix gives the voice priority.",
+      "why": "brief asks for the narration to sit cleanly over the music bed. A too-hot bed buries the narrator and is the sister failure to S-VO-INTELL but specifically about mix balance.",
+      "check": "gemini-audio on repurpose audio only; pass iff there is no audible window where the music bed louder than the VO masks the VO's words. Distinct from S-VO-INTELL \u2014 this item judges only mix balance, not VO performance or splices.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-06",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "S-AUDIO-ARC  The audio bed shifts with the beats: quieter or sparser during the stifled open, lifting through the absurd middle, supported at the close. Not a single flat ambience under the entire repurposed cut.",
+      "why": "Stage 1 audio inventory. The source's score is mid-century pastiche with a sour undertone and varies with the beats; brief asks the repurposed cut to feel like the film.",
+      "check": "gemini-audio on repurpose audio only; pass iff the bed audibly shifts in volume, density, or instrumentation across at least three distinct beats over the 60s runtime.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOICE-MOOD",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "Narrator's tone is aligned with the repurposed cut's emotional register: warm where the film warms, restrained where it hurts, energetic where it accelerates. A flat, unrelenting TTS read on a piece with real emotional shape fails this.",
+      "why": "brief asks for narration that moves with the story. A monotone read flattens an emotional arc into an explainer.",
+      "check": "gemini-audio on repurpose audio only; pass iff VO delivery audibly shifts emotional register across at least 2 distinct beats AND no flat-monotone stretch covers the repurposed cut's turning point.",
+      "judge": "gemini-audio"
+    }
+  ]
+}

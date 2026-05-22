@@ -1,0 +1,203 @@
+{
+  "task_id": "standup",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR Runtime is 75 seconds (\u00b10.1 s), the runtime the brief committed to.",
+      "why": "brief mandates a single specific runtime. A loose tolerance invites padding.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 |d \u2212 75| \u2264 0.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-RES Video is delivered at 1920\u00d71080, the horizontal YouTube frame the brief asked for.",
+      "why": "brief names 1920 \u00d7 1080 explicitly. Vertical-upscale is a platform-mismatch failure.",
+      "check": "`ffprobe -select_streams v:0 -show_entries stream=width,height` \u2192 width == 1920, height == 1080.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-ASPECT Display aspect ratio is 16:9 with no pillarboxing, letterboxing, or vertical content centred on black bars.",
+      "why": "a 1920 \u00d7 1080 file with 9:16 content in a black-bar frame passes F-02 but defeats the platform choice. Catch it.",
+      "check": "deterministic. `ffprobe` width/height ratio = 16:9 AND opus-vision sampled frames show no black-bar sidebars consuming more than 5% of horizontal extent.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-AUDIO-PRESENT The file carries an audio stream with audible content; a silent export of a stand-up reel is not a deliverable.",
+      "why": "trivially important; trivially catchable.",
+      "check": "`ffprobe -show_streams` has an audio stream AND librosa RMS of full audio > \u221260 dBFS.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-06",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CODEC-SANE Video codec is H.264 or H.265 and audio codec is AAC or Opus, so the file plays on YouTube without re-encode surprises.",
+      "why": "esoteric codecs (AV1 without --cpu-used tuning, ProRes, uncompressed) aren't a \"deliverable\" for YouTube.",
+      "check": "`ffprobe -show_streams` codec_name \u2208 {h264, hevc, h265} for video AND codec_name \u2208 {aac, opus} for audio.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-TITLECARD-CAP The end-title / Dry Bar card at the close occupies at most 3 seconds of the reel's runtime, in line with the brief's \"a second or two, not a dragged-out pad.\"",
+      "why": "anti-padding. Content density trades directly against title-card hold time, and the brief said a \"second or two.\"",
+      "check": "opus-vision over last 6 s at 1 fps; identify the contiguous end-card window (frames without speaker silhouette + mic on stand, or frames showing the Dry Bar app-promo layout). Pass iff that window \u2264 3 s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-CAPTIONS-PRESENT Burned-in English captions are visible during every stretch of spoken audio in the reel; only music-only beats and the end-title card are exempt.",
+      "why": "brief explicitly asks for burned-in captions so a muted scroller can land the jokes. The whole deliverable premise assumes they're there.",
+      "check": "gemini-video samples the reel at 1 fps; for each frame with non-silent speaker audio (RMS > \u221240 dBFS), pass iff visible on-screen text overlay is present.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-CAPTIONS-SYNC-STRICT The on-screen caption matches the spoken word at every moment (within roughly a third of a second), and no caption line carries over from a prior clip after a cut. A muted viewer reading captions hears, in their head, the word Robert is actually saying.",
+      "why": "the single most caption-craft-critical item. A caption that's close but half-a-beat off is worse than no caption because it actively misinforms the muted viewer.",
+      "check": "gemini-video samples \u2265 5 evenly-spaced moments in the content body; at each, compare the on-screen caption against the concurrent audible word; pass iff paraphrase-OK, \u2264 3 words of drift, \u2264 0.3 s temporal drift at EVERY sampled moment AND no post-cut caption carryover.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-CAPTIONS-LEGIBLE Captions are legible: large enough to read on a phone, high-contrast against the brick-wall set, and not clipped at the edge of the frame.",
+      "why": "the muted-scroller use case dies the moment captions drop below readability. A visual-only check; no audio needed.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff \u2265 90 % of frames with captions meet font-size (\u2265 40 px body at 1080p), contrast (\u2265 4.5:1 luminance ratio vs local background), and safe-area (no text clipped).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-THESIS-VISUALLY-REINFORCED When Robert delivers his persona-thesis line (\"I'm Robert Mack and I kill birds,\" or his \"my brain is flexibleer than that\" self-ID), the camera is on him chest-up on the Dry Bar stage \u2014 not on the end-title card and not on a wide where audience silhouettes are the subject.",
+      "why": "the thesis line's job is done by Robert on camera, not by a caption over a blank plate. If the reel lets an editing beat steal the frame at the exact moment the thesis lands, the character doesn't land.",
+      "check": "gemini-video finds the moment the repurposed cut audio carries the thesis sentence; pass iff during that moment \u00b1 1 s the frame shows the speaker's face clearly (chest-up, face centered, not on an end-card or a wide-with-audience-as-subject).",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-NO-VISUAL-FABRICATION Every image in the reel is from the source footage. No stock B-roll under the bird/polar-bear/Panama-Canal beats, no illustrated maps, no motion-graphic inserts. The reel is Robert on stage, full stop.",
+      "why": "the source has no B-roll, no cutaways, no demos. Any visual that isn't Robert on the Dry Bar stage is fabricated and changes what the reel is.",
+      "check": "opus-vision samples repurposed cut at 1 fps; for each frame, require either (a) a speaker-on-stage shot matching source pHash within threshold 12, or (b) a recognizable Dry Bar title-card / end-card frame. Pass iff all sampled frames match one of those two categories.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-07",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-FRAMING-CONSISTENT The reel keeps Robert's full face in frame and the mic stand visible \u2014 no aggressive vertical-style reframe that crops his forehead or slices the mic out of the shot.",
+      "why": "a reframe that crops forehead-to-mouth-only to \"fit vertical\" even in a 16:9 export reads as a platform-mismatch artifact. The brief committed to horizontal.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff \u2265 80 % of content-body frames show the speaker's full face (forehead to chin) inside the frame AND the microphone stand is visible in at least one frame of each speaker clip.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-THESIS Robert's persona-thesis line \u2014 \"I'm Robert Mack and I kill birds,\" or its callback \"I do because I kill birds\" \u2014 is audibly in the reel in his own voice, and lands inside the first 30 seconds or the last 15 seconds. This is the single sentence that names the character.",
+      "why": "the line that does all the character-framing work for a cold viewer. Every other bit reads wrong without it.",
+      "check": "whisper the repurposed cut audio; pass iff the string \"I'm Robert Mack and I kill birds\" (\u2264 3 words of drift) OR the string \"I do because I kill birds\" is substring-findable in the repurposed cut transcript AND its timestamp is within [0, 30] s or [runtime \u2212 15, runtime] s of the reel.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-COLD-VIEWER-COMPREHENSION A viewer who has never seen the source can, after one watch, (a) state the persona \u2014 a confidently-wrong \"problem thinker\" who proposes absurd solutions to large public problems; (b) name at least two specific bits from the reel (Shorter Border Order / Panama Canal, Remove the Fire, Hottest-Month-Ever, HB2 Peepee Lady Style, Pass-holes, White Bears Can't Jump, Pythagorean cheetah); and (c) recognize where the reel lands (thesis restated, signoff, callback).",
+      "why": "baseline comprehension. The whole point of an insight reel is that it IS a standalone persuasion, not a trailer for the 42-minute set.",
+      "check": "opus-vision given repurpose frames at 1 fps + full repurpose transcript, plus gemini-video for audio-concurrent reads; judge answers (a) persona-statable? (b) at least two of the seven named bits recoverable? (c) closing beat recoverable? Pass iff all three yes.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-BIT-SUPPORT-WITH-NAMED-DETAIL At least two of the bits in the reel arrive with their specific named detail \u2014 the thing that makes the bit Mack's rather than a generic premise. A specific number (\"2,000-mile dotted line,\" \"one 5,000th of a mile\"), a specific named referent (\"Panama Canal, short and very secure, what with all those locks,\" \"Robert Plant of the Led Zeppelins,\" \"Pythagorean theorem\"), a persona-catchphrase tag (\"I kill birds,\" \"I happen to know a lot of stuff,\" \"I'm not the best driver\"), or an escalating list / callback (the HB2 productivity list, the cheetah Pythagorean math). A bit paired with a vague \"and then it's funny\" beat does NOT count.",
+      "why": "a bit without its specific detail reads as a premise without a punchline. The detail is what separates a Mack reel from a generic-comedian reel.",
+      "check": "opus-vision with repurpose frames at 1 fps + repurpose transcript; for each audible bit, map to its adjacent (within \u00b1 5 s) detail beat; pass iff \u2265 2 bits are paired with a named detail of type (a)-(d).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-OPENS-ON-SUBSTANCE The first 5 seconds carry Robert's voice on a line that tells the scroller what kind of person they're watching \u2014 a persona-line, a landed punchline, a signature quote. Housekeeping intros, slow fades from black, logo-only Dry Bar holds, and music-only cold-opens are not acceptable openers.",
+      "why": "brief says \"open on something that earns the next fifteen seconds.\" A scroller decides in three seconds. The first five must carry voice + character.",
+      "check": "opus-vision + repurpose whisper transcript; pass iff the first 5 s of content has Robert's voice audible AND at least one identifiable persona-cue (a persona-catchphrase, a landed punchline, a signature quote from moments) is present in those 5 s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-NO-FABRICATION Every line in the reel keeps its load-bearing setup. Three risk moments: (i) the \"white bears can't jump\" tag must arrive with the \"polar bears evolved in the Arctic and there are no trees\" setup within the prior 10 s; (ii) \"Come on people, follow the money\" or \"Sainara, China\" from the Chinese-New-Year/gluten bit must arrive with its persona-frame (\"I'm kind of opposed [to China] right now\" or a Mack persona-catchphrase) within 15 s; (iii) \"peepee lady style\" or the HB2 productivity capper must arrive with either the \"North Carolina House Bill 2\" framing OR the \"birth certificate\" / \"federale under the stall\" setup within the prior 15 s. Stripped of setup, these lines invert from satire into endorsement.",
+      "why": "these three lines invert meaning when stripped of setup. Satire becomes endorsement. A reel that lifts them without their scaffolding fabricates a POV Robert did not perform.",
+      "check": "repurpose whisper transcript is scanned for each of the three risk-moment strings; for each hit, the preceding 10-15 s of repurpose transcript is checked for the required setup sentence (with paraphrase tolerance \u2264 20 %). Pass iff every risk-moment hit has its required setup; auto-pass iff no risk-moment hits appear in the reel.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-CLOSES-ON-LANDING The last 10 seconds of the content body (before the end-title card) land on a Mack beat \u2014 a landed punchline, a persona-callback, a restated thesis, or a signoff in Robert's voice. Not acceptable: a slow fade into the end card with no spoken content, a mid-sentence truncation, or a Dry Bar logo-only card occupying that window.",
+      "why": "brief says close on a Dry Bar card \"a second or two, not a dragged-out pad.\" A reel that lets the card steal the last ten seconds has no ending.",
+      "check": "opus-vision + repurpose transcript; locate the end-title window (via V-TITLECARD-CAP check); pass iff the 10 seconds immediately preceding that window contain Robert-voice audio AND end on a complete-sentence landing (no mid-word or mid-clause truncation).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-PERSONA-SUSTAINED The reel stays inside Robert's performed persona from the first audible frame through the final landing. No \"here's a clip from\u2026\" framing voiceover, no meta caption explaining the bit, no non-Mack narrator interrupting the set. The scroller's experience is Robert performing, uninterrupted.",
+      "why": "the character is the product. A framing device that breaks the fourth wall (even in Mack's own voice, if the line is lifted out of the set context as a narration) collapses the character-frame that N-01 and N-02 depend on.",
+      "check": "gemini-video reviews the reel end-to-end; pass iff no frame contains (a) a non-speaker voice-over over the picture, OR (b) a caption/title-card layered on top of the picture that reframes what we're watching as a clip-of (\"here's Robert doing\u2026\", \"in this bit, Robert says\u2026\"), OR (c) a Mack-voice line placed as narration over a non-stage plate.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "S-SEAM-QUALITY",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-SEAM-QUALITY Cuts in the repurposed cut land at natural sentence/word boundaries (and natural laugh-break boundaries \u2014 punchlines must be allowed to land), not mid-sentence or mid-word or mid-laugh. The repurposed cut reads as a clean assembly, not a chopped one.",
+      "why": "the reel is heavily cut by nature. Sloppy seams undermine the reel's authority more than a bad visual cut.",
+      "check": "gemini-audio on repurpose audio only; pass iff there are no audibly jarring seam artifacts: no > 6 dB loudness jumps at cut points, consistent room-tone, no audible clicks or pumps at seams.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-CAPTIONS-ASYNC",
+      "pillar": 4,
+      "weight": -50,
+      "criterion": "P4-CAPTIONS-ASYNC Somewhere in the reel, the caption on screen disagrees with what Robert is audibly saying \u2014 the caption drifts more than half a second from the audio, persists across a cut and now contradicts the new clip, or shows text Robert is not actually saying. A muted viewer reading captions must never, at any moment, be misinformed about what Robert just said.",
+      "why": "worst-case caption failure: active misinformation for the muted-scroller audience the brief was written for. Weight is steep because the whole caption premise collapses if a single visible line says the wrong thing.",
+      "check": "gemini-video examines every speaker-clip transition and every continuous caption line; fire iff any caption line satisfies (a) OR (b) OR (c).",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "P4-CAPTIONS-UNREADABLE",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "P4-CAPTIONS-UNREADABLE Captions are present but functionally unreadable \u2014 too small to read on a phone, dark-on-dark for multi-second stretches, or clipped off the edge of the frame.",
+      "why": "less severe than ASYNC (the viewer gets NO info rather than WRONG info), but still defeats the brief's core muted-scroller use case. Moderate weight.",
+      "check": "opus-vision samples repurposed cut at \u2265 10 evenly-spaced moments; for each, check caption font-size (< 30 px body \u2192 illegible), contrast (< 3:1 luminance ratio vs local background \u2192 dark-on-dark), and safe-area (text clipped off-edge \u2192 clipped). Fire iff \u2265 2 samples flagged illegible.",
+      "judge": "opus-vision"
+    }
+  ]
+}
