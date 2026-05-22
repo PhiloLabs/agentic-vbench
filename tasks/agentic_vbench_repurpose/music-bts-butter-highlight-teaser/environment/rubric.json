@@ -1,0 +1,230 @@
+{
+  "task_id": "music_bts_butter_highlight_teaser",
+  "items": [
+    {
+      "id": "F-DURATION",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The repurposed cut is between 30.0 and 35.0 seconds long, inclusive.",
+      "why": "Brief asks for 30\u201335 seconds end-to-end, matching the \u00b15% golden runtime tolerance around the ~33.4 s label teaser.",
+      "check": "Read the repurposed cut file's total runtime in seconds. Pass iff 30.0 \u2264 duration \u2264 35.0. Judge cites the measured duration.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-AUDIO-STREAM-PRESENT",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The repurposed cut has a non-silent audio stream that is audible across its runtime, allowing at most a single 0.5-second fade-up at the very start and a single 0.5-second fade-out at the very end.",
+      "why": "A music teaser must have audible music for almost its entire runtime; a missing audio stream collapses the brief.",
+      "check": "Probe for an audio track. Walk the repurposed cut in non-overlapping 1-second windows from t = 0.5s to t = duration \u2212 0.5s and confirm that each window contains audible signal above a silence threshold. Pass iff every such window is non-silent. Judge cites any silent windows (start and end timestamp).",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-CLEAN-END",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No further footage of BTS members, choreography, or any non-title-card B-roll appears after the title-card hold ends.",
+      "why": "A clean title-card ending is the teaser convention; an appended B-roll tail breaks the curiosity payoff.",
+      "check": "Identify the repurposed cut timestamp at which the title-card graphic showing the word \"Butter\" first becomes the dominant on-screen content. From that timestamp through the end of the repurposed cut, only the title-card graphic (or its fade-out to black) should remain on screen. Pass iff no member-of-BTS shot, no dance footage, and no other B-roll appears after the title-card hold begins. Judge cites the title-card start timestamp and the repurposed cut end timestamp and confirms no other content fills that window.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-FULL-GROUP-FORMATION-ONCE",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "At least one continuous shot of at least 0.5 seconds duration shows exactly seven distinct people composed together in a single coordinated group frame (matching/coordinated styling such as suits, jackets, or coordinated formal-wear).",
+      "why": "The \"we are seven\" identity assertion is the central group-shot beat of a BTS teaser. Source calibration: the official label teaser lands this once, around its midpoint, with the seven members in coordinated suits.",
+      "check": "Scan every shot in the repurposed cut and find one continuous shot of \u22650.5 seconds in which exactly seven distinct human figures are simultaneously visible within the frame, composed as a group (not a random crowd, not separate cutouts spliced together). Judge cites the start and end repurpose timestamps of that shot.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-DISTINCT-MEMBER-FACES",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "At least five visually distinct individual face close-ups appear across the repurposed cut, where each close-up frames one person at head-and-shoulders scale and the face occupies a clearly identifiable share of the frame.",
+      "why": "A label MV teaser hands time to the members individually as the product being sold. Source calibration: the golden cycles all seven members through identifiable close-ups in its first half.",
+      "check": "Count individual close-up shots in the repurposed cut where one person's head fills at least 35% of the frame area and the face is identifiable. Across those shots, count distinct people. Pass iff at least five visually distinct people each have at least one close-up. Judge cites repurposed cut timestamps for five such close-ups (one per person) and confirms the five faces are distinct.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-RAPID-CUT-BUILD",
+      "pillar": 1,
+      "weight": 4,
+      "criterion": "In the middle third of the repurposed cut (between 33% and 67% of total runtime), at least six hard cuts occur within a continuous six-second window.",
+      "why": "Teaser convention escalates with sub-second cuts to build energy without spending the chorus. Restricting the rapid-cut window to the middle third removes overlap with N-TEASER-CURIOSITY-PACING (which also tests middle-third density) and isolates this item's reward to the convention's actual location.",
+      "check": "Locate any contiguous six-second window inside the middle third of the repurposed cut (from t = duration/3 to t = 2 \u00d7 duration/3) that contains at least six hard cuts (scene-change-level transitions, not pans or zooms inside a single shot). Judge cites the start and end repurpose timestamps of that window and lists the timestamps of the six (or more) cuts inside it. Item fails if no such window exists inside the middle third (even if a qualifying window exists outside that range).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TITLE-CARD-SONG-TITLE",
+      "pillar": 1,
+      "weight": 4,
+      "criterion": "The word \"Butter\" appears as a graphic/typographic on-screen title and is held continuously on screen for at least 2.0 seconds within the final 8 seconds of the repurposed cut.",
+      "why": "Title-card identity is the commercial product of the teaser, the viewer must leave knowing the name of the song.",
+      "check": "Within the repurposed cut window [duration \u2212 8.0, duration], find a continuous on-screen graphic in which the word \"Butter\" (any capitalization) is readable as a title overlay. Pass iff that graphic stays on screen for \u2265 2.0 continuous seconds. Judge cites the start and end repurpose timestamps of the hold.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TITLE-CARD-RELEASE-METADATA",
+      "pillar": 1,
+      "weight": 4,
+      "criterion": "An on-screen release-date overlay containing the digits \"2021\" together with a numeric indicator of May 21 (any of \"5.21\", \"5/21\", \"May 21\", \"21.5\", \"21/5\", or \"05-21\") appears on screen at the same time as, or within 2 seconds of, the \"Butter\" title text.",
+      "why": "The teaser advertises a release date as well as a song name; this is what distinguishes a pre-release teaser from a generic music edit.",
+      "check": "Inspect every on-screen overlay in the repurposed cut. Pass iff a text element containing both \"2021\" and a May-21 numeric indicator (per the formats listed) is visible on screen near the \"Butter\" title (overlapping in time or within 2 seconds before/after). Judge cites the repurposed cut timestamp where this overlay is readable and quotes the text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-REPEATED-PADDING",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "No identical or near-identical shot (same composition, same subject, same framing within minor color-grading differences) appears two or more times in the repurposed cut as runtime padding.",
+      "why": "A 30-second teaser shouldn't repeat shots to fill time; that's the failure mode of an agent over-padding.",
+      "check": "Walk through every distinct shot in the repurposed cut. For any shot that visually repeats later, count the repeat. Pass iff no shot is repeated. Judge cites the repurposed cut timestamps of one repeat pair if the item fails (e.g., 00:04 and 00:18).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-WRONG-TITLE",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No on-screen title-card / typographic graphic presents a song title other than \"Butter\" as the name of this release.",
+      "why": "An agent that hallucinates the song title or pulls in unrelated branding fails the basic identity job.",
+      "check": "Inspect every title-card and held typographic overlay in the repurposed cut. The item fails iff any overlay names a different release as the title (for example \"Dynamite\", \"Permission to Dance\", \"Boy with Luv\", \"Black Swan\"). Judge cites repurposed cut timestamps and quotes any wrong-title text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-NON-BTS-FOOTAGE",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No focal shot of a musical artist or performer who is not one of the seven members of BTS appears in the repurposed cut.",
+      "why": "A teaser must promote this release and these members only; intercutting other artists is a misleading edit.",
+      "check": "For each shot, identify whether the focal person(s) on screen are members of BTS. The item fails iff any shot shows a non-BTS performer as the focal subject (background extras at a venue do not count). Judge cites the repurposed cut timestamps of any non-BTS-performer focal shots.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-TEASER-CURIOSITY-PACING",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The number of hard cuts in the middle third of the repurposed cut is strictly greater than the number of hard cuts in the first 5 seconds.",
+      "why": "Teaser convention is \"settle \u2192 escalate \u2192 land\", not flat pacing. A repurposed cut that opens with rapid cuts and then slows has the energy arc backwards.",
+      "check": "Count hard cuts in the window [0.0, 5.0] of the repurposed cut. Then count hard cuts in the window [duration/3, 2 \u00d7 duration/3]. Pass iff middle-third-count > first-5s-count. Judge cites both counts and lists the repurposed cut timestamps of every cut in each window.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-TITLE-CARD-LAST",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The first appearance of the held \"Butter\" title-card graphic occurs in the final third of the repurposed cut (repurpose timestamp \u2265 2 \u00d7 duration / 3) and not earlier.",
+      "why": "The title card is the curiosity-payoff punchline; placing it earlier and resuming B-roll spoils the arc.",
+      "check": "Locate the first repurpose timestamp at which the word \"Butter\" appears as a held title-card graphic (held continuously for \u2265 1.5 seconds). Pass iff that timestamp \u2265 (2 \u00d7 duration / 3). Judge cites that timestamp and the repurposed cut duration.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-LONG-CHORUS",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "No continuous stretch of audible sung-lyric content from \"Butter\" plays for 6 or more continuous seconds.",
+      "why": "The teaser convention WITHHOLDS the long chorus; a repurposed cut that drops the full chorus collapses to a generic highlight reel.",
+      "check": "Listen to the repurposed cut audio and identify every continuous stretch in which a sung human vocal is performing lyrics from the \"Butter\" track (any chorus, verse, or hook lyric). Pass iff the longest such continuous stretch is < 6.0 seconds. Judge cites the start and end repurpose timestamps of the longest sung-lyric stretch and reports its duration in seconds.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-EXTRA-VO",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No spoken-word voiceover, narration, presenter voice, announcer voice, or interview clip appears in the repurposed cut audio at any timestamp.",
+      "why": "This is a source-only audio brief; adding VO/narration shifts the register from teaser to explainer.",
+      "check": "Listen to the repurposed cut audio in full. Pass iff there is no spoken-word non-sung voice content other than singing on the \"Butter\" track. Judge cites repurposed cut timestamps of any spoken-word VO if present and transcribes a sample.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-LYRIC-CAPTION",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No on-screen subtitle, caption, or lyric overlay transcribing the sung lyrics of \"Butter\" appears in the repurposed cut.",
+      "why": "The teaser sells vibe and identity, not lyric text; on-screen lyrics over-spell the hook the teaser is trying to bait. Title-card branding, song name, and release date overlays are NOT lyric captions.",
+      "check": "Inspect every on-screen text element. The item fails iff any text overlay reproduces a sung lyric from the \"Butter\" track (\"Smooth like butter\", \"Side step right left to my beat\", \"Hotter? Sweeter?\", \"Get it, let it roll\", etc.). Title cards, brand logos, and release-date metadata do not count against this item. Judge cites repurposed cut timestamps of any lyric-caption overlays.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-COUNTDOWN",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "No on-screen text frames the repurposed cut as a ranked countdown, top-N list, or numbered highlight set (\"Top 5 Butter Moments\", \"#1 Best Shot\", \"Best of Butter\", \"1/7\", etc.).",
+      "why": "That framing treats the repurposed cut as a fan highlight reel and breaks the label-teaser register.",
+      "check": "Inspect every on-screen text element. Pass iff no text presents the repurposed cut as a ranked countdown or numbered highlight list. Judge cites repurposed cut timestamps of any such text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-BUTTER-INSTRUMENTAL-DOMINANT",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "The instrumental of the \"Butter\" track, its identifiable funk-pop synth bass-and-snare groove, is audible under at least 80% of the repurposed cut's total runtime.",
+      "why": "This is a music-product teaser; the song's own instrumental is the audio bed throughout, never library music and never silence.",
+      "check": "Listen to the repurposed cut. Walk it in 1-second windows from t=0 to t=duration. For each window, judge whether the \"Butter\" instrumental (its recognizable synth-bass groove) is audibly playing. Count windows where it is audible. Pass iff that count / total-windows \u2265 0.80. Judge cites the approximate total seconds during which the \"Butter\" instrumental is NOT audible.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOCAL-HOOK-PRESENT",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "At least one sung vocal line from \"Butter\", for example \"Smooth like butter\", \"Get it, let it roll\", \"Side step right left to my beat\", \"High like the moon rock with me baby\", \"Hotter? Sweeter? Cooler? Butter?\" or any other sung lyric line from the song, lands audibly for at least 0.5 continuous seconds at some repurpose timestamp.",
+      "why": "A single sung anchor is what fixes the teaser to the song's identity; a 100% wordless teaser is a fashion film, not a song teaser.",
+      "check": "Listen to the repurposed cut. Pass iff at least one sung vocal line from the \"Butter\" track is audible at recognizable level for \u2265 0.5 continuous seconds at some timestamp. Judge cites the start and end repurpose timestamp of one such sung-vocal anchor and quotes the line.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CUTS-ON-BEATS",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "Within the repurposed cut's rapid-cut build (a continuous window containing at least six hard cuts), at least four consecutive cuts each land on the underlying beat or downbeat of the \"Butter\" instrumental, with each cut within ~100 ms of the nearest beat.",
+      "why": "Beat-grid cutting is the teaser craft a generic clip-grabber fails. The \"Butter\" groove sits near ~110 BPM, giving a ~545 ms beat period; cuts wider than ~100 ms off the grid feel visibly wrong.",
+      "check": "Locate a continuous repurposed cut window with \u22656 hard cuts (the rapid-cut build). For each cut in that window, judge whether its repurposed cut timestamp falls within ~100 ms of a downbeat or strong off-beat of the \"Butter\" instrumental currently playing. Pass iff at least four consecutive cuts in the window each meet the ~100 ms criterion. Judge cites the repurposed cut timestamps of the four consecutive on-beat cuts and notes the approximate beat positions.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-AUDIO-ANCHOR",
+      "pillar": 3,
+      "weight": -60,
+      "criterion": "The repurposed cut plays without the \"Butter\" track as its audio bed for the majority of its runtime, either it is silent, or non-\"Butter\" music plays for more than half of the runtime, or the \"Butter\" track (instrumental or vocal) is audible for less than half of the runtime.",
+      "why": "A music teaser that isn't anchored to the song it's advertising is not a music teaser at all. This is the catastrophic audio failure.",
+      "check": "Listen to the repurposed cut. Walk it in 1-second windows from t=0 to t=duration. Count windows in which the \"Butter\" track (instrumental groove or vocal) is audibly playing. The item fires (deduct -60) iff Butter-audible windows / total windows < 0.50. Judge cites the approximate total seconds during which \"Butter\" is audible.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-CHORUS-PAYOFF-SPOILED",
+      "pillar": 2,
+      "weight": -30,
+      "criterion": "The repurposed cut shows the iconic gold-stage finale formation, a horizontally arranged BTS group performance on a clearly gold-/yellow-floored stage under intense yellow stage lighting, with the seven members in coordinated black-and-yellow tailored suits performing the canonical chorus choreography.",
+      "why": "That gold-stage finale is the visual punchline the full MV release is reserving as its payoff; a teaser that reveals it blows the withhold the teaser is supposed to bait. Source calibration: this finale lives around source 02:30-02:47 in the full MV.",
+      "check": "Inspect every shot in the repurposed cut. The item fires (deduct -30) iff at least one shot shows a horizontally arranged BTS group performance with ALL of: (a) a gold-toned or yellow-toned reflective stage floor visible, (b) intense yellow stage lighting framing the members, (c) the members wearing coordinated black-and-yellow tailored suits (not athletic tracksuits, not white shirts, not casual streetwear). Judge cites the repurposed cut timestamp(s) of any such shot.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-NO-ADDED-VO",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "No third-party narrator, announcer, presenter, or voiceover voice, any spoken human voice that is not a member of BTS singing or speaking inside an original source shot, is audible for \u22653.0 cumulative seconds across the repurposed cut.",
+      "why": "Diversity-constraint reward for `audio_policy=source_audio_only`. The brief commissions a source-only audio cut; absence of an external narrator preserves the label-teaser register. (Catastrophic penalty was downgraded to this positive absence item per QC Pass B.)",
+      "check": "Listen to the repurposed cut audio in full. Identify every continuous stretch of spoken-word audio (non-sung) that does not appear to originate from a visible BTS member inside a source shot (e.g., over-the-top narration, an announcer reading copy, a TTS voice, an interview clip layered over the visuals). Sum their durations. Item passes if the summed duration is < 3.0 seconds. Judge cites repurposed cut timestamps of any external-VO stretches, transcribes a sample, and reports the summed duration.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "V-NO-UNEXPECTED-OVERLAY",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No persistent on-screen overlay element, a scoreboard, lower-third caption strip, persistent chapter card, persistent presenter caption, persistent attribution graphic, or any similar non-title-card graphic, is visible across \u226550% of the repurposed cut's runtime.",
+      "why": "Diversity-constraint reward for `output_shape=single_concat`. The brief asks for a single concatenated teaser cut with no chapter/overlay structure. (Catastrophic penalty was downgraded to this positive absence item per QC Pass B.) The end-of-repurpose \"Butter\" title card (held briefly within the final 8 seconds) is the deliverable's only intended overlay and does NOT count against this item.",
+      "check": "Walk through the repurposed cut. Identify any on-screen graphic element (other than the end \"Butter\" title card and its release-date overlay) that is visible continuously or near-continuously for a stretch of the repurposed cut. Sum the cumulative duration during which any such overlay (or any combination of overlays excluding the end title card) is on-screen. Item passes iff that summed duration is < 0.5 \u00d7 repurpose duration. Judge cites any repurposed cut timestamps during which the overlay was on-screen and characterizes the overlay (e.g., \"persistent chapter-card numbering 1/3, 2/3, 3/3 across 00:00\u201300:33\").",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-BEATS-ON-GRID",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "In the rapid-cut window of the repurposed cut, fewer than three hard cuts land more than 150 milliseconds off the nearest detectable beat in the \"Butter\" instrumental, i.e., cuts are reasonably aligned with the source music's beat grid.",
+      "why": "Brief explicitly says \"sub-second cuts in the middle should sit cleanly on the beat, and if one of them lands mid-bar it'll feel wrong.\" (Catastrophic penalty was downgraded to this positive absence item per QC Pass B; the stronger S-CUTS-ON-BEATS presence item remains the primary anchor for tight beat-grid editing.)",
+      "check": "Gemini-audio detects the beat positions in the audible \"Butter\" instrumental, then judge identifies hard-cut timestamps in the repurposed cut (via scene-cut detection). For each cut in the rapid-cut window, compute the offset from the nearest beat. Item passes iff fewer than 3 cuts have offsets >150ms from the nearest beat.",
+      "judge": "gemini-audio"
+    }
+  ]
+}

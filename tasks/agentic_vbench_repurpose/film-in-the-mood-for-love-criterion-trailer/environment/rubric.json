@@ -1,0 +1,428 @@
+{
+  "task_id": "film_in_the_mood_for_love_criterion_trailer",
+  "items": [
+    {
+      "id": "F-RUNTIME",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The repurposed cut's total playable runtime is between 77.0 and 86.0 seconds inclusive.",
+      "why": "A cinephile-register teaser sits around 82s; the golden Criterion trailer is 81.6s. \u00b15% of the golden gives 77.5-85.7s, rounded to 77-86 for integer-second tolerance.",
+      "check": "Measure the repurposed cut's runtime in seconds via ffprobe-equivalent inspection. Pass iff 77.0 \u2264 duration \u2264 86.0.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-PLAYABLE",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The repurposed cut is a single playable .mp4 file with at least one video stream and at least one audio stream, with no decoding errors when played end-to-end.",
+      "why": "Deliverable integrity gate.",
+      "check": "Pass iff playback completes without errors and both video and audio streams are present.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-TITLE-RENDER",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "A text overlay or full-screen title card rendering the film's title, the words \"In the Mood for Love\", appears on screen at some point in the repurposed cut and is legible for at least 0.8 consecutive seconds.",
+      "why": "A teaser must self-identify. The golden lands the title across 00:02-05.",
+      "check": "Judge cites the repurposed cut timestamp(s) where the title \"In the Mood for Love\" is visible on screen. Pass iff at least one such interval \u2265 0.8s exists.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-CLEAN-END",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The repurposed cut ends on a clean cut, fade-out, or title/credit card, not in the middle of a shot, mid-word, or with a freeze-on-error.",
+      "why": "A trailer must close, not get truncated.",
+      "check": "Judge cites the last 1.5 seconds of the repurposed cut. Pass iff the closing frame is either black, a held title/credit card, or a clean held image with the music having resolved or faded.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-NO-VHS-BURNED-SUBS",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The source's UGLY YELLOW VHS-rip burned-in English subtitles (legacy lo-res yellow caption text from the VHS provenance, rendered in the source frame itself reading source dialogue line-by-line) appear in the repurposed cut for a cumulative total of less than 8.0 seconds. This item rewards keeping the SOURCE'S yellow VHS captions out of frame (via cropping or framing choice), it does NOT reward the absence of subtitles in general; clean modern English subtitles burned by the editor are a separate concern (and are required by the brief).",
+      "why": "The provenance is a VHS rip whose yellow subtitles drag the piece toward an explainer when left unfiltered. The brief asks the agent to crop or choose framings to keep those legacy yellow captions out, and to replace them with clean modern English subs. This item scores only the keep-the-yellow-VHS-subs-out half of that instruction.",
+      "check": "Judge identifies any frames in which the source's lo-res yellow burned-in subtitle text (the legacy VHS-rip yellow caption look, not freshly-rendered clean white modern subs) appears at the bottom of the picture and cites their repurposed cut timestamps. Pass iff such yellow-VHS-sub frames cover less than 8.0 cumulative seconds in total. Clean modern white English subtitles added by the editor do NOT count against this item.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-NO-THIRD-PARTY-BRAND",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No third-party channel watermark, social-platform UI, AI-tool stamp, or unrelated logo (e.g. \"Made with X\", a YouTube reaction overlay, a stock-footage watermark) is overlaid anywhere in the repurposed cut.",
+      "why": "Trailer-register fidelity. Criterion / studio / festival branding is acceptable; reaction overlays and AI tool watermarks are not.",
+      "check": "Judge cites the repurposed cut timestamp(s) of any overlay logo or watermark. Pass iff no third-party / AI-tool / reaction watermark appears at any timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-NO-DECORATIVE-CHROME",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut's text elements (title card, chapter intertitles, closing card, any other on-screen text) use clean sans-serif typography in a single weight, with NO decorative serif fonts, NO kinetic animation (text flying in, scaling, rotating, typewriter effects, parallax), NO logo flourishes (decorative borders, gradient backgrounds, lens flares), NO multiple competing font choices in the same card.",
+      "why": "Brief mandates \"Sans-serif typography throughout, no decorative chrome, no logo flourishes, no kinetic-typography motion.\" Cinephile/Criterion register depends on restrained typography.",
+      "check": "Judge inspects each text element in the repurposed cut and confirms each is rendered in a clean sans-serif (e.g., Helvetica/Futura family), in a single weight, with no kinetic motion or decorative chrome. Pass if all text elements pass these constraints.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHEONGSAM-VARIETY",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "The repurposed cut shows the female lead (the slim Chinese woman in 1960s bouffant hair) wearing at least THREE visually distinct high-collared Chinese qipao/cheongsam dress designs (each clearly differing from the others in colour, pattern, or fabric).",
+      "why": "The central wardrobe-repetition motif of the source. The golden uses six distinct dresses in 82s; the rubric demands only three to score the central item, leaving headroom for valid editorial choices but blocking the wardrobe-collapse failure.",
+      "check": "Judge enumerates each timestamp at which the female lead appears, lists the dress (a one-line description of colour/pattern), and confirms \u2265 3 visually distinct designs. Pass iff at least three distinct cheongsam designs are identified, each cited with a repurposed cut timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-SLOW-MOTION-OR-STEP-PRINT",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least one shot rendered in noticeable slow motion or step-printed movement (a human figure or hand visibly moving slower than real time, often used for a hallway walk or stairwell descent).",
+      "why": "A signature Wong Kar-wai stylistic move; the golden opens its first numbered reason with Mrs Chan's slow-motion hallway walk.",
+      "check": "Judge cites the repurposed cut timestamp of any shot whose motion is clearly sub-real-time. Pass iff at least one such shot exists.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MALE-LEAD-PERIOD-DRESS",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The slim Chinese male lead appears at least once in 1960s-style menswear, a dark fitted suit with narrow tie, or a white sleeveless undershirt over high-waisted trousers, in an interior setting (office desk, apartment doorway, hallway, or hotel corridor).",
+      "why": "Tony Leung's Mr Chow is the second lead. The golden frames him at the office desk and against the purple-wall corridor.",
+      "check": "Judge cites the repurposed cut timestamp where the male lead appears in 1960s menswear in an interior setting. Pass iff at least one such shot exists.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-RAIN-OR-LAMP-EXTERIOR",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least one exterior shot featuring either visibly falling rain, a single illuminated street lamp at night, or wet glistening pavement at night.",
+      "why": "The film's exterior atmospheric anchor; the golden lands this at 00:40-44 (rain under a streetlamp) and uses it to break the interior parade.",
+      "check": "Judge cites the repurposed cut timestamp where rain, a glowing street lamp at night, or wet night-pavement is visible. Pass iff at least one such shot exists.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-SMOKING-OR-SMOKE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least one shot featuring a lit cigarette held by a character, smoke curling from a cigarette, or visible cigarette smoke drifting across the frame.",
+      "why": "A recurring source motif; the golden lands a smoke-curl shot at 00:32.",
+      "check": "Judge cites the repurposed cut timestamp where a cigarette or its smoke is visible. Pass iff at least one such shot exists.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CRAMPED-CORRIDOR",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least one shot of a narrow interior corridor, staircase, or wallpapered hallway in which the framing emphasises the cramped, vertically tall, dimly lit geometry of the space.",
+      "why": "The film's defining interior architecture; the golden returns to this framing repeatedly (00:12, 00:44, 00:55).",
+      "check": "Judge cites the repurposed cut timestamp where such a cramped/wallpapered corridor or staircase is visible. Pass iff at least one such shot exists.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-BOTH-LEADS-SAME-FRAME",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least two distinct shots in which the slim Chinese male lead and the slim Chinese female lead are visible in the same frame at the same time.",
+      "why": "Trailers about a near-romance need their two principals together; the golden has multiple two-shots in doorways and silhouettes.",
+      "check": "Judge cites the repurposed cut timestamp of each shot where both leads appear together. Pass iff at least two distinct such shots exist.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-HELD-STATIC-SHOTS",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least TWO distinct shots that are held without any internal cut for at least 3.0 consecutive seconds each (slow-cinema pacing).",
+      "why": "Wong Kar-wai's grammar; reinforces the slow-pacing axis at the positive level so that even a repurposed cut that avoids the rapid-cut penalty still loses points if it never holds.",
+      "check": "Judge cites the repurposed cut start/end timestamps of each held shot lasting \u2265 3.0s without an internal cut. Pass iff at least two such shots are identified.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-WARM-PALETTE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The overall colour grade of the repurposed cut is dominated by warm and saturated tones (reds, ambers, golds, browns) rather than cool, desaturated, or modern teal-and-orange tones.",
+      "why": "The film's signature colour temperature lives in lamp-light reds, embroidered cheongsam patterns, and red curtains.",
+      "check": "Judge selects three roughly-evenly-spaced sample timestamps and confirms the warm-saturated palette dominates. Pass iff at least two of three samples are warm-dominant.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-FRAME-WITHIN-FRAME",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least one shot whose composition uses a doorway, window, mirror, curtain, or other architectural opening to frame a character or the interior space within the frame.",
+      "why": "A Wong Kar-wai compositional signature; the golden uses a circular mirror at 00:37 and a doorway peephole at 01:02.",
+      "check": "Judge cites the repurposed cut timestamp of a frame-within-frame composition. Pass iff at least one such shot exists.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-EXTERIOR-ATMOSPHERIC-SHOT",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least one exterior atmospheric shot, rain, a single illuminated street lamp at night, wet night-pavement, an outdoor alley, or an exterior stairwell.",
+      "why": "The film's recurring exterior motif is the connective tissue between every meeting; the golden lands rain-under-lamp at 00:40-44 and includes an outdoor stairwell shadow shot. A purely interior repurpose loses this atmospheric anchor.",
+      "check": "Judge enumerates each shot and labels it INTERIOR or EXTERIOR/ATMOSPHERIC. Pass iff at least one shot is labelled EXTERIOR/ATMOSPHERIC (rain, lamp at night, alley, outdoor stairwell, wet night-pavement, or comparable).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-THREE-REASONS-STRUCTURE-PRESENT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The repurposed cut implements the Criterion \"Three Reasons\" tripartite editorial signature: three distinct chapter boundaries each marked by either a numbered overlay (1, 2, 3) AND/OR a thematic English-language intertitle (e.g., a 2-5 word thematic phrase functioning as a chapter title).",
+      "why": "Brief commissions a Criterion-style chaptered teaser. The tripartite numbered+named structure is the editorial signature; the positive item rewards delivering the assigned editorial form.",
+      "check": "Judge inspects the repurposed cut for chapter boundaries marked by either (a) a numbered overlay graphic (the numerals 1 / 2 / 3 or \"1.\" / \"2.\" / \"3.\" rendered as on-screen text large enough to read), OR (b) a thematic intertitle card with an English-language thematic phrase naming the chapter. Pass iff at least three such chapter boundaries are visible.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHAPTER-CONTENT-CORRECT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "When the three chapters are present, the content within each chapter matches the per-chapter editorial assignment from the brief: (i) Following chapter 1 (the intro card naming the two leads), the next ~20 seconds contain AT LEAST 3 distinct shots of either lead in a character-introduction context, Mr Chow at the office desk, Mrs Chan on the stone steps or in the alley with the noodle thermos, the two of them in a wallpapered-hallway or doorway two-shot, Mrs Chan in the landlord scene, or equivalent character-establishing material. (ii) Following chapter 2 (the intro card naming image / composition / dresses), the next ~20 seconds contain BOTH (a) a wardrobe parade of AT LEAST 2 distinct cheongsam designs on Mrs Chan AND (b) AT LEAST ONE slow-motion, step-printed, or held-static composition shot (smoke curl against wallpaper, circular mirror, lamp at night, noodle-counter still life, or any held framing whose internal motion is sub-real-time or whose shot length is \u22653.0s without an internal cut). (iii) Following chapter 3 (the intro card naming restraint / chastity / withholding), the next ~20 seconds contain AT LEAST ONE of: the hand-with-wedding-rings shot (one hand covering another in dim light with at least one wedding ring visible), OR a no-touch close-framing of the two leads (both leads in the same frame with a visible gap between their bodies, doorway two-shot, table two-shot, hallway two-shot).",
+      "why": "The Criterion Three Reasons pattern derives its meaning from the three distinct arguments, leads, image, restraint. This item rewards delivering the per-chapter arguments, not just stamping three numbered cards over any twenty-second windows.",
+      "check": "opus-vision identifies each chapter intro (where a numeral 1/2/3 or its thematic phrase first appears) and inspects the ~20s of body footage following each intro. Pass iff ALL of (i), (ii), (iii) are satisfied.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-KISS",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No shot in the repurposed cut depicts the male lead and the female lead kissing each other on the lips or in any direct mouth-to-mouth contact.",
+      "why": "The film deliberately never depicts a kiss between the two leads. This is the most common easy-strategy failure for a romantic-trailer agent.",
+      "check": "Judge inspects every shot featuring both leads. Pass iff no such mouth-to-mouth kiss is depicted.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-BED-TOGETHER",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No shot in the repurposed cut depicts the male lead and the female lead lying together on or in a bed, or sharing a bed in any intimate posture.",
+      "why": "The film never places the two leads in a bed together.",
+      "check": "Judge inspects every shot. Pass iff no shot shows both leads on a bed together.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-UNDRESS-TOGETHER",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No shot in the repurposed cut depicts the male lead and the female lead together in any state of partial nudity, undress, or in-the-act undressing.",
+      "why": "The film never depicts the leads disrobing.",
+      "check": "Judge inspects every shot featuring both leads. Pass iff no such partial-undress shot is depicted.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-SLOW-PACING",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The repurposed cut is NOT cut as a rapid-fire montage. Average shot duration is at least 1.2 seconds, equivalently, the repurposed cut contains at most approximately `0.83 \u00d7 runtime_in_seconds` hard cuts.",
+      "why": "The source's slow-cinema register requires ~3-4s/shot on average. A \"modern cinematic trailer\" agent defaults to ~0.8s/shot, which imports a rapid-trailer grammar alien to the source. This item rewards keeping the pacing in the source's register.",
+      "check": "Judge counts hard cuts in the repurposed cut end-to-end and cites N (total cut count). Compute avg_shot_duration = runtime_seconds / (N + 1). Pass iff avg_shot_duration \u2265 1.2 seconds.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-PERSISTENT-OVERLAY",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No non-title persistent overlay element, a scoreboard widget, a permanent lower-third caption/citation bar, a chapter card pinned at the corner, a channel watermark, a TikTok-style attribution band, or comparable UI chrome, is visible across more than 50% of the repurposed cut's body runtime (excluding the title card and any closing-credit card).",
+      "why": "Diversity-constraint axis: this task is `output_shape = single_concat`, a normal linear cut with no persistent overlay chrome. The golden has only title cards. A repurposed cut that wraps the cut in a permanent caption bar imports an explainer/social shape that violates the assigned editorial form.",
+      "check": "Judge inspects sample frames across the repurposed cut and identifies any persistent overlay element (something visible at the same on-screen position across many cuts, not a title card on a single image). Pass iff the cumulative on-screen presence of such persistent overlay chrome does NOT exceed 50% of the body runtime.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-FULLSCREEN-CHAPTER-CARDS",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The chapter intros (the numbered 1, 2, 3 markers and their thematic phrases) do NOT appear on a solid-color background with no source footage visible behind them. Chapter text is overlaid on top of moving source footage, keeping the image breathing underneath. (Closing film-title cards and distributor billing are excluded from this item.)",
+      "why": "Brief mandates that chapter markers overlay the source footage; cutting to a full-screen black card for chapter intros breaks the trailer's spell and feels like a slideshow.",
+      "check": "opus-vision identifies each chapter-intro moment (where the visible \"1\", \"2\", or \"3\" appears together with its thematic phrase). Pass iff at most 1 of the 3 chapter intros is presented on a flat solid-color background with no source-film footage visible behind the text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-FRAME-FILL",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The visible source-footage content fills the 1920\u00d71080 frame, no persistent black bars on left and right (pillarbox covering > 15% of total frame width when summed), no persistent black bars on top and bottom (letterbox covering > 15% of total frame height when summed), and no centered \"video-inside-a-video\" effect where the actual image content is rendered at a noticeably smaller resolution (\u2264720p) and floated inside a black surround.",
+      "why": "Brief mandates that the deliverable FILLS the 1920\u00d71080 frame edge to edge. A common automated-edit failure is to take a 360p/720p source and center it inside a 1920\u00d71080 black background; that ships the wrong viewing experience.",
+      "check": "opus-vision samples 5 frames evenly across the repurposed cut body (skipping the closing title card). For each frame, judge measures whether the visible image content extends to the left edge AND right edge AND (top edge OR bottom edge, allowing for academy-ratio framing). Pass iff \u22653 of 5 sampled frames have the image content reaching the frame edges without persistent black bars covering >15% of any side.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-SLOW-WALTZ",
+      "pillar": 3,
+      "weight": 4,
+      "criterion": "The dominant music underneath the repurposed cut is a slow waltz-style cue in triple meter (three-beat pulse) featuring sustained string melody and pizzicato (plucked-string) accents, at a tempo well below 100 BPM.",
+      "why": "The film's score signature is Shigeru Umebayashi's \"Yumeji's Theme\", a 3/4 strings-and-pizzicato cue. Any reasonable extraction from the source's score yields a track of this character.",
+      "check": "Judge listens across at least three roughly-evenly-spaced 5-second windows of the repurposed cut. Pass iff at least two of three windows clearly feature a slow triple-meter cue with strings and pizzicato.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-SINGLE-CUE",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "At least one musical cue (or a seamlessly variated variation of one cue) underscores at least 60% of the repurposed cut's runtime.",
+      "why": "The golden is scored by a single cue across all 82s. Single-cue scoring is a hallmark of the cinephile-register teaser; this threshold rules out 3-piece pop-mixtape stitches without requiring shot-for-shot use of the source's score.",
+      "check": "Judge identifies the music cue(s) playing in the repurposed cut and cites their start/end repurpose timestamps. Pass iff one identifiable cue (or seamlessly variated variation) plays for \u2265 60% of the repurposed cut's total runtime.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-SOURCE-AUDIO-CONTINUOUS",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "All audible non-silent audio across the body of the cut (everything except the final ~1.5s of intentional fade/title silence) is source-derived: either music recognisably consistent with the source's slow strings+pizzicato score, or ambient sound from the source world (rain, footfalls, room tone, mahjong clatter), or source-language dialogue in Cantonese / Shanghainese / Mandarin.",
+      "why": "Diversity-constraint axis: this task is `audio_policy = source_audio_only`. Encodes positive evidence that the cut leans on the source's own sound world. The negative complement (no narrator / no contemporary bed) is enforced independently by S-NO-ENGLISH-VO, S-NO-MODERN-POP-BED, S-NO-ENGLISH-DIALOGUE, and the S-ADDED-VO-PRESENT penalty, so this item can score the positive atomic property in isolation.",
+      "check": "Judge listens to the repurposed cut end-to-end and cites repurposed cut timestamp ranges where audible audio is present. Pass iff every cited audio timestamp range in the body labels cleanly into one of three categories: source-style score, source-style ambience, or source-language dialogue.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-ENGLISH-VO",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No English-language voice-over narration (a narrator describing events, characters, or themes in English) appears anywhere in the repurposed cut's audio track.",
+      "why": "Trailer convention for this register; an English VO is the second most common easy-strategy failure.",
+      "check": "Judge listens to the repurposed cut end to end. Pass iff no English narrator voice is audible at any point.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-MODERN-POP-BED",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "No clearly contemporary musical bed (modern EDM, rap, modern pop, contemporary cinematic-trailer braam stings, dubstep-style drops) appears in the repurposed cut's audio track.",
+      "why": "Stylistic fit with the source's slow-cinema register.",
+      "check": "Judge listens end-to-end. Pass iff no clearly contemporary pop/EDM/cinematic-trailer-braam bed is audible.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-ENGLISH-DIALOGUE",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "If any source dialogue is audible in the repurposed cut, that dialogue is in Cantonese, Shanghainese, or Mandarin, not in English (no English-dubbed source dialogue audible).",
+      "why": "The source is a Cantonese/Shanghainese feature; using an English dub flattens its language identity.",
+      "check": "Judge listens end-to-end. Pass iff (a) no spoken dialogue is audible OR (b) all audible dialogue is in a Chinese language.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-ABRUPT-MUSIC-CUT",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "The music does not abruptly stop mid-phrase at the end of the repurposed cut. The final 1.5 seconds either resolve the cue, fade it, or land into a title-card silence.",
+      "why": "Closing-craft fidelity to the cinephile register.",
+      "check": "Judge listens to the last 1.5s of the repurposed cut. Pass iff the music either resolves, fades, or has ended cleanly into silence (not mid-phrase clipped).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-AUDIO-DROPOUT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No segment of complete or near-complete silence (no music, no dialogue, no ambience) lasting more than 1.5 consecutive seconds occurs in the body of the repurposed cut (excluding the final 1.5s of intentional fade or title card silence).",
+      "why": "A common rendering-pipeline failure that signals a broken edit.",
+      "check": "Judge inspects the audio waveform/loudness across the repurposed cut (excluding the final 1.5s). Pass iff no internal silence \u2265 1.5s is present.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-ADDED-VO",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "No third-party narrator voice, a speaker who is not visible as a character on screen, overlays the repurposed cut's audio track in any language for a cumulative duration of 3.0 seconds or more. This includes English voice-over, TTS narration, an explainer voice, a \"movie repurpose channel\" host, or any added off-camera commentary.",
+      "why": "Diversity-constraint axis: this task is `audio_policy = source_audio_only`. A narrator turns the teaser into an explainer and overrides the source's own audio world. The golden has no narrator. This item complements S-NO-ENGLISH-VO (which checks the English-language case) by also catching non-English narrator overlays.",
+      "check": "Judge listens end-to-end and identifies any speaker(s) whose voice is not visibly attributable to an on-screen character. Pass iff cumulative off-camera narrator-voice presence is less than 3.0 seconds.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-PERIOD-1960s",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut establishes a 1960s-era East Asian period setting through wardrobe (men in fitted suits and narrow ties, women in qipao), hairstyles (slicked-back side-parted men's hair, women's bouffant), and set decoration (wallpapered interiors, vintage lamps, period telephones or clocks).",
+      "why": "1962 Hong Kong is the setting; a contemporary-styled repurpose fails the period identity.",
+      "check": "Judge cites three repurposed cut timestamps and identifies period-fidelity markers (specific wardrobe, hair, or set elements). Pass iff at least two of three sampled moments show explicit 1960s East Asian period markers.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-CONTACT-COUNT",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "Across the entire repurposed cut, at most ONE shot features any physical contact whatsoever between the male lead and the female lead (a brushed hand, a hand on a shoulder, a hand-passing-an-object, an embrace, or otherwise).",
+      "why": "The restraint axis at the count level, the film holds physical contact between the two leads to one or two muted moments across 94 minutes. A teaser must not over-amplify this.",
+      "check": "Judge enumerates every shot featuring both leads and lists any in which they physically touch each other, citing repurpose timestamps. Pass iff at most one such shot exists.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-LONGING-FRAMING",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least one shot in which the male lead and the female lead are framed together with a clear visible gap between their bodies (no touching), sharing a hallway, doorway, room, or table while standing or sitting apart, or framed through a doorway / window / mirror with one in the foreground and the other in the background.",
+      "why": "The longing-as-distance grammar; the golden lands this at 00:53-55 (doorway two-shot) and 00:55-58 (shadow projections).",
+      "check": "Judge cites the repurposed cut timestamp of at least one such no-touch close-framing of the two leads. Pass iff at least one such shot is identified.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-FILM-IDENTIFIED",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "At least one text element in the repurposed cut clearly identifies the film: either the title \"In the Mood for Love\" appears, or a director credit naming \"Wong Kar-wai\" appears, or both.",
+      "why": "A teaser identifies its source.",
+      "check": "Judge cites the repurposed cut timestamp(s) where \"In the Mood for Love\" and/or \"Wong Kar-wai\" (or stylistic equivalents, Cantonese rendering \u738b\u5bb6\u885b also counts) appear. Pass iff at least one such text element is legible for \u2265 0.8s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-RESTRAINT-CEILING-HAND",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least one shot whose composition isolates a body-detail or proxy of restrained intimacy: two hands close to or touching each other (with at least one wedding ring visible), shoulders almost-but-not-touching, eyes meeting through a doorway or window, or fingers near a face / wrist / collar.",
+      "why": "The golden lands this exact emotional ceiling at 01:09-14 (hands with wedding rings, \"THE THRILL OF THE CHASTE\").",
+      "check": "Judge cites the repurposed cut timestamp(s) of any such restraint-ceiling shot. Pass iff at least one such shot exists.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-CANTONESE-DIALOGUE-PRESENT",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "At least 4 cumulative seconds of audible Cantonese, Shanghainese, or Mandarin dialogue from the source actors is present across the entire repurposed cut.",
+      "why": "Brief asks for audible source-language dialogue to preserve the linguistic identity of the foreign-language teaser. A music-only mood reel that strips all dialogue loses the language identity of the film and is no longer a teaser for *this* picture.",
+      "check": "Whisper or gemini-audio identifies all timestamps with audible spoken dialogue from a source-actor voice (any of Cantonese, Shanghainese, or Mandarin). Judge sums the cumulative duration. Pass iff cumulative source-language dialogue duration is at least 4.0 seconds.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-MODERN-FOOTAGE",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No shot in the repurposed cut is sourced from contemporary (post-2000) live-action footage, modern interview clips, behind-the-scenes B-roll, AI-generated imagery, or animation. Every shot reads as period-1962-style cinematography matching the source's grain, lensing, and palette.",
+      "why": "The agent must not fill runtime with reaction shots, modern news B-roll, or contemporary celebrity inserts.",
+      "check": "Judge cites the repurposed cut timestamp of any shot that reads as not-from-the-source-era. Pass iff no such shot is identified.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-EXPLANATORY-CARD",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No text card, on-screen overlay, or caption in the repurposed cut explicitly describes plot facts, phrases of the form \"they fall in love\", \"their spouses are having an affair\", \"she leaves him\", \"Mr Chow moves to Singapore\", or comparable explainer prose.",
+      "why": "Teaser register; the golden's title cards (THREE REASONS / MR. CHOW AND MRS. CHAN / MOVING STILL LIFES / THE THRILL OF THE CHASTE) are thematic, not expository.",
+      "check": "Judge reads every on-screen text element and cites its repurposed cut timestamp. Pass iff no text element states a plot fact in the explainer sense above.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-TEMPLE-CODA",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No shot in the repurposed cut depicts ancient temple-ruins architecture (Khmer/Angkor-style stone carvings, large weathered stone fa\u00e7ades with classical Hindu-Buddhist iconography), nor a person whispering into a hole in a stone wall, nor a hand sealing such a hole with mud or wax.",
+      "why": "This is the film's final coda. A teaser must not reveal it. The golden does not feature this material at all.",
+      "check": "Judge inspects every shot. Pass iff no Angkor-style temple-ruins shot or whispering-into-stone shot appears at any timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-CONSUMMATION-VIOLATION",
+      "pillar": 2,
+      "weight": -60,
+      "criterion": "The repurposed cut visually depicts the male lead and the female lead in a romantic-sexual moment between them, any of: a mouth-to-mouth kiss, the two of them lying together on or in a bed in an intimate posture, or the two of them in any state of partial undress together in the same shot.",
+      "why": "The film deliberately never depicts the consummation of the central relationship; this restraint is the picture's defining cinematic claim and the golden's third reason (\"THE THRILL OF THE CHASTE\"). Depicting consummation is the catastrophic semantic failure for this task, the repurposed cut tells a fundamentally wrong story.",
+      "check": "Judge inspects every shot featuring both leads and lists those (if any) that depict a mouth-to-mouth kiss, lying-together-on-a-bed posture, or partial-undress co-framing. Pass (penalty fires) iff at least one such shot is present in the repurposed cut; cite the repurposed cut timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-ENGLISH-SUBTITLES",
+      "pillar": 2,
+      "weight": -50,
+      "criterion": "Spoken Cantonese or Shanghainese dialogue is audible in the repurposed cut for cumulative duration \u22651 second without any legible burned-in English subtitle visible in a lower safe area during those lines. A US/English-speaking cinephile audience cannot read what is being said, the repurposed cut ships the wrong viewing experience.",
+      "why": "Brief commissions a US art-house teaser for an audience that does not speak Cantonese. Foreign-language dialogue without burned English subtitles destroys access for the commissioned audience. The yellow VHS subs in the source are unusable (lo-res, ugly typography) and must be replaced with clean modern subs, not just cropped out. Threshold is tightened to \u22651s because even a single un-subtitled line of foreign dialogue breaks the access contract of the teaser.",
+      "check": "Judge identifies all repurpose segments where Cantonese or Shanghainese dialogue is audible in any character's voice (the actors). For each such segment, judge confirms whether a legible English caption is visible in the lower safe area during the line. Pass (deduction fires) if and only if cumulative dialogue-without-subs duration is \u22651 second across the repurposed cut.",
+      "judge": "opus-vision"
+    }
+  ]
+}

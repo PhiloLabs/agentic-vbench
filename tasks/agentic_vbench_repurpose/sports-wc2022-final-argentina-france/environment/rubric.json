@@ -1,0 +1,365 @@
+{
+  "task_id": "sports_wc2022_final_argentina_france",
+  "items": [
+    {
+      "id": "F-VALID-MP4",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The repurposed cut is a single playable MP4 file delivered as one self-contained video.",
+      "why": "Delivery basic. A multi-segment or corrupt file blocks all downstream judging.",
+      "check": "Judge confirms the file opens and plays as one mp4 and notes the repurposed cut duration in MM:SS.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-RUNTIME-121-134",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut's total runtime is between 121.0 and 134.0 seconds inclusive.",
+      "why": "Source calibration: the golden FIFA repurposed cut of this match runs 127.477s. The \u00b15% tolerance window (121.10s to 133.85s) keeps the repurposed cut inside the broadcast-repurpose density convention for this 90-minute-plus event.",
+      "check": "Judge cites the repurposed cut duration in seconds and confirms it falls between 121.0 and 134.0.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-ASPECT-9-16-NOT-DISTORTED",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The repurposed cut is delivered in a 9:16 vertical aspect ratio at target resolution 1080\u00d71920 with no vertical or horizontal stretching of players, scoreboard graphics, or stadium architecture.",
+      "why": "Brief commissions a 1080\u00d71920 vertical (9:16) deliverable for TikTok / Reels; this item must agree with V-NOT-VERTICAL. Stretching breaks the broadcast look and distorts the scoreboard overlay that the comeback chronology relies on.",
+      "check": "Judge confirms ffprobe width=1080 AND height=1920 (or, equivalently, aspect ratio width/height in [0.5, 0.6]) AND cites a repurposed cut timestamp where the aspect is visibly correct (round football, undistorted scoreboard text).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-NO-BLACK-FILLER",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The repurposed cut contains no continuous black, single-color, or static-blank segment longer than 3 seconds (other than a brief opening/closing fade under 1.5 seconds).",
+      "why": "Filler is the classic agentic runtime-padding tell.",
+      "check": "Judge confirms no >3s black/blank segment is present in the repurposed cut and cites repurposed cut timestamps for any fade boundaries.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-ARG-MATCHPLAY-PK-SHOWN",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains a shot of an Argentina-kit (white and light-blue vertical stripes) player scoring a penalty kick during match play, i.e., multiple France-kit outfield players are visible defending and other Argentina-kit teammates are visible in frame or in the buildup, distinct from a 1v1 penalty-shootout kick.",
+      "why": "Source calibration: this beat appears around 00:51-01:08 in the source as Argentina's opening goal (Messi PK, 23 minute). Without it the 2-0 lead can't be established. Match-play disambiguator separates this from Messi's shootout kick.",
+      "check": "Judge cites the repurposed cut timestamp where the Argentina match-play penalty conversion is shown.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-DIMARIA-COUNTER-SHOWN",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains a shot of an open-play Argentina goal scored from a counter-attack and finished at the far post, i.e., the ball travels across the box from one wing to the opposite far post where an Argentina-kit player slides or strikes it past the goalkeeper, not a penalty kick.",
+      "why": "Source calibration: this beat appears around 01:17-01:29 in the source as Di Mar\u00eda's counter-attack finish at 36 minutes for ARG 2-0. The \"far-post finish from a counter\" pattern uniquely identifies this goal among Argentina's three.",
+      "check": "Judge cites the repurposed cut timestamp where the open-play far-post Argentina counter-attack finish is shown.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MBAPPE-VOLLEY-SHOWN",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains a shot of a France player in the royal-blue kit scoring with a falling/airborne volley from inside the box, not a penalty kick.",
+      "why": "Source calibration: this beat appears around 02:18-02:30 in the source as Mbapp\u00e9's falling-volley equalizer for 2-2 at 81 minutes. Most distinctive of Mbapp\u00e9's three goals.",
+      "check": "Judge cites the repurposed cut timestamp where the falling-volley equalizer by a France-kit player is shown.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-ARG-CLOSERANGE-OPENPLAY-GOAL-SHOWN",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains a shot of an Argentina-kit player scoring an open-play goal from close range, i.e., the ball is poked, tapped, or forced over the goal line from within roughly 3 meters of the goal, from a goalmouth scramble or rebound, not from a penalty spot and not from outside the box and not at the far post on a wide cross.",
+      "why": "Source calibration: this beat appears around 03:13-03:28 in the source as Messi's close-range ET finish for ARG 3-2 at 108 minutes. The \"close-range goalmouth scramble\" pattern uniquely identifies this Argentina goal vs the PK opener and the Di Mar\u00eda far-post finish.",
+      "check": "Judge cites the repurposed cut timestamp where the Argentina close-range goalmouth-scramble finish is shown.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-FRANCE-MATCHPLAY-PK-SHOWN",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains a shot of a France-kit (royal-blue jersey) player scoring a penalty kick during match play, i.e., multiple Argentina-kit outfield players are visible defending and the France player runs up from the penalty spot, distinct from a 1v1 penalty-shootout kick.",
+      "why": "Source calibration: France has two match-play PK conversions in the source, Mbapp\u00e9's 80-minute regulation PK (~02:03-02:08) for 2-1 and his 117-minute ET PK (~04:04-04:09) for 3-3. This item passes if either is preserved with match-play context; the score-state items differentiate which has which scoreboard.",
+      "check": "Judge cites the repurposed cut timestamp where a France match-play penalty conversion is shown.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-COMAN-SAVE-VISIBLE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut contains a clearly visible shot of a penalty kick during the penalty shootout being stopped/saved by the goalkeeper, with the kicker in the France royal-blue kit and the goalkeeper in a non-blue kit.",
+      "why": "Source calibration: this beat appears around 04:28-04:30 in the source as Coman's PK saved by Mart\u00ednez. This save is the swing moment that decides the shootout.",
+      "check": "Judge cites the repurposed cut timestamp where a France-kit penalty kick is visibly saved by the goalkeeper.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MONTIEL-WINNING-KICK-VISIBLE",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The repurposed cut contains a clearly visible shot of a penalty kick during the penalty shootout being scored by a player in the Argentina white-and-light-blue striped kit, after which no further kicks are taken and an Argentina pile-on celebration begins.",
+      "why": "Source calibration: this beat appears around 04:47-04:51 in the source as Montiel's winning penalty. The single-most-important shot in the repurposed cut.",
+      "check": "Judge cites the repurposed cut timestamp where the Argentina-kit penalty is scored and a pile-on celebration immediately begins.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-OVERLAY-PERSISTS",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "Two persistent on-screen overlay elements produced by the repurposed cut editor are held across the repurposed cut: (a) a running ARG-FRA scoreboard widget in one corner of the frame AND (b) a channel-or-tournament identifier (FIFA logo, World Cup mark, broadcaster bug, or equivalent tournament/channel badge) in the opposite corner of the frame. Both overlays must be held in roughly fixed screen regions across the repurposed cut.",
+      "why": "Source calibration: the golden repurpose holds a persistent FIFA logo top-right 00:00-02:07 and a persistent live score widget top-left 00:04-01:36, i.e., dual-corner overlay architecture. The diversity-constraint output_shape is picture_in_picture_overlay; this item rewards the dual-corner repurpose-level overlay distinct from the source's own in-broadcast scoreboard. A single corner overlay is not sufficient.",
+      "check": "Judge samples the repurposed cut at 5 timestamps (~10%, 30%, 50%, 70%, 90%) and at each sample confirms BOTH (a) a scoreboard widget visible in one corner AND (b) a channel/tournament identifier visible in the opposite corner. Item passes if and only if BOTH overlays are visible in \u2265 3 of the 5 samples. Judge cites the corner regions and the visible content of each overlay.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHAMPIONS-END-CARD",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut's closing shot (within the final 5 seconds of runtime) contains a brief end card naming Argentina as the World Cup champions, either on-screen text saying \"ARGENTINA CHAMPIONS\" / \"ARGENTINA WIN\" / \"CHAMPIONS DEL MUNDO\" or equivalent, OR a clean closing shot of Argentina lifting the trophy with an overlay confirming the result.",
+      "why": "Brief mandates \"close on a brief end card naming Argentina as champions.\" Location-specific (final-5s end card) is the brief's exact ask.",
+      "check": "Judge inspects the final 5 seconds of the repurposed cut. Pass if a clear end card identifying Argentina as champions (or Argentina lifting the trophy with text confirming) is visible.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-REPEATED-GOAL-CLIP",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut does not reuse the same goal clip (same scorer, same angle, same scoreboard state) more than once.",
+      "why": "Looping a goal clip is the classic runtime-padding move when an agent cannot find enough material; with six distinct goals available it is never necessary here.",
+      "check": "Judge confirms no identical goal-action shot appears at two distinct repurpose timestamps and lists any near-duplicate candidates.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-SCORE-1-0-LEGIBLE",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "Within five seconds of the first Argentina goal being shown, the post-goal score ARG 1 - FRA 0 is legible to the viewer, via the broadcast scoreboard overlay reading \"ARG 1 - 0 FRA\" (or \"1 - 0\"), an added on-screen score graphic, or an audible spoken statement of the score.",
+      "why": "Source calibration: scoreboard shows ARG 1 - 0 FRA at the Messi PK, source ~00:51-01:08. Without explicit score legibility a goal montage cannot establish state.",
+      "check": "Judge cites the repurposed cut timestamp where the 1-0 score state is visible or spoken.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-SCORE-2-0-LEGIBLE",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "Within five seconds of the second Argentina goal being shown, the post-goal score ARG 2 - FRA 0 is legible via scoreboard overlay, added graphic, or audible narration stating two-nil.",
+      "why": "Source calibration: scoreboard shows ARG 2 - 0 FRA at Di Mar\u00eda's goal, source ~01:17-01:29. Establishes the lead France must overturn.",
+      "check": "Judge cites the repurposed cut timestamp where the 2-0 score state is visible or spoken.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-SCORE-2-1-LEGIBLE",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "Within five seconds of the first France goal being shown, the post-goal score ARG 2 - FRA 1 is legible via scoreboard overlay, added graphic, or audible narration stating two-one.",
+      "why": "Source calibration: scoreboard shows ARG 2 - 1 FRA at Mbapp\u00e9's first PK, source ~02:03-02:08. First step of the French comeback.",
+      "check": "Judge cites the repurposed cut timestamp where the 2-1 score state is visible or spoken.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-SCORE-2-2-LEGIBLE",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "Within five seconds of the second France goal being shown, the post-goal score ARG 2 - FRA 2 is legible via scoreboard overlay, added graphic, or audible narration stating two-two or \"level\".",
+      "why": "Source calibration: scoreboard shows ARG 2 - 2 FRA at the Mbapp\u00e9 volley, source ~02:18-02:30. The equalization is the first major arc flip.",
+      "check": "Judge cites the repurposed cut timestamp where the 2-2 score state is visible or spoken.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-SCORE-3-2-ET-LEGIBLE",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "Within five seconds of the third Argentina goal being shown, the post-goal score ARG 3 - FRA 2 is legible via scoreboard overlay, added graphic, or audible narration stating three-two.",
+      "why": "Source calibration: scoreboard shows ARG 3 - 2 FRA at Messi's ET finish, source ~03:13-03:28, with the broadcast ET tag visible. The extra-time go-ahead is the third arc flip.",
+      "check": "Judge cites the repurposed cut timestamp where the 3-2 score state is visible or spoken.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-SCORE-3-3-ET-LEGIBLE",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "Within five seconds of the third France goal being shown, the post-goal score ARG 3 - FRA 3 is legible via scoreboard overlay, added graphic, or audible narration stating three-three.",
+      "why": "Source calibration: scoreboard shows ARG 3 - 3 FRA at Mbapp\u00e9's ET PK, source ~04:04-04:09. The cliff before the shootout.",
+      "check": "Judge cites the repurposed cut timestamp where the 3-3 score state is visible or spoken.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-MBAPPE-HATTRICK-MARKER",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least one explicit hat-trick designation for Mbapp\u00e9, i.e., the audible or on-screen text contains a hat-trick phrase (\"hat-trick\", \"hat trick\", \"all three goals\", \"three goals\", \"Mbapp\u00e9 x3\", \"Mbapp\u00e9 HAT-TRICK\", or equivalent) in association with the name Mbapp\u00e9 / Kylian Mbapp\u00e9.",
+      "why": "Source calibration: Mbapp\u00e9 scores at source ~02:03-02:08, ~02:18-02:30, and ~04:04-04:09. A generic agent will treat the three goals as three different French players. This explicit hat-trick marker is the unique-difficulty-axis canary; the wrong-scorer penalty handles inverse misattribution.",
+      "check": "Judge cites the repurposed cut timestamp where the audible or on-screen hat-trick phrase for Mbapp\u00e9 appears.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-MESSI-NAMED-AS-SCORER",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut explicitly names Messi (Messi / Lionel Messi / \"Messi\") as the scorer of an Argentina goal, via an on-screen name graphic appearing within five seconds of an Argentina goal, a \"Messi 10\" / \"#10 Messi\" jersey-number readout on screen, or audible narration saying \"Messi scores\" / \"Messi goals\" / \"Messi gives Argentina the lead\" / equivalent at the moment of an Argentina goal.",
+      "why": "Source calibration: Messi scores at source ~00:51-01:08 (opening PK) and ~03:13-03:28 (ET 3-2). Messi's protagonist role anchors the Argentina story; the wrong-scorer penalty handles inverse misattribution.",
+      "check": "Judge cites the repurposed cut timestamp where Messi is explicitly named as scoring an Argentina goal.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-GOALS-IN-SCORED-ORDER",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The six match goals appear in the repurposed cut in this exact order: first Argentina penalty goal, second Argentina open-play goal, first France penalty goal, France falling-volley goal, third Argentina close-range goal, second France penalty goal, before any penalty-shootout footage.",
+      "why": "Source calibration: scored order is 23' Messi PK, 36' Di Mar\u00eda, 80' Mbapp\u00e9 PK, 81' Mbapp\u00e9 volley, 108' Messi ET, 117' Mbapp\u00e9 ET PK. Reordering destroys the 2-0 \u2192 2-2 \u2192 3-2 \u2192 3-3 arc.",
+      "check": "Judge lists the repurposed cut timestamp of each of the six goals and confirms the sequence matches the order above, with no shootout kick interleaved.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-ET-DISTINCT-FROM-REGULATION",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "The repurposed cut visibly or audibly marks the last two Argentina/France goal pair as extra-time, via the broadcast ET tag in the scoreboard graphic, an added \"EXTRA TIME\" / \"ET\" / \"extra time\" overlay or title card, or audible narration saying \"extra time\" / \"in extra time\" / equivalent.",
+      "why": "Source calibration: ET tag visible at source ~03:13 (Messi ET) and ~04:04 (Mbapp\u00e9 ET PK). Without ET marking, viewers may read the 3-2 and 3-3 goals as regulation.",
+      "check": "Judge cites the repurposed cut timestamp where the extra-time marker is visible or audible.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-ARGENTINA-NAMED-AS-CHAMPIONS",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut explicitly identifies Argentina as the World Cup winner, via spoken narration using the words \"Argentina\" plus \"champions\" / \"won\" / \"world cup\" / equivalent, or via a closing on-screen title naming Argentina as the winner / champions.",
+      "why": "Source calibration: outcome moment falls at source ~04:51-04:58. This is an outcome-highlight repurpose; the winner must be explicitly named, not merely implied.",
+      "check": "Judge cites the repurposed cut timestamp where Argentina is explicitly named as the winner/champions in audio or on-screen text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-FABRICATED-CLAIMS",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut contains no spoken or on-screen claim that contradicts the actual match (e.g., a stated final score other than 3-3 in regulation/ET, a claim that France won, an invented scorer name that did not score in this match, an invented red card, or an invented assist that did not happen).",
+      "why": "Hallucinated narration and fabricated overlays are a known failure mode for agentic edits that add narration; this item makes the cost explicit.",
+      "check": "Judge lists every spoken or on-screen factual claim in the repurposed cut and confirms none contradicts the match facts of: ARG 3-3 FRA in regulation/ET, Argentina won on penalties, scorers Messi (\u00d72), Di Mar\u00eda (\u00d71), Mbapp\u00e9 (\u00d73).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-PRE-MATCH-PADDING",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut contains no extended pre-match content, no anthems, lineup graphics, formation diagrams, coach interviews, walkout/tunnel sequences longer than 5 seconds total, or stats tables in place of match action.",
+      "why": "Source calibration: lineups appear at source 00:16-00:25 and would be the lowest-information way for an agent to consume runtime. Pre-match padding crowds out the comeback story.",
+      "check": "Judge confirms no continuous pre-match content (anthems, lineups, formations, tunnel shots, stats tables) totalling more than 5 seconds is present in the repurposed cut.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-NARRATOR-PERSISTS",
+      "pillar": 3,
+      "weight": 6,
+      "criterion": "A single identifiable narrator voice carries the repurposed cut, one consistent speaker is audibly speaking explainer-style narration about the match across at least 50% of the repurposed cut's total runtime, with no audible mid-repurpose swap to a second person carrying the narrator role.",
+      "why": "Source calibration: the diversity-constraint audio_policy is new_vo_required; the golden adds Peter Drury narration end-to-end over FOX footage. A consistent narrator voice is the scaffolding that lets a viewer who never saw the match follow the comeback arc.",
+      "check": "Judge cites repurposed cut timestamps where the same narrator voice is audible, estimates the cumulative narrator coverage as a percentage of total runtime, and confirms whether a single speaker carries that coverage.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CROWD-AT-GOAL-MOMENTS",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "Stadium crowd noise (roar, gasp, chant) is audible at the moment of at least three of the six match goals, clearly distinguishable from a music track.",
+      "why": "Source calibration: crowd roar is a distinctive audio character of this final and swings between gasp (France goals) and eruption (Argentina goals). Replacing it entirely with library music kills the atmosphere.",
+      "check": "Judge cites the repurposed cut timestamps of each goal where stadium crowd noise is clearly audible.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CLIMACTIC-AUDIO-WINNING-KICK",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "At the moment the Argentina-kit player scores the final penalty-shootout kick, the audio includes a clear crowd-eruption peak, a narration call peak (e.g., \"Argentina\" / \"champions\" / \"they've done it\"), or both, louder/more intense than the rest of the repurposed cut.",
+      "why": "Source calibration: source ~04:47-04:51 has the loudest crowd peak of the match. The audio climax must align with the winning kick, not float over a montage.",
+      "check": "Judge cites the repurposed cut timestamp where the winning-kick audio peak occurs and notes the type (crowd peak, narration peak, or both).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-AUDIO-DROPOUT",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "The repurposed cut contains no silent gap longer than 2.0 seconds between the first 5 seconds and the last 5 seconds of runtime.",
+      "why": "Mid-repurpose silence breaks broadcast pacing and is an audible sign that an agent removed source audio without rebuilding the soundbed.",
+      "check": "Judge confirms no >2.0s silent segment is present between repurpose 00:05 and (repurpose_end - 5).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-MUSIC-DROWN-NARRATOR",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "If music is added to the repurposed cut, it does not obscure the narrator voice at any point to the degree that the narrator's words cannot be made out.",
+      "why": "A repurposed cut can add tasteful score, but burying the narrator undoes S-NARRATOR-PERSISTS. This absence item polices the \"music on top, narrator buried\" failure.",
+      "check": "Judge confirms that at every repurposed cut timestamp where the narrator voice is audible, the narrator's words remain intelligible above any added music bed.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-VO-CONTRADICTS-SCORE",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "The repurposed cut's narrator voice does not state a scorer attribution that contradicts the match's scorer roster, specifically, the narrator does not verbally name a non-actual scorer for any of the six match goals (e.g., the narrator does not say \"Griezmann scores\", \"Giroud's hat-trick\", or attribute one of Messi's goals to another Argentina player or one of Mbapp\u00e9's goals to another France player).",
+      "why": "Hallucinated narrator scorer attributions are the most damaging audio failure for a comeback-chronology repurpose. Scope is restricted to narrator-stated scorer attributions only; on-screen-text contradictions and other fabricated factual claims (final-score errors, \"France won\", invented red cards, invented assists) are covered by N-NO-FABRICATED-CLAIMS and must not double-count here.",
+      "check": "Judge lists every narrator claim in the repurposed cut that names a scorer for a specific goal, and confirms each is consistent with the actual scorer roster: Messi (\u00d72: PK 23' and ET 108'), Di Mar\u00eda (\u00d71: 36'), Mbapp\u00e9 (\u00d73: 80' PK, 81' volley, 117' ET PK). Pass if every narrator-stated scorer attribution is consistent with this roster. Overlay-text contradictions are not in scope for this item (graded under N-NO-FABRICATED-CLAIMS).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-CHRONOLOGY-COLLAPSE",
+      "pillar": 2,
+      "weight": -60,
+      "criterion": "The six regulation/extra-time match goals appear in the repurposed cut out of scored order, for example, a France goal appears before the first Argentina goal, the extra-time Messi goal appears before the Mbapp\u00e9 volley equalizer, or two goals are interleaved with shootout kicks between them so the 2-0 \u2192 2-2 \u2192 3-2 \u2192 3-3 arc cannot be reconstructed from the repurposed cut alone.",
+      "why": "Source calibration: scored order is Messi PK 23' (ARG 1-0) \u2192 Di Mar\u00eda 36' (ARG 2-0) \u2192 Mbapp\u00e9 PK 80' (ARG 2-1) \u2192 Mbapp\u00e9 volley 81' (ARG 2-2) \u2192 Messi ET 108' (ARG 3-2) \u2192 Mbapp\u00e9 ET PK 117' (ARG 3-3). Reordering destroys the repurposed cut's central story and is the hardest failure to recover from.",
+      "check": "Judge lists the repurposed cut timestamp of each of the six goals it can identify, and confirms whether the sequence matches the scored order above. Pass (deduct) when any goal is out of order or interleaved with shootout footage.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-MISSING-WINNING-KICK",
+      "pillar": 2,
+      "weight": -50,
+      "criterion": "The repurposed cut does not contain a visible shot of the final Argentina-kit player scoring the winning penalty in the penalty shootout (the Argentina-kit kicker followed by an immediate pile-on celebration and no further kicks).",
+      "why": "Source calibration: source ~04:47-04:51 shows Montiel's winning penalty. Without it the repurposed cut has no climax and the viewer cannot tell Argentina actually won.",
+      "check": "Judge confirms whether a visible Argentina-kit penalty kick followed by an immediate pile-on celebration (with no further shootout kicks) appears in the repurposed cut. Pass (deduct) when no such moment is present.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-MISSING-PK-OR-OUT-OF-POSITION",
+      "pillar": 2,
+      "weight": -30,
+      "criterion": "The repurposed cut either contains no penalty-shootout footage at all, OR shows the penalty shootout before all six regulation/extra-time goals have been shown.",
+      "why": "Source calibration: PK shootout occupies source ~04:18-04:51, strictly after all six goals. The shootout must be the climax, not the opening; this penalty fires when an agent uses the shootout as a hook or omits it entirely.",
+      "check": "Judge identifies the repurposed cut timestamp(s) of any penalty-shootout kicks (one-on-one kick from the penalty spot during a clearly post-match shootout context: a single kicker, goalkeeper, and no other outfield players defending). Pass (deduct) when no such timestamp exists, or when any shootout kick appears before the last of the six regulation/extra-time goals.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-WRONG-SCORER-CANON",
+      "pillar": 2,
+      "weight": -30,
+      "criterion": "The repurposed cut explicitly attributes one of Mbapp\u00e9's three France goals to another France player by name (e.g., names Griezmann, Giroud, Coman, Demb\u00e9l\u00e9, or Thuram as the scorer of a goal in the repurposed cut), OR attributes one of Messi's two Argentina goals to another Argentina player by name (e.g., names Di Mar\u00eda, \u00c1lvarez, or Lautaro as the scorer of one of Messi's goals).",
+      "why": "Source calibration: scorers are Messi (\u00d72: PK 23' and ET 108'), Di Mar\u00eda (\u00d71: 36'), Mbapp\u00e9 (\u00d73: 80' PK, 81' volley, 117' ET PK). Wrong-scorer attribution is the second curator-named critical failure and a known agentic hallucination pattern.",
+      "check": "Judge lists every spoken or on-screen scorer attribution in the repurposed cut and confirms whether any contradicts the scorer roster above. Pass (deduct) when any attribution contradicts (Mbapp\u00e9's goal credited to another France player, or Messi's goal credited to another Argentina player).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NOT-VERTICAL",
+      "pillar": 1,
+      "weight": -50,
+      "criterion": "The repurposed cut's aspect ratio is not 9:16 vertical, it is 16:9 horizontal or any aspect ratio wider than tall. A vertical repurpose is the structural deliverable for TikTok / Reels distribution; a horizontal repurpose fails the platform brief entirely.",
+      "why": "Brief commissions a 1080\u00d71920 vertical (9:16) deliverable for TikTok / Instagram Reels. A horizontal cut, even if perfectly edited otherwise, cannot ship to the commissioned platform.",
+      "check": "Judge probes the repurposed cut's frame width and height. Pass (deduction fires) if and only if the frame height is not strictly greater than the frame width.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-VERTICAL-CROP-MISSES-GOAL",
+      "pillar": 1,
+      "weight": -30,
+      "criterion": "Assuming the repurposed cut is a true 9:16 vertical reframe, key match action, the ball at the moment of a goal, the goalkeeper at a key save, or a sprint/buildup run, is truncated by the vertical reframe such that the ball or the named scorer leaves the visible vertical frame during the goal's buildup or strike.",
+      "why": "A 9:16 reframe from a 16:9 broadcast football source forces the editor to track the active half of the pitch; a center-crop or a wrong-zoom that loses the ball during Messi's or Mbapp\u00e9's run, or that crops the goalkeeper out at a save, destroys the readability of the goal sequence. Assumes the repurposed cut is a true vertical reframe, letterbox-cheat output is covered separately by V-LETTERBOX-CHEAT.",
+      "check": "Judge samples the repurposed cut's named goal sequences (Messi's opener, Di Mar\u00eda's, Mbapp\u00e9's brace, Messi's ET goal, the PK shootout) and confirms the ball, the scorer's body, and the goalkeeper at decisive moments are inside the vertical frame. Pass (deduction fires) if and only if one or more goal sequences shows the ball or the named scorer clipped out of frame during the buildup or strike.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-LETTERBOX-CHEAT",
+      "pillar": 1,
+      "weight": -15,
+      "criterion": "The repurposed cut's frame dimensions are vertical (height > width) but the actual cinematic video content sits in a horizontal band occupying only the middle of the vertical frame, with padding bars (black, scoreboard graphics, branding cards, caption strips, blurred background, OR any combination) above and below the active video content. This is a \"Reels template\" letterbox cheat: technically-vertical-but-actually-horizontal content padded into a 9:16 canvas.",
+      "why": "Brief commissions a TRUE vertical reframe of the broadcast source. A horizontal clip with vertical padding still ships the wrong viewing experience: viewers see a small horizontal video strip surrounded by graphics, not a vertical repurpose of the action. The author has not actually done the reframe work; they have padded the source into a vertical container. (QC Pass B: weight reduced from -50 to -15, the viewer still sees the action.)",
+      "check": "Judge samples the repurposed cut at 5 timestamps (~10%, 30%, 50%, 70%, 90%) and identifies the bounding box of the active cinematic video content (excluding scoreboard widgets, branding cards, caption strips, black bars, blurred backgrounds). Pass (deduction fires) if and only if the active video content's vertical extent occupies less than 75% of the frame height in 3 or more of the 5 samples, i.e., the vertical padding (top + bottom non-video region) consistently exceeds 25% of total frame height.",
+      "judge": "opus-vision"
+    }
+  ]
+}

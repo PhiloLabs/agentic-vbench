@@ -1,0 +1,311 @@
+{
+  "task_id": "sports_bolt_beijing_2008_100m",
+  "items": [
+    {
+      "id": "FORMAT-RUNTIME",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The repurposed cut runtime is at least 2 minutes 38 seconds and at most 2 minutes 55 seconds (158\u2013175 seconds inclusive).",
+      "why": "Brief specifies \"exactly two minutes forty-six seconds end-to-end\"; this band is \u00b15% of that target. Source calibration: the canonical Olympics-channel reference cut is 2:46 (166.6s).",
+      "check": "Read the repurposed cut's container duration from ffprobe and verify 158 \u2264 duration_seconds \u2264 175.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "FORMAT-CONTAINER",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The deliverable is a single MP4 file with an H.264 video stream and an AAC audio stream.",
+      "why": "Standard delivery format requested in the brief; failure usually indicates a broken render or wrong export profile.",
+      "check": "Run ffprobe on the repurposed cut; confirm format_name contains 'mp4', video codec is h264, and at least one audio stream uses AAC.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "FORMAT-ASPECT",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The repurposed cut is 9:16 vertical with target resolution 1080\u00d71920 and undistorted aspect ratio (no horizontally stretched or vertically squashed picture).",
+      "why": "Brief specifies 1080\u00d71920 vertical (9:16) for TikTok / Reels distribution; this item must agree with V-NOT-VERTICAL.",
+      "check": "Read width and height from ffprobe and confirm width=1080 AND height=1920 (or, equivalently, the aspect ratio width/height falls in [0.5, 0.6]). Spot-check one mid-repurpose frame for distortion (round objects stay round, faces are not stretched).",
+      "judge": "deterministic"
+    },
+    {
+      "id": "FORMAT-AUDIO-PRESENT",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The repurposed cut contains at least one audible audio stream with non-silent content for the majority of its runtime.",
+      "why": "The brief specifies broadcast-style audio with commentary, gun start, and crowd; a silent edit defeats the editorial purpose.",
+      "check": "Probe audio stream existence; sample three points in the repurposed cut (\u224825%, 50%, 75% of runtime) and confirm audible content (non-silent waveform or audible speech/crowd) at each.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-FINAL-LABEL",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "On-screen text identifying the race as the 100 metre Final is visible at some point in the repurposed cut (text reading \"100M\" and \"FINAL\" appears in the same overlay or within the same on-screen graphic).",
+      "why": "Source calibration: a \"100M MEN FINAL\" overlay appears in the source at approximately 01:43\u201301:46 and is the broadcast's standard race-identifier graphic. The repurposed cut should preserve or reproduce it.",
+      "check": "Judge cites the repurposed cut timestamp where text reading both \"100M\" and \"FINAL\" is visible together on screen.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-START-LIST",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "A start-list overlay listing multiple athletes by lane number with national flags or country codes is visible at some point in the repurposed cut.",
+      "why": "Source calibration: the 100m Final start-list graphic appears around source 01:43\u201301:50 and is the broadcast's pre-race context graphic, listing all 8 finalists.",
+      "check": "Judge cites the repurposed cut timestamp where an on-screen overlay shows at least three athlete names paired with lane numbers (1\u20138) and/or country flags or codes.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-PRE-RECORD-BANNER",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "A pre-race graphic showing the standing world-record and Olympic-record times (e.g., \"WR 9.72\" and \"OR 9.84\") is visible at some point before the race result is announced.",
+      "why": "Source calibration: the broadcast's standing-record banner appears around source 02:08\u201302:12 (in starting-blocks footage); the golden preserves it. It frames the stakes for the new record.",
+      "check": "Judge cites the repurposed cut timestamp where an on-screen graphic displays both a \"WR\" (world record) value and an \"OR\" (Olympic record) value as standing record times, before the post-race result is shown.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-BLOCKS",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "A shot of athletes in starting blocks at the start line is visible before the race begins in the repurposed cut.",
+      "why": "Source calibration: source 02:08\u201302:14 shows the field settling into blocks; broadcast convention requires this beat to establish the start.",
+      "check": "Judge cites the repurposed cut timestamp where one or more sprinters are visible in starting blocks (low set position with hands on the line) before any in-race running footage.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHEST-THUMP-PRESENT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The chest-thump deceleration moment is visible at least once in the repurposed cut, Bolt (or a runner in the leading yellow Jamaica vest) drops his arms and slaps his own chest while still running, before the finish line, with one hand striking the chest.",
+      "why": "Source calibration: chest-thump appears in source at approximately 02:24\u201302:30 inside the 100m Final segment. This is the single most-cited image of the moment and is the editorial reason the repurposed cut exists.",
+      "check": "Judge cites the repurposed cut timestamp where a leading runner in a yellow Jamaica vest is visibly striking his own chest with at least one hand while still running on the track, before crossing the finish line.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHEST-THUMP-MULTI-ANGLE",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "The chest-thump beat is shown a second time from a clearly different camera angle (for example: live-race wide angle, then slow-motion side-view; or live then trackside low-angle replay). The second appearance must be visibly recognisable as a replay or a different camera position, not the identical shot repeated.",
+      "why": "Source calibration: the golden returns to the chest-thump twice after the live race, once in a slow-motion side-angle replay around repurpose 01:22\u201301:53 and once in a low-angle trackside replay around repurpose 01:58\u201302:21. Multi-angle replay is the canonical Olympics-channel treatment of an iconic deceleration moment.",
+      "check": "Judge cites two distinct repurpose timestamps where the chest-thump is visible. Judge confirms the two appearances differ in at least one of: camera angle (wide vs side vs low/track-level), playback speed (real-time vs slow-motion), or framing (full-body vs torso/close), and are not the same shot repeated identically.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-RESULT-9-69",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "An on-screen graphic explicitly showing the result \"9.69\" as the winning time is visible at some point in the repurposed cut (for example: a post-race \"WINNER\" overlay reading \"9.69\", a track-clock reading 9.69, a final result table with \"9.69\" next to the first-place athlete, or a \"NEW WR 9.69\" banner).",
+      "why": "Source calibration: source \u2248 02:34\u201302:48 contains the broadcast \"WINNER, Usain BOLT, JAM, 9.69, WR\" graphic; the golden surfaces this at \u2248 00:56 and again in its closing result table. The 9.69 figure is the resolution of the repurposed cut and must be visible.",
+      "check": "Judge cites the repurposed cut timestamp where an on-screen graphic explicitly displays the numeric value \"9.69\" associated with the first-place finisher of the 100m Final.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MEDAL-CONTEXT",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "After the race, the repurposed cut acknowledges at least one of: the silver medallist (a runner labeled Thompson or with country code TRI), the bronze medallist (Dix or USA in third), or a final result table that lists positions 2 and 3 by name and time.",
+      "why": "Source calibration: in the golden at \u2248 02:21\u201302:36 Richard Thompson (TRI, 9.89) and Walter Dix (USA, 9.91) appear after the race; in the closing result table at \u2248 02:36\u201302:47 all eight finishers are listed. Acknowledging the podium grounds the repurposed cut as a race repurpose rather than a solo highlight.",
+      "check": "Judge cites the repurposed cut timestamp where either an athlete named \"Thompson\" or labeled \"TRI\" appears as a silver/second-place context after the race, OR an athlete named \"Dix\" or labeled \"USA\" appears as a bronze/third-place context, OR an on-screen result table shows finishers in positions 2 and 3 with names and times.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-OVERLAY-PERSISTS",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "A persistent corner overlay element, a scoreboard widget, a record-time card showing \"WR\" and/or the numeric value \"9.69\", or an equivalent corner attribution graphic, is visible in a fixed screen region (a corner or edge of the frame) across the majority of the repurposed cut's runtime (visible for at least 60% of total seconds).",
+      "why": "Brief specifies \"run a corner scoreboard widget across the whole cut \u2026 so the time is on screen even when the broadcast graphic isn't.\" Per candidate_profile.diversity_constraints.output_shape = picture_in_picture_overlay, a sustained author-composited overlay element is the structural marker of this task and the bulk of the source's intermittent broadcast graphics do not satisfy it on their own.",
+      "check": "Judge samples the repurposed cut at five points (\u224810%, 30%, 50%, 70%, 90% of runtime). Confirm that a small persistent overlay element (occupying a roughly fixed corner or edge region, smaller than ~25% of frame area) is visible at four or more of those five samples. Judge cites the corner/edge region and the visible text or scoreboard content (e.g., \"WR 9.72\" / \"9.69\" / a small scoreboard widget). The source's full-screen broadcast graphics (start-list, \"WINNER\" panel) do not count as a persistent corner overlay because they appear only briefly and occupy most of the frame.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-SINGLE-RACE-FOCUS",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The repurposed cut presents a single race as its central event. The majority of runtime (at least 60% of total seconds) is footage clearly tied to one race, the 100m Final, including its pre-race build-up, the race itself, replays of that race, and its post-race aftermath.",
+      "why": "The subtype is moment-extraction, not multi-race compilation. A montage that splits time roughly equally across multiple races defeats the editorial purpose even if each segment is well-cut.",
+      "check": "Judge segments the repurposed cut timeline into shots and tags each shot with which race it belongs to (using broadcast graphics, lane assignments, jersey numbers, distance labels, or visual cues). Confirm that shots belonging to a single race accumulate at least 60% of total runtime. Judge cites the dominant race's identifying evidence (e.g., \"100M FINAL\" overlay, \"9.69\" graphic) and the total share.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-PRE-RACE-CONTEXT",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut contains a pre-race set-up section that appears before the first in-race running footage, for example athlete intros, start list, settling into blocks, or pre-race record banner.",
+      "why": "Pre-race context is what differentiates a repurposed cut from a clip. The golden uses a 35-second build before the gun.",
+      "check": "Judge identifies the repurposed cut timestamp of the first frame of in-race running footage (sprinters on the track at full speed). Confirm at least 5 seconds of pre-race footage (intros / blocks / start list / record banner) appears before that timestamp. Cite both timestamps.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-POST-RACE-DWELL",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut contains a post-race section that lingers on result, replay, or celebration for at least 30 seconds of continuous runtime after the finish line is crossed in the live-race footage.",
+      "why": "Moment-extraction repurposed cuts dwell on the moment after it happens; the golden spends roughly 90+ seconds on post-race material (winner graphic + slo-mo + photo finish + trackside replay + medalists + final table).",
+      "check": "Judge identifies the repurposed cut timestamp where the runners cross the finish line in the live (non-replay) race footage. Confirm that at least 30 seconds of repurpose runtime follows that timestamp before the repurposed cut ends. Cite both timestamps.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-BOLT-WINS",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The repurposed cut unambiguously communicates that Usain Bolt (the runner in the yellow Jamaica vest) wins the 100m Final, via at least one of: an on-screen winner/result graphic naming Bolt or labeled JAM in first position, the commentator naming Bolt as the winner, or the visible finish-line ordering with Bolt clearly first.",
+      "why": "The result is part of the information payload of a moment-extraction repurpose. A repurposed cut that shows the chest-thump but does not actually confirm who won fails the resolution requirement.",
+      "check": "Judge cites the repurposed cut timestamp providing the evidence (graphic text, commentator phrase, or visible finish ordering) that confirms Bolt or a runner labeled JAM is first in the 100m Final.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-COMMENTARY",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "A live English-language broadcast commentator is audible over the picture for the majority of the repurposed cut's runtime (audible commentary covers at least 60% of the runtime, allowing brief gaps for crowd-roar emphasis).",
+      "why": "The golden uses a single English broadcast commentator continuously, with brief moments of crowd-only sound; the brief specifies broadcast-style audio.",
+      "check": "Judge listens to the full repurpose and estimates the proportion of runtime with audible English commentary. Judge cites at least three repurposed cut timestamps where commentary is audible (e.g., a verbal phrase quoted with its timestamp) and confirms cumulative coverage is at least 60% of total runtime.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-GUN-START",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "The starting gun's report (a sharp, percussive bang) is audible on the soundtrack at the start of the live race footage in the repurposed cut.",
+      "why": "The gun start is the audible anchor that marks the race beginning; the golden preserves it crisply.",
+      "check": "Judge cites the repurposed cut timestamp where a sharp percussive impulse consistent with a starting gun is audible, and confirms that in-race running footage begins within ~1 second after that impulse.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VERBAL-9-69",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "At some point in the repurposed cut, the broadcast commentator verbally says or names the number \"9.69\" (the world-record time) in connection with the 100m Final result.",
+      "why": "Source calibration: the broadcast commentator says \"It's adjusted to 9.69, a new world record by far\" shortly after the line in the source 100m Final segment; the golden preserves this phrase around repurpose 00:52. The repurposed cut should let the audience hear the time named, not only read it on a graphic.",
+      "check": "Judge cites the repurposed cut timestamp where a commentator voice audibly says \"9.69\" (or \"nine point six nine\"). Judge quotes the surrounding phrase if possible.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CAPTIONS-PRESENT",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "Burned-in English captions covering the spoken broadcast commentary are visible inside the screen safe area during every commentary line in the repurposed cut, legible against the underlying footage.",
+      "why": "Brief specifies \"burn English captions into the safe area for every line the commentator says.\" Per candidate_profile.diversity_constraints.audio_policy = source_with_burned_captions, captions are part of the deliverable and must be usable for a sound-off viewer.",
+      "check": "Judge identifies every repurposed cut timestamp range where the commentator is audibly speaking, then verifies that during each such range an English-text caption is visible inside the title-safe area (no text running off-screen, no text obscured by the lower or upper picture edge) and is readable against the underlying footage (sufficient contrast / outline / shadow / box). Judge cites at least three commentary-line timestamps with the visible caption text and the safe-area position; award the point if and only if no audible commentary line in the repurposed cut lacks a legible safe-area caption.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-NO-ADDED-NARRATOR",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No added third-party narrator voice (a voice that is not the original 2008 broadcast commentator and is not visible as a character in any source shot) is audible at any point in the repurposed cut.",
+      "why": "Brief mandates \"no new narrator over the top\", the live broadcast commentary carries the moment, an added narrator turns the highlight into an explainer. Diversity-constraint audio_policy = source_with_burned_captions enforces source-only voice.",
+      "check": "Judge listens end-to-end and identifies any speaker not attributable to the 2008 broadcast feed (the call by Andrew Cotter / John Inverdale / etc.) or to a person visibly speaking in a source shot. Pass if and only if no such added narrator is audible at any timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "A-NO-200M-FOOTAGE",
+      "pillar": 3,
+      "weight": 4,
+      "criterion": "The repurposed cut contains no 200m race footage. No on-screen graphic labels appear reading \"200M\", and no race footage shows runners completing a full curved 200-metre track lap.",
+      "why": "200m races (Round 1 Heat 5, Round 2 Heat 1, and the 200m Final) are present in the source but off-task for a 100m-Final moment repurpose. Including them turns the repurposed cut into a Bolt-at-Beijing montage.",
+      "check": "Judge scans the repurposed cut for on-screen text containing \"200M\" and for race footage showing sprinters running on a curved track around a bend (200m races include a curve; 100m races are straight-line only). Award the point if and only if no such 200m evidence appears.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "A-NO-HEATS-SEMI-PADDING",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "The repurposed cut contains no more than 20 cumulative seconds of 100m Heat or Semifinal footage. (Brief flashbacks for context are allowed; extended round-by-round coverage is not.)",
+      "why": "The golden omits all heats and semifinal footage. An agent that pads runtime by including all three 100m rounds is producing a multi-round montage rather than the 100m Final close-read.",
+      "check": "Judge identifies any repurposed cut shots showing on-screen graphics with text like \"HEAT\", \"ROUND 1\", \"ROUND 2\", \"SEMIFINAL\", or \"SEMI-FINAL\" labelling a race round other than the Final. Sum the duration of all such shots. Award the point if and only if the cumulative total is \u2264 20 seconds.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "A-NO-ORCHESTRAL-MUSIC",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "The repurposed cut does not lay an added orchestral, electronic, pop, hip-hop, or other music score under the broadcast audio. Diegetic stadium PA / crowd sound is fine; an added musical bed is not.",
+      "why": "The golden uses zero added music; broadcast-style audio is the editorial convention. An agent that lays a hype track over the picture violates the convention even if every other item passes.",
+      "check": "Judge listens to the repurposed cut and confirms there is no continuous instrumental music bed running underneath the commentary. Diegetic crowd, gun-start, and stadium PA do not count as score. Award the point if and only if no added musical bed is present.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "A-NO-IDENTICAL-SHOT-REPEAT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No single shot is used twice as identical padding (same camera angle, same framing, same playback speed, same duration, with no editorial purpose). Multi-angle replays of the same on-track moment are allowed; identical copy-paste shots are not.",
+      "why": "A common agent failure mode is to fill runtime by duplicating the same chest-thump shot, which superficially looks like a replay structure but defeats the multi-angle convention.",
+      "check": "Judge scans for cases where the same exact frames (same camera, same speed, same framing) appear in two different positions in the repurposed cut with no editorial difference. Award the point if and only if no such identical duplication is present.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "A-NO-MUTED-AUDIO",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No continuous segment of the repurposed cut lasting 3 seconds or longer has muted or fully inaudible audio (commentary, crowd, or other source sound).",
+      "why": "Audio dropouts break the broadcast-repurpose feel. Standard absence-item check for delivery quality.",
+      "check": "Run silencedetect on the repurposed cut audio with a -40dB threshold and 3-second minimum duration. Award the point if and only if no silent segment \u2265 3.0s is detected.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "A-NO-WRONG-WINNER-CLAIM",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The repurposed cut does not claim that any athlete other than Bolt (or a runner labeled JAM in lane 4) won the 100m Final, either via on-screen graphic or via commentator statement.",
+      "why": "Source-fact contradiction absence item. The golden's graphics and narration all attribute first place to Bolt; an agent that misattributes the win via a misordered result table or a misedited commentary clip should be penalised.",
+      "check": "Judge scans on-screen result graphics and commentator audio for any claim that a non-Bolt runner finished first in the 100m Final. Award the point if and only if no such contradictory claim appears.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-CHEST-THUMP",
+      "pillar": 2,
+      "weight": -60,
+      "criterion": "The chest-thump deceleration moment never appears in the repurposed cut, no shot anywhere in the repurposed cut shows a sprinter striking his own chest with his hand while running on the track during a race.",
+      "why": "The chest-thump is the single iconic image and the editorial reason the repurposed cut exists. Source calibration: this moment occurs at source \u2248 02:24\u201302:30. A repurposed cut of the 9.69-seconds moment that omits this beat tells the wrong story regardless of how polished the rest is.",
+      "check": "Judge searches the entire repurposed cut for any shot of a runner striking his own chest with at least one hand while still running on the track during race footage. Pass (deduction fires) if and only if no such shot is found anywhere in the repurposed cut.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-DOMINATED-BY-200M",
+      "pillar": 1,
+      "weight": -50,
+      "criterion": "The repurposed cut is dominated by 200m race footage rather than the 100m Final, meaning more than 25% of total runtime contains 200m identifiers (on-screen \"200M\" text, curved-track running footage, or the 200m result of 19.30) OR the longest single race covered in the repurposed cut is a 200m race rather than the 100m Final.",
+      "why": "A generic Bolt-at-Beijing agent will treat the source's larger 200m runtime (three races totalling 4 minutes) as material to include. The repurposed cut claim scope is the 100m Final; significant 200m content makes the repurposed cut about the wrong race entirely.",
+      "check": "Judge sums all repurpose runtime containing 200m identifiers (any of: \"200M\" on screen, runners completing a curved-track lap, \"19.30\" or \"20.64\" or \"20.29\" as a finishing time). Pass (deduction fires) if and only if the 200m runtime exceeds 25% of total runtime OR is longer than the cumulative 100m Final runtime.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-WRONG-WINNING-TIME",
+      "pillar": 2,
+      "weight": -50,
+      "criterion": "The repurposed cut displays or verbally states a final winning time for the 100m Final that is not 9.69, for example, leaving the unofficial 9.68 as the final time, naming 9.85 or 10.20 (other rounds' times), naming 19.30 (the 200m Final time), or never displaying or stating any final time at all for the 100m Final.",
+      "why": "The 9.69 figure is the resolution of the repurposed cut and the source-fact the repurposed cut is built around. A repurposed cut that gets the time wrong, or leaves only the unofficial 9.68 reading as final, is factually incorrect about the headline outcome.",
+      "check": "Judge searches the entire repurposed cut for the value \"9.69\" as the final 100m Final time, in either an on-screen graphic showing 9.69 as the winning result OR a commentator verbally naming 9.69. Pass (deduction fires) if and only if no such confirmation of 9.69 as the final winning time appears anywhere in the repurposed cut, OR the repurposed cut explicitly attributes a different value to the 100m Final winning time.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NOT-VERTICAL",
+      "pillar": 1,
+      "weight": -50,
+      "criterion": "The repurposed cut's aspect ratio is not 9:16 vertical, it is 16:9 horizontal, 4:3, or any aspect ratio wider than tall. A vertical repurpose is the structural deliverable for TikTok / Reels distribution; a horizontal repurpose fails the platform brief entirely.",
+      "why": "Brief commissions a 1080\u00d71920 vertical (9:16) deliverable for TikTok / Instagram Reels. A horizontal cut, even if perfectly edited otherwise, cannot ship to the commissioned platform, it would appear letterboxed-tiny in the vertical feed.",
+      "check": "Judge probes the repurposed cut's frame width and height. Pass (deduction fires) if and only if the frame height is not strictly greater than the frame width (i.e., height \u2264 width, which covers 16:9 widescreen, 4:3 standard, and 1:1 square).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-VERTICAL-CROP-MISSES-BOLT",
+      "pillar": 1,
+      "weight": -50,
+      "criterion": "Across all frames containing live race-action footage (any of the 100m heats, the 100m semifinal, the 100m Final, OR any chest-thump shot), Bolt's full body silhouette, from the crown of his head to his feet, stays inside the visible vertical frame. The failure mode this targets is a naive center-crop of the 16:9 broadcast source that leaves Bolt's head clipped at the top edge and/or his feet clipped at the bottom edge of the 9:16 reframe.",
+      "why": "A 9:16 reframe from a 16:9 broadcast source must keep the named subject fully inside the vertical frame during the race; a center-crop that loses Bolt, half-Bolt at the top or legs cut at the bottom, is a published-to-Reels disaster even if the aspect ratio is technically correct. The iconic image is destroyed when the viewer sees a torso without a head or a runner without legs.",
+      "check": "Judge samples repurposed cut frames at 1 fps across every segment containing live race-action footage (100m heats, semifinal, Final, or any chest-thump shot). For each sampled frame, confirm Bolt's full body silhouette (head crown down to feet) is inside the vertical frame. Pass (deduction fires) if and only if MORE than 20% of the sampled race-action frames clip Bolt's head OR his feet outside the vertical frame edge.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-LETTERBOX-CHEAT",
+      "pillar": 1,
+      "weight": -15,
+      "criterion": "The repurposed cut's frame dimensions are vertical (height > width) but the actual cinematic broadcast video content sits in a horizontal band occupying only the middle of the vertical frame, with padding bars (black, scoreboard graphics, branding cards, caption strips, blurred background, OR any combination) above and below the active video content. This is a \"Reels template\" letterbox cheat: technically-vertical-but-actually-horizontal content padded into a 9:16 canvas.",
+      "why": "Brief commissions a TRUE vertical reframe of the 2008 broadcast source. A horizontal clip with vertical padding still ships the wrong viewing experience: viewers see a small horizontal track strip surrounded by graphics, not a vertical reframe of Bolt's race. The author has not actually done the reframe work; they have padded the source into a vertical container. (QC Pass B: weight reduced from -50 to -15, the viewer still sees the action.)",
+      "check": "Judge samples the repurposed cut at 5 timestamps (~10%, 30%, 50%, 70%, 90%) and identifies the bounding box of the active cinematic track-and-field content (excluding scoreboard widgets, branding cards, caption strips, black bars, blurred backgrounds). Pass (deduction fires) if and only if the active video content's vertical extent occupies less than 75% of the frame height in 3 or more of the 5 samples, i.e., the vertical padding (top + bottom non-video region) consistently exceeds 25% of total frame height.",
+      "judge": "opus-vision"
+    }
+  ]
+}
