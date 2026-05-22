@@ -1,0 +1,257 @@
+{
+  "task_id": "film_stop_making_sense_a24_trailer",
+  "items": [
+    {
+      "id": "F-RUNTIME",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The recap's total duration is at least 105.4 seconds and at most 116.5 seconds.",
+      "why": "Diversity-constraint runtime band, \u00b15% of the golden runtime (110.954 s) for this `medium_100_140s` task. Outside that window the deliverable is the wrong artifact length for the festival/revival-house slot.",
+      "check": "ffprobe the submitted file; the format-level duration field is in [105.4, 116.5] seconds. Cite the duration value.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-ASPECT",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The recap is 1920\u00d71080 in 16:9 aspect ratio.",
+      "why": "Theatrical teaser delivery spec.",
+      "check": "ffprobe the submitted file; width=1920, height=1080, display_aspect_ratio=16:9. Cite the values.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-CONTAINER",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The recap is an H.264 MP4 with AAC stereo audio.",
+      "why": "Theatrical teaser delivery spec.",
+      "check": "ffprobe the submitted file; video codec=h264, audio codec=aac, audio channels=2. Cite the values.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-AUDIO-PRESENT",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The recap file contains a non-empty audio stream.",
+      "why": "A concert-film trailer without an audio stream is structurally broken; this is a fast sanity check that fires before audio-content items.",
+      "check": "ffprobe the submitted file; an audio stream exists with duration > 0 and at least one non-zero audio frame. Cite the stream index and duration.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-BUILD-ORDER",
+      "pillar": 1,
+      "weight": 9,
+      "criterion": "The first recap timestamp at which only one performer is on stage is earlier than the first recap timestamp at which a 2\u20134 performer shot occurs, which is earlier than the first recap timestamp at which a 5-or-more performer shot occurs.",
+      "why": "This is the architectural axis of the task. The film's \"one performer added per song\" build is legible only when these three density tiers appear in this temporal order in the trailer. The golden trailer collapses this into ~00:00\u201300:28 but keeps the order.",
+      "check": "Inspect the entire recap. Identify t_solo (first frame with exactly one performer on stage), t_mid (first frame with 2\u20134 performers), t_full (first frame with 5+ performers). Pass if t_solo < t_mid < t_full. Cite all three recap timestamps and the visible performer counts.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-BIG-SUIT-PRESENT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The recap contains at least one shot showing David Byrne wearing an oversized grey business suit (visibly cut several sizes too large; shoulders extending well past his actual shoulder line; jacket hem dropping below the hips).",
+      "why": "Source calibration, Byrne wears the oversized suit during \"Girlfriend Is Better\" (source \u2248 54:00\u201362:00). It is the film's most photographable single image. The golden trailer shows it multiple times across the body.",
+      "check": "Inspect the entire recap. Pass if at least one frame visibly shows a male performer wearing a clearly oversized grey suit (jacket noticeably wider than the wearer's torso, shoulder pads protruding well past the body line). Cite the recap timestamp and describe the framing.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-ENSEMBLE-COVERAGE",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The recap visibly shows at least three distinct band roles (e.g., bass, drums, keyboards, second guitar, backing vocals, percussion) across the body, not only the lead singer.",
+      "why": "The film is famous as an ensemble piece; a Byrne-only edit misrepresents it. The golden trailer shows bass, drums, keys, second guitar, percussion, and backing vocalists across its 110 seconds.",
+      "check": "Inspect the entire recap. Identify at least three of: a person playing bass guitar; a person playing a drum kit; a person playing keyboards; a person playing electric or acoustic guitar visibly not the lead singer; a person singing into a microphone visibly not the lead singer; a person playing congas/hand percussion. Cite the recap timestamp for each of the three (or more) qualifying shots.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-BIG-SUIT-NOT-FIRST",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The first visible shot of the recap (the cut occupying recap timestamp 00:00) does NOT show David Byrne in the oversized grey suit.",
+      "why": "The Big Suit is the payoff of the build, not the hook. Opening cold on it is the textbook generic-music-trailer mistake; the golden trailer opens on empty-stage feet, not the suit.",
+      "check": "Inspect the recap frame at 00:00\u201300:01. Pass if Byrne is NOT visibly wearing an oversized grey business suit in this opening shot (he may be in a normal-fitting suit, in casual clothes, off-screen, or the shot may show no performer at all). Cite the recap timestamp 00:00 and describe what is in the opening frame.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-REPEAT-SHOTS",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "No identical or near-identical shot is reused twice as runtime padding.",
+      "why": "Concert-film trailers rely on a wealth of distinct visual material; reusing the same shot signals the agent ran out of selections and is padding.",
+      "check": "Inspect the recap end-to-end. Pass if no shot (defined by the same camera framing, the same performer pose, and the same lighting) appears twice with overlap \u2265 1 second. Cite recap timestamps of any candidate near-duplicate pair and explain why they are not duplicates. Fail if a near-duplicate is found; cite both recap timestamps.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-BLACK-FRAME",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Before the final fade-out, the body of the recap contains no all-black or all-blank frames lasting longer than 0.5 seconds.",
+      "why": "Black frames inside the body suggest a broken cut or a missing asset; the golden trailer holds source content under every cut and only fades to black at the very end.",
+      "check": "Inspect the recap from 00:00 up to 5 seconds before the end. Pass if no contiguous run of all-black frames longer than 0.5s is observed in that window. Cite the recap timestamp range of any near-miss black segment.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-WATERMARK",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The recap is not overlaid with watermarks, channel logos, social-media handles, or third-party brand bugs unrelated to the film, A24, or the restoration credit.",
+      "why": "Trailer delivery should be clean; persistent third-party bugs are a delivery defect.",
+      "check": "Inspect the recap end-to-end. Pass if no persistent overlay text or logo appears that names a YouTube/Twitter/Instagram handle, a stock-footage provider, an agent name, or any company other than A24 or the Talking Heads. Cite the recap timestamp of any candidate overlay.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-SOLO-FIRST",
+      "pillar": 2,
+      "weight": 7,
+      "criterion": "The first audible OR visible content of the recap reads as a single-performer signature of the film, i.e., empty stage, walking feet on a dark stage, a boombox on the stage floor, an acoustic-guitar strum from one performer, OR David Byrne's spoken on-stage line about \"a tape I want to play\".",
+      "why": "This is the film's signature opening and the rhetorical hook of the editorial product. The golden trailer enforces this from 00:00 (white sneakers) through 00:10 (boombox play-button press into Psycho Killer).",
+      "check": "Inspect the recap from 00:00 to the first cut, or to 00:08 if no cut occurs first. Pass if at least one of these is true: (a) only one performer is visible; (b) no performer is visible (only stage hardware, empty stage, audience); (c) the audio is a single voice/instrument with no full-band accompaniment. Cite the recap timestamp of the first cut and describe what is visible and audible.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-TITLE-LAND",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "An on-screen text card reading \"STOP MAKING SENSE\" (or \"Stop Making Sense\") appears in the last 25 seconds of the recap.",
+      "why": "Re-release teaser must land the film's title. The golden trailer places this card at approximately 01:40 of a 111s runtime.",
+      "check": "Inspect the recap from (total_duration \u2212 25.0) seconds to the end. Pass if a frame in that window contains the legible text \"STOP MAKING SENSE\" or \"Stop Making Sense\" (any styling). Cite the recap timestamp at which the card first appears and quote the visible text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-RESTORATION-CREDIT",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "An on-screen text element identifies this as a re-release: a \"4K\" or \"Restored\" or \"Newly Restored\" or \"Restoration\" label, OR an explicit release-year text containing the digits \"2023\" or \"2024\" or \"2025\" or \"2026\".",
+      "why": "The source is a 1984 film; without a re-release credit the trailer reads as a vintage upload rather than a current theatrical release. The golden trailer uses \"SEPTEMBER 2023 / NEWLY RESTORED IN 4K\".",
+      "check": "Inspect the recap from (total_duration \u2212 25.0) seconds to the end. Pass if a frame in that window contains text matching one of: \"4K\", \"Restored\", \"Newly Restored\", \"Restoration\", \"2023\", \"2024\", \"2025\", or \"2026\" (case-insensitive). Cite the recap timestamp and quote the visible text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-VO-NARRATION",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The recap does not contain an off-stage narrator voice describing the film, the band, the year, or the cultural significance.",
+      "why": "This is a teaser, not an explainer. The film carries itself; a narrator voiceover is the wrong subtype convention. The golden trailer has zero narrator voice. (Note: this absence item rewards craft at +3; the much larger S-ADDED-VO-PRESENT [-40] penalty fires only when a sustained narrator voice is present, and is the catastrophic-failure backstop for the source_audio_only diversity constraint.)",
+      "check": "Listen to the full recap audio. Pass if no voice speaks in the explanatory third person about the film, the year, the band's history, critical reception, or upcoming release. Brief on-stage Byrne dialogue (e.g., \"I've got a tape\", \"Does anybody have any questions?\") is permitted and does NOT trigger this item. Cite the recap timestamp range of any candidate narration and quote what is said.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-EXPLAINER-TEXT",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The recap does not contain any single on-screen text element of more than 12 words explaining the film, the band, the concert, or its cultural significance.",
+      "why": "Trailer convention forbids explainer paragraphs; long text reads as a video essay or DVD insert, not a theatrical teaser. The golden trailer's only multi-word text is its kinetic tagline, broken across many cards of 1\u20133 words each.",
+      "check": "Inspect every on-screen text element in the recap. Pass if no single text element (counted as a contiguous block of text visible together in a single shot) exceeds 12 words. Cite the recap timestamp and word count of the longest single text element.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-MUSIC-LIVE-THROUGHOUT",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "Live concert music, vocals plus at least one of guitar/bass/drums/keyboards, is audible in the recap for at least 80% of its total runtime.",
+      "why": "This is a concert-film trailer; the source music is the whole product. The golden trailer has live source music under nearly every cut from 00:09 to 01:50. The 80% threshold (not 90%+) is deliberate: the pure-montage diversity constraint demands an opening quiet beat (sneakers + applause + boombox click), short between-song breaths, and a closing fade, those legitimately reduce music-presence to ~85-90%, not 100%.",
+      "check": "Step through the recap audio in 5-second windows. For each window, mark whether live concert music (multiple musical elements characteristic of a live performance, vocals plus drums/bass/guitar/keys) is audible. Pass if at least 80% of the 5-second windows are marked live-music-present. Cite the total runtime, the number of music-present windows, and any recap timestamp range where music is absent.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CONCERT-AUDIO-CONTINUOUS",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The recap's audio reads end-to-end as a single live concert mix, Talking Heads performance, on-stage spoken lines, room ambience, audience reaction, with no library music bed and no added narrator voice audible.",
+      "why": "Mandatory diversity-constraint presence item for `audio_policy = source_audio_only`. This is a recap-fidelity check independent of the music-presence threshold above: even in silence beats, what is audible (applause, room tone, boombox click) must read as concert-derived, not as a studio add.",
+      "check": "Listen to the full recap audio end-to-end. Pass if every audible element (vocals, instruments, applause, room ambience, on-stage speech) is consistent with the acoustic environment of a single live concert mix and could plausibly originate from one continuous Talking Heads concert recording, AND no segment contains an added narrator voice, library music bed, sound-design risers, or unrelated music tracks. Cite the recap timestamp of any audio segment that sounds inconsistent with a live-concert-only audio track and describe why.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-MUSIC-NOT-CONTINUOUS",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "The recap audio has at least two distinct moments of breathing room, either \u2265 2 audible silence-or-near-silence spans of \u2265 0.5 seconds each, OR \u2265 2 audible shifts between musically distinct source songs (different tempo, different chord progression, different vocal hook).",
+      "why": "Mandatory diversity-constraint presence item for `output_shape = pure_montage_no_continuous_music`. A trailer that holds one song wall-to-wall is the wrong shape for this task. The golden trailer has both: an opening ~9 seconds of sneakers + applause + spoken line before music drops, plus audible song-to-song shifts (Psycho Killer \u2192 Life During Wartime \u2192 Burning Down the House \u2192 Once in a Lifetime \u2192 This Must Be the Place).",
+      "check": "Listen to the full recap audio end-to-end. Identify either (a) two recap timestamps at which audio level drops to near-silence (perceptually quiet, dialogue/applause/room-tone only, no musical accompaniment) for \u2265 0.5 seconds, OR (b) two recap timestamps at which the audible song noticeably changes (different melody, tempo, or harmonic content). Pass if at least two such moments are found (silence or song-shift, in any combination \u2265 2 total). Cite each recap timestamp and describe the audio character before and after.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-SONG-COUNT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "At least two musically distinct Talking Heads source songs are identifiable in the recap audio track.",
+      "why": "A trailer that stays on one song is a music video, not a concert-film teaser. The golden trailer audibly covers at least four songs (Psycho Killer, Life During Wartime, Burning Down the House, Once in a Lifetime, This Must Be the Place).",
+      "check": "Listen to the full recap audio. Identify at least two recap timestamp ranges where the audio is from a distinct, musically separable song (different tempo, different chord progression, different lyrical hook, and not just a verse/chorus shift of the same song). Cite both recap timestamp ranges and describe a distinguishing musical or lyrical feature of each.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-SOURCE-DIALOGUE",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "At least one moment of on-stage spoken dialogue by David Byrne (e.g., \"I've got a tape I want to play\", \"Does anybody have any questions?\", or any other on-stage between-song line) is audible in the recap.",
+      "why": "The film's spoken-word anchors are part of its signature; the golden trailer uses \"Hi. I've got a tape I want to play\" at 00:06 and \"Does anybody have any questions?\" at ~01:39.",
+      "check": "Listen to the full recap audio. Pass if at least one segment of intelligible spoken English (not sung) by a male voice in the acoustic environment of a large live concert venue (room reverb, distant audience) is audible. Cite the recap timestamp and quote the line as heard.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-APPLAUSE",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "Audience cheering or applause is audible at least once in the recap (typically between or under cuts).",
+      "why": "Crowd response is the natural between-song mortar of the concert film; its absence flattens the live feel.",
+      "check": "Listen to the full recap audio. Pass if a sustained crowd reaction (cheers, applause, whoops) is audible for at least 0.5 seconds at any timestamp. Cite the recap timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-BEAT-FEEL",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "At least one visible cut in the recap lands on a musical downbeat or song accent (snare hit, downbeat of a bar, end of a vocal phrase, etc.).",
+      "why": "Music-trailer craft. A trailer with zero on-beat cuts is editorially disconnected from its own audio. The bar here is intentionally low (one beat-aligned cut) so this item is a presence reward, not a beat-sync grade, the positive carries the floor on this axis.",
+      "check": "Step through the recap and locate at least one cut where the visible frame transition occurs within \u00b1100 ms of an audible musical accent in the recap audio (snare/kick hit, song downbeat, end of a phrase). Cite the recap timestamp of the cut and describe the audio accent it lands on.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-LIBRARY-MUSIC",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "The recap does not contain library or stock music added under or in place of the source concert audio (e.g., a generic dramatic trailer cue, a synth-pad bed, an unrelated pop song).",
+      "why": "Replacing or layering library music over a Talking Heads concert mix is a complete subtype failure. The golden trailer uses only source audio.",
+      "check": "Listen to the full recap audio. Pass if no segment contains music whose instrumentation, vocal character, or production style is inconsistent with a live Talking Heads concert mix (e.g., orchestral trailer risers, synth pads not present in any Talking Heads recording, unrelated pop tracks, generic dramatic-trailer cues). Cite any recap timestamp range where library/stock music is suspected and describe the audio signature.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-MUTE-SEG",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No contiguous audio-silent or near-silent segment longer than 4 seconds appears inside the body of the recap.",
+      "why": "Mid-trailer dead air breaks the concert feel. The threshold is set to 4s (not 2s) deliberately to allow the pure-montage diversity-constraint craft of brief silence beats (boombox click before the band, breath before a song lands) while still catching unintended dropouts. The golden trailer's longest mid-body quiet stretch is well under 2 seconds.",
+      "check": "Step through the recap audio. Pass if no contiguous segment of duration > 4.0 seconds has audio level below \u221240 dB everywhere, between recap timestamp 00:00 and (total_duration \u2212 1.5) seconds. Cite the loudest 0.5 s window of any candidate silent segment.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-ADDED-VO",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "No third-party narrator voice (a speaker who is not visibly a source performer on stage) is audible for \u2265 3 cumulative seconds across the recap.",
+      "why": "Diversity-constraint axis for `audio_policy = source_audio_only`. The golden trailer has zero off-stage narration. Rewarding the absence of an added narrator tests the source-audio-only convention without penalising recaps that include brief non-source spoken elements under 3 cumulative seconds. (Note: this absence item +3 complements N-NO-VO-NARRATION +3, which catches the same axis at the strict any-narrator threshold; this item enforces the \u2265 3 s cumulative threshold for diversity-constraint compliance.)",
+      "check": "Listen to the full recap audio end-to-end. Mark every segment in which a voice speaks (in any language) that is NOT plausibly a performer audible on stage in a live concert environment, markers of off-stage VO include studio-booth dry reverb (no large-venue room tone), no overlapping audience reaction, explanatory third-person register, or a speaker not visibly present in the corresponding frame. Sum the durations of those segments. Pass if the cumulative duration is < 3.0 seconds. Cite the recap timestamp ranges of every flagged segment and quote what is said.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-SILENT-OUTPUT",
+      "pillar": 3,
+      "weight": -60,
+      "criterion": "More than 50% of the recap runtime has no audible source concert music, i.e., the audio track is silent, replaced with non-source content, or contains only ambient noise / non-musical audio.",
+      "why": "A concert-film teaser without source music is not a concert-film teaser. This is a task-defining catastrophic failure; deduct -60 if present. (Note: this can co-fire with S-NO-LIBRARY-MUSIC; that absence item only catches partial library replacement; this penalty catches full-track loss.)",
+      "check": "Step through the recap audio in 5-second windows. For each window, mark whether live concert music (vocals plus drums/bass/guitar/keys) is audible. Return pass=true (fire the penalty) if more than 50% of the windows are marked music-absent. Cite the percentage of music-absent windows.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-SOLO-BUILDUP",
+      "pillar": 2,
+      "weight": -50,
+      "criterion": "The recap does not contain the solo-to-ensemble band buildup that is the film's structural argument. Specifically: there is no clearly-readable sequence in the recap that begins with David Byrne alone on stage (empty stage, boombox, solo acoustic guitar) and progressively adds band members one (or two) at a time before the full ensemble appears. The first 25% of the recap fails to convey \"one person\", AND no progressive-addition sequence is visible anywhere in the cut.",
+      "why": "The brief mandates this build as \"the whole reason people still talk about Stop Making Sense forty years later, and it's the architecture I'm hiring you to honor.\" Without the buildup the recap shows a generic Talking Heads concert and has missed the film's central editorial point. Including only the full-ensemble peak is the exact failure mode this penalty targets.",
+      "check": "Judge inspects the first 25% of the recap to confirm Byrne is alone on stage with the boombox/acoustic-guitar setup AND samples the body of the recap to confirm at least two distinct band-addition events (a new musician arriving on stage during a song or between songs) are visible before the full-ensemble framing. Pass (deduction fires) if and only if EITHER (a) the recap's opening does not read as Byrne-alone OR (b) no progressive band-addition sequence appears anywhere in the recap.",
+      "judge": "opus-vision"
+    }
+  ]
+}

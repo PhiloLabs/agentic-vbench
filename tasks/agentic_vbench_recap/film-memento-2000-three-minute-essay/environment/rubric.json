@@ -1,0 +1,275 @@
+{
+  "task_id": "film_memento_2000_three_minute_essay",
+  "items": [
+    {
+      "id": "F-DURATION",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The recap's total runtime is between 206.0 seconds and 228.0 seconds inclusive.",
+      "why": "3:37 \u00b1 5 % matches the runtime band the brief specifies and the calibration target for this task; recaps shorter than 206 s or longer than 228 s either truncate the explainer or pad it.",
+      "check": "Read the recap's container duration and verify it is within [206.0, 228.0] seconds.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-CONTAINER",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The recap is a single MP4 file with one H.264 video stream and one AAC audio stream.",
+      "why": "Standard container for downstream evaluation; mismatched container often signals an incomplete or corrupted output.",
+      "check": "Inspect file extension and stream codecs; require .mp4, video codec h264, audio codec aac.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-ASPECT",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The recap preserves a wide cinematic frame (aspect ratio between 1.78 and 2.50, no letterboxing of an already letterboxed source baked in twice, no anamorphic stretching of faces).",
+      "why": "Faces and on-screen text in Memento are framed for ~2.35:1; cropping or stretching destroys readability of tattoos and Polaroid text.",
+      "check": "Inspect a sampled middle frame: head shapes should be natural-looking, on-screen text should not be horizontally squashed, no double black-bar nesting.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-AUDIO-PRESENT",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The recap has an audible audio track that is not silent for more than 5 contiguous seconds in any window.",
+      "why": "A near-silent edit fails this subtype regardless of visuals.",
+      "check": "Scan the recap's audio; verify there is no contiguous silence \u2265 5.0 s outside intentional brief beats at start/end.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-LEONARD-VISIBLE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "A young-to-middle-aged man with short blond hair (Leonard, played by Guy Pearce) appears as the recurring protagonist on screen, visible in at least three distinct recap segments separated by at least 20 seconds.",
+      "why": "The protagonist must be visually anchored; if no recurring central character is visible, the recap is not a Memento recap. Source calibration: Leonard is on screen throughout the film and in every reference segment.",
+      "check": "Cite 3 recap timestamps where the same blond-haired protagonist is the dominant figure in the frame, each \u2265 20 s apart.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHEST-TATTOO-READABLE",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "At least one shot in the recap shows a body tattoo whose text is legible enough to make out the words \"JOHN G\" and either \"RAPED\" or \"MURDERED\" or \"WIFE.\"",
+      "why": "The chest tattoo is the film's diegetic mission statement; without it the viewer doesn't know what Leonard is doing. Source calibration: Natalie traces this tattoo around 02:12 in the canonical human reference's reading of the source.",
+      "check": "Cite the recap timestamp where the tattoo is on screen and the words are legible; quote the words read off the tattoo.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-POLAROID-MOTIF",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "At least one shot in the recap features a Polaroid photograph as a foregrounded object (held, taken, written on, ripped, or burned), not merely glimpsed in the background.",
+      "why": "Polaroids are Leonard's external-memory device and one of the film's defining visual motifs; their absence flags a generic recap. Source calibration: reference shows Polaroid of Natalie ~00:50 and Polaroid of Teddy at ~01:20.",
+      "check": "Cite the recap timestamp where a Polaroid is the foregrounded object; describe what is happening to it.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-BW-AND-COLOR",
+      "pillar": 1,
+      "weight": 4,
+      "criterion": "The recap contains both a clearly black-and-white passage and a clearly color passage, with the black-and-white passage running for at least 8 cumulative seconds.",
+      "why": "Memento's dual treatment (B&W chronological / color reverse) is the visual signal of its dual timeline; suppressing one channel collapses the form. Source calibration: reference alternates the two treatments throughout.",
+      "check": "Cite at least one recap timestamp range that is plainly monochrome and one that is plainly in color; verify the monochrome material accumulates to \u2265 8 s total.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-SAMMY-TATTOO-OR-FLASH",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "At least one shot in the recap shows either a hand/skin tattoo legibly reading \"Sammy\" or \"Jankis\" (or both), OR shows a separately identifiable man who is not Leonard sitting in a chair / in a hospital setting being implied as Sammy Jankis.",
+      "why": "Visual anchoring of the Sammy Jankis mirror; reference uses the hand tattoo as the visual cue at ~00:18 and ~02:35.",
+      "check": "Cite the recap timestamp; either quote the tattoo text or describe the non-Leonard man and the cue that ties him to Sammy.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHAPTER-CARDS-PRESENT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "Exactly 3 chapter title cards visibly partition the recap into sections. A \"chapter title card\" is a full-frame or near-full-frame static graphic that announces a numbered chapter (e.g., \"ONE\", \"Chapter 2\", \"III\"), a named section heading (e.g., \"The Tattoo\"), or a one-line claim that introduces the next section. Each card must be on screen for at least 1.5 seconds with readable text and must not overlap with continuous source action behind it.",
+      "why": "Output shape for this task is `chapter_titled`; the brief explicitly specifies \"three numbered chapter cards\" partitioning the cut. Source calibration: no chapter cards in the canonical human reference for this asset (it predates this task's diversity-constraint requirement), so this item is a separate task requirement not gated by reference.",
+      "check": "Identify every full-frame or near-full-frame static title-card graphic in the recap that announces a chapter, section, or claim heading; cite each one's recap timestamp; count them; verify the total is exactly 3 and that each card holds for \u2265 1.5 s with readable text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-AMNESIA-EXPLICIT",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "At least one spoken sentence in the recap audio explicitly states or directly paraphrases that the protagonist cannot form new memories or has short-term memory loss / amnesia / a memory condition. The line must be intelligible as English (not background mumble).",
+      "why": "A viewer cannot understand Memento without knowing about the protagonist's condition; this is the load-bearing fact of the film. Source calibration: canonical human reference surfaces this via \"With my condition, it's really tough. I can't keep it all in mind at once\" at ~00:33.",
+      "check": "Quote the recap line verbatim and cite its timestamp; the line must mention the condition (memory, memory loss, amnesia, condition, can't remember) in a way that applies to the protagonist. The line may be spoken by the new narrator OR by a source character.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-STRUCTURE-NONLINEAR",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The order of events presented in the recap is NOT a clean linear chronological order: at least one clearly later-in-the-story image or claim appears in the recap before at least one clearly earlier-in-the-story image or claim.",
+      "why": "Preserving reverse / non-linear ordering is the central craft requirement of this task; a chronological retelling destroys the film. Source calibration: reference opens with B&W motel awakening (chronological start) followed shortly by a color shot of Leonard already choking Teddy (much later in the story), then continues to weave the two strands.",
+      "check": "Cite a recap timestamp A showing a \"later\" beat (e.g., Leonard already choking someone, already holding a Polaroid of someone he is hunting, already in violent struggle) and a later recap timestamp B showing an \"earlier\" beat (e.g., quiet alone in motel room writing notes, first meeting another character, calmly investigating). A then B violates linear chronology and earns the point. If every recap beat is in chronological order, the item fails.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-WITHHOLD-TWIST",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The recap does NOT state in plain language that the protagonist has already killed the man he is hunting / that the protagonist is manipulating his own evidence to keep killing / that his quest is self-perpetuated.",
+      "why": "Spoiler policy for this subtype is withhold-ending; the film's reveal must remain at most a foreshadow, never delivered as exposition. Source calibration: reference ends without ever stating the twist; only the \"DON'T BELIEVE HIS LIES\" Polaroid moment hints at it.",
+      "check": "Inspect every spoken line and every on-screen text line in the recap; verify none of them say in plain English that the protagonist already killed his target, that he is faking his own clues, or that his memory loss is being exploited by himself. If a spoken line ambiguously hints at the twist (e.g., \"his actions still have meaning even if he can't remember them\"), that is acceptable and the item still passes.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-WITHHOLD-TEDDY-IDENTITY",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The recap does NOT identify, in spoken or on-screen text, a balding bespectacled man as a police officer / cop / detective / corrupt cop who is using or manipulating the protagonist.",
+      "why": "Naming Teddy as a cop is the moment the film's structural twist breaks; revealing this in a recap converts the film into a thriller logline. Source calibration: reference never names Teddy as a cop; he appears as \"your buddy\" and \"Lenny!\" greeting.",
+      "check": "For every line of spoken dialogue and every on-screen text label in the recap, verify none identify a balding man / glasses-wearing man as a cop, detective, officer, or police-officer figure. Background source dialogue that incidentally uses the word \"officer\" without identifying a specific on-screen character does not violate the item.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-SAMMY-NAMED",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The name \"Sammy Jankis\" (or \"Sammy\") is audibly spoken or shown as on-screen text at least once in the recap.",
+      "why": "The Sammy Jankis mirror is the film's truthtelling device and one of three primary capability tests for this task. Source calibration: reference includes the name at ~02:09 (\"look at Sammy Jankis\").",
+      "check": "Quote the recap line OR transcribe the on-screen text containing \"Sammy Jankis\" or \"Sammy\"; cite the recap timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-MID-ACTION-CONFUSION-LINE",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "At least one spoken line in the recap reflects the protagonist's in-medias-res confusion about his own current action (e.g., \"Where am I?\", \"What am I doing?\", \"I'm chasing this guy, no, he's chasing me\", \"What happened?\", or clear paraphrase by the new narrator).",
+      "why": "Such lines are how the film makes the reverse-discovery structure subjectively legible; they distinguish a structural recap from a chronological synopsis. Source calibration: reference uses \"Where am I?\", \"Okay, so what am I doing?\", \"I'm chasing this guy / no, he's chasing me\" at ~00:24, 00:58, 01:54.",
+      "check": "Quote a recap line and cite its timestamp; the line must convey the protagonist's confusion about what he is presently doing (whether spoken by the protagonist directly in surfaced source dialogue OR paraphrased by the new narrator describing the protagonist's state), not a generic philosophical statement.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-WIFE-DEATH-REFERENCED",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The recap references, in spoken audio or readable on-screen text, that the protagonist's wife is dead or was killed.",
+      "why": "Without this fact the protagonist's mission is unmotivated; viewers cannot understand why Leonard is acting. Source calibration: reference surfaces this via \"What's the last thing that you do remember?, My wife., That's sweet., Dying\" at ~00:38-00:47, and the chest tattoo.",
+      "check": "Quote the spoken line OR transcribe the on-screen text; cite the recap timestamp. The reference must implicate the wife's death specifically (not just \"his wife\" generically).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-CHRON-OPENING",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The first 20 seconds of the recap do NOT contain a spoken or on-screen logline that lays out the plot in chronological order (e.g., \"Leonard Shelby is a man with no memory who is hunting the killer of his wife, and he will discover the truth\").",
+      "why": "This is the classic generic-agent failure mode for *Memento*. Opening with the logline guarantees a chronological mental model and kills the film's structure before the rest of the recap can recover. Source calibration: reference's opening 20 s is Leonard alone in a motel reading the Bible, with monologue about \"an anonymous room\", no logline.",
+      "check": "Listen and read all spoken / on-screen text in the recap's first 20.0 s; verify there is no sentence that names the protagonist AND describes his quest AND implies the chronological arc, all in one breath. Cite the timestamp(s) inspected.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-LEONARD-MISIDENTIFICATION",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "No spoken line or on-screen text in the recap identifies the protagonist by a name other than \"Leonard\" (or \"Lenny\"), and no spoken line refers to him as the murderer / killer of his wife.",
+      "why": "Mis-naming the protagonist is a common hallucination failure for VLM-driven recap agents on canonical films; calling him the killer of his wife both spoils and inverts the story. Source calibration: in reference, he is addressed as \"Lenny\" by Teddy at ~01:02.",
+      "check": "Inspect every spoken sentence and every label/caption in the recap for an alternative protagonist name. If any name other than \"Leonard\"/\"Lenny\" is used to refer to the protagonist, OR if any line calls him the killer of his own wife, the item fails. Cite the offending timestamp if it exists, otherwise confirm none was found.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-FACT-INVENTION",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "No spoken line or on-screen text introduces a verifiable false claim about the film (e.g., naming a killer who does not appear in the film, naming a city / country the film does not show, attributing the protagonist's condition to a disease he does not have, citing a year or director other than the film's actual one if any year/director is mentioned at all).",
+      "why": "Hallucinated facts are the dominant accuracy failure mode for VLM agents on canonical films; they erode trust faster than omissions. Source calibration: reference never makes factual claims beyond what its quoted source dialogue grounds.",
+      "check": "For every concrete proper-noun or factual claim (name, place, date, profession) in the recap, verify the claim is consistent with the recap's own visible/audible evidence; if the recap names a person, the recap must also show or have shown someone identified as that person. Cite the recap timestamp of any unsupported claim; if none, confirm none was found.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-PADDING-REPEATS",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No single recap shot or near- identical recap shot (same scene, same camera, same characters) appears for more than 8 cumulative seconds across the recap.",
+      "why": "Padding via reused footage is a common low-discrimination failure mode and inflates duration without adding semantic content. Source calibration: reference has no single repeated shot \u2265 8 s; cuts are short and motivated.",
+      "check": "Identify the longest cumulative on-screen duration of any single near-identical shot in the recap; verify it is \u2264 8.0 s. Cite the recap timestamps of any candidate repeat.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-NARRATOR-CONSISTENT",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "One identifiable narrator voice (a voice making explanatory claims about the film, not a source character speaking dialogue inside a scene) persists across the recap as the dominant explainer track, audible for at least half of the recap's runtime, with no audible swap to a second distinct narrator voice.",
+      "why": "This task's audio policy requires a single new narrator carrying the explainer spine; speaker swap mid-cut signals editing failure and a generic-agent fallback to TTS pipelines. Source calibration: this item is the diversity-constraint anchor and is independent of any reference recap (the canonical human reference for this asset uses source monologue instead, which would not satisfy this item).",
+      "check": "Identify the recap's narrator voice (a non-source explanatory voice). Verify (a) the same narrator voice carries explanatory speech across multiple recap timestamps spanning at least 50 % of the total runtime, AND (b) no second distinct narrator voice replaces or alternates with the first. Cite at least three recap timestamps across the runtime where the narrator's voice is audible.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-SOURCE-AUDIO-PRESENT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "At least 30 cumulative seconds of the recap audio is direct source-film audio (recognisable as character dialogue or score consistent with a 2000-era neo-noir thriller, not a TTS voice and not stock music).",
+      "why": "Source-grounded audio is part of \"stay inside the world of the film\"; surfacing source dialogue under the narrator is how the recap roots specific claims (the tattoo reading, the Sammy line, the \"I'm chasing this guy\" beat) in the source. Source calibration: reference audio is overwhelmingly source-derived; this rubric only asks for \u2265 30 s so the new narrator still carries the spine.",
+      "check": "Identify segments where the audio is plausibly direct source dialogue or score (e.g., recognisable character voices like Leonard's, Teddy's, Natalie's; or sparse piano/drone score). Sum durations; verify total \u2265 30.0 s. Cite 2 representative timestamp ranges.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-AUDIO-BREAKAGE",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The recap audio contains no hard clipping, no abrupt sub-second dropouts mid-line, and no jarring volume jumps (> 12 dB) between adjacent cuts.",
+      "why": "Polish gate; an editor with no audio sense will leave breakpoints that mark the output as agentic. Source calibration: reference's audio cuts are clean with no breakpoint artifacts.",
+      "check": "Scan the recap audio; verify absence of perceptible clipping artifacts and mid-line dropouts; if a sharp jump is detected, cite the recap timestamp. If none detected, confirm none.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-WRONG-VOICE-ASSIGNMENT",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "No new-narrator statement or on-screen caption in the recap claims a piece of source dialogue was said by a character to whom it was not said (e.g., a caption mis-attributing Natalie's line to Leonard's wife, or the narrator describing Leonard as the speaker of Teddy's line).",
+      "why": "Speaker mis-attribution is a high-visibility hallucination failure when an agent layers explainer narration on top of source dialogue. Source calibration: reference has no third-party narrator and so cannot make this error; the rubric defends against an agent that adds one.",
+      "check": "For every new-narrator sentence (if any) or on-screen caption that attributes a line of dialogue to a named character, verify the attribution matches who is visibly speaking in the corresponding visual. Cite the recap timestamp of any violation, or confirm none.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-CHRON-COLLAPSE",
+      "pillar": 2,
+      "weight": -60,
+      "criterion": "The recap presents the film's events in a clearly chronological order, with no later-in-the-story shot ever appearing before an earlier-in-the-story shot, AND with at least one spoken or on-screen line that signals chronological scaffolding (e.g., \"first\u2026\", \"then\u2026\", \"next\u2026\", \"and at the end\u2026\", or numbered beats).",
+      "why": "Chronological reordering destroys the film's central artistic device. This is the prepared failure mode for this task per `candidate_profile.critical_penalty_modes`. Applies on top of the failing N-STRUCTURE-NONLINEAR item; the penalty is large because the entire recap's identity is collapsed when this fires.",
+      "check": "Verify both (a) the recap shows no clear out-of-order pair across its full runtime, AND (b) at least one explicit chronological scaffold word/phrase (\"first\", \"then\", \"next\", \"and then\", \"finally\", numbered or ordinal sequencing language outside of chapter-card numbering) appears in the spoken audio or on-screen text. If both are true, the violation fires and -60 is applied. Cite the recap timestamps you inspected. If either condition is false, the penalty does NOT fire (recap is not chronologically collapsed by this strict test). Note: chapter-card numbering (e.g., \"ONE\", \"TWO\", \"THREE\" used to label sections) alone does NOT constitute chronological scaffolding for the purpose of this penalty.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-TWIST-LEAKED-AS-SETUP",
+      "pillar": 2,
+      "weight": -50,
+      "criterion": "The recap delivers the film's ending revelation, that the protagonist has already killed the man who killed his wife, OR that he is manipulating his own notes to keep killing, OR that the balding bespectacled man is a cop using him, as opening exposition within the first 60 seconds of the recap.",
+      "why": "Spoiler-as-setup converts the film into a thriller logline and erases the structural reason the recap is hard. Source calibration: reference never delivers any of these in the first 60 s (and in fact never delivers them in plain language at all).",
+      "check": "Inspect all spoken lines and on-screen text in the first 60.0 s of the recap. If a sentence in that window plainly states (i) the protagonist has already killed his target, (ii) the protagonist is faking / manipulating his own notes, OR (iii) a balding bespectacled man is a cop/officer exploiting the protagonist, the violation fires. Quote the offending line and cite the timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NARRATOR-PRESENT",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "A consistent third-party narrator voice (a non-source explanatory voice, not a voice belonging to a character speaking within a source scene) is audible across the recap for at least half of the runtime, holding the cut together as the spine of the edit rather than letting surfaced source dialogue, music, and atmosphere carry it alone.",
+      "why": "This task's `audio_policy = new_vo_required` mandates a new explainer narrator carrying the spine; this absence item rewards the presence of such a sustained narrator. (Catastrophic penalty for a fully missing narrator was downgraded to this positive absence item per QC Pass B; the narrator-dominance presence item S-NARRATOR-CONSISTENT remains the primary anchor.)",
+      "check": "Identify all recap audio segments where a clearly non-source narrator voice (a voice making explanatory claims about the film, not part of any visible source scene) is audible. Sum their durations. Pass if the total is \u2265 50% of the recap's total runtime. Cite the narrator runs you found with timestamp ranges, or confirm none were detected.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-SAMMY-MISSING",
+      "pillar": 2,
+      "weight": -30,
+      "criterion": "Neither the name \"Sammy\" nor \"Jankis\" appears in the recap's spoken audio or on-screen text, AND no shot in the recap visibly depicts the Sammy Jankis cue (Sammy- Jankis tattoo on the protagonist's hand, or a clearly non-Leonard man identified as the subject of a story-within-the-story).",
+      "why": "The Sammy Jankis mirror is one of the primary capability requirements; entire omission of the subplot is a task-defining failure. Source calibration: reference contains both audio mention at ~02:09 and visual tattoo cues at ~00:18 / ~02:35.",
+      "check": "Verify (a) no audible or on-screen instance of \"Sammy\" or \"Jankis\" anywhere in the recap, AND (b) no shot showing a tattoo reading those words AND no shot of a clearly non-Leonard man framed as the subject of a recounted story. If both hold, the violation fires. Cite the timestamps you inspected to confirm absence; if the audio is unintelligible, treat as missing for this gate.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "V-CHAPTER-STRUCTURE-PRESENT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "At least one full-frame or near-full-frame static title-card graphic announcing a numbered chapter, named section, or one-line claim heading appears somewhere in the recap, the recap is not a single continuous edit with zero chapter-card structure.",
+      "why": "This task's `output_shape = chapter_titled` mandates 3\u20135 chapter cards partitioning the cut; this absence item rewards the basic shape signal that any chapter card was used at all. (Catastrophic penalty for zero chapter cards was downgraded to this positive absence item per QC Pass B; the count-based presence item V-CHAPTER-CARDS-PRESENT remains the primary anchor for the exact 3-card target.)",
+      "check": "Inspect the full recap for any full-frame or near-full-frame static title-card graphic announcing a chapter, section, part, or claim heading. A persistent lower-third caption or a brief intertitle that does not pause the action does NOT count as a chapter card. Pass if at least one qualifying chapter card appears anywhere in the recap. Cite the timestamps inspected.",
+      "judge": "opus-vision"
+    }
+  ]
+}

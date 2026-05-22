@@ -1,0 +1,365 @@
+{
+  "task_id": "talk_mlk_i_have_a_dream",
+  "items": [
+    {
+      "id": "F-RUNTIME",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The recap runtime is within \u00b15% of the canonical 4:06 reference (i.e., between 3:54 and 4:19).",
+      "why": "Curator diversity_constraints.runtime_band=medium_180_280s and the recap-pair convention enforces golden_duration \u00b15%. Source calibration: reference recap duration \u2248 246.5 s; 5% tolerance = 234.2 s to 258.8 s.",
+      "check": "Read container duration; pass if 234.2 \u2264 duration_seconds \u2264 258.8.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-CONTAINER",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The recap file is an MP4 container with H.264 video and AAC audio.",
+      "why": "Brief specifies `.mp4` / H.264 / AAC for downstream playback.",
+      "check": "Probe the container; pass if `video_codec == h264` AND `audio_codec == aac` AND format includes `mp4`.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-AUDIO-PRESENT",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The recap has a non-silent audio stream that runs the full duration of the video.",
+      "why": "A muted output catastrophically fails the canonical-sound requirement; this is the basic deliverable check.",
+      "check": "Probe audio stream presence and run silencedetect with -30dB threshold; pass if at least one audio stream exists and total non-silent duration \u2265 80% of total runtime.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-NO-ASPECT-DISTORTION",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The recap does not stretch or squash the source frame; 4:3 and 16:9 are both acceptable as long as pixels are not anamorphically distorted.",
+      "why": "Brief allows 4:3 or 16:9 but forbids distortion or arbitrary letterbox bars.",
+      "check": "Read sample_aspect_ratio and display_aspect_ratio; pass if SAR is 1:1 and DAR is one of 4:3 or 16:9 (or close approximation within 2%).",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-TITLE-SPEECH-NAME",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Within the first 30 seconds of the recap, on-screen text names the speech as \"I Have a Dream\" (or \"I Have A Dream\").",
+      "why": "Brief mandates \"put a brief title card at the top naming the speech, Dr. King, the year, and the venue,\" and explicitly permits opening on an earned moment before the title card. Naming the speech up top anchors the viewer who only knows the phrase; the 30s window accommodates a brief earned cold-open.",
+      "check": "Opus-vision inspects the first 30 seconds of the recap; pass if the words \"I Have a Dream\" (or \"I Have A Dream\") appear as visible on-screen text. Judge cites the recap timestamp where the text appears.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-TITLE-SPEAKER",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Within the first 30 seconds of the recap, on-screen text names the speaker as \"Martin Luther King,\" \"Dr. King,\" or \"MLK.\"",
+      "why": "Speech-without-attribution loses the speaker's identity, but the brief explicitly permits opening on an earned moment before the title card. Source calibration: the speech is delivered by Dr. Martin Luther King Jr. at the 1963 March on Washington.",
+      "check": "Opus-vision inspects the first 30 seconds of the recap; pass if \"Martin Luther King\" (with or without \"Jr.\"), \"Dr. King,\" or the acronym \"MLK\" appears as visible on-screen text. Judge cites the recap timestamp where the text appears.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-ARCHIVAL-FOOTAGE-DOMINANT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "Black-and-white archival speech footage (the speaker at a lectern with microphones, the National Mall crowd, or the Lincoln statue) is the dominant visual content of the recap, occupying more than half of the runtime.",
+      "why": "The brief instructs the editor to work primarily from the archival footage, and the source is essentially the only visual material available. Slideshow-only or stock-montage substitutes are the easy-strategy failure to block.",
+      "check": "Opus-vision samples frames every 5 seconds; pass if more than 50% of sampled frames show black-and-white archival speech footage (figure at a lectern with microphones, wide crowd at the National Mall, or marble Lincoln statue). Judge cites the recap timestamps that establish the count.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-LECTERN-CLOSEUP",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "At least one close-up or medium close-up of the speaker speaking at the lectern with visible microphones is shown.",
+      "why": "The lectern shot is the canonical visual of this speech and grounds the audio in the actual delivery.",
+      "check": "Opus-vision; pass if at least one shot shows the speaker from chest-up or closer, at a lectern with at least one visible microphone, in black-and-white archival quality. Judge cites the recap timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CROWD-WIDE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "At least one wide or aerial shot of the assembled crowd on the National Mall (reflecting pool flanked by people, or aerial scale shot) is shown.",
+      "why": "The scale of the audience is part of the event's meaning; the source has multiple such shots (Gemini confirms aerial / high-angle from the Washington Monument toward the Lincoln Memorial).",
+      "check": "Opus-vision; pass if at least one shot shows a large outdoor crowd in black-and-white archival quality, either at the reflecting pool or in an aerial / high-angle view. Judge cites the recap timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-LINCOLN-OR-VENUE-CUE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "At least one shot visibly anchors the venue as the Lincoln Memorial, either the Lincoln statue (the marble portrait of Lincoln seated) or the Lincoln Memorial steps / columns or the broad view from the memorial toward the Washington Monument.",
+      "why": "Venue identification is part of why this speech matters; source has the Lincoln statue cutaway around 01:48 and the Washington Monument skyline around 06:40.",
+      "check": "Opus-vision; pass if at least one shot shows the seated marble Lincoln statue, the white-columned Lincoln Memorial steps, OR a wide view aligning the reflecting pool with the Washington Monument obelisk. Judge cites the recap timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-POST1963-FOOTAGE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The recap does NOT include footage clearly from after August 1963, no MLK funeral footage, no Selma 1965 footage, no signing of the Civil Rights Act (LBJ-at-desk imagery), no later-decade civil-rights imagery.",
+      "why": "Brief explicitly forbids padding with stock civil-rights montage material outside this speech. This is the most common easy-strategy substitution.",
+      "check": "Opus-vision samples the full recap; pass if no shot shows post-1963 identifiable content (a coffin/funeral, LBJ signing at a desk, Selma bridge marches, color news footage of later civil-rights events). Judge cites recap timestamps if any such shot is found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-SLIDESHOW-PADDING",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The recap does NOT consist primarily of static text slides or PowerPoint-style bullet lists; on-screen text is limited to title card and any short lower-thirds, not standalone slide segments.",
+      "why": "Brief specifies a clip-driven editorial summary worked primarily from the archival footage; substituting static text slides or PowerPoint-style bullet lists for the actual source material is the easy-strategy failure to block.",
+      "check": "Opus-vision samples frames every 5 seconds; pass if fewer than 20% of sampled frames are dominated by text on a flat-color background with no archival footage visible. Judge cites recap timestamps.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-REPEATED-SHOT-PADDING",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The recap does NOT use the same shot twice in a way that reads as runtime padding (e.g., the title still photo shown for 30+ seconds with no other visual).",
+      "why": "A common failure mode for short edits is to loop one strong image rather than do real selection work.",
+      "check": "Opus-vision; pass if no single static frame or near-identical shot occupies more than 20 seconds of contiguous runtime.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-BLACK-FRAMES",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The recap does NOT contain a contiguous black or blank frame stretch of more than 2 seconds outside of a deliberate <2s fade-to-black at the very end.",
+      "why": "Standard delivery hygiene; black frames usually indicate broken concatenation.",
+      "check": "Deterministic frame analysis; pass if no black-frame run > 2.0 seconds appears anywhere except possibly the final 2 seconds.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "N-METAPHOR-PROMISSORY-NOTE",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The \"promissory note\" OR \"bad check\" OR \"insufficient funds\" wording from the speech is audibly heard in Dr. King's recorded voice somewhere in the recap.",
+      "why": "The financial metaphor is the speech's signature first-act image and the curator's #2 critical penalty if dropped. Source calibration: this cluster sits at \u224803:24\u201304:30, with \"insufficient funds\" landing around 04:25.",
+      "check": "Gemini-audio listens to the full recap; pass if any of the phrases \"promissory note,\" \"bad check,\" or \"insufficient funds\" is audible AND the speaker's voice is recognizably MLK (deep, cadenced, archival recording quality), not a narrator paraphrase. Judge cites the recap timestamp where the phrase is heard.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-METAPHOR-OPENING-PROMINENCE",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The promissory-note / bad-check / insufficient-funds wording is heard within the first one-third of the recap runtime.",
+      "why": "Brief mandates that the first act \"land\" and that \"both acts have to land, and they have to land in that order.\" Front-loading the financial metaphor early in the recap signals that it anchors the speech, rather than being a token snippet on the way to the dream section.",
+      "check": "Gemini-audio; pass if any of \"promissory note,\" \"bad check,\" or \"insufficient funds\" is audible at a recap timestamp \u2264 (recap_duration / 3). Judge cites the timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-BANK-OF-JUSTICE-PAYOFF",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The \"bank of justice is bankrupt\" OR \"great vaults of opportunity\" payoff line of the financial metaphor is audibly heard in the recap.",
+      "why": "Without the payoff line, the bad-check metaphor lands without its rhetorical answer. Source calibration: \u224804:35\u201304:55. This is a separate atomic item from the bad-check setup.",
+      "check": "Gemini-audio; pass if either of the phrases \"bank of justice\" or \"vaults of opportunity\" is audible in MLK's recorded voice. Judge cites the recap timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-DREAM-ANAPHORA-PRESENT",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The phrase \"I have a dream\" is audibly heard in Dr. King's recorded voice at least once in the recap.",
+      "why": "This is the speech's titular phrase. Source calibration: first instance at \u224812:20.",
+      "check": "Gemini-audio; pass if the phrase \"I have a dream\" is audible at least once AND the voice is recognizably MLK's recorded delivery, not a narrator paraphrase. Judge cites the recap timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-MISSISSIPPI-NAMED",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The state name \"Mississippi\" is audibly spoken in Dr. King's recorded voice at least once in the recap.",
+      "why": "Mississippi is named in both the geographic bridge (\u224811:38) and the dream sequence (\u224813:18) and the \"let freedom ring\" closing (\u224816:37). The curator's #3 critical penalty is named-place collapse with Mississippi specifically called out.",
+      "check": "Gemini-audio; pass if the word \"Mississippi\" is audible in MLK's recorded voice (not narrator). Judge cites the recap timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-ALABAMA-NAMED",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The state name \"Alabama\" is audibly spoken in Dr. King's recorded voice at least once in the recap.",
+      "why": "Alabama appears in the geographic bridge (\u224811:41) and the dream's \"little black boys and black girls\" variant (\u224814:05). Curator's #3 critical penalty names Alabama explicitly.",
+      "check": "Gemini-audio; pass if the word \"Alabama\" is audible in MLK's recorded voice. Judge cites the recap timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-LET-FREEDOM-RING",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The phrase \"let freedom ring\" is audibly heard in Dr. King's recorded voice at least once in the recap.",
+      "why": "The closing anaphora is the speech's geographic-reach payoff and one of its most-quoted lines. Source calibration: \u224815:58 onward.",
+      "check": "Gemini-audio; pass if the phrase \"let freedom ring\" is audible in MLK's voice. Judge cites the recap timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-FREE-AT-LAST",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The phrase \"free at last\" is audibly heard in Dr. King's recorded voice at least once in the recap.",
+      "why": "The coda phrase is the speech's emotional close. Source calibration: \u224817:13.",
+      "check": "Gemini-audio; pass if the phrase \"free at last\" is audible in MLK's voice. Judge cites the recap timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-TWO-ACT-ORDER",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The financial-metaphor material (promissory note / bad check / insufficient funds wording) is heard BEFORE the \"I have a dream\" anaphora and BEFORE \"let freedom ring\" in the recap's timeline.",
+      "why": "The brief requires both rhetorical halves in their original order; reversing them inverts the speech's argument-then-vision logic.",
+      "check": "Gemini-audio; pass if the earliest recap timestamp containing any of \"promissory note\" / \"bad check\" / \"insufficient funds\" is strictly less than the earliest recap timestamp containing \"I have a dream\" AND strictly less than the earliest timestamp containing \"let freedom ring.\" Judge cites both timestamps.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-NARRATOR-PARAPHRASE",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The recap does NOT substitute a narrator's paraphrase for Dr. King's words on any of the speech's signature phrases (promissory note / bad check / insufficient funds / I have a dream / let freedom ring / free at last). When any of those phrases is heard, it is heard in MLK's recorded voice, not summarized by a narrator.",
+      "why": "The brief explicitly forbids replacing MLK's words with a narrator summary. This is the most common easy-strategy failure for talk_summary tasks.",
+      "check": "Gemini-audio; pass if every occurrence of the signature phrases above is delivered in MLK's recorded voice (archival, cadenced, deep). If any signature phrase is heard only in a narrator's paraphrase (\"King argued that America had given Black citizens a bad check\u2026\"), the item fails. Judge cites recap timestamps for any failure.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-POST1963-CONTENT",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The recap does NOT include factual claims about events that happened after August 1963, no Civil Rights Act, no Voting Rights Act, no MLK's assassination, no Affirmative Action, no Selma, no Vietnam, no other civil-rights leaders' work outside this speech.",
+      "why": "Brief restricts scope to this speech only; the recap is about what happened at the Lincoln Memorial on August 28, 1963, not the broader civil-rights timeline. Padding the cut with later legislative milestones, later marches, or later civil-rights leaders is the topic-adjacent drift the rubric refuses to reward.",
+      "check": "Gemini-audio plus opus-vision; pass if no spoken claim and no on-screen text references any of: 1964 Civil Rights Act, 1965 Voting Rights Act, MLK's 1968 death, Affirmative Action, Selma, Vietnam War, Cesar Chavez, post-1963 women's rights legislation. Judge cites recap timestamps if any such reference is found.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-FABRICATED-QUOTES",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "The recap does NOT attribute any quote to Dr. King that does not appear in this speech's transcript.",
+      "why": "A narrator may correctly paraphrase, but inventing a quote (or pulling from a different MLK speech) misleads the viewer about what they heard at the Lincoln Memorial.",
+      "check": "Gemini-audio; pass if any verbatim quoted line attributed to MLK in the recap (whether spoken in his voice or read by a narrator with quotation framing) comes from the \"I Have a Dream\" speech. Phrases such as \"I've been to the mountaintop\" (a different speech), \"the arc of the moral universe\" (Theodore Parker, often paraphrased by MLK in other speeches), or any other non-source MLK line constitutes a failure. Judge cites recap timestamps.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-MLK-VOICE-DOMINANT",
+      "pillar": 3,
+      "weight": 4,
+      "criterion": "Dr. King's recorded voice is the dominant audio of the recap, audible for more than half of the recap's total runtime.",
+      "why": "The curator's #4 critical penalty hardcodes the rule that MLK's voice is the canonical sound of this speech. The brief reinforces this. Dominance \u2260 exclusive; brief framing narration is allowed, but MLK has to be the through-line.",
+      "check": "Gemini-audio segments the audio track; pass if the total duration audibly featuring MLK's recorded speaking voice (deep, cadenced, archival recording quality) exceeds 50% of recap_duration. Judge cites the recap timestamps that constitute the largest MLK-voice segments.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CAPTIONS-PRESENT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "Legible English captions are burned into the lower safe area of the frame whenever the speaker is audibly speaking, present, readable at the recap's playback resolution, and inside the bottom safe area (not clipped by the frame edge or overlapping the speaker's face).",
+      "why": "Curator diversity_constraints.audio_policy=source_with_burned_captions requires captions so signature phrases (\"insufficient funds,\" \"I have a dream,\" named places) read as text alongside MLK's voice for classroom accessibility.",
+      "check": "Opus-vision samples frames every 3 seconds across the recap; pass if every sampled frame whose audio contains audible speech also shows English caption text in the bottom safe area (lower third of the frame, not clipped by edges, not obscured by other on-screen elements). Brief gaps for non-speech beats (applause-only, title card with its own typography, fade-out) do not fail the item. Judge cites at least three recap timestamps confirming captioned spoken segments and one timestamp confirming readability/safe-area placement.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-APPLAUSE-OR-AMENS",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "Audience response (applause, audible \"amens,\" or crowd murmur from the original recording) is preserved and audible somewhere in the recap.",
+      "why": "The crowd response is part of the recording's character; stripping it dries out the speech. Source calibration: applause breaks at \u224804:27, \u224805:04, \u224806:55, \u224812:19, \u224817:17.",
+      "check": "Gemini-audio; pass if at least one clearly audible burst of applause, \"amen,\" or sustained crowd response is heard in the recap. Judge cites the recap timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-MUSIC-SCORE",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "The recap does NOT add a music score over Dr. King's voice; original archival audio is not displaced by any added music bed.",
+      "why": "Brief explicitly says do not score this with music. Sentimental music beds are a common easy-strategy gesture for talk_summary tasks.",
+      "check": "Gemini-audio; pass if no instrumental music track is audible underneath or instead of MLK's voice during any segment containing speech. Brief stinger-style music before the title card or after the coda is acceptable so long as it does not bleed under the speaker's words.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CODA-ERUPTION",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The closing moment of the recap features either the \"free at last\" coda in MLK's voice, OR the audible crowd eruption that follows it, OR both.",
+      "why": "The emotional close of the speech is its most-remembered punctuation; a recap that ends on a quiet narrator outro misses the source's actual ending. Source calibration: \u224817:13\u201317:27.",
+      "check": "Gemini-audio; pass if within the final 20 seconds of the recap, either the phrase \"free at last\" is heard in MLK's voice OR a sustained crowd eruption / applause is audible. Judge cites the recap timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-AUDIO-DROPOUTS",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The recap does NOT contain audio dropouts longer than 1.5 seconds while a speaker is mid-sentence on screen.",
+      "why": "Splice hygiene; mid-sentence audio gaps usually indicate broken concatenation.",
+      "check": "Deterministic silencedetect with -40dB threshold cross-referenced against opus-vision lip-movement detection; pass if no silence window > 1.5s overlaps a frame with visible mouth-open lectern speech. Acceptable: silence between cuts or during applause-only beats.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "S-NO-CLIPPED-DIALOGUE",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "No signature phrase from this speech is cut off mid-word in the recap, when \"I have a dream,\" \"promissory note,\" \"bad check,\" \"insufficient funds,\" \"let freedom ring,\" or \"free at last\" appears, the full phrase is heard end-to-end.",
+      "why": "Sloppy splicing of the most-quoted phrases is a recognizable trailer-trash failure mode for talk summaries.",
+      "check": "Gemini-audio; pass if every audible occurrence of the listed phrases is heard as a complete intact phrase, not truncated mid-word. Judge cites recap timestamps for any clipped instance.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-SPEAKER-MISATTRIBUTION",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "No quote in the recap is attributed to a speaker other than Dr. Martin Luther King Jr., no labeled quote from another civil-rights figure, no on-screen attribution to a different speaker.",
+      "why": "A talk_summary task can drift if the editor pulls in a quote from John Lewis, A. Philip Randolph, or another March-on-Washington speaker and labels it inside this cut.",
+      "check": "Opus-vision plus gemini-audio; pass if every visible attribution and every spoken attribution names MLK / Dr. King / Martin Luther King Jr., not any other person. Judge cites recap timestamps for any failure.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-MLK-VOICE-MUTED",
+      "pillar": 3,
+      "weight": -60,
+      "criterion": "Dr. King's recorded voice is audible for less than half of the recap's total runtime, the cut is dominated by narrator paraphrase, music, or silence rather than the original speaker.",
+      "why": "Curator-defined #4 critical penalty: \"muted output: speech voice not audible in >50% of recap (king's voice is the canonical 'sound').\" This is the catastrophic version of S-MLK-VOICE-DOMINANT and fires when the recap is essentially a non-speech edit (narrator-only paraphrase, music bed over silenced footage, or text-slide format with no source audio).",
+      "check": "Gemini-audio segments the audio track; pass (deduction fires) if the total duration audibly featuring MLK's recorded speaking voice is LESS THAN 50% of recap_duration. Judge cites the dominant non-MLK audio segments and the rough percentage.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-FIRST-HALF-MISSING",
+      "pillar": 2,
+      "weight": -50,
+      "criterion": "The first-half financial-metaphor argument is entirely absent, none of \"promissory note,\" \"bad check,\" \"insufficient funds,\" \"bank of justice,\" or \"vaults of opportunity\" is audible in the recap (whether in MLK's voice OR a narrator's paraphrase).",
+      "why": "Curator-defined #2 critical penalty: \"missing the 'insufficient funds' check metaphor (the speech's most economically-pointed image).\" This is the easy-strategy failure where the agent makes an \"I have a dream\" highlight reel and drops the speech's actual argument. The penalty fires only when ALL of the metaphor's interchangeable phrasings are missing; if any one is present this penalty does not fire (the lower-weight presence items handle partial credit).",
+      "check": "Gemini-audio scans the full recap audio AND any on-screen text; pass (deduction fires) if NONE of \"promissory note,\" \"bad check,\" \"insufficient funds,\" \"bank of justice,\" \"vaults of opportunity\" appears either audibly or in visible on-screen text. Judge cites the recap timestamps confirming the search was exhaustive.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "V-ARCHIVAL-FOOTAGE-PRESENT-ABSENCE",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "The recap contains at least some archival speech footage, it does NOT consist exclusively of static text slides, modern stock imagery, or generated illustration without any black-and-white archival footage of the speaker or the March on Washington.",
+      "why": "Brief specifies a clip-driven editorial summary worked primarily from the archival footage. (Catastrophic penalty V-SLIDESHOW-ONLY was downgraded to this positive absence item per QC Pass B; the stronger V-ARCHIVAL-FOOTAGE-DOMINANT presence item remains the primary anchor for actual majority-archival use.) The atomically-graded N-MISSISSIPPI-NAMED and N-ALABAMA-NAMED presence items already cover named-place preservation, so the catastrophic N-NAMED-PLACE-COLLAPSE penalty was eliminated as redundant per QC Pass B.",
+      "check": "Opus-vision samples frames every 3 seconds across the full recap; pass if at least one sampled frame contains black-and-white archival footage of a speaker at a lectern, the National Mall crowd, the Lincoln statue, the Washington Monument from the Lincoln Memorial vantage, or other 1963-era March on Washington imagery. Judge cites at least one such recap timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-CAPTIONS-PRESENT-ABSENCE",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "Every spoken line in the recap is accompanied by a legible burned-in English caption visible in the lower safe area, i.e., a viewer who cannot hear the audio can read what is being said.",
+      "why": "Curator diversity_constraints.audio_policy=source_with_burned_captions explicitly commissions a captioned classroom deliverable. (Catastrophic penalty was downgraded to this positive absence item per QC Pass B; the lighter S-CAPTIONS-PRESENT presence item remains a separate anchor for the polish/safe-area placement axis.)",
+      "check": "Opus-vision samples frames every 3 seconds; identify any sampled frame whose audio contains audible spoken speech (MLK or narrator) but which shows NO English caption text in the bottom safe area. Item passes iff no uncaptioned spoken segment of \u22653 seconds is found AND \u226425% of sampled spoken-audio frames lack burned captions. Judge cites the recap timestamp ranges where captions are missing during speech, if any.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-UNEXPECTED-OVERLAY",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No persistent overlay element that was not commissioned, for example a scoreboard widget, a numbered chapter card scheme partitioning the cut, or a persistent lower-third citation card, is visible across most of the recap runtime.",
+      "why": "Curator diversity_constraints.output_shape=single_concat. The brief commissions a single straight cut with only burned captions and a brief title card. (Catastrophic penalty was downgraded to this positive absence item per QC Pass B.)",
+      "check": "Opus-vision samples frames every 5 seconds; item passes iff no single non-caption overlay element (a chapter title card scheme of three or more numbered/named cards, a persistent scoreboard, a persistent lower-third attribution card unrelated to captions) is visible across more than 50% of sampled frames. The brief title card at the head and the burned captions themselves do NOT count. Judge cites the recap timestamps showing any overlay observed, or confirms none.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-FIRST-HALF-UNDERWEIGHTED",
+      "pillar": 2,
+      "weight": -30,
+      "criterion": "The first-half financial-metaphor argument occupies less than 25% of the recap runtime, i.e., the cumulative duration during which MLK's voice is articulating any of the first-act canonical phrases (\"promissory note\", \"bad check\", \"insufficient funds\", \"bank of justice\", \"vaults of opportunity\", \"now is the time\", \"the fierce urgency of now\", \"America has given the Negro people a bad check\", \"we refuse to believe that the bank of justice is bankrupt\") is less than 25% of the recap's total runtime. A recap that includes only a token 5\u201310 second snippet of one first-act phrase before jumping to the dream section has shipped a \"dream-only\" cut that the brief explicitly forbids.",
+      "why": "Brief mandates \"both acts have to land, and they have to land in that order... A cut that gives a viewer only the dream is missing the speech.\" The first-act financial-metaphor argument is what EARNS the second-act dream payoff, without proportional weight to the first act, the speech's rhetorical architecture collapses into a \"MLK dream highlight reel\" rather than the speech's actual structure. This penalty assumes N-FIRST-HALF-MISSING did not fire (i.e., at least one first-act phrase IS audible); it specifically targets the failure mode of including only a token snippet rather than the argument as a whole.",
+      "check": "Gemini-audio identifies all timestamps where MLK's voice articulates any of the first-act canonical phrases (or directly adjacent first-act content). Judge sums the total duration of these segments. Pass (deduction fires) if and only if the cumulative first-act duration is less than 25% of the recap's total runtime (e.g., in a 246-second recap, less than 62 seconds of first-act content).",
+      "judge": "gemini-audio"
+    }
+  ]
+}
