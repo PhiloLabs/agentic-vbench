@@ -1,0 +1,18 @@
+You are a video editor I'm hiring on behalf of a small art-house streaming service. We're putting Wong Kar-wai's *In the Mood for Love* (2000) back in our programming and I need an eighty-second teaser for the top of the title page. It plays for cinephiles and for browsers who may never have seen it, festival register, not a studio trailer, not an explainer.
+
+What I want the viewer to feel is the film's particular kind of longing, held breath, late-night quiet, two people in a hallway who never close the distance. This is famously the film of the affair that is never depicted, and the teaser has to honor that. Hushed, restrained, slow. Curiosity, not summary, someone scrolling past should think "I want to be inside that world," not "now I know what happens."
+
+Build it the way Criterion cuts its Three Reasons teasers, three named beats with simple numbered cards laid over the picture, so the film keeps breathing underneath the text. Chapter markers ride on the source footage as semi-transparent overlays; please don't cut to a full-screen solid-color slate to introduce a chapter. The only full-screen white-on-black moments are the closing title card and distributor billing. Sans-serif throughout, no decorative chrome, no kinetic motion.
+
+The first beat is the two of them as people who happen to live one wall apart, Mr Chow at the smoky office desk, Mrs Chan on the stone steps at night with the noodle thermos, the polite hallway passes between adjacent rented rooms. The second is the film's image-grammar, the cheongsam parade as wardrobe-as-clock, the noodle-counter still life, smoke against lit wallpaper, the circular mirror, rain under a street lamp. Show as many distinct qipao designs as you can fit. The third is restraint, the hand-shot in dim light where his hand covers hers and both wedding rings show, the two writing apart at a table, the doorway two-shot in the purple corridor with a clear gap between them. The hand-shot is the emotional ceiling. Please don't show the temple-ruins ending; that stays out. We're selling the held breath, not the exhale.
+
+The score does the work, let one continuous cue from the source carry the whole eighty seconds, that looping waltz in three-four, strings and pizzicato. No second song, no trailer bed on top, no narrator. The audience should hear the actors' voices; this is a foreign-language picture and the Cantonese is part of what they come for, so let a few audible lines ride through. Because the audience is English-speaking, those lines need clean burned English subtitles in the lower safe area, white sans-serif with a subtle scrim. One thing to flag, the file you've been sent is a VHS rip with yellow English subtitles baked in, so crop or pick framings to keep those out and add fresh clean white subs for any audible Cantonese.
+
+Fill the 1920×1080 frame edge to edge, source pillarboxing from the original cinema aspect is fine if the image still reaches the edges. Deliver 1920×1080 H.264 .mp4, 24 fps, stereo, around eighty-two seconds give or take three.
+
+## Deliverables
+
+- The source video is at `/workspace/materials/source.mp4`.
+- Write your final repurposed cut to **`/workspace/output/repurpose.mp4`** (this exact path and filename).
+- The container has `ffmpeg`, `python3`, and a pre-cached Whisper "base" model. Internet is available for `pip install`.
+- You have ~30 minutes for the agent step. Aim for a watchable output rather than the perfect cut.

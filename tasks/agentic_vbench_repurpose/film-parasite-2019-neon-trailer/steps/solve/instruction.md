@@ -1,0 +1,16 @@
+You are a video editor I'm hiring on behalf of NEON's specialty marketing team. We're cutting the North American theatrical trailer for Bong Joon-ho's *Parasite*, the Palme d'Or winner we're launching out of Cannes into a fall awards run. It lives at the top of our YouTube channel and has to make a literate adult audience want to see the film without us telling them what it actually is.
+
+Here's what *Parasite* is, and what I need you to keep secret. On the surface, the first hour is a deadpan con-comedy: a poor family in a Seoul semi-basement quietly slipping their way into a rich family's modernist hilltop house, one tutor, one art therapist, one chauffeur, one housekeeper, in that order. Underneath, in the back half, the film mutates into something else entirely. The whole campaign depends on the audience walking in expecting the first thing and being blindsided by the second; if the cut hands them the third-act material, the bunker or what's in it or what happens at the birthday party, you've given me the wrong trailer. Leave the ending untouched. End on a question.
+
+Open in the Kim family's semi-basement: cramped, comic in a Bong way. Build through the con, one Kim after another talking their way into the Park household, the architectural shock of that vast glass house, the deadpan absurdity of a young woman reciting a fake American backstory at a gate. The contrast between the two homes is the engine; let the audience feel the class drop every time we cross it. In the back half, tilt the floor: rain, dark interiors, a child looking suspicious, an adult realising something is wrong, pull-quotes from real critics that promise the film mutates without saying into what. Imply, don't show. The cuts should land faster the closer you get to the title.
+
+Leave the audio of the film alone. Korean dialogue with subtitles is the voice of this trailer, and Jung Jae-il's score is the engine, harpsichord-driven heist cue in the front half, orchestral build behind, a held beat of silence right before the title lands. The film talks for itself; nothing here needs a narrator. Keep the subtitles in the safe area; this audience will be reading.
+
+Deliver as 1920×1080 H.264 .mp4 at 24 fps with stereo audio, somewhere between two minutes and two-and-a-half, landing a full-screen `PARASITE` title card late in the runtime ahead of a short distributor billing tail.
+
+## Deliverables
+
+- The source video is at `/workspace/materials/source.mp4`.
+- Write your final repurposed cut to **`/workspace/output/repurpose.mp4`** (this exact path and filename).
+- The container has `ffmpeg`, `python3`, and a pre-cached Whisper "base" model. Internet is available for `pip install`.
+- You have ~30 minutes for the agent step. Aim for a watchable output rather than the perfect cut.

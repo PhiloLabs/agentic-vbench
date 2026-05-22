@@ -1,0 +1,329 @@
+{
+  "task_id": "event_apollo_11_50th_anniversary",
+  "items": [
+    {
+      "id": "F-1",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The submitted file is a playable MP4 with an H.264 video stream.",
+      "why": "Delivery contract from the brief.",
+      "check": "ffprobe reports container `mov,mp4,m4a,3gp,3g2,mj2` and video codec h264.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-2",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Display aspect ratio is 16:9.",
+      "why": "Delivery contract.",
+      "check": "ffprobe `display_aspect_ratio` is `16:9` OR width/height ratio is within 0.02 of 1.7777.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-3",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "Total duration is between 226 s (3:46) and 250 s (4:10) inclusive.",
+      "why": "Brief target window for the anniversary retrospective; matches the golden's 237.8 s \u00b15%.",
+      "check": "ffprobe `format.duration` \u2265 226.0 and \u2264 250.0.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-4",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Audio track is audible throughout (mean dBFS over 0:05-3:40 is louder than -50 dBFS).",
+      "why": "Brief explicitly requires audible stereo audio.",
+      "check": "ffmpeg `volumedetect` filter on the audio between 0:05 and 3:40 reports `mean_volume` > -50 dB.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-5",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The repurposed cut is a single contiguous video, no segment between 0:05 and 3:55 is black for more than 1.0 consecutive second.",
+      "why": "Avoids \"padding by black frames\" cheat to hit runtime.",
+      "check": "ffmpeg `blackdetect=d=1.0:pix_th=0.05` filter run on the 0:05-3:55 window reports zero `black_start` events.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-6",
+      "pillar": 0,
+      "weight": -1,
+      "criterion": "More than 2.0 cumulative seconds of black or blank frames appear within the 0:05-3:55 window (excluding intro fade-in and outro fade-out).",
+      "why": "Catches subtler runtime padding via repeated short blacks.",
+      "check": "ffmpeg `blackdetect=d=0.3:pix_th=0.05` run on 0:05-3:55 sums `black_duration` values; deduct if the sum > 2.0 s.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-1",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "A Saturn V rocket launch sequence is visible in the repurposed cut (rocket ignition with flame plume and/or rocket ascending from a launch pad).",
+      "why": "Anchors the mission with its iconic kinetic moment; without it the repurposed cut is not a launch-to-moonwalk arc.",
+      "check": "Judge identifies a repurposed cut timestamp where a large white-and-black rocket is shown either igniting on a launch pad or ascending through the lower atmosphere. Judge cites the repurposed cut mm:ss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-2",
+      "pillar": 1,
+      "weight": 4,
+      "criterion": "Lunar surface EVA footage of one or more astronauts is visible in the repurposed cut (a suited figure standing, walking, or working on the visibly lunar/grey-cratered surface).",
+      "why": "The moonwalk is the editorial centerpiece of every credible 50th-anniversary cut; the brief explicitly demands it.",
+      "check": "Judge identifies a repurposed cut timestamp where a white-pressure-suited astronaut is visibly on a grey, cratered, low-horizon lunar terrain. Judge cites the repurposed cut mm:ss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-3",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Neil Armstrong's face appears in at least one shot (NASA pressure-suit portrait, mission press photo, or recognizable mission still).",
+      "why": "Anchors Armstrong as an identifiable individual rather than a generic \"astronaut\".",
+      "check": "Judge identifies a repurposed cut timestamp showing a man's face in a white NASA pressure suit who can be identified as Armstrong by surrounding visual context (a labeled crew triptych portrait, an on-screen name caption, or a clear period crew-portrait composition). Judge cites the repurposed cut mm:ss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-4",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Buzz Aldrin appears in at least one shot identifiable as Aldrin (NASA crew portrait, or the iconic full-body lunar \"Visor\" portrait with American flag and LM reflected in his gold visor, or another on-screen-labeled Aldrin shot).",
+      "why": "Anchors Aldrin as a distinct individual; the Visor portrait is the most-reproduced single Apollo 11 image.",
+      "check": "Judge identifies a repurposed cut timestamp showing an Aldrin-identifiable shot. The Visor portrait alone satisfies (gold visor reflection of US flag + LM legs is unambiguous). Judge cites the repurposed cut mm:ss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-5",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Michael Collins appears in at least one shot identifiable as Collins (NASA crew portrait, Command Module interior shot, or post-flight shot with on-screen name).",
+      "why": "Anchors Collins as a distinct individual present in the mission record.",
+      "check": "Judge identifies a repurposed cut timestamp showing a Collins-identifiable shot. Judge cites the repurposed cut mm:ss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHAPTERS-PRESENT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "Between 3 and 5 numbered or named chapter title cards visibly partition the repurposed cut (e.g., \"ONE, LIFTOFF\", \"TWO, TRANQUILITY\", \"THREE, ONE SMALL STEP\", or equivalent Apollo-11-specific labels). Each card occupies most of the frame for at least 1.5 s on a substantially clean background (not just a tiny chyron over busy footage).",
+      "why": "The brief explicitly commissions a chaptered structure (3-5 numbered cards) and says cards should hold \"two seconds or so\", the 1.5s floor tracks that guidance while leaving small tolerance below. Diversity-constraint requirement: this task must be structurally distinguishable from a single-concat cut.",
+      "check": "Judge identifies the repurposed cut timestamps where each chapter title card appears, reads the visible card text, and counts cards. Pass = the count is in [3, 5] AND each card was visible \u22651.5 s AND each card text references an Apollo-11-specific phase or theme (launch / liftoff / Saturn V / Tranquility / landing / moonwalk / one small step / coming home / homecoming / splashdown / legacy or equivalent). Judge cites each chapter card's repurposed cut mm:ss and visible text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-LEGACY-STILL",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "An iconic Apollo 11 legacy still appears at least once: the Apollo 11 mission plaque (text \"HERE MEN FROM THE PLANET EARTH FIRST SET FOOT UPON THE MOON / JULY 1969, A.D.\"), OR the Aldrin Visor portrait (full body with gold visor reflecting flag and LM), OR the official crew triptych portrait of all three astronauts in pressure suits with a Moon backdrop.",
+      "why": "Anniversary-retrospective convention closes on iconic legacy imagery rather than chronological completeness (validated by the golden's plaque + visor + crew-portrait close).",
+      "check": "Judge identifies a repurposed cut timestamp where any one of the three listed iconic stills appears. Judge cites the repurposed cut mm:ss and names which of the three.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-7",
+      "pillar": 1,
+      "weight": -3,
+      "criterion": "The same archival shot is reused as visible padding (the same identifiable shot appears for \u22651.5 s in two or more non-adjacent positions in the repurposed cut).",
+      "why": "Punishes \"loop the launch to hit runtime\" style padding.",
+      "check": "Judge identifies two repurposed cut timestamps where the same identifiable archival shot (same camera angle, same subjects, same framing) is held for \u22651.5 s each, separated by \u226510 s of intervening footage. Deduct if a repeat is found. Judge cites both repurpose mm:ss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-8",
+      "pillar": 1,
+      "weight": -2,
+      "criterion": "Pre-Apollo Space Race or non-Apollo-11 footage is present in the repurposed cut (any of: V2 rocket launches with Nazi-era markings, Sputnik satellite animations, dog Laika, Yuri Gagarin / Vostok capsule, Alan Shepard's Mercury suborbital, Gemini two-astronaut capsule, or any clearly-labeled mission other than Apollo 11).",
+      "why": "Brief explicitly excludes pulling from the source's first 10-minute Space-Race preamble.",
+      "check": "Judge identifies a repurposed cut timestamp where any of the listed non-Apollo-11 historical references appears (a black-and-white V2 launch, a small spherical satellite labeled or captioned as Sputnik, a dog in a Soviet capsule, an on-screen \"Mercury\" / \"Gemini\" / \"Gagarin\" / \"Sputnik\" caption, etc.). Deduct if any such reference appears. Judge cites the repurposed cut mm:ss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-1",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The name \"Armstrong\" appears in the repurposed cut, either in audible speech (narrator or archival) or in an on-screen text overlay/title card.",
+      "why": "Named-entity preservation, the repurposed cut must distinguish Armstrong as an individual.",
+      "check": "Judge identifies a repurposed cut timestamp where the word \"Armstrong\" is either heard in dialogue or visible as on-screen text. Judge cites the repurposed cut mm:ss and quotes the surrounding context.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-2",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The name \"Aldrin\" (or \"Buzz Aldrin\" or \"Edwin Aldrin\") appears in the repurposed cut, either in audible speech or in an on-screen text overlay/title card.",
+      "why": "Named-entity preservation, the repurposed cut must distinguish Aldrin as an individual.",
+      "check": "Judge identifies a repurposed cut timestamp where \"Aldrin\" (any form) is heard or shown on screen. Judge cites the repurposed cut mm:ss and quotes the surrounding context.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-3",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The name \"Collins\" (or \"Michael Collins\") appears in the repurposed cut, either in audible speech or in an on-screen text overlay/title card.",
+      "why": "Named-entity preservation, the repurposed cut must distinguish Collins as an individual. The plaque shot alone satisfies because all three signatures are legible.",
+      "check": "Judge identifies a repurposed cut timestamp where \"Collins\" (any form) is heard or shown on screen. Judge cites the repurposed cut mm:ss and quotes the surrounding context.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-4",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The repurposed cut communicates that Collins remained in lunar orbit / aboard the Command Module *Columbia* / did NOT walk on the lunar surface, via on-screen text, narrator speech, archival audio, or a visibly-in-orbit Collins shot inside the spacecraft interior.",
+      "why": "This is the single most agent-failure-prone factual claim in the mission record. Collins's distinct role must be preserved, not collapsed into \"the three astronauts walked on the Moon\".",
+      "check": "Judge identifies a repurposed cut timestamp where any of: (a) on-screen text says Collins \"stayed in orbit\" / \"remained\" / \"Command Module Pilot\" / \"Columbia\"; (b) audible narrator speech describes Collins as orbiting/remaining while the other two walked; (c) audible archival comms places Collins in *Columbia*; (d) a Collins-identified shot inside the Command Module spacecraft interior appears with Collins visible. Judge cites the repurposed cut mm:ss and the specific evidence (text / audio quote / visual).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-5",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The event is anchored to the year 1969 OR explicitly identified as \"Apollo 11\" somewhere in the repurposed cut, via on-screen text, narrator speech, archival audio, or a chapter card.",
+      "why": "A timeless \"men landed on the Moon\" framing without 1969/Apollo-11 anchor fails the event-identity requirement.",
+      "check": "Judge identifies a repurposed cut timestamp where any of: (a) on-screen text contains \"1969\" OR \"July 1969\" OR \"Apollo 11\"; (b) audible narration or archival comms mentions \"Apollo 11\" or \"nineteen sixty-nine\"; (c) a chapter title card text references Apollo 11 or 1969. Judge cites the repurposed cut mm:ss and quotes the evidence.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-6",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "A pre-EVA Apollo 11 mission phase (any of: Saturn V on the launch pad, Saturn V ignition, Saturn V ascent, spacecraft in space en route to the Moon, Lunar Module separation, LM descending toward the surface, OR LM stationary on the lunar surface) appears in the repurposed cut BEFORE the first shot of an astronaut walking on the lunar surface.",
+      "why": "Chronology preservation, the repurposed cut should walk forward through the mission, not lead with the moonwalk. With chapter cards, the first non-philosophical-opening chapter should be a pre-EVA phase.",
+      "check": "Judge finds (a) the repurposed cut timestamp of the first pre-EVA mission-phase shot (per the list above) and (b) the repurposed cut timestamp of the first EVA / astronaut-on-surface shot. Pass = true if (a) < (b). Judge cites both repurpose mm:ss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-7",
+      "pillar": 2,
+      "weight": -2,
+      "criterion": "A factually wrong on-screen overlay or chapter card text is present (wrong year \u2260 1969 attached to the launch/landing event, wrong mission number such as \"Apollo 12\" or \"Apollo 13\" attached to the depicted footage, or a name caption attached to the wrong person, e.g. \"Collins\" captioning a shot of a man stepping onto the lunar surface).",
+      "why": "Anniversary retrospectives are judged on factual fidelity; a single wrong caption or card damages trust. Chapter card factual errors are common when an agent writes generic boilerplate.",
+      "check": "Judge scans every on-screen text overlay and chapter card in the repurposed cut. Deduct if any overlay contains: a year other than 1969 attached to the launch/landing event, a mission number other than \"Apollo 11\" attached to the depicted footage, or a person's name visibly attached to a shot of a different person performing a different action. Judge cites the repurposed cut mm:ss and quotes the wrong overlay.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-8",
+      "pillar": 2,
+      "weight": -2,
+      "criterion": "Post-Apollo or post-1969 spaceflight content is present (any of: Space Shuttle, Soyuz capsule docking, International Space Station, Mars rover/Curiosity/Perseverance, Apollo 12/13/14/15/16/17 mission identifiers, SpaceX rockets, modern astronauts in modern spacesuits).",
+      "why": "Brief restricts the repurposed cut to Apollo 11; later spaceflight history is out of scope.",
+      "check": "Judge identifies a repurposed cut timestamp where any of the listed post-Apollo-11 references appears (visible Shuttle orbiter, ISS, modern color HD spacesuit, on-screen \"Apollo 12+\" caption, etc.). Deduct if any such reference appears. Judge cites the repurposed cut mm:ss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-1",
+      "pillar": 3,
+      "weight": 4,
+      "criterion": "Neil Armstrong's archival voice is heard saying \"one small step for [a] man\" (or the phonetically intact \"that's one small step for man\") at some point in the repurposed cut, audible above any concurrent narrator or music (i.e., not buried).",
+      "why": "The single non-negotiable audio anchor of any Apollo 11 retrospective; archival voice is preferred and the brief explicitly directs the new narrator to yield during this moment.",
+      "check": "Judge identifies a repurposed cut timestamp where the phrase \"one small step for [a] man\" is audible in a period-correct archival voice (slow, faint, hissy NASA transmission). The phrase must be intelligible (not drowned under narrator or music). Judge cites the repurposed cut mm:ss and transcribes the surrounding ~2 s of audio.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-2",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "The continuation \"one giant leap for mankind\" is heard in the same archival audio segment as Armstrong's \"one small step\" line (i.e., the full sentence plays without truncation).",
+      "why": "A common compression failure is to clip the line after \"for man\" and cut to the next beat; the full phrase is the iconic unit.",
+      "check": "Judge identifies a repurposed cut timestamp where \"one giant leap for mankind\" is audible within 4 seconds of the \"one small step\" delivery, in the same continuous archival voice. Judge cites the repurposed cut mm:ss.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-3",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "At least one additional Apollo-11 archival audio cue beyond the \"one small step\" line is audible in the repurposed cut (any of: T-minus countdown, \"we have liftoff\", Houston / mission-control comms during landing or EVA, \"Tranquility Base here\", \"the Eagle has landed\", Nixon's phone-call audio, JFK's \"we choose to go to the Moon\").",
+      "why": "Single-cue reliance feels hollow; the convention is a layered archival audio bed under the narrator. Brief explicitly directs use of NASA's own archival audio underneath the narration.",
+      "check": "Judge identifies a repurposed cut timestamp where any of the listed archival audio cues is audible and recognizable (period transmission character, period speaker), distinguishable from the new narrator's voice. Judge cites the repurposed cut mm:ss and transcribes ~5 words.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NARRATOR-PERSISTS",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "One new-narrator voice (not present in archival audio, distinct from any source character) is the dominant audible voice for at least 50% of the repurposed cut's total runtime, audible near the opening, the middle, and the close. (S-1 archival \"one small step\" is exempt, the narrator yields during that window.)",
+      "why": "The brief commissions a single fresh narrator; the diversity-constraint requirement is that one voice carries the cut for the majority of the runtime. (The no-swap sub-property is already covered by the S-NARRATOR-SWAP absence item and the S-MISSING-NARRATOR penalty; this item rewards the dominance property only.)",
+      "check": "Judge identifies at least three repurposed cut timestamps spanning roughly the opening third (0:00-1:20), middle third (1:20-2:40), and final third (2:40-end), at each of which a new (non-archival, non-source-character) human narrator voice is audible. Judge estimates the cumulative duration of new-narrator speech across the repurposed cut; pass if that duration \u2265 0.5 \u00d7 repurpose runtime. Judge cites the three mm:ss and transcribes ~5 words from each, and reports the estimated cumulative narrator duration.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-4",
+      "pillar": 3,
+      "weight": -2,
+      "criterion": "An audio dropout (total silence, no narrator, no music, no archival audio) longer than 1.5 consecutive seconds occurs anywhere between 0:05 and 3:55.",
+      "why": "Dead air mid-repurpose signals a stitching error or muted segment.",
+      "check": "ffmpeg `silencedetect=noise=-50dB:d=1.5` on the repurposed cut audio between 0:05 and 3:55 reports zero silence events. Deduct if any silence event is reported.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "S-5",
+      "pillar": 3,
+      "weight": -2,
+      "criterion": "An identifiable archival sentence is audibly cut off mid-phrase (e.g., \"That's one small step for [a]\u2026\" without continuation, \"Tranquility Base he\u2026\" without \"ere\", \"we choose to go to the\u2026\" without \"Moon\", or any other recognizable historical phrase truncated before its known end).",
+      "why": "Mid-phrase cuts damage the iconic-audio fidelity that this subtype depends on.",
+      "check": "Judge listens through the repurposed cut audio and identifies any moment where a recognizable historical Apollo-11-era phrase is audibly truncated before its known completion. Deduct if any truncation is found. Judge cites the repurposed cut mm:ss and quotes the truncated fragment.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NARRATOR-SWAP",
+      "pillar": 3,
+      "weight": -2,
+      "criterion": "Two or more distinct new-narrator voices (different speakers, not counting archival audio) are audible across the repurposed cut, indicating a mid-repurpose speaker swap or multiple TTS voices stitched together.",
+      "why": "Brief explicitly directs \"one person\" carrying the whole cut. A swap breaks the commissioned persona.",
+      "check": "Judge listens for new-narrator (non-archival) speech and identifies whether two or more clearly distinct speakers occur (distinct vocal timbre, gender, age, or accent). Deduct if two or more distinct new narrators are heard. Judge cites the repurposed cut mm:ss of each distinct voice and transcribes ~5 words from each.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-CRITICAL-COLLINS-ON-MOON",
+      "pillar": 2,
+      "weight": -60,
+      "criterion": "Michael Collins is depicted standing, walking, working, or otherwise present on the lunar surface (a repurposed cut shot shows three astronauts on the Moon, OR a shot of an astronaut on the lunar surface is captioned/named \"Collins\", OR Collins's face appears inside a helmet on the lunar surface, OR the narrator audibly says Collins walked / stepped / stood on the Moon).",
+      "why": "Catastrophic factual error, Collins remained in lunar orbit aboard the Command Module *Columbia* and never set foot on the Moon. This is the single most damaging failure mode an agent can make on this source.",
+      "check": "Judge scans every repurposed cut shot of the lunar surface (grey cratered terrain with a suited astronaut). Deduct if any of: (a) an on-screen caption or chapter card attaches \"Collins\" to a moonwalk shot; (b) a narrator or archival sentence audibly says Collins walked / stepped / stood on the Moon; (c) three suited figures appear together on the lunar surface (the Apollo 11 EVA was only two astronauts); (d) Collins's facial features (visible from a labeled portrait elsewhere in the repurposed cut, or from common Apollo 11 mission photography) appear unambiguously inside a helmet on the lunar surface. Judge cites the repurposed cut mm:ss and the specific violation form.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-CRITICAL-NAME-COLLAPSE",
+      "pillar": 2,
+      "weight": -50,
+      "criterion": "At most one of the three astronauts (Armstrong, Aldrin, Collins) is named anywhere in the repurposed cut (audio or on-screen text). Equivalently: two or three of them are never identified as individuals, the repurposed cut refers only to \"the astronauts\" / \"the crew\" / \"they\".",
+      "why": "Catastrophic loss of the named-entity backbone of the mission record; collapses the Armstrong-Aldrin-Collins distinction.",
+      "check": "Judge counts how many of the three names {Armstrong, Aldrin, Collins} appear anywhere in the repurposed cut (in any spoken audio OR any on-screen text, the plaque shot satisfies all three at once). Deduct if the count is \u2264 1. Judge lists which names were found and at which repurposed cut mm:ss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-CRITICAL-ONE-SMALL-STEP-MISSING",
+      "pillar": 3,
+      "weight": -50,
+      "criterion": "Armstrong's \"one small step for [a] man, one giant leap for mankind\" line is never delivered in the repurposed cut in any form (not heard in archival audio, not quoted verbatim in on-screen text with Armstrong attribution, not delivered by the new narrator with explicit Armstrong attribution).",
+      "why": "This line is the single iconic audio of the mission; missing it entirely makes the repurposed cut fail its task. (Partial-credit positive items S-1 and S-2 already reward the strongest form, archival voice with full sentence, so this penalty only fires when the line is absent in every form.)",
+      "check": "Judge searches the entire repurposed cut for any audible delivery OR visible quotation of the phrase \"one small step for man / one giant leap for mankind\". Deduct only if NONE of the following appears anywhere in the repurposed cut: (a) archival or new audible delivery of the line in any voice; (b) on-screen text quoting the line verbatim alongside an Armstrong attribution (a name caption, signature, or surrounding \"Armstrong said:\" framing). Judge cites the strongest delivery found, or confirms none.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NARRATOR-PRESENT",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "A consistent new-narrator voice (a non-archival, non-source-character human speaker) carries the repurposed cut for at least 50% of its runtime. Equivalently: the repurposed cut is NOT silent or carried only by music + archival audio + on-screen text, a fresh narrator speaks across most of the cut.",
+      "why": "Brief commissions a new narrator carrying the whole cut; diversity-constraint requirement is that one voice persists across the runtime. (Catastrophic penalty was downgraded to this positive absence item per QC Pass B; the S-NARRATOR-PERSISTS presence item remains the primary anchor for dominance + timestamped opening/middle/close coverage.)",
+      "check": "Judge listens through the repurposed cut and estimates the cumulative duration during which a new (non-archival, non-source-character) human voice is the primary audible foreground speaker (treating archival comms / Armstrong's archival line / JFK speech as NOT counting toward this duration). Pass iff that cumulative duration is \u2265 50% of total repurposed cut runtime. Judge cites the repurposed cut mm:ss segments where new narration was audible and reports the estimated cumulative duration.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-CRITICAL-CHRONOLOGY-REVERSAL",
+      "pillar": 2,
+      "weight": -30,
+      "criterion": "The first identifiable Apollo 11 mission moment in the repurposed cut is the lunar EVA / moonwalk (an astronaut on the lunar surface) rather than launch / pre-launch / philosophical-context material. OR the chapter cards visibly partition the cut in a non-chronological order (e.g., a card labeled \"moonwalk\" precedes a card labeled \"liftoff\", or a card labeled \"splashdown\" precedes a card labeled \"landing\").",
+      "why": "Opening on the moonwalk is the most common chronology-reversal failure for an agent in \"teaser\" mode; chapter labels in the wrong order is the chaptered-variant equivalent.",
+      "check": "Judge identifies the repurposed cut timestamp of the very first shot showing an identifiable Apollo 11 mission moment (excluding generic-stars / abstract / philosophical-opening / contextual material that is not itself a mission phase). Deduct if EITHER (a) that first identifiable mission moment is an astronaut on the lunar surface (EVA), OR (b) the on-screen chapter cards, read in their appearance order, name phases in a non-chronological sequence (later mission phase named in an earlier card). Judge cites the repurposed cut mm:ss of the first identifiable mission moment AND the chapter cards in order.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHAPTER-STRUCTURE-PRESENT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "At least one chapter title card visibly partitions the repurposed cut. The repurposed cut is NOT presented as a single continuous cut with zero full-frame numbered or named chapter cards. (A small persistent chyron or lower-third does NOT count as a chapter card, the card must occupy most of the frame for at least 1.0 s.)",
+      "why": "Brief explicitly commissions a chaptered structure (3-5 numbered cards). (Catastrophic penalty was downgraded to this positive absence item per QC Pass B; the count-based V-CHAPTERS-PRESENT presence item remains the primary anchor for the 3\u20135-card target.)",
+      "check": "Judge scans the repurposed cut for full-frame numbered or named chapter title cards (per V-CHAPTERS-PRESENT criterion). Pass iff at least one such card is visible somewhere in the repurposed cut. Judge cites the repurposed cut mm:ss of any chapter card observed, or confirms zero cards.",
+      "judge": "opus-vision"
+    }
+  ]
+}

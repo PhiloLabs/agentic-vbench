@@ -1,0 +1,29 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/film-mulholland-drive-lynch-essay"
+
+[metadata]
+difficulty = "hard"
+category = "video-editing"
+tags = ["video-repurpose", "agentic-vbench-repurpose", "cutbench-v2"]
+source = "cutbench_v2_36tasks (task_id=film_mulholland_drive_lynch_essay)"
+
+[environment]
+build_timeout_sec = 1800.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 8192
+allow_internet = true
+
+[environment.env]
+ANTHROPIC_API_KEY = "${ANTHROPIC_API_KEY:-}"
+GEMINI_API_KEY    = "${GEMINI_API_KEY:-}"
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 1800.0
+
+[steps.verifier]
+timeout_sec = 600.0

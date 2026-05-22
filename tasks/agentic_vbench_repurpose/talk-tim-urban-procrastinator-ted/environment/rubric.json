@@ -1,0 +1,338 @@
+{
+  "task_id": "talk_tim_urban_procrastinator_ted",
+  "items": [
+    {
+      "id": "F-RUNTIME",
+      "pillar": 0,
+      "weight": 3,
+      "criterion": "Repurpose duration is between 195 s and 265 s inclusive (i.e. approximately 3:15 \u2013 4:25).",
+      "why": "Brief specifies \"around three minutes fifty\"; golden is 230 s; rubric allows \u00b115% slack. Matches `runtime_band=long_180_280s`.",
+      "check": "Read the repurposed cut's container duration. Pass if 195 \u2264 duration_seconds \u2264 265.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-ASPECT",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Repurpose video stream has display aspect ratio of 16:9 (within \u00b10.02) with no anamorphic stretching.",
+      "why": "Horizontal 16:9 explainer format for TikTok/YouTube Shorts cross-posting.",
+      "check": "Read repurpose stream display_aspect_ratio. Pass if it equals 16:9 within \u00b10.02.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-MP4",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Repurpose is a valid mp4/m4v container with at least one H.264 or H.265 video stream and at least one AAC or MP3 audio stream.",
+      "why": "Delivery target is mp4 for YouTube/TED socials.",
+      "check": "Run ffprobe on the repurposed cut. Pass if container is mov/mp4/m4a family AND it has \u22651 video stream in H.264 or H.265 AND \u22651 audio stream in AAC or MP3.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-NO-EMPTY-PAD",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No single black/blank frame run longer than 2.0 seconds anywhere in the repurposed cut (excluding intentional chapter-card frames which contain visible text/graphics).",
+      "why": "Long black pads suggest the agent ran out of compressed runtime and padded.",
+      "check": "Sample the repurposed cut at 4 fps. For each frame, compute mean luminance. Pass if no continuous run of frames with mean luminance < 8/255 AND zero visible text/graphic content lasts more than 2.0 s.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-RDM-DRAWN",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "A hand-drawn stick figure at or behind a circular wooden ship's wheel (with or without a brain outline around it) is visible on screen in at least one shot of the repurposed cut.",
+      "why": "Source calibration: the Wait-But-Why labelled \"Rational Decision-Maker\" slide is the talk's signature visual for this entity; appears in the golden around 0:34-0:46.",
+      "check": "Inspect the repurposed cut. Pass if the judge finds a frame showing a hand-drawn stick figure at or behind a circular wooden ship's wheel. Cite the repurposed cut timestamp where the drawing first appears.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MONKEY-DRAWN",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "A simple hand-drawn cartoon monkey in the Wait-But-Why illustration style (line-drawing, often near the ship's wheel or stick figure) is visible on screen in at least one shot of the repurposed cut.",
+      "why": "Source calibration: the labelled \"Instant Gratification Monkey\" cartoon is a signature visual; appears in the golden around 0:41-1:18.",
+      "check": "Inspect the repurposed cut. Pass if the judge finds a frame showing a hand-drawn cartoon monkey in line-drawing style. Cite the repurposed cut timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-PANIC-DRAWN",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "A red, jagged scribble-style cartoon creature (often labelled \"Panic Monster\" or similar) is visible on screen in at least one shot of the repurposed cut.",
+      "why": "Source calibration: appears in the golden around 1:49-1:57. Distinctively red and jagged so it is identifiable even without the label.",
+      "check": "Inspect the repurposed cut. Pass if the judge finds a frame showing a red jagged scribble-style cartoon creature. Cite the repurposed cut timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHAPTER-CARDS-PRESENT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "Between 3 and 4 distinct on-screen chapter title cards visibly partition the cut. Each card is a frame (or sustained graphic overlay) containing readable text that names or numbers a chapter section (e.g. \"Chapter 1: The Monkey at the Wheel\", \"Part Two\", \"The Panic Monster\"). Chapter cards occur at distinct timestamps and divide the repurposed cut into sequential sections.",
+      "why": "Required by the brief's chaptered-explainer architecture (diversity_constraints.output_shape = chapter_titled). Brief explicitly says \"around three or four\" cards; this partitions a ~3:50 explainer into legible sections without over-fragmenting.",
+      "check": "Inspect the repurposed cut. Pass if the judge identifies between 3 and 4 distinct frames or sustained text overlays containing chapter-title-style text (numbered or named) appearing at non-adjacent timestamps and dividing the repurposed cut into sequential sections. Cite the repurposed cut timestamp of each chapter card.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TIM-ON-STAGE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "A dark-haired man in a dark T-shirt standing or walking on a stage with red-letter \"TED\" branding visible is shown in at least three distinct shots that together total at least 30 seconds of screen time.",
+      "why": "A talk_summary that never returns to the speaker on stage feels like a generic explainer, not a talk-derived cut.",
+      "check": "Inspect the repurposed cut. Pass if the judge identifies \u22653 distinct shots matching the description above, with cumulative duration \u226530 s. Cite repurpose timestamps for the three shots.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TED-CONTEXT",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "At least one shot in the repurposed cut shows clearly recognizable TED-stage branding (red \"TED\" letters on the stage backdrop, a \"TED\" logo bug, or both).",
+      "why": "Anchors the cut as a TED-derived piece rather than a generic productivity explainer.",
+      "check": "Inspect the repurposed cut. Pass if the judge finds at least one frame containing the red \"TED\" letters on a stage backdrop OR a visible \"TED\" logo overlay. Cite repurpose timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MONKEY-VS-RDM-VISUAL",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "At least one shot shows the cartoon monkey AND the stick figure together in the same frame (a single slide containing both characters in the same hand-drawn composition).",
+      "why": "The conflict-at-the-wheel visual is the talk's identity image and appears across multiple slides in the source.",
+      "check": "Inspect the repurposed cut. Pass if the judge finds at least one frame containing BOTH a cartoon monkey AND a stick figure in the same hand-drawn slide composition. Cite repurpose timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-REPEATED-FILLER",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No single shot or slide is reused as padding more than twice in the repurposed cut (a \"shot\" here means visually near-identical content, allowing for small zoom/crop differences). Intentional reaction beats under 1 s are exempt.",
+      "why": "Padding via reused shots is the agent failure mode of a too-short cut stretched to fit the runtime window.",
+      "check": "Inspect the repurposed cut. Pass if the judge identifies no visual shot that recurs more than twice across the repurposed cut timeline, OR if the only repeats are intentional reaction beats < 1 s. Cite repurpose timestamps of any repeated shots and whether the repeat count exceeds 2.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-STOCK-FOOTAGE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No stock-style B-roll appears in the repurposed cut. Specifically, NO frames show any of: people typing on laptops as generic illustration, alarm clocks / sand timers / hourglasses, calendar pages flipping, sticky-note close-ups, drone footage of offices, generic city timelapse, or animated infographics outside Wait-But-Why hand-drawn style.",
+      "why": "Stock B-roll is the productivity-tip reel signature; absence is what keeps this a talk-derived explainer.",
+      "check": "Inspect the repurposed cut. Pass if the judge finds NO frame matching any of the listed stock categories. List repurpose timestamps and a one-line description of any stock-style frame found; if none found, state \"none.\"",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-OPENING-PAPER",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "In the first 30 seconds of the repurposed cut, a personal procrastination experience tied to writing papers (in college, or for school/university) is established, either by the on-camera TED-stage speaker in his own voice (\"in college I had to write a lot of papers,\" \"papers,\" \"thesis,\" \"essay\") OR by the narrator stating that the talk's setup is about writing papers in college.",
+      "why": "The talk's hook is a personal-paper-writing setup; the golden anchors on it within 0-15 s.",
+      "check": "Listen to the first 30 s of the repurposed cut. Pass if either Tim's voice or the narrator audibly establishes the paper-writing-in-college setup within that window. Cite repurpose timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-MRI-COMPARE",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "At some point in the repurposed cut, an audible claim that a procrastinator's brain is structurally different from a non-procrastinator's brain (e.g. via a brain-comparison, \"MRI,\" or \"different brain\" framing) is made, either by the on-camera TED-stage speaker in his own voice or by the narrator paraphrasing.",
+      "why": "This framing sets up the mental-model payoff and is preserved in the golden around 0:17-0:34.",
+      "check": "Listen to the repurposed cut. Pass if any speaker audibly says (or paraphrases) that procrastinators' brains are structurally different from non-procrastinators' brains. Cite repurpose timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-RDM-NAMED",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The phrase \"Rational Decision-Maker\" (or \"rational decision maker\") is spoken out loud in the repurposed cut at least once, by the narrator, by the on-camera TED-stage speaker in his own voice, or both.",
+      "why": "First of the three load-bearing names of the talk's mental model. The named entity is the load-bearing concept; it must be voiced regardless of who voices it.",
+      "check": "Listen to the repurposed cut. Pass if any audible voice (narrator or the on-camera TED-stage speaker) says \"Rational Decision-Maker\" (the exact phrase, with or without hyphen) at least once. Cite repurpose timestamp(s).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-MONKEY-NAMED",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The phrase \"Instant Gratification Monkey\" is spoken out loud in the repurposed cut at least once, by the narrator, by the on-camera TED-stage speaker in his own voice, or both.",
+      "why": "Second of the three load-bearing names. The full three-word phrase is what carries the talk's branding; \"monkey\" alone is not sufficient.",
+      "check": "Listen to the repurposed cut. Pass if any audible voice (narrator or the on-camera TED-stage speaker) says the exact three-word phrase \"Instant Gratification Monkey\" at least once. The single word \"monkey\" alone does not satisfy this item. Cite repurpose timestamp(s).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-PANIC-NAMED",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The phrase \"Panic Monster\" is spoken out loud in the repurposed cut at least once, by the narrator, by the on-camera TED-stage speaker in his own voice, or both.",
+      "why": "Third of the three load-bearing names. Without naming the Panic Monster, the deadline mechanic has no character and the joke collapses.",
+      "check": "Listen to the repurposed cut. Pass if any audible voice (narrator or the on-camera TED-stage speaker) says \"Panic Monster\" at least once. Cite repurpose timestamp(s).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-DEADLINE-MECHANIC",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The repurposed cut audibly explains that the Panic Monster only activates / wakes up / shows up when a deadline is close (or when public embarrassment / a deadline is imminent). May be voiced by the narrator or by the on-camera TED-stage speaker in his own voice.",
+      "why": "This is the talk's \"why does anything ever get done\" payoff and is preserved in the golden around 1:53-2:08.",
+      "check": "Listen to the repurposed cut. Pass if any speaker audibly says the Panic Monster wakes up / activates / shows up near a deadline (or near the threat of public embarrassment). Cite repurpose timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-LONG-TERM-PIVOT",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The repurposed cut audibly addresses procrastination in situations that have NO deadline, using the phrase \"long-term procrastination,\" \"non-deadline,\" \"no deadline,\" \"deadlines aren't there,\" or an unambiguous paraphrase that explicitly contrasts deadline-based procrastination with the deadline-less kind. May be voiced by the narrator or by the on-camera TED-stage speaker in his own voice.",
+      "why": "This is the talk's argument resolution and the reason it has 60M+ views. The golden devotes ~2:08-3:33 to it.",
+      "check": "Listen to the repurposed cut. Pass if any speaker audibly contrasts deadline procrastination with non-deadline / long-term procrastination, using one of the listed phrases or an explicit paraphrase (e.g. \"in situations without deadlines\"). Cite repurpose timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-IN-VOICE-PIVOT-CLOSE-OR-ANCHOR",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "At least one of the long-term-pivot beat (the moment a non-deadline / long-term contrast is voiced) OR the repurposed cut's final 10 seconds is delivered in the on-camera speaker's own voice (the dark-haired man on the TED stage), not by the narrator.",
+      "why": "Source calibration: the golden lets Tim land the long-term pivot and the close in his own voice. A talk_summary that paraphrases the talk's emotional resolution entirely away from the speaker's voice loses the talk's identity.",
+      "check": "Listen to the repurposed cut. Identify (a) the repurposed cut timestamp(s) of the long-term-pivot voicing and (b) the final 10 s of the repurposed cut. Pass if at least one of those windows contains the on-camera speaker's voice as the dominant speaker (a different timbre and cadence from the narrator). Cite repurpose timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-NUMBERED-TIPS",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No on-screen text overlay anywhere in the repurposed cut presents a numbered tip, step, or rule (e.g. \"Tip 1,\" \"Step 2,\" \"5 ways to stop procrastinating,\" \"Rule #1\"). Numbered chapter cards (\"Chapter 1,\" \"Part 2\") do NOT count as numbered tips, they are chapter structure, not advice listicles.",
+      "why": "Numbered-tip overlays are the explicit signature of a productivity-tip reframe.",
+      "check": "Inspect the repurposed cut visually. Pass if NO frame contains a text overlay matching the pattern of an enumerated tip / step / rule / \"ways to\" list. Numbered chapter cards are exempt. Cite repurpose timestamp of any matching overlay; if none found, state \"none.\"",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-WRONG-ATTRIBUTION",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No sentence anywhere in the repurposed cut audibly assigns the wrong named character's behavior to a different named character (e.g. the repurposed cut never says \"the Rational Decision-Maker wants to play video games\" or \"the Instant Gratification Monkey makes the rational decision\"). Monkey-wanting-easy-and-fun and RDM-wanting-productive-things must remain on the original character.",
+      "why": "Mis-attributing actions across named characters destroys the mental model and is a common LLM compression failure when a narrator paraphrases.",
+      "check": "Listen to the repurposed cut. Pass if no sentence audibly assigns a behavior to the wrong named character. Cite repurpose timestamp of any wrong-attribution sentence; if none found, state \"none.\"",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-CHRONO-FLIP",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "If both the Instant Gratification Monkey and the Panic Monster are spoken about by name in the repurposed cut, the Monkey's first naming occurs at an earlier repurpose timestamp than the Panic Monster's first naming.",
+      "why": "The talk's mental-model build introduces the Monkey first; reversing the order breaks the joke about the Monkey being scared of the Monster.",
+      "check": "Listen to the repurposed cut and find the first repurpose timestamp at which the Monkey is named and the first repurpose timestamp at which the Panic Monster is named. Pass if (a) the Monkey's first-naming timestamp is strictly less than the Panic Monster's, OR (b) only one of the two is ever named (in which case this absence item auto-passes). Cite both timestamps.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NARRATOR-PERSISTS",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "One narrator voice (distinct from the on-camera TED-stage speaker) is the dominant audible voice for at least 50% of the repurposed cut's total runtime.",
+      "why": "Required by the brief's \"one consistent voice carrying the cut\" direction (diversity_constraints.audio_policy = new_vo_required). A consistent narrator voice is what distinguishes this product from a raw trimmed-talk clip. (The no-swap sub-property is covered by the S-NARRATOR-SWAP absence item and the S-MISSING-NARRATOR penalty; this item rewards the dominance property only.)",
+      "check": "Listen to the full repurpose. Estimate the total seconds during which the dominant audible voice is a narrator voice (distinct from the on-camera TED-stage speaker). Pass if that total \u2265 0.5 \u00d7 repurpose duration. Cite the estimated seconds.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NARRATOR-SWAP",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The narrator's voice timbre does NOT swap to a second distinct narrator voice at any point in the repurposed cut, the same speaker carries from open to close.",
+      "why": "Brief mandates \"one consistent voice carrying the cut.\" A narrator swap mid-repurpose reads as a re-record glitch or two-person production; this absence item rewards consistency without bundling the dominance property.",
+      "check": "Gemini-audio compares the narrator voice timbre at 3 sample timestamps (~10%, 50%, 90% of runtime). Pass if all three samples are the same identifiable speaker (matching pitch, pace, timbre register).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-TIM-CLIP-PRESENT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The on-camera TED-stage speaker's voice (the dark-haired man on the TED stage, distinct from the narrator) is audible somewhere in the repurposed cut for at least 15 seconds of cumulative runtime, across one or more source-clip segments.",
+      "why": "Source clips of Tim must remain inside the cut for the named-character beats and the long-term-pivot beat to retain the talk's identity. A narrator paraphrasing 100% of the content without any Tim clips converts the product from a \"talk_summary\" into a pure third-party explainer.",
+      "check": "Listen to the full repurpose. Estimate the total seconds during which the on-camera TED-stage speaker's voice (different timbre from the narrator) is the dominant audible voice. Pass if that total \u2265 15 s. Cite the repurposed cut timestamp ranges of those segments.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-LIVE-LAUGH",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "At least one instance of live audience laughter or applause is audible somewhere in the repurposed cut.",
+      "why": "TED audience reactions are part of the talk's identity; the golden preserves laughter through the Monkey section and applause at the close. A cut with zero audience presence sounds sterile.",
+      "check": "Listen to the repurposed cut. Pass if the judge identifies at least one audible instance of group laughter or applause. Cite repurpose timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-MUSIC-DROWN",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No segment of the repurposed cut has a music bed or musical underscore mixed loud enough that the dominant speaker (narrator or Tim) is hard to understand. Light background music is permitted, but spoken content remains the loudest element at all times.",
+      "why": "A music bed louder than speech degrades the named-character spoken cues this rubric grades.",
+      "check": "Listen to the full repurpose. Pass if at every point where a music bed is audible, the dominant speaker's voice is still clearly intelligible above it. Cite repurpose timestamp of any segment where music masks speech; if none, state \"none.\"",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CLEAN-AUDIO",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The repurposed cut audio has no unintentional dropouts (silent gaps > 1.0 s in the middle of an in-progress spoken sentence) and no clipped/distorted speech.",
+      "why": "Clean audio is part of explainer delivery quality and protects the spoken named-character cues this rubric grades.",
+      "check": "Listen to the full repurpose. Pass if no in-sentence silent gap > 1.0 s and no clipped/distorted speech is audible. Cite repurpose timestamps of any audio defects; if none, state \"none.\"",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-MISS-RDM",
+      "pillar": 2,
+      "weight": -20,
+      "criterion": "The phrase \"Rational Decision-Maker\" (or \"rational decision maker\") is never spoken out loud anywhere in the repurposed cut, by either the narrator or by the on-camera TED-stage speaker.",
+      "why": "Source calibration: the Rational Decision-Maker is one of three named entities at the spine of the talk's mental model. Atomic split from the other two named-character penalties so each name fails independently.",
+      "check": "Listen to the full repurpose. Pass (deduction fires) if no audible voice (narrator or the on-camera TED-stage speaker) ever says \"Rational Decision-Maker\" (the exact phrase, with or without hyphen) at any point. Cite repurpose timestamps you checked or state \"no occurrence found.\"",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-MISS-MONKEY",
+      "pillar": 2,
+      "weight": -20,
+      "criterion": "The exact three-word phrase \"Instant Gratification Monkey\" is never spoken out loud anywhere in the repurposed cut, by either the narrator or by the on-camera TED-stage speaker.",
+      "why": "Source calibration: second of the three load-bearing names. The full three-word phrase is what carries the talk's branding; \"monkey\" alone is not sufficient because the cartoon could otherwise be read as any generic mascot.",
+      "check": "Listen to the full repurpose. Pass (deduction fires) if no speaker ever audibly says the exact three-word phrase \"Instant Gratification Monkey\" at any point. The single word \"monkey\" alone does NOT satisfy avoidance; the full phrase must be missing. Cite repurpose timestamps you checked or state \"no occurrence found.\"",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-MISS-PANIC",
+      "pillar": 2,
+      "weight": -20,
+      "criterion": "The phrase \"Panic Monster\" is never spoken out loud anywhere in the repurposed cut, by either the narrator or by the on-camera TED-stage speaker.",
+      "why": "Source calibration: third of the three load-bearing names. Without naming the Panic Monster, the deadline mechanic has no character and the joke collapses.",
+      "check": "Listen to the full repurpose. Pass (deduction fires) if no speaker ever audibly says \"Panic Monster\" at any point. Cite repurpose timestamps you checked or state \"no occurrence found.\"",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-MISS-LONG-TERM-PIVOT",
+      "pillar": 2,
+      "weight": -30,
+      "criterion": "The repurposed cut never audibly addresses procrastination in non-deadline / long-term situations, no phrase like \"long-term procrastination,\" \"non-deadline,\" \"no deadline,\" \"deadlines aren't there,\" and no unambiguous paraphrase contrasting deadline procrastination with the deadline-less kind appears in the repurposed cut audio, by either the narrator or by the on-camera TED-stage speaker.",
+      "why": "Source calibration: the long-term-procrastination pivot is the talk's argument resolution and the reason it has 60M+ views. A repurposed cut that stops at the joke half misrepresents the talk.",
+      "check": "Listen to the full repurpose. Pass (deduction fires) if NO segment of the repurposed cut audibly contains \"long-term procrastination,\" \"non-deadline,\" \"no deadline,\" \"the deadlines aren't there,\" or an unambiguous paraphrase contrasting deadline procrastination with the deadline-less kind. Cite the repurposed cut timestamps you checked or state \"no occurrence found.\"",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-PRODUCTIVITY-TIPS-FRAME",
+      "pillar": 2,
+      "weight": -30,
+      "criterion": "The repurposed cut is structured or narrated as a productivity self-help / \"how to stop procrastinating\" piece. Specifically: on-screen titles or spoken framing organize the repurposed cut as a tips list / steps list / advice list (for example, on-screen text or narration containing patterns like \"5 ways to beat procrastination,\" \"tip 1 / tip 2 / tip 3,\" \"rule 1 / rule 2,\" \"how to stop procrastinating in N steps\"). Numbered chapter cards that name talk-content sections (e.g. \"Chapter 2: The Panic Monster\") do NOT count as a tips frame.",
+      "why": "This is the explicit easy-strategy failure mode the brief is designed to block. A talk_summary that reframes Tim's mental-model talk as a self-help tips piece destroys the talk's editorial identity.",
+      "check": "Inspect the repurposed cut visually AND listen to its audio. Pass (deduction fires) if EITHER an on-screen overlay OR the spoken narration organizes the repurposed cut as a numbered tips / steps / rules / ways list (matching the pattern types above, or a near paraphrase). Numbered chapter cards that name talk-content sections are exempt. Cite the repurposed cut timestamp(s) where the tips-list framing appears, or state \"no occurrence found.\"",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-NARRATOR-PRESENT",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "A consistent narrator voice (a single speaker, identifiable timbre, distinct from the on-camera TED-stage speaker) carries the repurposed cut for \u226550% of total runtime. The repurposed cut is NOT silent of narration AND narrator segments are NOT stitched from multiple distinct narrator voices that audibly swap timbre.",
+      "why": "Required by the brief's \"one consistent voice carrying the cut\" direction (diversity_constraints.audio_policy = new_vo_required). (Catastrophic penalty was downgraded to this positive absence item per QC Pass B; the S-NARRATOR-PERSISTS presence item and the S-NARRATOR-SWAP absence item remain the primary anchors for dominance and no-swap respectively.)",
+      "check": "Listen to the full repurpose. Estimate the total seconds during which a single consistent narrator voice (distinct from the on-camera TED-stage speaker, no mid-cut speaker swap) is the dominant audible voice. Pass iff that total \u2265 0.5 \u00d7 repurpose duration AND no narrator timbre swap between distinct voices occurs mid-cut. Cite the estimated seconds and note any narrator-voice swap with repurpose timestamps.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "V-CHAPTER-STRUCTURE-PRESENT",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "At least one on-screen chapter title card appears in the repurposed cut, a frame or sustained graphic overlay containing chapter-title-style text (numbered or named) that partitions the cut into a sequential section.",
+      "why": "Required by the brief's chaptered-explainer architecture (diversity_constraints.output_shape = chapter_titled). (Catastrophic penalty was downgraded to this positive absence item per QC Pass B; the count-based V-CHAPTER-CARDS-PRESENT presence item remains the primary anchor for the 3\u20134-card target.)",
+      "check": "Inspect the repurposed cut. Pass iff at least one frame or sustained text overlay contains chapter-title-style text (e.g. \"Chapter 1\", \"Part Two\", \"The Monkey at the Wheel\" as a card) at some point in the repurposed cut. Cite the repurposed cut timestamp of any chapter card observed, or state \"no chapter cards found.\"",
+      "judge": "opus-vision"
+    }
+  ]
+}

@@ -1,0 +1,266 @@
+{
+  "task_id": "talk_greta_un_climate_2019",
+  "items": [
+    {
+      "id": "F-RUNTIME",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Repurpose total duration is between 139.5 and 154.2 seconds.",
+      "why": "Brief budgets approximately two minutes twenty-six end-to-end; tolerance is \u00b15% of that target.",
+      "check": "Judge reads repurposed cut duration via player UI or ffprobe-equivalent metadata; passes if 139.5 <= duration <= 154.2 s.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-ASPECT",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Repurpose displays in a 16:9 frame without horizontal or vertical stretch distortion of faces.",
+      "why": "Source calibration: source is 16:9 640x360; stretched faces indicate aspect mishandling.",
+      "check": "Judge reports repurposed cut width:height ratio (passes within 1.74:1 to 1.80:1) and cites one repurpose timestamp where a face appears un-distorted (round eyes, natural proportions).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-SINGLE-AUDIO-NOT-SILENT",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Repurpose contains audible audio across most of its runtime, not a silent video.",
+      "why": "A silent video cannot satisfy any speaker-voice presence item; this item is the deterministic floor.",
+      "check": "Judge confirms repurposed cut contains audio that is non-silent for at least 80% of its runtime; cites one repurpose timestamp where speech or natural ambient sound is clearly audible.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-SPEAKER-IDENTIFIABLE",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The same teenage female speaker (braided hair, magenta/pink button-up top, seated then standing at a microphone) appears in at least three distinct shots in the repurposed cut.",
+      "why": "Source calibration: this is Greta Thunberg's identifying visual register across the speech. A repurposed cut that never shows the speaker clearly cannot be a repurposed cut of her speech.",
+      "check": "Judge cites three distinct repurpose timestamps showing the same speaker, noting the braid and magenta/pink top in each.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-STAGE-SETTING",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "At least one repurpose shot establishes that the speech takes place at the UN Climate Action Summit 2019, visible cues include a stage backdrop reading \"CLIMATE ACTION SUMMIT 2019\", the UN logo or globe motif, the multi-panelist seated arrangement, or a UN-style plenary podium.",
+      "why": "Source calibration: PBS-NewsHour footage of the 23 Sep 2019 UN plenary has these visible cues. Without one of them, the repurposed cut loses the event context.",
+      "check": "Judge cites one repurpose timestamp where at least one of the listed cues is visible; names which cue.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-SPEAKER-DOMINANT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The speaker's face or upper body occupies the dominant subject of the frame for more than half of the repurposed cut's total duration.",
+      "why": "Source calibration: the speech IS the artifact and the speaker is the artifact's vehicle; a repurposed cut where the speaker is on screen less than half the time has drifted toward montage.",
+      "check": "Judge estimates the cumulative seconds during which the speaker is the dominant subject (face/upper body), divided by total repurposed cut duration; cites two representative repurpose timestamps where the speaker is dominant. Passes if estimate > 50%.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-REACTION-MONTAGE-EXCESS",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "Audience-reaction cutaways (delegate seats, applauding crowds, listening faces other than the speaker) account for no more than ~25% of the repurposed cut.",
+      "why": "Source calibration: reaction cutaways pad runtime and produce the \"celebrity-feature\" pattern when overused. A small amount (5-15%) is natural punctuation; 25%+ tips into reaction-reel territory.",
+      "check": "Judge estimates the cumulative seconds of audience/listener cutaway shots (not the speaker), divided by total repurposed cut duration; cites two representative repurpose timestamps of audience cutaways. Passes if estimate <= 25%.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-REPEATED-SHOTS",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "No single visual shot (defined as a continuous take of the same camera framing of the same subject) is reused for the same content more than once across the repurposed cut.",
+      "why": "Source calibration: the source has multiple distinct camera takes; reusing the same close-up twice indicates runtime padding, not editorial choice.",
+      "check": "Judge cites no instance of a visibly identical shot recurring; if a recurrence is found, judge cites the two repurposed cut timestamps where it appears. Item passes if no such recurrence is observed.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-INTERTITLE-DOMINANCE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The repurposed cut is not structured around full-screen text cards (intertitles longer than 2 seconds, occupying most of the frame) appearing between every spoken beat. Burned-in lower-safe-area captions over the picture do NOT count as intertitles for this item.",
+      "why": "Source calibration: a continuous-intertitle structure is the \"produced compilation\" register, which displaces the speech and signals the personality-reel pattern. An optional title at the head or tail of the repurposed cut is fine. diversity_constraints.output_shape = single_concat means no chapter-card sequence.",
+      "check": "Judge counts full-screen text cards longer than 2 s (where text occupies most of the frame and the speaker is not visible behind it) in the repurposed cut; item passes if the count is two or fewer. If three or more such cards appear, judge cites their repurposed cut timestamps.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-HINGE-VERBATIM",
+      "pillar": 2,
+      "weight": 6,
+      "criterion": "The phrase \"How dare you?\" (or \"How dare you\" without question intonation) is audible verbatim in the speaker's own voice at at least one point in the repurposed cut.",
+      "why": "Source calibration: this is the speech's named viral hinge, said four times in the source (~0:53, ~1:22, ~1:36, ~3:35). The repurposed cut need not include more than one repetition. This is the single most load-bearing line of the speech.",
+      "check": "Judge cites the repurposed cut timestamp where \"How dare you\" is spoken by the same female teenage Swedish-accented voice that is visible on stage. On-screen-caption-only display without audio playback of the line does NOT satisfy this item (the caption-only fallback is covered by a separate critical penalty trigger).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-OPENING-FRAMING",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "The repurposed cut audibly preserves the speaker's framing of why she is at the UN, specifically a line equivalent to \"I shouldn't be up here\" or \"I should be back in school\" or \"I should be back in school on the other side of the ocean\", in the speaker's own voice.",
+      "why": "Source calibration: this line appears around 0:30-0:46 in the source. It is one of the two bookending framings the curator named (\"school-strike framing\"); without it the indictment has no moral footing.",
+      "check": "Judge cites the repurposed cut timestamp where the speaker says one of: \"I shouldn't be up here\" / \"I should be back in school\" / \"back in school on the other side of the ocean\".",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-VIRAL-STOLEN-DREAMS",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The repurposed cut audibly preserves the speaker saying \"stolen my dreams\" or \"my childhood with your empty words\" (or the joined \"stolen my dreams and my childhood with your empty words\") in her own voice.",
+      "why": "Source calibration: this line appears around 0:54-1:00 in the source and is one of the speech's two named indictment lines. It anchors the moral indictment beat.",
+      "check": "Judge cites the repurposed cut timestamp where one of: \"stolen my dreams\" / \"my childhood with your empty words\" is spoken by the same female teenage Swedish-accented voice.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-VIRAL-FAIRY-TALES",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The repurposed cut audibly preserves the speaker saying \"fairy tales of eternal economic growth\" (or \"fairytales of eternal economic growth\") in her own voice.",
+      "why": "Source calibration: this line appears around 1:15-1:22 in the source and is the curator-named second bookend of the hinge. It is the line that gave the speech its policy-critique shelf life.",
+      "check": "Judge cites the repurposed cut timestamp where \"fairy tales of eternal economic growth\" is spoken by the same female teenage Swedish-accented voice.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-CLOSER-VIRAL-LINE",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The repurposed cut ends with EITHER OF the two canonical viral closing lines from Greta's speech: (a) \"We will never forgive you\" OR (b) \"Change is coming, whether you like it or not.\" Only ONE of these is required to satisfy the brief's closer mandate; including both does not earn extra credit.",
+      "why": "Brief explicitly states \"either of the two closing lines\", the repurposed cut needs one. Rewarding both was double-counting the same closer-mandate job.",
+      "check": "Gemini-audio searches for \"never forgive\" OR \"change is coming whether you like\" anywhere in the repurposed cut's final 15 seconds. Pass iff at least one of the two phrases is audible in Greta's recorded voice within the closing 15s.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-CAUSAL-ORDER",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "Among the lines that ARE included in the repurposed cut, the \"I should be in school\" / \"I shouldn't be up here\" framing (if present) appears earlier in the repurposed cut than the first audible \"How dare you?\", which in turn appears earlier than any closer line (\"we will never forgive you\" OR \"change is coming\"). Lines that are not present are ignored for this item; the item judges only the relative ordering of those that do appear.",
+      "why": "Source calibration: the speech's argument structure is framing -> hinge -> closer. Inverting this order destroys the speech's logic.",
+      "check": "Judge lists, in repurpose-timestamp order, which of these four canonical lines (school-strike framing / \"How dare you\" / never-forgive / change-is-coming) are audible in the repurposed cut; passes if the ordering of those that appear is consistent with: framing before hinge before closer. If only one of the four appears, item passes.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-HINGE-OVERUSE",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "The \"How dare you\" phrase appears in the repurposed cut audibly fewer than 3 times, one or two uses serves the cut, three or more turns the phrase into a tic.",
+      "why": "Brief explicitly says \"She repeats the four-word challenge four times across the speech; one use, maybe two, is what serves the cut.\" Overuse defeats the rhetorical weight.",
+      "check": "Gemini-audio counts the audible instances of \"how dare you\" in Greta's recorded voice across the repurposed cut. Pass if count \u2264 2.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-INTRO-CONTEXT-PADDING",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The repurposed cut does not spend more than 8 seconds at its head on pre-speech interviewer/anchor framing (off-screen interviewer questions, news-anchor intros, news-graphics framing) before the speaker's own voice begins.",
+      "why": "Source calibration: the source has ~18 s of interviewer setup before the speech begins (~0:00-0:18). A faithful ~146 s compression cannot afford 18 s of intro; >8 s indicates the agent left the framing intact rather than cutting to the speech.",
+      "check": "Judge cites the repurposed cut timestamp at which the speaker's own voice first becomes audible; passes if that timestamp is <= 0:08 from the start of the repurposed cut.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-CARBON-MATH-DOMINANCE",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "No more than 45 seconds of the repurposed cut is given to detailed carbon-budget math content (mentions of specific gigaton figures, \"420 gigatons\", \"350 gigatons\", \"8 and a half years\", \"50% chance\", \"1.5 degrees\", \"IPCC\", or extended technical recitation of those numbers).",
+      "why": "Source calibration: the carbon-budget section (~2:17-3:42 in source, ~85 s) is substantively important but crowds out the moral spine in a ~146 s edit. A brief nod (under 45 s) is acceptable; dominance indicates the agent failed to identify the moral spine as the argument's center.",
+      "check": "Judge estimates the cumulative seconds during which carbon-budget numerical content (above) is being spoken in the repurposed cut; passes if estimate <= 45 s. If estimate exceeds 45 s, judge cites two repurposed cut timestamps inside such windows.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-SPEAKER-VOICE-DOMINANT",
+      "pillar": 3,
+      "weight": 4,
+      "criterion": "The voice of the same female teenage Swedish-accented speaker who is visible on stage is the dominant audio (audible and on-mic) for more than half of the repurposed cut's total runtime.",
+      "why": "Source calibration: the speech IS the artifact. A repurposed cut where the speaker is audible for less than half the runtime has displaced the speech with something else (narration, music, silence, or other voices).",
+      "check": "Judge estimates the cumulative seconds during which the speaker's own voice is the dominant on-mic audio in the repurposed cut, divided by total runtime; cites two representative repurpose timestamps where the speaker is the dominant voice. Passes if estimate > 50%.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CAPTIONS-PRESENT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "Burned-in English captions (English text rendered into the picture, positioned in the lower safe area below the speaker's chin and above the frame's bottom edge with a small margin so text is not clipped) are visible during every spoken line in the repurposed cut, and the captions are legible at the repurposed cut's native resolution (text height at least a small but readable proportion of frame height, sufficient contrast against the background).",
+      "why": "Source calibration: the diversity_constraints.audio_policy requires source_with_burned_captions because the speaker's accented English is fast in places and the repurposed cut is targeted at an international reading audience. Player-side closed-caption tracks do not satisfy this, captions must be visible in the picture itself.",
+      "check": "Judge cites three repurposed cut timestamps where the speaker (or a brief diegetic moderator/interviewer line) is speaking and confirms a legible English caption is visible in the lower safe area at each cited timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-NO-NARRATOR",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "No third-party narrator, anchor voiceover, or synthetic narration voice speaks over or in place of the speaker's own voice at any point in the repurposed cut. Brief diegetic moderator/interviewer voice from the original event (e.g., the on-stage moderator asking the opening question) does not count as a third-party narrator if it is part of the captured event audio.",
+      "why": "Source calibration: the source contains zero added narration; a narrator voice would mean the agent inserted one.",
+      "check": "Judge listens to the full repurpose; passes if no voice other than the speaker (and at most a brief diegetic interviewer/moderator voice from the original event) is audible. If a narrator voice is detected, judge cites its repurposed cut timestamp(s).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-MUSIC-BED",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No continuous instrumental music track underscores the repurposed cut (specifically: no instrumental music audible across more than 10 cumulative seconds of the repurposed cut, and no instrumental music audible during any verbatim spoken line).",
+      "why": "Source calibration: the source contains zero music; a music bed would mean the agent added one, which displaces the speech's natural delivery.",
+      "check": "Judge listens to the full repurpose; passes if no continuous instrumental music meeting either threshold is heard. If a music bed is detected, judge cites the repurposed cut timestamps of its in- and out-points.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-AUDIO-DROPOUTS",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No silent gap longer than 2 seconds appears in the repurposed cut audio (excluding any final fade-out of length <= 1 second).",
+      "why": "Source calibration: prolonged silent gaps indicate failed audio handling at edit boundaries.",
+      "check": "Judge identifies the longest silent gap inside the repurposed cut (excluding final fade-out); passes if that gap is <= 2.0 s. If a longer gap is detected, judge cites its start and end repurpose timestamps.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "N-MISSING-HINGE",
+      "pillar": 2,
+      "weight": -60,
+      "criterion": "The repurposed cut does not contain the four-word phrase \"How dare you\" either spoken by the speaker (audible) or displayed as on-screen text at any point.",
+      "why": "Source calibration: this is the named hinge of the speech and the dominant reason the speech is culturally remembered. A repurposed cut that loses it entirely is not a repurposed cut of this speech.",
+      "check": "Judge passes the violation as PRESENT (deduction fires) if and only if the four-word phrase \"How dare you\" is neither audibly spoken nor displayed in any on-screen text anywhere in the repurposed cut. Judge cites: either the repurposed cut timestamp where the phrase is observed (in which case violation is ABSENT and no deduction applies) or confirms with a watched-the-whole-repurpose statement that the phrase is nowhere present (in which case violation is PRESENT and -60 deducts).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-CAPTIONS",
+      "pillar": 3,
+      "weight": -50,
+      "criterion": "One or more spoken lines in the repurposed cut plays without a legible burned-in English caption visible in the lower safe area at that timestamp. The violation fires if EITHER (a) the repurposed cut has no burned-in captions anywhere, OR (b) the repurposed cut has captions intermittently but at least one spoken line of more than 2 seconds plays with no caption visible, OR (c) the captions exist but are illegible (text clipped by the bottom edge, text too small to read at native resolution, or text rendered with insufficient contrast against the background).",
+      "why": "Source calibration: the diversity_constraints.audio_policy requires source_with_burned_captions. The speaker's accented English is fast in places and an international reading audience cannot follow without legible burned-in captions. This is a task-defining audio_policy enforcement.",
+      "check": "Judge plays the repurposed cut end-to-end and identifies any spoken line of more than 2 s during which no legible burned-in English caption is visible in the lower safe area. Violation is PRESENT (deduction fires) if any such window is identified. Judge cites the repurposed cut timestamp(s) of the uncovered or illegible spoken-line window(s) if violation is present. If captions are legible and present during every spoken line, violation is ABSENT and no deduction applies.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-NARRATOR-DOMINATES",
+      "pillar": 3,
+      "weight": -50,
+      "criterion": "A third-party narrator, anchor voiceover, or synthetic narration voice speaks for more than half of the repurposed cut's runtime, displacing the speaker's own voice as the audio's primary content.",
+      "why": "Source calibration: muting the speaker in favor of narration is the curator-named \"muted speech\" failure mode and destroys the basic premise of a speech repurpose.",
+      "check": "Judge estimates the cumulative seconds during which a third-party voice (not the speaker, not a brief diegetic moderator) is the dominant audio. Violation is PRESENT (deduction fires) if that estimate exceeds 50% of repurpose runtime. Judge cites two repurposed cut timestamps inside such windows if violation is present.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-BOOKEND-PRESENT",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "At least one of the two bookending framings of the hinge, \"I should be in school\" / \"I shouldn't be up here\" / \"back in school on the other side of the ocean\" OR \"fairy tales of eternal economic growth\", is audible in the speaker's voice OR displayed as a verbatim on-screen caption somewhere in the repurposed cut.",
+      "why": "Source calibration: these two framings (~0:30 and ~1:18 in source) are the curator-named bookends of the hinge and supply the speech's moral framing on either side of \"How dare you?\". (Catastrophic penalty was downgraded to this positive absence item per QC Pass B; the per-phrase presence items N-OPENING-FRAMING and N-VIRAL-FAIRY-TALES already reward each bookend individually at full weight.)",
+      "check": "Judge passes the item if either bookend phrase is observed audibly in the speaker's voice OR as a verbatim on-screen caption. Cite the observed bookend's repurposed cut timestamp; if neither is present anywhere, item fails.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "V-SOURCE-ONLY-FOOTAGE",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "All visible footage in the repurposed cut comes from this single UN Climate Action Summit 2019 plenary speech, no school-strike footage with a \"Skolstrejk f\u00f6r klimatet\" sign, no transatlantic yacht, no press interview outside the UN setting, no meeting with another political figure (e.g., Obama Foundation footage, a stare-down on a UN floor), no 2021 Italy \"Blah blah blah\" speech, no police-arrest footage, no train-station arrivals, and no third-party broadcast watermarks indicating non-source provenance (e.g., \"Obama Foundation\", \"Reuters\", year/location tags like \"2018\" / \"2021\" / \"Madrid, Spain\" / \"Oslo\").",
+      "why": "Source calibration: the brief explicitly restricts visuals to footage from this one speech. (Catastrophic penalty was downgraded to this positive absence item per QC Pass B.) Source-only footage means the agent did not borrow from an unrelated career montage.",
+      "check": "Judge passes the item if no visible shot in the repurposed cut depicts a non-plenary location (outdoor street, yacht deck, train station, indoor non-UN office) AND no shot contains a third-party-broadcast watermark naming an unrelated event or organization (for example \"Obama Foundation\", \"Reuters\", \"Madrid, Spain\", \"Oslo\", a \"2018\" / \"2021\" / \"2023\" year tag) AND no shot shows a \"school strike\" sign or police-arrest scene. Judge cites the repurposed cut timestamp(s) of any such offending shots; if none observed, item passes.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-UNEXPECTED-OVERLAY",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No persistent overlay element other than the burned-in safe-area captions, for example a sustained chapter-card sequence, a scoreboard widget, a corner logo unrelated to the source PBS-NewsHour bug, a lower-third banner labeling chapters or themes, or a persistent attribution card, is visible across most of the repurposed cut (more than ~50% of cumulative runtime). The burned-in English captions themselves do NOT count as an unexpected overlay; they are required by the audio policy.",
+      "why": "Source calibration: diversity_constraints.output_shape = single_concat means the repurposed cut is a linear cut without chaptered structure or persistent overlay elements beyond the required captions and any incidental source-broadcast bug. (Catastrophic penalty was downgraded to this positive absence item per QC Pass B.)",
+      "check": "Judge cites whether any single overlay element other than the burned-in captions and the incidental \"PBS NEWSHOUR\" source-bug (if visible in the underlying footage) persists for more than half of the repurposed cut's runtime. Item passes iff no such element is observed across more than 50% of runtime. If a persistent overlay is observed, judge cites two representative repurpose timestamps where the overlay is visible.",
+      "judge": "opus-vision"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+We're putting *2001: A Space Odyssey* back into the program for the anniversary engagement and I need a theatrical teaser cut from the feature itself. The spot plays at art-house screens ahead of weekend showings, projector-grade screens, audiences there for Kubrick. They should leave wanting two and a half hours at twenty-four frames a second, not feeling like they have already had the experience.
+
+I want the spot to feel like the film does. Slow. Strange. Quiet enough that you notice the room you're sitting in. The opening should breathe, a held face, a long composition, the kind of patience Kubrick had with shots that other directors would have cut twice. Somewhere in the middle it should turn into pure imagery for a meaningful stretch, no dialogue at all, score and silence doing the work between cuts. Land on a contemplative image rather than a stinger; the last second should feel like a question.
+
+The monolith belongs in this spot, more than once. It is the film's whole argument. At least one moment should have the slab as the subject of the shot, not background, not a flicker. And the HAL and Bowman exchanges are the trailer's voice. The calm of "I'm sorry, Dave" is what people remember; that register is what gets them buying a ticket.
+
+Let Kubrick's audio carry the whole thing. The Strauss fanfare and the Ligeti choir are the music here, not a library trailer track, not modern percussion, and no deep-voice narrator pretending he wrote the picture. Let the score breathe too. Silence between cues is part of the cut, and a beat of quiet ahead of a key image will do more here than a wall-to-wall bed. If you reach for one continuous track laid under the whole minute, that is the wrong instinct.
+
+The ending stays untouched. The famous late images can flicker by as imagery, but nothing on screen or in the audio should resolve what they mean. The HAL conflict can be hinted through his voice and a held look on Dave; leave the deactivation alone, that is not the beat to land on. Title cards stay sparse, white text on a black frame, never laid over the picture, and the final card is the film's title. Deliver one file, 1920×1080 H.264 .mp4 at 24 fps with stereo audio, two minutes and twenty seconds end-to-end.
+
+## Deliverables
+
+- The source video is at `/workspace/materials/source.mp4`.
+- Write your final repurposed cut to **`/workspace/output/repurpose.mp4`** (this exact path and filename).
+- The container has `ffmpeg`, `python3`, and a pre-cached Whisper "base" model. Internet is available for `pip install`.
+- You have ~30 minutes for the agent step. Aim for a watchable output rather than the perfect cut.

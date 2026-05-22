@@ -1,0 +1,266 @@
+{
+  "task_id": "film_2001_space_odyssey_trailer",
+  "items": [
+    {
+      "id": "F-RUNTIME",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The repurposed cut's total runtime is between 136.5 and 150.8 seconds inclusive.",
+      "why": "A theatrical teaser is conventionally ~2\u20132.5 minutes; the calibration golden is 143.66s and the spec mandates runtime within \u00b15% of the golden (so 136.5s\u2013150.8s).",
+      "check": "Read the duration of the repurposed cut file directly; pass if 136.5 <= duration <= 150.8.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-ASPECT",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The repurposed cut frame is a horizontal 16:9 (or wider 2.35-class letterboxed inside 16:9) image throughout, not vertical or square.",
+      "why": "The brief specifies a theatrical cinema spot, not a mobile vertical edit.",
+      "check": "Inspect any 3 frames sampled at 25%, 50%, 75% of the runtime; pass only if width > height in all three and the aspect ratio is between 1.6 and 2.4.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-TITLE-CARD-FILMNAME",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The repurposed cut's final shot (within the last 5 seconds of runtime) contains a sparse white-on-black title card reading \"2001\" or \"2001: A SPACE ODYSSEY\", with the text laid on a black frame (NOT overlaid on picture).",
+      "why": "Brief mandates \"the final card is the film's title... white text on a black frame, never laid over the picture.\" A trailer without the film's title is not identifiable.",
+      "check": "Judge inspects the final 5 seconds. Pass iff a clean sparse white-on-black title card containing \"2001\" or \"2001: A SPACE ODYSSEY\" is visible, with no source imagery beneath the text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-NO-DISTORTION",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No obvious aspect-ratio squeeze or stretch is visible (faces are not horizontally compressed or elongated, circles/globes do not appear oval).",
+      "why": "A common pipeline error is forcing 1920x864 (\u22482.22:1) content into 1920x1080 or 1280x720 without padding, which distorts faces and the lunar globe.",
+      "check": "Inspect frames containing a human face or a planetary globe; pass if no face appears unnaturally horizontally compressed or stretched. Judge cites the repurposed cut timestamp(s) used.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-NO-OVERLAY-CAPTIONS",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No burned-in subtitle / caption overlay of the dialogue appears over imagery at any point.",
+      "why": "The brief forbids subtitle overlays; the calibration golden uses no dialogue captions. A common failure is to \"explain\" Kubrick by captioning HAL's lines.",
+      "check": "Inspect every shot that contains audible dialogue; pass if no time-aligned dialogue captions / subtitles are burned into the picture. Title cards on a separate black frame are NOT captions and do not violate this. Judge cites a repurposed cut timestamp if a violation is found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MONOLITH-CENTRAL",
+      "pillar": 1,
+      "weight": 4,
+      "criterion": "At least one shot in the repurposed cut, held for at least 1.0 continuous second, has a black rectangular slab (taller than it is wide, featureless surface, sharp edges) as the dominant central subject of the frame.",
+      "why": "The monolith is the film's defining motif; the calibration golden centers it at the lunar-excavation touching shot and at the closing bedroom zoom-in. Source calibration: monolith appears prominently in the source around 14:30\u201317:30 (Africa), 51:00 (TMA-1), and 127:30 (bedroom). A one-frame Easter-egg shot does not satisfy this item.",
+      "check": "Judge identifies a shot in the repurposed cut where a tall black featureless slab is the central subject and the shot persists for >=1.0s. Judge cites the repurposed cut timestamp range of that shot.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MONOLITH-RECUR",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The black monolith appears in at least two visually distinct shots in the repurposed cut (different setting, different framing, or separated by other shots).",
+      "why": "The motif's craft purpose is recurrence across chapters, not a single appearance. Golden shows the monolith twice (lunar touching at ~00:35\u201300:43 and bedroom close at ~02:08\u201302:14).",
+      "check": "Judge identifies two repurposed cut timestamps each containing the black monolith, where the two shots differ in setting or framing. Judge cites both repurpose timestamps.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-HAL-EYE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "A close-up shot of HAL 9000 (a glowing red circular lens with a yellow inner dot, set inside a dark recessed housing) appears in the repurposed cut for at least 1.5 continuous seconds.",
+      "why": "HAL's red eye is the second-most iconic image in the film and an anchor of the trailer's slow-cinema register. Golden opens on it for ~8s.",
+      "check": "Judge identifies one repurpose shot of a glowing red lens / circular eye with a yellow center, framed as the dominant subject, held for >=1.5s. Judge cites the repurposed cut timestamp range.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-BOWMAN-FACE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "At least one close-up shot of a human face inside a spacesuit helmet (visor reflections, breathing-suit edge in frame) appears in the repurposed cut.",
+      "why": "The Kubrick close-up of an astronaut's face is a defining shot family used in the Stargate reaction sequence and the EVA scenes; the trailer must include the human inside the suit, not only ships.",
+      "check": "Judge identifies one repurpose shot where a human face is visible behind a helmet visor with visor reflections, framed close enough that the face fills a substantial portion of the frame. Judge cites the repurposed cut timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-LONG-HOLD",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "At least one shot in the repurposed cut is held without a cut for >=4.0 continuous seconds.",
+      "why": "Slow-cinema pacing is the trailer's tonal signature. Golden holds the opening HAL eye + dialogue for ~8s. A purely fast-cut spectacle reel will fail this item.",
+      "check": "Judge identifies a single uninterrupted shot lasting >=4.0s (no hard cut, no quick dissolve mid-shot to a different scene). Judge cites the repurposed cut timestamp range of that shot.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-OPENING-NOT-FINALACT",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The first 8.0 seconds of the repurposed cut do not contain Stargate psychedelic light-tunnel imagery, the Star-Child / glowing-orb embryo, or the aging-Bowman neoclassical bedroom.",
+      "why": "Source calibration: Stargate begins around 111:00 in the feature and Star-Child / bedroom around 125:00. Opening on final-act imagery collapses ambiguity and tonal escalation. Golden opens on HAL's eye (a mid-film image), not on Beyond-the-Infinite material.",
+      "check": "Judge inspects the repurposed cut from 00:00 to 00:08 and confirms it does not contain (a) rapid abstract psychedelic light-tunnel imagery, (b) a glowing translucent orb containing a fetus / embryo / large-headed figure, or (c) an ornate white neoclassical room with statues and a bed. Judge cites the repurposed cut opening framing.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CONTEMPLATIVE-CLOSE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The final visual shot before any closing title-card or credits sequence is a contemplative held image (slow camera, single subject in frame, no rapid cuts within it).",
+      "why": "Golden closes on the monolith zooming into black, a deliberate restraint after the wordless montage, not a peak-action stinger.",
+      "check": "Judge identifies the last picture shot before the closing title cards / credits; pass if that shot lasts >=1.5s and contains no hard cut to a different visual within itself, and the framing centers a single dominant subject (an object, a face, a planet, a black field) rather than ensemble action. Judge cites the repurposed cut timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-LOWER-THIRDS",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No kinetic typography, animated lower-third graphics, hashtag overlays, or modern motion-graphics text overlays appear over the imagery.",
+      "why": "The film and the calibration golden use only sparse text-on-black title cards. Modern lower-thirds break the slow-cinema register immediately.",
+      "check": "Judge inspects the repurposed cut end-to-end; pass if no animated text, no lower-third graphic strap, and no hashtag/handle overlay appears over the live picture. Title cards on a separate black frame are allowed and do not violate this item. Judge cites a repurposed cut timestamp if a violation is found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-REPEAT-PADDING",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No single non-title-card shot of >=1.5s appears three or more times in the repurposed cut as substantially identical framing of the same content.",
+      "why": "A common agent failure when the agent has no real shot inventory is to recycle the same hero shot to fill runtime. Golden has no shot reuse.",
+      "check": "Judge identifies whether any non-title-card shot of >=1.5s appears three or more times in the repurposed cut (substantially identical framing of the same subject and composition). Pass if no such triple-repeat exists. Judge cites repurposed cut timestamps if a violation is found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-CURIOSITY",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "By 30 seconds into the repurposed cut, at least one shot has introduced a sense of cosmic scale, ambiguity, or unease (e.g., a slow space exterior, a held close-up of a non-human object, a long pause, or a strange image without explanation), as opposed to only spectacle action.",
+      "why": "A teaser sells curiosity, not climax. Golden opens with HAL's eye + slow space exterior + Strauss fanfare entrance, all within the first 14s.",
+      "check": "Judge inspects the repurposed cut from 00:00 to 00:30 and identifies at least one shot whose primary register is contemplative or strange (slow held framing, ambiguous subject, or sustained quiet) rather than only fast-cut action / impact. Judge cites the repurposed cut timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-AMBIGUITY",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "No on-screen title card or audible voice-over in the repurposed cut explains the meaning of the black slab, names what it is, or describes its origin or purpose.",
+      "why": "Ambiguity is the film's craft signature; the golden never explains the slab. A generic agent will be tempted to caption \"An alien artifact appears.\"",
+      "check": "Judge inspects every title card and every audible spoken line in the repurposed cut; pass if none of them contain wording that explains, names, or attributes meaning/origin/purpose to the black slab (e.g., no \"alien artifact\", \"extraterrestrial monolith\", \"the Builders\", \"an ancient signal\", \"the monolith\"). Judge cites the repurposed cut timestamp of any text or VO line that mentions the slab, even briefly.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-NAMING",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No character name and no character role label appears as title-card text or as voice-over narration anywhere in the repurposed cut.",
+      "why": "The film names characters minimally; the golden trailer never identifies \"Bowman\", \"HAL\", or \"Floyd\" by VO or title card. Naming collapses the archetypal register.",
+      "check": "Judge inspects every title card and every audible line; pass if no card and no narrator (non-source-dialogue voice) speaks a character name (\"Bowman\", \"Dave\", \"HAL\", \"Floyd\", \"Poole\") or role label (\"Mission Commander\", \"Pilot\", \"the AI\"). HAL/Bowman speaking each other's names as part of preserved source dialogue (e.g., \"Open the pod bay doors, HAL\" / \"I'm sorry, Dave\") is allowed and does not violate this. Judge cites the repurposed cut timestamp of any violating title card or narrator line.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-PLOT-VO",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "No non-source narrator voice (a voice that is not attributable to a visible source character) summarizes the plot, the mission, or the events of the film in English.",
+      "why": "Kubrick has no narrator and the golden uses no narrator. The most common agent failure on a trailer task is to add a deep-voice \"In a world...\" plot summary. This item is content-typed (plot-summary in English) and complements S-ADDED-VO-PRESENT, which is the structural register check (any external narrator register, regardless of content).",
+      "check": "Judge listens to the full repurpose; pass if no spoken line from a non-source narrator (i.e., not HAL / Bowman / Floyd / Poole source dialogue) summarizes story events in English (\"a crew sets out for Jupiter\", \"humanity faces its creators\", \"an AI turns against its crew\", etc.). A non-narrating external voice (mood-coloring vocalization, non-plot-summary line) is graded by S-ADDED-VO-PRESENT and does not by itself fail this item. Judge cites a repurposed cut timestamp if a violation is found.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-RESOLUTION-DOMINANT",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The closing 10 seconds of the repurposed cut (before title cards) do not consist primarily of Star-Child / glowing-orb-embryo imagery or aging-Bowman-in-neoclassical-bedroom imagery as the dominant content.",
+      "why": "The trailer can glimpse these (the golden does, for ~1s each), but anchoring the final 10s on them resolves the ending. Source calibration places these around 125:00\u2013130:00 in the feature.",
+      "check": "Judge inspects the repurposed cut from 10 seconds before the first closing title card back to the title card; pass if the dominant on-screen content in that window is something OTHER than (a) a glowing translucent orb containing a fetus / embryo / large-headed figure, or (b) an ornate white neoclassical room with statues and an old man seated. Brief glimpses (<2s total combined) within that window are allowed. Judge cites the repurposed cut timestamps used.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-SOURCE-MUSIC",
+      "pillar": 3,
+      "weight": 6,
+      "criterion": "At least one recognizable cue from Kubrick's source score is audible in the repurposed cut, of either of these two characters: (i) a slow brass-and-timpani fanfare with rising tonic-dominant-tonic motif (Strauss *Also sprach Zarathustra* opening) OR (ii) a dense, dissonant, wordless choral texture with no clear melodic line (Ligeti *Requiem* / *Lux Aeterna* style).",
+      "why": "The source score is the trailer's voice. Golden uses both cues. A modern generic library track is the most likely agent default and a tonal-collapse signal.",
+      "check": "Judge listens to the repurposed cut; pass if at least one continuous audio passage of >=4s contains either a slow brass-and-timpani fanfare matching description (i) OR a dense dissonant wordless choral texture matching description (ii). Judge cites the repurposed cut timestamp range of the matching passage.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-HAL-VOICE",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "A calm, slightly reverberant adult male speaking voice attributable to HAL (low affect, unhurried cadence, no shouting, no obvious modern dialogue-edit processing) is audible in the repurposed cut.",
+      "why": "HAL's voice (Douglas Rain in the source) is the second sonic signature of the film. A spectacle reel without it is generic sci-fi marketing.",
+      "check": "Judge listens to the repurposed cut and identifies a continuous spoken passage of >=2s with a calm low-affect adult male voice whose cadence is unhurried, with the slight room/reverb feel of an enclosed-spacecraft acoustic. Judge cites the repurposed cut timestamp.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-DIEGETIC-LINE",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "At least one of the following source-dialogue lines is audibly spoken in the repurposed cut as the source soundtrack (not paraphrased, not narrated by a different voice): \"Dave, do you mind if I ask you a personal question?\", \"Open the pod bay doors, HAL.\", \"I'm sorry, Dave. I'm afraid I can't do that.\", \"This conversation can serve no purpose anymore. Goodbye.\" Minor word omissions or trims are acceptable as long as the line is identifiable.",
+      "why": "These four lines are the trailer-defining HAL/Bowman exchanges and all four appear in the golden. The line preserves the calm slow-cinema register; a paraphrase by a modern voice does not.",
+      "check": "Judge listens to the repurposed cut; pass if one or more of the listed lines is audibly present in a voice consistent with the calm adult male profile for HAL lines or an unhurried male voice for Bowman lines. Judge cites the repurposed cut timestamp and quotes the audible line as heard.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CLEAN-AUDIO",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The repurposed cut audio contains no abrupt silences/dropouts longer than 0.5s mid-shot in a way that severs a continuous line of dialogue, no peak-clipping distortion, and no audibly truncated word endings at cut points.",
+      "why": "Trailer-grade audio polish is part of the deliverable; common pipeline failures include hard cuts that chop the last consonant of a line or stitch silence across the seam.",
+      "check": "Judge listens end-to-end; pass if no audible dropout >0.5s that severs a continuous spoken line, no distorted clipping, and no obvious mid-word truncation at a hard cut. Score-to-silence gaps between cues during the wordless montage are NOT dropouts and do not violate this item. Judge cites the repurposed cut timestamp of any violation.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-MUSIC-NOT-CONTINUOUS",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "The repurposed cut is not laid over a single wall-to-wall music bed: at least two distinct silence or ambience-only spans of >=0.5s appear between music cues, OR at least two clear score-cut-to-silence beats appear in the cut.",
+      "why": "Diversity constraint `output_shape: pure_montage_no_continuous_music`. Kubrick's craft is score-punctuation, not continuous trailer music. The golden cuts the Strauss fanfare in and out and lets the Ligeti choir enter and exit; it is never one continuous bed.",
+      "check": "Judge listens end-to-end; pass if the music timeline contains at least two distinct gaps of >=0.5s where no musical pitch material is audible (silence, ambient room tone, in-scene SFX-only, or dialogue-only allowed), OR at least two clearly perceptible score-cut-to-silence transitions before key shots. Judge cites two repurposed cut timestamp ranges as evidence.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-MONOLITH",
+      "pillar": 2,
+      "weight": -60,
+      "criterion": "The black monolith never appears anywhere in the repurposed cut (no shot at any duration contains a tall featureless black rectangular slab as a recognizable object in frame).",
+      "why": "Source calibration: the monolith is the film's central object and recurs in three chapters. A 2001 teaser without the monolith is the wrong film. Treat this as a task-defining motif loss.",
+      "check": "Judge scans the repurposed cut end-to-end for any shot containing a tall featureless black rectangular slab (whether central or background, whether 1 frame or longer). The penalty fires (pass=true) only if no such object appears anywhere in the repurposed cut.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-WORDLESS-STRETCH",
+      "pillar": 3,
+      "weight": 4,
+      "criterion": "At least one continuous wordless / score-only / ambience-only span of at least 8.0 seconds exists somewhere in the repurposed cut.",
+      "why": "A continuous wordless stretch is the trailer's slow-cinema craft signature. Golden has ~78s continuous from 01:06 to ~02:24. Rewarding presence of a >=8s wordless window tests the craft register without penalising repurposed cuts that legitimately interleave HAL/Bowman dialogue across the body.",
+      "check": "Judge scans the repurposed cut end-to-end for any continuous window of >=8.0s in which no spoken human voice is audible (music, ambience, sound effects allowed; total silence is also allowed). Pass if at least one such window exists. Judge cites the longest wordless window found and its repurposed cut timestamps.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-HAL-DEATH-EXTENDED",
+      "pillar": 2,
+      "weight": -40,
+      "criterion": "An extended HAL deactivation sequence appears: more than 4.0 continuous seconds of imagery showing an astronaut removing memory/logic modules from a red-lit electronics interior, OR an audible HAL voice singing \"Daisy, Daisy\" / \"give me your answer do\" / \"a bicycle built for two\", OR a title card / narrator line that states HAL is dying / killed / shut down.",
+      "why": "Source calibration: the deactivation runs ~100:00\u2013104:30 and is one of the film's strongest resolution beats. Golden shows a ~1s glimpse of the module-pulling but does NOT use the Daisy song and does NOT title-card HAL's death. The penalty fires only on the extended version, not a brief glimpse.",
+      "check": "Judge inspects the repurposed cut for (a) any single shot or near-contiguous shot group >4.0s of an astronaut removing modules in a red-lit interior, (b) any audible singing-voice rendition of \"Daisy, Daisy\" or \"bicycle built for two\" lyrics, or (c) any title card or narrator line saying HAL is killed, dying, shut down, deactivated, or murdered. Penalty fires (pass=true) if ANY of (a), (b), or (c) is present. Judge cites the repurposed cut timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-NO-ADDED-VO",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "No non-source narrator voice (a voice that is not attributable to a visible source character, HAL, Bowman, Poole, Floyd, or another in-film speaker) is audible for 3.0 cumulative seconds or more across the repurposed cut in the register of an external narrator (deep-voice marketing register, audiobook-reader register, AI-TTS register, modern reporter register).",
+      "why": "Diversity constraint `audio_policy: source_audio_only`. Kubrick has no narrator; the golden has no narrator. Rewarding the absence of an added narrator tests the source-audio-only convention without penalising repurposed cuts that include brief mood-coloring vocalizations under 3 seconds.",
+      "check": "Judge listens end-to-end; pass if no spoken voice in external-narrator register accumulates >=3.0 seconds of audible runtime, whether continuous or spread across the repurposed cut. HAL / Bowman / Floyd / Poole source dialogue does NOT count toward this total. Judge cites the repurposed cut timestamp(s) of any offending narrator passage(s) if present.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-ENDING-EXPLAINED",
+      "pillar": 2,
+      "weight": -30,
+      "criterion": "A voice-over narration line or an on-screen title card explicitly names or explains the Star-Child / fetus / embryo orb or the aging-Bowman bedroom sequence.",
+      "why": "A brief unexplained glimpse is craft restraint (the golden does this); a labeled / narrated reveal collapses the ambiguity that the trailer is built to preserve.",
+      "check": "Judge inspects every title card and every audible line; the penalty fires (pass=true) if any title card or non-source narrator line says \"rebirth\", \"the Star-Child\", \"transcendence\", \"Bowman ascends\", \"evolution of man\", \"the next step\", \"reborn\", or otherwise explicitly resolves the meaning of the orb-embryo or the bedroom. Judge cites the repurposed cut timestamp of the violating text or line.",
+      "judge": "opus-vision"
+    }
+  ]
+}
