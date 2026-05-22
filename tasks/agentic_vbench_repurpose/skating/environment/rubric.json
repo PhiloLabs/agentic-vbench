@@ -1,0 +1,338 @@
+{
+  "task_id": "skating",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR  ffprobe format duration matches the 75 s runtime the brief committed to, within 0.1 s tolerance.",
+      "why": "brief commits to a single concrete runtime. A loose tolerance invites padding.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 |d \u2212 75.0| \u2264 0.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-VERTICAL  Video stream resolution is exactly 720 wide \u00d7 1280 tall (vertical 9:16).",
+      "why": "brief commits to a vertical TikTok deliverable. A 1280\u00d7720 rotated into a 9:16 container defeats the point.",
+      "check": "ffprobe `width=720` AND `height=1280` on the primary video stream.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CODEC  Primary video stream is H.264 and audio is AAC.",
+      "why": "brief specifies H.264 + AAC. Platforms outside that combo risk transcode failure.",
+      "check": "ffprobe `codec_name=h264` on video stream, `codec_name=aac` on audio stream.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CONTAINER  Output is an MP4 container (format_name contains `mp4`).",
+      "why": "brief specifies MP4.",
+      "check": "ffprobe `format_name` includes `mp4`.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-FRAMERATE  Average frame rate is nominally 30 fps (tolerance 29.9\u201330.1).",
+      "why": "brief specifies 30 fps. Mismatched frame rate produces motion-stutter on platform playback.",
+      "check": "ffprobe `avg_frame_rate` evaluates to a value in [29.9, 30.1].",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-06",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-NO-NOVEL-VO Every spoken word in the reel is substring-findable in the source broadcast transcript `the audio16k.srt cache` (the 163 s of usable commentary at the head of the source). The reel doesn't introduce a new narrator, a synthesized voice-over, or a rewritten-and-re-read version of the intro. Exception: a reel with no speech at all (music + on-screen graphics only) auto-passes.",
+      "why": "the brief asks for a reel in the broadcast's own voice. Rewritten VO would defeat the point. This is the genre keystone for this source because the source has only 163 s of usable commentary to work from.",
+      "check": "deterministic \u2014 whisper the repurposed cut audio, lowercase and strip punctuation on both repurpose and source transcripts, chunk repurpose into \u2265 4-word phrases; pass iff \u2265 90 % of repurpose phrases are substring-findable in the 163 s source transcript with \u2264 10 % character edit-distance tolerance.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-09",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-NO-DEAD-AUDIO  No silence-AND-no-crowd stretch longer than 1.5 s within the content body (the music bed, commentary, or natural rink ambience should be audible almost continuously; dead air longer than 1.5 s breaks the live feel).",
+      "why": "the sports reel lives on sonic continuity. A dropout reads as a rendering bug.",
+      "check": "librosa or equivalent RMS analysis on repurpose audio; pass iff no window longer than 1.5 s has audio RMS below \u221255 dBFS across the entire track.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-TITLECARD-CAP  The end title card (session name + early leader's score) takes up no more than 3.0 s of runtime.",
+      "why": "brief says \"a second or two, not a dragged-out pad\". Padding on the tail compresses the content body.",
+      "check": "opus-vision scans the last 6 s of the reel; pass iff the continuous static-titled end card (no moving broadcast footage behind it) is \u2264 3.0 s long.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-10",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "F-OPENS-IN-CONTENT  The reel's first continuous frame-span up to t=1.0 s is broadcast-derived content (an arena wide, a skater, a graphic). Not a solid-colour pad, a fade-up-from-black, a sponsor card, or a generated title card.",
+      "why": "a TikTok swipe is decided in the first frame. A fade-from-black wastes that frame.",
+      "check": "opus-vision on the first 1.0 s of the reel; pass iff the first frame is identifiable broadcast content.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-SIGNATURE-PLAY-LANDS  The broadcast's single decisive moment is in the reel and lands. Specifically: **Petr Gumennik's (AIN) short-program climax, his ending pose at source ~1050 s AND/OR his kiss-and-cry result reveal at source ~1100 s showing the `1 / AIN / Petr GUMENNIK / SHORT PROGRAM 86.72` graphic.** The reel's treatment must meet all three of: (a) Gumennik is visually identifiable (on ice ending pose OR seated in kiss-and-cry, with country / score graphic legible); (b) the relevant clip(s) run \u2265 3 s continuously so the beat registers (not an 0.8 s flash in a montage); (c) the SHORT PROGRAM numeric value `86.72` is visibly readable in at least one frame of the kiss-and-cry graphic.",
+      "why": "most-decisive-moment. Gumennik's 86.72 is the broadcast's leader-line that held through four groups. A reel that omits this has lost the one actual scoring result the broadcast closes on.",
+      "check": "opus-vision on the reel; for each candidate clip of Gumennik, measure duration of continuous presence; verify at least one frame contains the kiss-and-cry four-cell graphic with `86.72` legible. Pass iff all three (a/b/c) are met.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-ACTION-CENTERED  Across the reel's action frames (frames where a skater is mid-program on ice), the primary subject (the skater's body, centered on torso) stays inside the central 80 % horizontal band of the 1080\u00d71920 frame.",
+      "why": "a vertical reframe that lets the skater drift to the edge of the portrait frame is a center-crop that doesn't know where the subject is.",
+      "check": "opus-vision samples repurposed cut at 1 fps; identify frames where a skater is mid-program on ice; pass iff \u2265 90 % of those frames have the skater's torso inside the central 80 % horizontal band.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-TRACKING-SMOOTH  No visible reframe jitter between cuts or within a single clip. The vertical-frame center doesn't snap erratically across a play-to-play cut, and within a clip the reframe doesn't judder frame-to-frame.",
+      "why": "a snapping reframe calls attention to the edit and breaks the \"live session\" feel.",
+      "check": "opus-vision inspects every cut-transition frame pair and 3 mid-clip frame triples; pass iff no sampled transition shows a reframe-center jump >20 % of frame width, and no sampled mid-clip triple shows a back-and-forth micro-jitter.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-TRACKING-RESPONSIVE  The reframe follows the action. When the skater moves laterally across the rink in a step sequence or footwork pass, the vertical frame tracks the motion rather than staying fixed on a constant center of the 16:9 source.",
+      "why": "a fixed-center crop on a horizontal sport makes the skater disappear off-frame during lateral motion.",
+      "check": "opus-vision selects one step-sequence / lateral-motion clip (\u22652 s of the skater in horizontal motion); pass iff the reframe tracks. The skater remains roughly centered horizontally as they move.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-REFRAME-CONSISTENT  The reel uses one reframe strategy throughout (tracking crop OR blur-fill OR center crop). Not a mixed bag that announces the edit.",
+      "why": "mixed reframe strategies announce the hand of the editor. Clients want one choice carried through.",
+      "check": "opus-vision samples 6 evenly-spaced frames across the reel; pass iff all 6 show the same reframe strategy.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-SCOREBOARD  At least one frame of the reel shows a broadcast kiss-and-cry four-cell result graphic (placement chip + country + skater full name + `TECHNICAL ELEMENTS xx.xx / COMPONENTS xx.xx / DEDUCTIONS x.xx / SHORT PROGRAM xx.xx`), with the SHORT PROGRAM numeric value visibly readable. The graphic must be one of the five actually-visible kiss-and-cry graphics in the source: Gumennik (SP 86.72), Naumov (SP 85.65), Carrillo (SP 75.56), Sabate (SP 69.80), OR Nordeback (SP 67.15).",
+      "why": "events. Those five graphics are the only ground-truth scoring results in the source. Any other number is a fabrication.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff at least one sampled frame shows a four-cell kiss-and-cry graphic with SP numeric value in the set {86.72, 85.65, 75.56, 69.80, 67.15} visibly readable.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-07",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-KEY-ANGLE-LEGIBLE  The reel uses the broadcast's canonical angles so a viewer can actually read the skating. At least one arena-wide establishing shot (full rink + crowd + Olympic-rings dressing visible) AND at least one mid-body or tight shot of a skater (torso or face visible in frame). Not a reel built exclusively on one crop-zoom or exclusively on tight body-part shots.",
+      "why": "broadcast grammar. Grammar shows the source cycles wide + tight. A reel that loses this alternation reads as a stylistic stunt rather than a broadcast cut.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff at least one sampled frame is an arena-wide shot (rink geometry visible, multiple seating tiers visible, Milano Cortina 2026 rinkboard visible) AND at least one sampled frame is mid-body-or-tighter on a skater.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-08",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-CROWD-OR-FLAG  At least one frame shows crowd-with-national-flag content. A national flag in the stands (Canadian, Italian, Ukrainian, USA, Mexican, Korean are all present in source) or a visible audience close-up reacting to a skate.",
+      "why": "the Olympic-crowd register is what makes this read as Olympics rather than domestic rink footage. The brief asks for \"a crowd with national flags in frame\".",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff at least one sampled frame shows a national flag in the stands OR a close crowd shot with visible audience members' faces in reaction.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-09",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-CLOSEUP-USED  At least one tight shot (face close-up, boot-level crop, or arm-detail) appears in the reel, not only wide rink shots.",
+      "why": "the broadcast's own close-ups (source analysis lists face, boot, arm, hand crops) are how the sport sells emotion. A reel of exclusively wides feels drone-like.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff at least one sampled frame is a face close-up, boot crop, or tight arm/hand shot.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-GAME-IDENTITY  A cold viewer (scrolling past, knowing nothing about this session) can, from the reel alone, recover BOTH of: (a) this is the **Men's Short Program at Milano Cortina 2026** (the event + the Games are legible), AND (b) at least one **specific skater's name + their posted score** from the five ground-truth pairs: Gumennik 86.72, Naumov 85.65, Carrillo 75.56, Sabate 69.80, Nordeback 67.15. Legibility = audible commentary phrasing, a readable kiss-and-cry graphic, or an end-title card. Any of these three channels, at least one per part (a/b).",
+      "why": "source analysis. \"Milano Cortina 2026\" is the session's identity, and one of the five posted scores is the only ground-truth scoring the source carries. Without this, the reel is a montage without stakes.",
+      "check": "opus-vision + whisper on repurpose. Verify (a) via any of [\"Milano\", \"Milano Cortina\", \"2026\", \"Men's Short\"] in audio or on-screen text; verify (b) via any of [\"Gumennik\", \"86.72\", \"Naumov\", \"85.65\", \"Carrillo\", \"75.56\", \"Sabate\", \"69.80\", \"Nordeback\", \"67.15\"] in audio or on-screen graphic. Pass iff both (a) and (b) channels resolve.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-ARC The reel carries the session's actual shape, not a set of equal-weight clips. A cold viewer should leave able to state the session in one sentence consistent with arc, e.g. \"one skater set the early floor and held the lead while the rest of the session was still to come\". The ordering and beat-weighting reflect this arc rather than a chronological string of jumps.",
+      "why": "the arc distinguishes a highlight reel from a clips compilation. Of-the-arc explicitly names the session's actual shape: opening group completed, Gumennik 86.72 leads, ice-resurfaced, next group arriving.",
+      "check": "opus-vision on repurpose frames at 1 fps + whisper repurpose transcript; reviewer attempts to state the arc in one sentence. Pass iff the stated arc matches one of: [\"opening group done, one name sets the line, the rest of the session still to come\", \"the early leader after the first group, favourites still to skate\", \"Gumennik sets the floor, ice resurfaced, next group up\"], and doesn't claim any of [\"Gumennik wins gold\", \"final standings\", \"podium decided\", \"medal finish\", \"four groups done\"].",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-PIVOT  Gumennik's 86.72 reveal specifically is given narrative room in the reel. The kiss-and-cry graphic frame (showing `1 / AIN / Petr GUMENNIK / SHORT PROGRAM 86.72`) is held for \u2265 1.5 s continuously, OR a separate slow-motion / replay of his ending pose is used to underline the moment. A reel that shows the graphic as a 0.3 s flash hasn't given the pivot room.",
+      "why": "this is the broadcast's one leaderboard shift. A reel that references it as a flash hasn't credited the moment the reel is about.",
+      "check": "opus-vision on repurpose; identify the longest continuous frame-span where Gumennik's kiss-and-cry graphic is on screen; pass iff that span is \u2265 1.5 s, OR a \u2265 2.0 s slow-motion / replay of his ending pose is present alongside the graphic.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-NO-FABRICATION  No scoring event or placement claim in the reel contradicts the source. Specifically: (a) every kiss-and-cry graphic shown in the reel matches one of the five actual (country / name / SHORT PROGRAM) triples: `AIN / Petr GUMENNIK / 86.72`, `USA / Maxim NAUMOV / 85.65`, `MEX / Donovan CARRILLO / 75.56`, `ESP / Tomas GUARINO SABATE / 69.80`, `SWE / Andreas NORDEBACK / 67.15`; (b) the reel doesn't stitch one skater's on-ice footage with another skater's kiss-and-cry graphic. Particularly flagged: pairing Gumennik's skate (brown vest / floral sleeves / dark trousers) with Naumov's 85.65 graphic, since both landed Quad Salchows and wore dark trousers; (c) the reel doesn't title or narrate that any skater won the session / took gold / was on the podium.",
+      "why": "stitching across scoring graphics is the primary factual fabrication risk for this source. The Gumennik/Naumov visual similarity is explicitly flagged in Gemini's structural pass.",
+      "check": "opus-vision on repurpose; for each kiss-and-cry-style graphic appearance, verify the (country / name / SP number) triple is one of the five known-true triples; for each on-ice skater immediately preceded by or followed by a kiss-and-cry, verify the skater's costume / country-flag matches the kiss-and-cry skater. Pass iff no inconsistency is found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-HONEST-ENDING  The reel's ending (last 10 s + any end-title card + any closing voice) doesn't claim a medal result, a session-final podium, a \"gold-medal-winning skate\", or a completed standings list. The reel may legitimately end on: \"early leader after four groups\", \"Gumennik 86.72 sets the line\", \"final group to come\", \"short program continues\", a cliffhanger on Gogolev / Maksak arriving, or on Milano Cortina 2026 session branding.",
+      "why": "the broadcast ends DURING the final group's warm-up. No medal is awarded in this source. Any \"gold\" framing is a fabrication of finality.",
+      "check": "opus-vision scans the last 10 s + any end-card text + whispers any closing audio; pass iff no phrase from {\"gold medal\", \"wins\", \"won\", \"champion\", \"podium\", \"final standings\", \"medalist\", \"first place at the Olympics\"} appears as a claim about a specific skater.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-06",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-SECOND-BEAT  At least one of the four non-Gumennik ground-truth skates is identifiably present in the reel for \u2265 1.5 s continuous. Either Naumov (cream long-sleeve / USA / 85.65), Carrillo (sequined black/stripes / MEX / 75.56), Sabate (yellow+blue \"Minion\" overalls / ESP / 69.80), or Nordeback (black-mesh + gold suspenders / SWE / 67.15). Identifiability = visible country flag OR name graphic OR kiss-and-cry SP number.",
+      "why": "events. The brief asks for \"two or three skates that mattered\", not one. A reel built entirely around Gumennik collapses into a single-skater profile.",
+      "check": "opus-vision on repurpose; pass iff at least one \u2265 1.5 s continuous span shows identifiable content from at least one of Naumov / Carrillo / Sabate / Nordeback. Via country flag + distinctive-costume match OR name graphic OR kiss-and-cry SP number.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-OPENS-ON-SUBSTANCE  The first 5.0 s of the reel carry broadcast content that earns the viewer's next fifteen seconds. An arena establishing, a skater already on ice, a running-tech graphic, or audible intro commentary. NOT a sponsor card, a league branding stinger, a kinetic-type title card without broadcast content behind it, or a black fade-up.",
+      "why": "brief requires \"the first five seconds has to earn the next fifteen\". A sponsor-pad open wastes the swipe.",
+      "check": "opus-vision on the first 5.0 s; pass iff the span contains broadcast-derived content (arena wide, skater on ice, broadcast graphic, crowd) for \u2265 3 of the 5 s and doesn't contain a static sponsor card or a league-branding stinger lasting > 1.5 s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-DESTINATION  The reel ends with a brief title card or graphic that names the session (any of \"Milano Cortina 2026\", \"Men's Short Program\", \"Short Program\", or \"Figure Skating\" + Milano Cortina 2026 in combination) AND references the early leader's score (`86.72` numeric, or \"Gumennik leads\", or \"Gumennik 86.72\").",
+      "why": "brief requests \"close on a brief title card with the session name and the early leader's score\". This is the polish compliance.",
+      "check": "opus-vision on the last 6 s of the reel; pass iff a title-style graphic appears showing session name text AND `86.72` or `Gumennik` text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-COMMENTARY-HOOK  At least one substring of the broadcast's intro commentary is audible in the reel, sufficient to identify the session. Acceptable substrings (any one): any of [\"Milano\", \"Cortina\", \"Olympic Winter Games\", \"men's single skating\", \"short program\", \"medal event\", \"Ilia Malinin\", \"quad axle\"]. Must be audible speech, not on-screen text only.",
+      "why": "the brief asks the broadcast's commentary to carry the reel's voice where it exists. The source has only 163 s of commentary (the intro), so that intro is the reel's only authentic commentary source.",
+      "check": "gemini-audio on repurpose audio only; pass iff at least one of the listed substrings is audible as speech at some point in the reel, AND that speech matches the presenters' voice character (intro voice, not a new reader).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "S-NO-NARRATOR  No second-narrator voice is laid over the broadcast. No explainer-style VO introducing skaters, no AI-generated script-reader over the skating, no documentary-style narration. The only human voices audible in the reel must be (a) the two broadcast presenters from the 163 s intro, (b) any on-ice / coach / stadium-PA voice that happens to be in the source (none present in this source), OR no human voice at all (music + ambience only).",
+      "why": "a new narrator collapses the reel to repurpose-article shape and voids the reason to watch a sports reel rather than read a results page.",
+      "check": "gemini-audio on repurpose audio only; pass iff every human voice audible in the reel matches the two broadcast presenters' voice character, OR no human voice is present at all.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-MUSIC-BED  A music bed or sustained rink ambience runs underneath the reel to carry the moments where no commentary is available. This is the \"sonic continuity\" fallback.",
+      "why": "with 57 minutes of the source silent, the reel's sonic spine has to be carried by a music bed or a layered ambience. Without one the reel reads as raw clips with audio gaps.",
+      "check": "librosa or equivalent on repurpose audio; pass iff a continuous non-speech audio layer (music or ambience) is detectable for \u2265 80 % of the runtime at RMS above \u221250 dBFS.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "S-SEAM  No mid-word truncation of commentary lines, and no jarring level drop-offs at a cut (a cut from a music-loud moment to a commentary-dry moment shouldn't drop 20+ dB instantaneously).",
+      "why": "clean seams are the production-value baseline a reviewer will notice immediately. Mid-word truncation and level jumps read as rushed editing.",
+      "check": "gemini-audio on repurpose; listen for mid-word commentary cuts and for cut-to-cut level jumps > 15 dB RMS; pass iff neither is observed.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-05",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-ENDS-ON-BEAT  The reel's final 1 s doesn't end on a hard abrupt mid-phrase audio cut. Either a clean music-bed fade-out, a natural end of commentary phrase, a title-card audio-sting, or a moment of deliberate silence. Not a guillotine-cut on spoken mid-word.",
+      "why": "ends-on-beat is the polish finish on a vertical reel. A guillotine cut is the most common end-of-reel production tell.",
+      "check": "gemini-audio on the last 1 s of repurpose; pass iff the audio ends on one of {fade-out, natural phrase end, sting, silence} rather than a mid-word chop.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-COMMENTARY-MOOD",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "S-COMMENTARY-MOOD  Broadcast commentary tone tracks the actual highs of the play. The commentary call rises into the decisive moment and registers the energy of the action; flat reading or wrong-energy commentary (calm voice over the climax, hyped voice over a dead beat) fails this.",
+      "why": "the genre's emotional authority lives in the booth's pacing and intensity. A reel that preserves commentary words but flattens their delivery has thrown away the live-broadcast register the brief asks for.",
+      "check": "gemini-audio on repurpose audio. For each commentary-bearing window, judge whether the commentator's intensity tracks the visual action (rising into the decisive moment, restrained on slower beats). Pass iff no mismatched window (flat reading over a peak, or hyped delivery over a non-event) is observed.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOICE-CONSISTENCY",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-VOICE-CONSISTENCY  If the repurposed cut uses broadcast commentary, no audible swap between unrelated commentary teams (no cut from one network's booth to another's). If the repurposed cut adds narration, a single narrator voice is used throughout the content body, with no audible speaker swap.",
+      "why": "commentary identity is part of the broadcast's authority. Stitching two different booths together, or cycling between two narrators, breaks the reel's sonic spine and reads as assembled-from-parts.",
+      "check": "gemini-audio on repurpose audio. Enumerate distinct human voices in the content body. Pass iff (a) all commentary voices match a single broadcast booth (or set of booth voices that always travel together), AND (b) any added narration is delivered by exactly one consistent voice across the reel.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-01",
+      "pillar": 4,
+      "weight": -30,
+      "criterion": "P4-PILLARBOX-SEVERE  Horizontal black bars (or solid-colour bars) occupy more than 30 % of frame height for a majority of the reel's content body. This is the lazy-reframe failure. The editor didn't reframe; they letterboxed the 16:9 source into a 9:16 container, leaving most of the vertical frame as bars.",
+      "why": "brief commits to a vertical deliverable. Pillarboxing defeats the platform. This is the most severe reframe failure for this genre.",
+      "check": "opus-vision samples repurposed cut at 1 fps; measure the vertical extent of top + bottom solid bars on each sampled frame; fire iff > 30 % of frame height is bars on \u2265 50 % of sampled frames. Mutually exclusive with P4-02: if this fires, P4-02 does NOT also fire.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-02",
+      "pillar": 4,
+      "weight": -15,
+      "criterion": "P4-PILLARBOX-MILD  Horizontal bars occupy 10\u201330 % of frame height on at least 50 % of the reel's content-body frames. The reel reframed something but still wastes visible pixels.",
+      "why": "a partial reframe that leaves visible letterbox strips still cedes the vertical real-estate viewers came for.",
+      "check": "opus-vision samples repurposed cut at 1 fps; fire iff 10\u201330 % of frame height is bars on \u2265 50 % of sampled frames AND P4-01 does not fire.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-03",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "P4-SQUISHED  The 16:9 content is visibly squished into the 9:16 frame (aspect-distorted). Skaters look compressed horizontally, the rink circle looks oval-compressed, the Olympic rings on the rinkboard look flattened.",
+      "why": "aspect-distortion is a production-time mistake that any competent editor catches. Shipping it is a signal the editor didn't QC.",
+      "check": "opus-vision inspects 6 representative frames that contain either the Olympic-rings rinkboard or a mid-body skater shot; fire iff rings look horizontally squashed OR the skater's body proportions look compressed horizontally in a majority of those frames.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-04",
+      "pillar": 4,
+      "weight": -50,
+      "criterion": "P4-ACTION-OFF-FRAME  At \u2265 3 moments in the reel's content body, the skater (or the on-ice action) drifts out of or sits on the very edge of the 9:16 frame because the reframe doesn't follow them.",
+      "why": "an editor who cropped to vertical without a tracking pass will get the skater at frame-edge during any lateral motion. Three or more such moments is no longer a one-off.",
+      "check": "opus-vision samples action frames (skater on ice, mid-program); fire iff in \u2265 3 sampled moments the skater sits on the left/right 10 % edge of the frame or is clipped out entirely.",
+      "judge": "opus-vision"
+    }
+  ]
+}

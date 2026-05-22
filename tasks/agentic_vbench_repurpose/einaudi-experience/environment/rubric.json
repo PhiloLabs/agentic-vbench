@@ -1,0 +1,203 @@
+{
+  "task_id": "einaudi_experience",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "DURATION Trailer runtime is 75.0 s plus or minus 0.5 s (74.5 to 75.5 s inclusive).",
+      "why": "brief asks for 75 s; the tolerance covers normal render and re-encode drift but rules out cuts that are clearly off-spec.",
+      "check": "ffprobe -show_format duration; pass iff 74.5 \u2264 duration \u2264 75.5.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "CONTAINER Output is an MP4 (.mp4) container.",
+      "why": "brief calls for MP4/H.264; container compliance is a trivial mechanical bar.",
+      "check": "ffprobe format_name contains \"mp4\" OR file extension is .mp4 AND ffprobe parses it as such.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "RESOLUTION Output is exactly 1920x1080.",
+      "why": "brief specifies 1920\u00d71080 horizontal; anything else is a spec failure.",
+      "check": "ffprobe stream width=1920 AND height=1080.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "FRAMERATE Output frame rate is 24 fps or 25 fps (matching the source's 25 fps cleanly is ideal; 24 fps is acceptable).",
+      "why": "source is 25 fps. Converting outside {24, 25} adds judder for no good reason.",
+      "check": "ffprobe avg_frame_rate parses to 24.0 or 25.0 (\u00b10.05).",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "AUDIO-PRESENT Output has at least one audio stream and that stream is non-silent across the majority of the runtime.",
+      "why": "a music trailer with no audio is a categorical failure, and shipping a silent track by mistake is a known failure mode.",
+      "check": "ffprobe finds an audio stream AND ffmpeg volumedetect mean_volume > -60 dB across the file.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-06",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "STEREO-RATE Output audio is stereo (channels=2) at 44.1 kHz or 48 kHz, AAC.",
+      "why": "source is AAC stereo 44.1 kHz; mono-collapsed or off-rate output is a spec failure.",
+      "check": "ffprobe audio stream: codec_name=aac AND channels=2 AND sample_rate \u2208 {44100, 48000}.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "HANDS-AND-FACE The trailer contains at least one close-on-hands shot during a passage from the source's fast or virtuosic regions (Development I, the drop, or the climax) AND at least one close-on-face shot during a passage from the source's sustain or emotional regions (intro, theme statement, or coda).",
+      "why": "these are the two shots audiences most want from a performance recording. Skip them and the trailer reads like a static-camera transcript \u2014 neither craft (hands) nor presence (face) lands.",
+      "check": "opus-vision; pass iff (a) at least one frame in the trailer shows the performer's hands closely (hands fill >25% of frame area) during a passage sourced from one of the fast/virtuosic regions, AND (b) at least one frame shows the performer's face closely (face fills >20% of frame) during a passage sourced from one of the sustain/emotional regions.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "COVERAGE-VARIETY The trailer uses at least 3 of the 5 source shot types: {wide-of-stage, medium-on-Einaudi, close-on-hands, close-on-face, audience}.",
+      "why": "the source has rich coverage (\u224820% wide, \u224830% medium, \u224825% hands, \u224820% face, \u22485% audience). A trailer that leans on \u22642 types leaves available texture on the floor and reads flat.",
+      "check": "opus-vision tags every distinct shot in the trailer with one of the 5 types; pass iff \u22653 distinct types are present.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "LIGHT-PALETTE The trailer preserves the source's two-pole lighting palette. Warm-amber (the solo-piano intro and coda lighting state) AND cool-blue or violet (the ensemble climax lighting state) are both visibly present in the cut.",
+      "why": "the venue's lighting is the room's visual signature in this recording. Keeping both poles is what makes it a *concert* preview rather than a generic piano clip.",
+      "check": "opus-vision; pass iff at least one shot reads as predominantly warm-amber lit (matching source 0:09\u20131:16 lighting state) AND at least one shot reads as predominantly cool-blue/violet lit (matching source 5:00\u20136:10 lighting state).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "AUDIENCE-LIVE At least one shot in the trailer visibly signals that this is a live concert: visible audience silhouettes, the ring-lit performance pod with crowd context, or an applause or reaction cutaway.",
+      "why": "the brief asks the trailer to \"show the room the listener is being invited into.\" Without an audience cue, the trailer reads like a studio recording and undersells the concert offer.",
+      "check": "opus-vision; pass iff at least one frame shows audience members (silhouettes count) or the wide pod-with-audience composition.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "NO-VISUAL-GLITCH No frozen frames (over 0.5 s held still unintentionally), no motion-glitch artefacts at cut points (frame doubling, half-decoded frames), no unintended black frames mid-trailer.",
+      "why": "polish floor. Visible decode artefacts at cuts are an avoidable defect.",
+      "check": "opus-vision scrubs the trailer end-to-end; pass iff zero frozen frames >0.5 s and zero visible glitch artefacts at cut points.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Closing title card, end card, or final-shot hold occupies 3 s or less of runtime. Whatever closes the trailer (logo card, label identity card, or a held last source frame fading to silence) must not occupy more than 3 s of the 75 s budget.",
+      "why": "the closing 5\u201310 s of a concert preview should belong to the source's resolution-into-silence, not to a logo. A 6+ s end card has stolen the resolution.",
+      "check": "opus-vision samples last 6 s at 1 fps; pass iff frames showing only title-card content (text on solid or static background, no source footage behind) span \u22643 s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "M-01",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "CLIMAX-LANDS The climactic passage from the source (5:30 to 5:45, peak around) is present in the trailer audio, plays in full and recognisably, and is held on screen for a continuous run of 3 seconds or more (that is, not flash-cut across).",
+      "why": "a trailer of this performance that omits or flash-cuts the climax has no peak, and sells the listener nothing. The climax is the dynamic, harmonic, and textural apex of the piece.",
+      "check": "gemini-audio identifies the source-climax audio in the trailer's audio track AND opus-vision confirms that the visible video at that audio timecode runs \u22653 s without a cut. Pass iff both hold.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "M-02",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "DYNAMIC-CURVE The trailer has a recognisable dynamic arc. It opens restrained, builds, peaks near the climax, and releases. A trailer that's uniformly loud or uniformly quiet end-to-end fails.",
+      "why": "the source piece's whole identity is its slow build from silence to ff and back. A flat-dynamic trailer has erased the piece's central idea.",
+      "check": "gemini-audio per-second loudness curve over the trailer; pass iff (a) RMS dB of trailer's first 5 s is \u22656 dB below RMS dB of trailer's loudest 5-s window AND (b) RMS dB of trailer's last 5 s is \u22654 dB below loudest 5-s window OR ends in a fade to \u2264-30 dB.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "M-03",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "SECTIONAL-VARIETY The trailer represents at least 3 distinct sections of the source piece (chosen from: intro, theme statement, Development I, pre-drop trough, drop or Development II, climax, coda). Three or more must be present. One section played on loop fails.",
+      "why": "a concert preview that samples only one passage misrepresents the piece's architecture. The source has 7 distinguishable sections, and the trailer should feel like a distillation of several.",
+      "check": "gemini-audio segments the trailer into source- aligned chunks; pass iff \u22653 distinct source sections (per the list above) are represented.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "M-04",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "INTRO-INTRO The trailer's first 5 seconds enter cleanly: either (a) start at or very near a listed phrase boundary, or (b) open from silence into the source's first piano note, or (c) open from a clean fade-up. The first 5 s are NOT a fade-in that lands in the middle of an arpeggio or sustained chord.",
+      "why": "the source's signature gesture is silence-into-first-note. Opening mid-phrase forfeits that signature and reads as a careless cut.",
+      "check": "gemini-audio analyses the trailer's first 5 s; pass iff the start is at or within 0.5 s of a phrase boundary OR is preceded by \u22650.3 s of near-silence (\u2264-50 dB) before the first audible note.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "M-05",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "CODA-RESOLVE The trailer's last 3 seconds end on a phrase end, a release, or a clean fade to silence (-40 dB or quieter by the last frame). Not a hard cut on a mid-phrase clip.",
+      "why": "the source resolves into silence. Ending the trailer mid-loud sells a fragment, not a piece.",
+      "check": "gemini-audio + ffmpeg volumedetect on the last 3 s; pass iff the audio either lands within 0.3 s of a phrase boundary at audible level OR fades to \u2264-40 dB by the last frame.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "PHRASES Every cut in the trailer lands on a clearly perceivable phrase boundary or phrase end. No cut splices mid-arpeggio, mid-bow-stroke, or mid-sustained-note. Allow up to 1 ambiguous cut over the full 75 s. More than 1 fails.",
+      "why": "in a performance recording, a cut mid-phrase is an audible defect, and it's the dominant failure mode for this task family. The phrase-boundary list in the input bundle removes the editor's biggest source of error.",
+      "check": "gemini-audio listens to the trailer end-to-end and flags every audible cut location; pass iff zero cuts land audibly mid-phrase (allow \u22641 ambiguous cut in 75 s as judge tolerance).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-01",
+      "pillar": 4,
+      "weight": -30,
+      "criterion": "VO-OVER-MUSIC The trailer layers narration, voice-over, announcer line, or spoken caption-track over the music at any point.",
+      "why": "voice-over over a performance recording is the signature failure of this task family. It destroys the product. The heavy negative weight is editorial.",
+      "check": "whisper transcription of trailer audio; trigger iff \u22653 transcribed words of added narration are detected (i.e. words that are NOT present in the source recording's audio at the corresponding timestamps).",
+      "judge": "deterministic"
+    },
+    {
+      "id": "P4-02",
+      "pillar": 4,
+      "weight": -30,
+      "criterion": "MUSIC-REPLACED The trailer's audio is not the source recording. It has been replaced with a different piece, a studio version, royalty-free music, or a completely re-mastered cover.",
+      "why": "the entire premise is to preview *this* live performance. Different audio is a categorical failure.",
+      "check": "gemini-audio compares trailer audio against source audio at corresponding timestamps; trigger iff trailer audio is not recognisably from the source recording (cross-correlation against source fails OR the piece is identifiably different).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-03",
+      "pillar": 4,
+      "weight": -25,
+      "criterion": "MID-PHRASE-CHOP Three or more cuts in the trailer land mid-phrase (that is, away from any boundary AND not at a perceivable phrase end). This is qualitatively worse than the 1-cut allowance under S-01.",
+      "why": "three or more mid-phrase cuts in 75 s isn't a slip. It says the editor ignored the phrase boundaries entirely.",
+      "check": "gemini-audio flags every audible mid-phrase cut; trigger iff \u22653 such cuts.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-04",
+      "pillar": 4,
+      "weight": -15,
+      "criterion": "DYNAMIC-CRUSHED The trailer has been level-normalised flat. Every passage is the same loudness within about 3 dB, destroying the source's dynamic range.",
+      "why": "the source's dynamic range is ~75 dB silence-to-ff. A flat-normalised trailer has erased the piece's central musical idea even when the cuts are otherwise well placed.",
+      "check": "gemini-audio computes the trailer's per-second RMS dB curve; trigger iff (max(RMS) - min(RMS)) over the trailer is \u2264 6 dB AND the trailer is \u226530 s (i.e. crush, not a short montage).",
+      "judge": "gemini-audio"
+    }
+  ]
+}

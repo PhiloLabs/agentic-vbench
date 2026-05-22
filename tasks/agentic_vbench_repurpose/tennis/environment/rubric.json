@@ -1,0 +1,338 @@
+{
+  "task_id": "tennis",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR  ffprobe format duration matches the runtime the brief committed to (75 seconds), within 0.1 seconds tolerance.",
+      "why": "brief mandates a single specific runtime. Loose tolerance invites padding.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 |d \u2212 75.0| \u2264 0.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-VERTICAL  Video stream resolution is exactly 1080\u00d71920 (vertical 9:16).",
+      "why": "brief commits to vertical for TikTok.",
+      "check": "ffprobe width=1080, height=1920.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CODEC-VIDEO  Video codec is H.264.",
+      "why": "brief specifies H.264.",
+      "check": "ffprobe codec_name=h264.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CODEC-AUDIO  Audio codec is AAC.",
+      "why": "brief specifies AAC audio.",
+      "check": "ffprobe audio stream codec_name=aac.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CONTAINER  Container format is MP4.",
+      "why": "brief specifies MP4 delivery.",
+      "check": "ffprobe format_name contains \"mp4\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-08",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-NO-NOVEL-VO  Every spoken word in the reel is present in the source broadcast transcript. The reel doesn't introduce a new narrator, a synthesized voice-over, or a rewritten-and-reread version of Butterworth's lines. Exception: a reel with no speech at all (music + crowd only) auto-passes.",
+      "why": "brief asks that \"the commentary stays in Bob's voice\u2026 don't add a new narrator.\" This is the sports-reel keystone.",
+      "check": "deterministic \u2014 whisper the repurposed cut audio, normalize (lowercase, strip punctuation), chunk into \u2265 4-word phrases; pass iff \u2265 90% of repurpose phrases are substring-findable in `the whisper_out cache/audio.txt` with \u2264 10% character edit-distance tolerance.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-09",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-NO-DEAD-AIR  No silence-AND-no-crowd stretch > 1.5s inside the content body (the runtime minus the end title card).",
+      "why": "dead air in a sports reel breaks the live feel. The broadcast itself has continuous wind / thwack / commentary.",
+      "check": "deterministic \u2014 measure RMS of repurpose audio in 50ms frames; flag any contiguous window > 1.5s where RMS is below a silence threshold (\u221245 dBFS) inside the content body; pass iff no such window exists.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "V-TITLECARD-CAP  The end title card (final-score + players slate) takes up \u2264 3.0 seconds of runtime.",
+      "why": "brief asks for \"a second or two, not a dragged-out pad\". Long end cards are the main padding failure.",
+      "check": "opus-vision samples the final 5s at 0.5s intervals; pass iff the solid-graphic-card portion (no court footage) is \u2264 3.0s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-10",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "F-OPEN-NOT-LOGO  The first 2 seconds of the reel aren't a static BevCam / sponsor / channel-branding logo card. The reel opens on broadcast content. Court footage, a player, a score graphic, an in-broadcast title overlay. Not a hold on a logo.",
+      "why": "brief asks the opener to be \"a play in the broadcast's own call, not a logo or a 'highlights presented by' sponsor card.\"",
+      "check": "opus-vision inspects frames at t=0.0, 0.5, 1.0, 1.5, 2.0 s; pass iff at least 3 of those 5 frames contain court / player / broadcast imagery (not a solid-color logo plate).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-SIGNATURE-PLAY-LANDS The match-winning point at source 1857\u20131858 s (Shub serves, King's backhand return fails, scoreboard flips SHUB 6\u20130 / 5\u20130 \u2192 SHUB 6\u20130 / 6\u20130; see most-decisive-moment) is in the reel AND lands VISUALLY. The serve / ball / both players are fully inside the 9:16 frame (no player clipped off the bottom baseline or edge), the clip runs \u2265 3 continuous seconds so the point actually unfolds, AND the visual aftermath is present. Either the scoreboard is visibly updating to 6\u20130 / 6\u20130 on-screen OR the post-point handshake at the net follows within 5 seconds of the final stroke. Not treated as a < 1-second flash in a montage. (The audio side of the same moment, Butterworth's call, is tested separately by N-03 and S-01.)",
+      "why": "the match point is the only visual moment in the source where the outcome becomes official. Without its framing + duration + aftermath, the reel can't show a viewer who won this match.",
+      "check": "opus-vision. Locate the match-point clip in repurpose; verify (present AND fully framed) AND (\u2265 3s continuous) AND (scoreboard update visible OR handshake within 5s).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-ACTION-CENTERED  Across a 1 fps sample of action-present frames, the primary subject (ball, Shub, King) stays within the central 80% horizontal band of the 9:16 frame.",
+      "why": "the source is 16:9 with one fixed wide angle. Reframe-to-vertical without tracking is the primary craft risk.",
+      "check": "opus-vision samples repurposed cut at 1 fps; for each frame where a player or the ball is present, mark whether the primary subject is inside the central 80% horizontal band; pass iff \u2265 90% of such frames are centered.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-TRACKING-SMOOTH  No visible reframe jitter within clips or jarring reframe snap across cuts. The crop / pan moves smoothly. It doesn't judder mid-rally or jump abruptly at a cut between two consecutive clips.",
+      "why": "the source is one fixed camera. A jittery reframe betrays a lazy auto-track.",
+      "check": "opus-vision inspects 4 cut transitions and 4 mid-rally frame runs (3 consecutive frames each); pass iff no sampled transition shows a reframe snap > 25% of frame width AND no mid-rally run shows visible judder.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-TRACKING-RESPONSIVE  The reframe follows the ball / active player as they move across the court, not a fixed center. When Shub steps to her forehand side, the reframe tracks her. It doesn't leave the action to drift toward the edge of the 9:16 frame.",
+      "why": "a fixed center-crop of a tennis court leaves the baseline action off the bottom of the frame and the opposing-baseline action invisible.",
+      "check": "opus-vision on one action-in-motion rally clip (pick the clip containing the match point if possible); pass iff the subject stays roughly centered as it moves left-right by > 25% of court width.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "V-REFRAME-CONSISTENT  The reel uses one reframe strategy throughout (tracking crop OR blur-fill OR center crop). Not a mixed bag that announces the edit.",
+      "why": "switching reframe strategies mid-reel is a legibility failure a producer notices immediately.",
+      "check": "opus-vision samples 6 frames evenly across the reel; pass iff all 6 show the same reframe strategy.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "V-SCOREBOARD-LEGIBLE  At least one frame in the content body shows the BevCam scoreboard overlay (top-left, SHUB / KING) with numerals readable. Enough that a viewer can read the score at that moment. The reel doesn't rely on commentary alone for the viewer to know the state of the game.",
+      "why": "\"what's the score\" is a first-order question. A tennis reel that never shows the scoreboard fails the viewer's first question. grammar: scoreboard is persistent top-left throughout match play.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff at least one sampled frame contains the scoreboard overlay with at least one numeral legible at 1080p.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-07",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-SET1-CLINCHER-FRAMED The Set 1 clinching winner at source ~1243 s (Shub's corner winner after King's high deep return, timeline) is in the reel AND its VISUAL framing works. Shub's stroke, the ball's trajectory, and both baselines (or the winning ball's landing spot) are inside the 9:16 frame. The shot isn't so over-cropped that a viewer can't see where the ball lands. (The set-closing narrative signal, commentary or scoreboard transition, is tested separately by N-06.)",
+      "why": "this is the visual framing check on the Set 1 signature winner. Moments \u00a73 calls this beat out as the mid-runtime peak an editor would reach for.",
+      "check": "opus-vision on the Set-1-clincher clip in repurpose; pass iff Shub's stroke + ball trajectory + landing are all visible in frame.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-08",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "V-PLAYER-IDENTIFIABLE  At least one frame in the reel shows one of the two players (Shub in near court, white visor, black/white kit; or King in far court, black kit) clearly enough that a viewer can see a face or a jersey number / team kit. Not only tiny figures on a far-court baseline.",
+      "why": "the source's fixed wide angle tends to leave the players the size of ants. A vertical reel that never pushes closer than the wide shot produces an unrecognizable match.",
+      "check": "opus-vision samples 6 action frames; pass iff at least one frame contains a player whose upper body is \u2265 15% of 9:16 frame height.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-09",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-WIDE-GAME-ANGLE  The broadcast's wide behind-baseline angle is visible (preserved as the reel's dominant game footage). Not replaced wholesale with a permanent over-crop to two tiny player silhouettes that never shows the full court.",
+      "why": "grammar. The wide shot is the only angle the source has. A reel that keeps every clip tight-cropped loses context (which side of the court, which player has the ball).",
+      "check": "opus-vision samples 6 action frames; pass iff at least 3 frames contain both baselines (or both players) simultaneously in frame.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-GAME-IDENTITY  A cold viewer (scrolling past, knowing nothing about this match) can, from the reel alone, name the two players (Michelle Shub of Marblehead and Lindsey King of Beverly) and state the final score (6\u20130, 6\u20130 in Shub's favor). This isn't inferred from a passing glimpse. It's legible from at least TWO of: (a) Butterworth naming the players and/or the final score on the broadcast, (b) a readable scoreboard frame showing 6\u20130 / 6\u20130, (c) an end-title card with the players and final score.",
+      "why": "the baseline a highlight reel owes a viewer. Who won and by how much. Without this the reel is a montage of forehands without stakes.",
+      "check": "opus-vision + gemini-audio. Verify \u2265 2 of (a/b/c) are present and legible.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-ARC  The reel carries the shape of a blowout, not a set of equal-weight clips that leave the outcome ambiguous. A viewer should leave able to say in one sentence that Shub dominated, King couldn't get off zero, and the match ended in a quiet handshake. The reel's ordering and beat-weighting reflect that arc. It doesn't flatten a 6\u20130, 6\u20130 sweep into what reads like a competitive match.",
+      "why": "the arc is what makes a highlight reel more than a scoring compilation. If a reviewer can't name the shape of this match from the reel, the reel has decayed into clips-next-to-clips. Arc: straight-sets blowout, King won zero games.",
+      "check": "opus-vision given repurpose frames at 1 fps + repurpose transcript; pass iff the reviewer can state the game's shape in one legible sentence consistent with \"Shub won 6\u20130, 6\u20130 / straight-sets sweep / King won no games.\"",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-MATCH-POINT-PRESERVED  The match-point at source 1857\u20131858 s is present AND the moment LANDS narratively. Butterworth's call \"All right. Game is over\u2026 matches over\" (or a substring) is audible concurrent with or within 3 seconds of the final stroke. This is the genre's authority on the beat. A match-point clip that strips Butterworth's line so the reel can run music across it has thrown away the moment's narrative weight, even if the framing (V-01) passes.",
+      "why": "most-decisive-moment. Bob's call is THE thing that makes a viewer feel the match has just ended. V-01 tests the visual; this tests the narrative. Who owns the call on the decisive beat.",
+      "check": "gemini-audio on the match-point clip window in repurpose; pass iff Butterworth's \"game is over\" / \"match is over\" line (or a substring, character edit-distance \u2264 10%, of the source transcript line at `audio.tsv` 1852420\u20131878420 ms) is audible and intelligible.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-NO-FABRICATION No scoring event or game-state claim in the reel contradicts the source. The reel doesn't: (a) show King winning a game (she won zero; scoreboard never shows KING > 0, see OCR-trace); (b) imply a competitive second set via scoreboard overlays showing 6\u20130 / 6\u20131 or similar; (c) attribute a Shub winner to King via title / caption / cutaway, or vice-versa; (d) stitch Butterworth's praise (\"very impressive\") onto a King swing or his critique (\"Lindsay has many mishits\") onto a Shub swing; (e) invent celebration footage (fist-pump, arm-raise) not present in the source.",
+      "why": "risks. The most common way a highlight reel quietly lies about what happened is by reattributing moments. For a double-bagel match, any hint of King competing is a fabrication.",
+      "check": "opus-vision + scoreboard OCR. Cross-reference each scoring / score-state signal in the reel against timeline; pass iff none of (a)\u2013(e) is observed.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-OPENS-ON-SUBSTANCE  The first 5 seconds of the reel carry game content. A live point in Butterworth's own call, a scoreboard frame, or a tight player beat. Not the BevCam intro graphic (source 00:00\u201300:13), not a sponsor card, not a logo hold, not a blank-court aerial from the pre-game.",
+      "why": "brief asks the opener to \"earn the next fifteen seconds, a play in the broadcast's own call, not a logo or a 'highlights presented by' sponsor card.\"",
+      "check": "opus-vision + gemini-audio on t=0\u20135 s of repurpose; pass iff game content (rally / player-in-action / scoreboard-with-play) is visible and/or a Butterworth game call is audible within that window.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-06",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-SET1-CLINCHER-CONTEXT  The Set 1 close (Shub takes Set 1 6\u20130 at source ~1243 s) reads as a SET-closing moment to a viewer. Butterworth's call \"that'll do it for the first set\" / \"Shub takes it 6\u20130\" / \"very impressive\" is audible in the clip, OR the reel carries an on-screen scoreboard transition where the Set 1 column moves from 5\u20130 \u2192 6\u20130 and the Set 2 column appears at 0. Not merely a Shub winner in the middle of Set 1 with no set-closing signal. (V-07 tests the VISUAL framing of the same winner; N-06 tests the NARRATIVE legibility as a set-closing beat.)",
+      "why": "a double-bagel match has two decisive moments (Set 1 close and match point). Without the Set 1 close a viewer can't recover the set-by-set shape. Was the match 7\u20136 / 7\u20136, 6\u20130 / 6\u20130, a split? Moments \u00a73.",
+      "check": "opus-vision + gemini-audio; pass iff the Set-1-close clip carries at least one set-transitioning signal. EITHER Butterworth's set-closing line audible (substring of `audio.tsv` 1168820\u20131269380 ms or the set-over call Gemini flagged) OR the scoreboard on-screen transition 5\u20130 \u2192 6\u20130.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-CLOSING-BEAT  The reel closes cleanly. On either the handshake at the net (source ~1860\u20131872 s), an end-title card showing the final score and the two players, or the match-point reaction beat. It doesn't end mid-rally, mid-Butterworth-sentence, or on a hard cut to black inside the final 3 seconds of the reel.",
+      "why": "brief asks for a \"brief title card with the final score and the teams, a second or two\" and an intentional close. A reel that stops mid-rally is a broken delivery.",
+      "check": "opus-vision on last 3s + audio last 3s; pass iff the final beat is handshake OR title card OR a post-match Butterworth sign-off line. Not a hard mid-rally cut or a mid-word audio truncation.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-NO-CAPTION-MISQUOTE  If the reel overlays any text caption, lower-third, or title card presented as a quote from Butterworth, every quoted phrase is substring-findable in the source transcript (`audio.tsv`). Captioned score / team-name / final-score graphics that aren't attributed to Butterworth aren't tested by this item. If no text overlays are used at all, this auto-passes.",
+      "why": "a reel that puts \"And that's match point!\" in quotes on screen when Butterworth never said those words has forged the commentator's voice. A subtle but common fabrication shape.",
+      "check": "deterministic \u2014 OCR each text overlay appearing in repurpose; for any overlay attributed to Butterworth (quoted or labeled \"Bob Butterworth\"), check each quoted phrase against source `audio.txt`; pass iff every quoted phrase is substring-findable with \u2264 10% edit-distance tolerance.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-COMMENTARY-ON-KEY-CALL  Butterworth's call is audible on at least one of the two defining moments. Either the match point at source 1857\u20131858 s (\"All right. Game is over\u2026 matches over\") OR the Set 1 close at source ~1243 s (\"And that'll do it for the first set. Shub takes it 6\u20130\" or \"very impressive\"). Audible means above a music-bed threshold such that the words are intelligible. Not buried.",
+      "why": "brief asks that \"Bob's\u2026 call on the set and the match-ender is the authority we have, and we want it carrying the moments that matter.\" A reel that mutes Butterworth on the two moments he actually calls has thrown away the genre's authority.",
+      "check": "gemini-audio on repurpose audio only around each defining-moment clip; pass iff at least one of the two Butterworth lines is intelligibly audible (not merely present at \u221230 dBFS under a loud music bed).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-NO-NARRATOR No second-narrator voice is laid over the broadcast. No explainer-style VO introducing plays, no AI / TTS voice reading score graphics, no documentary narration across the match. The only voices audible are Butterworth, Coach Bushee (if pre-game interview is used), or the broadcast's stadium-wind ambient. A distinct new voice that isn't in `the whisper_out cache/audio.txt` fails this.",
+      "why": "a new narrator collapses the reel to a narrative-repurpose shape and voids the reason to watch a sports reel rather than read a repurposed cut article. This is the audio counterpart to F-08 F-NO-NOVEL-VO.",
+      "check": "gemini-audio on repurpose audio only. Pass iff the only human voices are (a) Butterworth, (b) Coach Bushee from the pre-game interview, or (c) incidental on-court speech already present in the source. Any distinct studio-narrator voice fails.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "S-SEAM-LEVEL  Commentary levels are balanced cut-to-cut. No clip transition drops Butterworth from loud-and-clear into barely-audible or vice versa, and no Butterworth line is truncated mid-word at a cut.",
+      "why": "uneven commentary levels or chopped-mid-word calls are the craft failure a producer notices on the first playback.",
+      "check": "gemini-audio sampled at each cut transition (detected via visual cut); pass iff no cut transition shows a commentary-loudness jump > 12 dB AND no Butterworth line is truncated mid-word at a cut boundary.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-MUSIC-BED-BALANCE  If a music bed is used under the reel, it sits below commentary and below crowd / ambient on the two defining moments. It doesn't drown the match-point call or the Set-1 clinching call. If no music bed is used, this item auto-passes.",
+      "why": "the brief explicitly allows a music bed \"underneath\". Pulling it above commentary on the defining moments undoes S-COMMENTARY-ON-KEY-CALL's intent.",
+      "check": "gemini-audio on each defining-moment clip in repurpose; pass iff, during the match-point and Set-1 clincher windows, commentary is louder than the music bed (or no music is present).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-05",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-BROADCAST-AMBIENCE  Some broadcast ambient audio (crowd murmur, wind, racket-thwack, on-court footfall) is audible in at least one gameplay stretch of the reel. The reel isn't a pure-music-over-silent-footage assembly that strips the broadcast's native atmosphere.",
+      "why": "the source is an open-air windy broadcast with audible racket contact. Stripping it flattens the live feel the brief asks for.",
+      "check": "gemini-audio samples repurposed cut during a non-match-point gameplay window; pass iff at least one of wind / thwack / footfall / crowd murmur is identifiable in repurpose audio.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-COMMENTARY-MOOD",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-COMMENTARY-MOOD  Broadcast commentary tone tracks the actual highs of the play. The commentary call rises into the decisive moment and registers the energy of the action; flat reading or wrong-energy commentary (calm voice over the climax, hyped voice over a dead beat) fails this.",
+      "why": "the genre's emotional authority lives in the booth's pacing and intensity. A reel that preserves commentary words but flattens their delivery has thrown away the live-broadcast register the brief asks for.",
+      "check": "gemini-audio on repurpose audio. For each commentary-bearing window, judge whether the commentator's intensity tracks the visual action (rising into the decisive moment, restrained on slower beats). Pass iff no mismatched window (flat reading over a peak, or hyped delivery over a non-event) is observed.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOICE-CONSISTENCY",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-VOICE-CONSISTENCY  If the repurposed cut uses broadcast commentary, no audible swap between unrelated commentary teams (no cut from one network's booth to another's). If the repurposed cut adds narration, a single narrator voice is used throughout the content body, with no audible speaker swap.",
+      "why": "commentary identity is part of the broadcast's authority. Stitching two different booths together, or cycling between two narrators, breaks the reel's sonic spine and reads as assembled-from-parts.",
+      "check": "gemini-audio on repurpose audio. Enumerate distinct human voices in the content body. Pass iff (a) all commentary voices match a single broadcast booth (or set of booth voices that always travel together), AND (b) any added narration is delivered by exactly one consistent voice across the reel.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-01",
+      "pillar": 4,
+      "weight": -30,
+      "criterion": "P4-PILLARBOX-SEVERE  Horizontal black (or solid-color) bars occupy > 30% of frame height on a majority (\u2265 50%) of sampled content-body frames. This is the \"lazy reframe\" failure. The editor didn't reframe; they letterboxed 16:9 content into a 9:16 container.",
+      "why": "the single most severe reframe failure for a 16:9 \u2192 9:16 conversion. Produces a reel with ~40% of the pixel budget as dead black bars.",
+      "check": "opus-vision samples repurposed cut at 1 fps inside the content body; measure top+bottom bar extent per frame; fire iff > 30% of frame height is bars on \u2265 50% of sampled frames.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-02",
+      "pillar": 4,
+      "weight": -15,
+      "criterion": "P4-PILLARBOX-MILD  Horizontal bars occupy 10\u201330% of frame height on \u2265 50% of sampled content-body frames. The reel reframed something but still wastes visible pixels. Mutually exclusive with P4-01: if severe fires, mild does NOT also fire.",
+      "why": "a milder version of the same lazy-letterbox failure.",
+      "check": "opus-vision; fire iff 10\u201330% of frame height is bars on \u2265 50% of sampled frames AND P4-01 didn't fire.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-03",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "P4-SQUISHED  The 16:9 broadcast content is visibly squished into 9:16 (aspect-distorted). Players look compressed horizontally. The tennis ball looks oval, not round. The court lines bow inward.",
+      "why": "a non-uniform scale to fit 9:16 is a severe distortion failure. The geometry of the court stops reading as tennis.",
+      "check": "opus-vision inspects 4 representative frames (player upright, ball in flight if visible); fire iff a standing player's aspect ratio is visibly distorted (horizontal:vertical compressed by \u2265 20% relative to natural proportions) OR the ball is visibly non-circular.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "P4-04",
+      "pillar": 4,
+      "weight": -50,
+      "criterion": "P4-ACTION-OFF-FRAME  At \u2265 3 distinct moments in the content body, the primary action (ball at contact, server at toss, Shub at forehand extension, the match-point ball in flight) drifts out of or off the edge of the 9:16 frame because the reframe doesn't follow the play.",
+      "why": "the fail-mode that fixed-center-crop produces on a source that was shot for 16:9. The action leaves the vertical window whenever a player moves wide.",
+      "check": "opus-vision samples repurposed cut at 1 fps during action-present frames; fire iff \u2265 3 sampled moments show ball OR active player clipped at the frame edge or off-frame while play is live.",
+      "judge": "opus-vision"
+    }
+  ]
+}

@@ -1,0 +1,185 @@
+{
+  "task_id": "conf_tech",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR ffprobe format duration is between 74.9 and 75.1 seconds (target 75.0s \u00b10.1).",
+      "why": "brief commits to a single 75-second runtime, and a loose tolerance invites padding.",
+      "check": "`ffprobe -show_entries format=duration -of default=nw=1:nk=1` \u2192 |d \u2212 75.0| \u2264 0.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-RES The repurposed cut renders at 1920\u00d71080 horizontal.",
+      "why": "brief commits to horizontal 1920\u00d71080 for YouTube delivery.",
+      "check": "ffprobe video stream width=1920 AND height=1080.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CODEC The repurposed cut is an h264-encoded MP4.",
+      "why": "brief commits to MP4 delivery.",
+      "check": "ffprobe format_name contains 'mp4' AND video codec is h264.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-AUDIO-PRESENT The repurposed cut has a stereo audio track present and non-silent across at least 90% of the runtime.",
+      "why": "brief commits to stereo audio. This is a speaker-voice reel, so a silent reel is a failure.",
+      "check": "ffprobe shows \u22651 audio stream with channels=2; ffmpeg silencedetect with -50dB threshold reports silence \u2264 7.5s total.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "V-TITLECARD-CAP Closing title card / end card occupies \u22643 s of runtime.",
+      "why": "anti-padding for the visual layer; mirrors F-06's check but uses opus-vision to catch animated or footage-overlay end cards.",
+      "check": "opus-vision at 1 fps over last 6 s; pass iff title-card span \u2264 3.0 s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-CAPTIONS-PRESENT Burned-in English captions are visible on screen during every stretch of spoken audio in the reel. Cold-opens with silence/music and the end-title card are exempt. Pass iff every frame with non-silent speaker audio also shows on-screen caption text within the lower 25% of the frame.",
+      "why": "the brief requires burned-in English captions for the muted-scroll YouTube viewer. Absence breaks the genre's whole premise.",
+      "check": "gemini-video samples the repurposed cut (picture + synchronized audio) at 1fps; for each sampled second where the speaker audio is non-silent, verify that caption text is visible on screen. Pass iff all such sampled seconds (excluding cold-open and end-title) show captions.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "V-CAPTIONS-SYNC-STRICT At every sampled moment in the content body, the caption text on screen matches what the speaker is currently saying within \u00b10.3 seconds and within \u22643 words of paraphrase drift. Captions do not carry over a line from a prior clip after a speaker-clip cut.",
+      "why": "a caption layer that drifts misinforms the muted viewer. A strictly worse failure mode than no captions at all (V-01 covers presence; V-02 covers correctness). The keynote has multiple speaker handoffs and many cuts; this is where a mediocre editor will fail.",
+      "check": "gemini-video samples the repurposed cut at \u22655 evenly-spaced moments in the content body (e.g. seconds 5, 20, 35, 50, 65); at each, transcribe the audible spoken word(s) AND read the on-screen caption; pass iff all sampled moments align (paraphrase-ok, \u22643 words drift, \u22640.3s temporal drift) AND no sampled moment shows a caption from a prior clip after a cut.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-CAPTIONS-LEGIBLE Captions are legible. Body text \u226540px at 1080p, high-contrast against the busy stage footage (white-with-stroke, white-on-black-bar, or equivalent), no clipping into the bottom safe-area edge of the frame.",
+      "why": "legibility is the difference between captions a muted viewer can read and decoration. Brief says \"legible against the dark stage footage.\"",
+      "check": "opus-vision samples repurposed cut at 1fps; for each frame containing captions, verify body height \u226540px AND high-contrast against the immediate background. Pass iff all sampled caption frames meet both.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-SLIDE-WHEN-REFERENCED When the audible speaker references a number or announcement that is on a named slide in the source, the reel shows that slide (or a legible approximation) within \u00b12 seconds of the reference. Specifically: if the repurposed cut audio contains \"2.5x\" / \"12%\" / \"six billion\" / \"Compiler 1.0\" / \"React Foundation,\" the corresponding source slide (Compiler 1.0 announce slide, the \"2.5x ... 12%\" stat slide, the \"6,000,000,000 downloads\" slide, the \"REACT FOUNDATION\" logo slide) is visible adjacent to the spoken reference.",
+      "why": "cited statistics floating without their source slide read as asides instead of evidence. The keynote's slide grammar IS its evidence layer (structure).",
+      "check": "opus-vision with AV-aligned repurpose frames at 1fps + repurpose whisper transcript; for each cited number/announcement audible in the repurposed cut, verify the corresponding source slide is on screen within \u00b12s. Pass iff all cited references are slide-supported. (If the repurposed cut cites no such numbers, this item auto-passes, but then expect to fail N-03 N-CLAIM-SUPPORT.)",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-MULTI-SPEAKER-VISIBLE At least 2 of the 5 named speakers (Joe Savona, Mofei Zhang, Jack Pope, Lauren Tan, Seth Webster, with visual identifiers in character) are visibly on camera at some point in the reel. A reel that hides four speakers behind a single talking head loses the keynote's relay structure.",
+      "why": "this keynote is structurally a five-speaker relay; a single-speaker reel misrepresents the talk's authorship.",
+      "check": "opus-vision samples repurposed cut at 1fps; identify on-screen speakers using the visual identifier table from character (clothing, hair, build); pass iff \u22652 distinct named speakers are observably on camera in the content body.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-07",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-NO-DISTRACTING-CUTAWAYS No inserted footage from outside the source talk. No stock footage, no AI-generated b-roll, no archival news clips cuts into the reel. The reel's visual content is entirely traceable to `input/film.mp4`.",
+      "why": "brief says \"feel like the keynote compressed,\" not a remix. A tech reel that imports unrelated stock collapses authenticity.",
+      "check": "opus-vision samples repurposed cut at 1fps; pass iff every frame is plausibly drawn from a frame visible somewhere in the source talk (speaker shot, slide, stage wide, audience cutaway).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-THESIS Both anchor declarations of the keynote are audibly present in the reel, in the speaker's own voice: (a) the **Compiler 1.0 announcement**, Lauren Tan's line \"**React Compiler 1.0 is now available**\" (or \"we're announcing React Compiler 1.0\" / \"React Compiler is now available,\" paraphrase tolerance \u22643 words), AND (b) the **React Foundation announcement**, Seth Webster's line \"**we officially form[ed] the React Foundation**\" (or its restatement \"**React has always been about the people, and now with you and the React Foundation, it will always belong to you**\"). A reel that lands only one of the two anchors fails this item.",
+      "why": "bearing news. A reel that drops either has cut the keynote's news in half. Brief explicitly: \"a reel that lands one without the other has cut the news in half.\"",
+      "check": "gemini-video on the repurposed cut (picture + audio). Verify (a) the Compiler-1.0 sentence is audible in Lauren's voice (verifiable against: female speaker, dark glasses, navy denim jacket) AND (b) the Foundation-announce or its closing-line restatement is audible in Seth's voice (verifiable against: male speaker, bald, beige blazer over black React tee). Pass iff BOTH anchor utterances are audibly present, each in the correct speaker's voice.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-COLD-VIEWER-COMPREHENSION A viewer coming to the reel cold, no prior exposure to React Conf 2025, can answer all three from the reel alone: (a) **state the dual thesis** in roughly the speakers' own words (\"React Compiler 1.0 has shipped, and the React Foundation is forming\" or equivalent paraphrase containing both halves); (b) **name at least two of the supporting claims** from structure, specifically two distinct items from {`<Activity />` deprioritizes hidden UI, `<ViewTransition />` is the new declarative animations API, Fragment Refs compose platform behavior, six-billion lifetime React downloads, 2.5x faster interactions on Meta Quest Store, 12% faster initial load + navigations, Bluesky has used the compiler in production since May 2024, Foundation members include Meta + Amazon + Microsoft + Vercel + Expo + Callstack + Software Mansion}; (c) **state the call-to-action or takeaway**, one of {try the compiler / use the compiler in new apps / join the Foundation / React belongs to the community}.",
+      "why": "a captioned reel for a muted-scroll viewer must be self-contained, no prior context. This is the comprehension floor; if a cold viewer cannot recover thesis + 2 specific claims + CTA, the reel has not delivered the keynote.",
+      "check": "opus-vision given repurpose frames at 1fps + the repurposed cut whisper transcript; the judge answers (a) is the dual thesis recoverable? (b) name 2 specific claims from the enumerated list; (c) state the CTA. Pass iff all three are recoverable from the reel alone.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-CLAIM-SUPPORT-WITH-NAMED-EVIDENCE At least 2 distinct claims from the talk appear in the reel with their **specific named evidence** within \u00b15 seconds. \"Named evidence\" means one of: (i) a specific statistic stated audibly or shown on slide (\"six billion downloads,\" \"up to 2.5x faster interactions,\" \"up to 12% faster initial load,\" the \"May 2024\" Bluesky timestamp); (ii) a named demo from the source (the Activity \"Without Activity, toggle theme\" timeline, the Magic-Move movie-poster transition, the before/after `<ViewTransition>` code-comparison slide, the \"memo memo memo\" annotated component); (iii) a named real-world adopter (Meta Quest Store / Bluesky / Expo / Vite / Next.js); (iv) a named slide visible at the moment of reference (the \"React Compiler 1.0 is now available!\" announce slide, the \"REACT FOUNDATION\" logo, the Founding-members banner). A vague phrase (\"performance is great\" / \"lots of people use it\") does NOT count.",
+      "why": "every claim in the talk earned its support. A reel that lists claims without their specific evidence reads as marketing, not the keynote.",
+      "check": "opus-vision reads repurposed cut frames at 1fps + repurpose transcript; for each audible claim, verify a named evidence beat (one of the 4 listed types, drawn from the specific instances enumerated above) appears within \u00b15 seconds. Pass iff \u22652 distinct claims pair with specific named evidence.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-OPENS-ON-SUBSTANCE The first 5 seconds of the reel carry argument content in a speaker's own voice. Acceptable openers: a striking declarative line from the talk (\"React Compiler 1.0 is now available!\" / \"we officially form the React Foundation\" / \"Things didn't quite go as we intended\" / \"Six billion lifetime downloads\" / \"ViewTransition raises the ceiling\"), a specific statistic, or a sustained audience-applause moment from the talk. NOT acceptable: housekeeping (\"My name is Joe Savona, I'm on the React team at Meta\"), a conference-logo-only card extending past 5s, a music-only cold-open extending past 5s, a slow fade from black with no spoken content.",
+      "why": "brief explicitly says \"open on something that earns the next fifteen seconds, a striking line in a speaker's own voice, not a 'hi I'm' intro.\" Hook flags 00:42 (\"Things didn't quite go as we intended\") as the actual hook; anything before is housekeeping that an editor should drop.",
+      "check": "opus-vision + gemini-audio on the first 5 seconds. Verify the first 5s contain at least one substantive declarative line from the talk (not housekeeping, not logo-card, not music-only). Pass iff any of the listed accept-types is present in the first 5s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-NO-FABRICATION Every claim audible in the reel is traceable to a specific timestamp in the source transcript AND is not lifted out of its load-bearing context. Specifically, if any of the 5 risk-moment quotes from moments appears in the reel, the qualifier MUST also be audible: (1) \"Things didn't quite go as we intended\" \u2192 keep audible context that this is about the React 19 *RC* sibling-prerendering decision, not a general failure; (2) \"All new React apps should use React Compiler\" \u2192 keep \"for new apps\" framing OR adjacent \"incremental adoption for existing apps\" line; (3) Seth's \"React is nothing but a novel declarative reconciling library... impossible to understand code\" \u2192 MUST keep the leading \"Otherwise\" + the \"what brings it to life is you\" follow-up; (4) \"Bluesky was the first... outside of Meta\" \u2192 if used, don't present as the only large-scale adopter. Keep the broader Expo/Vite/Next.js adoption frame nearby; (5) \"Up to 2.5x faster interactions\" \u2192 MUST keep audible that this is the Meta Quest Store specifically, not a universal benchmark. Fire FAIL iff ANY of the 5 listed risk quotes appears without its qualifier.",
+      "why": "these are the specific stitch points where a 75s repurposed cut can quote correctly but mean wrongly. The keynote earned each qualifier; a reel that drops them fabricates a different talk.",
+      "check": "gemini-video on the repurposed cut (picture + audio). For each of the 5 listed risk quotes, check whether the quote is present in the repurposed cut; if yes, verify the qualifier is audibly adjacent (within \u00b15s in either direction). Pass iff for every risk quote present, the qualifier is also present.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-CLOSES-ON-LANDING The last 10 seconds of the reel land on a substantive beat from the talk. Seth's closing line (\"React has always been about the people...\" / \"...it will always belong to you\" / \"Crazy, intuitive, creative, beautiful people\") OR the React Foundation logo card with a closing speaker line OR the Compiler-1.0 announce-slide moment OR the brief end-title card (per V-TITLECARD-CAP) immediately following one of the above. NOT acceptable: a slow fade into nothing, a random mid-clip truncation, a music-only outro extending past 3s, or 10+ seconds of static logo.",
+      "why": "brief says \"close on a brief title card with the keynote name and conference, a second or two, not a dragged-out pad.\" Seth's closing line is the talk's emotional landing; a reel that closes on the cat meme or compiler stats has cut the wrong landing.",
+      "check": "opus-vision + repurpose transcript on the last 10s. Verify the reel lands on one of the listed substantive beats. Pass iff the close meets the criterion.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-SEAM-QUALITY",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-SEAM-QUALITY Cuts in the repurposed cut land at natural sentence/word boundaries, not mid-sentence or mid-word. The repurposed cut reads as a clean assembly, not a chopped one. The audio flows as continuous speech with no jarring word-clip seams.",
+      "why": "a multi-cut keynote repurpose WILL have many seams. Sloppy seams undermine credibility more than bad visual cuts on a captioned reel.",
+      "check": "gemini-audio on repurpose.mp3. Listen for sudden loudness jumps, mismatched room-tone, clipping at cut points. Pass iff there are no audibly jarring seam artifacts.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "P4-01",
+      "pillar": 4,
+      "weight": -50,
+      "criterion": "P4-CAPTIONS-ASYNC At any point in the content body of the reel, the caption text on screen disagrees with what the speaker is audibly saying at that moment. Drifts more than 0.5 seconds from the spoken audio, OR persists across a speaker-clip cut where the new clip's audio no longer matches the displayed caption, OR shows text that doesn't correspond (even paraphrased) to what the speaker is audibly saying. This is an EXHAUSTIVE check across every speaker-clip transition and every continuous caption line in the reel.",
+      "why": "a muted YouTube viewer reading captions on a 75s tech keynote repurpose is an active misinformation surface. If the caption says \"React Compiler is shipping\" while Seth's audio says \"React Foundation is forming,\" the viewer is misled about the news. Brief explicitly: \"in sync with the speaker.\"",
+      "check": "gemini-video on the full repurpose (picture + synchronized audio). Examine every speaker-clip transition and every continuous caption line. Fire iff ANY caption line either: (a) drifts more than 0.5s from the spoken audio, OR (b) persists across a speaker-clip cut while the audio has moved on, OR (c) shows text that doesn't correspond (even paraphrased) to what the speaker is audibly saying at that moment.",
+      "judge": "gemini-video"
+    },
+    {
+      "id": "P4-02",
+      "pillar": 4,
+      "weight": -20,
+      "criterion": "P4-CAPTIONS-UNREADABLE Captions are present but functionally unreadable. Body text smaller than 30px at 1080p, dark-on-dark for a multi-second stretch (e.g. dark grey text on black-stage-curtain background), or clipped off the bottom edge of the frame.",
+      "why": "a present-but-illegible caption layer is worse than no caption layer for the muted scroller. It pretends to deliver the argument but doesn't. Brief: \"legible against the dark stage footage.\"",
+      "check": "opus-vision samples repurposed cut at 1fps; for each frame containing captions, measure body-text height and contrast against the immediate background. Fire iff \u22652 sampled frames have body text < 30px OR have insufficient contrast (judge subjective: would a viewer at 1080p struggle to read?) OR have caption text clipped at the frame edge.",
+      "judge": "opus-vision"
+    }
+  ]
+}

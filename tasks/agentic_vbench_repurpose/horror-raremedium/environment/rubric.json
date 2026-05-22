@@ -1,0 +1,284 @@
+{
+  "task_id": "horror_raremedium",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-DUR  ffprobe format duration is between 59.9 and 60.1 seconds.",
+      "why": "brief mandates exactly 60s; a tight tolerance prevents pad-to-length gaming.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 59.9 \u2264 d \u2264 60.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-RES  Output is 1920\u00d71080, horizontal, the YouTube spec the brief calls for.",
+      "why": "brief delivers to ALTER's YouTube channel as 1920\u00d71080.",
+      "check": "`ffprobe -show_entries stream=width,height` \u2192 1920\u00d71080 on the video stream.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-CONTAINER  Container is MP4.",
+      "why": "brief specifies MP4.",
+      "check": "`ffprobe -show_entries format=format_name` contains \"mp4\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-VCODEC  Video codec is H.264.",
+      "why": "brief specifies H.264.",
+      "check": "`ffprobe -show_streams -select_streams v:0 -show_entries stream=codec_name` \u2192 \"h264\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-ACODEC  Audio codec is AAC.",
+      "why": "brief specifies AAC.",
+      "check": "`ffprobe -show_streams -select_streams a:0 -show_entries stream=codec_name` \u2192 \"aac\".",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-06",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "F-AUDIO-PRESENT  An audio stream is present and not silent for the bulk of the runtime.",
+      "why": "a 60s repurposed cut with no audio bed or VO would fail the brief at the most basic level.",
+      "check": "deterministic. Extract audio, measure mean RMS in non-leading/trailing windows; pass iff at least 80% of 1s windows have RMS above \u221245 dBFS.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-10",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "F-NO-DEAD-LEAD  The repurposed cut doesn't open with more than 1.5 seconds of black frames or silence before content begins.",
+      "why": "opening dead-air is a common pad-to-runtime tell and reads as amateur on YouTube.",
+      "check": "opus-vision + audio RMS over the first 2s; pass iff content (image and/or audio) is established within 1.5s of t=0.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "V-FOOD-AS-HORROR  The film's central visual signature lands as a deliberate beat in the repurposed cut, not slipped through as background. The signature is food standing in for violence. At least one of the source's food moments (the ketchup/fries macro, Gus eating dark jam from a jar, the \"homemade jerky\" passed mouth-to-mouth, OR the spaghetti-with-red-sauce in the plaza) appears in the repurposed cut given visible space: in frame, in focus, held \u22651.5 seconds, and not buried in a flash-cut transition.",
+      "why": "the entire horror is routed through food. Red sauce is blood, \"Italian\" is a victim, cooking is killing. The repurposed cut that drops the food motif loses the film.",
+      "check": "opus-vision inspects repurposed cut frames sampled at 1 fps; pass iff at least one food image from the named source moments is present, foregrounded, in focus, and held for \u22651.5 contiguous seconds (\u22652 contiguous 1-fps frames).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "V-EPILOGUE-IMAGE  The repurposed cut closes on or very near the source's payoff image, visible in the final 10 seconds of repurpose runtime. The image is Dave seated outdoors in his red cardigan eating spaghetti from the Tupperware.",
+      "why": "the spaghetti epilogue is the visual button on the \"Italian\" turn. It's the image that re-colors the entire grief setup as horror. The brief calls for closing on \"a moment that tells the viewer what genre they are really in.\"",
+      "check": "opus-vision sweeps repurposed cut frames in the final 10 seconds (50\u201360s); pass iff at least one frame contains Dave seated, in red, eating pasta-with-red-sauce, in daylit exterior \u2014 i.e. the Scene 11 composition is identifiable.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": -60,
+      "criterion": "V-POSSESSION  The first convulsion appears in the repurposed cut, not elided. The convulsion is the screaming wide-mouthed Gus with flickering translucent faces.",
+      "why": "the possession is the only overt horror image in the film's first half and the engine that delivers Maggie into Gus. Without it, \"Maggie speaks through Gus\" is a non sequitur for a cold viewer.",
+      "check": "opus-vision; pass iff at least one frame shows the convulsion (open screaming mouth on Gus, distorted face, or flickering second-face overlay).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-RITUAL-ROOM  The repurposed cut establishes Gus's ritual interior as the film's central setting. The room is warm, candlelit, red-paper-lanterned with crystals, beads and taxidermy.",
+      "why": "~7 of 12 source scenes occur in this single space. It's the visual signature of the seance half. A repurposed cut that never shows it loses tonal grounding.",
+      "check": "opus-vision; pass iff at least one repurpose frame clearly contains the warm-amber lantern-lit interior with at least one of {red paper lanterns, candles, mala beads, taxidermy, crystals} visible.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "V-PALETTE-SHIFT  The source's palette contrast is preserved in the repurposed cut, with both registers visible at distinct points in the runtime. The contrast is warm amber/red ritual interior vs. flat cold daylight in the epilogue plaza.",
+      "why": "the palette shift carries the genre flip in colour terms. Warm-room horror that resolves into a sun-drenched daylight punchline is one of the film's most legible craft choices.",
+      "check": "opus-vision; pass iff (a) at least one repurpose frame is the warm amber interior AND (b) at least one repurpose frame is the cold daylit exterior plaza, AND (b) appears later in the runtime than (a).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "V-NO-AMATEUR-OVERLAYS  No burned-in lower-thirds, glitchy text overlays, repurpose-style countdown numerals (\"1.\", \"2.\", \"3.\"), or Wikipedia-style on-screen synopsis text are added on top of the source frames.",
+      "why": "ALTER's house style is clean. Added repurpose chrome reads as a YouTube-clipper edit, not an editorial repurpose.",
+      "check": "opus-vision sweeps frames at 1 fps; pass iff no frame contains added text overlays beyond the source's own existing on-screen text and a single end title card.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "Closing title card or end card occupies no more than 3 seconds of total runtime.",
+      "why": "brief is explicit that the close shouldn't be a multi-second pad. Anti-padding for the closing title.",
+      "check": "opus-vision samples the last 6s of repurpose at 1fps; pass iff frames showing only title-card content (text on solid or static background, no source footage behind) span \u2264 3s of runtime.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MIN-SHOT-DURATION",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No individual shot in the repurposed cut content body is shorter than 1.0 second, OR, if the repurposed cut uses a deliberate rapid-cut sequence, no more than 3 consecutive shots <1.0s within any 5-second window.",
+      "why": "shots shorter than ~1s read as a frantic reel rather than a repurposed cut; allows a deliberate rapid-cut burst as long as it doesn't dominate.",
+      "check": "scenedetect content-detector on the repurposed cut excluding the closing title card; pass iff the rule above holds.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TRANSITION-NATURAL",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "most cuts in the repurposed cut read as deliberate transitions (subject continuity, motion match, lighting/color match, OR a clearly intentional jump-cut for emphasis) rather than jarring splices between unrelated images.",
+      "why": "deliberate transitions are what separates an edit from a shuffle. Random splices break the repurposed cut.",
+      "check": "scenedetect identifies cuts; opus-vision samples the last frame before and the first frame after each cut; pass iff \u226580% of cuts read as deliberate per the criterion above.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MOTION-MATCH",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Motion-direction or subject-position continuity (eye-trace) is preserved across cuts. most cuts preserve eye-trace OR violate it for a discernible emphatic reason.",
+      "why": "eye-trace continuity is what makes cutting feel like cinema rather than a slideshow with shuffle-mode pacing.",
+      "check": "for each scenedetect cut, opus-vision compares last-frame-before and first-frame-after; pass iff \u226580% preserve motion-direction or subject-position continuity, or violate it intentionally.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-TURN  The film's hinge is in the repurposed cut, landing as a turn rather than slipped through. The hinge is Maggie-in-Gus asking \"What are you in the mood for?\" and Dave answering \"Italian\". The exchange appears in the second half of repurpose runtime (after the 30s mark of 60s), AND at least one of the following is true: the line \"Italian\" is audible in source dialogue or VO, OR the corresponding source shot (Maggie-in-Gus's mischievous smile after the line) is held for \u22652 contiguous seconds, OR the VO directly references the \"what are you in the mood for / Italian\" exchange. Cut INTO this beat with a slight beat of held breath, or a cut that arrives slightly later than the eye expects.",
+      "why": "5:15 is the genre flip. A repurposed cut that loses this beat loses the film.",
+      "check": "opus-vision with AV-aligned repurpose frames at 1 fps + full audio transcript; pass iff (a) the \"Italian\" exchange occurs after repurpose t=30s, AND (b) at least one of {source line audible, source shot held \u22652s, VO line directly referencing the exchange} is satisfied.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "N-COLD  A viewer coming to the repurposed cut cold, with no prior exposure to *Rare Medium*, can answer all three: (a) identify DAVE (the bespectacled, mustachioed, cardigan-wearing widower) as the protagonist; (b) name the central conflict in one sentence (a man visiting a medium to talk to his dead wife is in fact a serial killer, and the dead wife is his scout for victims); (c) name the resolution (the killer eats the victim \u2014 the spaghetti epilogue is the meal). All three answers come from inside the repurposed cut, not from prior knowledge of the film.",
+      "why": "viewer-test. Baseline cold-viewer comprehension is the rubric's load-bearing narrative test.",
+      "check": "opus-vision given repurpose frames at 1 fps and the full transcript; the judge attempts to answer (a), (b), and (c) using only the repurposed cut. Pass iff all three are answerable as stated.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-MISDIRECTION  The repurposed cut stages a genuine genre flip rather than frontloading the horror. For at least the first 20 seconds of repurpose runtime, the piece reads as a quiet grief or seance short: soft VO, somber imagery (Dave crying, lying in bed, in the lantern-lit room), no on-screen violence and no \"dark twist\" cues. The horror beat (jerky, scalpel, spaghetti-as-victim, or the \"Italian\" line) doesn't appear until after that opening window.",
+      "why": "the film's whole engine is a five-minute grief misdirection. A repurposed cut that opens on the scalpel kills the trick. The brief asks the editor to \"build the misdirection, let a viewer think for a moment they are watching a serious short about mourning, then let the floor drop.\"",
+      "check": "opus-vision + audio; pass iff in repurpose [0:00, 0:20] no frame and no VO line reveals or directly references {the cannibalism, the scalpel, the spaghetti-epilogue, the \"Italian\" line, or Maggie's role as a victim-scout}.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-EPILOGUE-PUNCHLINE  The spaghetti epilogue lands as both punchline and horror. The final shot of Dave in red, eating pasta in daylight, is given enough time and stillness to register (\u22652 contiguous seconds in the final 10s of repurpose runtime) AND it appears after the turn, not before, so a viewer recovers the joke.",
+      "why": "the epilogue is the visual button on the turn. Without runway, it reads as a random outdoor shot rather than the horror reveal it is.",
+      "check": "opus-vision; pass iff (a) the Scene 11 plaza-spaghetti image occurs in repurpose [50s, 60s] AND held \u22652s, AND (b) the \"Italian\"/turn beat (per N-01) occurs earlier in repurpose runtime than the spaghetti shot.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "N-SCENES  The repurposed cut shows content from at least 4 of these 6 named source beats: the ritual-room grief session, the possession / convulsion, the reunion + \"Italian\" exchange, the briefing on Sophia with the jerky, the second convulsion with scalpel prep, and the epilogue spaghetti in the plaza.",
+      "why": "a repurposed cut that lives in just 1\u20132 source scenes can't carry the arc. This item enforces breadth without prescribing a specific cut.",
+      "check": "opus-vision sweeps repurposed cut frames at 1 fps; pass iff at least 4 of the 6 listed scenes are visually identifiable somewhere in the repurposed cut (e.g. ritual room interior with lanterns \u2261 Scene 4, screaming-Gus convulsion \u2261 Scene 6, embrace/forehead-kiss in ritual room \u2261 Scene 7, jerky from pocket \u2261 Scene 8, gloved hand + scalpel + slumped Gus \u2261 Scene 10, Dave-in-red-eating-spaghetti \u2261 Scene 11).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-06",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "N-DAVE-CONTINUITY  Dave is identifiable as the same character in both the grief portion and the epilogue. The repurposed cut doesn't crop him out of the seance half or the plaza half, so a viewer can see that the soft-spoken widower and the man eating \"Italian\" in red are one person.",
+      "why": "Dave's bearing never changes. The consistency between the crying widower and the calm cannibal IS the horror. A repurposed cut that uses only Gus in the seance and only an unidentified figure in the plaza loses the connective tissue.",
+      "check": "opus-vision; pass iff at least one repurpose frame in the seance portion (repurpose < 0:40) clearly shows Dave (bespectacled middle-aged man in muted cardigan), AND at least one repurpose frame in the epilogue portion (repurpose \u2265 0:50) clearly shows the same actor (red cardigan, pink shirt, exterior plaza).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-VO-RESTRAINT  The VO doesn't pre-spoil the turn. No line in the first 25 seconds of repurpose VO uses the words \"killer,\" \"cannibal,\" \"victim,\" \"murder,\" \"predator,\" \"scout,\" \"hunting,\" \"kill,\" or \"eat (her/him/them)\" in reference to Dave or Maggie. The narration trusts the source to do the reveal.",
+      "why": "brief asks for restraint and warns against summarizing the plot flatly. The wrongness is \"talking to you gently about something appalling,\" and a VO that names the horror upfront destroys it.",
+      "check": "gemini-audio transcribes repurposed cut audio; deterministic substring search over the first 25s of VO transcript for the listed terms in reference to Dave/Maggie. Pass iff no listed term appears in that window in that reference.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "N-NO-FLAT-SUMMARY  The repurposed cut reads as a short film in itself, not as a narrated Wikipedia synopsis. The VO doesn't run wall-to-wall. At least 8 cumulative seconds of repurpose runtime have no narrator speaking, so source dialogue or score is allowed to carry the moment.",
+      "why": "brief: \"a small handful of the source's own key lines, used surgically, will do more than wall-to-wall voiceover. The cut should feel like a short film in itself, not a trailer.\" Pure-VO repurposed cuts fail this test.",
+      "check": "gemini-audio; pass iff cumulative non-VO time in repurpose \u2265 8 seconds.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-VOICE-ONLY  A single, consistent narrator voice carries the repurposed cut end to end. No audible speaker swap, no mid-repurpose change in voice timbre or character, no overlay of a second narrator reading over the first. The voice that closes is the voice that opened. (Source dialogue from the film's own actors isn't a \"second narrator\" and doesn't violate this. The test is whether the repurposed cut-added voice-over track is one identity.)",
+      "why": "brief specifies one narrator carrying the piece. Multi-voice TTS swaps are the most common audio failure mode for an agentic edit and break the deliberately gentle tone the film needs.",
+      "check": "gemini-audio listens to repurpose audio only; pass iff every VO segment (i.e. every line that is not from the source film) shares one continuous voice identity.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-VO-CRAFT  The voice-over sounds like a person reading for cinema, not a machine reading a script.",
+      "why": "brief: \"calm and soft through the setup, a touch warmer than the material deserves\u2026 by the time the piece ends on its punchline image, the narration should feel quietly in on the joke. Real human cadence, not a flat read.\" Flat TTS sabotages the entire tonal premise of the repurposed cut.",
+      "check": "gemini-audio listens to repurpose audio only; pass iff (a) VO delivery varies in pace or pitch across at least two distinct emotional beats, AND (b) no audible TTS glitch is detected (clipped onsets, phoneme stutter, mechanical sibilants).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "S-VO-INTELLIGIBILITY  Every word of the VO is legible end to end. No stretch of speech is muddled by a music peak, clipped by a splice, or rendered ambiguous by mispronunciation. A viewer never has to strain to parse a line.",
+      "why": "the repurposed cut's narrative comprehension test (N-COLD) depends on the VO being followable. An unintelligible line drops the viewer out of the story and undoes everything else.",
+      "check": "gemini-audio; transcribe the repurposed cut VO with whisper-equivalent. Pass iff word-error rate against a clean re-listen is \u2264 5% (\u226595% of words correctly transcribed) AND no contiguous \u22652s span of VO is rated unintelligible by the listener.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "S-MUSIC-CONTINUITY  Any music or source-audio bed used in the repurposed cut ends cleanly. No mid-phrase cut, no abrupt stop mid-measure, no jarring 1+ second silence at a splice point. If the music ends before the repurposed cut does, it fades or resolves; if the repurposed cut ends while music is still playing (e.g. the \"A Forever Kind of Love\" punchline), the music is gracefully buttoned rather than chopped off.",
+      "why": "a cut that leaves the music hanging mid-phrase is perceptible to any viewer and reads as amateur. The source's bright 1950s love song over the spaghetti epilogue is the film's final punchline, so a chopped tail kills the joke.",
+      "check": "gemini-audio on repurpose audio only; pass iff there is no audible mid-phrase music cut and no contiguous silence \u22651s at a music splice point in the repurposed cut body or close.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-05",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "S-AUDIO-ARC  The audio bed shifts with the beats: sparser or somber under the grief opening, more charged at the possession, lifting or turning ironic at the spaghetti close. Not a single flat ambience under narration end-to-end.",
+      "why": "the source's score moves from somber piano \u2192 distorted scream \u2192 low drone \u2192 bright 1950s pop. A repurposed cut whose bed is one looped pad fails to track the arc the VO is doing.",
+      "check": "gemini-audio on repurpose audio only; pass iff the audio bed is distinguishable across at least 3 distinct emotional registers in the repurposed cut.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOICE-MOOD",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "Narrator's tone is aligned with the repurposed cut's emotional register: warm where the film warms, restrained where it hurts, energetic where it accelerates. A flat, unrelenting TTS read on a piece with real emotional shape fails this.",
+      "why": "brief asks for narration that moves with the story. A monotone read flattens an emotional arc into an explainer.",
+      "check": "gemini-audio on repurpose audio only; pass iff VO delivery audibly shifts emotional register across at least 2 distinct beats AND no flat-monotone stretch covers the repurposed cut's turning point.",
+      "judge": "gemini-audio"
+    }
+  ]
+}

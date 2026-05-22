@@ -1,0 +1,302 @@
+{
+  "task_id": "romance_pickup",
+  "items": [
+    {
+      "id": "F-01",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Container is MP4 and video stream is H.264.",
+      "why": "brief specifies \"H.264 MP4.\"",
+      "check": "`ffprobe -show_entries format=format_name:stream=codec_name` \u2192 format contains \"mp4\" AND video codec = h264.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-02",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Resolution is exactly 1920\u00d71080.",
+      "why": "brief specifies horizontal 1920\u00d71080.",
+      "check": "`ffprobe -show_entries stream=width,height` on video stream \u2192 width=1920, height=1080.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-03",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Frame rate is 24 fps (23.976 or 24.000 acceptable).",
+      "why": "brief specifies 24 fps; matches source.",
+      "check": "`ffprobe -show_entries stream=r_frame_rate` \u2192 23.97\u201324.01.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-04",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Audio stream is present and AAC-encoded.",
+      "why": "brief specifies AAC audio. A silent repurpose fails the spec regardless.",
+      "check": "`ffprobe -show_entries stream=codec_type,codec_name` \u2192 one audio stream with codec_name=aac.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-05",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "Exact duration: ffprobe format duration between 59.9 s and 60.1 s.",
+      "why": "brief mandates exactly sixty seconds; a tight tolerance prevents gaming via fractional pads.",
+      "check": "`ffprobe -show_entries format=duration` \u2192 59.9 \u2264 d \u2264 60.1.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-08",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "An end title card that names the film appears. The string \"PICK UP\" (case-insensitive) OR the string \"Pick Up\" is visible on-screen at some point during the repurposed cut.",
+      "why": "brief asks the repurposed cut to tell the viewer what the film is called.",
+      "check": "ffmpeg extracts repurposed cut frames at 2 fps, pytesseract OCRs each; pass iff any frame contains the substring \"pick up\" (case-insensitive, collapsed whitespace).",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-09",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The Omeleto channel is named on screen at some point in the repurposed cut.",
+      "why": "brief explicitly says the card should tell the viewer the film \"is on Omeleto.\"",
+      "check": "ffmpeg extracts repurposed cut frames at 2 fps, pytesseract OCRs each; pass iff any frame contains the substring \"omeleto\" (case-insensitive).",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-10",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "Narration (voice-over) is present across the repurposed cut, not just source-dialogue audio bounced through.",
+      "why": "the brief asks for a fresh narrator carrying the piece. A repurposed cut that simply stitches source-dialogue clips together fails the brief.",
+      "check": "gemini-audio on the repurposed cut audio track; pass iff a scripted narrator voice (distinct from the source-film characters' voices) is audible for \u2265 25 cumulative seconds of the 60-second runtime.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "V-01",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Nina behind the wheel, the film's defining composition, is given meaningful space in the repurposed cut. At least one shot places NINA (the brunette woman driving) alone in the driver's seat, in a dashboard-lit or window-lit close-up of her face, held long enough that a viewer reads her as the protagonist rather than an extra.",
+      "why": "inventory. The film opens and closes on Nina alone at the wheel; this composition is the film's frame.",
+      "check": "opus-vision samples repurposed cut at 1 fps; pass iff at least one frame shows Nina's face in a driver's-seat close-up (profile or three-quarter, not a wide two-shot) AND a neighboring frame \u2265 1.0 s later holds the same shot (so the shot is not a flash cut).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-02",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The mask motif is clear. The repurposed cut shows a mask on at least one character AND shows the same character's face without a mask. The film's entire first half is about the mask as a negotiated boundary; a repurposed cut that drops the masks erases the pandemic context and the unmasking release.",
+      "why": "inventory. Masks ON (0:16, 0:25\u20133:15) / OFF (3:15, 8:50) are the film's first pivot.",
+      "check": "opus-vision on repurpose frames at 1 fps; pass iff \u2265 1 frame shows a cloth face-mask worn by a recognizable character AND \u2265 1 frame shows that same character (Nina or Greg) without the mask.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-03",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The color-temperature arc, warm to cold, is visible in the repurposed cut. The repurposed cut moves from at least one daylight or golden-hour shot (bright / warm / sunlit) to at least one night or parking-garage shot (cool / underlit / sodium / blue-green). A repurposed cut that lives entirely in one lighting tone loses the film's emotional arc.",
+      "why": "inventory. Warm day \u2192 sunset \u2192 blue night \u2192 fluorescent garage \u2192 red stoplight is the emotional arc in color.",
+      "check": "opus-vision on repurpose frames at 1 fps; pass iff (a) at least one frame is a bright daytime / sunset exterior OR in-car shot with visible warm key, AND (b) at least one later frame is a night or indoor-garage shot with cool / dim dominant tone, AND (b) comes after (a) in repurpose time.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-04",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "The kiss moment is visible or unmistakably implied. A viewer can identify the intimate beat (mouths meeting, face-to-face close-up across the center console, OR a clear cutaway-and-return that reads as a kiss) from at least one frame or micro-sequence of the repurposed cut.",
+      "why": "most-important-moment. The kiss at ~8:50 is the physical hinge the turn depends on.",
+      "check": "opus-vision; pass iff repurpose contains at least one frame showing Nina and Greg in an embrace / kiss / face-to-face within kissing distance inside the parked car, OR a cutaway-and-return sequence clearly framed as a kiss.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-05",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Scene-coverage: the repurposed cut draws from at least 3 of these 5 named source scenes: LAX curbside pickup, daytime-highway drive with masks on, parked-car kiss / turn, open-air parking-deck argument, and Nina alone on the phone call with the new boyfriend.",
+      "why": "a repurposed cut built entirely from one window of the source has missed the film's shape. Scene diversity is a proxy for structural coverage.",
+      "check": "opus-vision on repurpose frames at 1 fps; pass iff at least 3 of these 5 named scenes are identifiable from visual cues \u2014 LAX signage / curbside car boot (Scene 3), daylight-highway-drive with visible masks (Scene 4), in-car kiss / pull-back (Scene 8), exterior parking-deck with both on their feet (Scene 9), Nina alone in the driver's seat lit by dash light with phone audio (Scene 11).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-06",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No broadcast-unsafe frame issues: no visible letterbox bars that don't belong, no full-resolution source logo bug collision where the Omeleto bug from the source obscures repurposed cut-added text, and no frames that are visibly ffmpeg-scaled from a lower resolution (pillarboxing around a 1280\u00d7720 core).",
+      "why": "polish. YouTube previews catch this and it reads amateur.",
+      "check": "opus-vision on 10 sampled frames; pass iff none shows pillarbox / unintended letterbox / obvious upscale artifacts.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TITLECARD-CAP",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "Closing title card or end card occupies no more than 3 seconds of total runtime.",
+      "why": "brief is explicit that the close shouldn't be a multi-second pad. Anti-padding for the closing title.",
+      "check": "opus-vision samples the last 6s of repurpose at 1fps; pass iff frames showing only title-card content (text on solid or static background, no source footage behind) span \u2264 3s of runtime.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MIN-SHOT-DURATION",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No individual shot in the repurposed cut content body is shorter than 1.0 second, OR, if the repurposed cut uses a deliberate rapid-cut sequence, no more than 3 consecutive shots <1.0s within any 5-second window.",
+      "why": "shots shorter than ~1s read as a frantic reel rather than a repurposed cut; allows a deliberate rapid-cut burst as long as it doesn't dominate.",
+      "check": "scenedetect content-detector on the repurposed cut excluding the closing title card; pass iff the rule above holds.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-TRANSITION-NATURAL",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "most cuts in the repurposed cut read as deliberate transitions (subject continuity, motion match, lighting/color match, OR a clearly intentional jump-cut for emphasis) rather than jarring splices between unrelated images.",
+      "why": "deliberate transitions are what separates an edit from a shuffle. Random splices break the repurposed cut.",
+      "check": "scenedetect identifies cuts; opus-vision samples the last frame before and the first frame after each cut; pass iff \u226580% of cuts read as deliberate per the criterion above.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-MOTION-MATCH",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Motion-direction or subject-position continuity (eye-trace) is preserved across cuts. most cuts preserve eye-trace OR violate it for a discernible emphatic reason.",
+      "why": "eye-trace continuity is what makes cutting feel like cinema rather than a slideshow with shuffle-mode pacing.",
+      "check": "for each scenedetect cut, opus-vision compares last-frame-before and first-frame-after; pass iff \u226580% preserve motion-direction or subject-position continuity, or violate it intentionally.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-01",
+      "pillar": 2,
+      "weight": -60,
+      "criterion": "THE TURN LANDS. The repurposed cut contains and gives room to the film's central pivot: Nina telling Greg she is \"kind of seeing someone\" (or the VO paraphrasing it, e.g. \"she's seeing someone new / she already has somebody / she's been dating someone\"). The turn either plays in source audio OR is delivered by the narrator, AND it falls in the second half of the repurposed cut (after the 30-second mark) so a cold viewer feels the reversal rather than being told the premise upfront. Cut INTO this beat with a slight beat of held breath, or a cut that arrives slightly later than the eye expects.",
+      "why": "most-important-moment. The reveal at 9:17 is the line that rewrites the film. A repurposed cut that spoils it in the first 15 seconds has no arc; a repurposed cut that omits it has no film.",
+      "check": "opus-vision with full repurpose frames at 1 fps + full repurpose transcript (whisper); pass iff (a) the repurposed cut's VO OR a source-audio clip references Nina being in / seeing / dating someone else, AND (b) that reference lands in the second half (repurpose time \u2265 30 s).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-02",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "COLD-VIEWER COMPREHENSION. A viewer coming to the repurposed cut cold can answer all three: (a) identify NINA, the brunette woman behind the wheel, as the protagonist; (b) name the central conflict (she drove her ex home from the airport while secretly seeing someone new, and the drive reopened the old feelings until she kissed him and then pulled back); (c) name the resolution (it is NOT reconciliation; he walks away, she takes a call from the new boyfriend and stays with that life). The repurposed cut doesn't require the source to make sense; all three answers come from inside it.",
+      "why": "baseline comprehension. Viewer-test lists these three as the film's stakes, turn, and moral.",
+      "check": "opus-vision given repurpose frames at 1 fps + full repurpose transcript; judge answers (a), (b), (c) above. Pass iff all three yes.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-03",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "EMOTIONAL TONE BREAK. The repurposed cut doesn't play the whole 60 s in a single tone. There is a noticeable shift: warm/curious/flirtatious in the first half, cooler/sadder/more restrained in the second half. Audible in the VO delivery OR visible in the shot choice OR clear in the music bed. A repurposed cut that treats the entire film as \"a meet-cute\" or, equivalently, \"a downer\" has flattened it.",
+      "why": "brief: \"the break is the whole point.\" A flat-tone repurpose sabotages the film's premise.",
+      "check": "opus-vision + gemini-audio; pass iff judges identify a shift in emotional tone between the first 25 s of the repurposed cut and the last 25 s, in EITHER the VO OR the visual selection OR the audio bed.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-04",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "OPENS-ON-CURIOSITY. The first 10 seconds of the repurposed cut don't play as a TV-news-style setup (\"In this film, a woman picks up her ex-boyfriend from the airport\u2026\"). The opening lands the viewer inside a moment: a face, a silence, a line of source dialogue mid-beat, a shot that doesn't fully explain itself. Not announcing the premise.",
+      "why": "brief explicitly asks for an opening that makes a stranger lean in, \"not a title, not a setup, not a wide shot of a car.\"",
+      "check": "opus-vision + repurpose transcript on first 10 s; pass iff the first 10 s is not a full-frame title / logo AND the VO (if present in that window) doesn't deliver an expository sentence that structurally summarises the film (\"this is the story of\u2026\", \"a woman picks up her ex\u2026\", \"they used to be together and\u2026\").",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-05",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "THE LIE LANDS. The final beat of the film is either present in the repurposed cut's final 15 s OR its moral function (she chooses the comfortable lie) is delivered by the narrator in the repurposed cut's final 15 s. The final beat is Nina alone in the driver's seat, taking the new boyfriend's call and warmly lying (\"kind of a crazy day\"). A repurposed cut that ends on the fight and skips the phone call flattens the film's moral statement.",
+      "why": "most-important-moment. The ending isn't the fight; the ending is the lie after the fight.",
+      "check": "opus-vision with repurpose frames at 1 fps from 45 s to 60 s + VO transcript; pass iff (a) the final 15 s visually includes Nina alone in the driver's seat after Greg is gone (no longer in frame), OR (b) the VO in the final 15 s explicitly names the choice \u2014 \"she lies,\" \"she doesn't tell him,\" \"she picks the easier one,\" \"she stays with the new one,\" or equivalent phrasing about Nina's choice to continue with the other relationship.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-06",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "PROTAGONIST-ANTAGONIST LEGIBILITY. A cold viewer can pair the face of NINA (brunette woman, driver's seat, appears first and last) with the face of GREG (bearded man, cap, passenger; enters from airport curb, exits at a parking garage) and can tell them apart. The repurposed cut doesn't confuse the two into \"a couple\" with no individual identities; the repurposed cut doesn't introduce additional faces (friends, family) prominently enough to compete.",
+      "why": "cold-viewer comprehension depends on recognizing who the two people are, not just that there are two people.",
+      "check": "opus-vision; pass iff \u2265 2 distinct frames in the repurposed cut show Nina's face clearly (front or 3/4 profile, unmasked) AND \u2265 2 distinct frames show Greg's face clearly (front or 3/4 profile, unmasked), AND no third named-looking character (no extended shots of an unintroduced face) appears for \u2265 3 s.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-07",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "THE TWO ARE EXES, NOT STRANGERS. The repurposed cut establishes that Nina and Greg have a romantic PAST. In VO, in source dialogue, or in unmistakable tonal cue (body language that only reads as an ex, a line like \"it's been nine months\"). A viewer who finishes the repurposed cut thinking they met in the car, or thinking they are siblings or platonic friends, has missed the premise the entire turn depends on.",
+      "why": "without the prior history, Nina's \"I'm kind of seeing someone\" is just a rideshare confession; with it, it's a betrayal. This is distinct from N-01 (that the line is spoken) and N-02 (the full three-part comprehension); it isolates the specific failure mode of a repurposed cut that plays the content but not the relational fact.",
+      "check": "opus-vision + repurpose transcript; pass iff the repurposed cut communicates that Nina and Greg are former partners, either explicitly in VO (\"her ex,\" \"they used to be together,\" \"years ago they broke up\") OR through source dialogue audibly preserved (\"you broke up with me,\" \"I missed you,\" \"it's been nine months\").",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-08",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "NO WRONG-FILM PREMISE. The repurposed cut doesn't pitch the film as a genre it isn't. NOT a horror/thriller (\"something goes terribly wrong\"), NOT a broad rom-com with a happy reunion (\"and they realize they're still in love\"), NOT a pandemic-safety PSA (\"a story of isolation\"). The repurposed cut frames the film as what it is: a drama about an ex-couple, a pickup, a kiss, and a quiet wrong choice.",
+      "why": "mis-framing is a recurring repurpose failure mode. The VO re-genres the film to something more clickable and loses the truth.",
+      "check": "opus-vision on repurpose + transcript; pass iff the narrator's framing lines don't describe the film as a thriller, horror, slasher, or happy-ending reunion; pass iff the last VO line doesn't imply the couple got back together.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-01",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "SINGLE-VOICE NARRATOR. A single, consistent narrator voice carries the repurposed cut end-to-end. No audible speaker swap, no mid-repurpose change in voice quality or character, no overlay of a second narrator reading over the first. The voice at the close is the same voice that opened the piece.",
+      "why": "brief: \"let one narrator carry the whole piece.\" Voice-swap in TTS-generated repurposed cuts breaks the film's intimacy instantly.",
+      "check": "gemini-audio on repurpose audio only; pass iff the VO track is a single continuous voice identity across the 60 s.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-02",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "VO INTELLIGIBILITY. Every word of the narrator's lines is clear end-to-end. No stretch where a viewer would strain to follow the line, no word clipped by a splice or buried by music or source dialogue.",
+      "why": "the repurposed cut's narrative depends on the VO being followable. An unintelligible line drops the viewer out of the story.",
+      "check": "gemini-audio transcribes repurposed cut VO; pass iff the transcription is coherent, unbroken English at \u2265 95% word-level recognizability AND no \u2265 2-second stretch is judged unintelligible.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-03",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "VO CRAFT, NOT FLAT TTS. The narration sounds like a person reading for cinema, not a machine reading a script.",
+      "why": "brief: the voice must \"carry warmth in the first half and cool restraint by the close.\" A flat TTS voice kills that arc regardless of script.",
+      "check": "gemini-audio on repurpose audio only; pass iff VO delivery audibly varies across distinct emotional beats AND no audible TTS glitches OR robotic cadence.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-04",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "AUDIO ARC. The audio bed (music and/or source-audio mix) shifts with the story: warmer or more present in the first half (where the reconnection lives), cooler / sparser / silent in the final beats (where the wrongness settles). Not flat ambience beneath narration.",
+      "why": "character. Source is score-sparse but the score enters at 3:20 for warmth and drops out after the turn.",
+      "check": "gemini-audio on repurpose audio only; pass iff the audio bed tracks the emotional arc across at least 2 distinct beats (e.g. music or warmth present in first half, music or warmth reduced / silent in final 10 s).",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-05",
+      "pillar": 3,
+      "weight": 1,
+      "criterion": "MUSIC-DOES-NOT-FIGHT-VO. When music is present, it sits under the narrator and the source dialogue. The repurposed cut has no window where the bed peaks over the VO or covers a source-dialogue line the repurposed cut is relying on for meaning.",
+      "why": "polish. A bed that drowns the VO erases the scripted narrative.",
+      "check": "gemini-audio; pass iff no stretch of the repurposed cut has music or source audio louder than the narrator for \u2265 2 continuous seconds while the narrator is speaking.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-06",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "MUSIC / SOURCE-AUDIO CONTINUITY. Any audio bed (music cue, source dialogue, ambient track) doesn't cut mid-phrase, end abruptly, or leave a jarring silence at a splice point. If music ends before the repurposed cut does, it fades out; if the repurposed cut ends while music is still playing, the music resolves or fades gracefully rather than being chopped.",
+      "why": "a cut that leaves the music or a source line hanging mid-phrase is perceptible to any viewer and reads as amateur.",
+      "check": "gemini-audio on repurpose audio only; pass iff there is no audible abrupt music cut or mid-phrase source-dialogue truncation in the repurposed cut body or at the close.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VOICE-MOOD",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "Narrator's tone is aligned with the repurposed cut's emotional arc: warm where the film warms, restrained where it hurts, energetic where it accelerates. A flat, unrelenting TTS read on a piece with real emotional shape fails this.",
+      "why": "brief asks for narration that moves with the story. A monotone read flattens an emotional arc into an explainer.",
+      "check": "gemini-audio on repurpose audio only; pass iff VO delivery audibly shifts emotional register across at least 2 distinct beats AND no flat-monotone stretch covers the repurposed cut's turning point.",
+      "judge": "gemini-audio"
+    }
+  ]
+}

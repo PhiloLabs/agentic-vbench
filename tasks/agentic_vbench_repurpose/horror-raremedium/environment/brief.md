@@ -1,0 +1,9 @@
+You are a video editor cutting a sixty-second repurpose of a short horror film called *Rare Medium* for ALTER's YouTube channel. ALTER's feed leans on a specific viewer reflex: the person who clicks one horror short, then sits through a repurposed cut to decide whether to give the full film ten minutes. This repurposed cut is the pitch for that click.
+
+The audience is curious about horror but time-poor. They've seen a hundred ghost videos. What they haven't seen is this film's particular trick, which is that it spends five careful minutes pretending to be a sombre grief drama before quietly revealing itself to be something much nastier. That reveal is the whole point of the film and it has to be the whole point of your cut. Don't summarize the plot flatly. Build the misdirection, let a viewer think for a moment they're watching a serious short about mourning, then let the floor drop. The film earns its horror through tone, not through gore. Your repurposed cut should do the same.
+
+Let one narrator carry the piece end to end. Calm and soft through the setup, a touch warmer than the material deserves, because the wrongness of the film is that it's talking to you gently about something appalling. By the time the piece ends on its punchline image, the narration should feel quietly in on the joke. Real human cadence, not a flat read.
+
+The cut should feel like a short film in itself, not a trailer. A small handful of the source's own key lines, used surgically, will do more than wall-to-wall voice-over. Close on a moment that tells the viewer what genre they're really in, and hold on a quiet title card for a beat at the end (a second or two, not a multi-second pad). The piece should leave the viewer with a small, uneasy smile.
+
+Deliver as a 1280×720 MP4, H.264 video with AAC audio, exactly sixty seconds long.
