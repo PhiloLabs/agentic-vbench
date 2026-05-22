@@ -1,0 +1,347 @@
+{
+  "task_id": "sports_tony_hawk_900_1999_v2",
+  "items": [
+    {
+      "id": "F-FILE",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The submission is a single playable MP4 video file with one continuous video track from start to end.",
+      "why": "Sanity gate that the recap can be evaluated as a video; rules out corrupt or split submissions.",
+      "check": "Judge confirms playback start-to-end with no missing-stream error and reports the runtime in seconds.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-DURATION",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The recap runtime is between 118.0 and 130.4 seconds inclusive (golden runtime 124.18s \u00b15%).",
+      "why": "Diversity constraint runtime_band = medium_120_150s, anchored to the golden's runtime \u00b15%. Under 118s drops the multi-attempt build; over 130.4s exceeds the commissioned length.",
+      "check": "Judge reports the exact runtime in seconds and confirms it falls in [118.0, 130.4].",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-AUDIO",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The recap contains an audio track and that track is non-silent (audible content present) for at least 90% of its runtime.",
+      "why": "A muted recap cannot carry the broadcast call which is half the moment.",
+      "check": "Judge reports the fraction of runtime with audible audio above noise floor and confirms it is \u2265 0.90.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-FRAME",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No frame in the recap is stretched or squashed beyond its native aspect (faces are not visibly elongated or compressed; the halfpipe arc is not warped).",
+      "why": "1999 broadcast source is 4:3; many recap edits in 16:9 stretch the frame.",
+      "check": "Judge cites one recap timestamp showing the halfpipe or a face frame and reports whether proportions look natural.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-ASPECT",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The recap is rendered in 9:16 vertical at target resolution 1080\u00d71920 with no aspect-ratio distortion (no horizontally stretched or vertically squashed picture).",
+      "why": "Brief specifies 1080\u00d71920 vertical (9:16) for TikTok / Reels distribution; this presence item rewards vertical compliance directly (complementing the V-NOT-VERTICAL penalty).",
+      "check": "ffprobe width=1080 AND height=1920 (or, equivalently, aspect ratio width/height in [0.5, 0.6]); spot-check one mid-recap frame for un-distorted bodies and trick geometry.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-MULTI-ATTEMPT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "At least three distinct failed-attempt clips appear in the recap. A failed-attempt clip is a shot where the skater enters the air over the halfpipe, attempts a rotation, and visibly fails to ride away (falls, slides out, lands on his side, or has the board fly out). \"Distinct\" means each clip shows a different fall, same body position, same outcome, same surrounding crowd shot does not count as a second clip.",
+      "why": "Source calibration: at least four failed attempts exist (around 00:31\u201300:42, 01:46\u201301:55, 02:49\u201302:58, 03:57\u201304:06). The multi-attempt drama is the dominant axis of the task; collapsing it loses the moment.",
+      "check": "Judge cites three recap timestamps where three different failed attempts are visible and confirms each fall is a visibly different event (different fall geometry, different crowd reaction, or different ramp graphic visible).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-SUCCESS",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "A successful 900 (skater completing rotation in the air over the halfpipe and riding away on the board without falling) appears in the recap.",
+      "why": "Source calibration: the successful landing is around 05:12\u201305:21. This is the resolution and must be present; the task is outcome-highlight, not teaser.",
+      "check": "Judge cites the recap timestamp where the skater lands and rides away upright, board under feet, no immediate fall after the landing.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-WIDE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "At least one wide shot of the halfpipe with the audience visibly in the stands appears in the recap (a venue-establishing shot, not just a tight close-up of the skater).",
+      "why": "Anchors the scale of the event and the crowd-as-witness frame; source has many such wides between attempts.",
+      "check": "Judge cites one recap timestamp where the halfpipe arc and at least one bank of seated/standing spectators are both visible in the same frame.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CELEBRATION",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "A post-success celebration shot (any of: skater throwing his board, skaters rushing onto the ramp to embrace him, skater lifted onto shoulders, skater with arms raised facing the crowd) appears in the recap within 30 seconds after the successful-landing shot identified in V-SUCCESS.",
+      "why": "Source calibration: board throw ~05:24, ramp mob ~05:24\u201305:51, shoulder carry ~05:51, family hug ~06:13. The celebration is the emotional payoff and the golden devotes ~25% of runtime to it.",
+      "check": "Judge cites the recap timestamp of the celebration shot and confirms it occurs within 30 seconds after the V-SUCCESS timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-TITLECARD",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "At least one on-screen text element (title card, lower third, opening graphic, or burned-in caption) names \"Tony Hawk\" by name and identifies the trick as a \"900\" (or \"first-ever 900\" / \"first 900\").",
+      "why": "Year/event/trick grounding is core to a viewer who does not already know the moment; relying on viewer prior knowledge of which trick this is is fragile.",
+      "check": "Judge cites the recap timestamp where this on-screen text is visible and quotes the relevant portion of the text.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-REPEATS",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No single shot is reused more than once in the recap as padding. Repetition for slow-motion analytical replay of the same successful landing is allowed at most once; otherwise each shot appears once.",
+      "why": "A common failure mode is recycling one fall clip multiple times to inflate runtime; this hides the chronology axis.",
+      "check": "Judge identifies any shot that appears two or more times in the recap, cites both timestamps, and confirms they are the same shot. Item passes if no such duplicate (beyond an allowed single replay of the success) is found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-GLITCH",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No black-frame, frozen-frame, render-glitch, or audio-with-no-video sequence longer than 1.0 second appears in the recap.",
+      "why": "Distinguishes a published recap from a half-rendered draft; common agent failure.",
+      "check": "Judge scans for any continuous interval \u2265 1.0s where the frame is solid black, frozen, or visibly corrupted, and reports the timestamp if found. Item passes if none.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-ENDS-ON-CELEBRATION",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The recap does NOT end on a freeze-frame of the 900 trick mid-air or at the moment of impact; instead the closing shot is either the celebration moment (Hawk raising arms, fist-pumping, crowd reacting, Hawk being lifted), the title card, OR a clean held shot following the celebration.",
+      "why": "Brief mandates \"finish on the celebration rather than on a freeze of the trick.\" A freeze on the trick is a common easy-strategy ending that misses the brief's emotional close.",
+      "check": "Judge inspects the last 3 seconds of the recap. Pass if the closing shot is NOT a freeze-frame of the airborne 900 trick. The closing shot should be celebration, title card, or post-celebration material.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-ORDER",
+      "pillar": 2,
+      "weight": 4,
+      "criterion": "In the recap timeline, all failed-attempt clips identified in V-MULTI-ATTEMPT precede the successful-landing clip identified in V-SUCCESS. The cut goes failures-then-success, not success-then-flashback.",
+      "why": "Build-then-payoff order is the locked editorial decision for this subtype; a success-first cut forfeits the chronology axis. The golden retrospective uses this order exclusively across 0:09\u20131:32.",
+      "check": "Judge lists the recap timestamps of all failed-attempt clips and of the V-SUCCESS landing and confirms every failed-attempt timestamp is earlier than the V-SUCCESS timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-YEAR-1999",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "On-screen text in the recap, or audible voice-over in the recap, identifies the year of the event as 1999.",
+      "why": "This is the canonical date and the second-most-asked fact about this moment after \"did he land it\"; the golden locks 1999 into a title card at 0:00\u20130:06.",
+      "check": "Judge cites the recap timestamp where \"1999\" appears on screen or is spoken in voice-over, and quotes the surrounding text/speech.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-EVENT-XGAMES",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "On-screen text in the recap, or audible voice-over in the recap, identifies the event as the X Games (not generic \"competition\", not a different event name).",
+      "why": "X Games is the specific event; viewer grounding depends on naming it; the golden lists \"X Games\" in the opening title card.",
+      "check": "Judge cites the recap timestamp where \"X Games\" appears on screen or is spoken in voice-over, and quotes the surrounding text/speech.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-MULTIPLE-DISTINCT",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The recap visually conveys that more than one separate attempt occurred, for example, by separating attempts with intercut crowd shots, on-screen text like \"Attempt 3\", or a clear scene change between falls. A viewer who has never seen the moment can tell that the falls are separate events, not one fall replayed.",
+      "why": "A super-cut of fall fragments without visible breaks reads as one chaotic event; the chronology axis requires the falls feel like distinct moments.",
+      "check": "Judge cites two recap timestamps of separate failed-attempt clips and confirms there is at least one intervening shot (crowd, skater on deck, replay graphic, or scene wipe) between them, or that an on-screen marker labels them as different attempts.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-ANTICIPATION",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "At least one preparation/anticipation beat appears in the recap before the V-SUCCESS shot, defined as any of: a close-up of the skater visibly focused or breathing at the top of the ramp, a wide shot of the halfpipe with other skaters watching from the deck, or a hush-then-cheer crowd shot immediately preceding the final attempt.",
+      "why": "The golden devotes 1:15\u20131:23 to this beat; \"everyone stopped skating to watch\" is the emotional setup for the landing.",
+      "check": "Judge cites the recap timestamp of the anticipation beat and confirms it is positioned in the recap timeline before the V-SUCCESS timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-WRONG-YEAR",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No on-screen text and no voice-over in the recap states a year other than 1999 for this 900 attempt. (Mentioning other years in unrelated context, e.g., \"first attempted in 1998\", is allowed; the moment itself must not be dated to a non-1999 year.)",
+      "why": "Common factual-grounding failure for an agent that hallucinates dates.",
+      "check": "Judge scans on-screen text and voice-over for any explicit year other than 1999 associated with this 900 landing. Item passes if none found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-WRONG-TRICK",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No on-screen text and no voice-over in the recap claims the trick is anything other than a 900 (e.g., not labelled as \"1080\", \"720\", \"540\", or \"first 1080\").",
+      "why": "Recap must not misname the trick; a 900 is two-and-a-half rotations, distinct from a 720 or 1080.",
+      "check": "Judge scans on-screen text and voice-over for any rotation label other than 900 applied to this landing. Item passes if none found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-WRONG-SKATER",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "No on-screen text and no voice-over in the recap credits any skater other than Tony Hawk with landing this 900.",
+      "why": "Other vert skaters visible in the source (Lasek, Macdonald, Burnquist) are on the ramp during the celebration; misattribution is a plausible agent failure.",
+      "check": "Judge scans on-screen text and voice-over for any claim that a non-Hawk skater landed the 900. Item passes if none found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-CAUSAL-REVERSAL",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The recap does not show the post-success celebration (board throw, ramp mob, shoulder carry, or arms-raised victory) before any failed-attempt clip in its timeline.",
+      "why": "Cause-effect reversal is a teaser-style flourish that wrecks the chronology axis; \"we already see he won, now here is how he tried\" forfeits the build.",
+      "check": "Judge identifies the earliest celebration shot in the recap and the earliest failed-attempt shot in the recap, and confirms the failed-attempt timestamp is earlier than the celebration timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-BROADCAST-CALL",
+      "pillar": 3,
+      "weight": 4,
+      "criterion": "At the moment the V-SUCCESS shot appears in the recap, an excited human announcer voice from the original 1999 broadcast (a play-by-play call exclaiming over the landing) is audible, not silent, not music-only, not modern retrospective voice-over.",
+      "why": "Source calibration: David Duncan's on-air call across roughly 05:12\u201305:24 of the source is the single most non-substitutable audio. The golden preserves this call (e.g., \"Oh! He made it! He made it!\" / \"Are you kidding me?\") across the landing despite adding modern VO elsewhere.",
+      "check": "Judge cites the V-SUCCESS recap timestamp window and reports whether an excited human announcer voice (clearly broadcast play-by-play, not music or generic narration) is audible across that window. Quote the announcer audio if intelligible.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CROWD-CHEER",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The post-success celebration footage in the recap has audible crowd cheering, applause, chanting, or similar arena audio (not silence, not music-only, not voice-over alone).",
+      "why": "The roar is the emotional payoff in audio; muting it under a clean music bed strips the moment.",
+      "check": "Judge cites the recap timestamp of the celebration footage and reports whether crowd cheer/applause/chant audio is audible across at least 2 seconds of it.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VO-NOT-OVER-CALL",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No added third-party voice-over, a non-source narrator voice not visible as a character in any source shot, and not the original broadcast announcer/commentary, is audible at any point in the recap.",
+      "why": "Diversity constraint audio_policy = source_with_burned_captions; the brief forbids adding a new narrator on top of the source. This is a pure-absence test: any added third-party VO violates the audio policy outright, regardless of whether it overlaps the V-SUCCESS window.",
+      "check": "Judge listens to the entire recap and identifies every spoken-voice span. Pass if and only if no span is attributable to a third-party narrator (a clean studio-recorded or modern voice that is neither the 1999 broadcast announcer/commentary nor a person visibly speaking inside a source shot). Judge cites the recap timestamp(s) of any detected third-party VO, or notes \"no added VO\".",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-CAPTIONS-PRESENT",
+      "pillar": 3,
+      "weight": 5,
+      "criterion": "Burned-in English captions are visible in the lower safe area of the recap whenever a spoken line (broadcast commentary, color commentary, on-ramp interview, or any human speech) is audible. The captions are legible (sufficient contrast, font \u2265 ~24px at 1080p, not clipped by the frame edge) and appear during the line, disappearing when the speaker stops.",
+      "why": "Diversity constraint audio_policy = source_with_burned_captions; the brief commissions burned captions explicitly so muted-playback viewers can read the commentary. Captions must track speech, not be a single decorative title.",
+      "check": "Judge cites at least two recap timestamps where a human speaker is audible and confirms (a) a caption is on screen at that moment, (b) the caption is in the lower safe area (bottom third, not overlapping faces or the action), (c) the caption text is legible at normal viewing size, and (d) the caption disappears or changes when the speaker pauses or another speaker takes over.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-CAPTIONS-ALIGN",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "At the V-SUCCESS landing window, a burned-in English caption visibly transcribes (verbatim or close paraphrase) the broadcast announcer's call across that window. The caption's appearance on screen overlaps the audible call within \u00b11.0 second.",
+      "why": "Without alignment, captions read as decoration rather than functional access to the commentary. The \"He made it!\" / \"Are you kidding me?\" call is the protected moment; the caption must carry it.",
+      "check": "Judge cites the V-SUCCESS recap timestamp and reports (a) the on-screen caption text visible during the landing call, (b) the audible announcer text during that window, and (c) whether the caption appears within \u00b11.0s of the corresponding audio. Item passes only if the caption text reasonably reflects the announcer's spoken words at the landing window.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-NO-MUSIC-OVERRIDE",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No interval of 5 seconds or longer where the audio is music-only (no broadcast audio, no announcer, no crowd) overlaps either the V-SUCCESS shot or the celebration footage that follows it.",
+      "why": "Replacing the broadcast feed with a music bed across the landing is the most common agent failure on this task.",
+      "check": "Judge cites the V-SUCCESS recap timestamp and the celebration timestamps, and reports whether any \u2265 5s music-only window overlaps them. Item passes if none.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-DROPOUT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No audio dropout, abrupt silence, or hard cut-to-silence longer than 0.5 seconds occurs within the V-SUCCESS window or in the 5 seconds immediately before or after it.",
+      "why": "A dropout at the landing call is functionally equivalent to muting the most important second of the recap.",
+      "check": "Judge cites the V-SUCCESS window and the 5s before/after it and reports whether any silent gap > 0.5s occurs in that interval. Item passes if none.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-MISATTRIBUTION",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No clip in the recap pairs the broadcast announcer's celebratory landing-call audio with footage that visually shows the skater falling, bailing, or in a pre-jump setup. The \"He made it!\" / \"Are you kidding me?\" / equivalent celebratory call only plays under footage where the skater is visibly riding away upright or in the immediate post-success celebration.",
+      "why": "Audio-visual misattribution would be a chronology-breaking edit and a story-breaking error.",
+      "check": "Judge scans the recap for any window where a clearly celebratory broadcast announcer voice (exclaiming, calling the landing) is paired with footage of a fall or pre-trick setup. Item passes if none found.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "V-NO-UNEXPECTED-OVERLAY",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "No persistent on-screen overlay element other than the burned commentary captions, for example a scoreboard widget, lower-third name super, chapter/section title card carried across multiple shots, attribution watermark, or other graphic, is visible across more than 50% of the recap's runtime.",
+      "why": "Diversity constraint output_shape = single_concat; the brief commissioned a clean linear cut with captions only, no chapter/scoreboard/lower-third architecture. (Downgraded from penalty V-UNEXPECTED-OVERLAY-PERSISTS [-20] in QC Pass B, clean-cut is a craft preference, not a comprehension-breaker.)",
+      "check": "Judge scans the recap for any non-caption overlay element (scoreboard, persistent lower third, chapter card, watermark, etc.) and estimates the fraction of total runtime it is visible. Pass if no such overlay is visible for more than 50% of total runtime. Captions tied to spoken lines (as scored in S-CAPTIONS-PRESENT) do not count as overlays for this item.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "C-COLLAPSED",
+      "pillar": 3,
+      "weight": -60,
+      "criterion": "The recap contains zero or only one failed-attempt clip (as defined in V-MULTI-ATTEMPT) before the V-SUCCESS shot. The story has been collapsed into \"the trick\" with no multi-attempt drama.",
+      "why": "This is the easy-strategy failure the task is designed to block. A recap that shows only the successful 900 with a title card has destroyed the dominant difficulty axis and is no longer the brief.",
+      "check": "Judge counts the number of failed-attempt clips that appear in the recap before the V-SUCCESS timestamp. Item fires (deduction applied) if that count is 0 or 1.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "C-MUTED-BROADCAST",
+      "pillar": 3,
+      "weight": -30,
+      "criterion": "No original 1999 broadcast announcer voice is audible anywhere in the recap. The recap may have music, crowd ambience, or modern voice-over, but the play-by-play / PA announcer track from the source broadcast is not present at any point.",
+      "why": "Curator-named critical mode: \"muted broadcast: commentators are inaudible (the canonical 'Tony just landed a 900' callout)\". Stripping the announcer is a task-defining audio violation distinct from S-BROADCAST-CALL (which fires only at the landing window).",
+      "check": "Judge scans the entire recap for any window of broadcast play-by-play announcer voice (excited human commentary clearly tied to the action, not modern retrospective VO). Item fires if no such window is found anywhere in the recap.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "C-NO-CELEBRATION",
+      "pillar": 3,
+      "weight": -30,
+      "criterion": "No post-success celebration shot (board throw, ramp mob, shoulder carry, arms-raised victory, hugs with fellow skaters, or family hug) appears anywhere in the recap.",
+      "why": "Curator-named critical mode: \"missing crowd reaction: post-trick crowd celebration is absent (it's the moment's emotional payoff)\". The golden devotes ~25% of its runtime to this beat; omitting it entirely is catastrophic. C-NO-CELEBRATION is broader than V-CELEBRATION (which also requires the celebration to fall within 30s of the landing); this penalty fires only when no celebration shot exists at any time in the recap.",
+      "check": "Judge scans the entire recap for any shot of post-success celebration as defined above. Item fires if no such shot is found anywhere.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "C-WRONG-FRAMING",
+      "pillar": 3,
+      "weight": -20,
+      "criterion": "On-screen text or voice-over in the recap explicitly states a year other than 1999 for this 900 landing, or explicitly names a competition other than the X Games as the venue for this landing.",
+      "why": "Curator-named critical mode: \"wrong-year framing: VO or text contradicts the 1999 X-Games date\". Stronger than the absence items N-NO-WRONG-YEAR / N-NO-WRONG-TRICK because it captures the joint factual-grounding failure.",
+      "check": "Judge scans on-screen text and voice-over for either (a) a year other than 1999 stated as the date of this landing, or (b) a non-X-Games competition stated as the venue for this landing. Item fires if either is found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NOT-VERTICAL",
+      "pillar": 1,
+      "weight": -50,
+      "criterion": "The recap's aspect ratio is not 9:16 vertical, it is 16:9, 4:3, or any aspect ratio wider than tall. A vertical recap is the structural deliverable for TikTok / Reels distribution; a horizontal recap fails the platform brief entirely.",
+      "why": "Brief commissions a 1080\u00d71920 vertical (9:16) deliverable for TikTok / Instagram Reels. A horizontal cut, even if perfectly edited otherwise, cannot ship to the commissioned platform.",
+      "check": "Judge probes the recap's frame width and height. Pass (deduction fires) if and only if the frame height is not strictly greater than the frame width.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-VERTICAL-CROP-CUTS-THE-AIR",
+      "pillar": 1,
+      "weight": -50,
+      "criterion": "Across all 900-attempt frames in the recap (every airborne moment of the skater during a 900 attempt, makes and misses alike), the skater's full body silhouette from head crown to skateboard does not stay inside the visible vertical frame. The failure mode is a center-crop that loses the apex (top-edge clip of the head crown) or the landing (bottom-edge clip of the skateboard / feet).",
+      "why": "A 9:16 reframe from a 4:3 X Games broadcast source forces the editor to choose vertical framing carefully; a 900 is a vertically-tall trick (skater rises, rotates, lands) and a too-tight crop or a wrong-centered crop will clip either the apex of the air or the landing. The trick must read end-to-end. This penalty assumes a true vertical reframe of the source, the \"Reels template letterbox cheat\" failure mode (horizontal video padded into a vertical canvas) is covered separately by V-LETTERBOX-CHEAT.",
+      "check": "Judge samples the recap at 1 fps across all frames containing the skater airborne during a 900 attempt and inspects each sampled frame for whether the skater's head crown is clipped at the top edge or the skateboard / feet are clipped at the bottom edge. Pass (deduction fires) if and only if MORE than 20% of sampled airborne frames clip the skater's head at the apex OR the skateboard / feet at the landing.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-LETTERBOX-CHEAT",
+      "pillar": 1,
+      "weight": -15,
+      "criterion": "The recap's frame dimensions are vertical (height > width) but the actual cinematic X Games video content sits in a horizontal band occupying only the middle of the vertical frame, with padding bars (black, scoreboard graphics, branding cards, caption strips, blurred background, OR any combination) above and below the active video content. This is a \"Reels template\" letterbox cheat: technically-vertical-but-actually-horizontal content padded into a 9:16 canvas.",
+      "why": "Brief commissions a TRUE vertical reframe of the 4:3 X Games broadcast source. A horizontal clip with vertical padding still ships the wrong viewing experience: viewers see a small horizontal skate strip surrounded by graphics, not a vertical reframe of the trick. The author has not actually done the reframe work; they have padded the source into a vertical container. (QC Pass B: weight reduced from -50 to -15, the viewer still sees the action.)",
+      "check": "Judge samples the recap at 5 timestamps (~10%, 30%, 50%, 70%, 90%) and identifies the bounding box of the active cinematic skating content (excluding scoreboard widgets, branding cards, caption strips, black bars, blurred backgrounds). Pass (deduction fires) if and only if the active video content's vertical extent occupies less than 75% of the frame height in 3 or more of the 5 samples, i.e., the vertical padding (top + bottom non-video region) consistently exceeds 25% of total frame height.",
+      "judge": "opus-vision"
+    }
+  ]
+}

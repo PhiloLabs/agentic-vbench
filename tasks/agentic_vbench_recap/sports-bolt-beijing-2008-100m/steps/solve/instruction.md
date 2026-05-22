@@ -1,0 +1,14 @@
+You are a video editor I'm hiring on behalf of the Olympics YouTube channel. We run a series of single-moment cuts that sit on top of our archive race compilations, one race, one beat inside it, with proper broadcast reverence. The source I'm handing you is our Beijing 2008 Bolt file: every individual race he ran at those Games, three rounds of the 100m and three of the 200m, stitched back-to-back. What we're publishing is the 9.69-second moment in the 100m Final, and only that.
+
+This is a single-race recap, not a Bolt-at-Beijing highlight reel. The 200m races and the earlier 100m rounds are off-task. A cold viewer should leave thinking they just watched one race and one moment, not a survey of a campaign. The moment is the chest-thump deceleration, the image where Bolt drops his arms and slaps his own chest about ten metres before the line. That's the reason the cut exists. The Olympics convention revisits that beat from at least one additional camera angle after the live race: a slow-motion side replay, a low-angle trackside shot, an analysis-feed close-up. One angle is a clip; the second is what tells the audience this is the moment.
+
+Build to it properly. Set the race up before the gun so the time means something, the lane-by-lane start list, the field settling into the blocks, the standing world record on the pre-race banner. Run the race in real time. Then dwell: the result graphic that names the time, the replays, the silver and bronze. The pacing should slow down at the moment, not speed past it.
+
+This is going on the global feed, so burn English captions into the safe area for every line the commentator says, viewers are reading as much as listening, and we want "nine point six nine" landing as text the second it lands as sound. Run a corner scoreboard widget across the whole cut, the standing world record going in and the new 9.69 once the clock settles, so the time is on screen even when the broadcast's own graphic isn't. Keep the audio otherwise honest to the broadcast: the live English commentary carries it, the gun start and crowd come through clean, no music bed, no new narrator over the top. Broadcast-style, not trailer-style. Deliver as 1080×1920 H.264 .mp4 with stereo AAC audio for TikTok and Instagram Reels, reframed from the horizontal broadcast source into a 9:16 vertical cut with the corner scoreboard widget tucked into the upper-right vertical safe area and the burned English captions sitting in the lower safe area, exactly two minutes forty-six seconds end-to-end.
+
+## Deliverables
+
+- The source video is at `/workspace/materials/source.mp4`.
+- Write your final recap to **`/workspace/output/recap.mp4`** (this exact path and filename).
+- The container has `ffmpeg`, `python3`, and a pre-cached Whisper "base" model. Internet is available for `pip install`.
+- You have ~30 minutes for the agent step. Aim for a watchable output rather than the perfect cut.

@@ -1,0 +1,311 @@
+{
+  "task_id": "film_mulholland_drive_lynch_essay",
+  "items": [
+    {
+      "id": "F-CONTAINER-VIDEO-AUDIO",
+      "pillar": 0,
+      "weight": 1,
+      "criterion": "The submitted file is an mp4 container with at least one video stream and at least one audio stream.",
+      "why": "A plot-explained product must be playable as audio-plus-video. A video-only or audio-only file is the wrong deliverable.",
+      "check": "Probe the recap container; pass if codec/container parse succeeds and both a video and an audio stream are listed.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-DURATION-BOUNDS",
+      "pillar": 0,
+      "weight": 2,
+      "criterion": "The recap's total runtime is between 152 and 170 seconds inclusive.",
+      "why": "The product is a ~2:40 explainer essay. Source calibration: the human reference ran 160.4 s; \u00b15% gives 152.4\u2013168.4 s, rounded out slightly for trailing-silence tolerance. Outside this window the recap is either a short or a long-form video.",
+      "check": "Probe the recap duration; pass if 152.0 \u2264 duration_seconds \u2264 170.0.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-LANDSCAPE-16-9",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The recap's video frame is landscape with an aspect ratio of approximately 16:9 (between 1.70 and 1.85 width/height).",
+      "why": "This is a desktop/YouTube essay; vertical and square crops are the wrong platform.",
+      "check": "Probe video stream width/height; pass if 1.70 \u2264 width/height \u2264 1.85.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "F-NO-ASPECT-DISTORTION",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "No human face in the recap appears horizontally or vertically stretched compared to natural proportions (eyes oval-flat or oval-tall) for any sustained shot.",
+      "why": "Container metadata can claim 16:9 while the encoded picture is squashed, especially after re-encoding source 1916\u00d71036 into 16:9.",
+      "check": "Inspect at least three shots containing a human face from different timestamps in the recap; pass if no face shows clear aspect distortion.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "F-NO-EXTRA-WATERMARK",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The recap contains no third-party brand or sponsor watermark, paid-promo card, or unrelated channel-bug overlay covering more than 5% of the frame area for more than 2 seconds.",
+      "why": "Sponsor cards belong to YouTube essay conventions but are not part of this deliverable; the recap should not bundle paid placements.",
+      "check": "Inspect the recap for persistent brand overlays; pass if no such overlay is visible.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NAOMI-WATTS-BLONDE-DREAM",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Within the first 80 seconds of the recap, the recap contains at least one shot of a young-looking blonde woman with a bright bob haircut, wide-eyed and naive in register, in a daytime or warmly lit interior such as an apartment, theatre audition, or airport arrival.",
+      "why": "This anchors the dream-half lead before the dream/reality collapse can be performed. Source calibration: this is Naomi Watts as \"Betty\" between source 00:14:00 and 01:40:00.",
+      "check": "Inspect the recap from 00:00 to 01:20; cite the recap timestamp of one qualifying shot, naming the visible features (bright-blonde bob, wide eyes, daytime/well-lit setting).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-RITA-CAMILLA-BRUNETTE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "Within the first 90 seconds of the recap, the recap contains at least one shot of a long-haired brunette woman appearing together with the blonde lead from V-NAOMI-WATTS-BLONDE-DREAM in the same frame.",
+      "why": "A recap that never shows the two leads together cannot perform the dual-character collapse. Source calibration: Betty and Rita share frames continuously between source 00:25:00 and 01:42:00.",
+      "check": "Inspect the recap from 00:00 to 01:30; cite the recap timestamp of one qualifying two-shot, naming both visible features (blonde bob plus long-haired brunette in the same frame).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-BRIDGE-CUE",
+      "pillar": 1,
+      "weight": 5,
+      "criterion": "At any point between 45% and 80% of the recap's runtime, the recap visibly shows at least one of: (i) a theatre stage with red curtains and blue spotlights featuring an MC at a microphone OR a woman in red on stage who falls/collapses while the song continues; OR (ii) a close-up of a small blue cube-shaped box held in human hands with its lid removed showing a dark interior.",
+      "why": "This is the rubric's single largest item because the visible bridge cue is the central craft test of the explainer subtype. Source calibration: Club Silencio is at source 01:42:00\u201301:48:00 and the blue-box opening at source 01:48:00\u201301:50:00. Either qualifies.",
+      "check": "Inspect the recap from approximately 45% to 80% of total runtime; pass if either signature is visible. Cite the recap timestamp and which signature (red-curtain stage or blue-box close-up) was found.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-DIANE-WAKE",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "After the bridge cue from V-BRIDGE-CUE, the recap contains at least one shot of the SAME blonde actress from V-NAOMI-WATTS-BLONDE-DREAM but now visibly disheveled, unkempt, depressed, or harshly lit, for example with mussed hair, no makeup, a slip or robe, in a dimmer interior such as a bedroom or kitchen.",
+      "why": "The reality-act lead must be visible on screen, not just referenced. Source calibration: Diane wakes on a bed at source 01:50:00\u201301:55:00.",
+      "check": "Inspect the recap from the timestamp of V-BRIDGE-CUE onward; cite the recap timestamp of one qualifying shot, naming the visible features (same actress, but disheveled/depressed register, dimmer setting).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CAMILLA-PARTY-KISS",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "The recap contains at least one shot of the brunette lead from V-RITA-CAMILLA-BRUNETTE in romantic or intimate physical proximity to a person OTHER than the blonde lead, for example kissing a man in a convertible, kissing another woman at a party, or standing arm-in-arm with a dark-haired man in a formal setting.",
+      "why": "The visible motive for the hitman beat. Source calibration: engagement-party flashbacks at source 01:55:00\u201302:05:00. Without this shot, the recap's claim of Camilla's betrayal is not source-grounded.",
+      "check": "Inspect the recap for any shot meeting the description; cite the recap timestamp and what was visible (kiss / arm-in-arm / engagement gesture between the brunette lead and a non-blonde-lead person).",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHAPTER-CARDS-PRESENT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The recap visibly partitions its runtime with exactly 3 chapter title cards. Each qualifying card is a full-screen or near-full-screen graphic frame (text on a solid or near-solid background, OR text overlaid on a still / dimmed source frame with no live action) bearing a chapter number (\"1\", \"2\", \"3\", \"Chapter One\", \"Part 1\", etc.) and/or a short chapter title of 1 to 6 words (e.g. \"The Dream\", \"The Cue\", \"The Truth\"). Each qualifying card is on screen for at least 0.7 seconds and at most 5 seconds.",
+      "why": "The brief explicitly mandates \"three numbered chapter cards\" (Dream / Cue / Truth). Two cards under-structures the argument; four or more dilutes the three-act spine the brief is built around. Source calibration: the human reference is a continuous-VO essay without numbered cards, so this requirement is specific to the chaptered task shape, not a golden-imitation criterion.",
+      "check": "Inspect the full recap for full-screen-or-near-full-screen graphic frames meeting the description. Count distinct chapter cards; pass if the count is exactly 3. Cite the recap timestamp and visible text of each qualifying card.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-CHAPTER-ORDER-CORRECT",
+      "pillar": 1,
+      "weight": 3,
+      "criterion": "The three chapter cards appear in the recap in the brief-mandated order: card 1 (Dream) is first, card 2 (Cue) is second AND sits at or immediately before the bridge-cue moment (Club Silencio sequence OR blue-box close-up), card 3 (Truth) is third and introduces Diane's reality act.",
+      "why": "Brief mandates this exact order and explicitly places card 2 at the hinge. A recap that has three chapter cards but in wrong order or with card 2 not aligned to the bridge cue has missed the brief's structural argument.",
+      "check": "Judge identifies each chapter card's timestamp + label, AND identifies the bridge-cue moment (red curtains / Club Silencio / blue box). Pass iff: cards appear in 1-then-2-then-3 order AND card 2 timestamp is within 5 seconds of the bridge-cue moment AND card 3 follows card 2.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-REPEATED-PADDING",
+      "pillar": 1,
+      "weight": 2,
+      "criterion": "No single visually identifiable shot from the source film is used three or more times in the recap as filler. (Brief reprises of a single shot for emphasis are acceptable; padding the runtime with a third or fourth use is not.)",
+      "why": "A common failure mode for short-budget agents is reusing one striking source shot to fill the timeline.",
+      "check": "Inspect the recap for repeated shots; pass if no single source shot is reused 3+ times.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "V-NO-BLANK-FRAMES",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "The recap contains no unbroken stretch of pure black or pure single-colour blank frame longer than 3 seconds, except optionally during the final 2 seconds (an end fade is allowed).",
+      "why": "Filling runtime with black frames is a cheap way to hit the duration bound without delivering content.",
+      "check": "Sample the recap frame-by-frame and flag any stretch > 3 s where frame luminance is below 5/255 OR all pixels are within 3/255 of the same value; ignore any such stretch within the final 2 s of the recap.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "V-NO-TITLE-CARD-LITTER",
+      "pillar": 1,
+      "weight": 1,
+      "criterion": "Excluding chapter cards graded under V-CHAPTER-CARDS-PRESENT, the recap contains no more than three additional full-screen text-only frames or kinetic-typography frames each lasting more than 2 seconds (e.g. opening title, closing title, sponsor card, signature).",
+      "why": "An agent may try to substitute text overlays for video; the explainer product is video with narration, not a slideshow of text. Chapter cards are graded separately and do not count toward this limit.",
+      "check": "Inspect the recap for full-screen text-only frames each \u2265 2 s. Exclude any frame that already qualifies as a chapter card under V-CHAPTER-CARDS-PRESENT. Pass if three or fewer remaining frames meet the description.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-DREAM-STATE",
+      "pillar": 2,
+      "weight": 4,
+      "criterion": "At some point in the recap, the narrator voiceover OR a clearly legible on-screen text caption explicitly states that some portion of the source film is a dream, hallucination, fantasy, imagined sequence, or not-real event, using one of the words \"dream\", \"imagined\", \"fantasy\", \"hallucination\", \"not real\", or \"in her head\".",
+      "why": "The single most important comprehension claim. Without it, the recap tells the story upside-down.",
+      "check": "Audit the recap's spoken VO and any visible captions; cite the recap timestamp where one of the listed words is spoken or shown, and quote the surrounding sentence.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-FIRST-TWO-THIRDS",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "At some point in the recap, the narrator voiceover OR on-screen text locates the dream temporally in the FIRST portion of the source film (not the last), using a phrasing such as \"the first two-thirds\", \"the first part\", \"the opening\", \"the first 90 minutes\", \"most of the film\", or a synonym that places the dream before the reality.",
+      "why": "The dream must be located at the beginning, not as a flashback inserted at the end. Source calibration: the dream covers source 00:00:00\u201301:48:00, i.e. the opening through ~74% of runtime.",
+      "check": "Audit the VO and captions for the temporal claim; cite the recap timestamp and quote the surrounding sentence.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-BETTY-DIANE",
+      "pillar": 2,
+      "weight": 5,
+      "criterion": "The recap's VO or on-screen text contains at least one sentence that identifies the blonde lead character in the dream half and the blonde character in the reality half as the same person, for example by naming both names (\"Betty in the dream is really Diane\"), by naming one actress who plays both (\"Naomi Watts plays both Betty and Diane\"), or by an explicit unification claim (\"I'll call her Diane throughout\").",
+      "why": "Half of the dual-identity collapse. Withholding this claim leaves the viewer unable to read the reality act.",
+      "check": "Audit the VO and captions for the unification sentence; cite the recap timestamp and quote the sentence.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-RITA-CAMILLA",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The recap's VO or on-screen text contains at least one sentence that identifies the brunette lead character in the dream half and the brunette character in the reality half as the same person, for example by naming both names (\"Rita in the dream is really Camilla\"), by naming one actress who plays both (\"Laura Harring plays both Rita and Camilla\"), or by an explicit unification claim (\"I'll call her Camilla throughout\").",
+      "why": "The other half of the dual-identity collapse. Separate item from N-BETTY-DIANE so that a recap collapsing only one of the two does not earn both points.",
+      "check": "Audit the VO and captions for the unification sentence; cite the recap timestamp and quote the sentence.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-CAMILLA-BETRAYAL",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The recap's VO or on-screen text states that Camilla (or \"the brunette\", or the named character) does not really love the protagonist, has left her for someone else, is engaged to another character, is unfaithful, or humiliated the protagonist.",
+      "why": "The reality act's emotional motive. Without it, the hitman beat has no cause.",
+      "check": "Audit the VO and captions for the betrayal claim; cite the recap timestamp and quote the sentence.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-HITMAN",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The recap's VO or on-screen text states that the protagonist hires, pays, or contracts someone, described as a hitman, an assassin, a killer, or a man at a diner, to kill Camilla.",
+      "why": "The reality act's central action. Source calibration: source 02:05:00\u201302:13:00.",
+      "check": "Audit the VO and captions for the hitman claim; cite the recap timestamp and quote the sentence.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-SUICIDE",
+      "pillar": 2,
+      "weight": 3,
+      "criterion": "The recap's VO or on-screen text states that the protagonist kills herself, shoots herself, commits suicide, or dies by her own hand at the end of the source film.",
+      "why": "This is an explainer with full-resolution policy; withholding the ending is the wrong subtype. Source calibration: source 02:18:00.",
+      "check": "Audit the VO and captions for the suicide claim; cite the recap timestamp and quote the sentence.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-INVENTED-NAMES",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The recap's VO and on-screen text introduce no character names beyond this allowed set: Betty, Diane (or Diane Selwyn), Rita, Camilla (or Camilla Rhodes), Adam (or Adam Kesher), Coco, the Cowboy, Naomi Watts, Laura Harring, David Lynch. (Pronouns, \"the protagonist\", \"the director\", \"the actress\" etc. are also fine. Any other proper noun for a person triggers the absence failure.)",
+      "why": "A common failure mode is inventing plausible-sounding character names (\"her boyfriend Tom\", \"her friend Susan\") that do not appear in the source.",
+      "check": "Audit the VO and captions for all proper nouns referring to people; pass if every named person falls within the allowed set above. List any out-of-set names found with their recap timestamps.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-NO-CHRONOLOGY-INVERSION",
+      "pillar": 2,
+      "weight": 2,
+      "criterion": "The recap does not present the reality act before the dream act. Specifically: every shot of the disheveled blonde lead from V-DIANE-WAKE, every mention of the hitman, and every mention of the suicide appears AFTER at least one shot or caption referring to the blonde lead in her bright/naive dream register or after the dream-state has been verbally established.",
+      "why": "Reversing dream and reality (presenting Diane's life as the framing story and Betty as her flashback) is the inverse of Lynch's cut and breaks the comprehension claim.",
+      "check": "Inspect the recap timeline; pass if the first reference to Diane's reality (disheveled lead shot, hitman line, suicide line) occurs AFTER at least one dream-register shot or after the dream has been verbally established.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-NO-TEASER-ENDING",
+      "pillar": 2,
+      "weight": 1,
+      "criterion": "In the final 20 seconds of the recap, the VO or on-screen text does not invite the viewer to \"watch the film to find out\" the resolution, ask \"what really happened?\" as if unresolved, or end on a \"you decide\" mystery card.",
+      "why": "An explainer must commit to an answer. A teaser outro contradicts the deliverable.",
+      "check": "Audit the last 20 s of the recap; pass if no such mystery-deferral phrasing appears. (A \"comment below\" / \"agree?\" essayist sign-off is acceptable as long as the resolution has already been narrated.)",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VO-PRESENT",
+      "pillar": 3,
+      "weight": 3,
+      "criterion": "At least 90 cumulative seconds of audible English narrator speech in the recap come from a single identifiable non-source narrator voice, one consistent apparent speaker identity (same apparent gender and timbre), and not from a stitch of two or more distinguishably different narrator voices. A recap with no narrator, a recap whose narration totals under 90 s, and a recap whose narration is split across two or more clearly different voices each contributing under 90 s, all fail.",
+      "why": "VO is the defining register of the \u8bb2\u7535\u5f71 / \"movie explained\" product, and the brief asks for one narrator across the whole runtime. Anchoring \"\u2265 90 s from a single voice\" tests both presence and persistence in one atomic measurement: a multi-voice stitch in which no single voice reaches 90 s fails by the same count, so the criterion remains atomic.",
+      "check": "Audit the recap's audio. Identify all non-source narrator speech segments. Group them by apparent speaker identity (gender, timbre, cadence). Pass if at least one group totals \u2265 90 cumulative seconds. Cite at least three recap timestamp ranges of narrator speech and confirm they belong to the same voice group.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VO-INTELLIGIBLE",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The narrator voice is intelligible in English at conversational volume without significant noise, robotic glitch, or clipping; at least one full sentence can be transcribed from any 30-second window of narrator speech.",
+      "why": "An unintelligible narrator carries no comprehension signal.",
+      "check": "Audit a 30-second window of narrator speech in the recap; pass if at least one sentence transcribes cleanly with no major missing words.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-VO-BRIDGE-NARRATION",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "Within 8 seconds before or after the recap timestamp identified in V-BRIDGE-CUE, the narrator voice OR a clearly legible on-screen caption explicitly names the dream-to-reality transition, for example \"the dream ends here\", \"we leave the dream\", \"she wakes up\", \"back in reality\", or a near-synonym.",
+      "why": "A visible cue without a verbal marker leaves the viewer ungrounded; a verbal marker without the visible cue is also incomplete. Both belong at the hinge.",
+      "check": "Identify the recap timestamp of V-BRIDGE-CUE; audit the audio and captions within \u00b18 s of that timestamp; pass if the transition is verbally or textually named. Quote the line and cite the recap timestamp.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "S-NO-AUDIO-DROPOUT",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The recap contains no unbroken stretch longer than 8 seconds in which the audio track is silent, i.e., neither narrator voice nor any source audio (dialogue, music, ambience) is audible.",
+      "why": "Long silences indicate audio rendering bugs or VO gaps.",
+      "check": "Sample the recap's audio RMS in 0.5 s windows; pass if no consecutive run > 8 s has RMS below -50 dBFS in all windows. Allow up to 1 second of trailing silence at the very end.",
+      "judge": "deterministic"
+    },
+    {
+      "id": "S-NO-MUSIC-BED-ONLY",
+      "pillar": 3,
+      "weight": 2,
+      "criterion": "The recap contains no continuous stretch longer than 30 seconds in which non-source-narrator voice is absent and only source film audio (score, dialogue, ambience) is playing.",
+      "why": "An explainer should not collapse into a trailer-style music-bed section. A short 20-second visual-only bridge moment is acceptable; a sustained music-bed section is the wrong product.",
+      "check": "Audit the recap's audio for stretches without narrator speech; pass if no such stretch lasts > 30 s.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "N-STRUCTURAL-COLLAPSE",
+      "pillar": 2,
+      "weight": -60,
+      "criterion": "The recap nowhere states or visually indicates that any portion of the source film is a dream, hallucination, fantasy, imagined sequence, or not-real event. Neither the VO nor any on-screen caption contains the words \"dream\", \"imagined\", \"fantasy\", \"hallucination\", \"not real\", or any equivalent claim about the unreality of part of the story.",
+      "why": "This is the central comprehension claim of the explainer. A recap that fails this presents Lynch's film upside-down: the dream is sold as the canonical plot and reality as a flashback. Source calibration: Lynch's cut runs dream first (0:00\u20131:48:00), then reality (1:48:00\u2013end). Tom The Critic's golden essay opens with this claim at 00:28.",
+      "check": "Audit the full recap audio and all visible captions. Fire the penalty if no dream-claim word or synonym is ever spoken or shown.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "S-NO-NARRATOR",
+      "pillar": 3,
+      "weight": -50,
+      "criterion": "The recap contains no non-source narrator voice anywhere in its runtime AND no caption-stack substitute (legible on-screen English text carrying the dream/reality unification claim) is present. Specifically: the audio track contains only source film audio and/or silence, AND no visible on-screen text in the recap states or conveys the dream/reality claim (i.e., no caption containing words like \"dream\", \"imagined\", \"fantasy\", \"hallucination\", \"not real\", \"Betty is Diane\", or equivalent unification phrasing).",
+      "why": "The explainer subtype is defined by carrying the dream/reality claim. A music-bed-only edit with no narrator AND no caption substitute is a different product (a trailer). Source calibration: the human golden has continuous male narrator across 0:00\u201302:30 with one ~20 s visual-only bridge. Narrowing this penalty to fire ONLY when both narrator AND caption-stack substitute are absent avoids penalising legitimate caption-driven essay variants that convey the same comprehension claim through on-screen text.",
+      "check": "Audit the recap's audio and all visible on-screen text. Fire the penalty if BOTH conditions hold: (a) no segment of voiced English speech from a non-source speaker can be identified anywhere in the recap, AND (b) no legible on-screen English caption conveys the dream/reality unification claim (no caption containing \"dream\", \"imagined\", \"fantasy\", \"hallucination\", \"not real\", \"Betty is Diane\", or equivalent). Do NOT fire if either a narrator voice OR a caption-stack substitute is present.",
+      "judge": "gemini-audio"
+    },
+    {
+      "id": "V-NO-BRIDGE-CUE",
+      "pillar": 1,
+      "weight": -40,
+      "criterion": "The recap, at the dream-to-reality hinge, substitutes a non-source / invented bridge image in place of the Club Silencio stage cue or the blue-box opening shot, for example a fabricated dream-shatter graphic, an AI-generated \"wake up\" overlay, a stock spinning-clock motif, an inserted shot of an alarm clock or sunrise that does not appear in the source film, or any other invented imagery placed at the hinge as the bridge cue.",
+      "why": "A non-source bridge image at the hinge actively breaks comprehension because it presents the viewer with a fake Lynch-grounded anchor. Mere absence of the bridge cue is already encoded by V-BRIDGE-CUE failing (+5 positive), this penalty narrows to the affirmative case of replacing the cue with invented imagery, which is the more catastrophic failure. Source calibration: Club Silencio at source 01:42:00\u201301:48:00, blue-box opening at source 01:48:00\u201301:50:00.",
+      "check": "Inspect the recap at the dream/reality hinge (around 45-80% of runtime). Fire the penalty ONLY if a non-source / invented bridge image is visibly placed at the hinge in place of the brief-mandated cue. Do NOT fire merely because the cue is absent, that case is already handled by V-BRIDGE-CUE failing.",
+      "judge": "opus-vision"
+    },
+    {
+      "id": "N-WRONG-ENDING",
+      "pillar": 2,
+      "weight": -30,
+      "criterion": "The recap states or visually shows an affirmative wrong ending in which the protagonist survives, escapes Hollywood, ends up with Camilla, or any non-suicide positive outcome, for example \"and they lived happily ever after\", \"she finally got the role\", \"Diane and Camilla escape together\", or a closing montage that visually depicts the two women reunited / driving off / embracing in a survival register.",
+      "why": "Affirmative wrong-ending is the inverse of the explainer subtype's comprehension goal. A separate failing N-SUICIDE positive already encodes the \"no death stated\" branch, so this penalty narrows to the affirmative-wrong-ending case to avoid double-counting. Source calibration: Diane shoots herself at source 02:18:00; smoke fills the bedroom; the final shot is the blue-haired Silencio woman whispering \"Silencio\" at source 02:24:00.",
+      "check": "Audit the recap's VO, captions, and final 30 s of visual content. Fire the penalty ONLY if the recap states or visually shows a non-suicide positive outcome (survival / escape / reunion with Camilla). Do NOT fire merely because the recap fails to state death, that case is already handled by N-SUICIDE failing.",
+      "judge": "gemini-audio"
+    }
+  ]
+}
