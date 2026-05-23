@@ -6,8 +6,8 @@ name = "agentic-vbench/romance-pickup"
 [metadata]
 difficulty = "hard"
 category = "video-editing"
-tags = ["video-repurpose", "agentic-vbench-repurpose", "cutbench-v2"]
-source = "cutbench_v2_36tasks (task_id=romance_pickup)"
+tags = ["video-repurpose", "agentic-vbench-repurpose"]
+source = "ameddserM/agentic_vbench_video_repurpose (task_id=romance_pickup)"
 
 [environment]
 build_timeout_sec = 1800.0

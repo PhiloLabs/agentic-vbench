@@ -6,8 +6,8 @@ name = "agentic-vbench/talk-mlk-i-have-a-dream"
 [metadata]
 difficulty = "hard"
 category = "video-editing"
-tags = ["video-repurpose", "agentic-vbench-repurpose", "cutbench-v2"]
-source = "cutbench_v2_36tasks (task_id=talk_mlk_i_have_a_dream)"
+tags = ["video-repurpose", "agentic-vbench-repurpose"]
+source = "ameddserM/agentic_vbench_video_repurpose (task_id=talk_mlk_i_have_a_dream)"
 
 [environment]
 build_timeout_sec = 1800.0

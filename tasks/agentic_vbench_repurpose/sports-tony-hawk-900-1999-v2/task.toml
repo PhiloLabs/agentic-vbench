@@ -6,8 +6,8 @@ name = "agentic-vbench/sports-tony-hawk-900-1999-v2"
 [metadata]
 difficulty = "hard"
 category = "video-editing"
-tags = ["video-repurpose", "agentic-vbench-repurpose", "cutbench-v2"]
-source = "cutbench_v2_36tasks (task_id=sports_tony_hawk_900_1999_v2)"
+tags = ["video-repurpose", "agentic-vbench-repurpose"]
+source = "ameddserM/agentic_vbench_video_repurpose (task_id=sports_tony_hawk_900_1999_v2)"
 
 [environment]
 build_timeout_sec = 1800.0

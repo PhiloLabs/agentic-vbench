@@ -6,8 +6,8 @@ name = "agentic-vbench/film-stop-making-sense-a24-trailer"
 [metadata]
 difficulty = "hard"
 category = "video-editing"
-tags = ["video-repurpose", "agentic-vbench-repurpose", "cutbench-v2"]
-source = "cutbench_v2_36tasks (task_id=film_stop_making_sense_a24_trailer)"
+tags = ["video-repurpose", "agentic-vbench-repurpose"]
+source = "ameddserM/agentic_vbench_video_repurpose (task_id=film_stop_making_sense_a24_trailer)"
 
 [environment]
 build_timeout_sec = 1800.0
