@@ -1,8 +1,8 @@
 # agentic-vbench
 
-A benchmark suite for evaluating AI coding agents on **video and audio editing tasks**. Built on top of [Harbor](https://www.harborframework.com/) — agent installation, sandboxed execution, concurrency, and trial scoring are handled for you.
+**AgenticVBench** is a 100-task benchmark for evaluating AI agents on real-world video post-production workflows — **Assembly**, **Repair**, **Sequencing**, and **Repurpose**. Tasks are authored by 20 industry experts (avg. 6 years of professional experience) and scored on a 0–1 scale, mixing programmatic verifiers with rubric-based LLM judges.
 
-Four task families, **100 tasks total**, every task scored on a 0–1 scale.
+Built on [Harbor](https://www.harborframework.com/) — agent installation, sandboxed execution, concurrency, and trial scoring are handled for you.
 
 ---
 
