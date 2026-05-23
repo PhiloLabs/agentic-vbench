@@ -31,6 +31,17 @@ Typical model scores live on the [leaderboard](https://agenticvbench.com/leaderb
 
 ---
 
+<p align="center">
+  <video
+    src="https://github.com/PhiloLabs/agentic-vbench/releases/download/media-v1/agenticvbench_final.mp4"
+    controls
+    width="100%"
+    muted>
+  </video>
+</p>
+
+---
+
 ## 🚀 Quick start
 
 ### 1. Install
