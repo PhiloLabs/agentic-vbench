@@ -28,3 +28,6 @@ timeout_sec = 1800.0
 
 [steps.verifier.env]
 MATERIALS_URL = "https://huggingface.co/datasets/ameddserM/agentic_vbench_video_repair/resolve/main/materials/exp-codec-restore-task01.zip"
+
+[solution.env]
+MATERIALS_URL = "https://huggingface.co/datasets/ameddserM/agentic_vbench_video_repair/resolve/main/materials/exp-codec-restore-task01.zip"

@@ -1,7 +1,16 @@
 #!/bin/bash
-# Oracle: copy the pre-baked golden into the agent-output path.
-# Golden was baked into /baked/golden/ at `docker build` time.
+# Oracle: fetch the golden from HF at solve time, then copy to the
+# agent-output path. MATERIALS_URL is injected via [solution.env] in
+# task.toml — present only when Harbor runs the oracle agent.
 set -euo pipefail
+
+# Fetch the golden assets at solve time. MATERIALS_URL is injected via
+# [solution.env] in task.toml — present only when Harbor runs the
+# oracle agent. The agent step never sees this var.
+mkdir -p /workspace/output /tmp/g
+curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
+     "$MATERIALS_URL" -o /tmp/g.zip
+unzip -q /tmp/g.zip 'golden/*' -d /tmp/g
 mkdir -p /workspace/output
-cp /baked/golden/clean.wav /workspace/output/enhanced.wav
-echo "oracle: copied /baked/golden/clean.wav -> /workspace/output/enhanced.wav"
+cp /tmp/g/golden/clean.wav /workspace/output/enhanced.wav
+echo "oracle: copied /tmp/g/golden/clean.wav -> /workspace/output/enhanced.wav"
