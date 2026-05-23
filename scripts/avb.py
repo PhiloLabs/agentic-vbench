@@ -84,18 +84,38 @@ def cmd_tasks_env(args: argparse.Namespace) -> int:
     cfg = tomllib.loads((p / "task.toml").read_text())
     agent_env = list(cfg.get("environment", {}).get("env", {}).keys())
     verifier_env = FAMILY_VERIFIER_ENV.get(fam, [])
-    print(f"task:      {args.task}")
-    print(f"family:    {fam}")
-    print(f"agent --ae:    {', '.join(agent_env) if agent_env else '(none)'}")
-    print(f"verifier --ve: {', '.join(verifier_env) if verifier_env else '(none)'}")
+    print(f"task:                 {args.task}")
+    print(f"family:                {fam}")
+    print(f"agent --ae (task-declared):   {', '.join(agent_env) if agent_env else '(none)'}")
+    print(f"verifier --ve (family-implied): {', '.join(verifier_env) if verifier_env else '(none)'}")
+    # Agent-side credential matrix — what `./avb run` injects automatically
+    # based on the -a flag. Even when the task itself declares no env, the
+    # agent runtime still needs its own API key.
+    print()
+    print("agent-side keys (auto-injected by `./avb run` based on -a):")
+    for ag, key in AGENT_ENV.items():
+        if key is None:
+            print(f"  -a {ag:<12s} (no key needed)")
+        else:
+            print(f"  -a {ag:<12s} {key}")
     return 0
 
 
 # ---- run -------------------------------------------------------------------
 def cmd_run(args: argparse.Namespace) -> int:
+    import time
     p = task_dir(args.task)
     fam = p.parent.name
-    cmd = ["harbor", "run", "-p", str(p), "-e", args.env, "-a", args.agent]
+    # Deterministic job name so the user can tail the trial log from a
+    # known path. Harbor still creates a child trial dir under this name.
+    job_name = f"avb-{args.task}-{int(time.time())}"
+    cmd = [
+        "harbor", "run",
+        "-p", str(p),
+        "-e", args.env,
+        "-a", args.agent,
+        "--job-name", job_name,
+    ]
     if args.model:
         cmd += ["-m", args.model]
     # Inject agent env if we know what the agent expects and the user has it.
@@ -115,6 +135,7 @@ def cmd_run(args: argparse.Namespace) -> int:
     if args.yes:
         cmd += ["--yes"]
     print("+", " ".join(cmd), file=sys.stderr)
+    print(f"  tail this trial:  tail -F jobs/{job_name}/*/trial.log", file=sys.stderr)
     return subprocess.call(cmd)
 
 
