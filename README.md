@@ -1,6 +1,12 @@
 # agentic-vbench
 
 <p align="center">
+  <a href="paper/paper.pdf"><img src="https://img.shields.io/badge/📖_Paper-PDF-blue" alt="Paper"></a>
+  <a href="https://agenticvbench.com/leaderboard"><img src="https://img.shields.io/badge/🏆_Leaderboard-Live-yellow" alt="Leaderboard"></a>
+  <a href="https://huggingface.co/ameddserM"><img src="https://img.shields.io/badge/🤗_Datasets-HuggingFace-orange" alt="HF Datasets"></a>
+</p>
+
+<p align="center">
   <img src="asset/overall_fig.png" alt="AgenticVBench: four task families — Assembly, Repair, Sequencing, Repurpose" width="100%">
 </p>
 
@@ -78,11 +84,17 @@ Same pattern for the other families. Per-task rewards land in `logs/rollout-resu
 
 ## ⚙️ Supported executors
 
+Any executor that [Harbor](https://www.harborframework.com/) supports works — pass `-e <executor>` to `harbor run` (or `./avb run`). Common picks:
+
 | Executor | Use when | Required env |
 |---|---|---|
 | `docker` | Local sanity checks, single-task debugging | none |
 | `modal` | Large parallel runs across the suite | `MODAL_TOKEN_ID`, `MODAL_TOKEN_SECRET` |
 | `daytona` | Cloud sandboxes (alternative to Modal) | `DAYTONA_API_KEY` |
+| `e2b` | Sandbox-as-a-service for code execution | `E2B_API_KEY` |
+| `runloop` | Long-running cloud workspaces | `RUNLOOP_API_KEY` |
+
+Plus `apple_container`, `gke`, `singularity`, `tensorlake`, and anything else Harbor adds — see Harbor's `--env` choices in `harbor run -h` for the live list.
 
 All task materials are hosted on Hugging Face under [`ameddserM/agentic_vbench_video_*`](https://huggingface.co/ameddserM) and baked into each task's Docker image at build time, so the same image runs on any executor without provider-specific configuration.
 
