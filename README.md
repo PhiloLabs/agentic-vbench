@@ -1,9 +1,9 @@
 # agentic-vbench
 
 <p align="center">
+  <a href="https://agenticvbench.com/"><img src="https://img.shields.io/badge/🌐_Website-agenticvbench.com-green" alt="Website"></a>
   <a href="paper/paper.pdf"><img src="https://img.shields.io/badge/📖_Paper-PDF-blue" alt="Paper"></a>
   <a href="https://agenticvbench.com/leaderboard"><img src="https://img.shields.io/badge/🏆_Leaderboard-Live-yellow" alt="Leaderboard"></a>
-  <a href="https://huggingface.co/ameddserM"><img src="https://img.shields.io/badge/🤗_Datasets-HuggingFace-orange" alt="HF Datasets"></a>
 </p>
 
 <p align="center">
