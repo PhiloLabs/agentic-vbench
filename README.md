@@ -58,6 +58,8 @@ export OPENAI_API_KEY=...
 
 For `agentic_vbench_repurpose` tasks the **verifier** additionally needs `GEMINI_API_KEY` (the rubric LLM judge uses Gemini for audio/video grading) — export it and `avb` will forward it via Harbor's `--ve` flag. Run `./avb tasks env <task>` to see what credentials a given task and agent combo need.
 
+**Bringing your own agent.** The four agents listed above are vendor-native Harbor agents that work against the task set out of the box. Custom agents — including open-source harnesses and proprietary stacks — plug into Harbor through a small adapter. See [Harbor's agents docs](https://www.harborframework.com/docs/agents) for the adapter contract.
+
 **Free smoke test (no agent API spend).** Every repair/assembly/sequencing task ships a bundled oracle solver. Use it to confirm the harness is wired up end-to-end:
 
 ```bash
@@ -80,7 +82,14 @@ For `agentic_vbench_repurpose` tasks the **verifier** additionally needs `GEMINI
 
 Each task ships its own such brief at `tasks/<family>/<task>/steps/solve/instruction.md`.
 
-**Inspect the result:**
+**Inspect the result.** Each trial drops four artifacts under `jobs/<job-name>/<trial-id>/`:
+
+| File | What it is |
+|---|---|
+| `steps/solve/verifier/reward.json` | Final score + per-metric breakdown. |
+| `agent/trajectory.json` | Full event stream Harbor captured for the agent (tool calls, tool results, model messages, final output). |
+| `result.json` | Per-trial Harbor summary (timings, exit codes, exception info). |
+| `trial.log` | Combined stdout/stderr stream for the whole trial. |
 
 ```bash
 ./avb results show          # rewards from the latest job
@@ -105,6 +114,12 @@ export MODAL_TOKEN_ID=... MODAL_TOKEN_SECRET=...
 ```
 
 Same pattern for the other families. Per-task rewards land in `logs/rollout-results.tsv`; full per-trial artifacts (agent trajectory, verifier breakdown) under `jobs/<job-name>/`.
+
+---
+
+## 🏆 Submitting to the leaderboard
+
+Once you've run all 100 tasks, zip the `jobs/` directory (which contains the `reward.json` + `trajectory.json` + `result.json` per trial) and follow the submission flow at [agenticvbench.com](https://agenticvbench.com/) — that page has the email template + a Google Drive link prompt. Reviewers verify that every task in the suite has an intact trajectory and that scores fall in `[0, 1]`, then publish to the [leaderboard](https://agenticvbench.com/leaderboard).
 
 ---
 
