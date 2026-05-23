@@ -1,5 +1,9 @@
 # agentic-vbench
 
+<p align="center">
+  <img src="asset/overall_fig.png" alt="AgenticVBench: four task families — Assembly, Repair, Sequencing, Repurpose" width="100%">
+</p>
+
 A benchmark suite for evaluating AI coding agents on **video and audio editing tasks**. Built on top of [Harbor](https://www.harborframework.com/) — agent installation, sandboxed execution, concurrency, and trial scoring are handled for you.
 
 Four task families, **100 tasks total**, every task scored on a 0–1 scale.
