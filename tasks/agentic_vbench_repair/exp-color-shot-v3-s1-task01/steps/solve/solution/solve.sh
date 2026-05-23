@@ -10,7 +10,7 @@ set -euo pipefail
 mkdir -p /workspace/output /tmp/g
 curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
      "$MATERIALS_URL" -o /tmp/g.zip
-unzip -q /tmp/g.zip 'golden/*' -d /tmp/g
+unzip -qo /tmp/g.zip 'golden/*' -d /tmp/g
 mkdir -p /workspace/output
 cp /tmp/g/golden/original.mp4 /workspace/output/output.mp4
 echo "oracle: copied /tmp/g/golden/original.mp4 -> /workspace/output/output.mp4"

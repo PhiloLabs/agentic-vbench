@@ -16,7 +16,7 @@ python3 -c "import cv2, numpy, skimage" 2>/dev/null || \
 mkdir -p /tests /tmp/g
 curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
      "$MATERIALS_URL" -o /tmp/g.zip
-unzip -q /tmp/g.zip 'golden/*' -d /tmp/g
+unzip -qo /tmp/g.zip 'golden/*' -d /tmp/g
 cp -r /tmp/g/golden/. /tests/
 rm -rf /tmp/g.zip /tmp/g
 
