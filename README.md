@@ -1,5 +1,9 @@
 # agentic-vbench
 
+<p align="center">
+  <img src="asset/overall_fig.png" alt="AgenticVBench: four task families — Assembly, Repair, Sequencing, Repurpose" width="100%">
+</p>
+
 **AgenticVBench** is a 100-task benchmark for evaluating AI agents on real-world video post-production workflows — **Assembly**, **Repair**, **Sequencing**, and **Repurpose**. Tasks are authored by 20 industry experts (avg. 6 years of professional experience) and scored on a 0–1 scale, mixing programmatic verifiers with rubric-based LLM judges.
 
 Built on [Harbor](https://www.harborframework.com/) — agent installation, sandboxed execution, concurrency, and trial scoring are handled for you.
