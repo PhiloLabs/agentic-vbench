@@ -6,8 +6,8 @@ name = "agentic-vbench/event-apollo-11-50th-anniversary"
 [metadata]
 difficulty = "hard"
 category = "video-editing"
-tags = ["video-repurpose", "agentic-vbench-repurpose", "cutbench-v2"]
-source = "cutbench_v2_36tasks (task_id=event_apollo_11_50th_anniversary)"
+tags = ["video-repurpose", "agentic-vbench-repurpose"]
+source = "ameddserM/agentic_vbench_video_repurpose (task_id=event_apollo_11_50th_anniversary)"
 
 [environment]
 build_timeout_sec = 1800.0
@@ -26,4 +26,4 @@ name = "solve"
 timeout_sec = 1800.0
 
 [steps.verifier]
-timeout_sec = 600.0
+timeout_sec = 1800.0

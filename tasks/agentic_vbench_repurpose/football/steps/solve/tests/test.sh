@@ -29,9 +29,9 @@ WS=/tmp/repurpose_ws
 RUN_ID=harbor_trial
 rm -rf "$WS"
 mkdir -p "$WS/runs/$RUN_ID/output" "$WS/results"
-cp /baked/rubric.json   "$WS/rubric.json"
+cp /tests/rubric.json   "$WS/rubric.json"
 cp /baked/source.mp4    "$WS/source.mp4"
-cp /baked/config.yaml   "$WS/config.yaml"
+cp /tests/config.yaml   "$WS/config.yaml"
 if [ ! -f /workspace/output/repurpose.mp4 ]; then
     mkdir -p /logs/verifier
     cat > /logs/verifier/reward.json <<'JSON'
@@ -41,10 +41,6 @@ JSON
     exit 0
 fi
 cp /workspace/output/repurpose.mp4 "$WS/runs/$RUN_ID/output/repurpose.mp4"
-
-# Stub config.yaml under /tests/ — judge walks up from __file__ for it.
-# Env vars (ANTHROPIC_API_KEY / GEMINI_API_KEY) override the empty values.
-cp /baked/config.yaml /tests/config.yaml
 
 # Run the judge. CUTBENCH_REPURPOSE_ONLY=1 skips golden-comparison (we have none).
 export CUTBENCH_REPURPOSE_ONLY=1

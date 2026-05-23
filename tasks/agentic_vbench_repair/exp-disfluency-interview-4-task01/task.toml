@@ -25,4 +25,7 @@ name = "solve"
 timeout_sec = 1800.0
 
 [steps.verifier]
-timeout_sec = 900.0
+timeout_sec = 1800.0
+
+[steps.verifier.env]
+MATERIALS_URL = "https://huggingface.co/datasets/ameddserM/agentic_vbench_video_repair/resolve/main/materials/exp-disfluency-interview-4-task01.zip"

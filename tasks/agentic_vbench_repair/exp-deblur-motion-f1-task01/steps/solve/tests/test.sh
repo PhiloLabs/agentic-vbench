@@ -19,7 +19,14 @@ if [ -f /tests/gt_window.json ]; then
     WIN_ARG=(--gt-window-json /tests/gt_window.json)
 fi
 
-cp -r /baked/golden/. /tests/
+# Fetch golden assets at verifier time. MATERIALS_URL is injected via
+# [steps.verifier.env] in task.toml — not visible to the agent step.
+mkdir -p /tests /tmp/g
+curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
+     "$MATERIALS_URL" -o /tmp/g.zip
+unzip -q /tmp/g.zip 'golden/*' -d /tmp/g
+cp -r /tmp/g/golden/. /tests/
+rm -rf /tmp/g.zip /tmp/g
 
 python3 /tests/judge.py \
         --output-mp4 /workspace/output/output.mp4 \
