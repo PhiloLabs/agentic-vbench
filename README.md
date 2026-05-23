@@ -30,26 +30,7 @@ cd agentic-vbench
 python3 -m venv .venv && .venv/bin/pip install --upgrade pip
 ```
 
-### 2. Sanity-check one task (Docker + oracle → reward ≈ 1.0)
-
-The bundled oracle solution runs the canonical fix and should hit ≈ 1.0:
-
-```bash
-harbor run -p tasks/agentic_vbench_repair/exp-codec-restore-task01 \
-           -e docker -a oracle
-```
-
-Inspect the result:
-
-```bash
-cat jobs/<job-name>/*/steps/solve/verifier/reward.json
-# {
-#   "reward": 1.0,
-#   "details": { "reason": "ok", ... }
-# }
-```
-
-### 3. Run one task with an agent
+### 2. Run one task with an agent
 
 Pick any agent supported by Harbor (`claude-code`, `codex`, `gemini-cli`, `opencode`, …) and pass its credentials with `--ae`:
 
@@ -65,9 +46,19 @@ harbor run -p tasks/agentic_vbench_repair/exp-codec-restore-task01 \
            --ae OPENAI_API_KEY=$OPENAI_API_KEY
 ```
 
+Inspect the result:
+
+```bash
+cat jobs/<job-name>/*/steps/solve/verifier/reward.json
+# {
+#   "reward": 0.55,
+#   "details": { "reason": "ok", ... }
+# }
+```
+
 For `agentic_vbench_repurpose` tasks the **verifier** also needs `GEMINI_API_KEY` (the rubric LLM judge uses Gemini for audio/video grading) — pass it via Harbor's `--ve` flag.
 
-### 4. Run a full family in parallel
+### 3. Run a full family in parallel
 
 ```bash
 export ANTHROPIC_API_KEY=...
@@ -79,6 +70,23 @@ export MODAL_TOKEN_ID=... MODAL_TOKEN_SECRET=...
 ```
 
 Same pattern for the other families. Per-task rewards land in `logs/rollout-results.tsv`; full per-trial artifacts (agent trajectory, verifier breakdown) under `jobs/<job-name>/`.
+
+---
+
+## 🛠️ `avb` — convenience CLI
+
+A thin discoverability wrapper over Harbor lives at `./avb` in the repo root. It auto-injects per-agent and per-family env vars, lists tasks, and aggregates rewards.
+
+```bash
+./avb --help                                 # all subcommands
+./avb tasks list --family repair             # list tasks in a family
+./avb tasks env boxing                       # show env-var requirements
+./avb run exp-codec-restore-task01 -a codex -m openai/gpt-5.5
+./avb rollout --family repair --agent claude-code
+./avb results show                           # rewards from the latest job
+```
+
+`avb` calls `harbor run` / `harbor check` under the hood — the harness is unchanged. Anywhere `avb` works, the equivalent direct `harbor` invocation works too.
 
 ---
 
