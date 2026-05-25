@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
-"""Score one agentic_vbench_sequencing solution: per-slot pick + SSIM honesty.
+"""Score one agentic_vbench_sequencing solution: ordering quality + SSIM honesty.
 
-Per-slot score:
-  slot_score = 1 iff pred[i] == CORRECT_ORDER[i] AND SSIM-honesty passes
-             = 0 otherwise
+Ordering metrics (agent's claimed order vs the golden order; vendored from
+the primary runner's grade kit):
+  ND  — normalized footrule displacement, sum|pred_pos − correct_pos| / (n²//2)
+  ADJ — fraction of golden adjacent transitions preserved, / (n−1)
+  LIS — longest correctly-ordered subsequence ratio, len(LIS) / len(pred)
+  ordering = (1 − ND) · ADJ · LIS   (= 1 for a perfect order)
 
 SSIM-honesty: sample 3 frames at 25%/50%/75% through each segment's
 output range in solution.mp4, sample the matching offsets from the
 claimed source clip's source_range, and require every pair's SSIM ≥ 0.95
-(same threshold the repair-task preservation gates use — robust to
-re-encoding noise, fails on real mismatch).
+(robust to re-encoding noise, fails on real mismatch). Run on every slot —
+under the partial-credit ordering metric a mis-placed clip still earns
+score, so its content must be verified too. honesty_factor is the fraction
+of slots that pass.
 
-Reward = (# slots that pass both gates) / n_slots.
+Reward = honesty_factor · ordering.
 """
 from __future__ import annotations
 
@@ -19,6 +24,7 @@ import argparse
 import json
 import os
 import sys
+from bisect import bisect_left
 from pathlib import Path
 
 os.environ.setdefault("OPENCV_FFMPEG_THREADS", "1")
@@ -144,6 +150,45 @@ def _check_honesty(solution_mp4: Path, source_mp4: Path,
     return True, samples
 
 
+def _metric_nd(pred: list[str], correct: list[str]) -> float:
+    """Normalized footrule displacement, in [0, 1]; lower is better."""
+    pred_pos = {c: i for i, c in enumerate(pred)}
+    correct_pos = {c: i for i, c in enumerate(correct)}
+    n = len(correct)
+    total = sum(abs(pred_pos[c] - correct_pos[c]) for c in correct_pos)
+    max_total = (n * n) // 2
+    return total / max_total if max_total else 0.0
+
+
+def _metric_lis(pred: list[str], correct: list[str]) -> float:
+    """Longest correctly-ordered subsequence ratio, in [0, 1]; higher better."""
+    rank = {c: i for i, c in enumerate(correct)}
+    seq = [rank[c] for c in pred if c in rank]
+    if not seq:
+        return 0.0
+    tails: list[int] = []
+    for x in seq:
+        i = bisect_left(tails, x)
+        if i == len(tails):
+            tails.append(x)
+        else:
+            tails[i] = x
+    return len(tails) / len(pred)
+
+
+def _metric_adj(pred: list[str], correct: list[str]) -> float:
+    """Fraction of true adjacent transitions caught, in [0, 1]; higher better."""
+    if len(correct) <= 1:
+        return 1.0
+    pred_pos = {c: i for i, c in enumerate(pred)}
+    caught = 0
+    for i in range(len(correct) - 1):
+        a, b = correct[i], correct[i + 1]
+        if pred_pos.get(b, -2) - pred_pos.get(a, -1) == 1:
+            caught += 1
+    return caught / (len(correct) - 1)
+
+
 def _zero(reason, pred=None):
     return {
         "reward": 0.0,
@@ -151,7 +196,7 @@ def _zero(reason, pred=None):
             "reason": reason,
             "n_slots": len(CORRECT_ORDER),
             "n_correct": 0,
-            "n_honest_correct": 0,
+            "n_honest": 0,
             "pred": pred or [],
             "correct": CORRECT_ORDER,
         },
@@ -181,6 +226,10 @@ def score(solution_json: Path, solution_mp4: Path, materials_dir: Path) -> dict:
             pred=pred,
         )
 
+    nd = _metric_nd(pred, CORRECT_ORDER)
+    lis = _metric_lis(pred, CORRECT_ORDER)
+    adj = _metric_adj(pred, CORRECT_ORDER)
+    ordering = (1.0 - nd) * adj * lis
     n_correct = sum(1 for i in range(n) if pred[i] == CORRECT_ORDER[i])
 
     if not solution_mp4.exists():
@@ -190,43 +239,47 @@ def score(solution_json: Path, solution_mp4: Path, materials_dir: Path) -> dict:
                 "reason": f"solution.mp4 not found at {solution_mp4}",
                 "n_slots": n,
                 "n_correct": n_correct,
-                "n_honest_correct": 0,
+                "nd": nd, "lis": lis, "adj": adj, "ordering": ordering,
+                "honesty_factor": 0.0,
                 "pred": pred,
                 "correct": CORRECT_ORDER,
             },
         }
 
+    # Honesty is verified on every slot: under the partial-credit ordering
+    # metric a mis-placed clip still earns score, so its content must be
+    # confirmed too (an exact-position-only check wouldn't catch a faked
+    # clip in a wrong slot). honesty_factor scales the ordering score.
     per_slot = []
-    n_honest_correct = 0
+    n_honest = 0
     for i in range(n):
-        slot = {"slot": i, "pred": pred[i], "expected": CORRECT_ORDER[i]}
-        if pred[i] != CORRECT_ORDER[i]:
-            slot["match"] = False
-            slot["honest"] = None  # not checked
-            slot["score"] = 0
+        slot = {"slot": i, "pred": pred[i], "expected": CORRECT_ORDER[i],
+                "match": pred[i] == CORRECT_ORDER[i]}
+        source_path = materials_dir / f"{pred[i]}.mp4"
+        if not source_path.exists():
+            slot["honest"] = False
+            slot["honesty_reason"] = f"missing source clip {source_path}"
         else:
-            slot["match"] = True
-            source_path = materials_dir / f"{pred[i]}.mp4"
-            if not source_path.exists():
-                slot["honest"] = False
-                slot["honesty_reason"] = f"missing source clip {source_path}"
-                slot["score"] = 0
-            else:
-                honest, samples = _check_honesty(solution_mp4, source_path, segments[i])
-                slot["honest"] = honest
-                slot["samples"] = samples
-                slot["score"] = 1 if honest else 0
-                if honest:
-                    n_honest_correct += 1
+            honest, samples = _check_honesty(solution_mp4, source_path, segments[i])
+            slot["honest"] = honest
+            slot["samples"] = samples
+            if honest:
+                n_honest += 1
         per_slot.append(slot)
 
+    honesty_factor = n_honest / n
+    reward = honesty_factor * ordering
+
     return {
-        "reward": n_honest_correct / n,
+        "reward": reward,
         "details": {
             "reason": "ok",
             "n_slots": n,
             "n_correct": n_correct,
-            "n_honest_correct": n_honest_correct,
+            "nd": nd, "lis": lis, "adj": adj,
+            "ordering": ordering,
+            "n_honest": n_honest,
+            "honesty_factor": honesty_factor,
             "ssim_threshold": SSIM_THRESHOLD,
             "n_samples_per_segment": N_SAMPLES,
             "pred": pred,

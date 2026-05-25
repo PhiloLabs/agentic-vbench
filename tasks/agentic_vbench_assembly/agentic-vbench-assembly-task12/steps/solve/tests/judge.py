@@ -11,7 +11,8 @@ claimed source clip's source_range, and require every pair's SSIM ≥ 0.95
 (same threshold the repair-task preservation gates use — robust to
 re-encoding noise, fails on real mismatch).
 
-Reward = (# slots that pass both gates) / n_slots.
+pass_rate p = (# slots that pass both gates) / n_slots.
+Reward = max(0, (p − 1/3) / (1 − 1/3)) — chance-corrected per-slot accuracy.
 """
 from __future__ import annotations
 
@@ -33,6 +34,10 @@ CORRECT_PICKS = ['7.mp4', '6.mp4', '2.mp4']
 
 SSIM_THRESHOLD = 0.95
 N_SAMPLES = 3  # at 25%, 50%, 75% through each segment
+
+CHANCE_LEVEL = 1.0 / 3.0  # paper's per-slot random baseline; reward is the
+                          # chance-corrected accuracy (p − chance)/(1 − chance),
+                          # floored at 0 to keep reward in [0, 1].
 
 
 def _normalize(src) -> str:
@@ -222,13 +227,18 @@ def score(solution_json: Path, solution_mp4: Path, materials_dir: Path) -> dict:
                     n_honest_correct += 1
         per_slot.append(slot)
 
+    p = n_honest_correct / n
+    reward = max(0.0, (p - CHANCE_LEVEL) / (1.0 - CHANCE_LEVEL))
+
     return {
-        "reward": n_honest_correct / n,
+        "reward": reward,
         "details": {
             "reason": "ok",
             "n_slots": n,
             "n_correct": n_correct,
             "n_honest_correct": n_honest_correct,
+            "pass_rate": p,
+            "chance_level": CHANCE_LEVEL,
             "ssim_threshold": SSIM_THRESHOLD,
             "n_samples_per_segment": N_SAMPLES,
             "pred": pred,
