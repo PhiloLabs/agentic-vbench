@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://agenticvbench.com/"><img src="https://img.shields.io/badge/🌐_Website-agenticvbench.com-green" alt="Website"></a>
-  <a href="paper/paper.pdf"><img src="https://img.shields.io/badge/📖_Paper-PDF-blue" alt="Paper"></a>
+  <a href="https://arxiv.org/abs/2605.27705"><img src="https://img.shields.io/badge/📖_Paper-arXiv:2605.27705-b31b1b" alt="Paper"></a>
   <a href="https://agenticvbench.com/leaderboard"><img src="https://img.shields.io/badge/🏆_Leaderboard-Live-yellow" alt="Leaderboard"></a>
 </p>
 
@@ -13,6 +13,12 @@
 **AgenticVBench** is a 100-task benchmark for evaluating AI agents on real-world video post-production workflows — **Assembly**, **Repair**, **Sequencing**, and **Repurpose**. Tasks are authored by 20 industry experts (avg. 6 years of professional experience) and scored on a 0–1 scale, mixing programmatic verifiers with rubric-based LLM judges.
 
 Built on [Harbor](https://www.harborframework.com/) — agent installation, sandboxed execution, concurrency, and trial scoring are handled for you.
+
+---
+
+## 🔥 News
+
+*   **`2026.06.01`** 📖 Our paper is now public on [arXiv](https://arxiv.org/abs/2605.27705) — read the full description of the benchmark, task families, and verifier design.
 
 ---
 
