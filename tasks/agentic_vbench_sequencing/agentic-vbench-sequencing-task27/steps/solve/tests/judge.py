@@ -203,7 +203,24 @@ def _zero(reason, pred=None):
     }
 
 
+class TaskMisconfiguredError(Exception):
+    """Provisioned materials do not match the answer key (CORRECT_ORDER);
+    the task is misconfigured. Fail loudly rather than producing a score."""
+
+
+def _assert_materials_match_key(materials_dir: Path) -> None:
+    provisioned = {p.stem for p in materials_dir.glob("*.mp4") if p.stem.isdigit()}
+    expected = set(CORRECT_ORDER)
+    if provisioned != expected:
+        order = lambda s: int(s) if s.isdigit() else 0
+        raise TaskMisconfiguredError(
+            f"materials clips {sorted(provisioned, key=order)} != answer-key clips "
+            f"{sorted(expected, key=order)} (have {len(provisioned)}, key wants {len(expected)})"
+        )
+
+
 def score(solution_json: Path, solution_mp4: Path, materials_dir: Path) -> dict:
+    _assert_materials_match_key(materials_dir)
     if not solution_json.exists():
         return _zero(f"solution.json not found at {solution_json}")
     try:
@@ -301,8 +318,17 @@ def main():
     parser.add_argument("--reward-txt", required=True, type=Path)
     args = parser.parse_args()
 
-    result = score(args.solution, args.solution_mp4, args.materials_dir)
     args.reward_json.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        result = score(args.solution, args.solution_mp4, args.materials_dir)
+    except TaskMisconfiguredError as e:
+        msg = f"TASK MISCONFIGURED (materials vs answer key out of sync): {e}"
+        print(msg, file=sys.stderr)
+        result = {"reward": None, "error": "task_misconfigured",
+                  "details": {"reason": msg, "correct": CORRECT_ORDER}}
+        args.reward_json.write_text(json.dumps(result, indent=2))
+        args.reward_txt.write_text("ERROR task_misconfigured\n")
+        return 2
     args.reward_json.write_text(json.dumps(result, indent=2))
     args.reward_txt.write_text(f"{result['reward']:.6f}\n")
     print(json.dumps(result, indent=2))

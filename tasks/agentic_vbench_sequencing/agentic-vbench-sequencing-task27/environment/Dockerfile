@@ -10,10 +10,12 @@ RUN pip install --no-cache-dir \
 
 # Bake task materials at build time from the public video dataset.
 # Workers pull this prebuilt image — no trial-time HF fetch.
-ARG MATERIALS_URL=https://huggingface.co/datasets/ameddserM/agentic_vbench_video_sequencing/resolve/main/materials/27.zip
+ARG MATERIALS_URL=https://huggingface.co/datasets/ameddserM/agentic_vbench_video_sequencing/resolve/00e704c2053e2260a40ef8432fe34af8258888d3/materials/27.zip
+ARG MATERIALS_SHA256=6ef2e4514f8c482a86b9f70013622b6ad9b2d1fadf25c0ff9a444acb269e147b
 RUN mkdir -p /baked/materials \
  && curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
       "$MATERIALS_URL" -o /tmp/m.zip \
+ && echo "${MATERIALS_SHA256}  /tmp/m.zip" | sha256sum -c - \
  && unzip -q /tmp/m.zip -d /baked/materials/ \
  && rm /tmp/m.zip
 
