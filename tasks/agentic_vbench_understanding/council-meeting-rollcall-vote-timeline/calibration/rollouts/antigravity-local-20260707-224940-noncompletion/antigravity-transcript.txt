@@ -1,0 +1,60 @@
+I will start by exploring the workspace to see the available files and directories.
+I will list the contents of the `materials` directory to verify the presence of the video file and check for other materials.
+I will run a command to check if CLI tools like `ffmpeg` or Python are available in our sandbox environment.
+I will run a python command to check which machine learning and speech recognition libraries (like `whisper`, `openai-whisper`, `speech_recognition`, etc.) are installed.
+I will check the default `python` interpreter (which was mapped to Anaconda) to see what libraries might be installed there.
+I will list the installed python packages for `/opt/homebrew/bin/python3` using pip.
+I will run `ffprobe` to find the duration and formats of the video file.
+I will run `ffprobe` to inspect the video file properties and get its duration.
+I will list the contents of the `work` directory to see if there are any helper scripts, notes, or existing files.
+I will list the `output` directory to check if there is anything there.
+I will check if there is a system-wide `whisper` CLI command available in the path.
+I will check the installed homebrew packages to see if there are any transcribers or speech recognition tools.
+I will run a command to find `whisper-cpp` and see if it is functional.
+I will check where `whisper-cpp` is installed by running `brew list whisper-cpp`.
+I will run `whisper-cli --help` using its full path.
+I will check the status of the help command to see the available options for `whisper-cli`.
+I will check the log file of the command to read the output of `whisper-cli --help`.
+I will search the Homebrew directory and workspace for any existing Whisper GGML model files.
+I will search the user's home directory for any downloaded Whisper model files.
+I will extract the audio from the `.mov` file and convert it to the 16kHz single-channel WAV format required by Whisper.
+I will check if there is a model downloader script included in the Whisper-cpp Cellar directory.
+I will test the local tiny Whisper model on the first 5 minutes of the extracted audio to see its quality and performance.
+I will check the log file of the Whisper transcription test to see if it works and what the transcribed output looks like.
+I will schedule a short 10-second timer to wait for the whisper transcription task to finish.
+I will pause to allow the background transcription task to progress.
+I will check the available disk space to make sure we can download a speech recognition model.
+I will run a `curl` command to download the `ggml-base.en.bin` model from Hugging Face to our `work` directory. This requires bypassing the sandbox to access the network.
+I will run the Whisper transcriber with the downloaded `ggml-base.en.bin` model on the first 5 minutes of the council meeting.
+I will schedule a 10-second timer to allow the Whisper model to transcribe the first 5 minutes of the audio.
+I will wait for the background transcription to proceed.
+I will view the log of the 5-minute transcription to check the result.
+I will run Whisper on the entire audio file using 8 threads and save the output in both TXT and VTT formats. This will run in the background.
+I will check the status of the full transcription task, waiting up to 60 seconds for it to complete.
+I will list all currently running background tasks to see if the transcription task is running.
+I will check the status of the transcription task using `manage_task`.
+I will schedule a 120-second timer to wait for the full transcription to finish.
+I will pause to wait for the transcription to complete.
+I will check the status of the transcription task to see if it is finished or still running.
+I will schedule a 60-second timer to allow the final portion of the meeting to be transcribed.
+I will pause to wait for the final part of the transcription to finish.
+I will run a python script to count the total lines in the transcription file and search for the positions of major agenda items and roll calls to get a high-level overview.
+I will write a python script to search the `.vtt` file for numbers and keywords, showing matching lines and their timestamps.
+I will run a python script to search the transcription for instances where the clerk calls the roll or councilmembers vote individually, to locate all roll-call vote events.
+I will write a python script to locate all clusters of councilmembers' names in the transcript, which will pinpoint where individual voting happens.
+I will view the transcription around the 1 hour 10 minutes to 1 hour 15 minutes mark, which is when the consent calendar begins.
+I will search the transcription after `01:13:32` for keywords like `resolution`, `motion`, `vote`, `aye`, `nay` to find the discussion and vote on `AB 8256`.
+I will write a python script to display the transcription lines between `01:25:00` and `01:45:00` that mention names, votes, or motions.
+I will write a python script to view the transcription cues starting from `01:44:40` to see the vote on the main motion of `AB 8256` (the Climate Action Plan).
+I will write a python script to check the transcription for the discussion and vote events under `AB 8292`.
+I will write a python script to output all transcription cues between `01:51:00` and `01:58:00` to see the details of the motion and vote on `AB 8292` (frontline worker incentive pay).
+I will write a python script to display the transcription from `02:04:00` to `02:28:00` to capture all the vote events and discussion for `AB 8303`.
+I will extract and inspect the audio clips for each of the identified voting events to verify the exact votes, movers, seconders, and results. I will start by writing a python script to get the exact time ranges of the votes from the VTT file.
+I will run a python script to search for a wider range of keywords related to voting, such as "clerk", "starting with", "unanimously", "fails", "passes", and "aye", to capture all the roll-call voting intervals.
+I will run a python script to display the transcription around `01:25:56` to see who moved and seconded the main motion for `AB 8256`.
+I will write a python script to search the transcription from `02:00:00` to `02:23:00` for keywords related to the amendment of `AB 8303` to identify the mover and seconder.
+I will write a python script to display the transcription around `02:03:13` to find out who made the main motion on `AB 8303`.
+I will write a python script to check the cues from `02:05:30` to `02:07:30` to identify the mover and seconder of the amendment for `AB 8303`.
+I will run a python script to display the transcription from `02:04:30` to `02:05:45` to verify who was called on to speak and confirm the identity of the speaker who made the amendment.
+I will extract a 45-second audio clip specifically covering the first vote (the amendment on `AB 8303`) to run Whisper with higher confidence tracking and verify every single councilmember's vote.
+I will transcribe the extracted clip for the `AB 8303` amendment vote using the Whisper base model, saving a detailed JSON transcript.

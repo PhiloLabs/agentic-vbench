@@ -1,0 +1,2716 @@
+2026-07-08T05:19:20.814981Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.codex/plugins/cache/openai-primary-runtime/template-creator/26.630.12135/.codex-plugin/plugin.json
+2026-07-08T05:19:20.816033Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.codex/plugins/cache/openai-primary-runtime/template-creator/26.630.12135/.codex-plugin/plugin.json
+OpenAI Codex v0.142.5
+--------
+workdir: /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: workspace-write [workdir, /tmp, $TMPDIR]
+reasoning effort: xhigh
+reasoning summaries: none
+session id: 019f402a-96d5-73a3-90d3-2940e60e5852
+--------
+user
+# Council Roll-Call Vote Timeline
+
+You are given one video at `materials/issaquah_city_council_2021-12-06.mov`:
+the full Issaquah City Council regular meeting from December 6, 2021.
+
+Reconstruct the complete timeline of agenda items in this meeting that have roll-call
+votes. For each such agenda item, identify its start time and count spoken public
+comments that clearly address that item. For each roll-call vote, identify the vote
+time, motion type, mover, seconder, final result, each councilmember's vote, absences,
+and any mayoral tie-break vote.
+
+Use the meeting video as your evidence. The spoken agenda labels, council discussion,
+public-comment section, and roll-call audio are all relevant.
+
+## Closed vocabularies
+
+Agenda item IDs:
+
+- `consent_calendar`
+- `AB 8256`
+- `AB 8292`
+- `AB 8303`
+
+Motion types:
+
+- `approve_consent_calendar`
+- `amend_motion`
+- `adopt_resolution`
+- `adopt_ordinance_and_ratify_mous`
+- `approve_motion_as_amended`
+
+Vote results:
+
+- `passed`
+- `passed_after_mayoral_tie_break`
+- `failed`
+
+Councilmember names:
+
+- `Barbara de Michele`
+- `Stacy Goodman`
+- `Zach Hall`
+- `Victoria Hunt`
+- `Tola Marts`
+- `Chris Reh`
+- `Lindsey Walsh`
+
+Mayor name:
+
+- `Mary Lou Pauly`
+
+## What counts as a spoken item-linked public comment
+
+Count only audience-comment speakers whose spoken comment clearly addresses the agenda
+item. Do not count email summaries, staff presentations, council discussion, ceremonial
+recognition comments, or general thanks unless the speaker also clearly addresses the
+agenda item.
+
+## What to submit
+
+Write `output/solution.json` in exactly this shape. Replace every
+placeholder with values derived from the video; do not include placeholder text in
+your final JSON:
+
+```json
+{
+  "agenda_items": [
+    {
+      "agenda_item_id": "<agenda_item_id>",
+      "item_start_time": "HH:MM:SS",
+      "spoken_item_linked_public_comment_count": 0
+    }
+  ],
+  "vote_events": [
+    {
+      "agenda_item_id": "<agenda_item_id>",
+      "vote_time": "HH:MM:SS",
+      "motion_type": "<motion_type>",
+      "mover": "<councilmember name>",
+      "seconder": "<councilmember name>",
+      "result": "<result>",
+      "yes": ["<councilmember name>"],
+      "no": ["<councilmember name>"],
+      "absent": ["<councilmember name>"],
+      "tie_breaker": null
+    },
+    {
+      "agenda_item_id": "<agenda_item_id>",
+      "vote_time": "HH:MM:SS",
+      "motion_type": "<motion_type>",
+      "mover": "<councilmember name>",
+      "seconder": "<councilmember name>",
+      "result": "<result>",
+      "yes": ["<councilmember name>"],
+      "no": ["<councilmember name>"],
+      "absent": ["<councilmember name>"],
+      "tie_breaker": {"name": "Mary Lou Pauly", "vote": "yes"}
+    }
+  ]
+}
+```
+
+- Include one `agenda_items` entry for each agenda item ID above that has one or more
+  roll-call votes.
+- Include one `vote_events` entry per roll-call vote, in any order.
+- Times are elapsed time from the start of the video in `HH:MM:SS`. Aim to be within
+  20 seconds for each timestamp.
+- The `yes`, `no`, and `absent` arrays should contain councilmember names only.
+- For a mayoral tie-break, keep councilmember votes in `yes` and `no`, and put the
+  mayor's vote in `tie_breaker`.
+
+## Rules
+
+- Stay inside this working directory. Do not read, write, or search outside it.
+- Do not look anything up online. Solve from the provided meeting video.
+- Do not use transcript files, captions downloaded from the internet, official
+  minutes, or motion reports. If you create your own notes from the video, keep them
+  under `work`.
+
+2026-07-08T05:19:20.961694Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:19:20.995301Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+2026-07-08T05:19:21.014805Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.014816Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.015715Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.015722Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.016289Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.016294Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.016703Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.016710Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.017126Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.017133Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.018532Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.018554Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.036498Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.codex/plugins/cache/openai-primary-runtime/template-creator/26.630.12135/.codex-plugin/plugin.json
+2026-07-08T05:19:21.037146Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.codex/plugins/cache/openai-primary-runtime/template-creator/26.630.12135/.codex-plugin/plugin.json
+2026-07-08T05:19:21.311999Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+2026-07-08T05:19:21.313075Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+2026-07-08T05:19:21.760746Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:19:21.764870Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+2026-07-08T05:19:21.775364Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.775373Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.775717Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.775722Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.776035Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.776041Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.776389Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.776397Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.776742Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.776750Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.777419Z  WARN codex_core_skills::loader: ignoring interface.icon_small: icon path with '..' must resolve under plugin assets/
+2026-07-08T05:19:21.777425Z  WARN codex_core_skills::loader: ignoring interface.icon_large: icon path with '..' must resolve under plugin assets/
+codex
+I’ll work from the local video only and keep any derived notes under `work`. First I’m checking the available files and media tooling so I can extract reliable timestamps and vote audio.
+exec
+/bin/zsh -lc 'which ffprobe && which ffmpeg && which python3 && which whisper && which yt-dlp' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ exited 1 in 0ms:
+/opt/homebrew/bin/ffprobe
+/opt/homebrew/bin/ffmpeg
+/opt/homebrew/bin/python3
+whisper not found
+
+exec
+/bin/zsh -lc 'rg --files' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 0ms:
+instruction.md
+materials/issaquah_city_council_2021-12-06.mov
+
+2026-07-08T05:19:30.393022Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:19:30.399140Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+codex
+The workspace contains just the task file and the `.mov`; `ffmpeg`/`ffprobe` are available, but no standalone `whisper` command. I’ll inspect the media metadata next and then sample/extract audio around agenda/vote sections.
+exec
+/bin/zsh -lc 'ls -lh materials && mkdir -p work output' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 0ms:
+total 1631344
+-rw-r--r--@ 4 brendaz  staff   797M Jul  7 21:17 issaquah_city_council_2021-12-06.mov
+
+exec
+/bin/zsh -lc 'ffprobe -hide_banner -i materials/issaquah_city_council_2021-12-06.mov' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 0ms:
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'materials/issaquah_city_council_2021-12-06.mov':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2021-12-07T06:56:35.000000Z
+  Duration: 02:30:17.24, start: 0.000000, bitrate: 741 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, smpte170m/bt709/bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 609 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 127 kb/s (default)
+    Metadata:
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+
+2026-07-08T05:19:35.721341Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:19:35.726657Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+codex
+The video is about 2:30:17 long. I’m going to check the local task text, then create low-bitrate audio/screenshot derivatives under `work` so searching the meeting structure is faster without leaving the workspace.
+exec
+/bin/zsh -lc "sed -n '1,220p' instruction.md" in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 0ms:
+# Council Roll-Call Vote Timeline
+
+You are given one video at `materials/issaquah_city_council_2021-12-06.mov`:
+the full Issaquah City Council regular meeting from December 6, 2021.
+
+Reconstruct the complete timeline of agenda items in this meeting that have roll-call
+votes. For each such agenda item, identify its start time and count spoken public
+comments that clearly address that item. For each roll-call vote, identify the vote
+time, motion type, mover, seconder, final result, each councilmember's vote, absences,
+and any mayoral tie-break vote.
+
+Use the meeting video as your evidence. The spoken agenda labels, council discussion,
+public-comment section, and roll-call audio are all relevant.
+
+## Closed vocabularies
+
+Agenda item IDs:
+
+- `consent_calendar`
+- `AB 8256`
+- `AB 8292`
+- `AB 8303`
+
+Motion types:
+
+- `approve_consent_calendar`
+- `amend_motion`
+- `adopt_resolution`
+- `adopt_ordinance_and_ratify_mous`
+- `approve_motion_as_amended`
+
+Vote results:
+
+- `passed`
+- `passed_after_mayoral_tie_break`
+- `failed`
+
+Councilmember names:
+
+- `Barbara de Michele`
+- `Stacy Goodman`
+- `Zach Hall`
+- `Victoria Hunt`
+- `Tola Marts`
+- `Chris Reh`
+- `Lindsey Walsh`
+
+Mayor name:
+
+- `Mary Lou Pauly`
+
+## What counts as a spoken item-linked public comment
+
+Count only audience-comment speakers whose spoken comment clearly addresses the agenda
+item. Do not count email summaries, staff presentations, council discussion, ceremonial
+recognition comments, or general thanks unless the speaker also clearly addresses the
+agenda item.
+
+## What to submit
+
+Write `output/solution.json` in exactly this shape. Replace every
+placeholder with values derived from the video; do not include placeholder text in
+your final JSON:
+
+```json
+{
+  "agenda_items": [
+    {
+      "agenda_item_id": "<agenda_item_id>",
+      "item_start_time": "HH:MM:SS",
+      "spoken_item_linked_public_comment_count": 0
+    }
+  ],
+  "vote_events": [
+    {
+      "agenda_item_id": "<agenda_item_id>",
+      "vote_time": "HH:MM:SS",
+      "motion_type": "<motion_type>",
+      "mover": "<councilmember name>",
+      "seconder": "<councilmember name>",
+      "result": "<result>",
+      "yes": ["<councilmember name>"],
+      "no": ["<councilmember name>"],
+      "absent": ["<councilmember name>"],
+      "tie_breaker": null
+    },
+    {
+      "agenda_item_id": "<agenda_item_id>",
+      "vote_time": "HH:MM:SS",
+      "motion_type": "<motion_type>",
+      "mover": "<councilmember name>",
+      "seconder": "<councilmember name>",
+      "result": "<result>",
+      "yes": ["<councilmember name>"],
+      "no": ["<councilmember name>"],
+      "absent": ["<councilmember name>"],
+      "tie_breaker": {"name": "Mary Lou Pauly", "vote": "yes"}
+    }
+  ]
+}
+```
+
+- Include one `agenda_items` entry for each agenda item ID above that has one or more
+  roll-call votes.
+- Include one `vote_events` entry per roll-call vote, in any order.
+- Times are elapsed time from the start of the video in `HH:MM:SS`. Aim to be within
+  20 seconds for each timestamp.
+- The `yes`, `no`, and `absent` arrays should contain councilmember names only.
+- For a mayoral tie-break, keep councilmember votes in `yes` and `no`, and put the
+  mayor's vote in `tie_breaker`.
+
+## Rules
+
+- Stay inside this working directory. Do not read, write, or search outside it.
+- Do not look anything up online. Solve from the provided meeting video.
+- Do not use transcript files, captions downloaded from the internet, official
+  minutes, or motion reports. If you create your own notes from the video, keep them
+  under `work`.
+
+exec
+/bin/zsh -lc "python3 - <<'PY'
+mods=['whisper','faster_whisper','speech_recognition','vosk','openai','pydub','moviepy','cv2','pytesseract','PIL','librosa','soundfile','torch','torchaudio']
+for m in mods:
+    try:
+        __import__(m)
+        print(m, 'OK')
+    except Exception as e:
+        print(m, 'NO', type(e).__name__)
+PY" in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 0ms:
+whisper NO ModuleNotFoundError
+faster_whisper NO ModuleNotFoundError
+speech_recognition NO ModuleNotFoundError
+vosk NO ModuleNotFoundError
+openai NO ModuleNotFoundError
+pydub NO ModuleNotFoundError
+moviepy NO ModuleNotFoundError
+cv2 NO ModuleNotFoundError
+pytesseract NO ModuleNotFoundError
+PIL NO ModuleNotFoundError
+librosa NO ModuleNotFoundError
+soundfile NO ModuleNotFoundError
+torch NO ModuleNotFoundError
+torchaudio NO ModuleNotFoundError
+
+2026-07-08T05:19:46.195017Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:19:46.199385Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+codex
+There’s no local ASR Python package installed, so I’ll rely on the video itself: frame sampling for agenda context and targeted audio/video review using local derivatives. I’m making contact sheets to locate the item segments before drilling into votes.
+exec
+/bin/zsh -lc 'ffmpeg -hide_banner -y -i materials/issaquah_city_council_2021-12-06.mov -vf "fps=1/120,scale=320:-1,tile=5x8" -frames:v 4 work/contact_%02d.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+2026-07-08T05:20:30.489785Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:20:30.517725Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+codex
+The first contact sheet render is still running, which is expected for a full 2.5-hour video. I’ll let it finish and then inspect the sheets for visible agenda transitions.
+2026-07-08T05:20:45.495837Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:20:45.524832Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+ succeeded in 45109ms:
+[mjpeg @ 0x147616560] bitrate tolerance 4000000 too small for bitrate 200000, overriding
+Output #0, image2, to 'work/contact_%02d.jpg':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    encoder         : Lavf62.12.102
+  Stream #0:0(und): Video: mjpeg, yuv420p(pc, smpte170m/bt709/bt709, progressive), 1600x1440 [SAR 1:1 DAR 10:9], q=2-31, 200 kb/s, 0.0002 fps, 0.0002 tbn (default)
+    Metadata:
+      encoder         : Lavc62.28.102 mjpeg
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+    Side data:
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 203x elapsed=0:00:23.68    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 198x elapsed=0:00:24.19    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 194x elapsed=0:00:24.69    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 190x elapsed=0:00:25.20    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 187x elapsed=0:00:25.70    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 183x elapsed=0:00:26.21    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 180x elapsed=0:00:26.71    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 176x elapsed=0:00:27.22    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 173x elapsed=0:00:27.72    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 170x elapsed=0:00:28.22    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 167x elapsed=0:00:28.73    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 164x elapsed=0:00:29.23    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 161x elapsed=0:00:29.74    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 159x elapsed=0:00:30.24    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 156x elapsed=0:00:30.75    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 154x elapsed=0:00:31.25    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 151x elapsed=0:00:31.75    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 149x elapsed=0:00:32.26    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 146x elapsed=0:00:32.76    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 144x elapsed=0:00:33.26    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 142x elapsed=0:00:33.77    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 140x elapsed=0:00:34.27    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 138x elapsed=0:00:34.78    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 136x elapsed=0:00:35.28    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 134x elapsed=0:00:35.79    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 132x elapsed=0:00:36.29    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 130x elapsed=0:00:36.80    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 129x elapsed=0:00:37.30    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 127x elapsed=0:00:37.80    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 125x elapsed=0:00:38.31    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 124x elapsed=0:00:38.81    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 122x elapsed=0:00:39.31    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 121x elapsed=0:00:39.82    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 119x elapsed=0:00:40.32    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 118x elapsed=0:00:40.83    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 116x elapsed=0:00:41.33    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 115x elapsed=0:00:41.84    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 113x elapsed=0:00:42.34    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 112x elapsed=0:00:42.85    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 111x elapsed=0:00:43.35    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 109x elapsed=0:00:43.85    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 108x elapsed=0:00:44.36    frame=    1 fps=0.0 q=13.4 size=N/A time=01:20:00.00 bitrate=N/A speed= 107x elapsed=0:00:44.86    [out#0/image2 @ 0x147615250] video:442KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    2 fps=0.0 q=11.4 Lsize=N/A time=02:40:00.00 bitrate=N/A speed= 213x elapsed=0:00:45.07
+
+codex
+The coarse sheets are ready. I’ll inspect them visually to map the major agenda blocks, then generate narrower sheets around the likely voting portions.
+exec
+/bin/zsh -lc 'ls -lh work/contact_*.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 0ms:
+-rw-r--r--@ 1 brendaz  staff   212K Jul  7 22:20 work/contact_01.jpg
+-rw-r--r--@ 1 brendaz  staff   229K Jul  7 22:20 work/contact_02.jpg
+
+2026-07-08T05:20:51.141108Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:20:51.145619Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+codex
+The frame labels expose the meeting structure: AB 8256 starts around the 74-80 minute area, AB 8292 around 100 minutes, and AB 8303 shortly after. I still need exact roll-call audio, so I’ll check for any local speech tools/binaries before falling back to more targeted manual video inspection.
+exec
+/bin/zsh -lc 'for c in whisper-cli whisper-cpp whispercpp main stream transcribe vosk-transcriber pocketsphinx pocketsphinx_continuous deepspeech mlx_whisper mlx-whisper; do p=$(command -v "$c" 2>/dev/null || true); [ -n "$p" ] && echo "$c $p"; done' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+exec
+/bin/zsh -lc "find . -maxdepth 3 -type f | sort | sed -n '1,200p'" in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ exited 1 in 0ms:
+stream /opt/homebrew/bin/stream
+
+ succeeded in 0ms:
+./instruction.md
+./materials/issaquah_city_council_2021-12-06.mov
+./work/contact_01.jpg
+./work/contact_02.jpg
+
+exec
+/bin/zsh -lc 'ffprobe -hide_banner -show_chapters -show_format materials/issaquah_city_council_2021-12-06.mov' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 0ms:
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'materials/issaquah_city_council_2021-12-06.mov':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2021-12-07T06:56:35.000000Z
+  Duration: 02:30:17.24, start: 0.000000, bitrate: 741 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, smpte170m/bt709/bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 609 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 127 kb/s (default)
+    Metadata:
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+[FORMAT]
+filename=materials/issaquah_city_council_2021-12-06.mov
+nb_streams=2
+nb_programs=0
+nb_stream_groups=0
+format_name=mov,mp4,m4a,3gp,3g2,mj2
+format_long_name=QuickTime / MOV
+start_time=0.000000
+duration=9017.237188
+size=835244193
+bit_rate=741020
+probe_score=100
+TAG:major_brand=mp42
+TAG:minor_version=0
+TAG:compatible_brands=isommp42
+TAG:creation_time=2021-12-07T06:56:35.000000Z
+[/FORMAT]
+
+2026-07-08T05:21:12.432114Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:21:12.436888Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+codex
+The media file has no embedded chapters or subtitle stream, so the only structured source is what’s visible/audible in the video. I’m checking whether any deferred local tool can help with audio transcription; if not, I’ll continue by narrowing the vote windows visually and using the meeting’s spoken labels where they can be determined.
+2026-07-08T05:21:36.779582Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:21:36.788108Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+codex
+No deferred ASR tool is available. I’m going to use local video derivatives: first pin item/vote windows from visible agenda labels, then extract short clips around each roll call so the evidence stays bounded and reviewable under `work`.
+exec
+/bin/zsh -lc 'mkdir -p work/frames work/clips' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+exec
+/bin/zsh -lc 'find . -maxdepth 4 -type d -name node_modules -o -type f -name package.json' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 0ms:
+ succeeded in 0ms:
+2026-07-08T05:21:43.582966Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:21:43.591705Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+codex
+I have the broad map now: consent near 72 minutes, AB 8256 immediately after, AB 8292 around 101 minutes, and AB 8303 around 106 minutes. I’m generating timestamped sheets for those intervals so the start and vote times can be pinned within the required tolerance.
+exec
+/bin/zsh -lc "ffmpeg -hide_banner -y -ss 00:00:00 -t 00:22:00 -i materials/issaquah_city_council_2021-12-06.mov -vf \"fps=1/30,scale=320:-1,drawtext=fontcolor=yellow:fontsize=20:box=1:boxcolor=black@0.7:text='%{pts\\\\:hms}':x=8:y=8,tile=6x8\" -frames:v 2 work/frames/start_00_%02d.jpg" in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+exec
+/bin/zsh -lc "ffmpeg -hide_banner -y -ss 00:30:00 -t 00:25:00 -i materials/issaquah_city_council_2021-12-06.mov -vf \"fps=1/30,scale=320:-1,drawtext=fontcolor=yellow:fontsize=20:box=1:boxcolor=black@0.7:text='%{pts\\\\:hms}':x=8:y=8,tile=6x8\" -frames:v 2 work/frames/comments_30_%02d.jpg" in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ exited 8 in 0ms:
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'materials/issaquah_city_council_2021-12-06.mov':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2021-12-07T06:56:35.000000Z
+  Duration: 02:30:17.24, start: 0.000000, bitrate: 741 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, smpte170m/bt709/bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 609 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 127 kb/s (default)
+    Metadata:
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+[AVFilterGraph @ 0x147006890] No such filter: 'drawtext'
+Error opening output file work/frames/start_00_%02d.jpg.
+Error opening output files: Filter not found
+
+ exited 8 in 0ms:
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'materials/issaquah_city_council_2021-12-06.mov':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2021-12-07T06:56:35.000000Z
+  Duration: 02:30:17.24, start: 0.000000, bitrate: 741 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, smpte170m/bt709/bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 609 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 127 kb/s (default)
+    Metadata:
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+[AVFilterGraph @ 0x1431077d0] No such filter: 'drawtext'
+Error opening output file work/frames/comments_30_%02d.jpg.
+Error opening output files: Filter not found
+
+exec
+/bin/zsh -lc "ffmpeg -hide_banner -y -ss 01:10:00 -t 01:15:00 -i materials/issaquah_city_council_2021-12-06.mov -vf \"fps=1/30,scale=320:-1,drawtext=fontcolor=yellow:fontsize=20:box=1:boxcolor=black@0.7:text='%{pts\\\\:hms}':x=8:y=8,tile=6x8\" -frames:v 3 work/frames/items_70_%02d.jpg" in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ exited 8 in 0ms:
+Input #0, mov,mp4,m4a,3gp,3g2,mj2, from 'materials/issaquah_city_council_2021-12-06.mov':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    creation_time   : 2021-12-07T06:56:35.000000Z
+  Duration: 02:30:17.24, start: 0.000000, bitrate: 741 kb/s
+  Stream #0:0[0x1](und): Video: h264 (High) (avc1 / 0x31637661), yuv420p(tv, smpte170m/bt709/bt709, progressive), 1280x720 [SAR 1:1 DAR 16:9], 609 kb/s, 30 fps, 30 tbr, 15360 tbn (default)
+    Metadata:
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+  Stream #0:1[0x2](und): Audio: aac (LC) (mp4a / 0x6134706D), 44100 Hz, stereo, fltp, 127 kb/s (default)
+    Metadata:
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+[AVFilterGraph @ 0x147e18c70] No such filter: 'drawtext'
+Error opening output file work/frames/items_70_%02d.jpg.
+Error opening output files: Filter not found
+
+2026-07-08T05:22:11.564387Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:22:11.592733Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+codex
+This ffmpeg build lacks `drawtext`, so I’ll keep timestamps in filenames and use grid position arithmetic for sheets. I’m switching to individual named frames around transitions where exact labels matter.
+exec
+/bin/zsh -lc 'for c in magick convert montage ffplay; do p=$(command -v "$c" 2>/dev/null || true); [ -n "$p" ] && echo "$c $p"; done' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 0ms:
+magick /opt/homebrew/bin/magick
+convert /opt/homebrew/bin/convert
+montage /opt/homebrew/bin/montage
+ffplay /opt/homebrew/bin/ffplay
+
+exec
+/bin/zsh -lc 'ffmpeg -hide_banner -y -ss 01:40:00 -t 00:45:00 -i materials/issaquah_city_council_2021-12-06.mov -vf "fps=1/30,scale=480:-1,tile=5x12" -frames:v 2 work/frames/items_100_30s_%02d.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+exec
+/bin/zsh -lc 'ffmpeg -hide_banner -y -ss 01:10:00 -t 00:15:00 -i materials/issaquah_city_council_2021-12-06.mov -vf "fps=1/15,scale=480:-1,tile=5x12" -frames:v 2 work/frames/items_70_15s_%02d.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 5450ms:
+[mjpeg @ 0x133f06aa0] bitrate tolerance 4000000 too small for bitrate 200000, overriding
+Output #0, image2, to 'work/frames/items_70_15s_%02d.jpg':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    encoder         : Lavf62.12.102
+  Stream #0:0(und): Video: mjpeg, yuv420p(pc, smpte170m/bt709/bt709, progressive), 2400x3240 [SAR 1:1 DAR 20:27], q=2-31, 200 kb/s, 0.0011 fps, 0.0011 tbn (default)
+    Metadata:
+      encoder         : Lavc62.28.102 mjpeg
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+    Side data:
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[out#0/image2 @ 0x133f05940] video:524KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.2 q=17.9 Lsize=N/A time=00:15:00.00 bitrate=N/A speed= 166x elapsed=0:00:05.43
+
+2026-07-08T05:22:39.225893Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:22:39.252702Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+ succeeded in 14883ms:
+[mjpeg @ 0x106e061e0] bitrate tolerance 4000000 too small for bitrate 200000, overriding
+Output #0, image2, to 'work/frames/items_100_30s_%02d.jpg':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    encoder         : Lavf62.12.102
+  Stream #0:0(und): Video: mjpeg, yuv420p(pc, smpte170m/bt709/bt709, progressive), 2400x3240 [SAR 1:1 DAR 20:27], q=2-31, 200 kb/s, 0.0006 fps, 0.0006 tbn (default)
+    Metadata:
+      encoder         : Lavc62.28.102 mjpeg
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+    Side data:
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+frame=    1 fps=0.1 q=17.7 size=N/A time=00:30:00.00 bitrate=N/A speed= 170x elapsed=0:00:10.59    frame=    1 fps=0.1 q=17.7 size=N/A time=00:30:00.00 bitrate=N/A speed= 162x elapsed=0:00:11.09    frame=    1 fps=0.1 q=17.7 size=N/A time=00:30:00.00 bitrate=N/A speed= 155x elapsed=0:00:11.60    frame=    1 fps=0.1 q=17.7 size=N/A time=00:30:00.00 bitrate=N/A speed= 149x elapsed=0:00:12.10    frame=    1 fps=0.1 q=17.7 size=N/A time=00:30:00.00 bitrate=N/A speed= 143x elapsed=0:00:12.60    frame=    1 fps=0.1 q=17.7 size=N/A time=00:30:00.00 bitrate=N/A speed= 137x elapsed=0:00:13.11    frame=    1 fps=0.1 q=17.7 size=N/A time=00:30:00.00 bitrate=N/A speed= 132x elapsed=0:00:13.61    frame=    1 fps=0.1 q=17.7 size=N/A time=00:30:00.00 bitrate=N/A speed= 127x elapsed=0:00:14.12    frame=    1 fps=0.1 q=17.7 size=N/A time=00:30:00.00 bitrate=N/A speed= 123x elapsed=0:00:14.62    [out#0/image2 @ 0x106e04720] video:886KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    2 fps=0.1 q=15.7 Lsize=N/A time=01:00:00.00 bitrate=N/A speed= 242x elapsed=0:00:14.86
+
+2026-07-08T05:22:47.343491Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:22:47.347869Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+codex
+The timestamped sheets show the item transitions more closely: consent starts just before 1:12:00, AB 8256 around 1:13:30, AB 8292 around 1:06 after the 1:40 offset, and AB 8303 around 1:52:30. The hard part is still the vote audio; I’m going to try macOS’s built-in speech framework locally on short extracted clips.
+exec
+/bin/zsh -lc 'ffmpeg -hide_banner -y -ss 01:11:00 -t 00:04:00 -i materials/issaquah_city_council_2021-12-06.mov -vn -ac 1 -ar 16000 work/clips/consent_71_75.wav' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+exec
+/bin/zsh -lc 'swift --version' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+exec
+/bin/zsh -lc 'ffmpeg -hide_banner -y -ss 01:40:00 -t 00:06:30 -i materials/issaquah_city_council_2021-12-06.mov -vn -ac 1 -ar 16000 work/clips/ab8256_vote_window.wav' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+exec
+/bin/zsh -lc 'ffmpeg -hide_banner -y -ss 02:18:00 -t 00:07:00 -i materials/issaquah_city_council_2021-12-06.mov -vn -ac 1 -ar 16000 work/clips/ab8303_votes_window.wav' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 124ms:
+Apple Swift version 6.1 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)
+Target: arm64-apple-macosx15.0
+
+ succeeded in 277ms:
+[out#0/wav @ 0x135112c00] video:0KiB audio:7500KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.001016%
+size=    7500KiB time=00:04:00.00 bitrate= 256.0kbits/s speed= 955x elapsed=0:00:00.25
+
+2026-07-08T05:23:22.113880Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:23:22.140536Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+ succeeded in 363ms:
+[out#0/wav @ 0x124e16070] video:0KiB audio:12188KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000625%
+size=   12188KiB time=00:06:30.00 bitrate= 256.0kbits/s speed=1.18e+03x elapsed=0:00:00.33
+
+ succeeded in 345ms:
+[out#0/wav @ 0x13b905e30] video:0KiB audio:13125KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: 0.000580%
+size=   13125KiB time=00:07:00.00 bitrate= 256.0kbits/s speed=1.25e+03x elapsed=0:00:00.33
+
+codex
+Short WAV clips for the consent, AB 8256 vote window, and late AB 8303 vote window are under `work/clips`. I’m adding a small local Swift transcriber harness to see whether the built-in macOS recognizer can process those files without external services.
+apply patch
+patch: completed
+/Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex/work/transcribe.swift
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+2026-07-08T05:23:35.950506Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:23:35.955300Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+codex
+The transcriber harness is in place. I’m compiling/running it on the shortest consent clip first; if macOS blocks speech permissions, I’ll drop that path and keep working from visual/video evidence.
+exec
+/bin/zsh -lc 'swift work/transcribe.swift work/clips/consent_71_75.wav > work/clips/consent_71_75.transcript.txt' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+2026-07-08T05:23:45.604093Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:23:45.607899Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+ exited 1 in 4352ms:
+<unknown>:0: error: unable to open output file '/Users/brendaz/.cache/clang/ModuleCache/2YSYFLYQ2SNRA/SwiftShims-HDRQD0I4Z1DW.pcm': 'Operation not permitted'
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/Swift.swiftmodule/arm64e-apple-macos.swiftinterface:5:8: error: could not build Objective-C module 'SwiftShims'
+    3 | // swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-macosx15.4 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftCore -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -enable-experimental-concise-pound-file -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature Macros -enable-experimental-feature FreestandingMacros -enable-experimental-feature Extern -enable-experimental-feature BitwiseCopyable -user-module-version 6.1.0.110.5 -module-name Swift
+    4 | // swift-module-flags-ignorable: -enable-lexical-lifetimes=false -enable-ossa-modules -interface-compiler-version 6.1
+    5 | import SwiftShims
+      |        `- error: could not build Objective-C module 'SwiftShims'
+    6 | @inlinable public func min<T>(_ x: T, _ y: T) -> T where T : Swift.Comparable {
+    7 |
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/lib/swift/Swift.swiftmodule/arm64e-apple-macos.swiftinterface:1:1: error: failed to build module 'Swift'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)', while this compiler is 'Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)'). Please select a toolchain which matches the SDK.
+    1 | // swift-interface-format-version: 1.0
+      | `- error: failed to build module 'Swift'; this SDK is not supported by the compiler (the SDK is built with 'Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)', while this compiler is 'Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)'). Please select a toolchain which matches the SDK.
+    2 | // swift-compiler-version: Apple Swift version 6.1 effective-5.10 (swiftlang-6.1.0.110.5 clang-1700.0.13.3)
+    3 | // swift-module-flags: -disable-objc-attr-requires-foundation-module -target arm64e-apple-macosx15.4 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftCore -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -enable-experimental-concise-pound-file -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature Macros -enable-experimental-feature FreestandingMacros -enable-experimental-feature Extern -enable-experimental-feature BitwiseCopyable -user-module-version 6.1.0.110.5 -module-name Swift
+
+codex
+The Swift run tried to write its compiler cache outside the workspace, which the sandbox blocked. I’ll redirect the compiler/module cache under `work` and retry; that stays within the directory rules.
+exec
+/bin/zsh -lc 'mkdir -p work/swift-cache work/tmp && CLANG_MODULE_CACHE_PATH=$PWD/work/swift-cache TMPDIR=$PWD/work/tmp swift -module-cache-path $PWD/work/swift-cache work/transcribe.swift work/clips/consent_71_75.wav > work/clips/consent_71_75.transcript.txt' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+exec
+/bin/zsh -lc 'xcrun --find swift && xcrun swift --version' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+ succeeded in 109ms:
+Apple Swift version 6.1 (swiftlang-6.1.0.110.21 clang-1700.0.13.3)
+Target: arm64-apple-macosx15.0
+
+2026-07-08T05:24:25.082590Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:24:25.114902Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+ exited 1 in 30698ms:
+nwi_state: registration failed (9)
+speech authorization failed: 1
+
+codex
+The Swift transcription process is running now with caches redirected into `work`. I’ll wait a bit for either a transcript or a permission/error result.
+2026-07-08T05:24:30.041811Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:24:30.048465Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+codex
+The macOS speech framework is unavailable in this environment due to Speech Recognition authorization. I’m continuing with a bounded visual reconstruction: the agenda labels, speaker changes, and meeting flow give reliable item times and likely vote windows, and I’ll record uncertainty only in my notes, not in the required JSON.
+exec
+/bin/zsh -lc 'ffmpeg -hide_banner -y -ss 01:25:00 -t 00:15:00 -i materials/issaquah_city_council_2021-12-06.mov -vf "fps=1/30,scale=480:-1,tile=5x12" -frames:v 1 work/frames/ab8256_85_100_30s.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+2026-07-08T05:25:12.841742Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:25:12.846890Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+ succeeded in 4881ms:
+[mjpeg @ 0x122705ed0] bitrate tolerance 4000000 too small for bitrate 200000, overriding
+Output #0, image2, to 'work/frames/ab8256_85_100_30s.jpg':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    encoder         : Lavf62.12.102
+  Stream #0:0(und): Video: mjpeg, yuv420p(pc, smpte170m/bt709/bt709, progressive), 2400x3240 [SAR 1:1 DAR 20:27], q=2-31, 200 kb/s, 0.0006 fps, 0.0006 tbn (default)
+    Metadata:
+      encoder         : Lavc62.28.102 mjpeg
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+    Side data:
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[image2 @ 0x122704da0] The specified filename 'work/frames/ab8256_85_100_30s.jpg' does not contain an image sequence pattern or a pattern is invalid.
+[image2 @ 0x122704da0] Use a pattern such as %03d for an image sequence or use the -update option (with -frames:v 1 if needed) to write a single image.
+[out#0/image2 @ 0x122706750] video:343KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.2 q=14.7 Lsize=N/A time=00:30:00.00 bitrate=N/A speed= 373x elapsed=0:00:04.82
+
+2026-07-08T05:25:16.597711Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:25:16.601259Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+codex
+The AB 8256 visual segment shows staff presentation followed by council discussion, with no obvious audience-speaker block inside that item. I’m checking the earlier Audience Comments section because item-linked comments may have occurred there instead.
+exec
+/bin/zsh -lc 'ffmpeg -hide_banner -y -ss 00:30:00 -t 00:25:00 -i materials/issaquah_city_council_2021-12-06.mov -vf "fps=1/30,scale=480:-1,tile=5x12" -frames:v 2 work/frames/comments_30_30s_%02d.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+2026-07-08T05:25:34.858200Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:25:34.863328Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+ succeeded in 7523ms:
+[mjpeg @ 0x12bf06aa0] bitrate tolerance 4000000 too small for bitrate 200000, overriding
+Output #0, image2, to 'work/frames/comments_30_30s_%02d.jpg':
+  Metadata:
+    major_brand     : mp42
+    minor_version   : 0
+    compatible_brands: isommp42
+    encoder         : Lavf62.12.102
+  Stream #0:0(und): Video: mjpeg, yuv420p(pc, smpte170m/bt709/bt709, progressive), 2400x3240 [SAR 1:1 DAR 20:27], q=2-31, 200 kb/s, 0.0006 fps, 0.0006 tbn (default)
+    Metadata:
+      encoder         : Lavc62.28.102 mjpeg
+      creation_time   : 2021-12-07T06:56:35.000000Z
+      handler_name    : ISO Media file produced by Google Inc. Created on: 12/06/2021.
+    Side data:
+      CPB properties: bitrate max/min/avg: 0/0/200000 buffer size: 0 vbv_delay: N/A
+[out#0/image2 @ 0x12bf05940] video:456KiB audio:0KiB subtitle:0KiB other streams:0KiB global headers:0KiB muxing overhead: unknown
+frame=    1 fps=0.1 q=16.2 Lsize=N/A time=00:30:00.00 bitrate=N/A speed= 240x elapsed=0:00:07.49
+
+2026-07-08T05:25:40.947958Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:25:40.952125Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+codex
+ImageMagick is available, so I can annotate frames after extraction even though ffmpeg lacks `drawtext`. I’m creating timestamped montages around the suspected vote windows to identify motion/vote sequences from active-speaker changes.
+exec
+/bin/zsh -lc 'mkdir -p work/frames/ab8303_vote_detail && rm -f work/frames/ab8303_vote_detail/*.jpg
+for s in $(seq 8280 10 8700); do
+  h=$((s/3600)); m=$(((s%3600)/60)); sec=$((s%60)); ts=$(printf '"'%02d:%02d:%02d' "'$h $m $sec); out="work/frames/ab8303_vote_detail/${ts}.jpg";
+  ffmpeg -hide_banner -loglevel error -y -ss "$ts" -i materials/issaquah_city_council_2021-12-06.mov -frames:v 1 -vf scale=480:-1 "$out";
+  magick "$out" -gravity NorthWest -background '"'#00000099' -fill yellow -pointsize 28 -splice 0x34 -annotate +8+4 \""'$ts" "$out";
+done
+montage work/frames/ab8303_vote_detail/*.jpg -tile 5x -geometry +4+4 work/frames/ab8303_vote_detail_montage.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+2026-07-08T05:26:26.858353Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:26:26.863702Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+ succeeded in 4421ms:
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+
+2026-07-08T05:26:32.339275Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:26:32.343303Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+codex
+The first AB 8303 vote window still shows discussion through 2:25:00, so the roll call is later than the initial estimate. I’m extending that window toward the end of the meeting.
+exec
+/bin/zsh -lc 'mkdir -p work/frames/ab8303_vote_detail2 && rm -f work/frames/ab8303_vote_detail2/*.jpg
+for s in $(seq 8700 10 9010); do
+  h=$((s/3600)); m=$(((s%3600)/60)); sec=$((s%60)); ts=$(printf '"'%02d:%02d:%02d' "'$h $m $sec); out="work/frames/ab8303_vote_detail2/${ts}.jpg";
+  ffmpeg -hide_banner -loglevel error -y -ss "$ts" -i materials/issaquah_city_council_2021-12-06.mov -frames:v 1 -vf scale=480:-1 "$out";
+  FC_CACHEDIR=$PWD/work/fontconfig-cache magick "$out" -gravity NorthWest -background '"'#00000099' -fill yellow -pointsize 28 -splice 0x34 -annotate +8+4 \""'$ts" "$out";
+done
+montage work/frames/ab8303_vote_detail2/*.jpg -tile 5x -geometry +4+4 work/frames/ab8303_vote_detail2_montage.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+2026-07-08T05:26:46.785235Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:26:46.789262Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+ succeeded in 3241ms:
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+
+2026-07-08T05:26:51.162264Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:26:51.166314Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+codex
+The AB 8303 item ends around 2:27:20 before “Good of the Order.” I’m zooming into the gallery-view stretches around 2:21 and 2:25 because those are likely the two roll calls.
+exec
+/bin/zsh -lc 'mkdir -p work/frames/ab8303_rollcalls && rm -f work/frames/ab8303_rollcalls/*.jpg
+for s in $(seq 8460 2 8570) $(seq 8720 2 8840); do
+  h=$((s/3600)); m=$(((s%3600)/60)); sec=$((s%60)); ts=$(printf '"'%02d:%02d:%02d' "'$h $m $sec); out="work/frames/ab8303_rollcalls/${ts}.jpg";
+  ffmpeg -hide_banner -loglevel error -y -ss "$ts" -i materials/issaquah_city_council_2021-12-06.mov -frames:v 1 "$out";
+  FC_CACHEDIR=$PWD/work/fontconfig-cache magick "$out" -gravity NorthWest -background '"'#00000099' -fill yellow -pointsize 30 -splice 0x38 -annotate +8+4 \""'$ts" "$out";
+done
+montage work/frames/ab8303_rollcalls/02:21:*.jpg work/frames/ab8303_rollcalls/02:22:*.jpg -tile 6x -geometry +3+3 work/frames/ab8303_rollcall1_montage.jpg
+montage work/frames/ab8303_rollcalls/02:25:*.jpg work/frames/ab8303_rollcalls/02:26:*.jpg work/frames/ab8303_rollcalls/02:27:*.jpg -tile 6x -geometry +3+3 work/frames/ab8303_rollcall2_montage.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+2026-07-08T05:27:27.605976Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:27:27.633138Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+ succeeded in 16008ms:
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+
+codex
+The detailed frame extraction finished. I’ll inspect the two annotated roll-call montages now and use the active-speaker sequence to set the vote timestamps.
+2026-07-08T05:27:36.805918Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:27:36.809711Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+codex
+I can see Chris Reh is not present in the gallery view, which explains the six-member votes and possible 3-3 tie. I’m now extracting the earlier vote windows so the same active-speaker pattern can identify movers/seconders and vote timestamps for consent, AB 8256, and AB 8292.
+exec
+/bin/zsh -lc 'mkdir -p work/frames/earlier_votes && rm -f work/frames/earlier_votes/*.jpg
+for s in $(seq 4280 2 4420) $(seq 6120 2 6380) $(seq 6360 2 6750); do
+  h=$((s/3600)); m=$(((s%3600)/60)); sec=$((s%60)); ts=$(printf '"'%02d:%02d:%02d' "'$h $m $sec); out="work/frames/earlier_votes/${ts}.jpg";
+  ffmpeg -hide_banner -loglevel error -y -ss "$ts" -i materials/issaquah_city_council_2021-12-06.mov -frames:v 1 -vf scale=960:-1 "$out";
+  FC_CACHEDIR=$PWD/work/fontconfig-cache magick "$out" -gravity NorthWest -background '"'#00000099' -fill yellow -pointsize 28 -splice 0x34 -annotate +8+4 \""'$ts" "$out";
+done
+montage work/frames/earlier_votes/01:11:*.jpg work/frames/earlier_votes/01:12:*.jpg work/frames/earlier_votes/01:13:*.jpg -tile 5x -geometry +3+3 work/frames/consent_vote_montage.jpg
+montage work/frames/earlier_votes/01:42:*.jpg work/frames/earlier_votes/01:43:*.jpg work/frames/earlier_votes/01:44:*.jpg work/frames/earlier_votes/01:45:*.jpg -tile 5x -geometry +3+3 work/frames/ab8256_vote_montage.jpg
+montage work/frames/earlier_votes/01:46:*.jpg work/frames/earlier_votes/01:47:*.jpg work/frames/earlier_votes/01:48:*.jpg work/frames/earlier_votes/01:49:*.jpg work/frames/earlier_votes/01:50:*.jpg work/frames/earlier_votes/01:51:*.jpg work/frames/earlier_votes/01:52:*.jpg -tile 5x -geometry +3+3 work/frames/ab8292_vote_montage.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+2026-07-08T05:29:10.480739Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:29:10.487142Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+codex
+The earlier vote montage build is still running because it is extracting many full-width frames. I’ll let it finish, then inspect only the final montages rather than the individual frame set.
+2026-07-08T05:29:28.226445Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:29:28.253660Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+ succeeded in 47847ms:
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+
+codex
+The earlier vote montages are built. I’m going to inspect them now, focusing on visible agenda labels and active-speaker changes to pin each roll-call timestamp.
+2026-07-08T05:29:40.786669Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:29:40.791432Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+codex
+For consent, the visual sequence indicates the item starts at 1:11:20, with Tola Marts speaking through the motion and Council President Hunt appearing for the second before the gallery roll call around 1:13:00. I’m tightening the AB 8256 and AB 8292 windows because the full montages are too tall to read cleanly.
+exec
+/bin/zsh -lc 'mkdir -p work/frames/tight && rm -f work/frames/tight/*.jpg
+for s in $(seq 6150 5 6360) $(seq 6360 5 6750); do
+  h=$((s/3600)); m=$(((s%3600)/60)); sec=$((s%60)); ts=$(printf '"'%02d:%02d:%02d' "'$h $m $sec); out="work/frames/tight/${ts}.jpg";
+  ffmpeg -hide_banner -loglevel error -y -ss "$ts" -i materials/issaquah_city_council_2021-12-06.mov -frames:v 1 -vf scale=640:-1 "$out";
+  FC_CACHEDIR=$PWD/work/fontconfig-cache magick "$out" -gravity NorthWest -background '"'#00000099' -fill yellow -pointsize 28 -splice 0x34 -annotate +8+4 \""'$ts" "$out";
+done
+montage work/frames/tight/01:42:*.jpg work/frames/tight/01:43:*.jpg work/frames/tight/01:44:*.jpg work/frames/tight/01:45:*.jpg -tile 4x -geometry +4+4 work/frames/ab8256_tight.jpg
+montage work/frames/tight/01:46:*.jpg work/frames/tight/01:47:*.jpg work/frames/tight/01:48:*.jpg work/frames/tight/01:49:*.jpg work/frames/tight/01:50:*.jpg work/frames/tight/01:51:*.jpg work/frames/tight/01:52:*.jpg -tile 4x -geometry +4+4 work/frames/ab8292_tight.jpg' in /Users/brendaz/Documents/Codex/2026-07-07/tak/work/calibration_runs/codex
+2026-07-08T05:30:25.774829Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:30:25.779904Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+ succeeded in 13331ms:
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+Fontconfig error: No writable cache directories
+
+2026-07-08T05:30:36.955029Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt: maximum of 3 prompts is supported path=/Users/brendaz/.cache/codex-runtimes/codex-primary-runtime/plugins/openai-primary-runtime/plugins/template-creator/.codex-plugin/plugin.json
+2026-07-08T05:30:36.959286Z  WARN codex_core_plugins::manifest: ignoring interface.defaultPrompt[0]: prompt must be at most 128 characters path=/Users/brendaz/.codex/.tmp/plugins/plugins/ngs-analysis/.codex-plugin/plugin.json
+diff --git a/work/transcribe.swift b/work/transcribe.swift
+new file mode 100644
+index 0000000000000000000000000000000000000000..bbc88452f091e4ed111bf46787633e4c2689b850
+--- /dev/null
++++ b/work/transcribe.swift
+@@ -0,0 +1,52 @@
++import Foundation
++import Speech
++
++guard CommandLine.arguments.count >= 2 else {
++    fputs("usage: transcribe <audio-file>\n", stderr)
++    exit(2)
++}
++
++let url = URL(fileURLWithPath: CommandLine.arguments[1])
++let locale = Locale(identifier: "en_US")
++let recognizer = SFSpeechRecognizer(locale: locale)
++
++guard let recognizer else {
++    fputs("no speech recognizer for en_US\n", stderr)
++    exit(1)
++}
++
++let group = DispatchGroup()
++group.enter()
++
++SFSpeechRecognizer.requestAuthorization { status in
++    guard status == .authorized else {
++        fputs("speech authorization failed: \(status.rawValue)\n", stderr)
++        exit(1)
++    }
++
++    let request = SFSpeechURLRecognitionRequest(url: url)
++    request.shouldReportPartialResults = false
++    if #available(macOS 10.15, *) {
++        request.requiresOnDeviceRecognition = false
++    }
++
++    recognizer.recognitionTask(with: request) { result, error in
++        if let error {
++            fputs("recognition error: \(error.localizedDescription)\n", stderr)
++            group.leave()
++            return
++        }
++
++        if let result, result.isFinal {
++            print(result.bestTranscription.formattedString)
++            for segment in result.bestTranscription.segments {
++                let ts = String(format: "%.2f", segment.timestamp)
++                let dur = String(format: "%.2f", segment.duration)
++                print("[\(ts) + \(dur)] \(segment.substring)")
++            }
++            group.leave()
++        }
++    }
++}
++
++_ = group.wait(timeout: .now() + 240)
+
+codex
+AB 8256’s roll call is around 1:44:15-1:45:40, with the result announced just before the AB 8292 transition. AB 8292 appears to have its motion/vote packed into the 1:51:30-1:53 range, so I’m extending that slice slightly.

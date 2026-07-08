@@ -1,0 +1,30 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/council-meeting-rollcall-vote-timeline"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "civic-meetings", "roll-call-votes", "public-comments", "event-timeline"]
+# Issaquah City Council Regular Meeting, 2021-12-06, from archive.org.
+# Ground truth: approved meeting minutes and official motion report, aligned to
+# video timestamps by caption/audio review.
+source = "archive.org: ciwa-Issaquah_City_Council_Regular_Meeting_-_December_6_2021"
+
+[environment]
+build_timeout_sec = 1800.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 8192
+# The media is baked at build time; the agent should solve from the video only.
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 3600.0
+
+[steps.verifier]
+timeout_sec = 300.0

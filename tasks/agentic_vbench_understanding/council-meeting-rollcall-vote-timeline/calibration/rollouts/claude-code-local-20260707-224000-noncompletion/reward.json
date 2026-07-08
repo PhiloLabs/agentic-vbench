@@ -1,0 +1,14 @@
+{
+  "reward": 0.0,
+  "details": {
+    "reason": "ok",
+    "n_ground_truth_vote_events": 6,
+    "n_predicted_vote_events": 0,
+    "n_matched_vote_events": 0,
+    "precision_credit": 0.0,
+    "recall_credit": 0.0,
+    "matched_event_scores": [],
+    "time_full_credit_tolerance_s": 20,
+    "time_partial_credit_tolerance_s": 60
+  }
+}
