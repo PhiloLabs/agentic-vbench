@@ -1,0 +1,2484 @@
+{
+  "reward": 0.0,
+  "details": {
+    "reason": "unreadable solution.json: [Errno 2] No such file or directory: '/Users/brendaz/Documents/Codex/2026-07-07/tak/work/agentic-vbench/calibration_runs/otb-chess-move-capture-reconstruction/claude-local-chess-20260710T223658Z/output/solution.json'",
+    "checks_passed": 0,
+    "checks_total": 297,
+    "n_ground_truth_moves": 115,
+    "n_ground_truth_captures": 22,
+    "n_predicted_moves": 0,
+    "n_predicted_captures": 0,
+    "time_tolerance_s": 6.0,
+    "checks": [
+      {
+        "name": "result",
+        "passed": false,
+        "details": {
+          "expected": "white_win",
+          "predicted": null
+        }
+      },
+      {
+        "name": "ply_001_white_Nf3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g1f3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_001_white_Nf3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:00:59.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_002_black_Nf6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g8f6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_002_black_Nf6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:02.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_003_white_c4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c2c4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_003_white_c4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:04.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_004_black_e6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e7e6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_004_black_e6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:12.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_005_white_e3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e2e3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_005_white_e3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:13.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_006_black_d5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d7d5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_006_black_d5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:17.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_007_white_d4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d2d4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_007_white_d4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:18.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_008_black_a6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "a7a6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_008_black_a6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:27.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_009_white_b3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "b2b3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_009_white_b3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:40.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_010_black_b6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "b7b6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_010_black_b6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:42.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_011_white_Bd3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f1d3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_011_white_Bd3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:45.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_012_black_Bd6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f8d6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_012_black_Bd6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:47.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_013_white_Nc3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "b1c3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_013_white_Nc3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:53.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_014_black_Bb7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c8b7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_014_black_Bb7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:54.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_015_white_Bb2.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c1b2",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_015_white_Bb2.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:55.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_016_black_Nbd7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "b8d7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_016_black_Nbd7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:01:56.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_017_white_O-O.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e1g1",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_017_white_O-O.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:02:03.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_018_black_Qe7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d8e7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_018_black_Qe7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:02:07.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_019_white_Re1.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f1e1",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_019_white_Re1.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:02:38.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_020_black_Ne4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f6e4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_020_black_Ne4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:02:49.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_021_white_Qc2.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d1c2",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_021_white_Qc2.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:03:03.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_022_black_f5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f7f5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_022_black_f5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:03:05.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_023_white_Ne2.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c3e2",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_023_white_Ne2.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:03:29.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_024_black_O-O.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e8g8",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_024_black_O-O.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:03:45.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_025_white_Rac1.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "a1c1",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_025_white_Rac1.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:04:01.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_026_black_Rac8.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "a8c8",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_026_black_Rac8.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:04:21.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_027_white_Ng3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e2g3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_027_white_Ng3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:04:47.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_028_black_a5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "a6a5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_028_black_a5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:05:32.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_029_white_Qe2.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c2e2",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_029_white_Qe2.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:05:40.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_030_black_Ndf6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d7f6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_030_black_Ndf6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:05:55.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_031_white_Ne5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f3e5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_031_white_Ne5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:06:15.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_032_black_Nxg3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e4g3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_032_black_Nxg3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:06:47.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_033_white_hxg3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "h2g3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_033_white_hxg3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:06:48.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_034_black_Ne4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f6e4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_034_black_Ne4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:06:50.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_035_white_cxd5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c4d5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_035_white_cxd5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:25.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_036_black_exd5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e6d5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_036_black_exd5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:30.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_037_white_Ba6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d3a6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_037_white_Ba6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:32.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_038_black_c6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c7c6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_038_black_c6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:42.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_039_white_Bxb7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "a6b7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_039_white_Bxb7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:43.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_040_black_Qxb7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e7b7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_040_black_Qxb7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:44.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_041_white_Rc2.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c1c2",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_041_white_Rc2.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:51.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_042_black_Bxe5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d6e5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_042_black_Bxe5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:53.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_043_white_dxe5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d4e5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_043_white_dxe5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:54.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_044_black_Ng5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e4g5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_044_black_Ng5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:55.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_045_white_Rec1.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e1c1",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_045_white_Rec1.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:57.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_046_black_Ne6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g5e6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_046_black_Ne6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:59.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_047_white_Qd3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e2d3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_047_white_Qd3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:00.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_048_black_c5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c6c5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_048_black_c5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:02.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_049_white_a4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "a2a4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_049_white_a4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:03.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_050_black_Rcd8.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c8d8",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_050_black_Rcd8.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:04.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_051_white_Rd1.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c1d1",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_051_white_Rd1.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:05.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_052_black_Rd7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d8d7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_052_black_Rd7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:14.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_053_white_Rcd2.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c2d2",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_053_white_Rcd2.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:15.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_054_black_g6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g7g6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_054_black_g6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:17.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_055_white_Qe2.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d3e2",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_055_white_Qe2.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:18.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_056_black_Rfd8.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f8d8",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_056_black_Rfd8.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:20.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_057_white_g4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g3g4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_057_white_g4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:21.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_058_black_f4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f5f4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_058_black_f4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:22.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_059_white_exf4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e3f4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_059_white_exf4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:23.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_060_black_Nxf4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e6f4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_060_black_Nxf4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:25.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_061_white_Qe3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e2e3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_061_white_Qe3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:27.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_062_black_Ne6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f4e6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_062_black_Ne6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:31.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_063_white_f4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f2f4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_063_white_f4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:36.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_064_black_d4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d5d4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_064_black_d4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:37.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_065_white_Qg3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e3g3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_065_white_Qg3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:39.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_066_black_Rf8.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d8f8",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_066_black_Rf8.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:44.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_067_white_Rf2.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d2f2",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_067_white_Rf2.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:45.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_068_black_Qe4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "b7e4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_068_black_Qe4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:49.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_069_white_f5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f4f5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_069_white_f5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:54.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_070_black_gxf5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g6f5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_070_black_gxf5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:55.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_071_white_gxf5+.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g4f5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_071_white_gxf5+.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:56.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_072_black_Rg7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d7g7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_072_black_Rg7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:57.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_073_white_Qf3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g3f3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_073_white_Qf3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:04.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_074_black_Ng5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e6g5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_074_black_Ng5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:20.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_075_white_Qxe4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f3e4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_075_white_Qxe4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:22.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_076_black_Nxe4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g5e4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_076_black_Nxe4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:23.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_077_white_Rf3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f2f3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_077_white_Rf3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:25.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_078_black_Rg5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g7g5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_078_black_Rg5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:27.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_079_white_Re1.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d1e1",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_079_white_Re1.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:29.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_080_black_Ng3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e4g3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_080_black_Ng3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:32.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_081_white_f6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f5f6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_081_white_f6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:32.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_082_black_Nf5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g3f5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_082_black_Nf5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:35.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_083_white_e6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e5e6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_083_white_e6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:37.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_084_black_Nd6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f5d6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_084_black_Nd6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:40.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_085_white_f7+.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f6f7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_085_white_f7+.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:41.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_086_black_Nxf7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d6f7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_086_black_Nxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:42.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_087_white_Ref1.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e1f1",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_087_white_Ref1.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:47.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_088_black_Rg7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g5g7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_088_black_Rg7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:48.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_089_white_exf7+.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e6f7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_089_white_exf7+.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:49.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_090_black_Rgxf7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g7f7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_090_black_Rgxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:50.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_091_white_Rxf7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f3f7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_091_white_Rxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:50.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_092_black_Rxf7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f8f7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_092_black_Rxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:51.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_093_white_Rxf7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f1f7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_093_white_Rxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:52.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_094_black_Kxf7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g8f7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_094_black_Kxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:53.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_095_white_Kf2.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g1f2",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_095_white_Kf2.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:54.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_096_black_Ke6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f7e6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_096_black_Ke6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:54.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_097_white_Ke2.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f2e2",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_097_white_Ke2.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:55.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_098_black_Kd5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e6d5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_098_black_Kd5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:56.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_099_white_Kd3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e2d3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_099_white_Kd3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:56.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_100_black_h5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "h7h5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_100_black_h5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:57.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_101_white_Bc1.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "b2c1",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_101_white_Bc1.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:58.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_102_black_Ke5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d5e5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_102_black_Ke5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:03.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_103_white_Bg5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c1g5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_103_white_Bg5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:03.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_104_black_Kd6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "e5d6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_104_black_Kd6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:05.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_105_white_Bf4+.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g5f4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_105_white_Bf4+.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:07.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_106_black_Kd5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d6d5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_106_black_Kd5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:09.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_107_white_Bg3.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "f4g3",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_107_white_Bg3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:10.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_108_black_Kc6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d5c6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_108_black_Kc6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:12.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_109_white_Kc4.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "d3c4",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_109_white_Kc4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:13.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_110_black_Kb7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c6b7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_110_black_Kb7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:13.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_111_white_Kb5.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c4b5",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_111_white_Kb5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:17.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_112_black_Ka7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "b7a7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_112_black_Ka7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:18.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_113_white_Bc7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "g3c7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_113_white_Bc7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:20.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_114_black_Kb7.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "a7b7",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_114_black_Kb7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:21.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "ply_115_white_Bxb6.identity",
+        "passed": false,
+        "details": {
+          "expected_uci": "c7b6",
+          "predicted_uci": null
+        }
+      },
+      {
+        "name": "ply_115_white_Bxb6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:24.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_032_Nxg3.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_032_Nxg3.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "g3",
+          "expected_piece": "white_knight",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_032_Nxg3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:06:47.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_033_hxg3.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_033_hxg3.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "g3",
+          "expected_piece": "black_knight",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_033_hxg3.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:06:48.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_035_cxd5.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_035_cxd5.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "d5",
+          "expected_piece": "black_pawn",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_035_cxd5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:25.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_036_exd5.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_036_exd5.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "d5",
+          "expected_piece": "white_pawn",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_036_exd5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:30.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_039_Bxb7.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_039_Bxb7.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "b7",
+          "expected_piece": "black_bishop",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_039_Bxb7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:43.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_040_Qxb7.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_040_Qxb7.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "b7",
+          "expected_piece": "white_bishop",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_040_Qxb7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:44.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_042_Bxe5.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_042_Bxe5.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "e5",
+          "expected_piece": "white_knight",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_042_Bxe5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:53.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_043_dxe5.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_043_dxe5.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "e5",
+          "expected_piece": "black_bishop",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_043_dxe5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:07:54.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_059_exf4.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_059_exf4.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f4",
+          "expected_piece": "black_pawn",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_059_exf4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:23.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_060_Nxf4.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_060_Nxf4.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f4",
+          "expected_piece": "white_pawn",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_060_Nxf4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:25.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_070_gxf5.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_070_gxf5.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f5",
+          "expected_piece": "white_pawn",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_070_gxf5.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:55.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_071_gxf5+.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_071_gxf5+.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f5",
+          "expected_piece": "black_pawn",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_071_gxf5+.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:08:56.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_075_Qxe4.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_075_Qxe4.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "e4",
+          "expected_piece": "black_queen",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_075_Qxe4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:22.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_076_Nxe4.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_076_Nxe4.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "e4",
+          "expected_piece": "white_queen",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_076_Nxe4.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:23.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_086_Nxf7.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_086_Nxf7.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f7",
+          "expected_piece": "white_pawn",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_086_Nxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:42.5",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_089_exf7+.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_089_exf7+.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f7",
+          "expected_piece": "black_knight",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_089_exf7+.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:49.0",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_090_Rgxf7.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_090_Rgxf7.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f7",
+          "expected_piece": "white_pawn",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_090_Rgxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:50.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_091_Rxf7.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_091_Rxf7.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f7",
+          "expected_piece": "black_rook",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_091_Rxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:50.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_092_Rxf7.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_092_Rxf7.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f7",
+          "expected_piece": "white_rook",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_092_Rxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:51.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_093_Rxf7.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_093_Rxf7.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f7",
+          "expected_piece": "black_rook",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_093_Rxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:52.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_094_Kxf7.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_094_Kxf7.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "f7",
+          "expected_piece": "white_rook",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_094_Kxf7.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:09:53.2",
+          "predicted_time": null,
+          "error_s": null
+        }
+      },
+      {
+        "name": "capture_ply_115_Bxb6.identity",
+        "passed": false
+      },
+      {
+        "name": "capture_ply_115_Bxb6.detail",
+        "passed": false,
+        "details": {
+          "expected_square": "b6",
+          "expected_piece": "black_pawn",
+          "predicted_square": null,
+          "predicted_piece": null
+        }
+      },
+      {
+        "name": "capture_ply_115_Bxb6.time",
+        "passed": false,
+        "details": {
+          "expected_time": "00:10:24.8",
+          "predicted_time": null,
+          "error_s": null
+        }
+      }
+    ]
+  }
+}

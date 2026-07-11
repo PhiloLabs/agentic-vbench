@@ -1,0 +1,21 @@
+I will list the contents of the target directory to see what materials are available.
+I will list the contents of the `materials` directory to confirm the files present.
+I will read the instruction.md file to see if there is any extra information.
+I will create a helper script `check_env.py` in the scratch directory to check which Python libraries are available (e.g., `cv2`, `chess`, `PIL`, `numpy`).
+I will run the `check_env.py` script to inspect our Python environment.
+I will run a command to check if `ffmpeg` is available on the system, and see what packages might be installed.
+I will list the installed packages in the virtual environment using `pip list` to see what is already there.
+I will install `opencv-python`, `numpy`, and `pillow` to allow us to process the chess game video.
+I will write a script to check the video's properties (width, height, FPS, frame count, duration).
+I will run the `video_info.py` script.
+I will check the output of the video_info script.
+I will view the log file for task-22 to read its output.
+I will run the command and redirect the output to a text file in our scratch directory so we can read it.
+I will write a script to extract frames at 1-minute intervals and save them as images so we can view them to understand the layout, orientation, and progression of the board.
+I will execute `extract_frames.py` to save the video frames.
+I will view the initial frame (0s) to understand the camera angle and orientation of the board.
+I will write a script to overlay a coordinate grid on the first frame so we can determine the exact pixel bounding box of the chessboard.
+I will run the grid drawing script.
+I will view the grid image to extract the pixel bounding box of the chessboard.
+I will write a Python script `detect_stable_frames.py` to identify stable periods in the video (where no hands are on the board) and extract one frame from each stable period. This will give us a clear image of the board after every move.
+I will now run the `detect_stable_frames.py` script. Since it processes the entire 11-minute video, it may take a minute or two. The execution will run in the background.

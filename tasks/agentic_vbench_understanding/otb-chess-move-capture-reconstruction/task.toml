@@ -1,0 +1,30 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/otb-chess-move-capture-reconstruction"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "chess", "board-state", "move-reconstruction", "agentic-vbench-understanding"]
+# Source: ChessBase India YouTube video xwoRCwMRE54. The benchmark material is
+# baked by downloading the 720p stream, masking the digital board overlay and
+# visible branding, stripping audio, and saving the neutralized video as
+# /workspace/materials/game.mp4.
+source = "youtube: xwoRCwMRE54"
+
+[environment]
+build_timeout_sec = 1800.0
+cpus = 4
+memory_mb = 4096
+storage_mb = 8192
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 3600.0
+
+[steps.verifier]
+timeout_sec = 600.0

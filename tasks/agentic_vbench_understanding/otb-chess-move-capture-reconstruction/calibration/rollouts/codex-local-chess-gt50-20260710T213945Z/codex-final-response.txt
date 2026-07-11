@@ -1,0 +1,8 @@
+Done. `output/solution.json` contains the reconstructed game.
+
+Validated:
+- JSON parses cleanly
+- required top-level shape only
+- 35 plies, 7 capture events
+- capture events match move list
+- local move/capture legality check passes
