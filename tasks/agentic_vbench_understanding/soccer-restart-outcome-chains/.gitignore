@@ -1,0 +1,6 @@
+.private/
+raw/
+__pycache__/
+*.pyc
+*.mkv
+*.mp4
