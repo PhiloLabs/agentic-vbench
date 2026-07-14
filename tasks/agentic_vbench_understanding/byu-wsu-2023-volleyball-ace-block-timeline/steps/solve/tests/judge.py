@@ -2,10 +2,19 @@
 """Grade an ace-and-block-timeline reconstruction. Pure Python stdlib, deterministic.
 
 The agent must list every point that ended as a service ace or a block, with set,
-exact score after the point, event type, and the credited player(s). A predicted
-event is a true positive only when it FULLY reconstructs the point: same set, same
-score, same type, and the same player multiset. We then score by F1 (misses and
-false positives both hurt). reward = F1.
+exact score after the point, event type, and the credited player(s). Scoring is
+two-tier:
+
+  * full credit (1.0)    — set, score_after, type, AND the exact credited-player
+    multiset all match;
+  * partial credit (0.5) — set, score_after, and type match and the credited
+    players differ by exactly one name (one missing, one extra, or one wrong).
+
+The partial tier exists because block credit (solo vs shared, and exactly who gets
+the assist) is a stats-crew ruling a perfect visual agent can legitimately miss in
+the sub-second window at the net. reward = F1 over summed credit (misses and false
+positives both hurt). Exact matches are assigned in a first pass so a partial match
+can never steal a slot from an exact one.
 
 Why this task and metric: a four-set match has ~170 rallies and only 24 of them end
 as an ace or a block. The score bug says a point was scored, never why or by whom —
@@ -53,6 +62,8 @@ GROUND_TRUTH = [
   {"set": 4, "score_after": "19-25", "type": "block", "players": ["Argentina Ung", "Lana Radakovic"]},
 ]
 
+PARTIAL_CREDIT = 0.5  # right rally and type, credited players off by one
+
 TYPE_ALIASES = {"service_ace": "ace", "service ace": "ace", "stuff": "block",
                 "block_point": "block", "block point": "block"}
 
@@ -93,18 +104,36 @@ def name_match(pred, gt_full):
     return gl in _UNIQUE_LASTS and p == gl  # lastname only if unambiguous
 
 
-def players_match(pred_list, gt_list):
-    if not isinstance(pred_list, list) or len(pred_list) != len(gt_list):
-        return False
+def matched_names(pred_list, gt_list):
+    """Greedy one-to-one count of predicted names that match ground-truth names."""
+    if not isinstance(pred_list, list):
+        return -1
     remaining = list(gt_list)
+    m = 0
     for p in pred_list:
         for g in remaining:
             if name_match(p, g):
                 remaining.remove(g)
+                m += 1
                 break
-        else:
-            return False
-    return True
+    return m
+
+
+def players_exact(pred_list, gt_list):
+    return isinstance(pred_list, list) and len(pred_list) == len(gt_list) \
+        and matched_names(pred_list, gt_list) == len(gt_list)
+
+
+def players_off_by_one(pred_list, gt_list):
+    """One name missing, one extra, or one wrong — everything else matched."""
+    if not isinstance(pred_list, list) or not pred_list:
+        return False
+    m = matched_names(pred_list, gt_list)
+    if m < 1 or m < len(gt_list) - 1:
+        return False
+    if abs(len(pred_list) - len(gt_list)) > 1:
+        return False
+    return not players_exact(pred_list, gt_list)
 
 
 def main():
@@ -124,50 +153,83 @@ def main():
     except Exception as exc:  # noqa: BLE001 - malformed output scores 0
         reason, preds = f"unreadable solution.json: {exc}", []
 
-    used = [False] * len(GROUND_TRUTH)        # strict (full-event) TPs
-    used_loose = [False] * len(GROUND_TRUTH)  # set+score+type only, diagnostics
-    tp = 0
-    anchor_only = 0
-    for pr in preds:
+    def parse(pr):
         if not isinstance(pr, dict):
-            continue
+            return None
         try:
-            ps = int(pr.get("set"))
+            st = int(pr.get("set"))
         except (TypeError, ValueError):
+            return None
+        sc = norm_score(pr.get("score_after", ""))
+        if sc is None:
+            return None
+        return {"set": st, "score": sc, "type": norm_type(pr.get("type", "")),
+                "players": pr.get("players")}
+
+    parsed = [parse(pr) for pr in preds]
+
+    def anchor_match(p, gt):
+        return p["set"] == gt["set"] and p["score"] == gt["score_after"] \
+            and p["type"] == gt["type"]
+
+    used = [False] * len(GROUND_TRUTH)
+    consumed = [False] * len(parsed)
+    full = 0
+    # pass 1: exact matches (anchor + exact player multiset) so partials never
+    # steal exact slots
+    for j, p in enumerate(parsed):
+        if p is None:
             continue
-        psc = norm_score(pr.get("score_after", ""))
-        pt = norm_type(pr.get("type", ""))
-        if psc is None:
-            continue
-        # diagnostic: right rally found (set + score + type), players aside
         for i, gt in enumerate(GROUND_TRUTH):
-            if not used_loose[i] and ps == gt["set"] and psc == gt["score_after"] \
-                    and pt == gt["type"]:
+            if not used[i] and anchor_match(p, gt) \
+                    and players_exact(p["players"], gt["players"]):
+                used[i] = True
+                consumed[j] = True
+                full += 1
+                break
+    # pass 2: anchor match with credited players off by one, at partial credit
+    partial = 0
+    for j, p in enumerate(parsed):
+        if p is None or consumed[j]:
+            continue
+        for i, gt in enumerate(GROUND_TRUTH):
+            if not used[i] and anchor_match(p, gt) \
+                    and players_off_by_one(p["players"], gt["players"]):
+                used[i] = True
+                consumed[j] = True
+                partial += 1
+                break
+
+    # diagnostic: right rally found (set + score + type), players aside
+    used_loose = [False] * len(GROUND_TRUTH)
+    anchor_only = 0
+    for p in parsed:
+        if p is None:
+            continue
+        for i, gt in enumerate(GROUND_TRUTH):
+            if not used_loose[i] and anchor_match(p, gt):
                 used_loose[i] = True
                 anchor_only += 1
                 break
-        # scored: full reconstruction (also requires the credited player multiset)
-        for i, gt in enumerate(GROUND_TRUTH):
-            if not used[i] and ps == gt["set"] and psc == gt["score_after"] \
-                    and pt == gt["type"] and players_match(pr.get("players"), gt["players"]):
-                used[i] = True
-                tp += 1
-                break
 
+    credit = full + PARTIAL_CREDIT * partial
     n_pred, n_gt = len(preds), len(GROUND_TRUTH)
-    precision = tp / n_pred if n_pred else 0.0
-    recall = tp / n_gt if n_gt else 0.0
+    precision = credit / n_pred if n_pred else 0.0
+    recall = credit / n_gt if n_gt else 0.0
     f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) else 0.0
 
     details = {
         "reason": reason,
         "n_ground_truth": n_gt,
         "n_predicted": n_pred,
-        "true_positives_full_event": tp,
+        "full_matches": full,
+        "partial_matches_players_off_by_one": partial,
+        "credit": round(credit, 4),
         "set_score_type_only_matches": anchor_only,
         "precision": round(precision, 4),
         "recall": round(recall, 4),
         "f1": round(f1, 4),
+        "partial_credit": PARTIAL_CREDIT,
     }
     args.reward_json.parent.mkdir(parents=True, exist_ok=True)
     args.reward_json.write_text(json.dumps({"reward": round(f1, 4), "details": details}, indent=2))
