@@ -40,9 +40,12 @@ ground_truth:
     credit (set 2 at 1-2, a Jehlarova solo block)
 
 scorer:
-  metric: F1 over events; a TP requires set, exact score_after, type, and the full
-    credited-player multiset to all match (names normalized; unambiguous-lastname
-    rule; greedy one-to-one matching)
+  metric: two-tier F1 over events — full credit (1.0) requires set, exact
+    score_after, type, and the exact credited-player multiset; partial credit (0.5)
+    when set, score_after, and type match and the credited players differ by exactly
+    one name (block credit is a stats-crew ruling a perfect visual agent can miss).
+    Names normalized (unambiguous-lastname rule); greedy one-to-one matching with
+    exact matches assigned first, so duplicate anchors are consumed at most once
   oracle_reward: 1.0
   null_reward: 0.0 (measured; empty list)
 
