@@ -19,7 +19,7 @@ Write `/workspace/output/solution.json` in exactly this shape:
 {
   "events": [
     {"set": 1, "score_after": "7-7",  "type": "ace",   "players": ["First Last"]},
-    {"set": 2, "score_after": "10-11", "type": "block", "players": ["First Last", "First Last"]}
+    {"set": 2, "score_after": "10-11", "type": "block", "players": ["First Last", "First Last"], "blocked": "First Last"}
   ]
 }
 ```
@@ -35,6 +35,9 @@ Write `/workspace/output/solution.json` in exactly this shape:
   blockers (one or two names, order does not matter). Credit follows the official
   scorer's rules: a stuff by one player is one name; a block shared by two players
   at the net is two names.
+- `blocked`: **for a block only**, the opposing hitter who was blocked — the player
+  whose attack the block stopped (one name, on the team opposite the blockers). Omit
+  this field for aces.
 
 ## Rosters (jersey number → name)
 

@@ -41,11 +41,14 @@ ground_truth:
 
 scorer:
   metric: two-tier F1 over events — full credit (1.0) requires set, exact
-    score_after, type, and the exact credited-player multiset; partial credit (0.5)
-    when set, score_after, and type match and the credited players differ by exactly
-    one name (block credit is a stats-crew ruling a perfect visual agent can miss).
-    Names normalized (unambiguous-lastname rule); greedy one-to-one matching with
-    exact matches assigned first, so duplicate anchors are consumed at most once
+    score_after, type, and every credited name (for a block: the exact blocker
+    multiset AND the opposing hitter who was blocked); partial credit (0.5) when
+    set, score_after, and type match and the credited names are off by exactly one
+    (block credit and reading the stuffed hitter's number are stats-crew/visual
+    judgments a perfect agent can miss). Names normalized (unambiguous-lastname
+    rule); greedy one-to-one matching, exact matches assigned first. The one
+    corrupted-PBP block (set 2, 1-2) carries no blocked hitter and does not require
+    one. Bar: a strong agent stays at/under ~0.10 (reviewer accepts <= 0.109).
   oracle_reward: 1.0
   null_reward: 0.0 (measured; empty list)
 
