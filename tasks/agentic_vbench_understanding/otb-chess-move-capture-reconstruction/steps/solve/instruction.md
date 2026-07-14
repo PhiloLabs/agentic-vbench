@@ -45,7 +45,8 @@ Definitions:
 - `uci`: coordinate notation from origin square to destination square, with a
   promotion suffix if applicable, such as `e7e8q`.
 - `video_time`: the approximate time in the supplied video when the move has
-  become visible on the physical board. Use `HH:MM:SS.s`.
+  become visible on the physical board. Use `HH:MM:SS.s`. The verifier accepts
+  timestamps within +/- 6 seconds of the reference annotation.
 - `capture_events`: include every move that captures a piece. Each capture event
   must repeat the move identity and report the square where the capture occurs
   and the color/type of the captured piece.

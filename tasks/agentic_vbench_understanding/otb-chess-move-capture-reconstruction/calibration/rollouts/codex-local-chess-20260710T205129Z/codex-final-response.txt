@@ -1,1 +1,0 @@
-Wrote `output/solution.json` with 36 plies and 11 capture events. Parsed and checked the JSON shape successfully.

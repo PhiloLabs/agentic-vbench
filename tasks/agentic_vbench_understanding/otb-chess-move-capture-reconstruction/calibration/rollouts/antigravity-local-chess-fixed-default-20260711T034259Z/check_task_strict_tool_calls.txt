@@ -1,8 +1,0 @@
-
-  [PASS] task structure      all required files present
-  [PASS] oracle == 1.0       reward = 1.0
-  [PASS] baseline ~ 0        reward = 0.0 (need <= 0.1)
-  [PASS] strong agent < 0.1  reward = 0.0 (need < 0.1)
-  [FAIL] rollout > 50 turns  27 tool-call turns (need > 50)
-
-FAILED: 1 check(s): rollout > 50 turns

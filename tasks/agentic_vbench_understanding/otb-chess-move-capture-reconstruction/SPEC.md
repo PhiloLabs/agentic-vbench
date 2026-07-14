@@ -46,8 +46,8 @@ evidence:
 
 ground_truth:
   source: YouTube video xwoRCwMRE54 and its description PGN, with timestamps aligned from the video overlay before masking.
-  tier: mixed; move identities are PGN-derived machine truth, timestamps/result are video-verified annotations.
-  verification: Parsed the description PGN into 115 legal plies with python-chess, aligned all plies to detected overlay-highlight transitions, spot-checked physical-board frames, and separately listed all 22 capture events.
+  tier: human-verified target; current source must be replaced or independently re-annotated before merge.
+  verification: Current draft parsed the description PGN into 115 legal plies with python-chess, aligned plies to detected overlay-highlight transitions, spot-checked physical-board frames, and separately listed all 22 capture events. Reviewer feedback requires a replacement source without PGN metadata and 2+ independent timestamp annotators before final acceptance.
 
 scorer:
   metric: Deterministic per-check accuracy over result, per-ply identity, per-ply timestamp within +/- 6s, capture identity, capture detail, and capture timestamp. Extra moves and extra captures are penalized.
@@ -55,9 +55,10 @@ scorer:
   null_reward: 0.0
 
 difficulty:
-  strong_agent_reward: 0.033
-  tool_call_turns: 54
-  agent_model: Codex CLI (`codex-local-chess-gt50-20260710T213945Z`)
+  strong_agent_reward: 0.0058
+  tool_call_turns: 36
+  agent_model: Codex CLI (`codex-local-chess-20260710T205129Z`)
+  status: natural rollout does not yet satisfy the >50 conservative tool-call gate; task needs real hardening rather than prompt padding.
 
 anti_shortcut:
   single_frame: not run yet; pending ablation calibration

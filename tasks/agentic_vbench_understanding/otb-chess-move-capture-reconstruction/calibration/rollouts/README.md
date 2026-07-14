@@ -3,12 +3,10 @@
 This directory contains compact calibration artifacts for local strong-agent
 rollouts.
 
-The qualifying long-horizon rollout is
-`codex-local-chess-gt50-20260710T213945Z`: it scored `0.033` and used 54
-distinct shell/tool turns, satisfying the current hardness and rollout-length
-gates.
+After review, the earlier prompt-padded Codex rollout was removed from the PR
+package. The remaining natural Codex rollout scored `0.0058` under the current
+windowed content matcher but used only 36 distinct shell/tool turns, so the task
+still needs real hardening before it can satisfy the long-horizon gate.
 
-Additional Codex, Claude, and Antigravity runs are included as supporting
-failure evidence. Bulky raw trajectory files may be omitted from the repository
-when the corresponding `run-summary.md`, reward files, and checker outputs
-capture the relevant outcome.
+The retained artifacts are deliberately compact: one audit transcript per agent
+where practical, plus `run-summary.md` files and the aggregate `scores.md`.

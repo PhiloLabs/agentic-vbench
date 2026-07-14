@@ -12,6 +12,7 @@ from typing import Any
 
 GROUND_TRUTH_PATH = Path(__file__).with_name("ground_truth.json")
 TIME_TOLERANCE_S = 6.0
+PLY_MATCH_WINDOW = 3
 
 
 def normalize_san(value: Any) -> str:
@@ -64,12 +65,48 @@ def load_solution(path: Path) -> tuple[dict[str, Any], str]:
         return {}, f"unreadable solution.json: {exc}"
 
 
-def identity_ok(pred: dict[str, Any], truth: dict[str, Any]) -> bool:
+def content_identity_ok(pred: dict[str, Any], truth: dict[str, Any]) -> bool:
     side_ok = normalize_token(pred.get("side")) == normalize_token(truth.get("side"))
-    ply_ok = pred.get("ply") == truth.get("ply")
     uci_ok = normalize_uci(pred.get("uci")) == normalize_uci(truth.get("uci"))
     san_ok = normalize_san(pred.get("san")) == normalize_san(truth.get("san"))
-    return bool(side_ok and ply_ok and (uci_ok or san_ok))
+    return bool(side_ok and (uci_ok or san_ok))
+
+
+def in_ply_window(pred: dict[str, Any], truth: dict[str, Any], pred_index: int) -> bool:
+    truth_ply = truth.get("ply")
+    pred_ply = pred.get("ply")
+    if isinstance(pred_ply, int) and isinstance(truth_ply, int):
+        return abs(pred_ply - truth_ply) <= PLY_MATCH_WINDOW
+    if isinstance(truth_ply, int):
+        return abs((pred_index + 1) - truth_ply) <= PLY_MATCH_WINDOW
+    return False
+
+
+def match_by_content_window(
+    predictions: list[dict[str, Any]],
+    truth_items: list[dict[str, Any]],
+) -> tuple[dict[int, tuple[int, dict[str, Any]]], set[int]]:
+    matches: dict[int, tuple[int, dict[str, Any]]] = {}
+    used: set[int] = set()
+    for truth_index, truth in enumerate(truth_items):
+        candidates: list[tuple[int, float, int, dict[str, Any]]] = []
+        for pred_index, pred in enumerate(predictions):
+            if pred_index in used:
+                continue
+            if not content_identity_ok(pred, truth) or not in_ply_window(pred, truth, pred_index):
+                continue
+            _ok, time_error = time_ok(pred, truth)
+            time_sort = time_error if time_error is not None else 999999.0
+            pred_ply = pred.get("ply") if isinstance(pred.get("ply"), int) else pred_index + 1
+            truth_ply = truth.get("ply") if isinstance(truth.get("ply"), int) else truth_index + 1
+            ply_sort = abs(pred_ply - truth_ply)
+            candidates.append((pred_index, time_sort, ply_sort, pred))
+        if not candidates:
+            continue
+        pred_index, _time_sort, _ply_sort, pred = min(candidates, key=lambda item: (item[1], item[2], item[0]))
+        matches[truth_index] = (pred_index, pred)
+        used.add(pred_index)
+    return matches, used
 
 
 def time_ok(pred: dict[str, Any], truth: dict[str, Any]) -> tuple[bool, float | None]:
@@ -92,17 +129,25 @@ def score_moves(pred_moves: Any, truth_moves: list[dict[str, Any]]) -> list[dict
     checks: list[dict[str, Any]] = []
     if not isinstance(pred_moves, list):
         pred_moves = []
+    pred_dicts = [move if isinstance(move, dict) else {} for move in pred_moves]
+    matches, used = match_by_content_window(pred_dicts, truth_moves)
 
     for index, truth in enumerate(truth_moves):
-        pred = pred_moves[index] if index < len(pred_moves) and isinstance(pred_moves[index], dict) else {}
-        ident = identity_ok(pred, truth)
+        match = matches.get(index)
+        pred = match[1] if match else {}
+        ident = match is not None
         time_match, time_error = time_ok(pred, truth)
         label = f"ply_{truth['ply']:03d}_{truth['side']}_{truth['san']}"
         add_check(
             checks,
             f"{label}.identity",
             ident,
-            {"expected_uci": truth["uci"], "predicted_uci": pred.get("uci")},
+            {
+                "expected_uci": truth["uci"],
+                "predicted_uci": pred.get("uci"),
+                "expected_ply": truth["ply"],
+                "predicted_ply": pred.get("ply"),
+            },
         )
         add_check(
             checks,
@@ -111,8 +156,9 @@ def score_moves(pred_moves: Any, truth_moves: list[dict[str, Any]]) -> list[dict
             {"expected_time": truth["video_time"], "predicted_time": pred.get("video_time"), "error_s": time_error},
         )
 
-    for extra_index in range(max(0, len(pred_moves) - len(truth_moves))):
-        add_check(checks, f"extra_move_{extra_index + 1}", False)
+    for extra_index, pred in enumerate(pred_dicts):
+        if extra_index not in used:
+            add_check(checks, f"extra_move_{extra_index + 1}", False, {"predicted_uci": pred.get("uci")})
 
     return checks
 
@@ -128,16 +174,14 @@ def score_captures(pred_events: Any, truth_events: list[dict[str, Any]]) -> list
     checks: list[dict[str, Any]] = []
     if not isinstance(pred_events, list):
         pred_events = []
-    by_ply = {
-        event.get("ply"): event
-        for event in pred_events
-        if isinstance(event, dict) and isinstance(event.get("ply"), int)
-    }
+    pred_dicts = [event if isinstance(event, dict) else {} for event in pred_events]
+    matches, used = match_by_content_window(pred_dicts, truth_events)
 
-    for truth in truth_events:
-        pred = by_ply.get(truth["ply"], {})
-        ident = isinstance(pred, dict) and identity_ok(pred, truth)
-        detail = isinstance(pred, dict) and capture_detail_ok(pred, truth)
+    for index, truth in enumerate(truth_events):
+        match = matches.get(index)
+        pred = match[1] if match else {}
+        ident = match is not None
+        detail = capture_detail_ok(pred, truth)
         time_match, time_error = time_ok(pred if isinstance(pred, dict) else {}, truth)
         label = f"capture_ply_{truth['ply']:03d}_{truth['san']}"
         add_check(checks, f"{label}.identity", ident)
@@ -159,13 +203,9 @@ def score_captures(pred_events: Any, truth_events: list[dict[str, Any]]) -> list
             {"expected_time": truth["video_time"], "predicted_time": pred.get("video_time") if isinstance(pred, dict) else None, "error_s": time_error},
         )
 
-    truth_plys = {event["ply"] for event in truth_events}
-    extra = [
-        event for event in pred_events
-        if isinstance(event, dict) and event.get("ply") not in truth_plys
-    ]
-    for extra_index, _event in enumerate(extra):
-        add_check(checks, f"extra_capture_{extra_index + 1}", False)
+    for extra_index, event in enumerate(pred_dicts):
+        if extra_index not in used:
+            add_check(checks, f"extra_capture_{extra_index + 1}", False, {"predicted_uci": event.get("uci")})
 
     return checks
 
@@ -202,6 +242,7 @@ def main() -> None:
         "n_predicted_moves": len(solution.get("moves", [])) if isinstance(solution.get("moves"), list) else 0,
         "n_predicted_captures": len(solution.get("capture_events", [])) if isinstance(solution.get("capture_events"), list) else 0,
         "time_tolerance_s": TIME_TOLERANCE_S,
+        "ply_match_window": PLY_MATCH_WINDOW,
         "checks": checks,
     }
 
