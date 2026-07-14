@@ -19,10 +19,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #   An archive.org mirror of the same upload exists (youtube-5KC1jC90lT8, 480p)
 #     as a fallback provenance record.
 #
-# TODO before merge: replace MATERIALS_URL with the re-hosted (Hugging Face) URL of
-# the processed file and fill in its SHA256 (bake_media.sh prints both).
-ARG MATERIALS_URL=REPLACE_WITH_REHOSTED_URL/byu-wsu-2023-09-08-720p-noaudio.mp4
-ARG MATERIALS_SHA256=REPLACE_WITH_SHA256
+ARG MATERIALS_URL=https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/main/byu-wsu-2023-09-08-720p-noaudio.mp4
+ARG MATERIALS_SHA256=ee887b18cf3dc9afce05087b24b629d1c44433344d7d4ccf612a4e548796dc60
 RUN mkdir -p /baked \
  && curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
       "$MATERIALS_URL" -o /baked/match.mp4 \

@@ -66,9 +66,11 @@ anti_shortcut:
     (to be measured)
 
 input:
-  url: https://www.youtube.com/watch?v=5KC1jC90lT8 (official WSU Athletics upload;
-    re-hosted processed copy pinned in environment/Dockerfile before merge)
-  sha256: TBD (filled by environment/bake_media.sh after re-host)
-  length_min: 115
+  url: https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/main/byu-wsu-2023-09-08-720p-noaudio.mp4
+    (research re-host of the official WSU Athletics upload
+    https://www.youtube.com/watch?v=5KC1jC90lT8 — provenance, rights and takedown
+    policy documented in the dataset README)
+  sha256: ee887b18cf3dc9afce05087b24b629d1c44433344d7d4ccf612a4e548796dc60
+  length_min: 115 (measured 114.9)
   resolution: 720 (source stream is 1080p; baked at 720p, audio stripped)
 ```
