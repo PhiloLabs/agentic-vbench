@@ -30,8 +30,10 @@ HF_TOKEN = "${HF_TOKEN:-}"
 name = "solve"
 
 [steps.agent]
-# A full match is long: give the agent real time to sample and tally.
-timeout_sec = 3600.0
+# A full match is long: give the agent real time to sample and tally. Measured
+# calibration rollouts (Claude Code, Codex CLI) genuinely ran multiple hours to
+# reach 290-320 tool-call turns; 1h was too tight to let a real attempt finish.
+timeout_sec = 18000.0
 
 [steps.verifier]
 timeout_sec = 600.0
