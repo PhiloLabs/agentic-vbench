@@ -17,11 +17,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #   Prepared: downloaded at 720p, audio track stripped (ffmpeg -an) so the task is
 #     single-modality video, then re-hosted at a stable URL so the bytes are pinned.
 #
-# NOTE: MATERIALS_SHA256 below is a placeholder pending the one-time bake+upload
-# (run environment/bake_media.sh, upload the .mp4 to the dataset repo, then paste the
-# printed sha256 here). The build verifies the hash, so it will fail loudly until set.
+# Baked 2026-07-15 via environment/bake_media.sh (yt-dlp 720p + ffmpeg -an) and
+# uploaded to the dataset repo below; the build verifies the SHA256.
 ARG MATERIALS_URL=https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/main/usc-wsu-2023-11-12-720p-noaudio.mp4
-ARG MATERIALS_SHA256=PENDING_BAKE_UPLOAD
+ARG MATERIALS_SHA256=13ccbabbdd9540da851099d138bef3c8eafe6de9426c3681593edba32d08ba9e
 RUN mkdir -p /baked \
  && curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
       "$MATERIALS_URL" -o /baked/match.mp4 \

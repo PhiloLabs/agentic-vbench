@@ -83,8 +83,8 @@ input:
     (research re-host of the official WSU Athletics upload
     https://www.youtube.com/watch?v=RgJjVgi7rZY — provenance, rights and takedown
     policy documented in the dataset README)
-  sha256: PENDING_BAKE_UPLOAD (set after environment/bake_media.sh + dataset upload)
-  length_min: ~118.5 (source runtime 1:58:32; confirm on baked file)
+  sha256: 13ccbabbdd9540da851099d138bef3c8eafe6de9426c3681593edba32d08ba9e
+  length_min: 118.5 (measured 118.53; baked, audio stripped, single video stream)
   resolution: 720 (source stream is 1080p; baked at 720p, audio stripped)
 
 score_order_note: score_after is written USC-WashingtonState (visitor-home), matching

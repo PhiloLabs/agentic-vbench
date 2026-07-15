@@ -15,8 +15,10 @@ attempt near 0.
 | Claude Code CLI | _to run_ | _to run_ |
 
 Oracle, empty, and the anchor-only guess are verified locally (oracle 1.0; empty and
-the names-wrong 28-entry guess both 0.0). The three agent rows are pending the media
-bake (the container needs the pinned `match.mp4` before a real rollout can run).
+the names-wrong 28-entry guess both 0.0). Media is baked and pinned (2026-07-15):
+720p audio-stripped mp4, sha256 `13ccbabb…d08ba9e`, hosted at the dataset URL in the
+Dockerfile (HF commit 859cb68; served Content-Length 1503364332 matches the local
+bake). The three agent rows are pending calibration rollouts.
 
 Raw transcripts go in `rollouts/` — one file per agent, so a reviewer can confirm
 each score was earned honestly and count the tool-call turns.
