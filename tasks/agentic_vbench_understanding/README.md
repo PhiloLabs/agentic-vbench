@@ -1,13 +1,14 @@
-# AgenticVBench — agentic video understanding
+# AgenticVBench — agentic omni understanding
 
 AgenticVBench has several **areas of focus**, and they are parallel, not sequential.
 v1.0 is the **post-production** area (`agentic_vbench_repair`, `_assembly`,
 `_sequencing`, `_repurpose`). This family, `agentic_vbench_understanding`, is the
-**video-understanding** area — the first community-built one. It does not modify the
+**omni-understanding** area — the first community-built one. It does not modify the
 frozen v1.0 post-production tasks; it stands on its own alongside them.
 
-A task here gives an agent one or multiple real videos and one unambiguous question,
-and grades the answer with deterministic code. The answer is usually objective — a
+A task here gives an agent one or multiple real videos — with their audio, and
+optionally additional files/context (images, documents, structured data) — and one
+unambiguous question, and grades the answer with deterministic code. The answer is usually objective — a
 count, an event, a time span, a yes/no — so scoring is clean and the task resists
 contamination.
 
