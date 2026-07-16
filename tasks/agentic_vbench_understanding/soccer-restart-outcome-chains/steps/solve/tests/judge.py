@@ -18,8 +18,8 @@ team/outcome -> well below 0.1.
 Encodings (as stated to the agent in instruction.md):
   restart_type: 1=Throw-in, 2=Corner, 3=Direct free-kick, 4=Indirect free-kick
   team:         "home" | "away"   (home = the side defending the scoreboard's left)
-  outcome:      2 if the taking team scores within 30 s, else 1 if a shot (on or off
-                target) within 15 s, else 0
+  outcome:      2 if a goal follows within 30 s of the restart (either side), else 1
+                if a shot (on or off target) follows within 15 s, else 0
 
 Ground truth is a deterministic transform of SoccerNet-v2's published, multi-annotator
 Labels-v2.json for this match (Mainz 05 vs Borussia Dortmund, 2016-17 Bundesliga):

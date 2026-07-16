@@ -1,0 +1,10 @@
+{
+  "sequence": [
+    {"t": 824, "restart_type": 2, "team": "home", "outcome": 0},
+    {"t": 1362, "restart_type": 4, "team": "away", "outcome": 0},
+    {"t": 3132, "restart_type": 1, "team": "away", "outcome": 0},
+    {"t": 3634, "restart_type": 2, "team": "away", "outcome": 0},
+    {"t": 3768, "restart_type": 1, "team": "home", "outcome": 0},
+    {"t": 4948, "restart_type": 4, "team": "home", "outcome": 2}
+  ]
+}

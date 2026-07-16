@@ -1,5 +1,6 @@
 {
   "agent": "claude-code",
+  "model": "claude-opus-4-8",
   "num_tool_calls": 110,
   "sampling_trace": [
     0,

@@ -1,5 +1,6 @@
 {
   "agent": "codex",
+  "model": "gpt-5.6-sol",
   "num_tool_calls": 120,
   "sampling_trace": [
     0,

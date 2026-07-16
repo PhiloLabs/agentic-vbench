@@ -30,7 +30,9 @@ Only visibility == "visible" restart events enter GT. Deterministic tie-break:
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
+import os
 
 # SoccerNet-v2 class names -> our integer codes (confirm against your Labels-v2.json).
 RESTART_TYPES = {"Throw-in": 1, "Corner": 2, "Direct free-kick": 3, "Indirect free-kick": 4}
@@ -108,12 +110,56 @@ def build(labels_path: str, half1_duration_sec: float | None, tau: float) -> dic
     }
 
 
+def _load_judge():
+    """Load the shipped verifier, steps/solve/tests/judge.py, from this task folder."""
+    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))  # provenance/..
+    path = os.path.join(root, "steps", "solve", "tests", "judge.py")
+    spec = importlib.util.spec_from_file_location("judge", path)
+    judge = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(judge)
+    return judge
+
+
+def prove(gt: dict, check_shipped: bool) -> None:
+    """Demonstrate provenance against the shipped verifier. Two asserts:
+
+    1. verifier(oracle) == 1.0: the derived answer key, played back as a solution,
+       scores exactly 1.0 under judge.py's matcher.
+    2. (when check_shipped) the derived instances equal judge.py's hardcoded
+       GROUND_TRUTH entry for entry, so the shipped answer key IS this mechanical
+       derivation and nothing else.
+    """
+    judge = _load_judge()
+    derived = [{"t": i["t"], "restart_type": i["restart_type"], "team": i["team"],
+                "outcome": i["outcome"]} for i in gt["instances"]]
+
+    if check_shipped:
+        assert derived == judge.GROUND_TRUTH, (
+            "derived GT does not match judge.py GROUND_TRUTH -- if you are building a "
+            "different match, pass --no-check-judge and regenerate judge.py's answer key")
+        print(f"provenance: derived GT == shipped judge.py GROUND_TRUTH ({len(derived)} entries)")
+
+    # verifier(oracle) == 1.0 on the derivation itself
+    judge.GROUND_TRUTH = derived
+    preds = [judge._norm(e) for e in derived]
+    tp = judge._max_monotonic(preds, judge._match)
+    n = len(derived)
+    precision = tp / n if n else 0.0
+    recall = tp / n if n else 0.0
+    f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) else 0.0
+    assert n > 0 and f1 == 1.0, f"verifier(oracle) != 1.0 (tp={tp}/{n}, f1={f1})"
+    print("provenance: verifier(oracle) == 1.0 CONFIRMED")
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Build gt.json mechanically from SoccerNet-v2 Labels-v2.json.")
     ap.add_argument("--labels", required=True, help="path to Labels-v2.json")
     ap.add_argument("--half1-duration-sec", type=float, default=None, help="length of the first-half video (for the abs timeline)")
     ap.add_argument("--tau", type=float, default=DEFAULT_TAU_SEC)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--no-check-judge", action="store_true",
+                    help="skip the derived-GT == judge.py GROUND_TRUTH equality check "
+                         "(use when building a match other than the shipped one)")
     args = ap.parse_args(argv)
 
     gt = build(args.labels, args.half1_duration_sec, args.tau)
@@ -124,6 +170,7 @@ def main(argv: list[str] | None = None) -> int:
     oc = Counter(i["outcome"] for i in gt["instances"])
     print(f"wrote {args.out}: {n} visible restarts | outcome dist none/shot/goal = "
           f"{oc.get(0,0)}/{oc.get(1,0)}/{oc.get(2,0)}")
+    prove(gt, check_shipped=not args.no_check_judge)
     return 0
 
 

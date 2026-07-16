@@ -38,12 +38,16 @@ soccer-restart-outcome-chains/
 | oracle | 1.0 |
 | empty / null | 0.0 |
 | no-media prior | 0.0247 |
+| single-frame ablation (Fable 5) | 0.0 |
+| frame-dump ablation (Fable 5, 120 frames, no tools) | 0.023 |
 | Claude Code (Opus 4.8) | 0.0225 over 110 turns |
-| Codex | 0.0227 over 120 turns |
-| Antigravity | 0.0449 over 120 turns |
+| Claude Code (Fable 5) | 0.0 over 118 turns |
+| Codex (GPT-5.6-sol) | 0.0227 over 120 turns |
+| Antigravity (Gemini 3.5 Flash) | 0.0449 over 120 turns |
 
-All three strong agents < 0.10 over > 50 tool-call turns. See `SPEC.md` and
-`calibration/scores.md`.
+Every rollout lands under 0.10 over > 50 tool-call turns, with the model named and the
+raw transcript in `calibration/rollouts/<agent>/transcripts/`. Ablation artifacts are
+in `provenance/ablations/measured/`. See `SPEC.md` and `calibration/scores.md`.
 
 ## Scoring rule (one coherent rule)
 

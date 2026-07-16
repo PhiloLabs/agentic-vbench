@@ -1,5 +1,6 @@
 {
   "agent": "antigravity",
+  "model": "Gemini 3.5 Flash (Medium), via the Antigravity desktop agent",
   "num_tool_calls": 120,
   "sampling_trace": [
     0,

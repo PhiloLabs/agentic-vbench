@@ -25,7 +25,9 @@ Write `/workspace/output/solution.json` in exactly this shape:
 
 One entry per visible restart, in chronological order. Fields:
 
-- `t`: the restart's time in seconds from the start of the clip (integer).
+- `t`: the restart's time in seconds from the start of the clip (integer). A predicted
+  restart counts only if its `t` is within 3 seconds of the true restart, so pin each
+  one carefully.
 - `restart_type`: one of
   - `1` = Throw-in
   - `2` = Corner
@@ -34,8 +36,8 @@ One entry per visible restart, in chronological order. Fields:
 - `team`: which side takes the restart, `"home"` or `"away"`. Home is the side
   defending the scoreboard's left at kickoff; infer the two kits and keep the mapping
   consistent for the whole match.
-- `outcome`: the chain the restart starts, judged from the following play:
-  - `2` if the team that took the restart scores within 30 seconds of it,
+- `outcome`: what the play following the restart produces, by either side:
+  - `2` if a goal is scored within 30 seconds of the restart,
   - else `1` if a shot (on or off target) happens within 15 seconds of it,
   - else `0`.
 

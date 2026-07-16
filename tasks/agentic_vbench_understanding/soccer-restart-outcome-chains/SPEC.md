@@ -62,18 +62,23 @@ difficulty:
   tool_call_turns: "110 / 120 / 120, all > 50."
   agent_model: "Claude Code (Opus 4.8), Codex, Antigravity"
 
-# 8. Anti-shortcut ablations. Target: each <= 0.15.
+# 8. Anti-shortcut ablations. Target: each <= 0.15. All measured; artifacts
+#    (answer.json + reward.json + raw transcript) in provenance/ablations/measured/.
 anti_shortcut:
-  single_frame: "structurally ~0 and model ablation PENDING. One frame cannot yield an
-                 81-entry ordered sequence, and the outcome field needs the 15-30 s of
-                 play after each restart, which one frame does not contain."
+  single_frame: "0.0 (measured, Claude Fable 5 given one representative frame, t=828).
+                 The model read the frame well: it identified the corner and placed it
+                 at t=826, 1.7 s from the true restart, with the right outcome, but
+                 misattributed the taking team, which needs the match-long kit mapping
+                 a single frame cannot give. Score 0.0."
   video_only: "n/a (no audio in this task)"
   audio_only: "n/a (no audio in this task)"
   no_media: "0.0247 (measured), best fixed guess from the answer-distribution prior,
              no video. Random guessing averages 0.0036. Both well under 0.15."
-  frame_dump_no_tools: "PENDING. Run a strong VLM on a uniform frame dump with no
-                        tools. Expected near 0 because outcomes need targeted temporal
-                        sampling around each restart, but not yet measured for this task."
+  frame_dump_no_tools: "0.023 (measured, Claude Fable 5 given 120 uniform frames, the
+                        same count as the interactive tool budget, one shot, no tools).
+                        It grounded 6 restarts in specific frames; 1 of 81 matched.
+                        With ~45 s gaps the restart second cannot be pinned to 3 s,
+                        so agency (choosing where to look) is what the task pays for."
 
 # 9. Input media.
 input:
@@ -92,9 +97,6 @@ input:
    `agentic_vbench_understanding` HF dataset the accepted path for an NDA-restricted
    broadcast (the pattern used by the egocentric tasks #45 / #47), or is a fully public
    source preferred? Until settled, `environment/Dockerfile` carries a placeholder URL.
-2. **Model-based ablations.** `no_media` and `random` are measured near 0. The
-   strong-VLM `single_frame` and `frame_dump_no_tools` ablations are argued but not yet
-   measured for this match, and will be added once the media is staged.
-
-Everything else (prompt, oracle, deterministic verifier, and the three-agent
-calibration at all < 0.10 over > 50 turns) is complete and reproduces locally.
+Everything else (prompt, oracle, deterministic verifier, the three-agent calibration
+at all < 0.10 over > 50 turns, and all four anti-shortcut ablations, measured) is
+complete and reproduces locally.
