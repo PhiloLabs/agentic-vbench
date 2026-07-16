@@ -1,0 +1,48 @@
+I will check the current contents of `./output/solution.json`.
+I will view the list of detected score updates from `work/score_updates.json` to find all time frames we need to inspect.
+I will check if there are any detected events saved in `work/detected_ocr_events.json` from the prior session.
+I will write a python script to programmatically search all 107 score updates for on-screen text containing player names (from the roster) or the words "ACE" or "BLOCK". The script will extract frames from 1 to 10 seconds before each score update, crop the lower third (where nameplates and event graphics typically appear) or scan the full frame, and run tesseract OCR. This will help us identify which points were aces/blocks and who was credited.
+I will modify `work/find_events_by_text.py` to run the frame extraction, cropping, and tesseract OCR in parallel using Python's `ThreadPoolExecutor`. This will speed up the execution by utilizing all CPU cores.
+I will execute the parallel text search script to scan the video for nameplates and overlays.
+I will check the status of the text search background task.
+I will wait for the text search task to finish. Once it finishes, we will receive a notification with the results.
+I will check the results of our parallel text search from `work/ocr_event_candidates.json`.
+I will inspect the background task logs to see if there were any errors running `ffmpeg` or `tesseract` in the sandbox.
+I will write a quick script to test running `ffmpeg` and check if there are any sandbox permissions or path errors that are preventing frame extraction.
+I will run `work/test_ffmpeg.py` to examine the FFmpeg output.
+I will write a python script to test the crop and tesseract OCR step on our test frame to see what tesseract is reading and if there are any issues with paths or character recognition.
+I will run the tesseract test script.
+I will write a python script to run the extraction and OCR test on a known game-action frame (t=373s, which corresponds to the first service ace point ending). This will verify if Tesseract works on game-action frames.
+I will run the test on t=373s to see Tesseract's output.
+I will test the crop of `880:320:200:200` at t=373s.
+I will execute the script to test the previous crop region on the t=373s frame.
+I will write a python script to extract the frames for update 1 exactly as was done in the previous session (using `-ss 369 -t 10 -r 1`) and run OCR on the 5th frame to check what tesseract reads. This will clarify the exact timing and parameters.
+I will run the exact frame extraction and OCR test.
+I will write a python script to verify that putting `-ss` *after* `-i` in the FFmpeg command provides frame-accurate seeking and retrieves the correct frame containing the OCR text `ase!`.
+I will run the accurate seeking test.
+I will list the work directory to check if the test has finished.
+I will write a python script `find_events_stream.py` to extract 10 frames at 1 fps for each of the 107 score updates (using `-ss {time_up - 10} -t 10 -r 1`). This is much faster than launching `ffmpeg` for every individual second, and it guarantees frame-accurate extraction of the moments before each score update. We will then run tesseract on these frames to search for players' names and the keywords "ace" and "block".
+I will run `work/find_events_stream.py` to identify the player names and play graphics for each of the 107 score updates.
+I will pause and wait for the stream OCR task to complete in the background. It will notify us with the results.
+I will check the parsed events in `work/ocr_event_candidates.json`.
+I will write a python script `find_events_fuzzy.py` to extract frames and perform OCR, but instead of using a strict keyword filter, it will save ALL non-empty OCR text results for the 1070 frames (10 seconds before each score update) to a file `work/raw_ocr_outputs.json`. This will ensure we do not miss any misspelled words (like "ase" for "ace" or "blok" for "block") and can analyze them comprehensively.
+I will execute the raw OCR extraction script to capture all on-screen text before each of the 107 updates. This will run as a background task.
+I will pause and wait for the raw OCR extraction task to complete in the background. Once finished, we will parse the full text logs.
+I will write a python script `parse_raw_ocr.py` to search the extracted text in `work/raw_ocr_outputs.json` using fuzzy spelling checks and name matching. This will show us all the events and player nameplates captured by OCR.
+I will run `parse_raw_ocr.py` to print all occurrences of match text.
+I will list the contents of the main workspace directory to see if there are other files (like rosters, stats, or logs) that we can leverage.
+I will view the contents of `rollout.txt` to see if it contains any useful info or logs from the environment.
+I will write a python script `inspect_graphic.py` to crop different horizontal slices of the lower half of the frame at t=373s (frame 5 of the first update). Since this frame is known to contain the graphic for the first service ace, this slice OCR will help us extract the player's name and jersey number.
+I will execute the script to scan horizontal slices of the lower half of the frame.
+I will write a python script `inspect_graphic_all.py` to scan the lower half of all 10 frames of Update 1 (t=369s to 378s) to see when the nameplate graphic pops up and what text it contains.
+I will run the script to scan all frames for graphics.
+I will check if the script has completed.
+I will read the output logs of `inspect_graphic_all.py` to see the text detected in the slices of all 10 frames.
+I will write a python script `parse_all_ocr.py` to print all non-empty OCR outputs from `work/raw_ocr_outputs.json` so we can inspect them for misspelled player names or event keywords (like "ace" or "block") that might have been missed by our previous strict patterns.
+I will run `parse_all_ocr.py` to view all text detected in the video frames.
+I will write a python script `search_names_fuzzy.py` to do fuzzy name and keyword matching on our raw OCR database (`work/raw_ocr_outputs.json`). This will allow us to catch player nameplates and event terms that have spelling variations or typos.
+I will run the fuzzy search script.
+I will write an updated parsing script `parse_raw_ocr_v2.py` to fix the fuzzy matching issue. Short names (like "lee" or "ung" or "ryan") will only be matched exactly or with very tight constraints to avoid matching common words like "the", "set", or "see", while longer names (like "livingston", "jehlarova", or "timmer") will still allow spelling tolerance. This will isolate the true occurrences of player names.
+I will run the updated parser script.
+I will write a python script `extract_candidate_images.py` to extract the bottom-third crop of the frame for each of our 15 candidates using frame-accurate seeks. The cropped images will be saved and copied to the brain directory, and then we will generate a markdown document to inspect them.
+I will run `work/extract_candidate_images.py` with BypassSandbox set to true to allow copying the cropped candidate frames to the brain/artifact directory for inspection.
