@@ -1,0 +1,30 @@
+{
+  "events": [
+    {"set": 1, "score_after": "2-1", "type": "block", "players": ["Whitney Bower"]},
+    {"set": 1, "score_after": "5-7", "type": "block", "players": ["Lana Radakovic", "Pia Timmer"]},
+    {"set": 1, "score_after": "8-9", "type": "block", "players": ["Iman Isanovic", "Magda Jehlarova"]},
+    {"set": 1, "score_after": "11-11", "type": "block", "players": ["Whitney McEwan-Llarenas", "Whitney Bower"]},
+    {"set": 1, "score_after": "12-11", "type": "block", "players": ["Kate Prior", "Erin Livingston"]},
+    {"set": 1, "score_after": "16-13", "type": "block", "players": ["Erin Livingston"]},
+    {"set": 1, "score_after": "22-17", "type": "block", "players": ["Erin Livingston"]},
+    {"set": 2, "score_after": "9-6", "type": "block", "players": ["Mia Lee"]},
+    {"set": 2, "score_after": "9-8", "type": "block", "players": ["Katy Ryan", "Magda Jehlarova"]},
+    {"set": 2, "score_after": "12-15", "type": "block", "players": ["Magda Jehlarova"]},
+    {"set": 2, "score_after": "19-24", "type": "block", "players": ["Lana Radakovic"]},
+    {"set": 2, "score_after": "19-25", "type": "block", "players": ["Katy Ryan", "Lana Radakovic"]},
+    {"set": 3, "score_after": "2-0", "type": "block", "players": ["Whitney Bower"]},
+    {"set": 3, "score_after": "8-7", "type": "block", "players": ["Whitney McEwan-Llarenas", "Erin Livingston"]},
+    {"set": 3, "score_after": "11-13", "type": "block", "players": ["Magda Jehlarova", "Pia Timmer"]},
+    {"set": 3, "score_after": "14-18", "type": "block", "players": ["Whitney McEwan-Llarenas"]},
+    {"set": 3, "score_after": "15-18", "type": "block", "players": ["Whitney McEwan-Llarenas"]},
+    {"set": 3, "score_after": "18-23", "type": "block", "players": ["Lana Radakovic"]},
+    {"set": 3, "score_after": "21-23", "type": "ace", "players": ["Hannah Billeter"]},
+    {"set": 4, "score_after": "2-0", "type": "block", "players": ["Erin Livingston"]},
+    {"set": 4, "score_after": "4-5", "type": "ace", "players": ["Emma Barbero"]},
+    {"set": 4, "score_after": "6-9", "type": "block", "players": ["Magda Jehlarova"]},
+    {"set": 4, "score_after": "7-11", "type": "block", "players": ["Lana Radakovic", "Pia Timmer"]},
+    {"set": 4, "score_after": "9-15", "type": "block", "players": ["Iman Isanovic"]},
+    {"set": 4, "score_after": "11-18", "type": "block", "players": ["Magda Jehlarova"]},
+    {"set": 4, "score_after": "19-25", "type": "block", "players": ["Iman Isanovic"]}
+  ]
+}
