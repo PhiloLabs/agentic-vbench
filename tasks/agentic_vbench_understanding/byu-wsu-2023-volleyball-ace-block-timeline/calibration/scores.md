@@ -11,14 +11,17 @@ attempt ≈ 0.
 | empty / null | 0.0 | — |
 | 24-entry plausible guess | 0.0 | — |
 | Codex CLI (gpt-5.6, xhigh) | 0.02 | 126 |
+| Claude Code CLI (Opus 4.8 [1m], xhigh) | 0.0 | 291 |
 | Claude Code CLI (Fable 5, xhigh) | 0.15 | 733 |
 | Antigravity (Gemini 3.5 Flash, High) | 0.0 † | 132 (isolated; did not converge) |
 
-Codex (0.02) and Fable (0.15) are clean, genuine runs well past 50 turns; they bracket
-the ~0.10 line (mean ≈ 0.085). The terminal ace/block moment is a sub-second blur and
-net-front jersey ID at 720p is genuinely hard, which is what keeps scores low. Run-to-run
-variance is real: F1 is scale-invariant in the number of events, so the spread reflects
-how many terminal moments a run happens to resolve, not how long its list is.
+Opus (0.0), Codex (0.02) and Fable (0.15) are clean, genuine runs well past 50 turns
+(mean ≈ 0.057). Opus shipped only 6 events and none matched — not even set+score+type —
+so 0.0 holds under both the old and hardened schema; Codex and Fable bracket the ~0.10
+line. The terminal ace/block moment is a sub-second blur and net-front jersey ID at 720p
+is genuinely hard, which is what keeps strong agents low. Run-to-run variance is real:
+F1 is scale-invariant in the number of events, so the spread reflects how many terminal
+moments a run happens to resolve, not how long its list is.
 
 † **Antigravity is recorded as 0.0 but is a special case reviewers should know about.**
 Un-isolated, Gemini *grounds* against the public NCAA box score — server-side Google
