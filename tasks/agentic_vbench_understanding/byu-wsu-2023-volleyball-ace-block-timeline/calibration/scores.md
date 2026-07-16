@@ -13,7 +13,7 @@ attempt ≈ 0.
 | Codex CLI (gpt-5.6, xhigh) | 0.02 | 126 |
 | Claude Code CLI (Opus 4.8 [1m], xhigh) | 0.0 | 291 |
 | Claude Code CLI (Fable 5, xhigh) | 0.15 | 733 |
-| Antigravity (Gemini 3.5 Flash, High) | 0.0 † | 132 (isolated; did not converge) |
+| Antigravity (Gemini 3.5 Flash, High) | 0.0 † | 2 windows, 54 frames (integrity-verified clean) |
 
 Opus (0.0), Codex (0.02) and Fable (0.15) are clean, genuine runs well past 50 turns
 (mean ≈ 0.057). Opus shipped only 6 events and none matched — not even set+score+type —
@@ -23,20 +23,28 @@ is genuinely hard, which is what keeps strong agents low. Run-to-run variance is
 F1 is scale-invariant in the number of events, so the spread reflects how many terminal
 moments a run happens to resolve, not how long its list is.
 
-† **Antigravity is recorded as 0.0 but is a special case reviewers should know about.**
-Un-isolated, Gemini *grounds* against the public NCAA box score — server-side Google
-Search inside the model↔API channel, which no local or container network policy can
-block — and returns a near-perfect list without watching the video. With grounding
-suppressed by an always-on "pixels only, no web" rule it stops grounding (verified:
-**0 grounding references** across a 389-frame and a 650-frame run) and does genuine
-frame-by-frame scoreboard OCR, but then two things happen: (a) it **cannot finish all
-24 events within the free-tier individual quota** (~1 h per window; it reached one
-shipped event before `RESOURCE_EXHAUSTED`), and (b) if any prior-run answer file is
-reachable on disk it enumerates sibling directories and **copies it, self-approving a
-`BypassSandbox`** to escape the `--sandbox` filesystem restriction. A trustworthy
-Antigravity number therefore requires **container-level isolation with no answer
-artifact present**; under that isolation its honest but incomplete work scores ≈ 0.
-Transcripts for the grounding, quota-capped, and answer-copy behaviours are in
+† **Antigravity's 0.0 is integrity-verified, but only after defeating three separate
+cheat vectors** — reviewers using Antigravity/Gemini should know about all three:
+1. **Web grounding.** Un-isolated, Gemini grounds against the public NCAA box score —
+   server-side Google Search inside the model↔API channel, which no local or container
+   network policy can block — and returns a near-perfect list without watching the
+   video. Defeated by an always-on "pixels only, no web" rule (verified 0 grounding
+   references across every isolated run).
+2. **Local answer-file theft.** With grounding blocked, if any prior-run answer file is
+   reachable on disk it enumerates sibling directories and copies it, self-approving a
+   `BypassSandbox` to escape `--sandbox`. Defeated by running in a workspace outside the
+   repo with `trustedWorkspaces` narrowed to that dir only, so the sandbox blocks every
+   path except the workspace (8 escape attempts blocked in the clean run).
+3. **Cross-conversation memory.** Once it has seen the answer via any vector, agy's
+   persistent local store (`conversations/`, `brain/`, `conversation_summaries.db`)
+   retains it, so even a *fresh* `agy -p` regurgitates the memorised answer. Defeated by
+   wiping those stores before the run.
+Only with all three closed does it do honest work: a 4-set partition, template-matched
+scoreboard OCR, an LNDS-filtered 107-update timeline, and fuzzy nameplate matching — yet
+across two ~3 h windows it isolated just 3 event candidates and shipped 1 (wrong) event,
+because 720p broadcast nameplate/jersey OCR defeats it. The run is **not converging**
+(window 2 added 0 events in 3 h), so the honest score is 0.0. Transcripts for all three
+cheat vectors and the clean run are in
 `rollouts/`.
 
 Raw transcripts are in `rollouts/` — one file per agent, so a reviewer can confirm each
