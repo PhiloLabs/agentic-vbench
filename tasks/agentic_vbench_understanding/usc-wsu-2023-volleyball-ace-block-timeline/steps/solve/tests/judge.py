@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-"""Grade an ace-and-block-timeline reconstruction. Pure Python stdlib, deterministic.
+"""Grade a block-point-timeline reconstruction. Pure Python stdlib, deterministic.
 
-The agent must list every point that ended as a service ace or a block. For an ace it
-reports the set, the score after the point, and the server. For a block it reports the
+The agent must list every point that ended as a block. For each block it reports the
 set, the score after the point, the credited blocker(s), AND the opposing hitter who
 was blocked. Scoring is two-tier:
 
-  * full credit (1.0)    — set, score_after, type, and every credited name match
-    (for a block: the exact blocker multiset AND the blocked hitter);
+  * full credit (1.0)    — set, score_after, type, the exact blocker multiset AND the
+    blocked hitter all match;
   * partial credit (0.5) — set, score_after, and type match and the credited names
     are off by exactly one (a blocker missing/extra/wrong, or the blocked hitter
     wrong) while everything else is correct.
@@ -18,32 +17,35 @@ a perfect visual agent can legitimately miss. reward = F1 over summed credit (mi
 and false positives both hurt). Exact matches are assigned in a first pass so a
 partial match can never steal a slot from an exact one.
 
-Why the blocked hitter: a block point requires identifying not just the blocker(s)
-but the opposing attacker who was stuffed — a second jersey read at the net, from a
-different team, at the terminal moment. The score bug says a point was scored, never
-why or by whom; scores increase monotonically within a set, so the exact score-after
-string anchors each event uniquely (this task's game clock). Duplicates are handled
-by greedy one-to-one multiset matching.
+Why block-only (no aces): a service ace is a single legible jersey read at the line
+with the ball landing untouched — a strong agent gets those, and a few high-precision
+ace hits inflate F1 without testing the hard skill. Every target here is instead a
+block point, which requires reading TWO opposing jerseys at the net inside a
+sub-second window: the credited blocker(s) AND the attacker who was stuffed. The
+score bug says a point was scored, never why or by whom; scores increase
+monotonically within a set, so the exact score-after string anchors each event
+uniquely (this task's game clock). Duplicates are handled by greedy one-to-one
+multiset matching.
 """
 import argparse
 import json
 import re
 from pathlib import Path
 
-# Official record: 28 events (5 aces — USC 1 / WSU 4 — and 23 block points,
-# USC 10 / WSU 13), 2023-11-12, #25 Southern California at #9 Washington State, a
-# five-set match WSU won 3-2 (15-25, 16-25, 25-16, 27-25, 15-11). Extracted from the
-# official NCAA rally-by-rally log (stats.ncaa.org contest 3252428) and reconciled
-# per player against the official box score: every SA, block-solo, and block-assist
-# column matches this list exactly — aces USC 1 / WSU 4, Block Solos 3 / 3, Block
-# Assists 14 / 20, so team block points BS + BA/2 = 10 (USC) and 13 (WSU). Each
-# block also carries `blocked`, the opposing hitter who was stuffed (the "Attack by
-# X" immediately preceding the terminal "Block by ..." rally line, direction-verified:
-# the hitter is always on the team opposite the blockers). "Kill by X, Block by Y"
-# rally lines are attacker kills through a block touch, not block points, and are
-# excluded. Scores are written USC-WSU (visitor-home) as on the broadcast graphic.
-# Unlike the sister BYU match, no rally line here is corrupted, so every block has a
-# recoverable blocked hitter (the None branch below is retained but unused).
+# Official record: 23 block points (USC 10 / WSU 13), 2023-11-12, #25 Southern
+# California at #9 Washington State, a five-set match WSU won 3-2 (15-25, 16-25,
+# 25-16, 27-25, 15-11). Extracted from the official NCAA rally-by-rally log
+# (stats.ncaa.org contest 3252428) and reconciled per player against the official box
+# score: Block Solos 3 / 3 and Block Assists 14 / 20, so team block points
+# BS + BA/2 = 10 (USC) and 13 (WSU) — matching this list exactly. Each block carries
+# `blocked`, the opposing hitter who was stuffed (the "Attack by X" immediately
+# preceding the terminal "Block by ..." rally line, direction-verified: the hitter is
+# always on the team opposite the blockers). "Kill by X, Block by Y" rally lines are
+# attacker kills through a block touch, not block points, and are excluded; the
+# match's 5 service aces are excluded by design (legible single-jersey reads that do
+# not test the hard net attribution). Scores are written USC-WSU (visitor-home) as on
+# the broadcast graphic. No rally line is corrupted, so every block has a recoverable
+# blocked hitter (the None branch below is retained but unused).
 GROUND_TRUTH = [
   {"set": 1, "score_after": "4-2",       "type": "block", "players": ["Mia Tuaniga", "Lindsey Miller"],                         "blocked": "Iman Isanovic"},
   {"set": 1, "score_after": "14-10",     "type": "block", "players": ["Lindsey Miller"],                                        "blocked": "Magda Jehlarova"},
@@ -52,13 +54,10 @@ GROUND_TRUTH = [
   {"set": 2, "score_after": "2-1",       "type": "block", "players": ["Lindsey Miller", "Skylar Fields"],                       "blocked": "Pia Timmer"},
   {"set": 2, "score_after": "10-7",      "type": "block", "players": ["Tyrah Ariail"],                                          "blocked": "Katy Ryan"},
   {"set": 2, "score_after": "16-10",     "type": "block", "players": ["Magda Jehlarova", "Argentina Ung"],                      "blocked": "Skylar Fields"},
-  {"set": 3, "score_after": "0-1",       "type": "ace",   "players": ["Lana Radakovic"]},
   {"set": 3, "score_after": "1-6",       "type": "block", "players": ["Magda Jehlarova", "Argentina Ung"],                      "blocked": "Skylar Fields"},
   {"set": 3, "score_after": "4-7",       "type": "block", "players": ["London Wijay", "Lindsey Miller"],                        "blocked": "Magda Jehlarova"},
   {"set": 3, "score_after": "7-10",      "type": "block", "players": ["Tyrah Ariail"],                                          "blocked": "Iman Isanovic"},
-  {"set": 3, "score_after": "11-13",     "type": "ace",   "players": ["Tyrah Ariail"]},
   {"set": 3, "score_after": "13-17",     "type": "block", "players": ["Magda Jehlarova", "Argentina Ung"],                      "blocked": "London Wijay"},
-  {"set": 3, "score_after": "16-24",     "type": "ace",   "players": ["Lana Radakovic"]},
   {"set": 3, "score_after": "16-25",     "type": "block", "players": ["Magda Jehlarova"],                                       "blocked": "Tyrah Ariail"},
   {"set": 4, "score_after": "1-1",       "type": "block", "players": ["Katy Ryan", "Magda Jehlarova"],                          "blocked": "Skylar Fields"},
   {"set": 4, "score_after": "3-3",       "type": "block", "players": ["Magda Jehlarova", "Argentina Ung"],                      "blocked": "Skylar Fields"},
@@ -67,11 +66,9 @@ GROUND_TRUTH = [
   {"set": 4, "score_after": "16-17",     "type": "block", "players": ["Pia Timmer"],                                            "blocked": "Skylar Fields"},
   {"set": 4, "score_after": "19-20",     "type": "block", "players": ["Katy Ryan", "Magda Jehlarova"],                          "blocked": "Kalyah Williams"},
   {"set": 5, "score_after": "3-3",       "type": "block", "players": ["Magda Jehlarova", "Iman Isanovic"],                      "blocked": "Kalyah Williams"},
-  {"set": 5, "score_after": "3-4",       "type": "ace",   "players": ["Julia Norville"]},
   {"set": 5, "score_after": "3-7",       "type": "block", "players": ["Magda Jehlarova", "Argentina Ung"],                      "blocked": "Skylar Fields"},
   {"set": 5, "score_after": "5-8",       "type": "block", "players": ["Mia Tuaniga", "Rylie McGinest"],                         "blocked": "Pia Timmer"},
   {"set": 5, "score_after": "5-11",      "type": "block", "players": ["Argentina Ung"],                                         "blocked": "London Wijay"},
-  {"set": 5, "score_after": "5-12",      "type": "ace",   "players": ["Karly Basham"]},
   {"set": 5, "score_after": "10-14",     "type": "block", "players": ["Tyrah Ariail", "London Wijay"],                          "blocked": "Iman Isanovic"},
 ]
 
