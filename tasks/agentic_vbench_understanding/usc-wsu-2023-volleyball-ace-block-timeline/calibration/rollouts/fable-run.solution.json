@@ -1,0 +1,13 @@
+{
+  "events": [
+    {"set": 1, "score_after": "8-8",   "type": "block", "players": ["Katy Ryan"], "blocked": "Tyrah Ariail"},
+    {"set": 3, "score_after": "0-1",   "type": "ace",   "players": ["Lana Radakovic"]},
+    {"set": 3, "score_after": "11-13", "type": "ace",   "players": ["Tyrah Ariail"]},
+    {"set": 3, "score_after": "16-24", "type": "ace",   "players": ["Lana Radakovic"]},
+    {"set": 4, "score_after": "1-0",   "type": "block", "players": ["Kalyah Williams"], "blocked": "Julia Norville"},
+    {"set": 4, "score_after": "9-6",   "type": "block", "players": ["Kalyah Williams"], "blocked": "Katy Ryan"},
+    {"set": 4, "score_after": "19-20", "type": "block", "players": ["Katy Ryan", "Julia Norville"], "blocked": "Kalyah Williams"},
+    {"set": 4, "score_after": "22-24", "type": "block", "players": ["Katy Ryan", "Pia Timmer"], "blocked": "London Wijay"},
+    {"set": 5, "score_after": "5-12",  "type": "ace",   "players": ["Karly Basham"]}
+  ]
+}
