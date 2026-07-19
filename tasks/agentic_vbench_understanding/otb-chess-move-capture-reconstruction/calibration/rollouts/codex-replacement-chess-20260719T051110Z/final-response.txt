@@ -1,0 +1,1 @@
+[solution.json](/Users/brendaz/Documents/Codex/2026-07-07/tak/calibration_runs_v5/codex-replacement-chess-20260719T051110Z/workspace/output/solution.json)
