@@ -1,0 +1,4872 @@
+{
+  "schema_version": "1.0",
+  "generator": "@slippi/slippi-js 9.1.2",
+  "policy": {
+    "include": "hit_count >= 4 or didKill == true",
+    "exclude": "unfinished non-kill conversions",
+    "hit_count": "sum of move hitCount values in the Slippi conversion",
+    "damage": "sum of move damage values in the Slippi conversion",
+    "damage_bands": {
+      "light": "<25",
+      "heavy": "25 to <50",
+      "devastating": ">=50"
+    },
+    "terminal": {
+      "kill": "Slippi conversion didKill is true",
+      "reversal": "the victim starts an overlapping conversion against the attacker",
+      "escape": "non-kill conversion with no overlapping reversal"
+    }
+  },
+  "video_sources": [
+    {
+      "games": [
+        1,
+        3
+      ],
+      "video_id": "3VJYGJ3KrZM",
+      "title": "Ferriswheel vs Zain - Nouns Bowl 2025 - Winners Round 2",
+      "bytes": 146426861,
+      "sha256": "4b9a6da0b6ee68488e2eb32a90fb3319d17b1f7bb1245c437d63dedfba462ec4",
+      "duration_seconds": 382,
+      "stage_sequence": [
+        "Battlefield",
+        "Dream Land N64",
+        "Dream Land N64"
+      ]
+    },
+    {
+      "games": [
+        4,
+        6
+      ],
+      "video_id": "tmZTwrLVceI",
+      "title": "JoJo vs Bard - Nouns Bowl 2025 - Winners Round 2",
+      "bytes": 202671526,
+      "sha256": "d726413360a809da8a72ec0289c9ab731b9e2b98a4dbee8562e7fe3b3bc9f7d2",
+      "duration_seconds": 450.52,
+      "stage_sequence": [
+        "Battlefield",
+        "Fountain of Dreams",
+        "Fountain of Dreams"
+      ]
+    },
+    {
+      "games": [
+        7,
+        10
+      ],
+      "video_id": "44jQnPR24zM",
+      "title": "Axe vs SRM13 - Nouns Bowl 2025 - Winners Round 2",
+      "bytes": 261562993,
+      "sha256": "af05250e0c2f7ff9744968a6a1df13bed8de83d6d66db72b731912ad61fe0a01",
+      "duration_seconds": 676.67,
+      "stage_sequence": [
+        "Battlefield",
+        "Pokémon Stadium",
+        "Dream Land N64",
+        "Dream Land N64"
+      ]
+    }
+  ],
+  "event_count": 104,
+  "games": [
+    {
+      "game": 1,
+      "replay_file": "ferriswheel-zain-g1.slp",
+      "replay_id": "69beac275febbbc18f6b02a4",
+      "sha256": "b9ffae237ee3c4a4577ccdd4e41b8228a6d404967c18a4b2c303e0eee04edc16",
+      "started_at": "2025-04-26T19:57:34.014Z",
+      "stage": "Battlefield",
+      "players": [
+        {
+          "player_index": 0,
+          "tag": "Ferriswheel",
+          "character": "Falco"
+        },
+        {
+          "player_index": 1,
+          "tag": "Zain",
+          "character": "Marth"
+        }
+      ],
+      "last_frame": 7434,
+      "all_conversions": 25,
+      "accepted_events": [
+        {
+          "game": 1,
+          "attacker": "Zain",
+          "victim_stock_before": 4,
+          "hit_count": 15,
+          "damage_band": "devastating",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 69,
+          "end_frame": 1036,
+          "start_game_seconds": 3.2,
+          "end_game_seconds": 19.317,
+          "damage": 119.331,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 69,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 103,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 137,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 186,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.76
+            },
+            {
+              "frame": 218,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 3.68
+            },
+            {
+              "frame": 280,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.58
+            },
+            {
+              "frame": 311,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 373,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 412,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 460,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 8.19
+            },
+            {
+              "frame": 513,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 12.09
+            },
+            {
+              "frame": 588,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 11.05
+            },
+            {
+              "frame": 663,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 788,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.88
+            },
+            {
+              "frame": 841,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 19.101
+            }
+          ]
+        },
+        {
+          "game": 1,
+          "attacker": "Zain",
+          "victim_stock_before": 3,
+          "hit_count": 5,
+          "damage_band": "light",
+          "terminal": "escape",
+          "victim": "Ferriswheel",
+          "start_frame": 1356,
+          "end_frame": 1612,
+          "start_game_seconds": 24.65,
+          "end_game_seconds": 28.917,
+          "damage": 24.64,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 1356,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 1395,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 1427,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 1491,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 3.64
+            },
+            {
+              "frame": 1531,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            }
+          ]
+        },
+        {
+          "game": 1,
+          "attacker": "Zain",
+          "victim_stock_before": 3,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 2768,
+          "end_frame": 3187,
+          "start_game_seconds": 48.183,
+          "end_game_seconds": 55.167,
+          "damage": 31.96,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2781,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.96
+            },
+            {
+              "frame": 2848,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 9.8
+            },
+            {
+              "frame": 2885,
+              "name": "Down Tilt",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 3016,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 9.2
+            }
+          ]
+        },
+        {
+          "game": 1,
+          "attacker": "Zain",
+          "victim_stock_before": 2,
+          "hit_count": 7,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "Ferriswheel",
+          "start_frame": 3624,
+          "end_frame": 3985,
+          "start_game_seconds": 62.45,
+          "end_game_seconds": 68.467,
+          "damage": 28.74,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 3624,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 8.4
+            },
+            {
+              "frame": 3656,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 3688,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 3753,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.76
+            },
+            {
+              "frame": 3779,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 3844,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.58
+            },
+            {
+              "frame": 3874,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 4
+            }
+          ]
+        },
+        {
+          "game": 1,
+          "attacker": "Ferriswheel",
+          "victim_stock_before": 4,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Zain",
+          "start_frame": 3941,
+          "end_frame": 4406,
+          "start_game_seconds": 67.733,
+          "end_game_seconds": 75.483,
+          "damage": 42.92,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 3941,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 8
+            },
+            {
+              "frame": 3980,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 4030,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 10.92
+            },
+            {
+              "frame": 4110,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 1,
+          "attacker": "Zain",
+          "victim_stock_before": 2,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 4929,
+          "end_frame": 5094,
+          "start_game_seconds": 84.2,
+          "end_game_seconds": 86.95,
+          "damage": 4,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 4944,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 4
+            }
+          ]
+        },
+        {
+          "game": 1,
+          "attacker": "Zain",
+          "victim_stock_before": 1,
+          "hit_count": 8,
+          "damage_band": "devastating",
+          "terminal": "reversal",
+          "victim": "Ferriswheel",
+          "start_frame": 5934,
+          "end_frame": 6581,
+          "start_game_seconds": 100.95,
+          "end_game_seconds": 111.733,
+          "damage": 70.86,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 5934,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 9.7
+            },
+            {
+              "frame": 5970,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 8.9
+            },
+            {
+              "frame": 6131,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.88
+            },
+            {
+              "frame": 6203,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 6245,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 11.83
+            },
+            {
+              "frame": 6322,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 10.79
+            },
+            {
+              "frame": 6391,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.76
+            },
+            {
+              "frame": 6445,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 9
+            }
+          ]
+        },
+        {
+          "game": 1,
+          "attacker": "Ferriswheel",
+          "victim_stock_before": 3,
+          "hit_count": 5,
+          "damage_band": "light",
+          "terminal": "reversal",
+          "victim": "Zain",
+          "start_frame": 6913,
+          "end_frame": 7136,
+          "start_game_seconds": 117.267,
+          "end_game_seconds": 120.983,
+          "damage": 10.46,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 6920,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 6949,
+              "name": "Up Throw",
+              "hit_count": 4,
+              "damage": 7.46
+            }
+          ]
+        },
+        {
+          "game": 1,
+          "attacker": "Zain",
+          "victim_stock_before": 1,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 7055,
+          "end_frame": 7434,
+          "start_game_seconds": 119.633,
+          "end_game_seconds": 125.95,
+          "damage": 23.9,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 7055,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 8.9
+            },
+            {
+              "frame": 7141,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 7233,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 7339,
+              "name": "Neutral B",
+              "hit_count": 1,
+              "damage": 7
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": 2,
+      "replay_file": "ferriswheel-zain-g2.slp",
+      "replay_id": "69beac275febbbc18f6b02a5",
+      "sha256": "0278ffa2a20bb950b4f3e49b511b570f069ddefc34f3c25bb81b79f5e8514f83",
+      "started_at": "2025-04-26T19:59:55.014Z",
+      "stage": "Dream Land N64",
+      "players": [
+        {
+          "player_index": 0,
+          "tag": "Ferriswheel",
+          "character": "Falco"
+        },
+        {
+          "player_index": 1,
+          "tag": "Zain",
+          "character": "Marth"
+        }
+      ],
+      "last_frame": 7791,
+      "all_conversions": 22,
+      "accepted_events": [
+        {
+          "game": 2,
+          "attacker": "Zain",
+          "victim_stock_before": 4,
+          "hit_count": 7,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 442,
+          "end_frame": 804,
+          "start_game_seconds": 9.417,
+          "end_game_seconds": 15.45,
+          "damage": 41,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 442,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 491,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 544,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 577,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 597,
+              "name": "Down Tilt",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 703,
+              "name": "Side B",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 757,
+              "name": "Up B",
+              "hit_count": 1,
+              "damage": 7
+            }
+          ]
+        },
+        {
+          "game": 2,
+          "attacker": "Zain",
+          "victim_stock_before": 3,
+          "hit_count": 7,
+          "damage_band": "devastating",
+          "terminal": "reversal",
+          "victim": "Ferriswheel",
+          "start_frame": 1135,
+          "end_frame": 1506,
+          "start_game_seconds": 20.967,
+          "end_game_seconds": 27.15,
+          "damage": 53.3,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 1135,
+              "name": "Neutral Air",
+              "hit_count": 2,
+              "damage": 12.78
+            },
+            {
+              "frame": 1186,
+              "name": "Dash Attack",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 1267,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.91
+            },
+            {
+              "frame": 1301,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 3.88
+            },
+            {
+              "frame": 1322,
+              "name": "Down Tilt",
+              "hit_count": 1,
+              "damage": 8.73
+            },
+            {
+              "frame": 1398,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            }
+          ]
+        },
+        {
+          "game": 2,
+          "attacker": "Zain",
+          "victim_stock_before": 3,
+          "hit_count": 7,
+          "damage_band": "devastating",
+          "terminal": "reversal",
+          "victim": "Ferriswheel",
+          "start_frame": 1798,
+          "end_frame": 2427,
+          "start_game_seconds": 32.017,
+          "end_game_seconds": 42.5,
+          "damage": 60.28,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 1814,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 1897,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.64
+            },
+            {
+              "frame": 1942,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 12.09
+            },
+            {
+              "frame": 2033,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 11.05
+            },
+            {
+              "frame": 2079,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 10.14
+            },
+            {
+              "frame": 2139,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 9.36
+            },
+            {
+              "frame": 2198,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 10
+            }
+          ]
+        },
+        {
+          "game": 2,
+          "attacker": "Zain",
+          "victim_stock_before": 3,
+          "hit_count": 5,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 2487,
+          "end_frame": 3112,
+          "start_game_seconds": 43.5,
+          "end_game_seconds": 53.917,
+          "damage": 42.5,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2487,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 9.1
+            },
+            {
+              "frame": 2641,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.8
+            },
+            {
+              "frame": 2699,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 8.5
+            },
+            {
+              "frame": 2822,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 3013,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 8.1
+            }
+          ]
+        },
+        {
+          "game": 2,
+          "attacker": "Zain",
+          "victim_stock_before": 2,
+          "hit_count": 14,
+          "damage_band": "devastating",
+          "terminal": "reversal",
+          "victim": "Ferriswheel",
+          "start_frame": 3597,
+          "end_frame": 4472,
+          "start_game_seconds": 62,
+          "end_game_seconds": 76.583,
+          "damage": 92.7,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 3609,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 3677,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 3709,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 3776,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.76
+            },
+            {
+              "frame": 3802,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 3.76
+            },
+            {
+              "frame": 3860,
+              "name": "Dash Attack",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 3946,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 3993,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.7
+            },
+            {
+              "frame": 4023,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.68
+            },
+            {
+              "frame": 4057,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 4110,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 4149,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 8.28
+            },
+            {
+              "frame": 4227,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 11.96
+            },
+            {
+              "frame": 4316,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 7.56
+            }
+          ]
+        },
+        {
+          "game": 2,
+          "attacker": "Zain",
+          "victim_stock_before": 2,
+          "hit_count": 6,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 5234,
+          "end_frame": 5789,
+          "start_game_seconds": 89.283,
+          "end_game_seconds": 98.533,
+          "damage": 39.34,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 5248,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.92
+            },
+            {
+              "frame": 5303,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 7.74
+            },
+            {
+              "frame": 5351,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 5396,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 5578,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 3.68
+            },
+            {
+              "frame": 5681,
+              "name": "Neutral B",
+              "hit_count": 1,
+              "damage": 7
+            }
+          ]
+        },
+        {
+          "game": 2,
+          "attacker": "Zain",
+          "victim_stock_before": 1,
+          "hit_count": 13,
+          "damage_band": "devastating",
+          "terminal": "reversal",
+          "victim": "Ferriswheel",
+          "start_frame": 6625,
+          "end_frame": 7612,
+          "start_game_seconds": 112.467,
+          "end_game_seconds": 128.917,
+          "damage": 122.06,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 6625,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 6689,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.96
+            },
+            {
+              "frame": 6722,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 6759,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 8.19
+            },
+            {
+              "frame": 6820,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 6957,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 11.83
+            },
+            {
+              "frame": 7002,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 10.79
+            },
+            {
+              "frame": 7047,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 6.84
+            },
+            {
+              "frame": 7084,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 8.55
+            },
+            {
+              "frame": 7143,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 9.62
+            },
+            {
+              "frame": 7207,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 7319,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 7385,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 8.28
+            }
+          ]
+        },
+        {
+          "game": 2,
+          "attacker": "Zain",
+          "victim_stock_before": 1,
+          "hit_count": 3,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 7655,
+          "end_frame": 7791,
+          "start_game_seconds": 129.633,
+          "end_game_seconds": 131.9,
+          "damage": 20.64,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 7684,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 7727,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 3.64
+            },
+            {
+              "frame": 7767,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": 3,
+      "replay_file": "ferriswheel-zain-g3.slp",
+      "replay_id": "69beac275febbbc18f6b02a6",
+      "sha256": "3eaaae87bc6241cc95cf8ed1b4812cc4e375f0a69424c83713f47149fb2cf752",
+      "started_at": "2025-04-26T20:02:24.014Z",
+      "stage": "Dream Land N64",
+      "players": [
+        {
+          "player_index": 0,
+          "tag": "Ferriswheel",
+          "character": "Falco"
+        },
+        {
+          "player_index": 1,
+          "tag": "Zain",
+          "character": "Marth"
+        }
+      ],
+      "last_frame": 6968,
+      "all_conversions": 24,
+      "accepted_events": [
+        {
+          "game": 3,
+          "attacker": "Zain",
+          "victim_stock_before": 4,
+          "hit_count": 10,
+          "damage_band": "devastating",
+          "terminal": "escape",
+          "victim": "Ferriswheel",
+          "start_frame": 225,
+          "end_frame": 852,
+          "start_game_seconds": 5.8,
+          "end_game_seconds": 16.25,
+          "damage": 68.2,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 233,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 264,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 297,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 365,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.79
+            },
+            {
+              "frame": 395,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.72
+            },
+            {
+              "frame": 455,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 519,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 9.4
+            },
+            {
+              "frame": 578,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 631,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 8.19
+            },
+            {
+              "frame": 662,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 8.1
+            }
+          ]
+        },
+        {
+          "game": 3,
+          "attacker": "Zain",
+          "victim_stock_before": 4,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 1668,
+          "end_frame": 1985,
+          "start_game_seconds": 29.85,
+          "end_game_seconds": 35.133,
+          "damage": 31.33,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 1681,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.8
+            },
+            {
+              "frame": 1737,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 6.93
+            },
+            {
+              "frame": 1836,
+              "name": "Down Tilt",
+              "hit_count": 1,
+              "damage": 7.6
+            },
+            {
+              "frame": 1910,
+              "name": "Up B",
+              "hit_count": 1,
+              "damage": 13
+            }
+          ]
+        },
+        {
+          "game": 3,
+          "attacker": "Ferriswheel",
+          "victim_stock_before": 4,
+          "hit_count": 11,
+          "damage_band": "devastating",
+          "terminal": "kill",
+          "victim": "Zain",
+          "start_frame": 2410,
+          "end_frame": 2792,
+          "start_game_seconds": 42.217,
+          "end_game_seconds": 48.583,
+          "damage": 67.46,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2417,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 2447,
+              "name": "Up Throw",
+              "hit_count": 4,
+              "damage": 7.46
+            },
+            {
+              "frame": 2539,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 2584,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 2625,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 2670,
+              "name": "Neutral B",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 2685,
+              "name": "Dash Attack",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 2736,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 3,
+          "attacker": "Zain",
+          "victim_stock_before": 3,
+          "hit_count": 12,
+          "damage_band": "devastating",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 2973,
+          "end_frame": 3557,
+          "start_game_seconds": 51.6,
+          "end_game_seconds": 61.333,
+          "damage": 69.14,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2984,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 3016,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 3057,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.76
+            },
+            {
+              "frame": 3087,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.68
+            },
+            {
+              "frame": 3162,
+              "name": "Dash Attack",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 3217,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 3275,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.7
+            },
+            {
+              "frame": 3308,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 3329,
+              "name": "Down Tilt",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 3416,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 3456,
+              "name": "Up B",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 3537,
+              "name": "Up B",
+              "hit_count": 1,
+              "damage": 1
+            }
+          ]
+        },
+        {
+          "game": 3,
+          "attacker": "Zain",
+          "victim_stock_before": 2,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "reversal",
+          "victim": "Ferriswheel",
+          "start_frame": 4607,
+          "end_frame": 4860,
+          "start_game_seconds": 78.833,
+          "end_game_seconds": 83.05,
+          "damage": 13.42,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 4617,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.88
+            },
+            {
+              "frame": 4649,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 3.84
+            },
+            {
+              "frame": 4717,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.7
+            },
+            {
+              "frame": 4743,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 4
+            }
+          ]
+        },
+        {
+          "game": 3,
+          "attacker": "Ferriswheel",
+          "victim_stock_before": 3,
+          "hit_count": 5,
+          "damage_band": "light",
+          "terminal": "reversal",
+          "victim": "Zain",
+          "start_frame": 4913,
+          "end_frame": 5288,
+          "start_game_seconds": 83.933,
+          "end_game_seconds": 90.183,
+          "damage": 15.12,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 4924,
+              "name": "Up Throw",
+              "hit_count": 4,
+              "damage": 7.12
+            },
+            {
+              "frame": 5106,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 8
+            }
+          ]
+        },
+        {
+          "game": 3,
+          "attacker": "Zain",
+          "victim_stock_before": 2,
+          "hit_count": 5,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "Ferriswheel",
+          "start_frame": 5477,
+          "end_frame": 6021,
+          "start_game_seconds": 93.333,
+          "end_game_seconds": 102.4,
+          "damage": 46.9,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 5477,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 5554,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 5623,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 12.22
+            },
+            {
+              "frame": 5742,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3.68
+            },
+            {
+              "frame": 5792,
+              "name": "Forward Smash",
+              "hit_count": 1,
+              "damage": 14
+            }
+          ]
+        },
+        {
+          "game": 3,
+          "attacker": "Ferriswheel",
+          "victim_stock_before": 3,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "Zain",
+          "start_frame": 5931,
+          "end_frame": 6096,
+          "start_game_seconds": 100.9,
+          "end_game_seconds": 103.65,
+          "damage": 7,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 5931,
+              "name": "Side B",
+              "hit_count": 1,
+              "damage": 7
+            }
+          ]
+        },
+        {
+          "game": 3,
+          "attacker": "Zain",
+          "victim_stock_before": 2,
+          "hit_count": 2,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 6251,
+          "end_frame": 6393,
+          "start_game_seconds": 106.233,
+          "end_game_seconds": 108.6,
+          "damage": 22,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 6251,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 6328,
+              "name": "Up B",
+              "hit_count": 1,
+              "damage": 13
+            }
+          ]
+        },
+        {
+          "game": 3,
+          "attacker": "Zain",
+          "victim_stock_before": 1,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Ferriswheel",
+          "start_frame": 6708,
+          "end_frame": 6968,
+          "start_game_seconds": 113.85,
+          "end_game_seconds": 118.183,
+          "damage": 32,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 6721,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 6860,
+              "name": "Side B",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 6913,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 6954,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": 4,
+      "replay_file": "jojo-bard-g1.slp",
+      "replay_id": "69beac275febbbc18f6b02b7",
+      "sha256": "6e3ec0ff1cc9233100794f5fc9361d633695a1f5fef25fc874fbb1ec562243fe",
+      "started_at": "2025-04-26T22:47:37.220Z",
+      "stage": "Battlefield",
+      "players": [
+        {
+          "player_index": 0,
+          "tag": "JoJo",
+          "character": "Captain Falcon"
+        },
+        {
+          "player_index": 1,
+          "tag": "Bard",
+          "character": "Fox"
+        }
+      ],
+      "last_frame": 12045,
+      "all_conversions": 50,
+      "accepted_events": [
+        {
+          "game": 4,
+          "attacker": "Bard",
+          "victim_stock_before": 4,
+          "hit_count": 7,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "JoJo",
+          "start_frame": 174,
+          "end_frame": 457,
+          "start_game_seconds": 4.95,
+          "end_game_seconds": 9.667,
+          "damage": 29.29,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 174,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 216,
+              "name": "Up Throw",
+              "hit_count": 4,
+              "damage": 7.46
+            },
+            {
+              "frame": 298,
+              "name": "Up Air",
+              "hit_count": 2,
+              "damage": 16.83
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "JoJo",
+          "victim_stock_before": 4,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 1485,
+          "end_frame": 1754,
+          "start_game_seconds": 26.8,
+          "end_game_seconds": 31.283,
+          "damage": 34.44,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 1502,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 1594,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 1632,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 6.44
+            },
+            {
+              "frame": 1691,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 18
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "Bard",
+          "victim_stock_before": 4,
+          "hit_count": 2,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "JoJo",
+          "start_frame": 2147,
+          "end_frame": 2343,
+          "start_game_seconds": 37.833,
+          "end_game_seconds": 41.1,
+          "damage": 16.1,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2147,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 2
+            },
+            {
+              "frame": 2180,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 14.1
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "JoJo",
+          "victim_stock_before": 3,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "reversal",
+          "victim": "Bard",
+          "start_frame": 2560,
+          "end_frame": 2838,
+          "start_game_seconds": 44.717,
+          "end_game_seconds": 49.35,
+          "damage": 11.52,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2569,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 2611,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 2671,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.76
+            },
+            {
+              "frame": 2713,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 2.76
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "Bard",
+          "victim_stock_before": 3,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "escape",
+          "victim": "JoJo",
+          "start_frame": 3861,
+          "end_frame": 4039,
+          "start_game_seconds": 66.4,
+          "end_game_seconds": 69.367,
+          "damage": 14.03,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 3861,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 3942,
+              "name": "Down Air",
+              "hit_count": 2,
+              "damage": 5.73
+            },
+            {
+              "frame": 3960,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 4.3
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "Bard",
+          "victim_stock_before": 3,
+          "hit_count": 6,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "JoJo",
+          "start_frame": 4049,
+          "end_frame": 4915,
+          "start_game_seconds": 69.533,
+          "end_game_seconds": 83.967,
+          "damage": 47.62,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 4082,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 4335,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 4411,
+              "name": "Up Throw",
+              "hit_count": 2,
+              "damage": 3.82
+            },
+            {
+              "frame": 4477,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 13.8
+            },
+            {
+              "frame": 4529,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "JoJo",
+          "victim_stock_before": 3,
+          "hit_count": 6,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "Bard",
+          "start_frame": 4973,
+          "end_frame": 5724,
+          "start_game_seconds": 84.933,
+          "end_game_seconds": 97.45,
+          "damage": 48.35,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 4973,
+              "name": "Down Tilt",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 5058,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.97
+            },
+            {
+              "frame": 5086,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.73
+            },
+            {
+              "frame": 5123,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 6.65
+            },
+            {
+              "frame": 5333,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 5512,
+              "name": "Forward Tilt",
+              "hit_count": 1,
+              "damage": 11
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "JoJo",
+          "victim_stock_before": 3,
+          "hit_count": 3,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 5735,
+          "end_frame": 5927,
+          "start_game_seconds": 97.633,
+          "end_game_seconds": 100.833,
+          "damage": 13,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 5735,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 2
+            },
+            {
+              "frame": 5747,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 5759,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 8
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "Bard",
+          "victim_stock_before": 3,
+          "hit_count": 2,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "JoJo",
+          "start_frame": 6475,
+          "end_frame": 6719,
+          "start_game_seconds": 109.967,
+          "end_game_seconds": 114.033,
+          "damage": 17,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 6475,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 6672,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "Bard",
+          "victim_stock_before": 2,
+          "hit_count": 13,
+          "damage_band": "devastating",
+          "terminal": "kill",
+          "victim": "JoJo",
+          "start_frame": 7541,
+          "end_frame": 8646,
+          "start_game_seconds": 127.733,
+          "end_game_seconds": 146.15,
+          "damage": 127.95,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 7541,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 18
+            },
+            {
+              "frame": 7616,
+              "name": "Up Air",
+              "hit_count": 2,
+              "damage": 16.83
+            },
+            {
+              "frame": 7713,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 7745,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 7816,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 7841,
+              "name": "Down Tilt",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 7924,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 7969,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 14.1
+            },
+            {
+              "frame": 8080,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 12.9
+            },
+            {
+              "frame": 8320,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 12.74
+            },
+            {
+              "frame": 8422,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 1
+            },
+            {
+              "frame": 8479,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 7.38
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "JoJo",
+          "victim_stock_before": 2,
+          "hit_count": 6,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 9409,
+          "end_frame": 9810,
+          "start_game_seconds": 158.867,
+          "end_game_seconds": 165.55,
+          "damage": 42.68,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 9429,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 9486,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.88
+            },
+            {
+              "frame": 9523,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 6.44
+            },
+            {
+              "frame": 9575,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.7
+            },
+            {
+              "frame": 9612,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 6.02
+            },
+            {
+              "frame": 9764,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 17.64
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "Bard",
+          "victim_stock_before": 1,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "JoJo",
+          "start_frame": 10042,
+          "end_frame": 10200,
+          "start_game_seconds": 169.417,
+          "end_game_seconds": 172.05,
+          "damage": 28.83,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 10042,
+              "name": "Up Air",
+              "hit_count": 2,
+              "damage": 16.83
+            },
+            {
+              "frame": 10088,
+              "name": "Dash Attack",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 10124,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "JoJo",
+          "victim_stock_before": 1,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "Bard",
+          "start_frame": 10528,
+          "end_frame": 11001,
+          "start_game_seconds": 177.517,
+          "end_game_seconds": 185.4,
+          "damage": 44.16,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 10528,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 16
+            },
+            {
+              "frame": 10611,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 6.16
+            },
+            {
+              "frame": 10690,
+              "name": "Forward Tilt",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 10783,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 4,
+          "attacker": "JoJo",
+          "victim_stock_before": 1,
+          "hit_count": 7,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 11502,
+          "end_frame": 12045,
+          "start_game_seconds": 193.75,
+          "end_game_seconds": 202.8,
+          "damage": 44,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 11520,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 6.23
+            },
+            {
+              "frame": 11628,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 11751,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 6.02
+            },
+            {
+              "frame": 11822,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 11851,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.73
+            },
+            {
+              "frame": 11888,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 6.02
+            },
+            {
+              "frame": 12024,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 16
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": 5,
+      "replay_file": "jojo-bard-g2.slp",
+      "replay_id": "69beac275febbbc18f6b02b8",
+      "sha256": "a1bd4322afbf45e780cd5428d0e49c1506f36fd2df0c5a638d93cacddd97efd1",
+      "started_at": "2025-04-26T22:51:17.220Z",
+      "stage": "Fountain of Dreams",
+      "players": [
+        {
+          "player_index": 0,
+          "tag": "JoJo",
+          "character": "Captain Falcon"
+        },
+        {
+          "player_index": 1,
+          "tag": "Bard",
+          "character": "Fox"
+        }
+      ],
+      "last_frame": 7483,
+      "all_conversions": 28,
+      "accepted_events": [
+        {
+          "game": 5,
+          "attacker": "JoJo",
+          "victim_stock_before": 4,
+          "hit_count": 7,
+          "damage_band": "devastating",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 81,
+          "end_frame": 613,
+          "start_game_seconds": 3.4,
+          "end_game_seconds": 12.267,
+          "damage": 88.28,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 81,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 18
+            },
+            {
+              "frame": 116,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 154,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 325,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 14
+            },
+            {
+              "frame": 400,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 507,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 16
+            },
+            {
+              "frame": 556,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 17.28
+            }
+          ]
+        },
+        {
+          "game": 5,
+          "attacker": "Bard",
+          "victim_stock_before": 4,
+          "hit_count": 15,
+          "damage_band": "devastating",
+          "terminal": "reversal",
+          "victim": "JoJo",
+          "start_frame": 1015,
+          "end_frame": 1778,
+          "start_game_seconds": 18.967,
+          "end_game_seconds": 31.683,
+          "damage": 86.42,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 1015,
+              "name": "Down Air",
+              "hit_count": 4,
+              "damage": 10.19
+            },
+            {
+              "frame": 1043,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 1074,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 18
+            },
+            {
+              "frame": 1143,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 1252,
+              "name": "Up Throw",
+              "hit_count": 4,
+              "damage": 7.12
+            },
+            {
+              "frame": 1296,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 16.74
+            },
+            {
+              "frame": 1482,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 1570,
+              "name": "Dash Attack",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 1638,
+              "name": "Dash Attack",
+              "hit_count": 1,
+              "damage": 6.37
+            }
+          ]
+        },
+        {
+          "game": 5,
+          "attacker": "JoJo",
+          "victim_stock_before": 3,
+          "hit_count": 7,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 1739,
+          "end_frame": 2171,
+          "start_game_seconds": 31.033,
+          "end_game_seconds": 38.233,
+          "damage": 35.64,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 1757,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 6.72
+            },
+            {
+              "frame": 1809,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.94
+            },
+            {
+              "frame": 1850,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 1911,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.76
+            },
+            {
+              "frame": 1951,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 2.76
+            },
+            {
+              "frame": 2032,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 5.82
+            },
+            {
+              "frame": 2053,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 11.64
+            }
+          ]
+        },
+        {
+          "game": 5,
+          "attacker": "Bard",
+          "victim_stock_before": 4,
+          "hit_count": 3,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "JoJo",
+          "start_frame": 2686,
+          "end_frame": 3021,
+          "start_game_seconds": 46.817,
+          "end_game_seconds": 52.4,
+          "damage": 33.65,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2686,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 2862,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 13.65
+            },
+            {
+              "frame": 2966,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            }
+          ]
+        },
+        {
+          "game": 5,
+          "attacker": "Bard",
+          "victim_stock_before": 3,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "JoJo",
+          "start_frame": 4377,
+          "end_frame": 4453,
+          "start_game_seconds": 75,
+          "end_game_seconds": 76.267,
+          "damage": 14,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 4377,
+              "name": "Up B",
+              "hit_count": 1,
+              "damage": 14
+            }
+          ]
+        },
+        {
+          "game": 5,
+          "attacker": "Bard",
+          "victim_stock_before": 2,
+          "hit_count": 6,
+          "damage_band": "devastating",
+          "terminal": "reversal",
+          "victim": "JoJo",
+          "start_frame": 5249,
+          "end_frame": 5904,
+          "start_game_seconds": 89.533,
+          "end_game_seconds": 100.45,
+          "damage": 72.41,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 5249,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 4.65
+            },
+            {
+              "frame": 5364,
+              "name": "Edge Attack (Slow)",
+              "hit_count": 1,
+              "damage": 8
+            },
+            {
+              "frame": 5429,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 18.11
+            },
+            {
+              "frame": 5499,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 5561,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 5664,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 13.65
+            }
+          ]
+        },
+        {
+          "game": 5,
+          "attacker": "JoJo",
+          "victim_stock_before": 2,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 5664,
+          "end_frame": 5723,
+          "start_game_seconds": 96.45,
+          "end_game_seconds": 97.433,
+          "damage": 18,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 5664,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 18
+            }
+          ]
+        },
+        {
+          "game": 5,
+          "attacker": "Bard",
+          "victim_stock_before": 2,
+          "hit_count": 2,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "JoJo",
+          "start_frame": 5976,
+          "end_frame": 6372,
+          "start_game_seconds": 101.65,
+          "end_game_seconds": 108.25,
+          "damage": 27,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 5976,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 6281,
+              "name": "Forward Smash",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 5,
+          "attacker": "JoJo",
+          "victim_stock_before": 1,
+          "hit_count": 4,
+          "damage_band": "devastating",
+          "terminal": "escape",
+          "victim": "Bard",
+          "start_frame": 6705,
+          "end_frame": 7092,
+          "start_game_seconds": 113.8,
+          "end_game_seconds": 120.25,
+          "damage": 50.84,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 6722,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 6792,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 16
+            },
+            {
+              "frame": 6846,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 14.56
+            },
+            {
+              "frame": 6946,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 13.28
+            }
+          ]
+        },
+        {
+          "game": 5,
+          "attacker": "JoJo",
+          "victim_stock_before": 1,
+          "hit_count": 5,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 7197,
+          "end_frame": 7483,
+          "start_game_seconds": 122,
+          "end_game_seconds": 126.767,
+          "damage": 35,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 7197,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 2
+            },
+            {
+              "frame": 7209,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 7221,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 8
+            },
+            {
+              "frame": 7310,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 7420,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": 6,
+      "replay_file": "jojo-bard-g3.slp",
+      "replay_id": "69beac275febbbc18f6b02b9",
+      "sha256": "80ab7e1d94590044fd035506967f136e0ce6a726cf28fff05cacf090cc41b2cd",
+      "started_at": "2025-04-26T22:53:44.220Z",
+      "stage": "Fountain of Dreams",
+      "players": [
+        {
+          "player_index": 0,
+          "tag": "JoJo",
+          "character": "Captain Falcon"
+        },
+        {
+          "player_index": 1,
+          "tag": "Bard",
+          "character": "Fox"
+        }
+      ],
+      "last_frame": 6801,
+      "all_conversions": 22,
+      "accepted_events": [
+        {
+          "game": 6,
+          "attacker": "Bard",
+          "victim_stock_before": 4,
+          "hit_count": 6,
+          "damage_band": "devastating",
+          "terminal": "kill",
+          "victim": "JoJo",
+          "start_frame": 675,
+          "end_frame": 1174,
+          "start_game_seconds": 13.3,
+          "end_game_seconds": 21.617,
+          "damage": 60.82,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 675,
+              "name": "Up Air",
+              "hit_count": 2,
+              "damage": 16.83
+            },
+            {
+              "frame": 738,
+              "name": "Up Air",
+              "hit_count": 2,
+              "damage": 15.34
+            },
+            {
+              "frame": 915,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 1016,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 13.65
+            }
+          ]
+        },
+        {
+          "game": 6,
+          "attacker": "Bard",
+          "victim_stock_before": 3,
+          "hit_count": 12,
+          "damage_band": "devastating",
+          "terminal": "escape",
+          "victim": "JoJo",
+          "start_frame": 1582,
+          "end_frame": 2048,
+          "start_game_seconds": 28.417,
+          "end_game_seconds": 36.183,
+          "damage": 63.84,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 1582,
+              "name": "Up B",
+              "hit_count": 2,
+              "damage": 3.82
+            },
+            {
+              "frame": 1609,
+              "name": "Up B",
+              "hit_count": 1,
+              "damage": 12.74
+            },
+            {
+              "frame": 1731,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 1800,
+              "name": "Down Air",
+              "hit_count": 4,
+              "damage": 10.28
+            },
+            {
+              "frame": 1838,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 1866,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 1909,
+              "name": "Dash Attack",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 1938,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 6,
+          "attacker": "JoJo",
+          "victim_stock_before": 3,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "Bard",
+          "start_frame": 2158,
+          "end_frame": 2503,
+          "start_game_seconds": 38.017,
+          "end_game_seconds": 43.767,
+          "damage": 29.92,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2158,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 2
+            },
+            {
+              "frame": 2170,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 2184,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 8
+            },
+            {
+              "frame": 2235,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 16.92
+            }
+          ]
+        },
+        {
+          "game": 6,
+          "attacker": "JoJo",
+          "victim_stock_before": 3,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "Bard",
+          "start_frame": 2669,
+          "end_frame": 3019,
+          "start_game_seconds": 46.533,
+          "end_game_seconds": 52.367,
+          "damage": 38,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2669,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 14
+            },
+            {
+              "frame": 2727,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            },
+            {
+              "frame": 2782,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 1
+            },
+            {
+              "frame": 2927,
+              "name": "Edge Attack",
+              "hit_count": 1,
+              "damage": 10
+            }
+          ]
+        },
+        {
+          "game": 6,
+          "attacker": "JoJo",
+          "victim_stock_before": 3,
+          "hit_count": 3,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 3106,
+          "end_frame": 3389,
+          "start_game_seconds": 53.817,
+          "end_game_seconds": 58.533,
+          "damage": 25,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 3128,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 3214,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 6
+            },
+            {
+              "frame": 3366,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 16
+            }
+          ]
+        },
+        {
+          "game": 6,
+          "attacker": "JoJo",
+          "victim_stock_before": 2,
+          "hit_count": 5,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "Bard",
+          "start_frame": 3745,
+          "end_frame": 4104,
+          "start_game_seconds": 64.467,
+          "end_game_seconds": 70.45,
+          "damage": 41.04,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 3745,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 16.56
+            },
+            {
+              "frame": 3794,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 12.48
+            },
+            {
+              "frame": 3837,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 2
+            },
+            {
+              "frame": 3867,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 3905,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 7
+            }
+          ]
+        },
+        {
+          "game": 6,
+          "attacker": "JoJo",
+          "victim_stock_before": 2,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "Bard",
+          "start_frame": 4193,
+          "end_frame": 4680,
+          "start_game_seconds": 71.933,
+          "end_game_seconds": 80.05,
+          "damage": 37.04,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 4199,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.76
+            },
+            {
+              "frame": 4236,
+              "name": "Down Throw",
+              "hit_count": 1,
+              "damage": 6.44
+            },
+            {
+              "frame": 4320,
+              "name": "Down Tilt",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 4486,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 15.84
+            }
+          ]
+        },
+        {
+          "game": 6,
+          "attacker": "Bard",
+          "victim_stock_before": 2,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "JoJo",
+          "start_frame": 4946,
+          "end_frame": 5308,
+          "start_game_seconds": 84.483,
+          "end_game_seconds": 90.517,
+          "damage": 32.17,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 4946,
+              "name": "Up Air",
+              "hit_count": 2,
+              "damage": 16.83
+            },
+            {
+              "frame": 5000,
+              "name": "Up Air",
+              "hit_count": 2,
+              "damage": 15.34
+            }
+          ]
+        },
+        {
+          "game": 6,
+          "attacker": "JoJo",
+          "victim_stock_before": 2,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 5233,
+          "end_frame": 5659,
+          "start_game_seconds": 89.267,
+          "end_game_seconds": 96.367,
+          "damage": 30.41,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 5233,
+              "name": "Neutral Air",
+              "hit_count": 2,
+              "damage": 11.37
+            },
+            {
+              "frame": 5338,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 5521,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 15.04
+            }
+          ]
+        },
+        {
+          "game": 6,
+          "attacker": "Bard",
+          "victim_stock_before": 2,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "JoJo",
+          "start_frame": 6134,
+          "end_frame": 6348,
+          "start_game_seconds": 104.283,
+          "end_game_seconds": 107.85,
+          "damage": 15,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 6134,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            }
+          ]
+        },
+        {
+          "game": 6,
+          "attacker": "JoJo",
+          "victim_stock_before": 1,
+          "hit_count": 2,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Bard",
+          "start_frame": 6620,
+          "end_frame": 6801,
+          "start_game_seconds": 112.383,
+          "end_game_seconds": 115.4,
+          "damage": 34,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 6620,
+              "name": "Down Air",
+              "hit_count": 1,
+              "damage": 16
+            },
+            {
+              "frame": 6672,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": 7,
+      "replay_file": "axe-srm13-g1.slp",
+      "replay_id": "69beac275febbbc18f6b0285",
+      "sha256": "1ee5675517ef6ac08534b9c6f61cdd1413a988b1333d424f474eae64fd9a7443",
+      "started_at": "2025-04-26T22:44:59.063Z",
+      "stage": "Battlefield",
+      "players": [
+        {
+          "player_index": 0,
+          "tag": "Axe",
+          "character": "Pikachu"
+        },
+        {
+          "player_index": 1,
+          "tag": "SRM13",
+          "character": "Jigglypuff"
+        }
+      ],
+      "last_frame": 10672,
+      "all_conversions": 36,
+      "accepted_events": [
+        {
+          "game": 7,
+          "attacker": "Axe",
+          "victim_stock_before": 4,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 227,
+          "end_frame": 601,
+          "start_game_seconds": 5.833,
+          "end_game_seconds": 12.067,
+          "damage": 43.37,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 227,
+              "name": "Down Tilt",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 272,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 8.37
+            },
+            {
+              "frame": 306,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 18
+            },
+            {
+              "frame": 368,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 10
+            }
+          ]
+        },
+        {
+          "game": 7,
+          "attacker": "SRM13",
+          "victim_stock_before": 4,
+          "hit_count": 5,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "Axe",
+          "start_frame": 1037,
+          "end_frame": 1485,
+          "start_game_seconds": 19.333,
+          "end_game_seconds": 26.8,
+          "damage": 36.74,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 1037,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 1103,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 10.92
+            },
+            {
+              "frame": 1172,
+              "name": "Down Air",
+              "hit_count": 2,
+              "damage": 3.82
+            },
+            {
+              "frame": 1275,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 10
+            }
+          ]
+        },
+        {
+          "game": 7,
+          "attacker": "SRM13",
+          "victim_stock_before": 3,
+          "hit_count": 3,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Axe",
+          "start_frame": 2086,
+          "end_frame": 2484,
+          "start_game_seconds": 36.817,
+          "end_game_seconds": 43.45,
+          "damage": 44.2,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2086,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 2131,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 9.2
+            },
+            {
+              "frame": 2278,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 28
+            }
+          ]
+        },
+        {
+          "game": 7,
+          "attacker": "Axe",
+          "victim_stock_before": 4,
+          "hit_count": 2,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 3088,
+          "end_frame": 3376,
+          "start_game_seconds": 53.517,
+          "end_game_seconds": 58.317,
+          "damage": 29,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 3088,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 17
+            },
+            {
+              "frame": 3350,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 7,
+          "attacker": "Axe",
+          "victim_stock_before": 3,
+          "hit_count": 6,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "SRM13",
+          "start_frame": 4344,
+          "end_frame": 4643,
+          "start_game_seconds": 74.45,
+          "end_game_seconds": 79.433,
+          "damage": 31.85,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 4344,
+              "name": "Down Tilt",
+              "hit_count": 1,
+              "damage": 6.44
+            },
+            {
+              "frame": 4391,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 11.4
+            },
+            {
+              "frame": 4493,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 8.37
+            },
+            {
+              "frame": 4526,
+              "name": "Forward Air",
+              "hit_count": 3,
+              "damage": 5.64
+            }
+          ]
+        },
+        {
+          "game": 7,
+          "attacker": "SRM13",
+          "victim_stock_before": 2,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Axe",
+          "start_frame": 4872,
+          "end_frame": 5270,
+          "start_game_seconds": 83.25,
+          "end_game_seconds": 89.883,
+          "damage": 41.46,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 4872,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 6.44
+            },
+            {
+              "frame": 4916,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 5052,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 6.02
+            },
+            {
+              "frame": 5184,
+              "name": "Forward Smash",
+              "hit_count": 1,
+              "damage": 17
+            }
+          ]
+        },
+        {
+          "game": 7,
+          "attacker": "Axe",
+          "victim_stock_before": 3,
+          "hit_count": 8,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "SRM13",
+          "start_frame": 5752,
+          "end_frame": 6853,
+          "start_game_seconds": 97.917,
+          "end_game_seconds": 116.267,
+          "damage": 44.56,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 5752,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 5790,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 6019,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 8.28
+            },
+            {
+              "frame": 6154,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 6396,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 3.72
+            },
+            {
+              "frame": 6482,
+              "name": "Up B",
+              "hit_count": 1,
+              "damage": 2
+            },
+            {
+              "frame": 6608,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 6662,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 3.56
+            }
+          ]
+        },
+        {
+          "game": 7,
+          "attacker": "Axe",
+          "victim_stock_before": 3,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 7922,
+          "end_frame": 8007,
+          "start_game_seconds": 134.083,
+          "end_game_seconds": 135.5,
+          "damage": 11.76,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 7922,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 11.76
+            }
+          ]
+        },
+        {
+          "game": 7,
+          "attacker": "SRM13",
+          "victim_stock_before": 1,
+          "hit_count": 2,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Axe",
+          "start_frame": 10247,
+          "end_frame": 10672,
+          "start_game_seconds": 172.833,
+          "end_game_seconds": 179.917,
+          "damage": 26.514,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 10247,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 14.514
+            },
+            {
+              "frame": 10485,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": 8,
+      "replay_file": "axe-srm13-g2.slp",
+      "replay_id": "69beac275febbbc18f6b0286",
+      "sha256": "41a9fba9921f83a571be2ec6f0d26a4ae8b4060267d8555a34255f218b1e7096",
+      "started_at": "2025-04-26T22:48:29.063Z",
+      "stage": "Pokémon Stadium",
+      "players": [
+        {
+          "player_index": 0,
+          "tag": "Axe",
+          "character": "Fox"
+        },
+        {
+          "player_index": 1,
+          "tag": "SRM13",
+          "character": "Jigglypuff"
+        }
+      ],
+      "last_frame": 6997,
+      "all_conversions": 24,
+      "accepted_events": [
+        {
+          "game": 8,
+          "attacker": "Axe",
+          "victim_stock_before": 4,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 176,
+          "end_frame": 450,
+          "start_game_seconds": 4.983,
+          "end_game_seconds": 9.55,
+          "damage": 10.49,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 176,
+              "name": "Down Air",
+              "hit_count": 2,
+              "damage": 4.73
+            },
+            {
+              "frame": 210,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 311,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.76
+            }
+          ]
+        },
+        {
+          "game": 8,
+          "attacker": "Axe",
+          "victim_stock_before": 4,
+          "hit_count": 2,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 1232,
+          "end_frame": 1410,
+          "start_game_seconds": 22.583,
+          "end_game_seconds": 25.55,
+          "damage": 22,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 1232,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 1257,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 18
+            }
+          ]
+        },
+        {
+          "game": 8,
+          "attacker": "Axe",
+          "victim_stock_before": 3,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 2041,
+          "end_frame": 2226,
+          "start_game_seconds": 36.067,
+          "end_game_seconds": 39.15,
+          "damage": 7.46,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2049,
+              "name": "Back Throw",
+              "hit_count": 4,
+              "damage": 7.46
+            }
+          ]
+        },
+        {
+          "game": 8,
+          "attacker": "Axe",
+          "victim_stock_before": 3,
+          "hit_count": 9,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "SRM13",
+          "start_frame": 2314,
+          "end_frame": 2914,
+          "start_game_seconds": 40.617,
+          "end_game_seconds": 50.617,
+          "damage": 26.87,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2314,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 4.65
+            },
+            {
+              "frame": 2417,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 2538,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.76
+            },
+            {
+              "frame": 2565,
+              "name": "Up Throw",
+              "hit_count": 4,
+              "damage": 7.46
+            },
+            {
+              "frame": 2609,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 2818,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            }
+          ]
+        },
+        {
+          "game": 8,
+          "attacker": "Axe",
+          "victim_stock_before": 3,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 3398,
+          "end_frame": 3570,
+          "start_game_seconds": 58.683,
+          "end_game_seconds": 61.55,
+          "damage": 18,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 3398,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 18
+            }
+          ]
+        },
+        {
+          "game": 8,
+          "attacker": "Axe",
+          "victim_stock_before": 2,
+          "hit_count": 8,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 3826,
+          "end_frame": 4174,
+          "start_game_seconds": 65.817,
+          "end_game_seconds": 71.617,
+          "damage": 41.27,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 3826,
+              "name": "Down Air",
+              "hit_count": 2,
+              "damage": 4.73
+            },
+            {
+              "frame": 3880,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 3.6
+            },
+            {
+              "frame": 3889,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 3909,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 4029,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 9
+            },
+            {
+              "frame": 4052,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 4113,
+              "name": "Neutral B",
+              "hit_count": 1,
+              "damage": 2.94
+            }
+          ]
+        },
+        {
+          "game": 8,
+          "attacker": "SRM13",
+          "victim_stock_before": 4,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "escape",
+          "victim": "Axe",
+          "start_frame": 4261,
+          "end_frame": 4346,
+          "start_game_seconds": 73.067,
+          "end_game_seconds": 74.483,
+          "damage": 7.46,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 4261,
+              "name": "Down Air",
+              "hit_count": 4,
+              "damage": 7.46
+            }
+          ]
+        },
+        {
+          "game": 8,
+          "attacker": "SRM13",
+          "victim_stock_before": 4,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "Axe",
+          "start_frame": 4952,
+          "end_frame": 5361,
+          "start_game_seconds": 84.583,
+          "end_game_seconds": 91.4,
+          "damage": 46,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 4952,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 5056,
+              "name": "Forward Throw",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 5205,
+              "name": "Back Throw",
+              "hit_count": 1,
+              "damage": 10
+            },
+            {
+              "frame": 5270,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 8,
+          "attacker": "Axe",
+          "victim_stock_before": 2,
+          "hit_count": 3,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 5490,
+          "end_frame": 5837,
+          "start_game_seconds": 93.55,
+          "end_game_seconds": 99.333,
+          "damage": 35,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 5490,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 5680,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 5790,
+              "name": "Forward Smash",
+              "hit_count": 1,
+              "damage": 15
+            }
+          ]
+        },
+        {
+          "game": 8,
+          "attacker": "Axe",
+          "victim_stock_before": 1,
+          "hit_count": 9,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 6563,
+          "end_frame": 6997,
+          "start_game_seconds": 111.433,
+          "end_game_seconds": 118.667,
+          "damage": 34.8,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 6563,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 4.75
+            },
+            {
+              "frame": 6645,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 6747,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.76
+            },
+            {
+              "frame": 6775,
+              "name": "Up Throw",
+              "hit_count": 4,
+              "damage": 7.46
+            },
+            {
+              "frame": 6820,
+              "name": "Up Air",
+              "hit_count": 2,
+              "damage": 16.83
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": 9,
+      "replay_file": "axe-srm13-g3.slp",
+      "replay_id": "69beac275febbbc18f6b0287",
+      "sha256": "005007b9b6fb3ddf939dd667373f46b9cf5ec3d15d5c678047d9eb5c1fce761a",
+      "started_at": "2025-04-26T22:50:40.063Z",
+      "stage": "Dream Land N64",
+      "players": [
+        {
+          "player_index": 0,
+          "tag": "Axe",
+          "character": "Fox"
+        },
+        {
+          "player_index": 1,
+          "tag": "SRM13",
+          "character": "Jigglypuff"
+        }
+      ],
+      "last_frame": 9053,
+      "all_conversions": 33,
+      "accepted_events": [
+        {
+          "game": 9,
+          "attacker": "Axe",
+          "victim_stock_before": 4,
+          "hit_count": 6,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 1082,
+          "end_frame": 1646,
+          "start_game_seconds": 20.083,
+          "end_game_seconds": 29.483,
+          "damage": 31.37,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 1082,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 1310,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 1339,
+              "name": "Up Throw",
+              "hit_count": 2,
+              "damage": 3.82
+            },
+            {
+              "frame": 1386,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 1509,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 4.55
+            }
+          ]
+        },
+        {
+          "game": 9,
+          "attacker": "Axe",
+          "victim_stock_before": 4,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 2603,
+          "end_frame": 2653,
+          "start_game_seconds": 45.433,
+          "end_game_seconds": 46.267,
+          "damage": 14.4,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2603,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 14.4
+            }
+          ]
+        },
+        {
+          "game": 9,
+          "attacker": "Axe",
+          "victim_stock_before": 3,
+          "hit_count": 4,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 4268,
+          "end_frame": 4559,
+          "start_game_seconds": 73.183,
+          "end_game_seconds": 78.033,
+          "damage": 29.73,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 4268,
+              "name": "Down Air",
+              "hit_count": 2,
+              "damage": 4.73
+            },
+            {
+              "frame": 4289,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 4351,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            }
+          ]
+        },
+        {
+          "game": 9,
+          "attacker": "Axe",
+          "victim_stock_before": 3,
+          "hit_count": 6,
+          "damage_band": "heavy",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 5105,
+          "end_frame": 5432,
+          "start_game_seconds": 87.133,
+          "end_game_seconds": 92.583,
+          "damage": 28.06,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 5105,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 5168,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 5198,
+              "name": "Up Throw",
+              "hit_count": 2,
+              "damage": 3.82
+            },
+            {
+              "frame": 5241,
+              "name": "Up Air",
+              "hit_count": 2,
+              "damage": 16.24
+            }
+          ]
+        },
+        {
+          "game": 9,
+          "attacker": "Axe",
+          "victim_stock_before": 2,
+          "hit_count": 7,
+          "damage_band": "devastating",
+          "terminal": "reversal",
+          "victim": "SRM13",
+          "start_frame": 6155,
+          "end_frame": 6768,
+          "start_game_seconds": 104.633,
+          "end_game_seconds": 114.85,
+          "damage": 57.18,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 6155,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 8.91
+            },
+            {
+              "frame": 6188,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 6228,
+              "name": "Up Tilt",
+              "hit_count": 1,
+              "damage": 8.28
+            },
+            {
+              "frame": 6272,
+              "name": "Forward Air",
+              "hit_count": 2,
+              "damage": 11.55
+            },
+            {
+              "frame": 6476,
+              "name": "Side B",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 6603,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 6.44
+            }
+          ]
+        },
+        {
+          "game": 9,
+          "attacker": "Axe",
+          "victim_stock_before": 2,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 6850,
+          "end_frame": 7343,
+          "start_game_seconds": 116.217,
+          "end_game_seconds": 124.433,
+          "damage": 24.82,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 6859,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 6889,
+              "name": "Up Throw",
+              "hit_count": 2,
+              "damage": 3.82
+            },
+            {
+              "frame": 7150,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 18
+            }
+          ]
+        },
+        {
+          "game": 9,
+          "attacker": "SRM13",
+          "victim_stock_before": 4,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "Axe",
+          "start_frame": 8056,
+          "end_frame": 8132,
+          "start_game_seconds": 136.317,
+          "end_game_seconds": 137.583,
+          "damage": 12,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 8056,
+              "name": "Dash Attack",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 9,
+          "attacker": "Axe",
+          "victim_stock_before": 1,
+          "hit_count": 12,
+          "damage_band": "devastating",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 8365,
+          "end_frame": 9053,
+          "start_game_seconds": 141.467,
+          "end_game_seconds": 152.933,
+          "damage": 58.84,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 8365,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            },
+            {
+              "frame": 8495,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 8.19
+            },
+            {
+              "frame": 8593,
+              "name": "Down Air",
+              "hit_count": 3,
+              "damage": 6.55
+            },
+            {
+              "frame": 8621,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 8653,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 8686,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.73
+            },
+            {
+              "frame": 8791,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.55
+            },
+            {
+              "frame": 8820,
+              "name": "Up Throw",
+              "hit_count": 2,
+              "damage": 3.82
+            },
+            {
+              "frame": 8865,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 13
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": 10,
+      "replay_file": "axe-srm13-g4.slp",
+      "replay_id": "69beac275febbbc18f6b0288",
+      "sha256": "ef8ed9b9e64e27a3dfb1c70408f1c95b2963a1e3644fdea714dc8889439e138a",
+      "started_at": "2025-04-26T22:53:24.063Z",
+      "stage": "Dream Land N64",
+      "players": [
+        {
+          "player_index": 0,
+          "tag": "Axe",
+          "character": "Fox"
+        },
+        {
+          "player_index": 1,
+          "tag": "SRM13",
+          "character": "Jigglypuff"
+        }
+      ],
+      "last_frame": 12912,
+      "all_conversions": 37,
+      "accepted_events": [
+        {
+          "game": 10,
+          "attacker": "SRM13",
+          "victim_stock_before": 4,
+          "hit_count": 4,
+          "damage_band": "devastating",
+          "terminal": "kill",
+          "victim": "Axe",
+          "start_frame": 117,
+          "end_frame": 321,
+          "start_game_seconds": 4,
+          "end_game_seconds": 7.4,
+          "damage": 58,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 117,
+              "name": "Forward Air",
+              "hit_count": 1,
+              "damage": 7
+            },
+            {
+              "frame": 191,
+              "name": "Up Throw",
+              "hit_count": 1,
+              "damage": 11
+            },
+            {
+              "frame": 234,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 12
+            },
+            {
+              "frame": 276,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 28
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 4,
+          "hit_count": 13,
+          "damage_band": "heavy",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 523,
+          "end_frame": 1283,
+          "start_game_seconds": 10.767,
+          "end_game_seconds": 23.433,
+          "damage": 39.04,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 530,
+              "name": "Up Throw",
+              "hit_count": 4,
+              "damage": 7.46
+            },
+            {
+              "frame": 568,
+              "name": "Forward Air",
+              "hit_count": 2,
+              "damage": 11.55
+            },
+            {
+              "frame": 766,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 846,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 879,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.73
+            },
+            {
+              "frame": 980,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.55
+            },
+            {
+              "frame": 1007,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.34
+            },
+            {
+              "frame": 1096,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.28
+            },
+            {
+              "frame": 1123,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.13
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 4,
+          "hit_count": 8,
+          "damage_band": "light",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 1445,
+          "end_frame": 1847,
+          "start_game_seconds": 26.133,
+          "end_game_seconds": 32.833,
+          "damage": 19.71,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 1445,
+              "name": "Down Air",
+              "hit_count": 2,
+              "damage": 4.73
+            },
+            {
+              "frame": 1515,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.52
+            },
+            {
+              "frame": 1546,
+              "name": "Up Throw",
+              "hit_count": 4,
+              "damage": 7.46
+            },
+            {
+              "frame": 1589,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 5
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 4,
+          "hit_count": 7,
+          "damage_band": "light",
+          "terminal": "reversal",
+          "victim": "SRM13",
+          "start_frame": 1994,
+          "end_frame": 2591,
+          "start_game_seconds": 35.283,
+          "end_game_seconds": 45.233,
+          "damage": 15.89,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 2002,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.64
+            },
+            {
+              "frame": 2032,
+              "name": "Up Throw",
+              "hit_count": 3,
+              "damage": 5.26
+            },
+            {
+              "frame": 2078,
+              "name": "Up Air",
+              "hit_count": 1,
+              "damage": 4.65
+            },
+            {
+              "frame": 2314,
+              "name": "Up Throw",
+              "hit_count": 2,
+              "damage": 3.34
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 4,
+          "hit_count": 3,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 2945,
+          "end_frame": 3244,
+          "start_game_seconds": 51.133,
+          "end_game_seconds": 56.117,
+          "damage": 23.25,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 2952,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.73
+            },
+            {
+              "frame": 2980,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.52
+            },
+            {
+              "frame": 3064,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 18
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 3,
+          "hit_count": 5,
+          "damage_band": "light",
+          "terminal": "reversal",
+          "victim": "SRM13",
+          "start_frame": 4074,
+          "end_frame": 4552,
+          "start_game_seconds": 69.95,
+          "end_game_seconds": 77.917,
+          "damage": 19.62,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 4080,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 4115,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.73
+            },
+            {
+              "frame": 4236,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.55
+            },
+            {
+              "frame": 4269,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.34
+            },
+            {
+              "frame": 4402,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 9
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 3,
+          "hit_count": 5,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 4833,
+          "end_frame": 5091,
+          "start_game_seconds": 82.6,
+          "end_game_seconds": 86.9,
+          "damage": 23.29,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 4840,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.64
+            },
+            {
+              "frame": 4876,
+              "name": "Up Throw",
+              "hit_count": 2,
+              "damage": 3.82
+            },
+            {
+              "frame": 4923,
+              "name": "Up Air",
+              "hit_count": 2,
+              "damage": 16.83
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "SRM13",
+          "victim_stock_before": 3,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "Axe",
+          "start_frame": 5715,
+          "end_frame": 5869,
+          "start_game_seconds": 97.3,
+          "end_game_seconds": 99.867,
+          "damage": 12,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 5715,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 2,
+          "hit_count": 2,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 8046,
+          "end_frame": 8264,
+          "start_game_seconds": 136.15,
+          "end_game_seconds": 139.783,
+          "damage": 22,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 8046,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 8074,
+              "name": "Up Smash",
+              "hit_count": 1,
+              "damage": 18
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 1,
+          "hit_count": 5,
+          "damage_band": "heavy",
+          "terminal": "reversal",
+          "victim": "SRM13",
+          "start_frame": 8944,
+          "end_frame": 9355,
+          "start_game_seconds": 151.117,
+          "end_game_seconds": 157.967,
+          "damage": 36.38,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 8944,
+              "name": "Down B",
+              "hit_count": 1,
+              "damage": 5
+            },
+            {
+              "frame": 9056,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 14.85
+            },
+            {
+              "frame": 9119,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 8.73
+            },
+            {
+              "frame": 9218,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 3.8
+            },
+            {
+              "frame": 9227,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 1,
+          "hit_count": 6,
+          "damage_band": "light",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 9908,
+          "end_frame": 10274,
+          "start_game_seconds": 167.183,
+          "end_game_seconds": 173.283,
+          "damage": 15.28,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 9908,
+              "name": "Down Air",
+              "hit_count": 3,
+              "damage": 8.46
+            },
+            {
+              "frame": 9976,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 3
+            },
+            {
+              "frame": 10006,
+              "name": "Up Throw",
+              "hit_count": 2,
+              "damage": 3.82
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 1,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "reversal",
+          "victim": "SRM13",
+          "start_frame": 10607,
+          "end_frame": 11285,
+          "start_game_seconds": 178.833,
+          "end_game_seconds": 190.133,
+          "damage": 21.4,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 10615,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.82
+            },
+            {
+              "frame": 10641,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.58
+            },
+            {
+              "frame": 10776,
+              "name": "Jab",
+              "hit_count": 1,
+              "damage": 4
+            },
+            {
+              "frame": 10935,
+              "name": "Neutral Air",
+              "hit_count": 1,
+              "damage": 12
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 1,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 11330,
+          "end_frame": 11638,
+          "start_game_seconds": 190.883,
+          "end_game_seconds": 196.017,
+          "damage": 10.02,
+          "opening_type": "counter-attack",
+          "moves": [
+            {
+              "frame": 11338,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.73
+            },
+            {
+              "frame": 11364,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.52
+            },
+            {
+              "frame": 11468,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.46
+            },
+            {
+              "frame": 11494,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.31
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 1,
+          "hit_count": 4,
+          "damage_band": "light",
+          "terminal": "escape",
+          "victim": "SRM13",
+          "start_frame": 11859,
+          "end_frame": 12106,
+          "start_game_seconds": 199.7,
+          "end_game_seconds": 203.817,
+          "damage": 8.34,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 11869,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.28
+            },
+            {
+              "frame": 11896,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.13
+            },
+            {
+              "frame": 11922,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 2.01
+            },
+            {
+              "frame": 11953,
+              "name": "Grab Pummel",
+              "hit_count": 1,
+              "damage": 1.92
+            }
+          ]
+        },
+        {
+          "game": 10,
+          "attacker": "Axe",
+          "victim_stock_before": 1,
+          "hit_count": 1,
+          "damage_band": "light",
+          "terminal": "kill",
+          "victim": "SRM13",
+          "start_frame": 12876,
+          "end_frame": 12912,
+          "start_game_seconds": 216.65,
+          "end_game_seconds": 217.25,
+          "damage": 15,
+          "opening_type": "neutral-win",
+          "moves": [
+            {
+              "frame": 12876,
+              "name": "Back Air",
+              "hit_count": 1,
+              "damage": 15
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
