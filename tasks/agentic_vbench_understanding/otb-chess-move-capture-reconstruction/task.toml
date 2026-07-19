@@ -7,11 +7,11 @@ name = "agentic-vbench/otb-chess-move-capture-reconstruction"
 difficulty = "hard"
 category = "video-understanding"
 tags = ["video-understanding", "chess", "board-state", "move-reconstruction", "agentic-vbench-understanding"]
-# Source: ChessBase India YouTube video xwoRCwMRE54. The benchmark material is
-# baked by downloading the 720p stream, masking the digital board overlay and
-# visible branding, stripping audio, and saving the neutralized video as
+# Source: Chess Fight Night YouTube video A94oACpgpYo. The benchmark material is
+# baked by downloading the 720p stream, masking visible branding/watermarks,
+# stripping audio, and saving the neutralized video as
 # /workspace/materials/game.mp4.
-source = "youtube: xwoRCwMRE54"
+source = "youtube: A94oACpgpYo"
 
 [environment]
 build_timeout_sec = 1800.0

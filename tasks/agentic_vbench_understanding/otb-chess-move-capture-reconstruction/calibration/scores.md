@@ -1,21 +1,21 @@
 # Calibration Scores
 
-This task is in post-review revision. Oracle/null behavior is healthy, but the
-current source and calibration do not yet satisfy all submit-ready gates.
+This task is in post-review revision. The source has been replaced, and the new
+104-ply move sequence and Black-win result have been human-verified. The
+replacement source still needs fresh agent and ablation runs before submit-ready
+review.
 
 | run | status | reward | notes |
 |---|---:|---:|---|
-| oracle | passed | 1.0 | Static oracle solution copied from the built ground truth; 297/297 checks passed. |
-| empty baseline | passed | 0.0 | Empty `moves` and `capture_events` submission; 0/297 checks passed. |
-| Codex CLI (`codex-local-chess-20260710T205129Z`) | completed | 0.0058 | Fresh clean workspace; produced 36 plies and 11 capture events; 2/343 checks passed under the windowed content matcher. Reward gate passed, but the long-horizon rollout gate failed (`36` distinct shell commands, need `>50`). Archive: `calibration/rollouts/codex-local-chess-20260710T205129Z/`. |
-| Claude Code CLI (`claude-local-chess-20260710T223658Z`) | session-limit failure | 0.0 | Fresh local Claude Code rollout; no `output/solution.json` was produced before Claude hit a 429 session limit. Judge scored the missing file as an empty/unreadable submission: 0/297 checks passed. A slim trajectory is archived because the raw transcript was too large for review. Archive: `calibration/rollouts/claude-local-chess-20260710T223658Z/`. |
-| Antigravity CLI (`antigravity-local-chess-fixed-default-20260711T034259Z`) | stopped by cap / no solution | 0.0 | Fresh local Antigravity retry after runner fixes; no `output/solution.json` was produced before the external watchdog stopped it at transcript `max_step=58`. Strict conservative tool-call count was only `27`, so this does not satisfy the `>50` rollout-length gate. Archive: `calibration/rollouts/antigravity-local-chess-fixed-default-20260711T034259Z/`. |
+| oracle | passed | 1.0 | Human-verified move sequence and result; 287/287 checks passed across 104 plies and 26 captures. |
+| empty baseline | passed | 0.0 | Empty `moves` and `capture_events` submission; 0/287 checks passed. |
+| Codex CLI | pending | n/a | Needs fresh rollout on replacement source. Old `codex-local-chess-20260710T205129Z` result was against the retired source and must not be used for acceptance. |
+| Claude Code CLI | pending | n/a | Needs fresh rollout on replacement source. Old `claude-local-chess-20260710T223658Z` result was against the retired source and must not be used for acceptance. |
+| Antigravity CLI | pending | n/a | Needs fresh rollout on replacement source. Old `antigravity-local-chess-fixed-default-20260711T034259Z` result was against the retired source and must not be used for acceptance. |
 
 ## Post-Review Required Work
 
-- Replace the current source video or neutralize the source distribution so the
-  PGN is not recoverable from public metadata.
-- Rebuild ground truth as `human-verified` with 2+ independent timestamp
-  annotation passes.
+- The move sequence and Black-win result are verified. A second independent
+  timestamp pass remains recommended for the +/- 6s annotations.
 - Run `single_frame` and `no_media` ablations against the replacement source.
 - Recalibrate with natural prompts only; do not count prompt-padded turn runs.

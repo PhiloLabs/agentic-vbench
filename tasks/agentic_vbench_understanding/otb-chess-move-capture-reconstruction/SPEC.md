@@ -6,7 +6,7 @@ task: agentic_vbench_understanding/otb-chess-move-capture-reconstruction
 cognitive_level: understanding
 
 modalities_required:
-  video: The answer requires tracking the physical chessboard through 115 visible plies and 22 capture events.
+  video: The answer requires tracking the physical chessboard through 104 visible plies and 26 capture events.
   audio: not used; the benchmark material is silent.
 
 question: Reconstruct the complete over-the-board chess game record, move timestamps, capture events, and final result from the supplied masked physical-board video.
@@ -39,15 +39,16 @@ output_schema: |
   }
 
 evidence:
-  - t=00:00:59.5, video, first visible move Nf3 establishes the game start.
-  - t=00:06:47.5-00:06:48.8, video, Nxg3/hxg3 capture-and-recapture sequence.
-  - t=00:09:49.0-00:09:53.2, video, rapid f7 capture chain with multiple rooks and king.
-  - t=00:10:24.8, video, final move Bxb6 and no following black move.
+  - t=00:00:42.0-00:01:01.5, video, e4/e5, Nf3/Nc6, and Bb5/Nge7 establish the opening and distinguish the two black-knight routes.
+  - t=00:04:12.5-00:05:57.4, video, exd4/Nxd4/Nxd4/Qxd4 followed by Bxb5/Nxb5 anchors the first capture sequence.
+  - t=00:19:48.1-00:21:04.5, video, Qxd6/Qxd6, Bd4, Bxe5/Rxe5, and Qxd3/cxd3 establish the queen trade and transition to the rook ending.
+  - t=00:22:10.9-00:22:43.4, video, Rxa3, Rxc3, exf6/gxf6, and cxd7 establish the late middlegame material changes.
+  - t=00:24:09.3-00:24:48.3, video, the final rook-and-pawn sequence ends with 52...Rh3 and White stopping the clock to concede.
 
 ground_truth:
-  source: YouTube video xwoRCwMRE54 and its description PGN, with timestamps aligned from the video overlay before masking.
-  tier: human-verified target; current source must be replaced or independently re-annotated before merge.
-  verification: Current draft parsed the description PGN into 115 legal plies with python-chess, aligned plies to detected overlay-highlight transitions, spot-checked physical-board frames, and separately listed all 22 capture events. Reviewer feedback requires a replacement source without PGN metadata and 2+ independent timestamp annotators before final acceptance.
+  source: YouTube video A94oACpgpYo, manually annotated from the physical-board video without using a public PGN.
+  tier: human-verified move sequence and result; author-annotated timestamps with a +/- 6s scoring tolerance.
+  verification: A human independently reviewed and confirmed the complete 104-ply move sequence and Black's win after 52...Rh3 when White stopped the clock. The author reconciled shorthand and ambiguous piece identities against perspective-warped board frames, aligned timestamps from the video, and validated all plies and 26 capture events with python-chess.
 
 scorer:
   metric: Deterministic per-check accuracy over result, per-ply identity, per-ply timestamp within +/- 6s, capture identity, capture detail, and capture timestamp. Extra moves and extra captures are penalized.
@@ -55,28 +56,27 @@ scorer:
   null_reward: 0.0
 
 difficulty:
-  strong_agent_reward: 0.0058
-  tool_call_turns: 36
-  agent_model: Codex CLI (`codex-local-chess-20260710T205129Z`)
-  status: natural rollout does not yet satisfy the >50 conservative tool-call gate; task needs real hardening rather than prompt padding.
+  strong_agent_reward: pending recalibration on replacement source
+  tool_call_turns: pending recalibration on replacement source
+  agent_model: pending
+  status: Replacement source and ground truth are built; fresh agent rollouts have not been run on this material.
 
 anti_shortcut:
-  single_frame: not run yet; pending ablation calibration
+  single_frame: not run yet on replacement source; pending ablation calibration
   video_only: not applicable as an ablation distinction because the task material is already silent video
   audio_only: not applicable because the task material has no audio
-  no_media: empty/null baseline scores 0.0
-  frame_dump_no_tools: not run yet; pending ablation calibration
+  no_media: not rerun yet on replacement source; expected empty/null baseline scores 0.0
+  frame_dump_no_tools: not run yet on replacement source; pending ablation calibration
 
 input:
-  url: https://www.youtube.com/watch?v=xwoRCwMRE54
-  source_sha256: 91d05bdf6138e232894cf826b18de91824c2bd9b1dc5045f0fbe40ac4aceb4b8
-  processed_material_sha256: 49c5afe38f0c5086ccc9f867b31994344e38db7dec3718931a17ebf521cc7a5a
-  length_min: 11.8
+  url: https://www.youtube.com/watch?v=A94oACpgpYo
+  source_sha256: 95326518fee4c5eeba8ecb1b8567087102985b263a7fdbf83af6e8bdd6009060
+  processed_material_sha256: b9839b0e67c02ffa4ae9a7662809b25a045f6feff9749844bb66eb19d6a99420
+  length_min: 25.8
   resolution: 720
 ```
 
 ## Notes
 
-The agent-facing video is derived from the YouTube source by masking the digital
-board overlay and visible branding, stripping audio, and keeping the physical board
-view. The unmasked overlay was used only for author-side timestamp annotation.
+The agent-facing video is derived from the YouTube source by masking visible
+branding/watermarks, stripping audio, and keeping the physical board view.
