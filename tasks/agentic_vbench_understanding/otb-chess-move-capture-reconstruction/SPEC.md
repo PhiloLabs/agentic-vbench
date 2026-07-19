@@ -56,10 +56,10 @@ scorer:
   null_reward: 0.0
 
 difficulty:
-  strong_agent_reward: 0.0250 in the enforced-long-horizon Codex diagnostic; natural-prompt acceptance run pending
-  tool_call_turns: 142 completed shell calls in the diagnostic
+  strong_agent_reward: 0.0379 in the natural-prompt full-media Codex rollout
+  tool_call_turns: 237 completed shell calls, with no turn minimum or pacing hint
   agent_model: Codex GPT-5.6 Sol, high reasoning
-  status: The replacement source and ground truth pass the numerical Codex hardness gates, but the diagnostic prompt explicitly enforced the minimum turn count. A benchmark-instruction-only Codex run remains pending for acceptance.
+  status: The replacement source and ground truth pass the numerical hardness gate and the natural long-horizon gate. The fresh rollout used the benchmark instruction with path-only rewriting and passed 13/343 checks; it wrote temporary analysis artifacts outside the requested workspace but did not access ground truth or public game data.
 
 anti_shortcut:
   single_frame: Codex GPT-5.6 Sol (high reasoning) scored 0.0058 from one representative frame at 00:13:00; 2/343 checks passed.

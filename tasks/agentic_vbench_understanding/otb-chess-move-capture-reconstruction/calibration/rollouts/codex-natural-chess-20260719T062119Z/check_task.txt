@@ -1,0 +1,10 @@
+
+  [PASS] task structure             all required files present
+  [PASS] oracle == 1.0              reward = 1.0
+  [PASS] baseline ~ 0               reward = 0.0 (need <= 0.1)
+  [PASS] strong agent < 0.1         reward = 0.0379 (need < 0.1)
+  [PASS] rollout > 50 turns         237 tool-call turns (need > 50)
+  [PASS] ablation single_frame ~ 0  reward = 0.0058 (need <= 0.15; one representative frame only)
+  [PASS] ablation no_media ~ 0      reward = 0.0 (need <= 0.15; prompt + schema, no media (recall/guess check))
+
+All provided checks passed.

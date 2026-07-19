@@ -11,9 +11,12 @@ The replacement-source `single_frame` and `no_media` Codex ablations are recorde
 here as compact rewards and run summaries. Their bulky local workspaces are kept
 out of git.
 
-`codex-replacement-chess-20260719T051110Z` is a fresh full-media Codex diagnostic
-on the replacement source. It scored `0.0250` in 142 completed shell calls, but
-its local prompt explicitly required at least 51 substantive calls. Keep it as
-useful audit evidence; a benchmark-instruction-only Codex run is still required
-for natural-prompt acceptance. Fresh Claude and Antigravity full-media runs also
+`codex-natural-chess-20260719T062119Z` is the full-media acceptance rollout on
+the replacement source. It used the benchmark instruction with only local path
+substitution, scored `0.0379`, and naturally took 237 completed shell calls.
+
+`codex-replacement-chess-20260719T051110Z` is retained as a separate diagnostic.
+It scored `0.0250` in 142 completed shell calls, but its local prompt explicitly
+required at least 51 substantive calls and therefore does not supply the
+natural-prompt evidence. Fresh Claude and Antigravity replacement-source runs
 remain pending.
