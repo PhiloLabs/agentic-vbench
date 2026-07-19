@@ -1,0 +1,2 @@
+No output/solution.json was produced before Claude hit its session limit.
+The judge scored the missing submission as reward 0.0 with 0/287 checks passed.

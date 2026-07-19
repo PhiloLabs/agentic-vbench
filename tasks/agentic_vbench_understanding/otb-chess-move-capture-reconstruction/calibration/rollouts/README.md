@@ -20,3 +20,10 @@ It scored `0.0250` in 142 completed shell calls, but its local prompt explicitly
 required at least 51 substantive calls and therefore does not supply the
 natural-prompt evidence. Fresh Claude and Antigravity replacement-source runs
 remain pending.
+
+`claude-natural-chess-20260719T070702Z` is a fresh natural-prompt Claude Sonnet 5
+attempt on the replacement source. It reached 210 completed tool uses naturally
+but hit Claude's subscription session limit after 40 minutes 50 seconds, before
+writing a solution. Its missing submission scored `0.0`; retain it as incomplete
+failure evidence, not as the completed Claude cross-agent calibration. A
+post-reset Claude rerun remains pending.
