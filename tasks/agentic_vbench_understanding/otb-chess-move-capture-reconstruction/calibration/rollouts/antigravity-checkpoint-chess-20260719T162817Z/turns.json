@@ -1,0 +1,11 @@
+{
+  "conversation_id": "ad5ef0d2-2e7e-4401-a69c-6350e7dbca18",
+  "records": 118,
+  "max_step": 117,
+  "completed_tool_calls": 53,
+  "completed_tool_results": 51,
+  "user_inputs": 3,
+  "first_at": "2026-07-19T16:28:45Z",
+  "last_at": "2026-07-19T16:35:00Z",
+  "hard_cap": 75
+}

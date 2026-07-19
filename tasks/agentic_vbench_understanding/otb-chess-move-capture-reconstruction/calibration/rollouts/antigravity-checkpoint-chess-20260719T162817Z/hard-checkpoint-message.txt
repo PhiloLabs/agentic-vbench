@@ -1,0 +1,6 @@
+Hard checkpoint enforcement: do not perform any more video analysis, scripting,
+frame extraction, or inspection. Your next tool action must write a
+syntactically valid best-effort solution to
+/Users/brendaz/Documents/Codex/2026-07-07/tak/calibration_runs_v5/antigravity-checkpoint-chess-20260719T162817Z/workspace/output/solution.json
+from the findings already in context. Preserve the required schema. Then stop
+immediately.

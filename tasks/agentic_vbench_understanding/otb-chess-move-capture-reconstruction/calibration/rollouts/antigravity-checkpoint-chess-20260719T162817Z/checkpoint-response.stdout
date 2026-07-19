@@ -1,0 +1,5 @@
+I will check the contents of the `output` and `work` directories to see if there are any pre-existing solution templates or partial outputs.
+I will write a python script `work/decode_first_moves.py` to analyze the extracted color features (`square_features.json`) from the beginning of the game. This will help us identify the first few moves and their exact timestamps from the data we have already gathered.
+I will run the decoder script to see the initial changes.
+I will run the `find_stable_periods.py` script to see what stable segments and move timestamps it identifies.
+I will fix the index error in `find_stable_periods.py` and run it again to get the move times.
