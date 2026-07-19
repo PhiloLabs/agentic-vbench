@@ -62,10 +62,10 @@ difficulty:
   status: Replacement source and ground truth are built; fresh agent rollouts have not been run on this material.
 
 anti_shortcut:
-  single_frame: not run yet on replacement source; pending ablation calibration
+  single_frame: Codex GPT-5.6 Sol (high reasoning) scored 0.0058 from one representative frame at 00:13:00; 2/343 checks passed.
   video_only: not applicable as an ablation distinction because the task material is already silent video
   audio_only: not applicable because the task material has no audio
-  no_media: not rerun yet on replacement source; expected empty/null baseline scores 0.0
+  no_media: Codex GPT-5.6 Sol (high reasoning) scored 0.0 from prompt and schema only; 0/287 checks passed.
   frame_dump_no_tools: not run yet on replacement source; pending ablation calibration
 
 input:

@@ -2,8 +2,8 @@
 
 This task is in post-review revision. The source has been replaced, and the new
 104-ply move sequence and Black-win result have been human-verified. The
-replacement source still needs fresh agent and ablation runs before submit-ready
-review.
+replacement source still needs fresh full-media agent runs before submit-ready
+review; the required `single_frame` and `no_media` shortcut checks now pass.
 
 | run | status | reward | notes |
 |---|---:|---:|---|
@@ -12,10 +12,11 @@ review.
 | Codex CLI | pending | n/a | Needs fresh rollout on replacement source. Old `codex-local-chess-20260710T205129Z` result was against the retired source and must not be used for acceptance. |
 | Claude Code CLI | pending | n/a | Needs fresh rollout on replacement source. Old `claude-local-chess-20260710T223658Z` result was against the retired source and must not be used for acceptance. |
 | Antigravity CLI | pending | n/a | Needs fresh rollout on replacement source. Old `antigravity-local-chess-fixed-default-20260711T034259Z` result was against the retired source and must not be used for acceptance. |
+| Codex single-frame ablation (`codex-ablation-single-frame-20260719T012741Z`) | passed | 0.0058 | GPT-5.6 Sol (high reasoning) received one representative frame from 00:13:00. It produced a plausible but incorrect 50-ply history and 8 captures; only 2/343 checks passed. |
+| Codex no-media ablation (`codex-ablation-no-media-20260719T012741Z`) | passed | 0.0 | GPT-5.6 Sol (high reasoning) received only the prompt and schema, returned `unknown` with empty move/capture lists, and passed 0/287 checks. |
 
 ## Post-Review Required Work
 
 - The move sequence and Black-win result are verified. A second independent
   timestamp pass remains recommended for the +/- 6s annotations.
-- Run `single_frame` and `no_media` ablations against the replacement source.
 - Recalibrate with natural prompts only; do not count prompt-padded turn runs.

@@ -1,12 +1,12 @@
 # Rollouts
 
-This directory contains compact calibration artifacts for local strong-agent
-rollouts.
+This directory contains compact calibration artifacts for local strong-agent and
+anti-shortcut rollouts.
 
-After review, the earlier prompt-padded Codex rollout was removed from the PR
-package. The remaining natural Codex rollout scored `0.0058` under the current
-windowed content matcher but used only 36 distinct shell/tool turns, so the task
-still needs real hardening before it can satisfy the long-horizon gate.
+The Codex, Claude, and Antigravity full-media runs predate the replacement source
+and are retained only as historical review context. They do not count toward
+acceptance for the current task material.
 
-The retained artifacts are deliberately compact: one audit transcript per agent
-where practical, plus `run-summary.md` files and the aggregate `scores.md`.
+The replacement-source `single_frame` and `no_media` Codex ablations are archived
+here with their prompts, submissions, rewards, compressed audit transcripts, and
+run summaries. Fresh full-media runs remain pending.
