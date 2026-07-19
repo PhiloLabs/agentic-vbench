@@ -34,3 +34,13 @@ calls; Antigravity wrote and validated an 8-ply submission at 53 calls. It
 scored `0.0205` and stopped below the 75-call cap. Because the rollout required
 two checkpoint messages and installed packages from pip, retain it as completed
 checkpoint-assisted diagnostic evidence rather than natural-prompt calibration.
+
+`antigravity-qualifying-chess-20260719T170155Z` supersedes that diagnostic as
+the clean Antigravity calibration. It used a fresh sandboxed workspace, clean
+Python 3.12 without pip, and a pre-tool gate that denied online, package,
+sandbox-bypass, and outside-workspace actions. One content-free persistence
+checkpoint was sent after call 46. Antigravity wrote and parsed a valid empty
+submission, continued past 50 calls, and was stopped after it scored `0.0` at
+call 53. The archive contains 54 invocations and 51 conservative `DONE` result
+records; the strict checker passes with the conservative count. Treat this as
+qualifying checkpointed evidence, not as a natural-prompt rollout.

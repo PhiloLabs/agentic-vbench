@@ -1,0 +1,7 @@
+External persistence checkpoint: write your current best syntactically valid
+solution to
+/Users/brendaz/Documents/Codex/2026-07-07/tak/calibration_runs_v5/antigravity-qualifying-chess-20260719T170155Z/workspace/output/solution.json
+now, using only evidence already gathered from the supplied video. Verify that
+the JSON parses. This is a checkpoint, not the final stopping point; after the
+file is valid, continue solving the task from the supplied video. Continue to
+obey the original workspace and no-online rules.

@@ -1,0 +1,46 @@
+I will start by listing the contents of the workspace directory to find the resources and understand the project layout.
+I will check the contents of the `materials` directory to see what inputs are provided besides the video.
+I will check the `work` directory to see if there are any starter files or logs.
+I will check the `output` directory as well.
+I will run a commands to check if python, ffmpeg, and other image/video processing tools are available in the current environment.
+I will run a command to verify the python3 version.
+I will write a python script in the `work/` directory to inspect which libraries are installed (like `cv2`, `PIL`, `numpy`, `chess`, etc.) and output details about the `materials/game.mp4` video (e.g. resolution, fps, duration).
+I will write the python script to `work/check_packages.py` without including the ArtifactMetadata parameter since it is a script, not a user-facing artifact.
+I will execute the script using `run_command` to inspect the available Python libraries and the video file dimensions.
+I will check if `ffmpeg` and `ffprobe` are available as commands in the system path.
+I will run `ffprobe` to inspect the video's stream metadata, duration, frame rate, and resolution.
+I will extract five sample frames at different timestamps (10s, 100s, 500s, 1000s, 1500s) to understand the chessboard's orientation, coordinates, masking, and general state throughout the game.
+I will list the `work` directory to verify the extracted frame images exist.
+I will view the first extracted frame (`work/frame_10s.png`) to inspect the visual board state and orientation.
+I will view the remaining extracted frames to determine which board (foreground Board 1 or background Board 2) is active, how the players sit, and what moves are played.
+I will view the next extracted frame (`work/frame_500s.png`) to see how the game state has advanced.
+I will view the next extracted frame (`work/frame_1000s.png`) to see the game state at 1000 seconds.
+I will view the frame at 1500 seconds (`work/frame_1500s.png`) to see if the game has ended.
+I will crop a region around the expected clock position (near the center of the image) from the 10s frame to find its exact pixel coordinates.
+I will view `work/clock_crop.png` to check if we captured the clock.
+I will crop the suspected chessboard region to find its coordinates.
+I will view `work/board_crop.png` to confirm the bounds of the chessboard.
+I will test a wider crop coordinates `w=700, h=420, x=300, y=300` to capture the entire chessboard including the bottom-right and top-right sections.
+I will view the wider board crop to check the board edges.
+I will write a python script (`work/diff_detector.py`) that processes the video at 2 fps, crops the chessboard area, downsamples the frames to reduce noise, computes the frame-to-frame difference, and saves the data to a text file for analysis.
+I will execute `work/diff_detector.py` to generate the frame difference time-series data.
+I will check the status of the background diff detection task.
+I will write a python script (`work/inspect_diffs.py`) to calculate basic statistics and check the distribution of the difference values to help choose a robust threshold for quiet versus active board states.
+I will run the `inspect_diffs.py` script to check the difference statistics.
+I will write a python script (`work/find_static_segments.py`) to group contiguous frames that have a difference below a certain threshold (e.g., 1.0) and represent stable chess board states. Each stable period of a minimum duration represents a potential move completion.
+I will run the static segments finder to see the candidate quiet periods of the board.
+I will write a python script to inspect the diff values between 1300s and 1450s to see why no static segments were detected in that range.
+I will run `inspect_gap.py` to check the diff values.
+I will check the diff values specifically between 1320s and 1420s to understand why it was not flagged as static.
+I will extract frames in the 1320s-1420s gap to see what was happening on or around the board.
+I will view `work/frame_1330s.png` to see the board state during this long gap.
+I will write a python script (`work/find_valleys.py`) to detect local minima in the frame differences. These local minima represent the quiet moments between moves, even during fast-paced play, when a move is complete and the next player is about to move. The script will also output a list of candidate times.
+I will run the valleys finder script to get the times of the local minimum frame differences.
+I will write a python script (`work/calibrate_grid.py`) to read `work/board_crop_wide.png` as raw RGB pixels, draw an 8x8 grid based on 4 candidate corner coordinates, and write the output to a raw file. Then I'll use ffmpeg to convert it to a viewable PNG (`work/grid_calibrated.png`). This allows us to visually align the grid.
+I will run `work/calibrate_grid.py` to generate the image with the overlay grid lines.
+I will view the calibrated grid image to see if the grid lines up with the chessboard.
+I will rewrite `work/calibrate_grid.py` to use the projective homography equations instead of bilinear interpolation, and run it with refined corner coordinates. This will give us a highly accurate grid projection on the board.
+I will run the calibration script again.
+I will view the new grid calibration output.
+I will write a python script (`work/debug_homography.py`) to print the solved homography parameters and verify if the corners map correctly. This will help identify if the distortion is due to a math error or incorrect input coordinates.
+I will run `work/debug_homography.py` to check the mapped coordinates.
