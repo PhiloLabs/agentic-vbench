@@ -1,0 +1,747 @@
+{
+  "source_log": "match.log.gz",
+  "tracker_source": "TIGERs",
+  "first_goal_log_s": 147.76,
+  "score_changes": [
+    {
+      "log_s": 147.76,
+      "team_name": "TIGERs Mannheim",
+      "score": 1
+    },
+    {
+      "log_s": 590.562,
+      "team_name": "TIGERs Mannheim",
+      "score": 2
+    },
+    {
+      "log_s": 1337.823,
+      "team_name": "TIGERs Mannheim",
+      "score": 3
+    },
+    {
+      "log_s": 1812.708,
+      "team_name": "TIGERs Mannheim",
+      "score": 4
+    }
+  ],
+  "observation_count": 16135,
+  "identity_cluster_count": 214,
+  "cluster_count": 203,
+  "accepted_active_kicks": 63,
+  "rejected_clusters": 140,
+  "scored_chain_count": 17,
+  "constants": {
+    "kick_cluster_window_s": 0.25,
+    "physical_kick_merge_window_s": 0.1,
+    "physical_kick_merge_distance_m": 0.2,
+    "min_kick_speed_mps": 0.5,
+    "zone_boundary_m": 2.0,
+    "min_chain_kicks": 2
+  },
+  "chains": [
+    {
+      "half": 1,
+      "team": "white",
+      "kick_count": 4,
+      "zone_path": [
+        "defensive",
+        "middle",
+        "attacking"
+      ],
+      "terminal": "turnover",
+      "play_segment": 6,
+      "log_start_s": 292.075,
+      "log_end_s": 304.728,
+      "segment_end_log_s": 307.09,
+      "kick_log_times_s": [
+        292.075,
+        295.155,
+        297.427,
+        304.728
+      ],
+      "robot_ids": [
+        11,
+        1,
+        2,
+        2
+      ],
+      "kick_positions_m": [
+        [
+          -3.714,
+          4.292
+        ],
+        [
+          0.51,
+          2.153
+        ],
+        [
+          5.388,
+          4.28
+        ],
+        [
+          5.679,
+          3.954
+        ]
+      ],
+      "kick_speeds_mps": [
+        3.932,
+        4.717,
+        3.239,
+        1.178
+      ]
+    },
+    {
+      "half": 1,
+      "team": "white",
+      "kick_count": 3,
+      "zone_path": [
+        "middle"
+      ],
+      "terminal": "turnover",
+      "play_segment": 7,
+      "log_start_s": 325.282,
+      "log_end_s": 333.855,
+      "segment_end_log_s": 358.809,
+      "kick_log_times_s": [
+        325.282,
+        330.572,
+        333.855
+      ],
+      "robot_ids": [
+        8,
+        7,
+        8
+      ],
+      "kick_positions_m": [
+        [
+          -1.265,
+          3.794
+        ],
+        [
+          -1.77,
+          4.045
+        ],
+        [
+          -1.84,
+          4.159
+        ]
+      ],
+      "kick_speeds_mps": [
+        0.78,
+        1.124,
+        1.185
+      ]
+    },
+    {
+      "half": 1,
+      "team": "white",
+      "kick_count": 3,
+      "zone_path": [
+        "middle",
+        "attacking"
+      ],
+      "terminal": "stoppage",
+      "play_segment": 7,
+      "log_start_s": 349.667,
+      "log_end_s": 356.335,
+      "segment_end_log_s": 358.809,
+      "kick_log_times_s": [
+        349.667,
+        353.825,
+        356.335
+      ],
+      "robot_ids": [
+        7,
+        3,
+        2
+      ],
+      "kick_positions_m": [
+        [
+          -1.994,
+          4.329
+        ],
+        [
+          2.06,
+          -4.013
+        ],
+        [
+          3.612,
+          0.482
+        ]
+      ],
+      "kick_speeds_mps": [
+        5.669,
+        4.844,
+        5.427
+      ]
+    },
+    {
+      "half": 1,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "attacking"
+      ],
+      "terminal": "turnover",
+      "play_segment": 11,
+      "log_start_s": 512.066,
+      "log_end_s": 514.853,
+      "segment_end_log_s": 581.157,
+      "kick_log_times_s": [
+        512.066,
+        514.853
+      ],
+      "robot_ids": [
+        3,
+        3
+      ],
+      "kick_positions_m": [
+        [
+          -2.641,
+          3.463
+        ],
+        [
+          -5.086,
+          3.733
+        ]
+      ],
+      "kick_speeds_mps": [
+        1.882,
+        2.132
+      ]
+    },
+    {
+      "half": 1,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "attacking"
+      ],
+      "terminal": "turnover",
+      "play_segment": 11,
+      "log_start_s": 523.213,
+      "log_end_s": 523.606,
+      "segment_end_log_s": 581.157,
+      "kick_log_times_s": [
+        523.213,
+        523.606
+      ],
+      "robot_ids": [
+        8,
+        8
+      ],
+      "kick_positions_m": [
+        [
+          -3.308,
+          0.816
+        ],
+        [
+          -3.166,
+          0.516
+        ]
+      ],
+      "kick_speeds_mps": [
+        1.106,
+        3.847
+      ]
+    },
+    {
+      "half": 1,
+      "team": "white",
+      "kick_count": 6,
+      "zone_path": [
+        "defensive",
+        "middle",
+        "defensive",
+        "attacking",
+        "middle"
+      ],
+      "terminal": "turnover",
+      "play_segment": 11,
+      "log_start_s": 524.229,
+      "log_end_s": 555.884,
+      "segment_end_log_s": 581.157,
+      "kick_log_times_s": [
+        524.229,
+        525.362,
+        525.76,
+        526.667,
+        554.453,
+        555.884
+      ],
+      "robot_ids": [
+        10,
+        3,
+        10,
+        9,
+        2,
+        4
+      ],
+      "kick_positions_m": [
+        [
+          -3.166,
+          0.516
+        ],
+        [
+          -1.867,
+          -0.772
+        ],
+        [
+          -2.861,
+          -1.377
+        ],
+        [
+          -2.861,
+          -1.377
+        ],
+        [
+          5.819,
+          4.275
+        ],
+        [
+          1.821,
+          4.078
+        ]
+      ],
+      "kick_speeds_mps": [
+        3.846,
+        3.165,
+        4.894,
+        4.887,
+        4.108,
+        4.96
+      ]
+    },
+    {
+      "half": 1,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "defensive"
+      ],
+      "terminal": "turnover",
+      "play_segment": 11,
+      "log_start_s": 557.969,
+      "log_end_s": 558.177,
+      "segment_end_log_s": 581.157,
+      "kick_log_times_s": [
+        557.969,
+        558.177
+      ],
+      "robot_ids": [
+        10,
+        15
+      ],
+      "kick_positions_m": [
+        [
+          4.289,
+          3.226
+        ],
+        [
+          3.862,
+          3.204
+        ]
+      ],
+      "kick_speeds_mps": [
+        2.098,
+        4.714
+      ]
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 2,
+      "zone_path": [
+        "middle"
+      ],
+      "terminal": "turnover",
+      "play_segment": 18,
+      "log_start_s": 1294.029,
+      "log_end_s": 1296.294,
+      "segment_end_log_s": 1305.506,
+      "kick_log_times_s": [
+        1294.029,
+        1296.294
+      ],
+      "robot_ids": [
+        9,
+        8
+      ],
+      "kick_positions_m": [
+        [
+          0.074,
+          -1.538
+        ],
+        [
+          -1.399,
+          -1.561
+        ]
+      ],
+      "kick_speeds_mps": [
+        2.09,
+        1.387
+      ]
+    },
+    {
+      "half": 2,
+      "team": "black",
+      "kick_count": 6,
+      "zone_path": [
+        "middle",
+        "attacking"
+      ],
+      "terminal": "stoppage",
+      "play_segment": 18,
+      "log_start_s": 1296.99,
+      "log_end_s": 1304.854,
+      "segment_end_log_s": 1305.506,
+      "kick_log_times_s": [
+        1296.99,
+        1298.323,
+        1299.408,
+        1302.537,
+        1303.877,
+        1304.854
+      ],
+      "robot_ids": [
+        10,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "kick_positions_m": [
+        [
+          -1.71,
+          -2.204
+        ],
+        [
+          -1.505,
+          -2.73
+        ],
+        [
+          -0.467,
+          -2.844
+        ],
+        [
+          1.773,
+          -3.195
+        ],
+        [
+          2.398,
+          -3.748
+        ],
+        [
+          3.177,
+          -3.604
+        ]
+      ],
+      "kick_speeds_mps": [
+        1.476,
+        1.319,
+        1.986,
+        1.214,
+        1.245,
+        0.812
+      ]
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 3,
+      "zone_path": [
+        "middle",
+        "attacking"
+      ],
+      "terminal": "turnover",
+      "play_segment": 19,
+      "log_start_s": 1318.973,
+      "log_end_s": 1324.395,
+      "segment_end_log_s": 1332.828,
+      "kick_log_times_s": [
+        1318.973,
+        1320.402,
+        1324.395
+      ],
+      "robot_ids": [
+        4,
+        2,
+        4
+      ],
+      "kick_positions_m": [
+        [
+          -1.295,
+          -1.751
+        ],
+        [
+          -1.666,
+          0.765
+        ],
+        [
+          -3.168,
+          -4.566
+        ]
+      ],
+      "kick_speeds_mps": [
+        3.643,
+        3.502,
+        5.152
+      ]
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 3,
+      "zone_path": [
+        "attacking",
+        "middle"
+      ],
+      "terminal": "turnover",
+      "play_segment": 20,
+      "log_start_s": 1441.694,
+      "log_end_s": 1445.32,
+      "segment_end_log_s": 1452.741,
+      "kick_log_times_s": [
+        1441.694,
+        1444.767,
+        1445.32
+      ],
+      "robot_ids": [
+        8,
+        2,
+        2
+      ],
+      "kick_positions_m": [
+        [
+          -4.389,
+          3.58
+        ],
+        [
+          -1.679,
+          3.696
+        ],
+        [
+          -1.71,
+          3.771
+        ]
+      ],
+      "kick_speeds_mps": [
+        8.084,
+        0.539,
+        1.137
+      ]
+    },
+    {
+      "half": 2,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "middle"
+      ],
+      "terminal": "stoppage",
+      "play_segment": 20,
+      "log_start_s": 1445.95,
+      "log_end_s": 1450.806,
+      "segment_end_log_s": 1452.741,
+      "kick_log_times_s": [
+        1445.95,
+        1450.806
+      ],
+      "robot_ids": [
+        14,
+        0
+      ],
+      "kick_positions_m": [
+        [
+          -1.967,
+          3.79
+        ],
+        [
+          1.519,
+          3.14
+        ]
+      ],
+      "kick_speeds_mps": [
+        3.065,
+        1.809
+      ]
+    },
+    {
+      "half": 2,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "attacking",
+        "middle"
+      ],
+      "terminal": "turnover",
+      "play_segment": 21,
+      "log_start_s": 1501.453,
+      "log_end_s": 1502.929,
+      "segment_end_log_s": 1524.829,
+      "kick_log_times_s": [
+        1501.453,
+        1502.929
+      ],
+      "robot_ids": [
+        1,
+        9
+      ],
+      "kick_positions_m": [
+        [
+          4.698,
+          -2.709
+        ],
+        [
+          1.741,
+          0.075
+        ]
+      ],
+      "kick_speeds_mps": [
+        3.84,
+        0.971
+      ]
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 2,
+      "zone_path": [
+        "defensive"
+      ],
+      "terminal": "turnover",
+      "play_segment": 21,
+      "log_start_s": 1504.514,
+      "log_end_s": 1512.107,
+      "segment_end_log_s": 1524.829,
+      "kick_log_times_s": [
+        1504.514,
+        1512.107
+      ],
+      "robot_ids": [
+        11,
+        11
+      ],
+      "kick_positions_m": [
+        [
+          2.793,
+          -0.334
+        ],
+        [
+          3.234,
+          1.145
+        ]
+      ],
+      "kick_speeds_mps": [
+        1.041,
+        4.154
+      ]
+    },
+    {
+      "half": 2,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "defensive"
+      ],
+      "terminal": "turnover",
+      "play_segment": 21,
+      "log_start_s": 1514.917,
+      "log_end_s": 1516.415,
+      "segment_end_log_s": 1524.829,
+      "kick_log_times_s": [
+        1514.917,
+        1516.415
+      ],
+      "robot_ids": [
+        12,
+        12
+      ],
+      "kick_positions_m": [
+        [
+          -3.155,
+          0.894
+        ],
+        [
+          -2.434,
+          0.211
+        ]
+      ],
+      "kick_speeds_mps": [
+        1.257,
+        4.036
+      ]
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 2,
+      "zone_path": [
+        "middle"
+      ],
+      "terminal": "stoppage",
+      "play_segment": 21,
+      "log_start_s": 1518.104,
+      "log_end_s": 1521.01,
+      "segment_end_log_s": 1524.829,
+      "kick_log_times_s": [
+        1518.104,
+        1521.01
+      ],
+      "robot_ids": [
+        4,
+        9
+      ],
+      "kick_positions_m": [
+        [
+          1.589,
+          3.458
+        ],
+        [
+          -1.243,
+          2.307
+        ]
+      ],
+      "kick_speeds_mps": [
+        4.831,
+        2.278
+      ]
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 2,
+      "zone_path": [
+        "defensive"
+      ],
+      "terminal": "stoppage",
+      "play_segment": 22,
+      "log_start_s": 1750.226,
+      "log_end_s": 1751.487,
+      "segment_end_log_s": 1805.453,
+      "kick_log_times_s": [
+        1750.226,
+        1751.487
+      ],
+      "robot_ids": [
+        2,
+        2
+      ],
+      "kick_positions_m": [
+        [
+          4.788,
+          1.953
+        ],
+        [
+          6.104,
+          2.021
+        ]
+      ],
+      "kick_speeds_mps": [
+        1.611,
+        0.851
+      ]
+    }
+  ]
+}
