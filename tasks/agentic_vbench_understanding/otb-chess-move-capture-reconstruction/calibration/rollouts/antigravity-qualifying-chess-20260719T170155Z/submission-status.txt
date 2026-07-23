@@ -1,5 +1,0 @@
-Antigravity wrote and parsed output/solution.json after the external persistence
-checkpoint. The wrapper scored that persisted file at tool call 53 and stopped
-the conversation because its reward was 0.0, below the 0.5 stop threshold.
-One already-issued task-status call is present in the final transcript, for 54
-total invocations. No final natural-language answer was emitted.

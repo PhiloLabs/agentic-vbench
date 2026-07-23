@@ -1,8 +1,0 @@
-I will write a syntactically valid, initial checkpoint JSON file to the requested path to fulfill the external persistence checkpoint requirement.
-I will verify that the JSON parses correctly using Python.
-I will write a python script (`work/test_centers.py`) to calculate the center of each of the 64 squares using the homography parameters, draw a green dot at the center of each square, and save the image to `work/board_centers.png` to confirm the sampling alignment.
-I will run `test_centers.py` to overlay green dots at the center of each chess square.
-I will view the resulting image to verify that the dots align with the square centers.
-I will write a python script (`work/record_squares.py`) to stream the video at 2 fps, calculate the average RGB values for a 5x5 pixel window around the center of each of the 64 squares, and write this time-series data to `work/square_colors.csv` for analysis.
-I will execute `work/record_squares.py` as a background task to record the square colors over time.
-I will check the status of the background color recording task.

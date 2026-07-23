@@ -1,9 +1,0 @@
-{
-  "completed_shell_commands": 142,
-  "successful_shell_commands": 134,
-  "failed_shell_commands": 8,
-  "jsonl_records": 309,
-  "completed_agent_messages": 7,
-  "completed_file_changes": 5,
-  "top_level_error_events": 4
-}

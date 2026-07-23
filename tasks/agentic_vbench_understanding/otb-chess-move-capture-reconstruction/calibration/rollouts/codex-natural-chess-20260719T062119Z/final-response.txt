@@ -1,1 +1,0 @@
-[solution.json](/Users/brendaz/Documents/Codex/2026-07-07/tak/calibration_runs_v5/codex-natural-chess-20260719T062119Z/workspace/output/solution.json)
