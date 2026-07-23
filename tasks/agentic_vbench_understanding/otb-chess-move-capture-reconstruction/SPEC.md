@@ -66,7 +66,7 @@ anti_shortcut:
   video_only: not applicable as an ablation distinction because the task material is already silent video
   audio_only: not applicable because the task material has no audio
   no_media: Codex GPT-5.6 Sol (high reasoning) scored 0.0 from prompt and schema only; 0/287 checks passed.
-  frame_dump_no_tools: not run yet on replacement source; pending ablation calibration
+  frame_dump_no_tools: Codex GPT-5.6 Sol (high reasoning) scored 0.0239 from 52 chronological contact sheets containing all 46,371 processed video frames, with tool use forbidden and zero tool calls observed; 7/293 checks passed.
 
 input:
   url: https://www.youtube.com/watch?v=A94oACpgpYo

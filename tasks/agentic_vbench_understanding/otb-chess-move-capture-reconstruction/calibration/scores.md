@@ -22,6 +22,7 @@ qualifying replacement-source rollouts.
 | [Antigravity CLI](rollouts/antigravity-transcript.jsonl) (`antigravity-qualifying-chess-20260719T170155Z`) | passed; checkpointed | 0.0 | Fresh Gemini 3.5 Flash (Medium) run in a clean sandbox on the replacement source. Its canonical initial prompt used path-only rewriting; one content-free persistence checkpoint was sent after call 46. The agent wrote a valid empty submission, continued naturally, and was stopped after scoring at call 53; the transcript has 54 invocations and 51 conservative `DONE` result records. No network, package installation, host Python package, outside-workspace, ground-truth, or prior-rollout access succeeded. All strict checks pass using the conservative 51-turn count. |
 | Codex single-frame ablation (`codex-ablation-single-frame-20260719T012741Z`) | passed | 0.0058 | GPT-5.6 Sol (high reasoning) received one representative frame from 00:13:00. It produced a plausible but incorrect 50-ply history and 8 captures; only 2/343 checks passed. |
 | Codex no-media ablation (`codex-ablation-no-media-20260719T012741Z`) | passed | 0.0 | GPT-5.6 Sol (high reasoning) received only the prompt and schema, returned `unknown` with empty move/capture lists, and passed 0/287 checks. |
+| Codex frame-dump/no-tools ablation (`codex-ablation-frame-dump-no-tools-20260723T181157Z`) | passed | 0.0239 | Codex CLI 0.144.2 with GPT-5.6 Sol (high reasoning) received 52 chronological 1920x1080 contact sheets containing all 46,371 processed video frames. The prompt forbade tools, the trajectory contained zero tool calls, and the direct JSON response predicted 12 plies and no captures; 7/293 checks passed. |
 
 ## Review Status
 
@@ -38,4 +39,4 @@ The committed calibration evidence is limited to one sanitized, plain-text
 transcript for each qualifying agent plus this score summary. Image payloads,
 full reward dumps, compressed binaries, duplicate instructions, response logs,
 historical and diagnostic runs, and personal paths are omitted. The shortcut
-ablation results are retained only as the two aggregate rows above.
+ablation results are retained only as aggregate rows above.
