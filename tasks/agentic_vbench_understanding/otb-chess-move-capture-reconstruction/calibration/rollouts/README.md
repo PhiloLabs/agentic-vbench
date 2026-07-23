@@ -24,8 +24,17 @@ natural-prompt evidence.
 attempt on the replacement source. It reached 210 completed tool uses naturally
 but hit Claude's subscription session limit after 40 minutes 50 seconds, before
 writing a solution. Its missing submission scored `0.0`; retain it as incomplete
-failure evidence, not as the completed Claude cross-agent calibration. A
-post-reset Claude rerun remains pending.
+failure evidence, not as the completed Claude cross-agent calibration.
+
+`claude-checkpoint-chess-20260723T040025Z` supersedes that incomplete attempt as
+the qualifying Claude calibration under the checkpoint-allowed protocol. It
+used a canonical path-rewritten initial prompt in a clean Python 3.12 workspace
+with web, package, subagent, and outside-workspace access blocked. A content-free
+persistence checkpoint was sent after 45 observed completed results. Claude
+wrote and parsed a valid empty submission, continued to 54 completed tool
+results, and scored `0.0` with verifier reason `ok`. The committed evidence is
+one sanitized text transcript with image payloads omitted and personal paths
+normalized.
 
 `antigravity-checkpoint-chess-20260719T162817Z` is a fresh replacement-source
 Antigravity run with a canonical, path-rewritten initial prompt and externally
