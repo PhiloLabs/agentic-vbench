@@ -47,8 +47,8 @@ evidence:
 
 ground_truth:
   source: YouTube video A94oACpgpYo, manually annotated from the physical-board video without using a public PGN.
-  tier: human-verified move sequence and result; author-annotated timestamps with a +/- 6s scoring tolerance.
-  verification: A human independently reviewed and confirmed the complete 104-ply move sequence and Black's win after 52...Rh3 when White stopped the clock. The author reconciled shorthand and ambiguous piece identities against perspective-warped board frames, aligned timestamps from the video, and validated all plies and 26 capture events with python-chess.
+  tier: human-verified
+  verification: Two independent human passes confirmed the complete 104-ply move sequence, Black's win after 52...Rh3 when White stopped the clock, and all annotated move and capture timestamps. The author reconciled shorthand and ambiguous piece identities against perspective-warped board frames, aligned timestamps from the video, and validated all plies and 26 capture events with python-chess. The second reviewer checked the timestamp annotations against the physical-board video with the stated +/- 6s scoring tolerance.
 
 scorer:
   metric: Deterministic per-check accuracy over result, per-ply identity, per-ply timestamp within +/- 6s, capture identity, capture detail, and capture timestamp. Extra moves and extra captures are penalized.

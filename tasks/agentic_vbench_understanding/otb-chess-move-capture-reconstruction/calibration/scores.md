@@ -1,7 +1,8 @@
 # Calibration Scores
 
-This task is in post-review revision. The source has been replaced, and the new
-104-ply move sequence and Black-win result have been human-verified. A fresh
+This task is in post-review revision. The source has been replaced, and two
+independent human passes have verified the complete 104-ply move sequence,
+Black-win result, and all annotated move and capture timestamps. A fresh
 natural-prompt, full-media Codex rollout passes the numerical hardness and
 long-horizon gates. The required `single_frame` and `no_media` shortcut checks
 also pass. A fresh Claude attempt hit its subscription limit before submission.
@@ -22,10 +23,10 @@ qualifying replacement-source rollouts.
 | Codex single-frame ablation (`codex-ablation-single-frame-20260719T012741Z`) | passed | 0.0058 | GPT-5.6 Sol (high reasoning) received one representative frame from 00:13:00. It produced a plausible but incorrect 50-ply history and 8 captures; only 2/343 checks passed. |
 | Codex no-media ablation (`codex-ablation-no-media-20260719T012741Z`) | passed | 0.0 | GPT-5.6 Sol (high reasoning) received only the prompt and schema, returned `unknown` with empty move/capture lists, and passed 0/287 checks. |
 
-## Remaining Work
+## Review Status
 
-- The move sequence and Black-win result are verified. A second independent
-  timestamp pass remains recommended for the +/- 6s annotations.
+- Ground-truth review is complete. The move sequence, Black-win result, and all
+  move and capture timestamps received two independent human passes.
 - Claude and Antigravity now have clean qualifying evidence under the
   user-approved checkpoint protocol, though neither counts as natural-prompt
   evidence. Retired-source runs, padded diagnostics, and the quota-truncated
