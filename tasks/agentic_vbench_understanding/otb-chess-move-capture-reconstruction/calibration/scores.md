@@ -1,42 +1,71 @@
 # Calibration Scores
 
-This task is in post-review revision. The source has been replaced, and two
-independent human passes have verified the complete 104-ply move sequence,
-Black-win result, and all annotated move and capture timestamps. A fresh
-natural-prompt, full-media Codex rollout passes the numerical hardness and
-long-horizon gates. The required `single_frame` and `no_media` shortcut checks
-also pass. A fresh Claude attempt hit its subscription limit before submission.
-A fresh isolated, checkpointed Antigravity run now passes the numerical
-hardness and long-horizon gates without online, package-installation, host
-Python-library, or outside-workspace access. A fresh isolated, checkpointed
-Claude rerun now also produces a valid scored submission and passes both gates.
-Under the checkpoint-allowed protocol, Codex, Claude, and Antigravity all have
-qualifying replacement-source rollouts.
+The replacement source and human-verified 104-ply ground truth are used by all
+three primary rollouts below. Codex is a natural-prompt run. Claude Code and
+Antigravity each received one content-free persistence checkpoint so an account
+or print-window interruption could not erase the current best submission.
 
-| run | status | reward | notes |
-|---|---:|---:|---|
-| oracle | passed | 1.0 | Human-verified move sequence and result; 287/287 checks passed across 104 plies and 26 captures. |
-| empty baseline | passed | 0.0 | Empty `moves` and `capture_events` submission; 0/287 checks passed. |
-| [Codex CLI](rollouts/codex-transcript.jsonl) (`codex-natural-chess-20260719T062119Z`) | passed | 0.0379 | Fresh GPT-5.6 Sol full-media rollout using the benchmark prompt with path-only rewriting; 13/343 checks, 45/104 plies, 17/26 captures, and 237 completed shell calls. The agent naturally exceeded 50 calls with no turn minimum or pacing hint. It wrote temporary analysis frames outside the workspace but did not access ground truth or public game data. |
-| [Claude Code CLI](rollouts/claude-transcript.jsonl) (`claude-checkpoint-chess-20260723T040025Z`) | passed; checkpointed | 0.0 | Fresh Sonnet 5 high-effort run in a clean replacement-source workspace. The canonical initial prompt used path-only rewriting; a content-free persistence checkpoint was sent after 45 observed completed results. Claude wrote and parsed a valid empty submission, continued to 54 completed tool results, and scored 0/287 with verifier reason `ok`. A pre-tool gate blocked one package-manager probe; no web, package installation, third-party Python package, outside-workspace, ground-truth, or prior-rollout access succeeded. |
-| [Antigravity CLI](rollouts/antigravity-transcript.jsonl) (`antigravity-qualifying-chess-20260719T170155Z`) | passed; checkpointed | 0.0 | Fresh Gemini 3.5 Flash (Medium) run in a clean sandbox on the replacement source. Its canonical initial prompt used path-only rewriting; one content-free persistence checkpoint was sent after call 46. The agent wrote a valid empty submission, continued naturally, and was stopped after scoring at call 53; the transcript has 54 invocations and 51 conservative `DONE` result records. No network, package installation, host Python package, outside-workspace, ground-truth, or prior-rollout access succeeded. All strict checks pass using the conservative 51-turn count. |
-| Codex single-frame ablation (`codex-ablation-single-frame-20260719T012741Z`) | passed | 0.0058 | GPT-5.6 Sol (high reasoning) received one representative frame from 00:13:00. It produced a plausible but incorrect 50-ply history and 8 captures; only 2/343 checks passed. |
-| Codex no-media ablation (`codex-ablation-no-media-20260719T012741Z`) | passed | 0.0 | GPT-5.6 Sol (high reasoning) received only the prompt and schema, returned `unknown` with empty move/capture lists, and passed 0/287 checks. |
-| Codex frame-dump/no-tools ablation (`codex-ablation-frame-dump-no-tools-20260723T181157Z`) | passed | 0.0239 | Codex CLI 0.144.2 with GPT-5.6 Sol (high reasoning) received 52 chronological 1920x1080 contact sheets containing all 46,371 processed video frames. The prompt forbade tools, the trajectory contained zero tool calls, and the direct JSON response predicted 12 plies and no captures; 7/293 checks passed. |
+## Primary Agent Rollouts
+
+| harness | harness version | model | reasoning effort | score | tool-call turns | trajectory |
+|---|---:|---|---:|---:|---:|---|
+| Codex CLI | 0.144.2 | GPT-5.6 Sol | high | 0.0379 | 237 | [raw trajectory](rollouts/codex-transcript.jsonl) |
+| Claude Code CLI | 2.1.204 | Claude Opus 4.8 | high | 0.0 | 91 | [raw trajectory](rollouts/claude-transcript.jsonl) |
+| Antigravity CLI | 1.1.5 | Gemini 3.5 Flash | medium | 0.0 | 51 | [raw trajectory](rollouts/antigravity-transcript.jsonl) |
+
+## Run Details
+
+- **Codex** (`codex-natural-chess-20260719T062119Z`) used the canonical prompt
+  with path-only rewriting and no pacing instruction. It naturally completed
+  237 shell calls, predicted 45/104 plies and 17/26 captures, and passed 13/343
+  checks. Temporary analysis frames escaped the requested workspace, but the
+  run did not access ground truth or public game data.
+- **Claude Code** (`claude-opus-checkpoint-chess-20260723T183709Z`) ran in a
+  fresh isolated workspace. A persistence checkpoint was sent after 41 tool
+  results. It then continued naturally to 91 tool uses/results, with 88 allowed
+  and three denied by the isolation hook. Its valid final submission predicted
+  `draw` with empty move and capture lists and passed 0/287 checks. Fable 5 was
+  unavailable to this account before sampling, so the approved Opus 4.8 model
+  was used instead. The invoked CLI executable reported version 2.1.204; its
+  emitted session-init events separately identify `claude_code_version` as
+  2.1.197, and both values are retained in the trajectory.
+- **Antigravity** (`antigravity-checkpoint-chess-20260723T192017Z`) ran in a
+  fresh sandbox with a workspace-local 1.1.5 pre-tool hook. A persistence
+  checkpoint was sent after 36 calls. The run was stopped under the standing
+  cap at 53 audited invocations after its score remained below 0.5; 51 allowed
+  tool results completed and two package probes were denied. The 51-result
+  count includes one asynchronous command after its completion notification and
+  one completed, allowed artifact-call error. Its valid final submission
+  predicted `unknown` with empty move and capture lists and passed 0/287 checks.
+
+No primary rollout successfully used web tools, installed packages, accessed
+ground truth, or read a prior rollout. Claude and Antigravity qualify under the
+checkpoint-allowed protocol; Codex independently supplies natural-prompt
+long-horizon evidence.
+
+## Oracle And Ablations
+
+| run | score | result |
+|---|---:|---|
+| oracle | 1.0 | Human-verified 104-ply sequence and 26 captures; 287/287 checks passed. |
+| empty baseline | 0.0 | Empty move and capture lists; 0/287 checks passed. |
+| Codex single-frame (`codex-ablation-single-frame-20260719T012741Z`) | 0.0058 | One frame at 00:13:00; 2/343 checks passed. |
+| Codex no-media (`codex-ablation-no-media-20260719T012741Z`) | 0.0 | Prompt and schema only; 0/287 checks passed. |
+| Codex frame-dump/no-tools (`codex-ablation-frame-dump-no-tools-20260723T181157Z`) | 0.0239 | All 46,371 frames in 52 contact sheets, zero tool calls; 7/293 checks passed. |
 
 ## Review Status
 
-- Ground-truth review is complete. The move sequence, Black-win result, and all
-  move and capture timestamps received two independent human passes.
-- Claude and Antigravity now have clean qualifying evidence under the
-  user-approved checkpoint protocol, though neither counts as natural-prompt
-  evidence. Retired-source runs, padded diagnostics, and the quota-truncated
-  Claude attempt are omitted from the committed evidence.
+- Ground-truth review is complete. Two independent human passes confirmed the
+  full sequence, Black-win result, and all move and capture timestamps.
+- All three primary agents score below 0.10 and exceed 50 tool-call turns.
+- The oracle, empty baseline, primary-agent, long-horizon, and three supplied
+  shortcut-ablation checks pass.
 
 ## Repository Evidence
 
-The committed calibration evidence is limited to one sanitized, plain-text
-transcript for each qualifying agent plus this score summary. Image payloads,
-full reward dumps, compressed binaries, duplicate instructions, response logs,
-historical and diagnostic runs, and personal paths are omitted. The shortcut
-ablation results are retained only as aggregate rows above.
+The committed evidence contains one plain-text trajectory for each primary
+agent plus this score table. The Claude trajectory omits binary image payloads
+and opaque thinking signatures; the Antigravity trajectory is its full text
+transcript with local paths normalized. Full local reward dumps, generated
+media, duplicate instructions, historical attempts, and personal paths remain
+untracked.
