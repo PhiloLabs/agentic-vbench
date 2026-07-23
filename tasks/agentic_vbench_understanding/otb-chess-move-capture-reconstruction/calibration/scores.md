@@ -63,9 +63,12 @@ long-horizon evidence.
 
 ## Repository Evidence
 
-The committed evidence contains one plain-text trajectory for each primary
-agent plus this score table. The Claude trajectory omits binary image payloads
-and opaque thinking signatures; the Antigravity trajectory is its full text
-transcript with local paths normalized. Full local reward dumps, generated
-media, duplicate instructions, historical attempts, and personal paths remain
+The committed evidence contains one complete raw harness trajectory for each
+primary agent plus this score table. Codex retains all 485 raw events, including
+`item.started` and `item.completed` records. Claude retains all 1,212 events
+from its initial and checkpoint-resume streams, including binary image payloads,
+thinking-token events, and opaque signatures. Antigravity retains all 114 raw
+transcript events. Synthetic envelope records preserve the canonical prompts
+and run metadata; only machine-specific paths are normalized. Full reward
+dumps, generated media, historical attempts, and personal paths remain
 untracked.
