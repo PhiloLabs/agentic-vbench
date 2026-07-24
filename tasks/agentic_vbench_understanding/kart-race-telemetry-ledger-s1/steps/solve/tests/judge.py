@@ -66,7 +66,8 @@ def tau(pairs):
     """Normalised Kendall correlation over (gt_value, pred_value) pairs. SIGNED.
 
     Deliberately not clamped here: clamping each race/field at 0 discards the negative half of
-    the noise distribution, so random guessing averages POSITIVE (measured 0.156 with 6 karts).
+    the noise distribution, so random guessing averages POSITIVE (measured 0.156 on an earlier
+    6-kart cut; the shipped 10-kart suite gives a 0.036 floor with this fixed aggregation).
     The signed values are aggregated first and the final reward is clamped once, which keeps a
     guess at ~0 in expectation.
     """

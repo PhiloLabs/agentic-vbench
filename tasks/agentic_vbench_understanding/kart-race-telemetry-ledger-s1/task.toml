@@ -7,11 +7,11 @@ name = "agentic-vbench/kart-race-telemetry-ledger-s1"
 difficulty = "hard"
 category = "video-understanding"
 tags = ["video-understanding", "game-analysis", "racing", "multi-object-tracking", "long-horizon", "event-timeline", "synthetic-ground-truth", "agentic-vbench-understanding"]
-# Four AI-driven SuperTuxKart races (~13 min total), six karts each on four tracks. The
-# agent reconstructs each race's finishing order and per-kart powerup pickups by following
-# the karts, the ranking column and the minimap. GT is STK's own profile-mode result table,
-# so the recorded run is its own machine-exact ground truth. Real-life framing: multi-object
-# tracking and outcome extraction from sports/gameplay footage.
+# Five AI-driven SuperTuxKart races (23.2 min total), ten karts each on five tracks. The agent
+# counts, per kart, the powerup boxes and nitro it collected — neither is displayed on screen,
+# so it means following ten karts and counting discrete events. GT is STK's own profile-mode
+# result table, so the recorded run is its own machine-exact ground truth. Real-life framing:
+# multi-object tracking plus fine-grained event counting in crowded gameplay/sports footage.
 source = "synthetic: SuperTuxKart 1.5 --profile-laps (SuperTux AI difficulty), recorded under Xvfb; tools/p4_stk/"
 
 [environment]

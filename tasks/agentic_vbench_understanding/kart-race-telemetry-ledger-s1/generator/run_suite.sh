@@ -11,13 +11,17 @@ FFX=${FFMPEG:-$(/usr/bin/python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.
 
 i=0
 : > "$OUT/concat.txt"
-for spec in "hacienda:tux,gnu,adiumy,amanda,beastie,kiki" \
-            "snowmountain:pidgin,konqi,puffy,hexley,wilber,xue" \
-            "lighthouse:emule,gavroche,nolok,suzanne,sara_the_racer,sara_the_wizard" \
-            "cornfield_crossing:tux,konqi,nolok,amanda,wilber,puffy"; do
+# 10 karts per race across 5 tracks. Bigger fields are both harder (ten karts' pickups to
+# follow) and statistically tighter: tau over 45 pairs per field instead of 15 shrinks the
+# noise, so one run can actually separate an agent from chance.
+for spec in "hacienda:tux,gnu,adiumy,amanda,beastie,kiki,konqi,nolok,puffy,wilber" \
+            "snowmountain:pidgin,konqi,puffy,hexley,wilber,xue,tux,gnu,emule,suzanne" \
+            "lighthouse:emule,gavroche,nolok,suzanne,sara_the_racer,sara_the_wizard,xue,kiki,adiumy,hexley" \
+            "cornfield_crossing:tux,konqi,nolok,amanda,wilber,puffy,gnu,beastie,pidgin,xue" \
+            "scotland:gavroche,suzanne,sara_the_racer,emule,hexley,kiki,adiumy,amanda,beastie,sara_the_wizard"; do
   track=${spec%%:*}; karts=${spec##*:}
   bash "$HERE/run_race.sh" "$OUT/race$i" "$track" 4 "$karts" 3
-  /usr/bin/python3 "$HERE/parse_profile.py" "$OUT/race$i/stk_stdout.log" "$OUT/race$i/gt.json" --expect 6
+  /usr/bin/python3 "$HERE/parse_profile.py" "$OUT/race$i/stk_stdout.log" "$OUT/race$i/gt.json" --expect 10
   test -s "$OUT/race$i/race_raw.mp4" || { echo "race$i produced no video — aborting suite"; exit 7; }
   echo "file 'race$i/race_raw.mp4'" >> "$OUT/concat.txt"
   i=$((i+1))

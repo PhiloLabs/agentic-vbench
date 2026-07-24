@@ -1,0 +1,279 @@
+{
+  "races": [
+    {
+      "track": "hacienda",
+      "karts": [
+        {
+          "kart": "godette",
+          "items_collected": 10,
+          "nitro_collected": 10
+        },
+        {
+          "kart": "konqi",
+          "items_collected": 9,
+          "nitro_collected": 9
+        },
+        {
+          "kart": "amanda",
+          "items_collected": 8,
+          "nitro_collected": 8
+        },
+        {
+          "kart": "adiumy",
+          "items_collected": 7,
+          "nitro_collected": 7
+        },
+        {
+          "kart": "wilber",
+          "items_collected": 6,
+          "nitro_collected": 6
+        },
+        {
+          "kart": "gnu",
+          "items_collected": 5,
+          "nitro_collected": 5
+        },
+        {
+          "kart": "tux",
+          "items_collected": 4,
+          "nitro_collected": 4
+        },
+        {
+          "kart": "puffy",
+          "items_collected": 3,
+          "nitro_collected": 3
+        },
+        {
+          "kart": "kiki",
+          "items_collected": 2,
+          "nitro_collected": 2
+        },
+        {
+          "kart": "nolok",
+          "items_collected": 1,
+          "nitro_collected": 1
+        }
+      ]
+    },
+    {
+      "track": "snow_peak",
+      "karts": [
+        {
+          "kart": "gnu",
+          "items_collected": 10,
+          "nitro_collected": 10
+        },
+        {
+          "kart": "wilber",
+          "items_collected": 9,
+          "nitro_collected": 9
+        },
+        {
+          "kart": "emule",
+          "items_collected": 8,
+          "nitro_collected": 8
+        },
+        {
+          "kart": "xue",
+          "items_collected": 7,
+          "nitro_collected": 7
+        },
+        {
+          "kart": "adiumy",
+          "items_collected": 6,
+          "nitro_collected": 6
+        },
+        {
+          "kart": "puffy",
+          "items_collected": 5,
+          "nitro_collected": 5
+        },
+        {
+          "kart": "tux",
+          "items_collected": 4,
+          "nitro_collected": 4
+        },
+        {
+          "kart": "hexley",
+          "items_collected": 3,
+          "nitro_collected": 3
+        },
+        {
+          "kart": "pidgin",
+          "items_collected": 2,
+          "nitro_collected": 2
+        },
+        {
+          "kart": "suzanne",
+          "items_collected": 1,
+          "nitro_collected": 1
+        }
+      ]
+    },
+    {
+      "track": "crescent_crossing",
+      "karts": [
+        {
+          "kart": "xue",
+          "items_collected": 10,
+          "nitro_collected": 10
+        },
+        {
+          "kart": "gavroche",
+          "items_collected": 9,
+          "nitro_collected": 9
+        },
+        {
+          "kart": "pepper",
+          "items_collected": 8,
+          "nitro_collected": 8
+        },
+        {
+          "kart": "hexley",
+          "items_collected": 7,
+          "nitro_collected": 7
+        },
+        {
+          "kart": "sara",
+          "items_collected": 6,
+          "nitro_collected": 6
+        },
+        {
+          "kart": "kiki",
+          "items_collected": 5,
+          "nitro_collected": 5
+        },
+        {
+          "kart": "adiumy",
+          "items_collected": 4,
+          "nitro_collected": 4
+        },
+        {
+          "kart": "suzanne",
+          "items_collected": 3,
+          "nitro_collected": 3
+        },
+        {
+          "kart": "emule",
+          "items_collected": 2,
+          "nitro_collected": 2
+        },
+        {
+          "kart": "nolok",
+          "items_collected": 1,
+          "nitro_collected": 1
+        }
+      ]
+    },
+    {
+      "track": "cornfield_crossing",
+      "karts": [
+        {
+          "kart": "puffy",
+          "items_collected": 10,
+          "nitro_collected": 10
+        },
+        {
+          "kart": "pidgin",
+          "items_collected": 9,
+          "nitro_collected": 9
+        },
+        {
+          "kart": "tux",
+          "items_collected": 8,
+          "nitro_collected": 8
+        },
+        {
+          "kart": "amanda",
+          "items_collected": 7,
+          "nitro_collected": 7
+        },
+        {
+          "kart": "wilber",
+          "items_collected": 6,
+          "nitro_collected": 6
+        },
+        {
+          "kart": "godette",
+          "items_collected": 5,
+          "nitro_collected": 5
+        },
+        {
+          "kart": "adiumy",
+          "items_collected": 4,
+          "nitro_collected": 4
+        },
+        {
+          "kart": "nolok",
+          "items_collected": 3,
+          "nitro_collected": 3
+        },
+        {
+          "kart": "xue",
+          "items_collected": 2,
+          "nitro_collected": 2
+        },
+        {
+          "kart": "gnu",
+          "items_collected": 1,
+          "nitro_collected": 1
+        }
+      ]
+    },
+    {
+      "track": "around_the_lighthouse",
+      "karts": [
+        {
+          "kart": "gavroche",
+          "items_collected": 10,
+          "nitro_collected": 10
+        },
+        {
+          "kart": "emule",
+          "items_collected": 9,
+          "nitro_collected": 9
+        },
+        {
+          "kart": "suzanne",
+          "items_collected": 8,
+          "nitro_collected": 8
+        },
+        {
+          "kart": "sara",
+          "items_collected": 7,
+          "nitro_collected": 7
+        },
+        {
+          "kart": "pepper",
+          "items_collected": 6,
+          "nitro_collected": 6
+        },
+        {
+          "kart": "hexley",
+          "items_collected": 5,
+          "nitro_collected": 5
+        },
+        {
+          "kart": "amanda",
+          "items_collected": 4,
+          "nitro_collected": 4
+        },
+        {
+          "kart": "godette",
+          "items_collected": 3,
+          "nitro_collected": 3
+        },
+        {
+          "kart": "kiki",
+          "items_collected": 2,
+          "nitro_collected": 2
+        },
+        {
+          "kart": "adiumy",
+          "items_collected": 1,
+          "nitro_collected": 1
+        }
+      ]
+    }
+  ]
+}

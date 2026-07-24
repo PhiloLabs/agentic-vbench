@@ -39,6 +39,7 @@ task and makes kart identity easier to track, but the HUD must be cropped out.
 ## Task shape
 
 Question: per kart (identified by character/colour, never by the HUD), reconstruct
-`{kart, start_position, finish_position, rescue_count, items_collected}`.
+`{kart, items_collected, nitro_collected}` (the scored fields; start/finish are exported for
+context but deliberately not scored — see the task SPEC).
 Deterministic scorer: per-field accuracy over karts; the finishing order is a permutation
 so a single-frame glance cannot recover it, and rescues/items require watching the race.

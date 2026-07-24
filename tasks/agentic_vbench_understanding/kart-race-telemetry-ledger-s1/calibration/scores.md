@@ -1,59 +1,68 @@
 # Calibration — kart-race-telemetry-ledger-s1
 
-Rank agreement (Kendall tau) over four fields per kart:
-`reward = 0.45·tau(finish) + 0.15·tau(start) + 0.25·tau(items) + 0.15·tau(nitro)`,
-averaged over 4 races. GT = SuperTuxKart profile-mode result table (SuperTux difficulty AI,
-6 karts × 4 tracks × 4 laps, 14.6 min, 720p).
+**Scorer as shipped:** `reward = max(0, mean_races[0.60·tau(items) + 0.40·tau(nitro)])`, where
+tau is the *signed* normalised Kendall correlation over kart pairs, aggregated across races and
+fields and clamped once at the end.
 
-| run | score | notes |
-|---|---|---|
-| oracle | 1.0 | verified through harness path (solve.sh → judge.py), all 4 races tau=1.0 |
-| empty | 0.0 | verified |
-| blind guess (all 4 fields random) | 0.16 | 500 trials, p95 0.26 |
-| grid-only (read start grid, guess finish=grid) | 0.22 | honest partial credit (see SPEC) |
-| podium-only (top-3 finish right) | 0.36 | partial credit is meaningful |
-| Codex `gpt-5.6-sol` (xhigh) | **0.557** | Codex CLI v0.145.0, ChatGPT Pro, 330k tokens, ~50 tool calls; rollout in rollouts/ |
-| Codex `gpt-5.6-sol` (xhigh), off-HUD scoring | **0.064** | same rollout re-scored under the shipped verifier |
-| Antigravity (Gemini-3.x) | _to run_ | |
-| Claude Code (Fable 5 / Opus 4.8) | _to run_ | |
+**Media as shipped:** SuperTuxKart profile-mode ground truth — 5 races (hacienda, snowmountain,
+lighthouse, cornfield_crossing, scotland) × **10 karts** × 4 laps, SuperTux (hardest) AI,
+23.2 min, 1280×720, no audio.
 
-Raw agent trajectories saved under `rollouts/` once each harness completes.
+## Results
 
+| run | score | turns | tokens | notes |
+|---|---|---|---|---|
+| oracle | **1.0** | — | — | harness path (`solve.sh` → `judge.py`); 5 races, 10/10 karts, all tau = 1.0 |
+| blind guess (random counts) | **0.036 ± 0.052** | — | — | 600 trials, p95 0.146 |
+| constant counts (all karts equal) | 0.0 | — | — | |
+| leaderboard-only (ranking column + grid, no pickup info) | 0.0 | — | — | |
+| empty | 0.0 | — | — | |
+| **Codex `gpt-5.6-sol` (xhigh) — shipped 5×10 suite** | **0.170** | **24** | 580,907 | rollout `rollouts/codex_5x10_*.json` |
+| Antigravity (Gemini‑3.x) | _to run_ | | | |
+| Claude Code (Fable 5 / Opus 4.8) | _to run_ | | | |
 
-## Calibration finding (IMPORTANT — task is NOT yet at the <0.10 hard bar)
-
-Codex scored **0.557**, far above the family's <0.10 target. Per-dimension mean tau shows
-exactly why:
-
-| dimension | Codex tau | on the HUD? |
-|---|---|---|
-| start_position | 0.90 | yes — the starting grid |
-| finish_position | 0.75 | yes — the ranking column |
-| items_collected | 0.27 | no — count pickups over time |
-| nitro_collected | 0.12 | no — count pickups over time |
-
-The ranking column and grid **display** the finishing order and start slots, so an agent that
-reads the leaderboard gets 0.60 of the weight almost for free — that is leaderboard-OCR, not
-video understanding. The genuine difficulty is the pickup counting (items/nitro), where Codex
-is weak (0.12–0.27).
-
-**This is a real anti-shortcut gap, surfaced by calibration, and the task must not be
-submitted as a <0.10 hard task until it is fixed.** Options:
-1. **Crop the ranking column + minimap** (the leaderboard giveaway) so finish/start must be
-   inferred from the race itself — the standard anti-shortcut move (cf. hiding Pokémon
-   move-name text). Trades against keeping those on-screen aids.
-2. **Score only the off-HUD signals** (items/nitro) and scale up karts/races; Codex is already
-   ~0.12–0.27 there, so this plausibly reaches the bar.
-3. Keep as-is and label it a **medium** task (~0.5), if the family accepts sub-hard entries.
-Decision pending.
-
+### Superseded runs, kept for the record
+| run | score | turns | tokens | why superseded |
+|---|---|---|---|---|
+| Codex, 4×6 cut, 4-field scoring | 0.557 | 17 | 329,676 | scored finish + start, which the HUD displays |
+| Codex, 4×6 cut, off-HUD scoring | 0.064 | 17 | 329,676 | same rollout re-scored; small-sample noise (15 tau-pairs/field) |
 
 ## Agent configuration (so the numbers are reproducible)
-Codex runs: `codex exec --dangerously-bypass-approvals-and-sandbox`, Codex CLI **v0.145.0**,
+`codex exec --dangerously-bypass-approvals-and-sandbox`, Codex CLI **v0.145.0**,
 `model = gpt-5.6-sol`, `model_reasoning_effort = xhigh`, ChatGPT Pro auth, ffmpeg+ffprobe on
-PATH, video mounted at `materials/race.mp4`. Scored with this task's own `judge.py`.
+PATH, video mounted at `materials/race.mp4`, scored with this task's own `judge.py`.
 
-## Media revision
-The first calibration used a 4-race x 6-kart cut (14.6 min). The shipped media is now
-5 races x 10 karts (23.2 min) because the smaller cut left the measurement underpowered
-(blind 0.057 +- 0.082 vs an agent score of 0.064). Blind is now 0.036 +- 0.052 (p95 0.146).
+## Two findings that changed the task
+
+**1. The scorer was rewarding leaderboard reading.** With finish order and start grid scored,
+Codex reached **0.557** — tau 0.75 on finish and 0.90 on start, because the ranking column and
+starting grid simply *display* them. Only the off-HUD pickup counts are scored now; finish and
+start may still be reported for context. Rescues and banana hits are excluded too: they are
+almost always zero, so ranking near-constant columns is neither discriminative nor guess-proof.
+
+**2. The scorer had a statistical bug.** Clamping tau at 0 *per race* discarded the negative half
+of the noise distribution, so random guessing averaged **0.156** instead of ~0. tau is now signed
+and aggregated before a single final clamp, which put the guess floor at 0.036.
+
+## Open item: the task does NOT currently clear the <0.10 bar
+
+The first calibration used a 4-race × 6-kart cut and gave **0.064**, which looked like a pass. It
+was not: with only 15 tau-pairs per field that score sat inside the blind-guess spread
+(0.057 ± 0.082) and could not be separated from chance. The shipped suite was enlarged to 5 × 10
+(45 pairs per field) specifically to fix the measurement — and on it the same harness scores
+**0.170**, i.e. **above** the bar, and ~2.6σ above the 0.036 floor. The earlier number was noise;
+this one supersedes it.
+
+Per-dimension mean tau shows where the difficulty actually lives:
+
+| dimension | Codex mean tau | why |
+|---|---|---|
+| `items_collected` | **~0.07** | genuinely hard: question-mark boxes must be counted per kart |
+| `nitro_collected` | **~0.32** | easier: nitro *use* is visible as boost flames, so there is partial on-screen evidence |
+
+Options are filed on the proposal issue (PhiloLabs/agentic-vbench#73) rather than decided
+unilaterally, because tuning the weights until the task "passes" would be fitting the metric to
+the desired answer: (1) restrict scoring to `items_collected` (Codex ≈ 0.07), (2) scale the field
+to 12–16 karts, or (3) accept it as a medium-difficulty entry at ~0.17.
+
+Raw agent trajectories are under `rollouts/`.

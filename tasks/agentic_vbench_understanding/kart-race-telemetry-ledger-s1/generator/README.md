@@ -44,8 +44,15 @@ field size is an effectively unlimited space of distinct, machine-labeled races.
 `spec` list in `run_suite.sh` to mint new instances; hold out unseen (track, kart-set)
 combinations for evaluation.
 
+The shipped media came from the default `spec` list in `run_suite.sh`: **5 tracks × 10 karts ×
+4 laps** on SuperTux difficulty (23.2 min). Field size matters for measurement as well as
+difficulty — 10 karts give 45 tau-pairs per field instead of 15, which is what made a single
+agent run separable from chance.
+
 ## Verifier
 
 Task-side, at `myclone/tasks/agentic_vbench_understanding/kart-race-telemetry-ledger-s1/`.
-Scores rank agreement (Kendall tau) over finish / start-grid / items / nitro; oracle 1.0,
-blind guess ≈ 0.16. See that task's `SPEC.md`.
+Scores rank agreement (Kendall tau) over the OFF-HUD pickup counts only — items and nitro.
+Finish order and start grid are reported for context but not scored, because the ranking column
+and grid display them (calibration showed that rewarded leaderboard reading). Oracle 1.0, blind
+guess 0.036 on the shipped 5x10 suite. See that task's `SPEC.md`.

@@ -1,6 +1,6 @@
 ---
 title: Task Spec Card
-summary: kart-race-telemetry-ledger-s1 — reconstruct finishing order and per-kart powerup pickups across four AI-driven SuperTuxKart races.
+summary: kart-race-telemetry-ledger-s1 — reconstruct each kart's powerup and nitro pickups across five AI-driven SuperTuxKart races.
 ---
 
 # Task Spec Card
@@ -9,9 +9,10 @@ summary: kart-race-telemetry-ledger-s1 — reconstruct finishing order and per-k
 task: agentic_vbench_understanding/kart-race-telemetry-ledger-s1
 
 cognitive_level: understanding
-# Follow six karts through each of four races on different tracks and reconstruct the
-# outcome: the finishing order, and how many powerup boxes each kart collected. Multi-object
-# tracking over a long horizon, using the on-screen ranking column and minimap as evidence.
+# Follow ten karts through each of five races on different tracks and count what each of them
+# picked up: powerup boxes and nitro. Neither total is shown anywhere on screen, so this is
+# fine-grained event counting per tracked object over a long horizon; the ranking column and
+# minimap are navigation aids for keeping identities straight, never answers.
 
 modalities_required:
   video: karts, ranking column and minimap are all visual.
@@ -26,7 +27,7 @@ ground_truth:
           ground truth. No replay-recorder keypress needed.
   tier: machine-truth
   verification: oracle solution.json = the profile table; judge.py scores it 1.0 through the
-                harness path (solve.sh -> judge.py), all four races finish_tau = items_tau = 1.0.
+                harness path (solve.sh -> judge.py): 5 races, 10/10 karts matched, all tau = 1.0.
 
 scorer:
   metric: "max(0, mean_races[0.60*tau(items) + 0.40*tau(nitro)]); tau = SIGNED normalised
@@ -38,14 +39,23 @@ scorer:
     constant_counts: 0.0       # every kart given the same count
     leaderboard_only: 0.0      # reads the ranking column/grid, reports no pickup info
     empty: 0.0
-  measured_agents:
-    codex_gpt56: 0.064         # real run, 330k tokens, ~50 tool calls
+  measured_agents:            # Codex CLI v0.145.0, model gpt-5.6-sol, reasoning xhigh
+    codex_5x10_shipped: 0.170  # 24 tool-call turns, 581k tokens  <-- the shipped suite
+    codex_4x6_earlier: 0.064   # 17 turns, 330k tokens; superseded — see note below
   # Calibration drove this design. Scoring finish + start too gave Codex 0.557 (tau 0.75 /
   # 0.90) because the ranking column and grid simply display them — leaderboard reading, not
-  # understanding. Scoring only the off-HUD pickup counts drops the same run to 0.064. A
-  # second flaw was found in the scorer itself: clamping tau per race discarded the negative
-  # half of the noise, so random guessing averaged 0.156; aggregating signed tau and clamping
-  # once puts the guess floor at 0.06.
+  # understanding. Re-scoring that same rollout on the off-HUD pickup counts alone gave 0.064.
+  # A second flaw was in the scorer itself: clamping tau per race discarded the negative half
+  # of the noise, so random guessing averaged 0.156; signed tau aggregated then clamped once
+  # puts the guess floor at 0.036.
+  #
+  # IMPORTANT, and the number that supersedes the others: on the SHIPPED 5x10 suite the same
+  # harness scores 0.170, i.e. ABOVE the family's <0.10 bar. The earlier 0.064 was small-sample
+  # noise (15 tau-pairs per field); with 45 pairs Codex's real partial ability shows, and 0.170
+  # vs a 0.036 +- 0.052 floor is ~2.6 sigma above chance. Per-dimension mean tau: items ~0.07
+  # (genuinely hard), nitro ~0.32 (easier — nitro use is visible as boost flames). Open design
+  # question filed on the proposal issue: restrict to items, scale the field further, or accept
+  # this as a medium-difficulty entry.
 
 difficulty: {strong_agent_reward: TBD, tool_call_turns: TBD, agent_model: TBD}
 
@@ -94,5 +104,6 @@ input:
 ## Known limitations
 
 - Powerup *counts* are harder to read precisely than finishing order; the 0.30 weight and the
-  rank-only (not exact-count) scoring reflect that a viewer tracking six karts will order the
-  pickups better than they will count them exactly.
+  rank-only (not exact-count) scoring reflect that a viewer tracking ten karts will order the
+  pickups better than they will count them exactly. Measured per-dimension, nitro (~0.32) is
+  easier for an agent than powerup boxes (~0.07), because nitro use shows as boost flames.
