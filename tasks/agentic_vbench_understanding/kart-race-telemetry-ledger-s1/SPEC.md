@@ -1,6 +1,6 @@
 ---
 title: Task Spec Card
-summary: kart-race-telemetry-ledger-s1 — count each kart's powerup-box pickups across six AI-driven SuperTuxKart races.
+summary: kart-race-telemetry-ledger-s1 — count each kart's powerup-box pickups across six AI-driven 12-kart SuperTuxKart races.
 ---
 
 # Task Spec Card
@@ -35,13 +35,15 @@ scorer:
   oracle_reward: 1.0
   null_reward: 0.0
   measured_ablations:          # on the shipped ground truth, 500+ trials
-    blind_guess: 0.036         # random counts, 600 trials (p95 0.146; was 0.057+-0.082 at 4x6)
+    blind_guess: 0.035         # random counts, 600 trials (p95 0.149) on the 6x12 media
     constant_counts: 0.0       # every kart given the same count
     leaderboard_only: 0.0      # reads the ranking column/grid, reports no pickup info
     empty: 0.0
   measured_agents:            # Codex CLI v0.145.0, model gpt-5.6-sol, reasoning xhigh
-    codex_5x10_shipped: 0.170  # 24 tool-call turns, 581k tokens  <-- the shipped suite
-    codex_4x6_earlier: 0.064   # 17 turns, 330k tokens; superseded — see note below
+    codex_6x12_items_only: re-running   # the shipped configuration
+    codex_5x10_items_and_nitro: 0.170   # 24 turns, 581k tokens; nitro included (superseded)
+    codex_5x10_items_only: 0.066        # same rollout, items-only rescore
+    codex_4x6_items_only: 0.064         # 17 turns, 330k tokens; underpowered (60 pairs)
   # Calibration drove this design. Scoring finish + start too gave Codex 0.557 (tau 0.75 /
   # 0.90) because the ranking column and grid simply display them — leaderboard reading, not
   # understanding. Re-scoring that same rollout on the off-HUD pickup counts alone gave 0.064.
@@ -68,13 +70,14 @@ anti_shortcut:
 
 input:
   url: https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/main/kart-race-telemetry-ledger-s1/race.mp4
-  sha256: 3b22cf5b66301777fe69fb5d4435a4f8683da974084032d01b42fedd4141d75a
-  length_min: 23.2
+  sha256: db77a2d39641e8111ffb32de478e891a45f9ac562e61dde1a92bc579715f3f77
+  length_min: 41.5
   resolution: 720
-  contents: 5 races (hacienda, snowmountain, lighthouse, cornfield_crossing, scotland),
-            4 laps each, 10 karts each on SuperTux (hardest) AI difficulty; 18 distinct
-            characters. Ten-kart fields are both harder to follow and statistically tighter
-            (45 tau-pairs per field instead of 15).
+  contents: 6 races (hacienda, snowmountain, lighthouse, cornfield_crossing, scotland,
+            black_forest), 4 laps each, 12 karts each on SuperTux (hardest) AI difficulty;
+            18 distinct characters. Twelve-kart fields are both harder to follow and
+            statistically tighter: 66 tau-pairs per race x 6 = 396, against 225 at 5x10 and
+            60 on the first 4x6 cut.
 ```
 
 ## Notes
@@ -104,6 +107,6 @@ input:
 ## Known limitations
 
 - Powerup *counts* are harder to read precisely than finishing order; the 0.30 weight and the
-  rank-only (not exact-count) scoring reflect that a viewer tracking ten karts will order the
+  rank-only (not exact-count) scoring reflect that a viewer tracking twelve karts will order the
   pickups better than they will count them exactly. Measured per-dimension, nitro (~0.32) is
   easier for an agent than powerup boxes (~0.07), because nitro use shows as boost flames.

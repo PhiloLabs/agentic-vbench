@@ -1,78 +1,92 @@
 {
-  "n_races": 5,
+  "n_races": 6,
   "races": [
     {
       "track": "hacienda",
       "karts": [
         {
-          "kart": "beastie",
-          "start_position": 5,
-          "finish_position": 1,
-          "items_collected": 20,
-          "nitro_collected": 16
-        },
-        {
-          "kart": "konqi",
-          "start_position": 7,
-          "finish_position": 2,
-          "items_collected": 17,
-          "nitro_collected": 12
-        },
-        {
-          "kart": "amanda",
-          "start_position": 4,
-          "finish_position": 3,
-          "items_collected": 18,
-          "nitro_collected": 16
-        },
-        {
           "kart": "adiumy",
+          "items_collected": 17,
+          "nitro_collected": 18,
           "start_position": 3,
-          "finish_position": 4,
-          "items_collected": 14,
-          "nitro_collected": 16
+          "finish_position": 1
         },
         {
           "kart": "wilber",
+          "items_collected": 19,
+          "nitro_collected": 14,
           "start_position": 10,
-          "finish_position": 5,
-          "items_collected": 17,
-          "nitro_collected": 13
-        },
-        {
-          "kart": "gnu",
-          "start_position": 2,
-          "finish_position": 6,
-          "items_collected": 13,
-          "nitro_collected": 14
-        },
-        {
-          "kart": "tux",
-          "start_position": 1,
-          "finish_position": 7,
-          "items_collected": 13,
-          "nitro_collected": 11
-        },
-        {
-          "kart": "puffy",
-          "start_position": 9,
-          "finish_position": 8,
-          "items_collected": 13,
-          "nitro_collected": 14
+          "finish_position": 2
         },
         {
           "kart": "kiki",
+          "items_collected": 8,
+          "nitro_collected": 8,
           "start_position": 6,
-          "finish_position": 9,
-          "items_collected": 17,
-          "nitro_collected": 11
+          "finish_position": 3
+        },
+        {
+          "kart": "xue",
+          "items_collected": 11,
+          "nitro_collected": 8,
+          "start_position": 11,
+          "finish_position": 4
+        },
+        {
+          "kart": "beastie",
+          "items_collected": 12,
+          "nitro_collected": 14,
+          "start_position": 5,
+          "finish_position": 5
+        },
+        {
+          "kart": "konqi",
+          "items_collected": 7,
+          "nitro_collected": 8,
+          "start_position": 7,
+          "finish_position": 6
+        },
+        {
+          "kart": "gnu",
+          "items_collected": 14,
+          "nitro_collected": 12,
+          "start_position": 2,
+          "finish_position": 7
+        },
+        {
+          "kart": "puffy",
+          "items_collected": 5,
+          "nitro_collected": 11,
+          "start_position": 9,
+          "finish_position": 8
+        },
+        {
+          "kart": "amanda",
+          "items_collected": 10,
+          "nitro_collected": 10,
+          "start_position": 4,
+          "finish_position": 9
+        },
+        {
+          "kart": "tux",
+          "items_collected": 14,
+          "nitro_collected": 13,
+          "start_position": 1,
+          "finish_position": 10
         },
         {
           "kart": "nolok",
+          "items_collected": 8,
+          "nitro_collected": 7,
           "start_position": 8,
-          "finish_position": 10,
-          "items_collected": 17,
-          "nitro_collected": 14
+          "finish_position": 11
+        },
+        {
+          "kart": "pidgin",
+          "items_collected": 7,
+          "nitro_collected": 11,
+          "start_position": 12,
+          "finish_position": 12
         }
       ]
     },
@@ -80,74 +94,88 @@
       "track": "snowmountain",
       "karts": [
         {
-          "kart": "gnu",
-          "start_position": 8,
-          "finish_position": 1,
-          "items_collected": 12,
-          "nitro_collected": 10
-        },
-        {
-          "kart": "wilber",
-          "start_position": 5,
-          "finish_position": 2,
-          "items_collected": 12,
-          "nitro_collected": 13
-        },
-        {
           "kart": "emule",
+          "items_collected": 13,
+          "nitro_collected": 10,
           "start_position": 9,
-          "finish_position": 3,
-          "items_collected": 6,
-          "nitro_collected": 9
-        },
-        {
-          "kart": "xue",
-          "start_position": 6,
-          "finish_position": 4,
-          "items_collected": 5,
-          "nitro_collected": 9
-        },
-        {
-          "kart": "konqi",
-          "start_position": 2,
-          "finish_position": 5,
-          "items_collected": 4,
-          "nitro_collected": 11
-        },
-        {
-          "kart": "puffy",
-          "start_position": 3,
-          "finish_position": 6,
-          "items_collected": 6,
-          "nitro_collected": 7
-        },
-        {
-          "kart": "tux",
-          "start_position": 7,
-          "finish_position": 7,
-          "items_collected": 6,
-          "nitro_collected": 7
+          "finish_position": 1
         },
         {
           "kart": "hexley",
+          "items_collected": 8,
+          "nitro_collected": 10,
           "start_position": 4,
-          "finish_position": 8,
-          "items_collected": 6,
-          "nitro_collected": 3
+          "finish_position": 2
         },
         {
-          "kart": "suzanne",
-          "start_position": 10,
-          "finish_position": 9,
-          "items_collected": 10,
-          "nitro_collected": 7
+          "kart": "wilber",
+          "items_collected": 12,
+          "nitro_collected": 12,
+          "start_position": 5,
+          "finish_position": 3
+        },
+        {
+          "kart": "tux",
+          "items_collected": 8,
+          "nitro_collected": 8,
+          "start_position": 7,
+          "finish_position": 4
+        },
+        {
+          "kart": "amanda",
+          "items_collected": 11,
+          "nitro_collected": 9,
+          "start_position": 12,
+          "finish_position": 5
+        },
+        {
+          "kart": "konqi",
+          "items_collected": 9,
+          "nitro_collected": 11,
+          "start_position": 2,
+          "finish_position": 6
+        },
+        {
+          "kart": "xue",
+          "items_collected": 9,
+          "nitro_collected": 13,
+          "start_position": 6,
+          "finish_position": 7
         },
         {
           "kart": "pidgin",
+          "items_collected": 10,
+          "nitro_collected": 13,
           "start_position": 1,
-          "finish_position": 10,
-          "items_collected": 12,
-          "nitro_collected": 13
+          "finish_position": 8
+        },
+        {
+          "kart": "nolok",
+          "items_collected": 5,
+          "nitro_collected": 1,
+          "start_position": 11,
+          "finish_position": 9
+        },
+        {
+          "kart": "suzanne",
+          "items_collected": 8,
+          "nitro_collected": 13,
+          "start_position": 10,
+          "finish_position": 10
+        },
+        {
+          "kart": "puffy",
+          "items_collected": 8,
+          "nitro_collected": 11,
+          "start_position": 3,
+          "finish_position": 11
+        },
+        {
+          "kart": "gnu",
+          "items_collected": 7,
+          "nitro_collected": 8,
+          "start_position": 8,
+          "finish_position": 12
         }
       ]
     },
@@ -155,74 +183,88 @@
       "track": "lighthouse",
       "karts": [
         {
-          "kart": "xue",
-          "start_position": 7,
-          "finish_position": 1,
-          "items_collected": 10,
-          "nitro_collected": 15
-        },
-        {
-          "kart": "gavroche",
-          "start_position": 2,
-          "finish_position": 2,
-          "items_collected": 15,
-          "nitro_collected": 5
-        },
-        {
-          "kart": "sara_the_racer",
-          "start_position": 5,
-          "finish_position": 3,
-          "items_collected": 11,
-          "nitro_collected": 6
+          "kart": "suzanne",
+          "items_collected": 12,
+          "nitro_collected": 5,
+          "start_position": 4,
+          "finish_position": 1
         },
         {
           "kart": "hexley",
+          "items_collected": 8,
+          "nitro_collected": 5,
           "start_position": 10,
-          "finish_position": 4,
-          "items_collected": 7,
-          "nitro_collected": 6
-        },
-        {
-          "kart": "sara_the_wizard",
-          "start_position": 6,
-          "finish_position": 5,
-          "items_collected": 14,
-          "nitro_collected": 5
+          "finish_position": 2
         },
         {
           "kart": "kiki",
-          "start_position": 8,
-          "finish_position": 6,
           "items_collected": 7,
-          "nitro_collected": 6
+          "nitro_collected": 7,
+          "start_position": 8,
+          "finish_position": 3
         },
         {
-          "kart": "adiumy",
-          "start_position": 9,
-          "finish_position": 7,
-          "items_collected": 11,
-          "nitro_collected": 4
+          "kart": "gavroche",
+          "items_collected": 8,
+          "nitro_collected": 10,
+          "start_position": 2,
+          "finish_position": 4
         },
         {
-          "kart": "suzanne",
-          "start_position": 4,
-          "finish_position": 8,
-          "items_collected": 9,
-          "nitro_collected": 4
-        },
-        {
-          "kart": "emule",
-          "start_position": 1,
-          "finish_position": 9,
-          "items_collected": 9,
-          "nitro_collected": 2
+          "kart": "tux",
+          "items_collected": 10,
+          "nitro_collected": 6,
+          "start_position": 11,
+          "finish_position": 5
         },
         {
           "kart": "nolok",
+          "items_collected": 8,
+          "nitro_collected": 7,
           "start_position": 3,
-          "finish_position": 10,
+          "finish_position": 6
+        },
+        {
+          "kart": "xue",
           "items_collected": 11,
-          "nitro_collected": 7
+          "nitro_collected": 9,
+          "start_position": 7,
+          "finish_position": 7
+        },
+        {
+          "kart": "beastie",
+          "items_collected": 11,
+          "nitro_collected": 2,
+          "start_position": 12,
+          "finish_position": 8
+        },
+        {
+          "kart": "sara_the_wizard",
+          "items_collected": 6,
+          "nitro_collected": 5,
+          "start_position": 6,
+          "finish_position": 9
+        },
+        {
+          "kart": "sara_the_racer",
+          "items_collected": 9,
+          "nitro_collected": 6,
+          "start_position": 5,
+          "finish_position": 10
+        },
+        {
+          "kart": "adiumy",
+          "items_collected": 12,
+          "nitro_collected": 2,
+          "start_position": 9,
+          "finish_position": 11
+        },
+        {
+          "kart": "emule",
+          "items_collected": 10,
+          "nitro_collected": 1,
+          "start_position": 1,
+          "finish_position": 12
         }
       ]
     },
@@ -230,74 +272,88 @@
       "track": "cornfield_crossing",
       "karts": [
         {
-          "kart": "puffy",
-          "start_position": 6,
-          "finish_position": 1,
-          "items_collected": 6,
-          "nitro_collected": 4
+          "kart": "tux",
+          "items_collected": 10,
+          "nitro_collected": 7,
+          "start_position": 1,
+          "finish_position": 1
         },
         {
           "kart": "pidgin",
+          "items_collected": 8,
+          "nitro_collected": 5,
           "start_position": 9,
-          "finish_position": 2,
-          "items_collected": 5,
-          "nitro_collected": 4
+          "finish_position": 2
         },
         {
-          "kart": "tux",
-          "start_position": 1,
-          "finish_position": 3,
-          "items_collected": 5,
-          "nitro_collected": 6
+          "kart": "gavroche",
+          "items_collected": 3,
+          "nitro_collected": 6,
+          "start_position": 11,
+          "finish_position": 3
         },
         {
-          "kart": "amanda",
-          "start_position": 4,
-          "finish_position": 4,
-          "items_collected": 4,
-          "nitro_collected": 3
-        },
-        {
-          "kart": "wilber",
-          "start_position": 5,
-          "finish_position": 5,
-          "items_collected": 13,
-          "nitro_collected": 2
-        },
-        {
-          "kart": "beastie",
-          "start_position": 8,
-          "finish_position": 6,
+          "kart": "puffy",
           "items_collected": 9,
-          "nitro_collected": 4
+          "nitro_collected": 4,
+          "start_position": 6,
+          "finish_position": 4
         },
         {
-          "kart": "konqi",
-          "start_position": 2,
-          "finish_position": 7,
-          "items_collected": 4,
-          "nitro_collected": 1
-        },
-        {
-          "kart": "nolok",
-          "start_position": 3,
-          "finish_position": 8,
-          "items_collected": 4,
-          "nitro_collected": 4
-        },
-        {
-          "kart": "xue",
-          "start_position": 10,
-          "finish_position": 9,
-          "items_collected": 9,
-          "nitro_collected": 4
+          "kart": "emule",
+          "items_collected": 3,
+          "nitro_collected": 3,
+          "start_position": 12,
+          "finish_position": 5
         },
         {
           "kart": "gnu",
+          "items_collected": 4,
+          "nitro_collected": 2,
           "start_position": 7,
-          "finish_position": 10,
-          "items_collected": 6,
-          "nitro_collected": 5
+          "finish_position": 6
+        },
+        {
+          "kart": "konqi",
+          "items_collected": 2,
+          "nitro_collected": 4,
+          "start_position": 2,
+          "finish_position": 7
+        },
+        {
+          "kart": "xue",
+          "items_collected": 5,
+          "nitro_collected": 5,
+          "start_position": 10,
+          "finish_position": 8
+        },
+        {
+          "kart": "wilber",
+          "items_collected": 7,
+          "nitro_collected": 4,
+          "start_position": 5,
+          "finish_position": 9
+        },
+        {
+          "kart": "nolok",
+          "items_collected": 5,
+          "nitro_collected": 4,
+          "start_position": 3,
+          "finish_position": 10
+        },
+        {
+          "kart": "amanda",
+          "items_collected": 4,
+          "nitro_collected": 2,
+          "start_position": 4,
+          "finish_position": 11
+        },
+        {
+          "kart": "beastie",
+          "items_collected": 5,
+          "nitro_collected": 1,
+          "start_position": 8,
+          "finish_position": 12
         }
       ]
     },
@@ -305,74 +361,177 @@
       "track": "scotland",
       "karts": [
         {
-          "kart": "gavroche",
-          "start_position": 1,
-          "finish_position": 1,
-          "items_collected": 11,
-          "nitro_collected": 15
-        },
-        {
-          "kart": "emule",
-          "start_position": 4,
-          "finish_position": 2,
-          "items_collected": 11,
-          "nitro_collected": 15
-        },
-        {
           "kart": "suzanne",
+          "items_collected": 12,
+          "nitro_collected": 15,
           "start_position": 2,
-          "finish_position": 3,
-          "items_collected": 16,
-          "nitro_collected": 13
+          "finish_position": 1
         },
         {
-          "kart": "sara_the_wizard",
-          "start_position": 10,
-          "finish_position": 4,
-          "items_collected": 10,
-          "nitro_collected": 8
+          "kart": "konqi",
+          "items_collected": 12,
+          "nitro_collected": 16,
+          "start_position": 11,
+          "finish_position": 2
         },
         {
-          "kart": "sara_the_racer",
-          "start_position": 3,
-          "finish_position": 5,
-          "items_collected": 13,
-          "nitro_collected": 11
+          "kart": "gavroche",
+          "items_collected": 15,
+          "nitro_collected": 11,
+          "start_position": 1,
+          "finish_position": 3
         },
         {
-          "kart": "hexley",
-          "start_position": 5,
-          "finish_position": 6,
-          "items_collected": 4,
-          "nitro_collected": 11
-        },
-        {
-          "kart": "amanda",
-          "start_position": 8,
-          "finish_position": 7,
-          "items_collected": 14,
-          "nitro_collected": 11
-        },
-        {
-          "kart": "beastie",
-          "start_position": 9,
-          "finish_position": 8,
-          "items_collected": 11,
-          "nitro_collected": 9
+          "kart": "wilber",
+          "items_collected": 15,
+          "nitro_collected": 13,
+          "start_position": 12,
+          "finish_position": 4
         },
         {
           "kart": "kiki",
+          "items_collected": 15,
+          "nitro_collected": 7,
           "start_position": 6,
-          "finish_position": 9,
+          "finish_position": 5
+        },
+        {
+          "kart": "sara_the_wizard",
+          "items_collected": 8,
+          "nitro_collected": 13,
+          "start_position": 10,
+          "finish_position": 6
+        },
+        {
+          "kart": "emule",
+          "items_collected": 4,
+          "nitro_collected": 12,
+          "start_position": 4,
+          "finish_position": 7
+        },
+        {
+          "kart": "sara_the_racer",
+          "items_collected": 11,
+          "nitro_collected": 10,
+          "start_position": 3,
+          "finish_position": 8
+        },
+        {
+          "kart": "beastie",
           "items_collected": 10,
-          "nitro_collected": 11
+          "nitro_collected": 12,
+          "start_position": 9,
+          "finish_position": 9
+        },
+        {
+          "kart": "hexley",
+          "items_collected": 5,
+          "nitro_collected": 9,
+          "start_position": 5,
+          "finish_position": 10
         },
         {
           "kart": "adiumy",
+          "items_collected": 6,
+          "nitro_collected": 10,
           "start_position": 7,
-          "finish_position": 10,
-          "items_collected": 11,
-          "nitro_collected": 13
+          "finish_position": 11
+        },
+        {
+          "kart": "amanda",
+          "items_collected": 7,
+          "nitro_collected": 10,
+          "start_position": 8,
+          "finish_position": 12
+        }
+      ]
+    },
+    {
+      "track": "black_forest",
+      "karts": [
+        {
+          "kart": "tux",
+          "items_collected": 36,
+          "nitro_collected": 33,
+          "start_position": 1,
+          "finish_position": 1
+        },
+        {
+          "kart": "suzanne",
+          "items_collected": 23,
+          "nitro_collected": 25,
+          "start_position": 7,
+          "finish_position": 2
+        },
+        {
+          "kart": "emule",
+          "items_collected": 38,
+          "nitro_collected": 25,
+          "start_position": 9,
+          "finish_position": 3
+        },
+        {
+          "kart": "nolok",
+          "items_collected": 28,
+          "nitro_collected": 15,
+          "start_position": 4,
+          "finish_position": 4
+        },
+        {
+          "kart": "hexley",
+          "items_collected": 31,
+          "nitro_collected": 36,
+          "start_position": 8,
+          "finish_position": 5
+        },
+        {
+          "kart": "kiki",
+          "items_collected": 24,
+          "nitro_collected": 17,
+          "start_position": 3,
+          "finish_position": 6
+        },
+        {
+          "kart": "sara_the_racer",
+          "items_collected": 21,
+          "nitro_collected": 24,
+          "start_position": 11,
+          "finish_position": 7
+        },
+        {
+          "kart": "puffy",
+          "items_collected": 20,
+          "nitro_collected": 10,
+          "start_position": 6,
+          "finish_position": 8
+        },
+        {
+          "kart": "pidgin",
+          "items_collected": 23,
+          "nitro_collected": 11,
+          "start_position": 10,
+          "finish_position": 9
+        },
+        {
+          "kart": "xue",
+          "items_collected": 19,
+          "nitro_collected": 21,
+          "start_position": 5,
+          "finish_position": 10
+        },
+        {
+          "kart": "adiumy",
+          "items_collected": 21,
+          "nitro_collected": 16,
+          "start_position": 12,
+          "finish_position": 11
+        },
+        {
+          "kart": "gnu",
+          "items_collected": 35,
+          "nitro_collected": 20,
+          "start_position": 2,
+          "finish_position": 12
         }
       ]
     }
