@@ -34,7 +34,7 @@ scorer:
   oracle_reward: 1.0
   null_reward: 0.0
   measured_ablations:          # on the shipped ground truth, 500+ trials
-    blind_guess: 0.06          # random counts (p95 0.24)
+    blind_guess: 0.036         # random counts, 600 trials (p95 0.146; was 0.057+-0.082 at 4x6)
     constant_counts: 0.0       # every kart given the same count
     leaderboard_only: 0.0      # reads the ranking column/grid, reports no pickup info
     empty: 0.0
@@ -58,11 +58,13 @@ anti_shortcut:
 
 input:
   url: https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/main/kart-race-telemetry-ledger-s1/race.mp4
-  sha256: ceffb7b11c29f01f7f7603a7bca8db0ae38937ded14ff750bba9b79d87e54ddf
-  length_min: 14.6
+  sha256: 3b22cf5b66301777fe69fb5d4435a4f8683da974084032d01b42fedd4141d75a
+  length_min: 23.2
   resolution: 720
-  contents: 4 races (hacienda, snowmountain, lighthouse, cornfield_crossing), 4 laps each,
-            6 karts each on SuperTux (hardest) AI difficulty; 18 distinct kart characters.
+  contents: 5 races (hacienda, snowmountain, lighthouse, cornfield_crossing, scotland),
+            4 laps each, 10 karts each on SuperTux (hardest) AI difficulty; 18 distinct
+            characters. Ten-kart fields are both harder to follow and statistically tighter
+            (45 tau-pairs per field instead of 15).
 ```
 
 ## Notes

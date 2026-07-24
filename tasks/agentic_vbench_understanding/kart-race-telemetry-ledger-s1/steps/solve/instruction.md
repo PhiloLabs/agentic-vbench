@@ -1,7 +1,7 @@
 # Kart Race Telemetry Reconstruction
 
-You are given one video at `/workspace/materials/race.mp4`: a suite of **four AI-driven
-SuperTuxKart races**, one after another, each on a different track with six karts. A race
+You are given one video at `/workspace/materials/race.mp4`: a suite of **five AI-driven
+SuperTuxKart races**, one after another, each on a different track with **ten karts**. A race
 change is obvious — the scene cuts to a new track and a new starting grid.
 
 For each race, reconstruct **per kart**:
@@ -64,4 +64,4 @@ disagreeing pairs cancel out.
 ## Rules
 - Stay inside this working directory. Do not read, write, or search outside it.
 - Do not look anything up online. Reconstruct the results from the video.
-- Report all four races, in the order they appear.
+- Report all five races, in the order they appear.

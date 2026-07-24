@@ -10,45 +10,53 @@ cat > "${SOLUTION_PATH:-/solution/solution.json}" <<'JSON'
       "karts": [
         {
           "kart": "beastie",
-          "start_position": 5,
-          "finish_position": 1,
-          "items_collected": 17,
+          "items_collected": 20,
           "nitro_collected": 16
         },
         {
-          "kart": "amanda",
-          "start_position": 4,
-          "finish_position": 2,
-          "items_collected": 15,
-          "nitro_collected": 10
-        },
-        {
-          "kart": "kiki",
-          "start_position": 6,
-          "finish_position": 3,
-          "items_collected": 22,
+          "kart": "konqi",
+          "items_collected": 17,
           "nitro_collected": 12
         },
         {
-          "kart": "gnu",
-          "start_position": 2,
-          "finish_position": 4,
-          "items_collected": 17,
-          "nitro_collected": 14
+          "kart": "amanda",
+          "items_collected": 18,
+          "nitro_collected": 16
         },
         {
           "kart": "adiumy",
-          "start_position": 3,
-          "finish_position": 5,
-          "items_collected": 16,
+          "items_collected": 14,
+          "nitro_collected": 16
+        },
+        {
+          "kart": "wilber",
+          "items_collected": 17,
           "nitro_collected": 13
         },
         {
+          "kart": "gnu",
+          "items_collected": 13,
+          "nitro_collected": 14
+        },
+        {
           "kart": "tux",
-          "start_position": 1,
-          "finish_position": 6,
-          "items_collected": 19,
-          "nitro_collected": 16
+          "items_collected": 13,
+          "nitro_collected": 11
+        },
+        {
+          "kart": "puffy",
+          "items_collected": 13,
+          "nitro_collected": 14
+        },
+        {
+          "kart": "kiki",
+          "items_collected": 17,
+          "nitro_collected": 11
+        },
+        {
+          "kart": "nolok",
+          "items_collected": 17,
+          "nitro_collected": 14
         }
       ]
     },
@@ -56,46 +64,54 @@ cat > "${SOLUTION_PATH:-/solution/solution.json}" <<'JSON'
       "track": "snowmountain",
       "karts": [
         {
+          "kart": "gnu",
+          "items_collected": 12,
+          "nitro_collected": 10
+        },
+        {
           "kart": "wilber",
-          "start_position": 5,
-          "finish_position": 1,
-          "items_collected": 19,
-          "nitro_collected": 18
+          "items_collected": 12,
+          "nitro_collected": 13
+        },
+        {
+          "kart": "emule",
+          "items_collected": 6,
+          "nitro_collected": 9
         },
         {
           "kart": "xue",
-          "start_position": 6,
-          "finish_position": 2,
-          "items_collected": 16,
-          "nitro_collected": 15
-        },
-        {
-          "kart": "puffy",
-          "start_position": 3,
-          "finish_position": 3,
-          "items_collected": 6,
-          "nitro_collected": 6
-        },
-        {
-          "kart": "pidgin",
-          "start_position": 1,
-          "finish_position": 4,
-          "items_collected": 7,
-          "nitro_collected": 11
+          "items_collected": 5,
+          "nitro_collected": 9
         },
         {
           "kart": "konqi",
-          "start_position": 2,
-          "finish_position": 5,
-          "items_collected": 11,
-          "nitro_collected": 16
+          "items_collected": 4,
+          "nitro_collected": 11
+        },
+        {
+          "kart": "puffy",
+          "items_collected": 6,
+          "nitro_collected": 7
+        },
+        {
+          "kart": "tux",
+          "items_collected": 6,
+          "nitro_collected": 7
         },
         {
           "kart": "hexley",
-          "start_position": 4,
-          "finish_position": 6,
+          "items_collected": 6,
+          "nitro_collected": 3
+        },
+        {
+          "kart": "suzanne",
+          "items_collected": 10,
+          "nitro_collected": 7
+        },
+        {
+          "kart": "pidgin",
           "items_collected": 12,
-          "nitro_collected": 11
+          "nitro_collected": 13
         }
       ]
     },
@@ -103,46 +119,54 @@ cat > "${SOLUTION_PATH:-/solution/solution.json}" <<'JSON'
       "track": "lighthouse",
       "karts": [
         {
-          "kart": "sara_the_wizard",
-          "start_position": 6,
-          "finish_position": 1,
+          "kart": "xue",
           "items_collected": 10,
-          "nitro_collected": 11
+          "nitro_collected": 15
         },
         {
-          "kart": "nolok",
-          "start_position": 3,
-          "finish_position": 2,
+          "kart": "gavroche",
+          "items_collected": 15,
+          "nitro_collected": 5
+        },
+        {
+          "kart": "sara_the_racer",
           "items_collected": 11,
           "nitro_collected": 6
         },
         {
-          "kart": "emule",
-          "start_position": 1,
-          "finish_position": 3,
-          "items_collected": 13,
-          "nitro_collected": 3
-        },
-        {
-          "kart": "suzanne",
-          "start_position": 4,
-          "finish_position": 4,
-          "items_collected": 12,
+          "kart": "hexley",
+          "items_collected": 7,
           "nitro_collected": 6
         },
         {
-          "kart": "gavroche",
-          "start_position": 2,
-          "finish_position": 5,
-          "items_collected": 8,
-          "nitro_collected": 9
+          "kart": "sara_the_wizard",
+          "items_collected": 14,
+          "nitro_collected": 5
         },
         {
-          "kart": "sara_the_racer",
-          "start_position": 5,
-          "finish_position": 6,
-          "items_collected": 10,
-          "nitro_collected": 9
+          "kart": "kiki",
+          "items_collected": 7,
+          "nitro_collected": 6
+        },
+        {
+          "kart": "adiumy",
+          "items_collected": 11,
+          "nitro_collected": 4
+        },
+        {
+          "kart": "suzanne",
+          "items_collected": 9,
+          "nitro_collected": 4
+        },
+        {
+          "kart": "emule",
+          "items_collected": 9,
+          "nitro_collected": 2
+        },
+        {
+          "kart": "nolok",
+          "items_collected": 11,
+          "nitro_collected": 7
         }
       ]
     },
@@ -150,46 +174,109 @@ cat > "${SOLUTION_PATH:-/solution/solution.json}" <<'JSON'
       "track": "cornfield_crossing",
       "karts": [
         {
-          "kart": "konqi",
-          "start_position": 2,
-          "finish_position": 1,
-          "items_collected": 7,
-          "nitro_collected": 3
+          "kart": "puffy",
+          "items_collected": 6,
+          "nitro_collected": 4
         },
         {
-          "kart": "nolok",
-          "start_position": 3,
-          "finish_position": 2,
-          "items_collected": 4,
-          "nitro_collected": 6
+          "kart": "pidgin",
+          "items_collected": 5,
+          "nitro_collected": 4
         },
         {
           "kart": "tux",
-          "start_position": 1,
-          "finish_position": 3,
-          "items_collected": 8,
+          "items_collected": 5,
           "nitro_collected": 6
         },
         {
           "kart": "amanda",
-          "start_position": 4,
-          "finish_position": 4,
           "items_collected": 4,
           "nitro_collected": 3
         },
         {
-          "kart": "puffy",
-          "start_position": 6,
-          "finish_position": 5,
+          "kart": "wilber",
+          "items_collected": 13,
+          "nitro_collected": 2
+        },
+        {
+          "kart": "beastie",
+          "items_collected": 9,
+          "nitro_collected": 4
+        },
+        {
+          "kart": "konqi",
+          "items_collected": 4,
+          "nitro_collected": 1
+        },
+        {
+          "kart": "nolok",
           "items_collected": 4,
           "nitro_collected": 4
         },
         {
-          "kart": "wilber",
-          "start_position": 5,
-          "finish_position": 6,
+          "kart": "xue",
+          "items_collected": 9,
+          "nitro_collected": 4
+        },
+        {
+          "kart": "gnu",
+          "items_collected": 6,
+          "nitro_collected": 5
+        }
+      ]
+    },
+    {
+      "track": "scotland",
+      "karts": [
+        {
+          "kart": "gavroche",
+          "items_collected": 11,
+          "nitro_collected": 15
+        },
+        {
+          "kart": "emule",
+          "items_collected": 11,
+          "nitro_collected": 15
+        },
+        {
+          "kart": "suzanne",
+          "items_collected": 16,
+          "nitro_collected": 13
+        },
+        {
+          "kart": "sara_the_wizard",
+          "items_collected": 10,
+          "nitro_collected": 8
+        },
+        {
+          "kart": "sara_the_racer",
+          "items_collected": 13,
+          "nitro_collected": 11
+        },
+        {
+          "kart": "hexley",
           "items_collected": 4,
-          "nitro_collected": 3
+          "nitro_collected": 11
+        },
+        {
+          "kart": "amanda",
+          "items_collected": 14,
+          "nitro_collected": 11
+        },
+        {
+          "kart": "beastie",
+          "items_collected": 11,
+          "nitro_collected": 9
+        },
+        {
+          "kart": "kiki",
+          "items_collected": 10,
+          "nitro_collected": 11
+        },
+        {
+          "kart": "adiumy",
+          "items_collected": 11,
+          "nitro_collected": 13
         }
       ]
     }
