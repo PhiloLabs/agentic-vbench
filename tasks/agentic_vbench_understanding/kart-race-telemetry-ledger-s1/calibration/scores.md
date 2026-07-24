@@ -1,8 +1,8 @@
 # Calibration — kart-race-telemetry-ledger-s1
 
-**Scorer as shipped:** `reward = max(0, mean_races[tau(items_collected)])`, where tau is the
-*signed* normalised Kendall correlation over kart pairs, aggregated across races and clamped once
-at the end. Powerup-box count is the only scored quantity — see "Why only items" below.
+**Scorer as shipped:** `reward = max(0, mean_races[0.65·tau(items_collected) + 0.35·tau(times_exploded)])`,
+where tau is the *signed* normalised Kendall correlation over kart pairs, aggregated across races
+and fields and clamped once at the end. Two off-HUD event counts — see "Which fields and why".
 
 **Media as shipped:** SuperTuxKart profile-mode ground truth — 5 races (hacienda, snowmountain,
 lighthouse, cornfield_crossing, scotland) × **10 karts** × 4 laps, SuperTux (hardest) AI,
@@ -13,11 +13,12 @@ lighthouse, cornfield_crossing, scotland) × **10 karts** × 4 laps, SuperTux (h
 | run | score | turns | tokens | notes |
 |---|---|---|---|---|
 | oracle | **1.0** | — | — | harness path (`solve.sh` → `judge.py`); 5 races, 10/10 karts, all tau = 1.0 |
-| blind guess (random counts) | **0.036 ± 0.052** | — | — | 600 trials, p95 0.146 |
+| blind guess (random counts) | **0.029 ± 0.041** | — | — | 600 trials, p95 0.116 |
 | constant counts (all karts equal) | 0.0 | — | — | |
 | leaderboard-only (ranking column + grid, no pickup info) | 0.0 | — | — | |
 | empty | 0.0 | — | — | |
-| **Codex `gpt-5.6-sol` (xhigh) — shipped 6×12, items-only, TARGETED prompt** | **0.335** | **34** | 1,050,734 | rollout `rollouts/codex_6x12_*.json` |
+| **Codex `gpt-5.6-sol` (xhigh) — shipped 6×12, items+explosions, TARGETED** | **0.1495** | **33** | 1,369,349 | rollout `rollouts/codex_items_explosions_*.json` |
+| Codex, same media, items-only, targeted | 0.335 | 34 | 1,050,734 | superseded scorer |
 | Antigravity (Gemini‑3.x) | _to run_ | | | |
 | Claude Code (Fable 5 / Opus 4.8) | _to run_ | | | |
 
@@ -115,3 +116,43 @@ that it cleared the bar came from a measurement that was later shown to be too w
 
 Rule taken from this: never estimate difficulty by re-scoring a rollout produced under a different
 objective, and never treat a single run inside the blind band as a pass.
+
+
+## Broadening the scored target worked — the decisive experiment
+
+The previous round established, uncomfortably, that *narrowing* the task made it easier: scoring
+items alone let the agent pour all its effort into one quantity and it reached 0.335. The obvious
+inverse hypothesis was that **broadening** would divide that effort. It was then tested rather than
+assumed, with a fresh targeted run on identical media:
+
+| scorer on the same 6×12 media | Codex | turns | tokens |
+|---|---|---|---|
+| items only | 0.335 | 34 | 1,050,734 |
+| **items 0.65 + explosions 0.35** | **0.1495** | 33 | 1,369,349 |
+
+Codex spent **more** tokens (1.37M vs 1.05M) for **less than half** the score. Per-race, three of
+six races are now at or below zero (snowmountain −0.021, lighthouse 0.013, scotland −0.072), with
+only black_forest (0.418) and hacienda (0.303) strong.
+
+Standing: **0.1495 against a blind floor of 0.029 ± 0.041** — roughly 2.9σ above chance, and close
+to but not yet under the family's <0.10 bar.
+
+### Why `times_exploded` and not something else
+Chosen on measured density and witnessability across the six shipped races, not on the score it
+produced:
+
+| candidate | distinct values in ≥6-of-12 karts | visually verifiable? | scored? |
+|---|---|---|---|
+| `bonus_count` (items) | 6/6 races | yes — kart drives through a question-mark box | **yes** |
+| `explosion_count` | 4/6 races | yes — kart is thrown into the air and spins out | **yes** |
+| `banana_count` | 1/6 races | yes | no — too sparse to rank |
+| `bubblegum_count` | 1/6 races | yes | no — too sparse to rank |
+| `rescue_count` | 0/6 races | yes | no — near-constant |
+| `small/large_nitro` | 5/6 races | **partly** — boost flames are a proxy | no |
+| `brake_count` | 6/6 races | **no** — braking has no visual tell | no — density alone is not enough |
+
+### If more hardening is wanted
+The remaining levers are field size (16–20 karts: more to track *and* more tau-pairs) and denser
+item spawns. Adding a third scored count is **not** a good lever: the only candidates left are
+near-constant, so an all-zeros guess would earn free credit — the same defect that removed rescues
+and bananas.

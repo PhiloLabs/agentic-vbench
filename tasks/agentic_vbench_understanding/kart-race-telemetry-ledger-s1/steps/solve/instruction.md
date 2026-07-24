@@ -4,14 +4,16 @@ You are given one video at `/workspace/materials/race.mp4`: a suite of **six AI-
 SuperTuxKart races**, one after another, each on a different track with **twelve karts**. A race
 change is obvious — the scene cuts to a new track and a new starting grid.
 
-For each race, reconstruct **per kart: how many powerup boxes it collected** — the
-question-mark boxes scattered around the track.
+For each race, reconstruct **per kart, two counts**:
+- **`items_collected`** — how many powerup boxes (the question-mark boxes) that kart drove through.
+- **`times_exploded`** — how many times that kart was blown up (hit by a bomb/cake: the kart is
+  thrown into the air and spins out).
 
-That number appears nowhere on screen, so you have to follow each kart through the race and
-count. You may also report `nitro_collected`, `start_position` and `finish_position` for
-context, but **only the powerup-box count is scored**: the ranking column and starting grid
-display the positions, and nitro use shows as boost flames, so none of those require the
-counting this task is measuring.
+Neither number appears anywhere on screen, so both require following each kart through the race and
+counting. You may also report `nitro_collected`, `start_position` and `finish_position` for context,
+but **only the two counts above are scored**: the ranking column and starting grid display the
+positions, and nitro use shows as boost flames, so none of those require the counting this task
+measures.
 
 Evidence is on screen throughout:
 
@@ -32,8 +34,8 @@ Write `/workspace/output/solution.json`, races in the order they appear in the v
     {
       "track": "hacienda",
       "karts": [
-        {"kart": "tux",    "start_position": 1, "finish_position": 2, "items_collected": 10, "nitro_collected": 12},
-        {"kart": "amanda", "start_position": 4, "finish_position": 1, "items_collected": 17, "nitro_collected": 11}
+        {"kart": "tux",    "items_collected": 10, "times_exploded": 2},
+        {"kart": "amanda", "items_collected": 17, "times_exploded": 0}
       ]
     }
   ]
@@ -43,14 +45,16 @@ Write `/workspace/output/solution.json`, races in the order they appear in the v
 - `kart`: the character name as shown in game (for example `tux`, `gnu`, `konqi`, `nolok`,
   `amanda`, `beastie`, `kiki`, `adiumy`, `pidgin`, `puffy`, `hexley`, `wilber`, `xue`,
   `emule`, `gavroche`, `suzanne`, `sara_the_racer`, `sara_the_wizard`).
-- `items_collected`: how many powerup boxes that kart drove through in that race. **Scored.**
+- `items_collected`: powerup boxes that kart drove through. **Scored (weight 0.65).**
+- `times_exploded`: how many times that kart was blown up. **Scored (weight 0.35).**
 - `nitro_collected`, `start_position`, `finish_position`, `track`: optional context, not scored.
 
 ## How it is scored
 
 Scoring is **rank agreement** (normalised Kendall correlation), not exact match:
 
-    reward = max(0, mean over races of agreement(items-collected order))
+    reward = max(0, mean over races of [ 0.65 * agreement(items order)
+                                      + 0.35 * agreement(explosion order) ])
 
 You do not have to count pickups exactly — ranking the karts by how many they collected is
 what matters, so getting the heavy and light collectors in roughly the right order earns

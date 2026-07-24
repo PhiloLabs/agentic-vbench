@@ -45,7 +45,7 @@ if header is None:
 
 KEEP = {"start_position": int, "end_position": int, "time": float, "top_speed": float,
         "rescue_count": int, "bonus_count": int, "banana_count": int,
-        "small_nitro_count": int, "large_nitro_count": int}
+        "explosion_count": int, "small_nitro_count": int, "large_nitro_count": int}
 
 karts = []
 for line in lines:
@@ -72,6 +72,7 @@ for line in lines:
         continue
     k["nitro_collected"] = k.pop("small_nitro_count") + k.pop("large_nitro_count")
     k["items_collected"] = k.pop("bonus_count")
+    k["times_exploded"] = k.pop("explosion_count")
     k["bananas_hit"] = k.pop("banana_count")
     k["finish_position"] = k.pop("end_position")
     karts.append(k)
@@ -95,5 +96,5 @@ dst.write_text(json.dumps({"n_karts": len(karts), "karts": karts}, indent=2))
 print(f"wrote {dst} — {len(karts)} karts")
 for k in sorted(karts, key=lambda k: k["finish_position"]):
     print(f"  P{k['finish_position']}  {k['kart']:9s} (grid {k['start_position']})"
-          f"  {k['time']:7.2f}s  items {k['items_collected']}  nitro {k['nitro_collected']}"
-          f"  bananas {k['bananas_hit']}  rescues {k['rescue_count']}")
+          f"  {k['time']:7.2f}s  items {k['items_collected']}  explosions {k['times_exploded']}"
+          f"  nitro {k['nitro_collected']}  bananas {k['bananas_hit']}")

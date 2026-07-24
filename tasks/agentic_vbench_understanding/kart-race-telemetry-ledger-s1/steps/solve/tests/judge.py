@@ -2,25 +2,29 @@
 """Grade a SuperTuxKart race-telemetry reconstruction. Pure stdlib, deterministic.
 
 The video is a suite of AI-driven races on different tracks. For each race the agent reports,
-per kart, how many **powerup boxes** it collected. (Nitro, finishing order and starting grid may
-be reported for context but are NOT scored — see below.)
+per kart, how many **powerup boxes** it collected and how many times it was **blown up**. (Nitro,
+finishing order and starting grid may be reported for context but are NOT scored — see below.)
 
 Scoring is **rank agreement**, not exact match:
 
-    reward = max(0, mean over races of tau(items-collected order))
+    reward = max(0, mean over races of [0.65*tau(items) + 0.35*tau(explosions)])
 
 where tau is the normalised Kendall correlation over kart pairs,
 `(concordant - discordant) / n_pairs`, clamped at 0.
 
 A field is scored only if it is (a) machine-exact in STK's profile table, (b) dense enough for a
 rank to have spread, and (c) has NO on-screen proxy an agent could read instead of counting.
-Only powerup-box pickups meet all three. What was excluded and why:
+Powerup-box pickups and explosions meet all three — a kart being hit by a bomb flips visibly and
+no counter for it exists on screen. What was excluded and why:
   * finish order / start grid — the ranking column and starting grid literally display them.
   * nitro — nitro *use* renders as boost flames and the meter is drawn for the followed kart, so
     it is partly inferable rather than counted. Measured: Codex reached tau ~0.32 on nitro
     against ~0.07 on items, i.e. nitro was ~5x easier, which is the signature of a proxy.
-  * rescues / banana hits — almost always zero; ranking near-constant columns is neither
-    discriminative nor guess-proof.
+  * rescues, banana hits, bubblegum — measured across the shipped six races, each has >=6 distinct
+    values in only 0-1 of them; ranking near-constant columns is neither discriminative nor
+    guess-proof.
+  * brake_count — dense, but braking has no reliable visual tell, so a viewer could not verify it.
+    Density alone is not enough; the quantity has to be *witnessable*.
 
 Three scoring designs were rejected by measurement, not taste:
   * Exact positions + tolerant counts: blind guessing scored 0.33 and reading only the start
@@ -30,8 +34,12 @@ Three scoring designs were rejected by measurement, not taste:
     on finish and 0.90 on start — leaderboard reading, not understanding.
   * Rank agreement over items AND nitro: the same harness scored 0.170 on the shipped suite,
     above the family's <0.10 bar, and the split showed why (nitro ~0.32 vs items ~0.07).
-Items-only rank agreement keeps the guessing floor near 0 (concordant and discordant pairs
-cancel) while still granting partial credit for partial knowledge.
+  * Items ONLY: a targeted run scored 0.335 — *higher*, because narrowing the target let the agent
+    concentrate all of its effort on one quantity. That is why a second off-HUD event type was
+    added rather than removed: counting two independent incident types across twelve karts divides
+    the agent's attention, which is where the difficulty actually lives.
+Rank agreement keeps the guessing floor near 0 (concordant and discordant pairs cancel) while
+still granting partial credit for partial knowledge.
 
 Karts are matched by name — the character is visible on track and in the ranking icons — so a
 submission that gets the order right but mislabels who is who is scored accordingly. Karts
@@ -51,7 +59,8 @@ GT_PATH = Path(__file__).with_name("ground_truth.json")
 # not displayed anywhere: they require following each kart through the whole race and counting
 # discrete events (Codex 0.27 / 0.12). Finish and start may still be REPORTED for context;
 # they are ignored by the scorer, like `track`.
-DIMS = [("items_collected", "items_collected", 1.00)]
+DIMS = [("items_collected", "items_collected", 0.65),
+        ("times_exploded",   "times_exploded",   0.35)]
 
 
 def norm(s):

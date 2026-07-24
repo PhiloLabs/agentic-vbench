@@ -1,6 +1,6 @@
 ---
 title: Task Spec Card
-summary: kart-race-telemetry-ledger-s1 — count each kart's powerup-box pickups across six AI-driven 12-kart SuperTuxKart races.
+summary: kart-race-telemetry-ledger-s1 — count each kart's powerup pickups and explosions across six AI-driven 12-kart SuperTuxKart races.
 ---
 
 # Task Spec Card
@@ -18,8 +18,8 @@ modalities_required:
   video: karts, ranking column and minimap are all visual.
   audio: not used.
 
-question: For each race, count per kart how many powerup boxes it collected (the one quantity with no on-screen proxy).
-output_schema: '{"races": [{"track": str, "karts": [{"kart": str, "items_collected": int}]}]}'  # other fields optional, unscored
+question: For each race, count per kart the powerup boxes collected and the times blown up (the two quantities with no on-screen proxy).
+output_schema: '{"races": [{"track": str, "karts": [{"kart": str, "items_collected": int, "times_exploded": int}]}]}'  # other fields optional, unscored
 
 ground_truth:
   source: SuperTuxKart 1.5 profile mode (--profile-laps) result table; the AI drives every
@@ -30,12 +30,12 @@ ground_truth:
                 harness path (solve.sh -> judge.py): 5 races, 10/10 karts matched, all tau = 1.0.
 
 scorer:
-  metric: "max(0, mean_races[tau(items)]); tau = SIGNED normalised Kendall correlation over
-           kart pairs, aggregated across races then clamped once."
+  metric: "max(0, mean_races[0.65*tau(items) + 0.35*tau(explosions)]); tau = SIGNED normalised
+           Kendall correlation over kart pairs, aggregated across races then clamped once."
   oracle_reward: 1.0
   null_reward: 0.0
   measured_ablations:          # on the shipped ground truth, 500+ trials
-    blind_guess: 0.035         # random counts, 600 trials (p95 0.149) on the 6x12 media
+    blind_guess: 0.029         # random counts, 600 trials (p95 0.116) on the 6x12 media
     constant_counts: 0.0       # every kart given the same count
     leaderboard_only: 0.0      # reads the ranking column/grid, reports no pickup info
     empty: 0.0
