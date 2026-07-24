@@ -12,8 +12,9 @@ averaged over 4 races. GT = SuperTuxKart profile-mode result table (SuperTux dif
 | blind guess (all 4 fields random) | 0.16 | 500 trials, p95 0.26 |
 | grid-only (read start grid, guess finish=grid) | 0.22 | honest partial credit (see SPEC) |
 | podium-only (top-3 finish right) | 0.36 | partial credit is meaningful |
-| Codex (GPT-5.6) | **0.557** | ChatGPT Pro, 330k tokens, ~50 tool calls; rollout in rollouts/ |
-| Antigravity (Gemini-3) | _to run_ | |
+| Codex `gpt-5.6-sol` (xhigh) | **0.557** | Codex CLI v0.145.0, ChatGPT Pro, 330k tokens, ~50 tool calls; rollout in rollouts/ |
+| Codex `gpt-5.6-sol` (xhigh), off-HUD scoring | **0.064** | same rollout re-scored under the shipped verifier |
+| Antigravity (Gemini-3.x) | _to run_ | |
 | Claude Code (Fable 5 / Opus 4.8) | _to run_ | |
 
 Raw agent trajectories saved under `rollouts/` once each harness completes.
@@ -45,3 +46,14 @@ submitted as a <0.10 hard task until it is fixed.** Options:
    ~0.12–0.27 there, so this plausibly reaches the bar.
 3. Keep as-is and label it a **medium** task (~0.5), if the family accepts sub-hard entries.
 Decision pending.
+
+
+## Agent configuration (so the numbers are reproducible)
+Codex runs: `codex exec --dangerously-bypass-approvals-and-sandbox`, Codex CLI **v0.145.0**,
+`model = gpt-5.6-sol`, `model_reasoning_effort = xhigh`, ChatGPT Pro auth, ffmpeg+ffprobe on
+PATH, video mounted at `materials/race.mp4`. Scored with this task's own `judge.py`.
+
+## Media revision
+The first calibration used a 4-race x 6-kart cut (14.6 min). The shipped media is now
+5 races x 10 karts (23.2 min) because the smaller cut left the measurement underpowered
+(blind 0.057 +- 0.082 vs an agent score of 0.064). Blind is now 0.036 +- 0.052 (p95 0.146).
