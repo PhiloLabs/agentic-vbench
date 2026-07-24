@@ -1,6 +1,6 @@
 ---
 title: Task Spec Card
-summary: kart-race-telemetry-ledger-s1 — reconstruct each kart's powerup and nitro pickups across five AI-driven SuperTuxKart races.
+summary: kart-race-telemetry-ledger-s1 — count each kart's powerup-box pickups across six AI-driven SuperTuxKart races.
 ---
 
 # Task Spec Card
@@ -9,8 +9,8 @@ summary: kart-race-telemetry-ledger-s1 — reconstruct each kart's powerup and n
 task: agentic_vbench_understanding/kart-race-telemetry-ledger-s1
 
 cognitive_level: understanding
-# Follow ten karts through each of five races on different tracks and count what each of them
-# picked up: powerup boxes and nitro. Neither total is shown anywhere on screen, so this is
+# Follow twelve karts through each of six races on different tracks and count how many powerup
+# boxes each of them drove through. That total is shown nowhere on screen, so this is
 # fine-grained event counting per tracked object over a long horizon; the ranking column and
 # minimap are navigation aids for keeping identities straight, never answers.
 
@@ -18,8 +18,8 @@ modalities_required:
   video: karts, ranking column and minimap are all visual.
   audio: not used.
 
-question: For each race, reconstruct per kart the powerup-box count and nitro count (off-HUD quantities).
-output_schema: '{"races": [{"track": str, "karts": [{"kart": str, "start_position": int, "finish_position": int, "items_collected": int, "nitro_collected": int}]}]}'
+question: For each race, count per kart how many powerup boxes it collected (the one quantity with no on-screen proxy).
+output_schema: '{"races": [{"track": str, "karts": [{"kart": str, "items_collected": int}]}]}'  # other fields optional, unscored
 
 ground_truth:
   source: SuperTuxKart 1.5 profile mode (--profile-laps) result table; the AI drives every
@@ -30,8 +30,8 @@ ground_truth:
                 harness path (solve.sh -> judge.py): 5 races, 10/10 karts matched, all tau = 1.0.
 
 scorer:
-  metric: "max(0, mean_races[0.60*tau(items) + 0.40*tau(nitro)]); tau = SIGNED normalised
-           Kendall correlation over kart pairs, aggregated then clamped once."
+  metric: "max(0, mean_races[tau(items)]); tau = SIGNED normalised Kendall correlation over
+           kart pairs, aggregated across races then clamped once."
   oracle_reward: 1.0
   null_reward: 0.0
   measured_ablations:          # on the shipped ground truth, 500+ trials

@@ -2,32 +2,36 @@
 """Grade a SuperTuxKart race-telemetry reconstruction. Pure stdlib, deterministic.
 
 The video is a suite of AI-driven races on different tracks. For each race the agent reports,
-per kart, how many powerup boxes it collected and how much nitro it picked up. (Finishing
-order and starting grid may be reported for context but are NOT scored — see below.)
+per kart, how many **powerup boxes** it collected. (Nitro, finishing order and starting grid may
+be reported for context but are NOT scored — see below.)
 
-Every component is scored as **rank agreement**, not exact match:
+Scoring is **rank agreement**, not exact match:
 
-    reward = max(0, mean over races of [0.60*tau(items) + 0.40*tau(nitro)])
+    reward = max(0, mean over races of tau(items-collected order))
 
 where tau is the normalised Kendall correlation over kart pairs,
 `(concordant - discordant) / n_pairs`, clamped at 0.
 
-A field is scored only if it is (a) machine-exact in STK's profile table, (b) visible on
-camera, and (c) NOT already displayed by the game's HUD. Powerup-box and nitro pickups are the
-only quantities meeting all three: both are dense (3-22 per kart) and nowhere on screen, so
-they must be counted by following each kart through the race. Rescues and banana hits are in
-the table but are almost always zero — ranking near-constant columns is neither discriminative
-nor guess-proof.
+A field is scored only if it is (a) machine-exact in STK's profile table, (b) dense enough for a
+rank to have spread, and (c) has NO on-screen proxy an agent could read instead of counting.
+Only powerup-box pickups meet all three. What was excluded and why:
+  * finish order / start grid — the ranking column and starting grid literally display them.
+  * nitro — nitro *use* renders as boost flames and the meter is drawn for the followed kart, so
+    it is partly inferable rather than counted. Measured: Codex reached tau ~0.32 on nitro
+    against ~0.07 on items, i.e. nitro was ~5x easier, which is the signature of a proxy.
+  * rescues / banana hits — almost always zero; ranking near-constant columns is neither
+    discriminative nor guess-proof.
 
-Two scoring designs were rejected by measurement, not taste:
+Three scoring designs were rejected by measurement, not taste:
   * Exact positions + tolerant counts: blind guessing scored 0.33 and reading only the start
     grid scored 0.43, because a random permutation still lands 1-in-6 positions exactly and
     sparse counts are almost always guessable.
   * Rank agreement including finish + start grid: a real Codex run scored 0.557, with tau 0.75
-    on finish and 0.90 on start — the ranking column and grid simply display those, so it was
-    rewarding leaderboard reading. The same run scored 0.27 / 0.12 on the pickup counts.
-Rank agreement over the off-HUD counts keeps the guessing floor at ~0 (concordant and
-discordant pairs cancel) while still granting partial credit for partial knowledge.
+    on finish and 0.90 on start — leaderboard reading, not understanding.
+  * Rank agreement over items AND nitro: the same harness scored 0.170 on the shipped suite,
+    above the family's <0.10 bar, and the split showed why (nitro ~0.32 vs items ~0.07).
+Items-only rank agreement keeps the guessing floor near 0 (concordant and discordant pairs
+cancel) while still granting partial credit for partial knowledge.
 
 Karts are matched by name — the character is visible on track and in the ranking icons — so a
 submission that gets the order right but mislabels who is who is scored accordingly. Karts
@@ -47,8 +51,7 @@ GT_PATH = Path(__file__).with_name("ground_truth.json")
 # not displayed anywhere: they require following each kart through the whole race and counting
 # discrete events (Codex 0.27 / 0.12). Finish and start may still be REPORTED for context;
 # they are ignored by the scorer, like `track`.
-DIMS = [("items_collected", "items_collected", 0.60),
-        ("nitro_collected", "nitro_collected", 0.40)]
+DIMS = [("items_collected", "items_collected", 1.00)]
 
 
 def norm(s):
