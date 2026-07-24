@@ -1,0 +1,68 @@
+{
+  "reward": 0.3351,
+  "details": {
+    "reason": "ok",
+    "n_races": 6,
+    "n_predicted_races": 6,
+    "per_race": [
+      {
+        "track": "hacienda",
+        "score": 0.3488,
+        "taus": {
+          "items_collected": 0.3488
+        },
+        "n_karts": 12,
+        "n_matched": 10
+      },
+      {
+        "track": "snowmountain",
+        "score": 0.4915,
+        "taus": {
+          "items_collected": 0.4915
+        },
+        "n_karts": 12,
+        "n_matched": 12
+      },
+      {
+        "track": "lighthouse",
+        "score": -0.3,
+        "taus": {
+          "items_collected": -0.3
+        },
+        "n_karts": 12,
+        "n_matched": 10
+      },
+      {
+        "track": "cornfield_crossing",
+        "score": 0.4419,
+        "taus": {
+          "items_collected": 0.4419
+        },
+        "n_karts": 12,
+        "n_matched": 10
+      },
+      {
+        "track": "scotland",
+        "score": 0.4375,
+        "taus": {
+          "items_collected": 0.4375
+        },
+        "n_karts": 12,
+        "n_matched": 9
+      },
+      {
+        "track": "black_forest",
+        "score": 0.5909,
+        "taus": {
+          "items_collected": 0.5909
+        },
+        "n_karts": 12,
+        "n_matched": 10
+      }
+    ],
+    "weights": {
+      "items_collected": 1.0
+    },
+    "note": "reward = sum_field w*tau(field order); tau is normalised Kendall correlation clamped at 0, so guessing scores 0 in expectation"
+  }
+}

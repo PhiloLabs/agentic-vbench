@@ -17,7 +17,7 @@ lighthouse, cornfield_crossing, scotland) × **10 karts** × 4 laps, SuperTux (h
 | constant counts (all karts equal) | 0.0 | — | — | |
 | leaderboard-only (ranking column + grid, no pickup info) | 0.0 | — | — | |
 | empty | 0.0 | — | — | |
-| **Codex `gpt-5.6-sol` (xhigh) — shipped 5×10 suite** | **0.170** | **24** | 580,907 | rollout `rollouts/codex_5x10_*.json` |
+| **Codex `gpt-5.6-sol` (xhigh) — shipped 6×12, items-only, TARGETED prompt** | **0.335** | **34** | 1,050,734 | rollout `rollouts/codex_6x12_*.json` |
 | Antigravity (Gemini‑3.x) | _to run_ | | | |
 | Claude Code (Fable 5 / Opus 4.8) | _to run_ | | | |
 
@@ -81,3 +81,37 @@ what the larger field is for. Numbers on the 6x12 media will be filled in when i
 rendering and Codex is re-run.
 
 Raw agent trajectories are under `rollouts/`.
+
+
+## Correction: the 0.066 items-only figure was a methodological error
+
+`items-only ≈ 0.066` was obtained by **re-scoring an old rollout** that had been produced while the
+agent was asked to report items *and* nitro *and* positions. That is not a valid estimate of the
+items-only task's difficulty, and it flattered the task.
+
+Run properly — Codex given the shipped 6x12 media and asked *only* for the powerup counts — the
+score is **0.335** (34 turns, 1.05M tokens), against a blind floor of 0.035 ± 0.055. That is ~5σ
+above chance: real, substantial skill.
+
+**Narrowing the scored target made the task easier, not harder.** Concentrating the agent on one
+quantity concentrated its effort on that quantity. The intuition that "score only the hard field"
+would push the score down was wrong, and it was wrong in a way only a fresh targeted run could
+reveal.
+
+Per-race spread is wide (lighthouse **−0.300**, black_forest **+0.591**), i.e. Codex is genuinely
+good on some tracks and actively inverted on others.
+
+### Honest standing of this task
+It is a **medium-difficulty** task at ~0.33, not a <0.10 one. Every previous claim in this file
+that it cleared the bar came from a measurement that was later shown to be too weak or invalid:
+
+| claim | value | why it was wrong |
+|---|---|---|
+| 4×6, 4 fields | 0.557 | scorer rewarded leaderboard reading |
+| 4×6, items+nitro rescore | 0.064 | 60 tau-pairs — inside the noise band |
+| 5×10, items+nitro | 0.170 | valid, and above the bar |
+| 5×10, items-only rescore | 0.066 | **invalid** — rescored a differently-targeted rollout |
+| **6×12, items-only, targeted** | **0.335** | the honest number |
+
+Rule taken from this: never estimate difficulty by re-scoring a rollout produced under a different
+objective, and never treat a single run inside the blind band as a pass.
