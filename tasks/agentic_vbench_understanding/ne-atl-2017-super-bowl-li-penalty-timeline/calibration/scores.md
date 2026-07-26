@@ -14,6 +14,11 @@ tool-call turns**. Oracle must be 1.0 and an empty attempt 0.
 | Codex CLI | _to run_ | _to run_ |
 | Antigravity | _to run_ | _to run_ |
 
+`scripts/understanding/check_task.py` — PASS on every check not requiring the agent run:
+task structure (all required files), input video (143.1 min, **1080p**, confirmed by the
+checker's ffprobe), oracle == 1.0, baseline == 0.0. The agent-reward, agent-turns, and
+ablation inputs are reported SKIP (they need the strong-agent stack).
+
 Status: PRE-CALIBRATION. Oracle / empty / no_media verified locally. The three-agent
 calibration (GPT 5.6 Sol first, per the README) has not been run — it requires the
 maintainer's agent stack and is the gating step before this task is PR-ready. Raw
