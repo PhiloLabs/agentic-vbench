@@ -17,10 +17,13 @@ Ground truth: the NFL official Game Book (nflgsis.com), cross-checked against
 nflpenalties.com. Team fouls with no announced jersey number (delay of game, illegal
 formation, etc.) are excluded by the task's scope rule.
 
-NOTE: GROUND_TRUTH below is the PILOT subset — the four fouls whose announced jersey
-numbers were verified by transcribing the broadcast audio. The full-game ground truth
-(every referee announcement, per the maintainer's guidance) is pending an official Game
-Book parse and will replace this list before calibration.
+GROUND_TRUTH below is the full set of referee-announced player fouls, parsed from the
+official NFL Game Book play-by-play, with jersey numbers taken from the Game Book
+lineups/substitutions. Scope rule and the three documented exclusions (delay of game,
+illegal formation, illegal touching — announced without a player number) are recorded
+in PROVENANCE.md. Four of the numbers (#23 Alford, #34 Poole, #70 Matthews, #59
+Campbell) were independently confirmed by transcribing the broadcast audio; all match
+the official lineup.
 """
 import argparse
 import json
@@ -37,12 +40,23 @@ VALID_TYPES = {
     "defensive holding", "illegal contact",
 }
 
-# --- PILOT ground truth: the 4 audio-verified fouls (see NOTE above). ---
+# --- Full ground truth: referee-announced player fouls (official Game Book). ---
+# quarter 5 = overtime. Both "accepted" and "declined" fouls are included (the referee
+# announces the number either way); no-number fouls are excluded (see PROVENANCE.md).
 GROUND_TRUTH = [
-    {"quarter": 2, "clock": "8:02", "type": "defensive holding",           "player_number": 23, "team": "ATL"},
-    {"quarter": 2, "clock": "5:16", "type": "defensive holding",           "player_number": 34, "team": "ATL"},
-    {"quarter": 3, "clock": "1:30", "type": "offensive holding",           "player_number": 70, "team": "ATL"},
-    {"quarter": 5, "clock": "11:18","type": "defensive pass interference", "player_number": 59, "team": "ATL"},
+    {"quarter": 1, "clock": "13:47", "type": "offensive holding",           "player_number": 55, "team": "ATL"},  # Worrilow
+    {"quarter": 2, "clock": "14:19", "type": "offensive holding",           "player_number": 88, "team": "NE"},   # Bennett (declined)
+    {"quarter": 2, "clock": "8:55",  "type": "defensive pass interference", "player_number": 23, "team": "NE"},   # Chung (declined)
+    {"quarter": 2, "clock": "8:02",  "type": "defensive holding",           "player_number": 23, "team": "ATL"},  # Alford
+    {"quarter": 2, "clock": "6:10",  "type": "defensive holding",           "player_number": 34, "team": "ATL"},  # Poole
+    {"quarter": 2, "clock": "5:16",  "type": "defensive holding",           "player_number": 34, "team": "ATL"},  # Poole
+    {"quarter": 2, "clock": "0:18",  "type": "offensive holding",           "player_number": 88, "team": "NE"},   # Bennett
+    {"quarter": 3, "clock": "13:02", "type": "offensive pass interference", "player_number": 15, "team": "NE"},   # Hogan (declined)
+    {"quarter": 3, "clock": "8:43",  "type": "defensive pass interference", "player_number": 21, "team": "NE"},   # Butler
+    {"quarter": 3, "clock": "1:30",  "type": "offensive holding",           "player_number": 70, "team": "ATL"},  # Matthews
+    {"quarter": 4, "clock": "3:50",  "type": "offensive holding",           "player_number": 70, "team": "ATL"},  # Matthews
+    {"quarter": 4, "clock": "0:57",  "type": "defensive offside",           "player_number": 93, "team": "ATL"},  # Freeney
+    {"quarter": 5, "clock": "11:18", "type": "defensive pass interference", "player_number": 59, "team": "ATL"},  # Campbell
 ]
 
 
@@ -126,7 +140,7 @@ def main():
         "recall": round(recall, 4),
         "f1": round(f1, 4),
         "clock_tolerance_s": CLOCK_TOL,
-        "pilot_subset": True,
+        "ground_truth_source": "official NFL Game Book",
     }
     args.reward_json.parent.mkdir(parents=True, exist_ok=True)
     args.reward_json.write_text(json.dumps({"reward": round(f1, 4), "details": details}, indent=2))

@@ -70,7 +70,10 @@ input:
 ## Status
 
 This card is filled for the parts that are **verified locally** and marked `PENDING`
-where they require the maintainer's calibration stack (GPT 5.6 Sol) or steps not yet
-run. The pilot uses a 4-foul subset (the audio-verified fouls); the full-game ground
-truth — every referee announcement, per maintainer guidance in issue #60 — replaces it,
-in lockstep between `judge.py` GROUND_TRUTH and the oracle, before calibration.
+where they require the maintainer's calibration stack (GPT 5.6 Sol) or steps not yet run.
+
+**Ground truth is complete:** 13 referee-announced player fouls parsed from the official
+NFL Game Book, jersey numbers from the Game Book lineups, kept in lockstep between
+`judge.py` GROUND_TRUTH and the oracle `solve.sh`. Scope rule + 3 documented exclusions
+in `PROVENANCE.md`. Still `PENDING`: the three-agent calibration (GPT 5.6 Sol) and the
+media ablation runs, which require the agent/Harbor stack.

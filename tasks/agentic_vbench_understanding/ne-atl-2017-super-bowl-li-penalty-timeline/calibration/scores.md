@@ -6,7 +6,7 @@ tool-call turns**. Oracle must be 1.0 and an empty attempt 0.
 
 | run | score | rollout (tool-call turns) |
 |---|---|---|
-| oracle (pilot subset) | 1.0 | — |
+| oracle (full 13-foul ground truth) | 1.0 | — |
 | empty / null | 0.0 | — |
 | plausible guess | 0.0 | — |
 | no_media (indicative proxy) | 0.0 | 0 |
