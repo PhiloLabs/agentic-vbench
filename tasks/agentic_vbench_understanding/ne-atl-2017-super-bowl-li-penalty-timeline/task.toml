@@ -1,0 +1,31 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/ne-atl-2017-super-bowl-li-penalty-timeline"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "sports-analytics", "american-football", "audio-visual", "event-timeline"]
+# Full broadcast, Super Bowl LI (NE vs ATL, 2017-02-05), from archive.org.
+# Ground truth: official NFL Game Book (nflgsis.com), cross-checked on nflpenalties.com.
+source = "archive.org: youtube-noLK78Hgq0A (Super Bowl LI full broadcast, 1080p, 2h23m)"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+# A full ~2.5h broadcast is several GB; give the build and trial room.
+storage_mb = 16384
+# The clip is baked at build time and the answer is not online: keep this false.
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# A full game is long: give the agent real time to seek, watch, and tally.
+timeout_sec = 3600.0
+
+[steps.verifier]
+timeout_sec = 600.0
