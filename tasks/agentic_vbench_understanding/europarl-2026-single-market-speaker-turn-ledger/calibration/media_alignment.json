@@ -1,0 +1,47 @@
+{
+  "method": "Exact full file compared against independently built and manually audited 20:31 pilot at identical video-relative times",
+  "samples": [
+    {
+      "time_s": 0,
+      "mean_absolute_pixel_difference": 0.873889
+    },
+    {
+      "time_s": 13,
+      "mean_absolute_pixel_difference": 2.512546
+    },
+    {
+      "time_s": 116,
+      "mean_absolute_pixel_difference": 1.671667
+    },
+    {
+      "time_s": 285,
+      "mean_absolute_pixel_difference": 1.095972
+    },
+    {
+      "time_s": 539,
+      "mean_absolute_pixel_difference": 0.744144
+    },
+    {
+      "time_s": 767,
+      "mean_absolute_pixel_difference": 1.155509
+    },
+    {
+      "time_s": 923,
+      "mean_absolute_pixel_difference": 1.410231
+    },
+    {
+      "time_s": 1095,
+      "mean_absolute_pixel_difference": 1.322292
+    },
+    {
+      "time_s": 1225,
+      "mean_absolute_pixel_difference": 1.085741
+    }
+  ],
+  "median_mean_absolute_pixel_difference": 1.155509,
+  "source_session_start_utc": "2026-05-20T07:00:15Z",
+  "debate_start_utc": "2026-05-20T07:59:32Z",
+  "source_seek_seconds": 3557,
+  "exact_file_start_time_s": 0.0,
+  "exact_file_duration_s": 7662.0
+}

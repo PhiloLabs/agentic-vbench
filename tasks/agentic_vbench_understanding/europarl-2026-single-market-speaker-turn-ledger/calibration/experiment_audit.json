@@ -1,0 +1,77 @@
+{
+  "date": "2026-07-27",
+  "auditor": "external-reviewer-gpt-5.5-xhigh",
+  "overall_verdict": "warn",
+  "integrity_status": "warn",
+  "design_validity_status": "warn",
+  "blocking": false,
+  "checks": {
+    "gt_provenance": {
+      "status": "pass",
+      "details": "source_provenance.json records official URLs, hashes, counts, player metadata, selection rule, anonymization seed, artifact hashes, and expected GT hash; build_ground_truth.py parses/cross-checks 170 official records and reproduces the current gt.json hash."
+    },
+    "construct_measurement": {
+      "status": "warn",
+      "details": "Metric matches the task construct, but the 4-second tolerance and identity review are not backed by independent agreement or preregistered measurement validation."
+    },
+    "data_event_support": {
+      "status": "warn",
+      "details": "Single task contains 86 turns and 79 speakers with observability evidence, but no split, power, or confirmation design exists."
+    },
+    "model_role_fitness": {
+      "status": "pass",
+      "details": "Agents generate solutions, deterministic Python scores them, and oracle is only a ceiling/reference artifact."
+    },
+    "baseline_independence": {
+      "status": "pass",
+      "details": "Oracle/null/degraded-input baselines are labeled appropriately; raw rollout scan found no GT/oracle/verifier path access."
+    },
+    "identification_assay_sensitivity": {
+      "status": "pass",
+      "details": "Oracle/null anchors and degraded-input controls exercise positive and negative cases; video-only scripted diagnostic is sensitive to boundary tolerance."
+    },
+    "evaluator_qualification": {
+      "status": "warn",
+      "details": "Primary scorer is deterministic, but supporting manual observability review has one reviewer and private contact sheets."
+    },
+    "information_statistical_adequacy": {
+      "status": "warn",
+      "details": "Raw counts are reported, but calibration uses one trajectory per model with no confidence intervals, seeds, or sample-size justification."
+    },
+    "leakage_fresh_evidence": {
+      "status": "pass",
+      "details": "Solver materials exclude GT; task disables internet; listed raw trajectories do not reference GT/oracle/verifier paths."
+    },
+    "result_computation_integrity": {
+      "status": "pass",
+      "details": "results.json records verifier hash/metric, oracle/null anchors, full-agent score/count/tool/status/trajectory hashes, ablations, scripted baseline, and checker status; current verifier and trajectory hashes match the manifest."
+    },
+    "scope_claim_alignment": {
+      "status": "warn",
+      "details": "Evidence supports this benchmark item but not broad/general strong-agent capability claims."
+    },
+    "outcome_classification": "mixed"
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "impact": "supported",
+      "details": "Official-machine-truth ledger provenance is now supported by source_provenance.json, build_ground_truth.py, and matching gt.json hash."
+    },
+    {
+      "id": "C2",
+      "impact": "supported",
+      "details": "Deterministic scorer implements the stated exact-ID plus boundary-tolerance F1."
+    },
+    {
+      "id": "C3",
+      "impact": "needs_qualifier",
+      "details": "Shortcut resistance is supported by controls but only on one task instance."
+    },
+    {
+      "id": "C4",
+      "impact": "needs_qualifier",
+      "details": "Strong-agent difficulty scores have exact run manifests and hashes, but still need statistical/generalization caveats."
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "retrieved_utc": "2026-07-16",
+  "official_sources": {
+    "speaker_list": {
+      "url": "https://www.europarl.europa.eu/plenary/en/previousDebate/pdf.html?internalEPId=2017076952270&sessionDay=2026-05-20",
+      "sha256": "eb811ce411f73fb09442c3c7cc2d874993a1006cb28d1c3e8f9011093338101b",
+      "pages": 3,
+      "parsed_records": 170
+    },
+    "debate_details": {
+      "url": "https://www.europarl.europa.eu/plenary/en/debate-details.html?date=20260520&detailBy=date",
+      "sha256": "54361bba619db5fc59aa300c22865a9fd568264e5c5f1a3ec981d72cc89c99e3",
+      "cross_checked_records": 170
+    },
+    "player_state": {
+      "url": "https://control.eup.glcloud.eu/content-manager/content-page/20260520-0900-PLENARY",
+      "sha256": "0378473f655922135f5d39b5f4b7b04eb6dc3271eeccb1349af03cbe33179b7b",
+      "session_start_utc": "2026-05-20T07:00:15Z",
+      "debate_start_utc": "2026-05-20T07:59:32Z",
+      "source_seek_seconds": 3557
+    },
+    "hls_master": {
+      "url": "https://vod.media.eup.glcloud.eu/i/2026/05/20/20260520-0900-PLENARY/20260520-0900-PLENARY_,360p,720p,540p,1080p,.mp4/master.m3u8",
+      "sha256": "923db10b55136b18419f7a697772258b5855b6d64bbae09c4ea43a7cf7ca260b"
+    },
+    "mep_directory": {
+      "url": "https://data.europarl.europa.eu/api/v2/meps?format=application%2Fld%2Bjson&offset=0&limit=10000"
+    }
+  },
+  "ground_truth_build": {
+    "debate_start_clock": "09:59:32",
+    "debate_end_clock": "12:07:14",
+    "selection_rule": {
+      "exclude_role": "Vice-President",
+      "minimum_official_duration_s": 30
+    },
+    "anonymization_seed": 20260715,
+    "official_records": 170,
+    "selected_turns": 86,
+    "selected_speakers": 79,
+    "gt_sha256": "1a2404f17dea4bc159bdef220f09d93f02f503999752cf2e8e691d9ef9f1b389",
+    "constructor": "build_ground_truth.py"
+  },
+  "published_materials": {
+    "repository": "https://huggingface.co/datasets/Jordan8717/agentic-vbench-europarl",
+    "revision": "457f5752fcd2c08b7b47889a8061535b80f1edc7",
+    "video_sha256": "844fb01dd7806105ebdde677d190822f80e46c2d140c7499006b20345870e1b7",
+    "roster_sha256": "c233ecc799a025badd1d6f3d6818ea1dca392fafab2ac2c3f4481a31e664966b",
+    "credit": "\u00a9 European Union, 2026 \u2014 Source: European Parliament"
+  }
+}

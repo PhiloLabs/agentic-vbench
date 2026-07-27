@@ -1,0 +1,133 @@
+{
+  "verifier": {
+    "path": "steps/solve/tests/judge.py",
+    "sha256": "d9c409be26a91027e8865643a1d29d6e257b6f1fde70025243e63de200ffca72",
+    "metric": "monotonic event F1",
+    "boundary_tolerance_s": 4.0
+  },
+  "anchors": {
+    "oracle": {
+      "status": "done",
+      "reward": 1.0,
+      "predicted_turns": 86,
+      "true_positives": 86
+    },
+    "empty": {
+      "status": "done",
+      "reward": 0.0,
+      "predicted_turns": 0,
+      "true_positives": 0
+    }
+  },
+  "full_agent_runs": [
+    {
+      "status": "done",
+      "harness": "GitHub Copilot CLI",
+      "harness_version": "1.0.75",
+      "model": "gpt-5.6-sol",
+      "reasoning": "xhigh",
+      "reward": 0.0,
+      "predicted_turns": 84,
+      "true_positives": 0,
+      "false_positives": 84,
+      "false_negatives": 86,
+      "tool_calls": 124,
+      "assistant_turns": 33,
+      "trajectory": "rollouts/gpt-5.6-sol_copilot.jsonl",
+      "trajectory_sha256": "8e99a5e0dc8edbe0b58a55f14015d9a9b37491447f8ddde813fbee1212d604ab",
+      "trajectory_audit": "pass"
+    },
+    {
+      "status": "done",
+      "harness": "GitHub Copilot CLI",
+      "harness_version": "1.0.75",
+      "model": "claude-opus-5",
+      "reasoning": "xhigh",
+      "reward": 0.0,
+      "predicted_turns": 86,
+      "true_positives": 0,
+      "false_positives": 86,
+      "false_negatives": 86,
+      "tool_calls": 260,
+      "assistant_turns": 244,
+      "trajectory": "rollouts/claude-opus-5_copilot.jsonl",
+      "trajectory_sha256": "661e7489c2b09c577d4e69da9e2e69204594cd487a0c0252ae6f8e13bbb3ba49",
+      "trajectory_audit": "pass_with_blocked_package_attempts"
+    },
+    {
+      "status": "done",
+      "harness": "GitHub Copilot CLI",
+      "harness_version": "1.0.75",
+      "model": "gemini-3.5-flash",
+      "reasoning": "xhigh",
+      "reward": 0.0,
+      "predicted_turns": 10,
+      "true_positives": 0,
+      "false_positives": 10,
+      "false_negatives": 86,
+      "tool_calls": 140,
+      "assistant_turns": 141,
+      "trajectory": "rollouts/gemini-3.5-flash_copilot.jsonl",
+      "trajectory_sha256": "aa702b017119c9ed6a02ce64751bc1031dccd96b6307b559a5f7924d8095be54",
+      "trajectory_audit": "pass_with_blocked_package_attempt"
+    }
+  ],
+  "anti_shortcut": [
+    {
+      "name": "no_media",
+      "status": "done",
+      "reward": 0.0,
+      "predicted_turns": 0,
+      "true_positives": 0
+    },
+    {
+      "name": "single_frame",
+      "status": "done",
+      "reward": 0.0,
+      "predicted_turns": 0,
+      "true_positives": 0
+    },
+    {
+      "name": "video_only",
+      "status": "done",
+      "reward": 0.0,
+      "predicted_turns": 78,
+      "true_positives": 0,
+      "tool_calls": 269
+    },
+    {
+      "name": "audio_only",
+      "status": "done",
+      "reward": 0.0,
+      "predicted_turns": 83,
+      "true_positives": 0,
+      "tool_calls": 94
+    },
+    {
+      "name": "frame_dump_no_tools",
+      "status": "done",
+      "reward": 0.011976,
+      "predicted_turns": 81,
+      "true_positives": 1
+    }
+  ],
+  "scripted_video_only": {
+    "status": "done",
+    "method": "YuNet plus SFace at one frame per second",
+    "reward": 0.098592,
+    "predicted_turns": 56,
+    "true_positives": 7
+  },
+  "complete_checker": {
+    "status": "pass",
+    "oracle": true,
+    "null": true,
+    "strong_agent": true,
+    "tool_calls": true,
+    "single_frame": true,
+    "video_only": true,
+    "audio_only": true,
+    "no_media": true,
+    "frame_dump_no_tools": true
+  }
+}

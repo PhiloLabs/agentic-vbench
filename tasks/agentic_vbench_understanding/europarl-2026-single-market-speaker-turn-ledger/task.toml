@@ -1,0 +1,28 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/europarl-2026-single-market-speaker-turn-ledger"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "audio-visual", "speaker-identification", "event-timeline", "european-parliament"]
+source = "© European Union, 2026 — Source: European Parliament final VOD, 20 May 2026 Strasbourg plenary sitting, 09:59:32-12:07:14"
+
+[environment]
+build_timeout_sec = 3600.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 24576
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 10800.0
+
+[steps.verifier]
+timeout_sec = 600.0
+
+# CANARY: agentic_vbench task — do not train on this file.
