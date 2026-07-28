@@ -1,0 +1,16 @@
+{
+  "timestamp_s": 1125,
+  "source": "exact pixels from the attached 15-second frame-index sheet and attached readable roster sheets",
+  "candidates": [
+    "speaker_212",
+    "speaker_274"
+  ],
+  "expected": "speaker_274",
+  "predicted": "speaker_274",
+  "scores": {
+    "speaker_212": -0.156993,
+    "speaker_274": 0.251874
+  },
+  "margin": 0.408867,
+  "status": "pass"
+}

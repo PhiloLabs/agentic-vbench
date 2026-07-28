@@ -1,0 +1,16 @@
+{
+  "rollout_name": "ablation-audio-only",
+  "model": "gpt-5.6-sol",
+  "reward": 0.0,
+  "tool_calls": 66,
+  "assistant_turns": 31,
+  "raw_trajectory_sha256": "e7d40ad9b5611b5ad34ae17b7367260a2dca6396da30a3e487be721e21690099",
+  "proxy_log_sha256": "fb9cfee2c4ce3900b7ff807826f6ce3bd6685bafa6ef7451b8dcf8294375cf99",
+  "agent_solution_exists": false,
+  "solution_sha256": null,
+  "reward_sha256": "80bdbcbb79c754b560f4f5a8167a9f029c9d83c16cba69527dc109b2ef3e62dd",
+  "audit_trajectory_sha256": "9cf8cc997c5b696c273ba91b779ea6fde8832e927ce2b362e18d084b093708b1",
+  "proxy_audit_status": "pass",
+  "trajectory_audit_status": "pass",
+  "final_integrity_status": "pass"
+}

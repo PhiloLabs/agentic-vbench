@@ -1,0 +1,1729 @@
+{
+  "method": "Pinned SpeechBrain VoxLingua107 ECAPA model, restricted to the 21 task language codes, full turn minus 2 s at each boundary",
+  "model_revision": "0253049ae131d6a4be1c4f0d8b0ff483a0f8c8e9",
+  "turns": 86,
+  "correct": 82,
+  "accuracy": 0.9534883720930233,
+  "rows": [
+    {
+      "turn_index": 1,
+      "expected_language_code": "pt",
+      "predicted_language_code": "pt",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "pt",
+          "score": -0.008566
+        },
+        {
+          "language_code": "sl",
+          "score": -8.928007
+        },
+        {
+          "language_code": "ro",
+          "score": -10.610109
+        }
+      ]
+    },
+    {
+      "turn_index": 2,
+      "expected_language_code": "it",
+      "predicted_language_code": "it",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "it",
+          "score": -0.0
+        },
+        {
+          "language_code": "ro",
+          "score": -20.703487
+        },
+        {
+          "language_code": "es",
+          "score": -22.246784
+        }
+      ]
+    },
+    {
+      "turn_index": 3,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -0.000302
+        },
+        {
+          "language_code": "da",
+          "score": -9.728103
+        },
+        {
+          "language_code": "nl",
+          "score": -11.53522
+        }
+      ]
+    },
+    {
+      "turn_index": 4,
+      "expected_language_code": "ro",
+      "predicted_language_code": "ro",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "ro",
+          "score": 0.0
+        },
+        {
+          "language_code": "pl",
+          "score": -21.156544
+        },
+        {
+          "language_code": "it",
+          "score": -21.272322
+        }
+      ]
+    },
+    {
+      "turn_index": 5,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -1.218308
+        },
+        {
+          "language_code": "hr",
+          "score": -3.877544
+        },
+        {
+          "language_code": "nl",
+          "score": -3.936405
+        }
+      ]
+    },
+    {
+      "turn_index": 6,
+      "expected_language_code": "lt",
+      "predicted_language_code": "lt",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "lt",
+          "score": -0.0
+        },
+        {
+          "language_code": "sl",
+          "score": -15.274023
+        },
+        {
+          "language_code": "ro",
+          "score": -20.556622
+        }
+      ]
+    },
+    {
+      "turn_index": 7,
+      "expected_language_code": "sv",
+      "predicted_language_code": "sv",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "sv",
+          "score": -0.003643
+        },
+        {
+          "language_code": "da",
+          "score": -16.059845
+        },
+        {
+          "language_code": "de",
+          "score": -17.022715
+        }
+      ]
+    },
+    {
+      "turn_index": 8,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -1e-06
+        },
+        {
+          "language_code": "nl",
+          "score": -20.594639
+        },
+        {
+          "language_code": "en",
+          "score": -21.941666
+        }
+      ]
+    },
+    {
+      "turn_index": 9,
+      "expected_language_code": "cs",
+      "predicted_language_code": "cs",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "cs",
+          "score": -0.000106
+        },
+        {
+          "language_code": "sk",
+          "score": -9.153529
+        },
+        {
+          "language_code": "pl",
+          "score": -20.056623
+        }
+      ]
+    },
+    {
+      "turn_index": 10,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -1.3e-05
+        },
+        {
+          "language_code": "da",
+          "score": -14.566753
+        },
+        {
+          "language_code": "nl",
+          "score": -15.668569
+        }
+      ]
+    },
+    {
+      "turn_index": 11,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -4.4e-05
+        },
+        {
+          "language_code": "nl",
+          "score": -14.105377
+        },
+        {
+          "language_code": "da",
+          "score": -16.817844
+        }
+      ]
+    },
+    {
+      "turn_index": 12,
+      "expected_language_code": "es",
+      "predicted_language_code": "es",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "es",
+          "score": -2.912166
+        },
+        {
+          "language_code": "it",
+          "score": -17.581348
+        },
+        {
+          "language_code": "el",
+          "score": -18.584833
+        }
+      ]
+    },
+    {
+      "turn_index": 13,
+      "expected_language_code": "bg",
+      "predicted_language_code": "bg",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "bg",
+          "score": -0.000348
+        },
+        {
+          "language_code": "pl",
+          "score": -17.295631
+        },
+        {
+          "language_code": "sl",
+          "score": -17.411875
+        }
+      ]
+    },
+    {
+      "turn_index": 14,
+      "expected_language_code": "pl",
+      "predicted_language_code": "pl",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "pl",
+          "score": -0.0
+        },
+        {
+          "language_code": "sk",
+          "score": -15.298059
+        },
+        {
+          "language_code": "cs",
+          "score": -18.550823
+        }
+      ]
+    },
+    {
+      "turn_index": 15,
+      "expected_language_code": "fr",
+      "predicted_language_code": "fr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "fr",
+          "score": -0.085843
+        },
+        {
+          "language_code": "de",
+          "score": -18.071074
+        },
+        {
+          "language_code": "nl",
+          "score": -18.2812
+        }
+      ]
+    },
+    {
+      "turn_index": 16,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -0.309411
+        },
+        {
+          "language_code": "nl",
+          "score": -1.602721
+        },
+        {
+          "language_code": "sl",
+          "score": -7.039885
+        }
+      ]
+    },
+    {
+      "turn_index": 17,
+      "expected_language_code": "fr",
+      "predicted_language_code": "fr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "fr",
+          "score": -0.002292
+        },
+        {
+          "language_code": "de",
+          "score": -19.812836
+        },
+        {
+          "language_code": "nl",
+          "score": -20.902679
+        }
+      ]
+    },
+    {
+      "turn_index": 18,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -1.257449
+        },
+        {
+          "language_code": "pt",
+          "score": -6.146655
+        },
+        {
+          "language_code": "lv",
+          "score": -6.528033
+        }
+      ]
+    },
+    {
+      "turn_index": 19,
+      "expected_language_code": "es",
+      "predicted_language_code": "es",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "es",
+          "score": -2.366812
+        },
+        {
+          "language_code": "el",
+          "score": -13.615632
+        },
+        {
+          "language_code": "it",
+          "score": -15.052773
+        }
+      ]
+    },
+    {
+      "turn_index": 20,
+      "expected_language_code": "it",
+      "predicted_language_code": "it",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "it",
+          "score": -0.0
+        },
+        {
+          "language_code": "sl",
+          "score": -17.903505
+        },
+        {
+          "language_code": "ro",
+          "score": -19.825592
+        }
+      ]
+    },
+    {
+      "turn_index": 21,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -9e-05
+        },
+        {
+          "language_code": "nl",
+          "score": -17.027033
+        },
+        {
+          "language_code": "da",
+          "score": -18.236774
+        }
+      ]
+    },
+    {
+      "turn_index": 22,
+      "expected_language_code": "sl",
+      "predicted_language_code": "sl",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "sl",
+          "score": -4e-06
+        },
+        {
+          "language_code": "hr",
+          "score": -13.240256
+        },
+        {
+          "language_code": "bg",
+          "score": -15.681078
+        }
+      ]
+    },
+    {
+      "turn_index": 23,
+      "expected_language_code": "en",
+      "predicted_language_code": "lt",
+      "correct": false,
+      "top3": [
+        {
+          "language_code": "lt",
+          "score": -2.143387
+        },
+        {
+          "language_code": "lv",
+          "score": -3.764343
+        },
+        {
+          "language_code": "nl",
+          "score": -4.30477
+        }
+      ]
+    },
+    {
+      "turn_index": 24,
+      "expected_language_code": "da",
+      "predicted_language_code": "da",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "da",
+          "score": -1.4e-05
+        },
+        {
+          "language_code": "de",
+          "score": -12.697403
+        },
+        {
+          "language_code": "en",
+          "score": -17.838951
+        }
+      ]
+    },
+    {
+      "turn_index": 25,
+      "expected_language_code": "fr",
+      "predicted_language_code": "fr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "fr",
+          "score": -0.008143
+        },
+        {
+          "language_code": "de",
+          "score": -16.609737
+        },
+        {
+          "language_code": "nl",
+          "score": -19.130775
+        }
+      ]
+    },
+    {
+      "turn_index": 26,
+      "expected_language_code": "lt",
+      "predicted_language_code": "lt",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "lt",
+          "score": 0.0
+        },
+        {
+          "language_code": "sl",
+          "score": -20.63789
+        },
+        {
+          "language_code": "ro",
+          "score": -24.175959
+        }
+      ]
+    },
+    {
+      "turn_index": 27,
+      "expected_language_code": "fr",
+      "predicted_language_code": "fr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "fr",
+          "score": -5.4e-05
+        },
+        {
+          "language_code": "it",
+          "score": -28.034813
+        },
+        {
+          "language_code": "nl",
+          "score": -29.270098
+        }
+      ]
+    },
+    {
+      "turn_index": 28,
+      "expected_language_code": "en",
+      "predicted_language_code": "de",
+      "correct": false,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -0.435798
+        },
+        {
+          "language_code": "en",
+          "score": -1.64432
+        },
+        {
+          "language_code": "da",
+          "score": -6.408322
+        }
+      ]
+    },
+    {
+      "turn_index": 29,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -5.9e-05
+        },
+        {
+          "language_code": "da",
+          "score": -18.769968
+        },
+        {
+          "language_code": "nl",
+          "score": -20.336102
+        }
+      ]
+    },
+    {
+      "turn_index": 30,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -0.995229
+        },
+        {
+          "language_code": "de",
+          "score": -2.768206
+        },
+        {
+          "language_code": "da",
+          "score": -6.711134
+        }
+      ]
+    },
+    {
+      "turn_index": 31,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -3e-06
+        },
+        {
+          "language_code": "nl",
+          "score": -15.194646
+        },
+        {
+          "language_code": "da",
+          "score": -16.123169
+        }
+      ]
+    },
+    {
+      "turn_index": 32,
+      "expected_language_code": "es",
+      "predicted_language_code": "es",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "es",
+          "score": -1.833718
+        },
+        {
+          "language_code": "it",
+          "score": -15.971054
+        },
+        {
+          "language_code": "ro",
+          "score": -19.451038
+        }
+      ]
+    },
+    {
+      "turn_index": 33,
+      "expected_language_code": "lt",
+      "predicted_language_code": "lt",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "lt",
+          "score": -1.9e-05
+        },
+        {
+          "language_code": "sl",
+          "score": -15.744745
+        },
+        {
+          "language_code": "ro",
+          "score": -16.945139
+        }
+      ]
+    },
+    {
+      "turn_index": 34,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -0.811388
+        },
+        {
+          "language_code": "sv",
+          "score": -7.514739
+        },
+        {
+          "language_code": "sl",
+          "score": -7.954635
+        }
+      ]
+    },
+    {
+      "turn_index": 35,
+      "expected_language_code": "pt",
+      "predicted_language_code": "pt",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "pt",
+          "score": -0.000529
+        },
+        {
+          "language_code": "ro",
+          "score": -9.491288
+        },
+        {
+          "language_code": "bg",
+          "score": -9.95033
+        }
+      ]
+    },
+    {
+      "turn_index": 36,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -4e-06
+        },
+        {
+          "language_code": "da",
+          "score": -16.269573
+        },
+        {
+          "language_code": "nl",
+          "score": -18.032045
+        }
+      ]
+    },
+    {
+      "turn_index": 37,
+      "expected_language_code": "it",
+      "predicted_language_code": "it",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "it",
+          "score": -1e-06
+        },
+        {
+          "language_code": "sl",
+          "score": -18.917587
+        },
+        {
+          "language_code": "ro",
+          "score": -19.354082
+        }
+      ]
+    },
+    {
+      "turn_index": 38,
+      "expected_language_code": "sv",
+      "predicted_language_code": "sv",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "sv",
+          "score": -1e-05
+        },
+        {
+          "language_code": "de",
+          "score": -27.066931
+        },
+        {
+          "language_code": "nl",
+          "score": -27.298443
+        }
+      ]
+    },
+    {
+      "turn_index": 39,
+      "expected_language_code": "ro",
+      "predicted_language_code": "ro",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "ro",
+          "score": 0.0
+        },
+        {
+          "language_code": "it",
+          "score": -18.076485
+        },
+        {
+          "language_code": "pt",
+          "score": -18.716768
+        }
+      ]
+    },
+    {
+      "turn_index": 40,
+      "expected_language_code": "hu",
+      "predicted_language_code": "hu",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "hu",
+          "score": 0.0
+        },
+        {
+          "language_code": "sl",
+          "score": -20.314857
+        },
+        {
+          "language_code": "sk",
+          "score": -23.285267
+        }
+      ]
+    },
+    {
+      "turn_index": 41,
+      "expected_language_code": "da",
+      "predicted_language_code": "da",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "da",
+          "score": -1e-06
+        },
+        {
+          "language_code": "de",
+          "score": -13.937348
+        },
+        {
+          "language_code": "nl",
+          "score": -16.94516
+        }
+      ]
+    },
+    {
+      "turn_index": 42,
+      "expected_language_code": "hr",
+      "predicted_language_code": "hr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "hr",
+          "score": -0.83137
+        },
+        {
+          "language_code": "sl",
+          "score": -12.456684
+        },
+        {
+          "language_code": "it",
+          "score": -15.875803
+        }
+      ]
+    },
+    {
+      "turn_index": 43,
+      "expected_language_code": "nl",
+      "predicted_language_code": "nl",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "nl",
+          "score": -0.000186
+        },
+        {
+          "language_code": "de",
+          "score": -14.370095
+        },
+        {
+          "language_code": "en",
+          "score": -15.424114
+        }
+      ]
+    },
+    {
+      "turn_index": 44,
+      "expected_language_code": "sv",
+      "predicted_language_code": "sv",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "sv",
+          "score": -0.000849
+        },
+        {
+          "language_code": "hu",
+          "score": -18.598845
+        },
+        {
+          "language_code": "da",
+          "score": -20.930086
+        }
+      ]
+    },
+    {
+      "turn_index": 45,
+      "expected_language_code": "bg",
+      "predicted_language_code": "bg",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "bg",
+          "score": -8.8e-05
+        },
+        {
+          "language_code": "sl",
+          "score": -15.123591
+        },
+        {
+          "language_code": "ro",
+          "score": -18.296282
+        }
+      ]
+    },
+    {
+      "turn_index": 46,
+      "expected_language_code": "hu",
+      "predicted_language_code": "hu",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "hu",
+          "score": 0.0
+        },
+        {
+          "language_code": "sl",
+          "score": -20.378466
+        },
+        {
+          "language_code": "lv",
+          "score": -24.385262
+        }
+      ]
+    },
+    {
+      "turn_index": 47,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -0.498084
+        },
+        {
+          "language_code": "de",
+          "score": -3.974937
+        },
+        {
+          "language_code": "da",
+          "score": -6.719154
+        }
+      ]
+    },
+    {
+      "turn_index": 48,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -0.000463
+        },
+        {
+          "language_code": "sl",
+          "score": -8.312857
+        },
+        {
+          "language_code": "nl",
+          "score": -10.076106
+        }
+      ]
+    },
+    {
+      "turn_index": 49,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -1e-06
+        },
+        {
+          "language_code": "da",
+          "score": -21.931767
+        },
+        {
+          "language_code": "nl",
+          "score": -23.27211
+        }
+      ]
+    },
+    {
+      "turn_index": 50,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -0.001915
+        },
+        {
+          "language_code": "sl",
+          "score": -7.215104
+        },
+        {
+          "language_code": "hu",
+          "score": -8.665207
+        }
+      ]
+    },
+    {
+      "turn_index": 51,
+      "expected_language_code": "lv",
+      "predicted_language_code": "lv",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "lv",
+          "score": 0.0
+        },
+        {
+          "language_code": "cs",
+          "score": -17.8484
+        },
+        {
+          "language_code": "fi",
+          "score": -18.546757
+        }
+      ]
+    },
+    {
+      "turn_index": 52,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -0.002191
+        },
+        {
+          "language_code": "en",
+          "score": -16.39463
+        },
+        {
+          "language_code": "da",
+          "score": -17.156765
+        }
+      ]
+    },
+    {
+      "turn_index": 53,
+      "expected_language_code": "fr",
+      "predicted_language_code": "fr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "fr",
+          "score": -0.000408
+        },
+        {
+          "language_code": "pl",
+          "score": -21.988783
+        },
+        {
+          "language_code": "de",
+          "score": -23.555969
+        }
+      ]
+    },
+    {
+      "turn_index": 54,
+      "expected_language_code": "el",
+      "predicted_language_code": "el",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "el",
+          "score": 0.0
+        },
+        {
+          "language_code": "es",
+          "score": -24.88475
+        },
+        {
+          "language_code": "it",
+          "score": -28.211079
+        }
+      ]
+    },
+    {
+      "turn_index": 55,
+      "expected_language_code": "pt",
+      "predicted_language_code": "pt",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "pt",
+          "score": -0.001072
+        },
+        {
+          "language_code": "ro",
+          "score": -9.89765
+        },
+        {
+          "language_code": "bg",
+          "score": -10.850116
+        }
+      ]
+    },
+    {
+      "turn_index": 56,
+      "expected_language_code": "el",
+      "predicted_language_code": "el",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "el",
+          "score": 0.0
+        },
+        {
+          "language_code": "es",
+          "score": -21.214565
+        },
+        {
+          "language_code": "it",
+          "score": -26.651539
+        }
+      ]
+    },
+    {
+      "turn_index": 57,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -0.891693
+        },
+        {
+          "language_code": "de",
+          "score": -9.001551
+        },
+        {
+          "language_code": "sl",
+          "score": -9.760242
+        }
+      ]
+    },
+    {
+      "turn_index": 58,
+      "expected_language_code": "pt",
+      "predicted_language_code": "pt",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "pt",
+          "score": -0.000481
+        },
+        {
+          "language_code": "sl",
+          "score": -9.21656
+        },
+        {
+          "language_code": "bg",
+          "score": -11.141741
+        }
+      ]
+    },
+    {
+      "turn_index": 59,
+      "expected_language_code": "en",
+      "predicted_language_code": "cs",
+      "correct": false,
+      "top3": [
+        {
+          "language_code": "cs",
+          "score": -0.756724
+        },
+        {
+          "language_code": "en",
+          "score": -2.007645
+        },
+        {
+          "language_code": "sv",
+          "score": -2.605548
+        }
+      ]
+    },
+    {
+      "turn_index": 60,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -4.8e-05
+        },
+        {
+          "language_code": "da",
+          "score": -11.93401
+        },
+        {
+          "language_code": "nl",
+          "score": -12.479271
+        }
+      ]
+    },
+    {
+      "turn_index": 61,
+      "expected_language_code": "sl",
+      "predicted_language_code": "sl",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "sl",
+          "score": -1e-06
+        },
+        {
+          "language_code": "hr",
+          "score": -14.427928
+        },
+        {
+          "language_code": "bg",
+          "score": -18.273285
+        }
+      ]
+    },
+    {
+      "turn_index": 62,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -0.107446
+        },
+        {
+          "language_code": "nl",
+          "score": -7.405607
+        },
+        {
+          "language_code": "fi",
+          "score": -7.423654
+        }
+      ]
+    },
+    {
+      "turn_index": 63,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -8.6e-05
+        },
+        {
+          "language_code": "da",
+          "score": -15.868231
+        },
+        {
+          "language_code": "nl",
+          "score": -17.305067
+        }
+      ]
+    },
+    {
+      "turn_index": 64,
+      "expected_language_code": "en",
+      "predicted_language_code": "el",
+      "correct": false,
+      "top3": [
+        {
+          "language_code": "el",
+          "score": -0.903227
+        },
+        {
+          "language_code": "en",
+          "score": -2.878702
+        },
+        {
+          "language_code": "nl",
+          "score": -4.941643
+        }
+      ]
+    },
+    {
+      "turn_index": 65,
+      "expected_language_code": "nl",
+      "predicted_language_code": "nl",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "nl",
+          "score": -0.000432
+        },
+        {
+          "language_code": "de",
+          "score": -11.795209
+        },
+        {
+          "language_code": "en",
+          "score": -13.517687
+        }
+      ]
+    },
+    {
+      "turn_index": 66,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -3.186651
+        },
+        {
+          "language_code": "sv",
+          "score": -13.657874
+        },
+        {
+          "language_code": "nl",
+          "score": -13.732923
+        }
+      ]
+    },
+    {
+      "turn_index": 67,
+      "expected_language_code": "es",
+      "predicted_language_code": "es",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "es",
+          "score": -0.974559
+        },
+        {
+          "language_code": "it",
+          "score": -17.803989
+        },
+        {
+          "language_code": "el",
+          "score": -18.863613
+        }
+      ]
+    },
+    {
+      "turn_index": 68,
+      "expected_language_code": "pt",
+      "predicted_language_code": "pt",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "pt",
+          "score": -0.005036
+        },
+        {
+          "language_code": "bg",
+          "score": -6.591513
+        },
+        {
+          "language_code": "nl",
+          "score": -7.572721
+        }
+      ]
+    },
+    {
+      "turn_index": 69,
+      "expected_language_code": "cs",
+      "predicted_language_code": "cs",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "cs",
+          "score": -1.1e-05
+        },
+        {
+          "language_code": "sk",
+          "score": -11.436444
+        },
+        {
+          "language_code": "pl",
+          "score": -19.755386
+        }
+      ]
+    },
+    {
+      "turn_index": 70,
+      "expected_language_code": "fi",
+      "predicted_language_code": "fi",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "fi",
+          "score": -1e-06
+        },
+        {
+          "language_code": "hu",
+          "score": -19.20241
+        },
+        {
+          "language_code": "sv",
+          "score": -19.544842
+        }
+      ]
+    },
+    {
+      "turn_index": 71,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -0.185051
+        },
+        {
+          "language_code": "nl",
+          "score": -5.064035
+        },
+        {
+          "language_code": "hr",
+          "score": -6.958397
+        }
+      ]
+    },
+    {
+      "turn_index": 72,
+      "expected_language_code": "de",
+      "predicted_language_code": "de",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "de",
+          "score": -1e-06
+        },
+        {
+          "language_code": "da",
+          "score": -14.840674
+        },
+        {
+          "language_code": "nl",
+          "score": -16.592592
+        }
+      ]
+    },
+    {
+      "turn_index": 73,
+      "expected_language_code": "it",
+      "predicted_language_code": "it",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "it",
+          "score": -1e-06
+        },
+        {
+          "language_code": "sl",
+          "score": -16.827068
+        },
+        {
+          "language_code": "ro",
+          "score": -17.881319
+        }
+      ]
+    },
+    {
+      "turn_index": 74,
+      "expected_language_code": "da",
+      "predicted_language_code": "da",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "da",
+          "score": -3e-06
+        },
+        {
+          "language_code": "sv",
+          "score": -16.783766
+        },
+        {
+          "language_code": "de",
+          "score": -16.936262
+        }
+      ]
+    },
+    {
+      "turn_index": 75,
+      "expected_language_code": "hr",
+      "predicted_language_code": "hr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "hr",
+          "score": -0.292532
+        },
+        {
+          "language_code": "sl",
+          "score": -7.961233
+        },
+        {
+          "language_code": "sk",
+          "score": -18.242039
+        }
+      ]
+    },
+    {
+      "turn_index": 76,
+      "expected_language_code": "it",
+      "predicted_language_code": "it",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "it",
+          "score": 0.0
+        },
+        {
+          "language_code": "ro",
+          "score": -20.488924
+        },
+        {
+          "language_code": "es",
+          "score": -22.244812
+        }
+      ]
+    },
+    {
+      "turn_index": 77,
+      "expected_language_code": "sk",
+      "predicted_language_code": "sk",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "sk",
+          "score": -3e-06
+        },
+        {
+          "language_code": "cs",
+          "score": -12.607391
+        },
+        {
+          "language_code": "pl",
+          "score": -15.791702
+        }
+      ]
+    },
+    {
+      "turn_index": 78,
+      "expected_language_code": "hr",
+      "predicted_language_code": "hr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "hr",
+          "score": -0.47024
+        },
+        {
+          "language_code": "sl",
+          "score": -11.692435
+        },
+        {
+          "language_code": "bg",
+          "score": -18.838858
+        }
+      ]
+    },
+    {
+      "turn_index": 79,
+      "expected_language_code": "hr",
+      "predicted_language_code": "hr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "hr",
+          "score": -0.796072
+        },
+        {
+          "language_code": "sl",
+          "score": -8.440542
+        },
+        {
+          "language_code": "sk",
+          "score": -12.383476
+        }
+      ]
+    },
+    {
+      "turn_index": 80,
+      "expected_language_code": "pl",
+      "predicted_language_code": "pl",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "pl",
+          "score": 0.0
+        },
+        {
+          "language_code": "ro",
+          "score": -19.139179
+        },
+        {
+          "language_code": "sk",
+          "score": -19.915442
+        }
+      ]
+    },
+    {
+      "turn_index": 81,
+      "expected_language_code": "es",
+      "predicted_language_code": "es",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "es",
+          "score": -3.385856
+        },
+        {
+          "language_code": "it",
+          "score": -19.195105
+        },
+        {
+          "language_code": "el",
+          "score": -20.022884
+        }
+      ]
+    },
+    {
+      "turn_index": 82,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -0.067554
+        },
+        {
+          "language_code": "nl",
+          "score": -6.49443
+        },
+        {
+          "language_code": "pt",
+          "score": -6.960295
+        }
+      ]
+    },
+    {
+      "turn_index": 83,
+      "expected_language_code": "en",
+      "predicted_language_code": "en",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "en",
+          "score": -2.61047
+        },
+        {
+          "language_code": "de",
+          "score": -9.416426
+        },
+        {
+          "language_code": "nl",
+          "score": -9.637514
+        }
+      ]
+    },
+    {
+      "turn_index": 84,
+      "expected_language_code": "ro",
+      "predicted_language_code": "ro",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "ro",
+          "score": 0.0
+        },
+        {
+          "language_code": "it",
+          "score": -19.884836
+        },
+        {
+          "language_code": "bg",
+          "score": -20.204145
+        }
+      ]
+    },
+    {
+      "turn_index": 85,
+      "expected_language_code": "fr",
+      "predicted_language_code": "fr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "fr",
+          "score": -0.050401
+        },
+        {
+          "language_code": "it",
+          "score": -8.099137
+        },
+        {
+          "language_code": "de",
+          "score": -9.900924
+        }
+      ]
+    },
+    {
+      "turn_index": 86,
+      "expected_language_code": "fr",
+      "predicted_language_code": "fr",
+      "correct": true,
+      "top3": [
+        {
+          "language_code": "fr",
+          "score": -8.5e-05
+        },
+        {
+          "language_code": "nl",
+          "score": -22.582829
+        },
+        {
+          "language_code": "de",
+          "score": -23.686995
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "rollout_name": "ablation-no-media",
+  "model": "gpt-5.6-sol",
+  "reward": 0.0,
+  "tool_calls": 20,
+  "assistant_turns": 6,
+  "raw_trajectory_sha256": "b1daad08443a3005e32f382834839d1dd85c79f1efbcc58c0d5bdfc9af301c0c",
+  "proxy_log_sha256": "fae6f24fcc5c4f00766e18e151d183a80581e7f740b6b8ec2e1e8a1643d82e72",
+  "agent_solution_exists": false,
+  "solution_sha256": null,
+  "reward_sha256": "b02fea4556ee96a42845235f4fefebd99a4116cd52fb9840eb275f8657cfa22a",
+  "audit_trajectory_sha256": "e9c3645e51c923338af246692a0fc7549bb0c0bc4800dad7112ad905ea0f3b8c",
+  "proxy_audit_status": "pass",
+  "trajectory_audit_status": "manual_review_required",
+  "final_integrity_status": "pass_manual"
+}

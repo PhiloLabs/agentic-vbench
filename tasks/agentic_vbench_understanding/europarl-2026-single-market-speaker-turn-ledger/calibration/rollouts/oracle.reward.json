@@ -1,0 +1,17 @@
+{
+  "reward": 1.0,
+  "details": {
+    "ground_truth_turns": 86,
+    "predicted_turns": 86,
+    "valid_predicted_turns": 86,
+    "invalid_predicted_turns": 0,
+    "true_positives": 86,
+    "false_positives": 0,
+    "false_negatives": 0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "boundary_tolerance_s": 3.5,
+    "reason": "ok"
+  }
+}

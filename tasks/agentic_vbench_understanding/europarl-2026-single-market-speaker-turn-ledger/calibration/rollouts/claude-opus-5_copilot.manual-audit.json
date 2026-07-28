@@ -1,0 +1,18 @@
+{
+  "trajectory": "claude-opus-5_copilot.jsonl",
+  "reviewer": "executor manual integrity adjudication",
+  "status": "pass",
+  "automatic_status": "manual_review_required",
+  "suspicious_calls_reviewed": 1,
+  "findings": [
+    {
+      "category": "public network probe",
+      "result": "blocked",
+      "evidence": "The curl probe to pypi.org returned exit=1. The sealed proxy audit records no allowed public destination and 44 post-seal GitHub denials."
+    }
+  ],
+  "answer_key_access": false,
+  "external_content_obtained": false,
+  "proxy_audit_status": "pass",
+  "conclusion": "The only suspicious action was a failed connectivity check. The 86-turn solution was produced from supplied task materials and offline tools."
+}

@@ -1,0 +1,16 @@
+{
+  "rollout_name": "gemini-3.5-flash_copilot",
+  "model": "gemini-3.5-flash",
+  "reward": 0.0,
+  "tool_calls": 205,
+  "assistant_turns": 198,
+  "raw_trajectory_sha256": "4308190ae6b3c5c5ccff32cdd514671536761b2ba8619d5380b41cffa3910867",
+  "proxy_log_sha256": "e4d5ea4947becbd8e311c7f110c12a49e4067468a98a6a11dae8ffe54019c789",
+  "agent_solution_exists": true,
+  "solution_sha256": "89e96fd5346e58e1a35e36c6337937161125f1f862988b2bb9059357f39048d7",
+  "reward_sha256": "59a76d4d0c041cb8891d4b74cd83209be3503287358caca3dcf2652243f78463",
+  "audit_trajectory_sha256": "e27547802668d77e491fdb367db69e054d50e0ecba6283005729666218851d08",
+  "proxy_audit_status": "pass",
+  "trajectory_audit_status": "pass",
+  "final_integrity_status": "pass"
+}

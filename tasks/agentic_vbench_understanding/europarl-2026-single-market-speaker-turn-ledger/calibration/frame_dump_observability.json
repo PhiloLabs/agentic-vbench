@@ -1,0 +1,107 @@
+{
+  "date": "2026-07-28",
+  "purpose": "Positive controls that the exact all-frames-pasted attachment bundle stays below the backend's 50-image limit and preserves readable timestamps, roster labels, inference cards, and nonzero face-identity signal before it is used as agency evidence.",
+  "model": "gpt-5.6-sol",
+  "harness": "GitHub Copilot CLI 1.0.76-0",
+  "image_id": "sha256:fa81b0532ba0eafd31e1ad1cf15e3ad15b95317be1d691c93bbea93927e472fb",
+  "tools_available": [
+    "apply_patch",
+    "task_complete"
+  ],
+  "attachments": {
+    "one_fps_complete_frame_sheets": 15,
+    "fifteen_second_face_index_sheets": 8,
+    "roster_sheets": 21,
+    "inference_card_sheets": 3,
+    "total_images": 47,
+    "backend_maximum_images": 50
+  },
+  "text_control": {
+    "expected": {
+      "first_frame_timestamp": "00:00:00.000",
+      "first_roster_ids": [
+        "speaker_001",
+        "speaker_002",
+        "speaker_003",
+        "speaker_004",
+        "speaker_005",
+        "speaker_006",
+        "speaker_007",
+        "speaker_008"
+      ],
+      "last_roster_id": "speaker_742",
+      "first_card_id": "excerpt_001",
+      "first_card_first_eight_words": "There is a strain in demanding that a",
+      "last_card_id": "excerpt_086"
+    },
+    "observed": {
+      "first_frame_timestamp": "00:00:00.000",
+      "first_roster_ids": [
+        "speaker_001",
+        "speaker_002",
+        "speaker_003",
+        "speaker_004",
+        "speaker_005",
+        "speaker_006",
+        "speaker_007",
+        "speaker_008"
+      ],
+      "last_roster_id": "speaker_742",
+      "first_card_id": "excerpt_001",
+      "first_card_first_eight_words": "There is a strain in demanding that a",
+      "last_card_id": "excerpt_086"
+    },
+    "status": "pass",
+    "raw_trajectory_sha256": "1e3d7f66df132a570b01a88a182c2cdb6b6e100a16401785864633e851766b2a",
+    "proxy_log_sha256": "906bc91b2d8ed66b44703d76e1a56fc703d8bd263e30bbe5edaaa26068420c73"
+  },
+  "open_set_identity_control": {
+    "expected": {
+      "00:07:45.000": "speaker_497",
+      "00:18:45.000": "speaker_274",
+      "00:37:00.000": "speaker_007"
+    },
+    "observed": {
+      "00:07:45.000": "speaker_044",
+      "00:18:45.000": "speaker_004",
+      "00:37:00.000": "speaker_038"
+    },
+    "correct": 0,
+    "total": 3,
+    "accuracy": 0.0,
+    "status": "expected_agency_failure",
+    "interpretation": "A single inference pass cannot search 742 labeled portraits reliably without inspection tools.",
+    "raw_trajectory_sha256": "f3e3da151b03dc947ca1f8ec3f66623128f9bd6ebc737c83f501af92dddb3c94",
+    "proxy_log_sha256": "3e143e8940f42c4f893dbff88656c08c1d68558690bbcf6257f56a5411aa3325"
+  },
+  "direct_llm_contrast_control": {
+    "timestamp": "00:18:45.000",
+    "candidates": [
+      "speaker_212",
+      "speaker_274"
+    ],
+    "expected": "speaker_274",
+    "observed": "speaker_212",
+    "status": "fail",
+    "interpretation": "One direct model inference confuses the two close lookalikes even when the search set is bounded.",
+    "raw_trajectory_sha256": "0248870cb1d3632027d5d2577c7e25d84d1ec52029e33c7ca699f5e946e2a9bc",
+    "proxy_log_sha256": "906bc91b2d8ed66b44703d76e1a56fc703d8bd263e30bbe5edaaa26068420c73"
+  },
+  "deterministic_identity_signal_control": {
+    "artifact": "frame_dump_identity_signal.json",
+    "timestamp_s": 1125,
+    "candidates": [
+      "speaker_212",
+      "speaker_274"
+    ],
+    "expected": "speaker_274",
+    "predicted": "speaker_274",
+    "sface_scores": {
+      "speaker_212": -0.156993,
+      "speaker_274": 0.251874
+    },
+    "margin": 0.408867,
+    "status": "pass",
+    "interpretation": "The exact attached pixels retain discriminative face information. The no-tools model failures therefore reflect inability to search the 742-way gallery, not evidence destruction."
+  }
+}

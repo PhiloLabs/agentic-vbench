@@ -1,0 +1,23 @@
+{
+  "trajectory": "/home/azureuser/AgentVBenchmark_Contribute/european_parliament_full/final-calibration/claude-opus-5_copilot.jsonl",
+  "solution_exists": true,
+  "model": "claude-opus-5",
+  "assistant_turns": 254,
+  "tool_calls": 317,
+  "exit_code": 0,
+  "reward": 0.116279,
+  "score_details": {
+    "ground_truth_turns": 86,
+    "predicted_turns": 86,
+    "valid_predicted_turns": 86,
+    "invalid_predicted_turns": 0,
+    "true_positives": 10,
+    "false_positives": 76,
+    "false_negatives": 76,
+    "precision": 0.116279,
+    "recall": 0.116279,
+    "f1": 0.116279,
+    "boundary_tolerance_s": 3.5,
+    "reason": "ok"
+  }
+}

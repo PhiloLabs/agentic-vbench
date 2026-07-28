@@ -1,0 +1,347 @@
+{
+  "definition": "Scored boundaries are the official intervention intervals. They may include overlapping chair or room audio and are not defined as voice-activity-only crops.",
+  "official_records": 170,
+  "scored_turns": 86,
+  "scored_turns_with_any_following_record_overlap": 48,
+  "scored_turns_with_overlap_over_tolerance": 8,
+  "maximum_end_audio_transition_error_for_overlaps_s": 4.72,
+  "maximum_end_audio_transition_error_for_over_tolerance_overlaps_s": 2.52,
+  "overlaps": [
+    {
+      "turn_index": 4,
+      "official_record_index": 9,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.4
+    },
+    {
+      "turn_index": 5,
+      "official_record_index": 11,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.14
+    },
+    {
+      "turn_index": 6,
+      "official_record_index": 13,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 3,
+      "nearest_end_audio_transition_error_s": 4.72
+    },
+    {
+      "turn_index": 7,
+      "official_record_index": 15,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 5,
+      "nearest_end_audio_transition_error_s": 2.52
+    },
+    {
+      "turn_index": 8,
+      "official_record_index": 17,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.12
+    },
+    {
+      "turn_index": 9,
+      "official_record_index": 19,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.14
+    },
+    {
+      "turn_index": 10,
+      "official_record_index": 21,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.62
+    },
+    {
+      "turn_index": 11,
+      "official_record_index": 23,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.8
+    },
+    {
+      "turn_index": 12,
+      "official_record_index": 25,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.26
+    },
+    {
+      "turn_index": 14,
+      "official_record_index": 29,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.26
+    },
+    {
+      "turn_index": 15,
+      "official_record_index": 31,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 4,
+      "nearest_end_audio_transition_error_s": 0.28
+    },
+    {
+      "turn_index": 17,
+      "official_record_index": 34,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.38
+    },
+    {
+      "turn_index": 18,
+      "official_record_index": 36,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.04
+    },
+    {
+      "turn_index": 19,
+      "official_record_index": 38,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.22
+    },
+    {
+      "turn_index": 20,
+      "official_record_index": 40,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.72
+    },
+    {
+      "turn_index": 22,
+      "official_record_index": 44,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.26
+    },
+    {
+      "turn_index": 23,
+      "official_record_index": 46,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.46
+    },
+    {
+      "turn_index": 25,
+      "official_record_index": 50,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 4,
+      "nearest_end_audio_transition_error_s": 2.04
+    },
+    {
+      "turn_index": 26,
+      "official_record_index": 52,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.7
+    },
+    {
+      "turn_index": 27,
+      "official_record_index": 54,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 4,
+      "nearest_end_audio_transition_error_s": 1.48
+    },
+    {
+      "turn_index": 30,
+      "official_record_index": 59,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.02
+    },
+    {
+      "turn_index": 31,
+      "official_record_index": 61,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.14
+    },
+    {
+      "turn_index": 32,
+      "official_record_index": 63,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.12
+    },
+    {
+      "turn_index": 33,
+      "official_record_index": 65,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.26
+    },
+    {
+      "turn_index": 34,
+      "official_record_index": 67,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.26
+    },
+    {
+      "turn_index": 36,
+      "official_record_index": 71,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.3
+    },
+    {
+      "turn_index": 40,
+      "official_record_index": 79,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.6
+    },
+    {
+      "turn_index": 41,
+      "official_record_index": 81,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.38
+    },
+    {
+      "turn_index": 42,
+      "official_record_index": 83,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.06
+    },
+    {
+      "turn_index": 43,
+      "official_record_index": 85,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.84
+    },
+    {
+      "turn_index": 45,
+      "official_record_index": 89,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.12
+    },
+    {
+      "turn_index": 46,
+      "official_record_index": 91,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 4,
+      "nearest_end_audio_transition_error_s": 0.12
+    },
+    {
+      "turn_index": 48,
+      "official_record_index": 94,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 4,
+      "nearest_end_audio_transition_error_s": 1.76
+    },
+    {
+      "turn_index": 50,
+      "official_record_index": 97,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.06
+    },
+    {
+      "turn_index": 51,
+      "official_record_index": 99,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.66
+    },
+    {
+      "turn_index": 57,
+      "official_record_index": 111,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 1.22
+    },
+    {
+      "turn_index": 58,
+      "official_record_index": 113,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.94
+    },
+    {
+      "turn_index": 59,
+      "official_record_index": 115,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.26
+    },
+    {
+      "turn_index": 61,
+      "official_record_index": 119,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.1
+    },
+    {
+      "turn_index": 64,
+      "official_record_index": 125,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 0.1
+    },
+    {
+      "turn_index": 70,
+      "official_record_index": 137,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 7,
+      "nearest_end_audio_transition_error_s": 0.6
+    },
+    {
+      "turn_index": 74,
+      "official_record_index": 145,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 0.86
+    },
+    {
+      "turn_index": 77,
+      "official_record_index": 151,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 1,
+      "nearest_end_audio_transition_error_s": 1.86
+    },
+    {
+      "turn_index": 78,
+      "official_record_index": 153,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 3,
+      "nearest_end_audio_transition_error_s": 0.42
+    },
+    {
+      "turn_index": 81,
+      "official_record_index": 159,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 3,
+      "nearest_end_audio_transition_error_s": 0.84
+    },
+    {
+      "turn_index": 82,
+      "official_record_index": 161,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 14,
+      "nearest_end_audio_transition_error_s": 0.68
+    },
+    {
+      "turn_index": 83,
+      "official_record_index": 163,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 3,
+      "nearest_end_audio_transition_error_s": 0.86
+    },
+    {
+      "turn_index": 84,
+      "official_record_index": 165,
+      "following_role": "Vice-President",
+      "following_record_starts_before_scored_end_s": 2,
+      "nearest_end_audio_transition_error_s": 1.66
+    }
+  ]
+}

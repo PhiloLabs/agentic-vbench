@@ -1,0 +1,612 @@
+{
+  "turns": [
+    {
+      "turn_index": 1,
+      "speaker_id": "speaker_191",
+      "language_code": "en",
+      "excerpt_id": "excerpt_001",
+      "start_time_s": 11.5,
+      "end_time_s": 110.7
+    },
+    {
+      "turn_index": 2,
+      "speaker_id": "speaker_180",
+      "language_code": "en",
+      "excerpt_id": "excerpt_002",
+      "start_time_s": 115.4,
+      "end_time_s": 187.3
+    },
+    {
+      "turn_index": 3,
+      "speaker_id": "speaker_152",
+      "language_code": "en",
+      "excerpt_id": "excerpt_003",
+      "start_time_s": 191.5,
+      "end_time_s": 279.8
+    },
+    {
+      "turn_index": 4,
+      "speaker_id": "speaker_118",
+      "language_code": "en",
+      "excerpt_id": "excerpt_004",
+      "start_time_s": 327.4,
+      "end_time_s": 432.1
+    },
+    {
+      "turn_index": 5,
+      "speaker_id": "speaker_127",
+      "language_code": "en",
+      "excerpt_id": "excerpt_005",
+      "start_time_s": 436.4,
+      "end_time_s": 535.1
+    },
+    {
+      "turn_index": 6,
+      "speaker_id": "speaker_297",
+      "language_code": "en",
+      "excerpt_id": "excerpt_006",
+      "start_time_s": 536.9,
+      "end_time_s": 643.8
+    },
+    {
+      "turn_index": 7,
+      "speaker_id": "speaker_723",
+      "language_code": "en",
+      "excerpt_id": "excerpt_007",
+      "start_time_s": 656.8,
+      "end_time_s": 745.8
+    },
+    {
+      "turn_index": 8,
+      "speaker_id": "speaker_218",
+      "language_code": "en",
+      "excerpt_id": "excerpt_008",
+      "start_time_s": 767.0,
+      "end_time_s": 848.0
+    },
+    {
+      "turn_index": 9,
+      "speaker_id": "speaker_668",
+      "language_code": "en",
+      "excerpt_id": "excerpt_009",
+      "start_time_s": 858.0,
+      "end_time_s": 941.3
+    },
+    {
+      "turn_index": 10,
+      "speaker_id": "speaker_548",
+      "language_code": "en",
+      "excerpt_id": "excerpt_010",
+      "start_time_s": 948.0,
+      "end_time_s": 1025.5
+    },
+    {
+      "turn_index": 11,
+      "speaker_id": "speaker_386",
+      "language_code": "en",
+      "excerpt_id": "excerpt_011",
+      "start_time_s": 1038.2,
+      "end_time_s": 1108.8
+    },
+    {
+      "turn_index": 12,
+      "speaker_id": "speaker_274",
+      "language_code": "en",
+      "excerpt_id": "excerpt_012",
+      "start_time_s": 1118.0,
+      "end_time_s": 1209.6
+    },
+    {
+      "turn_index": 13,
+      "speaker_id": "speaker_117",
+      "language_code": "en",
+      "excerpt_id": "excerpt_013",
+      "start_time_s": 1234.6,
+      "end_time_s": 1308.8
+    },
+    {
+      "turn_index": 14,
+      "speaker_id": "speaker_092",
+      "language_code": "en",
+      "excerpt_id": "excerpt_014",
+      "start_time_s": 1329.0,
+      "end_time_s": 1416.6
+    },
+    {
+      "turn_index": 15,
+      "speaker_id": "speaker_426",
+      "language_code": "en",
+      "excerpt_id": "excerpt_015",
+      "start_time_s": 1427.4,
+      "end_time_s": 1563.2
+    },
+    {
+      "turn_index": 16,
+      "speaker_id": "speaker_550",
+      "language_code": "en",
+      "excerpt_id": "excerpt_016",
+      "start_time_s": 1588.2,
+      "end_time_s": 1671.4
+    },
+    {
+      "turn_index": 17,
+      "speaker_id": "speaker_707",
+      "language_code": "en",
+      "excerpt_id": "excerpt_017",
+      "start_time_s": 1676.1,
+      "end_time_s": 1781.6
+    },
+    {
+      "turn_index": 18,
+      "speaker_id": "speaker_285",
+      "language_code": "en",
+      "excerpt_id": "excerpt_018",
+      "start_time_s": 1792.7,
+      "end_time_s": 1900.6
+    },
+    {
+      "turn_index": 19,
+      "speaker_id": "speaker_340",
+      "language_code": "en",
+      "excerpt_id": "excerpt_019",
+      "start_time_s": 1900.6,
+      "end_time_s": 1983.6
+    },
+    {
+      "turn_index": 20,
+      "speaker_id": "speaker_174",
+      "language_code": "en",
+      "excerpt_id": "excerpt_020",
+      "start_time_s": 1994.6,
+      "end_time_s": 2088.2
+    },
+    {
+      "turn_index": 21,
+      "speaker_id": "speaker_467",
+      "language_code": "en",
+      "excerpt_id": "excerpt_021",
+      "start_time_s": 2098.1,
+      "end_time_s": 2187.4
+    },
+    {
+      "turn_index": 22,
+      "speaker_id": "speaker_206",
+      "language_code": "en",
+      "excerpt_id": "excerpt_022",
+      "start_time_s": 2187.4,
+      "end_time_s": 2270.6
+    },
+    {
+      "turn_index": 23,
+      "speaker_id": "speaker_010",
+      "language_code": "en",
+      "excerpt_id": "excerpt_023",
+      "start_time_s": 2285.8,
+      "end_time_s": 2343.9
+    },
+    {
+      "turn_index": 24,
+      "speaker_id": "speaker_076",
+      "language_code": "en",
+      "excerpt_id": "excerpt_024",
+      "start_time_s": 2346.3,
+      "end_time_s": 2409.0
+    },
+    {
+      "turn_index": 25,
+      "speaker_id": "speaker_654",
+      "language_code": "en",
+      "excerpt_id": "excerpt_025",
+      "start_time_s": 2416.4,
+      "end_time_s": 2527.3
+    },
+    {
+      "turn_index": 26,
+      "speaker_id": "speaker_141",
+      "language_code": "en",
+      "excerpt_id": "excerpt_026",
+      "start_time_s": 2548.2,
+      "end_time_s": 2730.5
+    },
+    {
+      "turn_index": 27,
+      "speaker_id": "speaker_068",
+      "language_code": "en",
+      "excerpt_id": "excerpt_027",
+      "start_time_s": 2740.0,
+      "end_time_s": 2848.0
+    },
+    {
+      "turn_index": 28,
+      "speaker_id": "speaker_719",
+      "language_code": "en",
+      "excerpt_id": "excerpt_028",
+      "start_time_s": 2854.0,
+      "end_time_s": 2925.4
+    },
+    {
+      "turn_index": 29,
+      "speaker_id": "speaker_706",
+      "language_code": "en",
+      "excerpt_id": "excerpt_029",
+      "start_time_s": 2927.5,
+      "end_time_s": 2998.2
+    },
+    {
+      "turn_index": 30,
+      "speaker_id": "speaker_342",
+      "language_code": "en",
+      "excerpt_id": "excerpt_030",
+      "start_time_s": 3009.0,
+      "end_time_s": 3090.8
+    },
+    {
+      "turn_index": 31,
+      "speaker_id": "speaker_520",
+      "language_code": "en",
+      "excerpt_id": "excerpt_031",
+      "start_time_s": 3100.8,
+      "end_time_s": 3186.5
+    },
+    {
+      "turn_index": 32,
+      "speaker_id": "speaker_327",
+      "language_code": "en",
+      "excerpt_id": "excerpt_032",
+      "start_time_s": 3190.9,
+      "end_time_s": 3287.6
+    },
+    {
+      "turn_index": 33,
+      "speaker_id": "speaker_602",
+      "language_code": "en",
+      "excerpt_id": "excerpt_033",
+      "start_time_s": 3287.6,
+      "end_time_s": 3387.5
+    },
+    {
+      "turn_index": 34,
+      "speaker_id": "speaker_724",
+      "language_code": "en",
+      "excerpt_id": "excerpt_034",
+      "start_time_s": 3392.2,
+      "end_time_s": 3496.9
+    },
+    {
+      "turn_index": 35,
+      "speaker_id": "speaker_639",
+      "language_code": "en",
+      "excerpt_id": "excerpt_035",
+      "start_time_s": 3501.5,
+      "end_time_s": 3602.6
+    },
+    {
+      "turn_index": 36,
+      "speaker_id": "speaker_499",
+      "language_code": "en",
+      "excerpt_id": "excerpt_036",
+      "start_time_s": 3606.5,
+      "end_time_s": 3700.5
+    },
+    {
+      "turn_index": 37,
+      "speaker_id": "speaker_484",
+      "language_code": "en",
+      "excerpt_id": "excerpt_037",
+      "start_time_s": 3709.9,
+      "end_time_s": 3807.9
+    },
+    {
+      "turn_index": 38,
+      "speaker_id": "speaker_717",
+      "language_code": "en",
+      "excerpt_id": "excerpt_038",
+      "start_time_s": 3811.4,
+      "end_time_s": 3886.4
+    },
+    {
+      "turn_index": 39,
+      "speaker_id": "speaker_157",
+      "language_code": "en",
+      "excerpt_id": "excerpt_039",
+      "start_time_s": 3891.5,
+      "end_time_s": 3980.3
+    },
+    {
+      "turn_index": 40,
+      "speaker_id": "speaker_150",
+      "language_code": "en",
+      "excerpt_id": "excerpt_040",
+      "start_time_s": 3985.1,
+      "end_time_s": 4062.9
+    },
+    {
+      "turn_index": 41,
+      "speaker_id": "speaker_512",
+      "language_code": "en",
+      "excerpt_id": "excerpt_041",
+      "start_time_s": 4071.6,
+      "end_time_s": 4154.3
+    },
+    {
+      "turn_index": 42,
+      "speaker_id": "speaker_225",
+      "language_code": "en",
+      "excerpt_id": "excerpt_042",
+      "start_time_s": 4159.3,
+      "end_time_s": 4431.1
+    },
+    {
+      "turn_index": 43,
+      "speaker_id": "speaker_308",
+      "language_code": "en",
+      "excerpt_id": "excerpt_043",
+      "start_time_s": 4440.6,
+      "end_time_s": 4515.3
+    },
+    {
+      "turn_index": 44,
+      "speaker_id": "speaker_011",
+      "language_code": "en",
+      "excerpt_id": "excerpt_044",
+      "start_time_s": 4522.7,
+      "end_time_s": 4638.4
+    },
+    {
+      "turn_index": 45,
+      "speaker_id": "speaker_121",
+      "language_code": "en",
+      "excerpt_id": "excerpt_045",
+      "start_time_s": 4663.6,
+      "end_time_s": 4745.0
+    },
+    {
+      "turn_index": 46,
+      "speaker_id": "speaker_177",
+      "language_code": "en",
+      "excerpt_id": "excerpt_046",
+      "start_time_s": 4750.2,
+      "end_time_s": 4945.8
+    },
+    {
+      "turn_index": 47,
+      "speaker_id": "speaker_437",
+      "language_code": "en",
+      "excerpt_id": "excerpt_047",
+      "start_time_s": 4950.3,
+      "end_time_s": 5024.2
+    },
+    {
+      "turn_index": 48,
+      "speaker_id": "speaker_149",
+      "language_code": "en",
+      "excerpt_id": "excerpt_048",
+      "start_time_s": 5040.8,
+      "end_time_s": 5108.6
+    },
+    {
+      "turn_index": 49,
+      "speaker_id": "speaker_368",
+      "language_code": "en",
+      "excerpt_id": "excerpt_049",
+      "start_time_s": 5116.3,
+      "end_time_s": 5208.5
+    },
+    {
+      "turn_index": 50,
+      "speaker_id": "speaker_302",
+      "language_code": "en",
+      "excerpt_id": "excerpt_050",
+      "start_time_s": 5212.6,
+      "end_time_s": 5282.6
+    },
+    {
+      "turn_index": 51,
+      "speaker_id": "speaker_343",
+      "language_code": "en",
+      "excerpt_id": "excerpt_051",
+      "start_time_s": 5293.4,
+      "end_time_s": 5366.7
+    },
+    {
+      "turn_index": 52,
+      "speaker_id": "speaker_250",
+      "language_code": "en",
+      "excerpt_id": "excerpt_052",
+      "start_time_s": 5377.0,
+      "end_time_s": 5462.6
+    },
+    {
+      "turn_index": 53,
+      "speaker_id": "speaker_608",
+      "language_code": "en",
+      "excerpt_id": "excerpt_053",
+      "start_time_s": 5469.1,
+      "end_time_s": 5567.1
+    },
+    {
+      "turn_index": 54,
+      "speaker_id": "speaker_725",
+      "language_code": "en",
+      "excerpt_id": "excerpt_054",
+      "start_time_s": 5578.5,
+      "end_time_s": 5648.5
+    },
+    {
+      "turn_index": 55,
+      "speaker_id": "speaker_704",
+      "language_code": "en",
+      "excerpt_id": "excerpt_055",
+      "start_time_s": 5657.8,
+      "end_time_s": 5732.0
+    },
+    {
+      "turn_index": 56,
+      "speaker_id": "speaker_301",
+      "language_code": "en",
+      "excerpt_id": "excerpt_056",
+      "start_time_s": 5741.0,
+      "end_time_s": 5841.0
+    },
+    {
+      "turn_index": 57,
+      "speaker_id": "speaker_286",
+      "language_code": "en",
+      "excerpt_id": "excerpt_057",
+      "start_time_s": 5850.7,
+      "end_time_s": 5960.7
+    },
+    {
+      "turn_index": 58,
+      "speaker_id": "speaker_287",
+      "language_code": "en",
+      "excerpt_id": "excerpt_058",
+      "start_time_s": 5972.6,
+      "end_time_s": 6044.9
+    },
+    {
+      "turn_index": 59,
+      "speaker_id": "speaker_450",
+      "language_code": "en",
+      "excerpt_id": "excerpt_059",
+      "start_time_s": 6053.0,
+      "end_time_s": 6128.7
+    },
+    {
+      "turn_index": 60,
+      "speaker_id": "speaker_199",
+      "language_code": "en",
+      "excerpt_id": "excerpt_060",
+      "start_time_s": 6131.8,
+      "end_time_s": 6220.5
+    },
+    {
+      "turn_index": 61,
+      "speaker_id": "speaker_702",
+      "language_code": "en",
+      "excerpt_id": "excerpt_061",
+      "start_time_s": 6224.0,
+      "end_time_s": 6337.2
+    },
+    {
+      "turn_index": 62,
+      "speaker_id": "speaker_305",
+      "language_code": "en",
+      "excerpt_id": "excerpt_062",
+      "start_time_s": 6352.1,
+      "end_time_s": 6399.9
+    },
+    {
+      "turn_index": 63,
+      "speaker_id": "speaker_392",
+      "language_code": "en",
+      "excerpt_id": "excerpt_063",
+      "start_time_s": 6414.0,
+      "end_time_s": 6494.0
+    },
+    {
+      "turn_index": 64,
+      "speaker_id": "speaker_469",
+      "language_code": "en",
+      "excerpt_id": "excerpt_064",
+      "start_time_s": 6503.1,
+      "end_time_s": 6570.3
+    },
+    {
+      "turn_index": 65,
+      "speaker_id": "speaker_714",
+      "language_code": "en",
+      "excerpt_id": "excerpt_065",
+      "start_time_s": 6573.4,
+      "end_time_s": 6635.6
+    },
+    {
+      "turn_index": 66,
+      "speaker_id": "speaker_716",
+      "language_code": "en",
+      "excerpt_id": "excerpt_066",
+      "start_time_s": 6643.5,
+      "end_time_s": 6706.6
+    },
+    {
+      "turn_index": 67,
+      "speaker_id": "speaker_604",
+      "language_code": "en",
+      "excerpt_id": "excerpt_067",
+      "start_time_s": 6715.3,
+      "end_time_s": 6778.6
+    },
+    {
+      "turn_index": 68,
+      "speaker_id": "speaker_539",
+      "language_code": "en",
+      "excerpt_id": "excerpt_068",
+      "start_time_s": 6813.0,
+      "end_time_s": 6844.4
+    },
+    {
+      "turn_index": 69,
+      "speaker_id": "speaker_120",
+      "language_code": "en",
+      "excerpt_id": "excerpt_069",
+      "start_time_s": 6854.4,
+      "end_time_s": 6923.0
+    },
+    {
+      "turn_index": 70,
+      "speaker_id": "speaker_577",
+      "language_code": "en",
+      "excerpt_id": "excerpt_070",
+      "start_time_s": 6927.9,
+      "end_time_s": 6998.0
+    },
+    {
+      "turn_index": 71,
+      "speaker_id": "speaker_658",
+      "language_code": "en",
+      "excerpt_id": "excerpt_071",
+      "start_time_s": 7011.6,
+      "end_time_s": 7081.4
+    },
+    {
+      "turn_index": 72,
+      "speaker_id": "speaker_703",
+      "language_code": "en",
+      "excerpt_id": "excerpt_072",
+      "start_time_s": 7097.0,
+      "end_time_s": 7143.0
+    },
+    {
+      "turn_index": 73,
+      "speaker_id": "speaker_741",
+      "language_code": "en",
+      "excerpt_id": "excerpt_073",
+      "start_time_s": 7147.9,
+      "end_time_s": 7218.5
+    },
+    {
+      "turn_index": 74,
+      "speaker_id": "speaker_490",
+      "language_code": "en",
+      "excerpt_id": "excerpt_074",
+      "start_time_s": 7226.4,
+      "end_time_s": 7289.7
+    },
+    {
+      "turn_index": 75,
+      "speaker_id": "speaker_735",
+      "language_code": "en",
+      "excerpt_id": "excerpt_075",
+      "start_time_s": 7308.8,
+      "end_time_s": 7355.0
+    },
+    {
+      "turn_index": 76,
+      "speaker_id": "speaker_612",
+      "language_code": "en",
+      "excerpt_id": "excerpt_076",
+      "start_time_s": 7377.8,
+      "end_time_s": 7641.6
+    }
+  ]
+}

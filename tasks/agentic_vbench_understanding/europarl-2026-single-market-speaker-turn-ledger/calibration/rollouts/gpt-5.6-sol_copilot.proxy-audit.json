@@ -1,0 +1,421 @@
+{
+  "log": "gpt-5.6-sol_copilot.proxy.jsonl",
+  "connections": 114,
+  "first_copilot_connection": 3,
+  "github_auth_connections": 3,
+  "post_seal_github_denials": 18,
+  "other_denials": [
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    },
+    {
+      "host": "telemetry.enterprise.githubcopilot.com",
+      "port": 443,
+      "status": "denied"
+    }
+  ],
+  "violations": [],
+  "status": "pass"
+}

@@ -15,8 +15,10 @@ DEBATE_START = "09:59:32"
 EXPECTED_RECORDS = 170
 EXPECTED_TURNS = 86
 EXPECTED_SPEAKERS = 79
+EXPECTED_ROSTER = 742
 MINIMUM_DURATION_S = 30
 SEED = 20260715
+EXCERPT_SEED = 20260717
 TARGET_INTERNAL_ID = "2017076952270"
 ROW = re.compile(
     r"^\s*(?P<name>\S(?:.*?\S)?)\s{2,}"
@@ -34,6 +36,7 @@ class Turn:
     duration: str
     start: str
     end: str
+    language_code: str | None = None
 
 
 def clock_seconds(value):
@@ -103,6 +106,10 @@ def parse_html(path):
                 duration=text(notice, "p.duration"),
                 start=times[0],
                 end=times[1],
+                language_code=re.search(
+                    r"_01_([a-z]{2})\.mpg$",
+                    str(notice.find("a", title="MPG", href=True)["href"]),
+                ).group(1),
             )
         )
     if len(turns) != EXPECTED_RECORDS:
@@ -113,32 +120,71 @@ def parse_html(path):
 def build(pdf_path, html_path):
     pdf_turns = parse_pdf(pdf_path)
     html_turns = parse_html(html_path)
-    if pdf_turns != html_turns:
-        raise ValueError("PDF and HTML records differ")
+    for pdf_turn, html_turn in zip(pdf_turns, html_turns, strict=True):
+        if (
+            pdf_turn.name,
+            pdf_turn.role,
+            pdf_turn.duration,
+            pdf_turn.start,
+            pdf_turn.end,
+        ) != (
+            html_turn.name,
+            html_turn.role,
+            html_turn.duration,
+            html_turn.start,
+            html_turn.end,
+        ):
+            raise ValueError("PDF and HTML records differ")
 
     selected = [
-        turn
-        for turn in pdf_turns
-        if turn.role != "Vice-President"
-        and clock_seconds(turn.duration) >= MINIMUM_DURATION_S
+        (pdf_turn, html_turn.language_code)
+        for pdf_turn, html_turn in zip(pdf_turns, html_turns, strict=True)
+        if pdf_turn.role != "Vice-President"
+        and clock_seconds(pdf_turn.duration) >= MINIMUM_DURATION_S
     ]
-    speakers = list(dict.fromkeys(turn.name for turn in selected))
-    random.Random(SEED).shuffle(speakers)
+    speakers = list(dict.fromkeys(turn.name for turn, _ in selected))
+    roster_ids = json.loads(
+        Path(__file__).with_name("roster_ids.json").read_text()
+    )["official_person_ids"]
+    target_ids = set(
+        json.loads(
+            Path(__file__).with_name("target_person_ids.json").read_text()
+        )["official_person_ids"]
+    )
+    distractor_ids = [
+        identifier for identifier in roster_ids if identifier not in target_ids
+    ]
+    roster_names = speakers + [
+        f"distractor:{identifier}" for identifier in distractor_ids
+    ]
+    random.Random(SEED).shuffle(roster_names)
     mapping = {
         name: f"speaker_{index:03d}"
-        for index, name in enumerate(speakers, start=1)
+        for index, name in enumerate(roster_names, start=1)
     }
     debate_start = clock_seconds(DEBATE_START)
+    excerpt_positions = list(range(len(selected)))
+    random.Random(EXCERPT_SEED).shuffle(excerpt_positions)
+    excerpt_id_by_turn = {
+        turn_index: f"excerpt_{position + 1:03d}"
+        for position, turn_index in enumerate(excerpt_positions)
+    }
     turns = [
         {
             "turn_index": index,
             "speaker_id": mapping[turn.name],
+            "language_code": language_code,
+            "excerpt_id": excerpt_id_by_turn[index - 1],
             "start_time_s": float(clock_seconds(turn.start) - debate_start),
             "end_time_s": float(clock_seconds(turn.end) - debate_start),
         }
-        for index, turn in enumerate(selected, start=1)
+        for index, (turn, language_code) in enumerate(selected, start=1)
     ]
-    if len(turns) != EXPECTED_TURNS or len(speakers) != EXPECTED_SPEAKERS:
+    if (
+        len(turns) != EXPECTED_TURNS
+        or len(speakers) != EXPECTED_SPEAKERS
+        or len(roster_names) != EXPECTED_ROSTER
+    ):
         raise ValueError("unexpected selected turn or speaker count")
     return {"turns": turns}
 

@@ -1,0 +1,52 @@
+{
+  "date": "2026-07-28",
+  "purpose": "Measure whether every final inference card remains recoverable from complete speech content after lexical-shortcut hardening.",
+  "control_design": {
+    "transcripts": 86,
+    "cards": 86,
+    "transcript_content": "complete official intervention transcripts in their original languages",
+    "card_content": "final English inferential cards",
+    "identifiers": "transcript IDs and card order independently shuffled",
+    "excluded_information": [
+      "speaker identity",
+      "speaker order",
+      "timestamps",
+      "ground-truth mapping",
+      "internet access"
+    ],
+    "prompt_sha256": "ad0ee325944577b1ebdb9546980082e0fe681b14bba4e183174bb6add008a21a",
+    "hidden_answer_sha256": "826a87910f46fc88dc2f6a6287b46528580a4ee863befd46323a3c70b0a656e7"
+  },
+  "primary_run": {
+    "model": "gpt-5.6-sol",
+    "harness": "GitHub Copilot CLI 1.0.76-0",
+    "image_id": "sha256:fa81b0532ba0eafd31e1ad1cf15e3ad15b95317be1d691c93bbea93927e472fb",
+    "assistant_turns": 5,
+    "tool_calls": 6,
+    "correct": 86,
+    "total": 86,
+    "accuracy": 1.0,
+    "raw_trajectory_sha256": "4f8e6c727190b5f570d4c35989cbf141d134acec51949cad1a5014c60417615a",
+    "solution_sha256": "db02419081b6830e68a5b320d7981273d2d4da4a9e7fe619963acc5739ea8f38",
+    "score_sha256": "c30257b685fe18662ef8114494bddb751068ca4efd476bab9e8231fb39b6b7e9"
+  },
+  "corroborating_run": {
+    "model": "gemini-3.1-pro-preview",
+    "harness": "GitHub Copilot CLI 1.0.76-0",
+    "image_id": "sha256:fa81b0532ba0eafd31e1ad1cf15e3ad15b95317be1d691c93bbea93927e472fb",
+    "correct": 86,
+    "total": 86,
+    "accuracy": 1.0,
+    "errors": "none",
+    "raw_trajectory_sha256": "ccaed9cf4921c7dc92713a191d3bf70e02318986c85f835339ddcea5e9e387cf",
+    "solution_sha256": "8578135554e4674a072824aef9b9ca15b08a83ff4b419e1a90a307c72fa3fcf3",
+    "score_sha256": "c30257b685fe18662ef8114494bddb751068ca4efd476bab9e8231fb39b6b7e9"
+  },
+  "integrity": {
+    "proxy_audit": "pass",
+    "primary_suspicious_calls": 0,
+    "corroborating_external_augmentation": "All attempted package installs and public web probes failed.",
+    "assessment": "Both mappings were completed from the supplied transcript and card content. GPT and Gemini independently matched 86/86."
+  },
+  "status": "pass"
+}

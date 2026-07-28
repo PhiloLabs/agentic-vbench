@@ -1,6 +1,6 @@
 {
-  "date": "2026-07-27",
-  "auditor": "external-reviewer-gpt-5.5-xhigh",
+  "date": "2026-07-28",
+  "auditor": "external-codex-gpt-5.5-xhigh",
   "overall_verdict": "warn",
   "integrity_status": "warn",
   "design_validity_status": "warn",
@@ -8,70 +8,70 @@
   "checks": {
     "gt_provenance": {
       "status": "pass",
-      "details": "source_provenance.json records official URLs, hashes, counts, player metadata, selection rule, anonymization seed, artifact hashes, and expected GT hash; build_ground_truth.py parses/cross-checks 170 official records and reproduces the current gt.json hash."
+      "details": "Official PDF/HTML-derived ground truth; model-authored cards are disclosed as auxiliary input material, not independent labels."
     },
     "construct_measurement": {
       "status": "warn",
-      "details": "Metric matches the task construct, but the 4-second tolerance and identity review are not backed by independent agreement or preregistered measurement validation."
+      "details": "Deterministic event F1 measures the task construct; semantic-card channel is model-authored but cross-model-qualified."
     },
     "data_event_support": {
-      "status": "warn",
-      "details": "Single task contains 86 turns and 79 speakers with observability evidence, but no split, power, or confirmation design exists."
+      "status": "pass",
+      "details": "86 turns, 79 speakers, 742 roster entries, 21 languages, 86 cards; boundary/media support documented."
     },
     "model_role_fitness": {
       "status": "pass",
-      "details": "Agents generate solutions, deterministic Python scores them, and oracle is only a ceiling/reference artifact."
+      "details": "LLMs are solvers/material auditors; scorer is deterministic; roles are separated."
     },
     "baseline_independence": {
-      "status": "pass",
-      "details": "Oracle/null/degraded-input baselines are labeled appropriately; raw rollout scan found no GT/oracle/verifier path access."
+      "status": "warn",
+      "details": "Baselines and controls are present; scripted perception/card baseline is diagnostic/design-hardening evidence, not confirmation."
     },
     "identification_assay_sensitivity": {
       "status": "pass",
-      "details": "Oracle/null anchors and degraded-input controls exercise positive and negative cases; video-only scripted diagnostic is sensitive to boundary tolerance."
+      "details": "Oracle/empty anchors, five degraded ablations, semantic ceiling, and frame-dump controls exercise assay sensitivity."
     },
     "evaluator_qualification": {
-      "status": "warn",
-      "details": "Primary scorer is deterministic, but supporting manual observability review has one reviewer and private contact sheets."
+      "status": "pass",
+      "details": "Primary evaluator is deterministic; semantic-card material audits are disclosed and corrected."
     },
     "information_statistical_adequacy": {
       "status": "warn",
-      "details": "Raw counts are reported, but calibration uses one trajectory per model with no confidence intervals, seeds, or sample-size justification."
+      "details": "Adequate for a benchmark gate; no uncertainty/power basis for broad robustness or population claims."
     },
     "leakage_fresh_evidence": {
       "status": "pass",
-      "details": "Solver materials exclude GT; task disables internet; listed raw trajectories do not reference GT/oracle/verifier paths."
+      "details": "Internet disabled, proxy sealed, raw trajectory/proxy audits retained, public-oracle probe blocked."
     },
     "result_computation_integrity": {
       "status": "pass",
-      "details": "results.json records verifier hash/metric, oracle/null anchors, full-agent score/count/tool/status/trajectory hashes, ablations, scripted baseline, and checker status; current verifier and trajectory hashes match the manifest."
+      "details": "Standard F1, no self-normalization; reported reward files and immutable raw package exist."
     },
     "scope_claim_alignment": {
       "status": "warn",
-      "details": "Evidence supports this benchmark item but not broad/general strong-agent capability claims."
+      "details": "GPT-first checker passes; Opus 0.116279 exceeds nominal README <0.10; harness/source substitutions are explicit maintainer waivers."
     },
     "outcome_classification": "mixed"
   },
   "claims": [
     {
       "id": "C1",
-      "impact": "supported",
-      "details": "Official-machine-truth ledger provenance is now supported by source_provenance.json, build_ground_truth.py, and matching gt.json hash."
+      "claim": "Official GT and deterministic scoring",
+      "impact": "supported"
     },
     {
       "id": "C2",
-      "impact": "supported",
-      "details": "Deterministic scorer implements the stated exact-ID plus boundary-tolerance F1."
+      "claim": "GPT-first strong-agent calibration",
+      "impact": "supported"
     },
     {
       "id": "C3",
-      "impact": "needs_qualifier",
-      "details": "Shortcut resistance is supported by controls but only on one task instance."
+      "claim": "All strong agents below 0.10",
+      "impact": "unsupported"
     },
     {
       "id": "C4",
-      "impact": "needs_qualifier",
-      "details": "Strong-agent difficulty scores have exact run manifests and hashes, but still need statistical/generalization caveats."
+      "claim": "Copilot harness and Hugging Face hosting compliance",
+      "impact": "needs_waiver"
     }
   ]
 }

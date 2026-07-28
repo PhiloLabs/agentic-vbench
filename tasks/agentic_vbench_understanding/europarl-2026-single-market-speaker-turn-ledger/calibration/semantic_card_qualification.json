@@ -1,0 +1,127 @@
+{
+  "date": "2026-07-28",
+  "purpose": "Qualify shuffled English inferential cards as source-supported, semantically recoverable task materials while measuring lexical-ASR shortcut risk on a deterministic held-out translation split.",
+  "official_source": {
+    "documents": 86,
+    "type": "European Parliament per-intervention DOCX transcript",
+    "private_source_bundle_sha256": "7f18610de47abd045dc343bc8de42c63547547a27a2697fdfbca5ba1a8f22de6"
+  },
+  "rejected_designs": [
+    {
+      "design": "verbatim excerpts",
+      "reward": 0.475
+    },
+    {
+      "design": "first semantic cards with Whisper-tiny lexical matching",
+      "reward": 0.1375
+    },
+    {
+      "design": "first semantic cards with shipped Whisper-base full-turn matching",
+      "reward": 0.35
+    },
+    {
+      "design": "translation-conditioned meaning-only cards",
+      "reward": 0.0875,
+      "reason_rejected": "The certifying translations were also used during card authoring, so the score was in-sample."
+    },
+    {
+      "design": "fresh held-out summary cards",
+      "reward": 0.1625,
+      "reason_rejected": "The untouched translation holdout exposed residual lexical restatement."
+    }
+  ],
+  "heldout_protocol": {
+    "split_seed": "semantic-v3-heldout",
+    "perception_exact_translation_turns": 39,
+    "development_translations_visible_to_writer": 19,
+    "heldout_translations_hidden_from_writer": 20,
+    "writer_files_read": [
+      "private/excerpt_mapping.json",
+      "development_translations_private.json",
+      "private/roster_sources.json"
+    ],
+    "writer_forbidden_inputs": [
+      "heldout translations",
+      "all prior card artifacts and audits",
+      "baseline solutions, rewards, and matching",
+      "ground truth, oracle, and verifier outputs",
+      "speaker mapping"
+    ]
+  },
+  "final_card_construct": {
+    "name": "inferential consequence",
+    "description": "Each card states a source-entailed counterfactual, implication, falsifiable policy-logic test, or premise/outcome tension rather than summarizing or translating the speech.",
+    "writer_model_family": "Claude served through GitHub Copilot",
+    "cards": 86,
+    "mapping_preserved": true,
+    "unique_ids": 86,
+    "unique_texts": 86,
+    "minimum_words": 20,
+    "maximum_words": 35,
+    "writer_audit_sha256": "27ba582fa46ef7babeb78f565a8febe1549686a0f47a7a4a86426a3709ac9f65"
+  },
+  "independent_qualification": {
+    "first_audit": {
+      "model_family": "GPT served through GitHub Copilot",
+      "cards_passed": 62,
+      "cards_requiring_correction": 24,
+      "audit_sha256": "0d9e912fd9f1f11df1694e495199d703137176b051260bc4d8f724bf2118687c"
+    },
+    "correction_recheck": {
+      "model_family": "Claude served through GitHub Copilot",
+      "cards_checked": 24,
+      "blocking_card_ids": [],
+      "advisory_card_ids": [
+        "v4_card_009",
+        "v4_card_030"
+      ],
+      "audit_sha256": "b9aa22c6e2e67e82c45723afc9ef7776cdb54f171e3e5de4cc5357939bdb6246"
+    },
+    "final_advisory_recheck": {
+      "cards_checked": 2,
+      "blocking_card_ids": [],
+      "overall": "pass",
+      "audit_sha256": "3bdb5aa1150b44c77a5ad617044d2a8807a4411ac856c24d1bbc76bac4b7410c"
+    },
+    "final_status": "pass"
+  },
+  "published_cards": {
+    "semantic_cards_sha256": "5a8bc33f3b3a9acf1706fc2d97f50c12d263a69c35c02ebb764c149343f3460f",
+    "excerpts_json_sha256": "4137bc63db3590aefd27df8d3e8ff0285c95f8af8d1c13a630065525d24d74f1",
+    "public_source_evidence": "semantic_card_sources.json",
+    "public_source_evidence_sha256": "b76fd3fd61b3ca556c81b5f62914ff9b3f6c76b808e277314c535a4e8f2365f1"
+  },
+  "lexical_shortcut_preflight": {
+    "pipeline": "Energy VAD, YuNet/SFace 742-way identity, VoxLingua language, shipped Whisper-base full-turn English translation, and maximum-weight one-to-one card assignment over TF-IDF cosine, character-trigram Jaccard, and word Jaccard.",
+    "ground_truth_access": false,
+    "perception_only_exact_turns": 39,
+    "perception_only_headroom_f1": 0.4875,
+    "true_positives_after_card_matching": 5,
+    "heldout_true_positives": 4,
+    "development_true_positives": 1,
+    "predicted_turns": 74,
+    "reward": 0.0625,
+    "strong_agent_threshold": 0.1,
+    "status": "pass",
+    "solution_sha256": "9284a6f79bf4763f30c727059eb6653019b96e0aa37d8c12ff81300e8c1815c9",
+    "reward_sha256": "e854ff80962eef7ff0b5bd8ea3d1dcdaeecffdfb4055533f1666094e7ca45998",
+    "matching_sha256": "fddf40df30cd431e89e540bd55c42c33369c9ac970941597387b4a3c358b2176"
+  },
+  "semantic_ceiling_control": {
+    "input": "86 complete official transcripts in original languages plus 86 shuffled final inferential cards; identifiers independently shuffled; no speaker identity or turn order.",
+    "primary_model": "gpt-5.6-sol",
+    "primary_accuracy": 1.0,
+    "primary_correct": 86,
+    "corroborating_model": "gemini-3.1-pro-preview",
+    "corroborating_accuracy": 1.0,
+    "corroborating_correct": 86,
+    "total": 86,
+    "network": "sealed calibration network; no external content was obtained",
+    "primary_raw_trajectory_sha256": "4f8e6c727190b5f570d4c35989cbf141d134acec51949cad1a5014c60417615a",
+    "primary_solution_sha256": "db02419081b6830e68a5b320d7981273d2d4da4a9e7fe619963acc5739ea8f38",
+    "corroborating_raw_trajectory_sha256": "ccaed9cf4921c7dc92713a191d3bf70e02318986c85f835339ddcea5e9e387cf",
+    "corroborating_solution_sha256": "8578135554e4674a072824aef9b9ca15b08a83ff4b419e1a90a307c72fa3fcf3",
+    "status": "pass"
+  },
+  "provenance_note": "The cards are explicitly model-authored and cross-model-qualified auxiliary input materials, not official quotations or independent ground-truth labels. The hidden card-to-turn mapping remains the fixed deterministic shuffle of the 86 official interventions."
+}

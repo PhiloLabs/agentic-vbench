@@ -6,16 +6,62 @@ import os
 import stat
 from pathlib import Path
 
-TOLERANCE_S = 4.0
+TOLERANCE_S = 3.5
 MAX_PREDICTED_TURNS = 1000
 MAX_SOLUTION_BYTES = 2_000_000
+VALID_LANGUAGE_CODES = {
+    "bg",
+    "cs",
+    "da",
+    "de",
+    "el",
+    "en",
+    "es",
+    "fi",
+    "fr",
+    "hr",
+    "hu",
+    "it",
+    "lt",
+    "lv",
+    "nl",
+    "pl",
+    "pt",
+    "ro",
+    "sk",
+    "sl",
+    "sv",
+}
 
 
 def load_ground_truth():
     return json.loads(Path(__file__).with_name("gt.json").read_text())["turns"]
 
 
-def load_prediction(path, valid_speaker_ids):
+def load_roster_ids():
+    return {
+        speaker["speaker_id"]
+        for speaker in json.loads(
+            Path(__file__).with_name("roster.json").read_text()
+        )["speakers"]
+    }
+
+
+def load_excerpt_ids():
+    return {
+        excerpt["excerpt_id"]
+        for excerpt in json.loads(
+            Path(__file__).with_name("excerpts.json").read_text()
+        )["excerpts"]
+    }
+
+
+def load_prediction(
+    path,
+    valid_speaker_ids,
+    valid_language_codes,
+    valid_excerpt_ids,
+):
     descriptor = os.open(
         path,
         os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK,
@@ -45,47 +91,68 @@ def load_prediction(path, valid_speaker_ids):
         )
 
     validated = []
+    invalid = []
     previous_start = -1.0
     for position, turn in enumerate(turns, start=1):
-        if not isinstance(turn, dict):
-            raise ValueError(f"turn {position} must be an object")
-        required = {"turn_index", "speaker_id", "start_time_s", "end_time_s"}
-        if not required.issubset(turn):
-            raise ValueError(f"turn {position} is missing required fields")
-        if turn["turn_index"] != position:
-            raise ValueError("turn_index must be consecutive and one-based")
-        if turn["speaker_id"] not in valid_speaker_ids:
-            raise ValueError(f"turn {position} has an invalid speaker_id")
-        start = turn["start_time_s"]
-        end = turn["end_time_s"]
-        if (
-            isinstance(start, bool)
-            or isinstance(end, bool)
-            or not isinstance(start, (int, float))
-            or not isinstance(end, (int, float))
-            or not math.isfinite(start)
-            or not math.isfinite(end)
-            or start < 0
-            or end <= start
-        ):
-            raise ValueError(f"turn {position} has invalid timestamps")
-        if start < previous_start:
-            raise ValueError("turns must be chronological")
-        previous_start = float(start)
-        validated.append(
-            {
-                "turn_index": position,
-                "speaker_id": turn["speaker_id"],
-                "start_time_s": float(start),
-                "end_time_s": float(end),
+        try:
+            if not isinstance(turn, dict):
+                raise ValueError("must be an object")
+            required = {
+                "turn_index",
+                "speaker_id",
+                "language_code",
+                "excerpt_id",
+                "start_time_s",
+                "end_time_s",
             }
-        )
-    return validated
+            if not required.issubset(turn):
+                raise ValueError("is missing required fields")
+            if turn["turn_index"] != position:
+                raise ValueError(
+                    "turn_index must be consecutive and one-based"
+                )
+            if turn["speaker_id"] not in valid_speaker_ids:
+                raise ValueError("has an invalid speaker_id")
+            if turn["language_code"] not in valid_language_codes:
+                raise ValueError("has an invalid language_code")
+            if turn["excerpt_id"] not in valid_excerpt_ids:
+                raise ValueError("has an invalid excerpt_id")
+            start = turn["start_time_s"]
+            end = turn["end_time_s"]
+            if (
+                isinstance(start, bool)
+                or isinstance(end, bool)
+                or not isinstance(start, (int, float))
+                or not isinstance(end, (int, float))
+                or not math.isfinite(start)
+                or not math.isfinite(end)
+                or start < 0
+                or end <= start
+            ):
+                raise ValueError("has invalid timestamps")
+            if start < previous_start:
+                raise ValueError("is not chronological")
+            previous_start = float(start)
+            validated.append(
+                {
+                    "turn_index": position,
+                    "speaker_id": turn["speaker_id"],
+                    "language_code": turn["language_code"],
+                    "excerpt_id": turn["excerpt_id"],
+                    "start_time_s": float(start),
+                    "end_time_s": float(end),
+                }
+            )
+        except ValueError as error:
+            invalid.append(f"turn {position} {error}")
+    return validated, len(turns), invalid
 
 
 def matches(prediction, ground_truth):
     return (
         prediction["speaker_id"] == ground_truth["speaker_id"]
+        and prediction["language_code"] == ground_truth["language_code"]
+        and prediction["excerpt_id"] == ground_truth["excerpt_id"]
         and abs(prediction["start_time_s"] - ground_truth["start_time_s"])
         <= TOLERANCE_S
         and abs(prediction["end_time_s"] - ground_truth["end_time_s"])
@@ -113,9 +180,12 @@ def monotonic_true_positives(predictions, ground_truth):
     return previous[-1]
 
 
-def score(predictions, ground_truth):
+def score(predictions, ground_truth, predicted_count=None):
     true_positives = monotonic_true_positives(predictions, ground_truth)
-    precision = true_positives / len(predictions) if predictions else 0.0
+    predicted_count = (
+        len(predictions) if predicted_count is None else predicted_count
+    )
+    precision = true_positives / predicted_count if predicted_count else 0.0
     recall = true_positives / len(ground_truth) if ground_truth else 0.0
     reward = (
         2.0 * precision * recall / (precision + recall)
@@ -124,9 +194,11 @@ def score(predictions, ground_truth):
     )
     return reward, {
         "ground_truth_turns": len(ground_truth),
-        "predicted_turns": len(predictions),
+        "predicted_turns": predicted_count,
+        "valid_predicted_turns": len(predictions),
+        "invalid_predicted_turns": predicted_count - len(predictions),
         "true_positives": true_positives,
-        "false_positives": len(predictions) - true_positives,
+        "false_positives": predicted_count - true_positives,
         "false_negatives": len(ground_truth) - true_positives,
         "precision": round(precision, 6),
         "recall": round(recall, 6),
@@ -143,15 +215,28 @@ def main():
     args = parser.parse_args()
 
     reason = "ok"
+    predicted_count = 0
     ground_truth = load_ground_truth()
-    valid_speaker_ids = {turn["speaker_id"] for turn in ground_truth}
+    valid_speaker_ids = load_roster_ids()
+    valid_excerpt_ids = load_excerpt_ids()
     try:
-        predictions = load_prediction(args.solution, valid_speaker_ids)
+        predictions, predicted_count, invalid = load_prediction(
+            args.solution,
+            valid_speaker_ids,
+            VALID_LANGUAGE_CODES,
+            valid_excerpt_ids,
+        )
+        if invalid:
+            reason = "; ".join(invalid[:10])
     except Exception as error:
         predictions = []
         reason = f"invalid solution: {error}"
 
-    reward, details = score(predictions, ground_truth)
+    reward, details = score(
+        predictions,
+        ground_truth,
+        predicted_count=predicted_count,
+    )
     details["reason"] = reason
     args.reward_json.parent.mkdir(parents=True, exist_ok=True)
     args.reward_json.write_text(
