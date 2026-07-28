@@ -1,0 +1,1303 @@
+{
+  "events": [
+    {
+      "death_tick": 39383,
+      "killer": "Malady",
+      "positions": {
+        "death": {
+          "raw_x": 89.688965,
+          "raw_y": 163.217041,
+          "sample_tick": 39383,
+          "tick_delta": 0,
+          "world_x": 11480.1875,
+          "world_y": 20891.78125
+        },
+        "minus_10s": {
+          "raw_x": 96.838135,
+          "raw_y": 160.692627,
+          "sample_tick": 39083,
+          "tick_delta": 0,
+          "world_x": 12395.28125,
+          "world_y": 20568.65625
+        },
+        "minus_5s": {
+          "raw_x": 95.399658,
+          "raw_y": 161.334717,
+          "sample_tick": 39231,
+          "tick_delta": -2,
+          "world_x": 12211.15625,
+          "world_y": 20650.84375
+        }
+      },
+      "time": 316,
+      "victim": "tOfu",
+      "victim_hero": "npc_dota_hero_warlock"
+    },
+    {
+      "death_tick": 39413,
+      "killer": "m1CKe",
+      "positions": {
+        "death": {
+          "raw_x": 93.338135,
+          "raw_y": 159.412354,
+          "sample_tick": 39411,
+          "tick_delta": -2,
+          "world_x": 11947.28125,
+          "world_y": 20404.78125
+        },
+        "minus_10s": {
+          "raw_x": 94.595459,
+          "raw_y": 156.229004,
+          "sample_tick": 39111,
+          "tick_delta": -2,
+          "world_x": 12108.21875,
+          "world_y": 19997.3125
+        },
+        "minus_5s": {
+          "raw_x": 93.821289,
+          "raw_y": 157.27417,
+          "sample_tick": 39263,
+          "tick_delta": 0,
+          "world_x": 12009.125,
+          "world_y": 20131.09375
+        }
+      },
+      "time": 317,
+      "victim": "Saksa",
+      "victim_hero": "npc_dota_hero_shadow_demon"
+    },
+    {
+      "death_tick": 39689,
+      "killer": "DM",
+      "positions": {
+        "death": {
+          "raw_x": 98.13208,
+          "raw_y": 147.767822,
+          "sample_tick": 39687,
+          "tick_delta": -2,
+          "world_x": 12560.90625,
+          "world_y": 18914.28125
+        },
+        "minus_10s": {
+          "raw_x": 93.442139,
+          "raw_y": 162.329346,
+          "sample_tick": 39387,
+          "tick_delta": -2,
+          "world_x": 11960.59375,
+          "world_y": 20778.15625
+        },
+        "minus_5s": {
+          "raw_x": 98.04834,
+          "raw_y": 152.566895,
+          "sample_tick": 39539,
+          "tick_delta": 0,
+          "world_x": 12550.1875,
+          "world_y": 19528.5625
+        }
+      },
+      "time": 326,
+      "victim": "m1CKe",
+      "victim_hero": "npc_dota_hero_nevermore"
+    },
+    {
+      "death_tick": 48481,
+      "killer": "Nisha",
+      "positions": {
+        "death": {
+          "raw_x": 139.57251,
+          "raw_y": 90.709473,
+          "sample_tick": 48479,
+          "tick_delta": -2,
+          "world_x": 17865.28125,
+          "world_y": 11610.8125
+        },
+        "minus_10s": {
+          "raw_x": 141.550049,
+          "raw_y": 93.021729,
+          "sample_tick": 48179,
+          "tick_delta": -2,
+          "world_x": 18118.40625,
+          "world_y": 11906.78125
+        },
+        "minus_5s": {
+          "raw_x": 146.135254,
+          "raw_y": 90.425293,
+          "sample_tick": 48331,
+          "tick_delta": 0,
+          "world_x": 18705.3125,
+          "world_y": 11574.4375
+        }
+      },
+      "time": 619,
+      "victim": "Malady",
+      "victim_hero": "npc_dota_hero_jakiro"
+    },
+    {
+      "death_tick": 48629,
+      "killer": "watson",
+      "positions": {
+        "death": {
+          "raw_x": 136.830322,
+          "raw_y": 89.338135,
+          "sample_tick": 48627,
+          "tick_delta": -2,
+          "world_x": 17514.28125,
+          "world_y": 11435.28125
+        },
+        "minus_10s": {
+          "raw_x": 145.067383,
+          "raw_y": 92.789062,
+          "sample_tick": 48327,
+          "tick_delta": -2,
+          "world_x": 18568.625,
+          "world_y": 11877.0
+        },
+        "minus_5s": {
+          "raw_x": 138.696533,
+          "raw_y": 91.229004,
+          "sample_tick": 48479,
+          "tick_delta": 0,
+          "world_x": 17753.15625,
+          "world_y": 11677.3125
+        }
+      },
+      "time": 624,
+      "victim": "Ace",
+      "victim_hero": "npc_dota_hero_tidehunter"
+    },
+    {
+      "death_tick": 49031,
+      "killer": "CHIRA_JUNIOR",
+      "positions": {
+        "death": {
+          "raw_x": 137.81543,
+          "raw_y": 101.941406,
+          "sample_tick": 49031,
+          "tick_delta": 0,
+          "world_x": 17640.375,
+          "world_y": 13048.5
+        },
+        "minus_10s": {
+          "raw_x": 139.15918,
+          "raw_y": 92.874512,
+          "sample_tick": 48731,
+          "tick_delta": 0,
+          "world_x": 17812.375,
+          "world_y": 11887.9375
+        },
+        "minus_5s": {
+          "raw_x": 137.30249,
+          "raw_y": 99.020996,
+          "sample_tick": 48879,
+          "tick_delta": -2,
+          "world_x": 17574.71875,
+          "world_y": 12674.6875
+        }
+      },
+      "time": 638,
+      "victim": "Nisha",
+      "victim_hero": "npc_dota_hero_void_spirit"
+    },
+    {
+      "death_tick": 50725,
+      "killer": "Saksa",
+      "positions": {
+        "death": {
+          "raw_x": 115.748535,
+          "raw_y": 122.757568,
+          "sample_tick": 50723,
+          "tick_delta": -2,
+          "world_x": 14815.8125,
+          "world_y": 15712.96875
+        },
+        "minus_10s": {
+          "raw_x": 127.193115,
+          "raw_y": 115.212891,
+          "sample_tick": 50423,
+          "tick_delta": -2,
+          "world_x": 16280.71875,
+          "world_y": 14747.25
+        },
+        "minus_5s": {
+          "raw_x": 116.54126,
+          "raw_y": 118.406494,
+          "sample_tick": 50575,
+          "tick_delta": 0,
+          "world_x": 14917.28125,
+          "world_y": 15156.03125
+        }
+      },
+      "time": 694,
+      "victim": "Boxi",
+      "victim_hero": "npc_dota_hero_tiny"
+    },
+    {
+      "death_tick": 50919,
+      "killer": "DM",
+      "positions": {
+        "death": {
+          "raw_x": 122.093262,
+          "raw_y": 125.111816,
+          "sample_tick": 50919,
+          "tick_delta": 0,
+          "world_x": 15627.9375,
+          "world_y": 16014.3125
+        },
+        "minus_10s": {
+          "raw_x": 113.553467,
+          "raw_y": 117.477783,
+          "sample_tick": 50619,
+          "tick_delta": 0,
+          "world_x": 14534.84375,
+          "world_y": 15037.15625
+        },
+        "minus_5s": {
+          "raw_x": 113.506836,
+          "raw_y": 116.842773,
+          "sample_tick": 50767,
+          "tick_delta": -2,
+          "world_x": 14528.875,
+          "world_y": 14955.875
+        }
+      },
+      "time": 701,
+      "victim": "Nisha",
+      "victim_hero": "npc_dota_hero_void_spirit"
+    },
+    {
+      "death_tick": 51309,
+      "killer": "watson",
+      "positions": {
+        "death": {
+          "raw_x": 139.232422,
+          "raw_y": 131.819092,
+          "sample_tick": 51307,
+          "tick_delta": -2,
+          "world_x": 17821.75,
+          "world_y": 16872.84375
+        },
+        "minus_10s": {
+          "raw_x": 133.990479,
+          "raw_y": 130.033203,
+          "sample_tick": 51007,
+          "tick_delta": -2,
+          "world_x": 17150.78125,
+          "world_y": 16644.25
+        },
+        "minus_5s": {
+          "raw_x": 137.972412,
+          "raw_y": 129.227295,
+          "sample_tick": 51159,
+          "tick_delta": 0,
+          "world_x": 17660.46875,
+          "world_y": 16541.09375
+        }
+      },
+      "time": 714,
+      "victim": "tOfu",
+      "victim_hero": "npc_dota_hero_warlock"
+    },
+    {
+      "death_tick": 71050,
+      "killer": "watson",
+      "positions": {
+        "death": {
+          "raw_x": 144.322266,
+          "raw_y": 81.399658,
+          "sample_tick": 71050,
+          "tick_delta": 0,
+          "world_x": 18473.25,
+          "world_y": 10419.15625
+        },
+        "minus_10s": {
+          "raw_x": 138.163818,
+          "raw_y": 78.293945,
+          "sample_tick": 70750,
+          "tick_delta": 0,
+          "world_x": 17684.96875,
+          "world_y": 10021.625
+        },
+        "minus_5s": {
+          "raw_x": 141.981689,
+          "raw_y": 79.954834,
+          "sample_tick": 70898,
+          "tick_delta": -2,
+          "world_x": 18173.65625,
+          "world_y": 10234.21875
+        }
+      },
+      "time": 1372,
+      "victim": "Boxi",
+      "victim_hero": "npc_dota_hero_tiny"
+    },
+    {
+      "death_tick": 71200,
+      "killer": "m1CKe",
+      "positions": {
+        "death": {
+          "raw_x": 139.673096,
+          "raw_y": 85.341797,
+          "sample_tick": 71200,
+          "tick_delta": 0,
+          "world_x": 17878.15625,
+          "world_y": 10923.75
+        },
+        "minus_10s": {
+          "raw_x": 137.699463,
+          "raw_y": 83.027344,
+          "sample_tick": 70898,
+          "tick_delta": -2,
+          "world_x": 17625.53125,
+          "world_y": 10627.5
+        },
+        "minus_5s": {
+          "raw_x": 140.25,
+          "raw_y": 85.25,
+          "sample_tick": 71050,
+          "tick_delta": 0,
+          "world_x": 17952.0,
+          "world_y": 10912.0
+        }
+      },
+      "time": 1377,
+      "victim": "Malady",
+      "victim_hero": "npc_dota_hero_jakiro"
+    },
+    {
+      "death_tick": 71298,
+      "killer": "CHIRA_JUNIOR",
+      "positions": {
+        "death": {
+          "raw_x": 146.702148,
+          "raw_y": 84.793945,
+          "sample_tick": 71296,
+          "tick_delta": -2,
+          "world_x": 18777.875,
+          "world_y": 10853.625
+        },
+        "minus_10s": {
+          "raw_x": 143.846191,
+          "raw_y": 80.034424,
+          "sample_tick": 70998,
+          "tick_delta": 0,
+          "world_x": 18412.3125,
+          "world_y": 10244.40625
+        },
+        "minus_5s": {
+          "raw_x": 146.908203,
+          "raw_y": 82.163818,
+          "sample_tick": 71146,
+          "tick_delta": -2,
+          "world_x": 18804.25,
+          "world_y": 10516.96875
+        }
+      },
+      "time": 1380,
+      "victim": "Ace",
+      "victim_hero": "npc_dota_hero_tidehunter"
+    },
+    {
+      "death_tick": 71300,
+      "killer": "CHIRA_JUNIOR",
+      "positions": {
+        "death": {
+          "raw_x": 149.265137,
+          "raw_y": 86.448242,
+          "sample_tick": 71300,
+          "tick_delta": 0,
+          "world_x": 19105.9375,
+          "world_y": 11065.375
+        },
+        "minus_10s": {
+          "raw_x": 144.70459,
+          "raw_y": 83.35498,
+          "sample_tick": 70998,
+          "tick_delta": -2,
+          "world_x": 18522.1875,
+          "world_y": 10669.4375
+        },
+        "minus_5s": {
+          "raw_x": 146.598877,
+          "raw_y": 85.461426,
+          "sample_tick": 71150,
+          "tick_delta": 0,
+          "world_x": 18764.65625,
+          "world_y": 10939.0625
+        }
+      },
+      "time": 1380,
+      "victim": "tOfu",
+      "victim_hero": "npc_dota_hero_warlock"
+    },
+    {
+      "death_tick": 72934,
+      "killer": "Boxi",
+      "positions": {
+        "death": {
+          "raw_x": 94.708984,
+          "raw_y": 131.421631,
+          "sample_tick": 72932,
+          "tick_delta": -2,
+          "world_x": 12122.75,
+          "world_y": 16821.96875
+        },
+        "minus_10s": {
+          "raw_x": 77.393799,
+          "raw_y": 138.928467,
+          "sample_tick": 72632,
+          "tick_delta": -2,
+          "world_x": 9906.40625,
+          "world_y": 17782.84375
+        },
+        "minus_5s": {
+          "raw_x": 90.302002,
+          "raw_y": 132.311523,
+          "sample_tick": 72784,
+          "tick_delta": 0,
+          "world_x": 11558.65625,
+          "world_y": 16935.875
+        }
+      },
+      "time": 1434,
+      "victim": "DM",
+      "victim_hero": "npc_dota_hero_bristleback"
+    },
+    {
+      "death_tick": 73208,
+      "killer": "Saksa",
+      "positions": {
+        "death": {
+          "raw_x": 87.026123,
+          "raw_y": 134.642822,
+          "sample_tick": 73208,
+          "tick_delta": 0,
+          "world_x": 11139.34375,
+          "world_y": 17234.28125
+        },
+        "minus_10s": {
+          "raw_x": 95.089844,
+          "raw_y": 130.886719,
+          "sample_tick": 72908,
+          "tick_delta": 0,
+          "world_x": 12171.5,
+          "world_y": 16753.5
+        },
+        "minus_5s": {
+          "raw_x": 91.389648,
+          "raw_y": 132.440186,
+          "sample_tick": 73056,
+          "tick_delta": -2,
+          "world_x": 11697.875,
+          "world_y": 16952.34375
+        }
+      },
+      "time": 1444,
+      "victim": "Boxi",
+      "victim_hero": "npc_dota_hero_tiny"
+    },
+    {
+      "death_tick": 73268,
+      "killer": "Saksa",
+      "positions": {
+        "death": {
+          "raw_x": 91.505615,
+          "raw_y": 139.805908,
+          "sample_tick": 73268,
+          "tick_delta": 0,
+          "world_x": 11712.71875,
+          "world_y": 17895.15625
+        },
+        "minus_10s": {
+          "raw_x": 93.728271,
+          "raw_y": 133.789062,
+          "sample_tick": 72968,
+          "tick_delta": 0,
+          "world_x": 11997.21875,
+          "world_y": 17125.0
+        },
+        "minus_5s": {
+          "raw_x": 89.43457,
+          "raw_y": 136.101807,
+          "sample_tick": 73116,
+          "tick_delta": -2,
+          "world_x": 11447.625,
+          "world_y": 17421.03125
+        }
+      },
+      "time": 1446,
+      "victim": "m1CKe",
+      "victim_hero": "npc_dota_hero_nevermore"
+    },
+    {
+      "death_tick": 85221,
+      "killer": "Nisha",
+      "positions": {
+        "death": {
+          "raw_x": 180.206543,
+          "raw_y": 67.399658,
+          "sample_tick": 85221,
+          "tick_delta": 0,
+          "world_x": 23066.4375,
+          "world_y": 8627.15625
+        },
+        "minus_10s": {
+          "raw_x": 180.937988,
+          "raw_y": 70.758057,
+          "sample_tick": 84921,
+          "tick_delta": 0,
+          "world_x": 23160.0625,
+          "world_y": 9057.03125
+        },
+        "minus_5s": {
+          "raw_x": 178.907471,
+          "raw_y": 68.224609,
+          "sample_tick": 85069,
+          "tick_delta": -2,
+          "world_x": 22900.15625,
+          "world_y": 8732.75
+        }
+      },
+      "time": 1844,
+      "victim": "Saksa",
+      "victim_hero": "npc_dota_hero_shadow_demon"
+    },
+    {
+      "death_tick": 85323,
+      "killer": "DM",
+      "positions": {
+        "death": {
+          "raw_x": 172.280762,
+          "raw_y": 71.569824,
+          "sample_tick": 85321,
+          "tick_delta": -2,
+          "world_x": 22051.9375,
+          "world_y": 9160.9375
+        },
+        "minus_10s": {
+          "raw_x": 163.751221,
+          "raw_y": 76.573242,
+          "sample_tick": 85021,
+          "tick_delta": -2,
+          "world_x": 20960.15625,
+          "world_y": 9801.375
+        },
+        "minus_5s": {
+          "raw_x": 177.29248,
+          "raw_y": 68.071777,
+          "sample_tick": 85173,
+          "tick_delta": 0,
+          "world_x": 22693.4375,
+          "world_y": 8713.1875
+        }
+      },
+      "time": 1847,
+      "victim": "Boxi",
+      "victim_hero": "npc_dota_hero_tiny"
+    },
+    {
+      "death_tick": 85341,
+      "killer": "watson",
+      "positions": {
+        "death": {
+          "raw_x": 172.93335,
+          "raw_y": 66.088379,
+          "sample_tick": 85341,
+          "tick_delta": 0,
+          "world_x": 22135.46875,
+          "world_y": 8459.3125
+        },
+        "minus_10s": {
+          "raw_x": 169.241699,
+          "raw_y": 86.401611,
+          "sample_tick": 85041,
+          "tick_delta": 0,
+          "world_x": 21662.9375,
+          "world_y": 11059.40625
+        },
+        "minus_5s": {
+          "raw_x": 178.593994,
+          "raw_y": 68.055908,
+          "sample_tick": 85189,
+          "tick_delta": -2,
+          "world_x": 22860.03125,
+          "world_y": 8711.15625
+        }
+      },
+      "time": 1848,
+      "victim": "Ace",
+      "victim_hero": "npc_dota_hero_tidehunter"
+    },
+    {
+      "death_tick": 85683,
+      "killer": "DM",
+      "positions": {
+        "death": {
+          "raw_x": 175.556396,
+          "raw_y": 84.244629,
+          "sample_tick": 85681,
+          "tick_delta": -2,
+          "world_x": 22471.21875,
+          "world_y": 10783.3125
+        },
+        "minus_10s": {
+          "raw_x": 178.474609,
+          "raw_y": 77.230957,
+          "sample_tick": 85381,
+          "tick_delta": -2,
+          "world_x": 22844.75,
+          "world_y": 9885.5625
+        },
+        "minus_5s": {
+          "raw_x": 176.109131,
+          "raw_y": 78.524658,
+          "sample_tick": 85533,
+          "tick_delta": 0,
+          "world_x": 22541.96875,
+          "world_y": 10051.15625
+        }
+      },
+      "time": 1859,
+      "victim": "tOfu",
+      "victim_hero": "npc_dota_hero_warlock"
+    },
+    {
+      "death_tick": 89098,
+      "killer": "Boxi",
+      "positions": {
+        "death": {
+          "raw_x": 172.006348,
+          "raw_y": 123.253906,
+          "sample_tick": 89098,
+          "tick_delta": 0,
+          "world_x": 22016.8125,
+          "world_y": 15776.5
+        },
+        "minus_10s": {
+          "raw_x": 153.451416,
+          "raw_y": 119.750732,
+          "sample_tick": 88798,
+          "tick_delta": 0,
+          "world_x": 19641.78125,
+          "world_y": 15328.09375
+        },
+        "minus_5s": {
+          "raw_x": 168.807373,
+          "raw_y": 124.708984,
+          "sample_tick": 88946,
+          "tick_delta": -2,
+          "world_x": 21607.34375,
+          "world_y": 15962.75
+        }
+      },
+      "time": 1973,
+      "victim": "Saksa",
+      "victim_hero": "npc_dota_hero_shadow_demon"
+    },
+    {
+      "death_tick": 89162,
+      "killer": "Ace",
+      "positions": {
+        "death": {
+          "raw_x": 171.736328,
+          "raw_y": 123.297363,
+          "sample_tick": 89162,
+          "tick_delta": 0,
+          "world_x": 21982.25,
+          "world_y": 15782.0625
+        },
+        "minus_10s": {
+          "raw_x": 157.680176,
+          "raw_y": 123.183105,
+          "sample_tick": 88862,
+          "tick_delta": 0,
+          "world_x": 20183.0625,
+          "world_y": 15767.4375
+        },
+        "minus_5s": {
+          "raw_x": 172.91748,
+          "raw_y": 122.938232,
+          "sample_tick": 89010,
+          "tick_delta": -2,
+          "world_x": 22133.4375,
+          "world_y": 15736.09375
+        }
+      },
+      "time": 1975,
+      "victim": "DM",
+      "victim_hero": "npc_dota_hero_bristleback"
+    },
+    {
+      "death_tick": 89560,
+      "killer": "tOfu",
+      "positions": {
+        "death": {
+          "raw_x": 177.182129,
+          "raw_y": 118.317383,
+          "sample_tick": 89558,
+          "tick_delta": -2,
+          "world_x": 22679.3125,
+          "world_y": 15144.625
+        },
+        "minus_10s": {
+          "raw_x": 178.008545,
+          "raw_y": 120.137451,
+          "sample_tick": 89258,
+          "tick_delta": -2,
+          "world_x": 22785.09375,
+          "world_y": 15377.59375
+        },
+        "minus_5s": {
+          "raw_x": 176.920898,
+          "raw_y": 119.887695,
+          "sample_tick": 89410,
+          "tick_delta": 0,
+          "world_x": 22645.875,
+          "world_y": 15345.625
+        }
+      },
+      "time": 1989,
+      "victim": "watson",
+      "victim_hero": "npc_dota_hero_luna"
+    },
+    {
+      "death_tick": 89700,
+      "killer": "CHIRA_JUNIOR",
+      "positions": {
+        "death": {
+          "raw_x": 171.691162,
+          "raw_y": 112.55835,
+          "sample_tick": 89698,
+          "tick_delta": -2,
+          "world_x": 21976.46875,
+          "world_y": 14407.46875
+        },
+        "minus_10s": {
+          "raw_x": 178.422119,
+          "raw_y": 117.73877,
+          "sample_tick": 89398,
+          "tick_delta": -2,
+          "world_x": 22838.03125,
+          "world_y": 15070.5625
+        },
+        "minus_5s": {
+          "raw_x": 184.890381,
+          "raw_y": 117.958252,
+          "sample_tick": 89550,
+          "tick_delta": 0,
+          "world_x": 23665.96875,
+          "world_y": 15098.65625
+        }
+      },
+      "time": 1993,
+      "victim": "Ace",
+      "victim_hero": "npc_dota_hero_tidehunter"
+    },
+    {
+      "death_tick": 89836,
+      "killer": "Nisha",
+      "positions": {
+        "death": {
+          "raw_x": 157.728516,
+          "raw_y": 125.827637,
+          "sample_tick": 89834,
+          "tick_delta": -2,
+          "world_x": 20189.25,
+          "world_y": 16105.9375
+        },
+        "minus_10s": {
+          "raw_x": 176.086426,
+          "raw_y": 120.47168,
+          "sample_tick": 89534,
+          "tick_delta": -2,
+          "world_x": 22539.0625,
+          "world_y": 15420.375
+        },
+        "minus_5s": {
+          "raw_x": 167.172119,
+          "raw_y": 115.868652,
+          "sample_tick": 89686,
+          "tick_delta": 0,
+          "world_x": 21398.03125,
+          "world_y": 14831.1875
+        }
+      },
+      "time": 1998,
+      "victim": "CHIRA_JUNIOR",
+      "victim_hero": "npc_dota_hero_invoker"
+    },
+    {
+      "death_tick": 96532,
+      "killer": "Malady",
+      "positions": {
+        "death": {
+          "raw_x": 116.950439,
+          "raw_y": 112.700195,
+          "sample_tick": 96532,
+          "tick_delta": 0,
+          "world_x": 14969.65625,
+          "world_y": 14425.625
+        },
+        "minus_10s": {
+          "raw_x": 117.475098,
+          "raw_y": 116.239746,
+          "sample_tick": 96232,
+          "tick_delta": 0,
+          "world_x": 15036.8125,
+          "world_y": 14878.6875
+        },
+        "minus_5s": {
+          "raw_x": 114.713379,
+          "raw_y": 106.482422,
+          "sample_tick": 96380,
+          "tick_delta": -2,
+          "world_x": 14683.3125,
+          "world_y": 13629.75
+        }
+      },
+      "time": 2221,
+      "victim": "Boxi",
+      "victim_hero": "npc_dota_hero_tiny"
+    },
+    {
+      "death_tick": 96712,
+      "killer": "CHIRA_JUNIOR",
+      "positions": {
+        "death": {
+          "raw_x": 117.305908,
+          "raw_y": 108.945068,
+          "sample_tick": 96712,
+          "tick_delta": 0,
+          "world_x": 15015.15625,
+          "world_y": 13944.96875
+        },
+        "minus_10s": {
+          "raw_x": 110.452148,
+          "raw_y": 111.184814,
+          "sample_tick": 96412,
+          "tick_delta": 0,
+          "world_x": 14137.875,
+          "world_y": 14231.65625
+        },
+        "minus_5s": {
+          "raw_x": 114.848633,
+          "raw_y": 110.409424,
+          "sample_tick": 96560,
+          "tick_delta": -2,
+          "world_x": 14700.625,
+          "world_y": 14132.40625
+        }
+      },
+      "time": 2227,
+      "victim": "Ace",
+      "victim_hero": "npc_dota_hero_tidehunter"
+    },
+    {
+      "death_tick": 96812,
+      "killer": "Nisha",
+      "positions": {
+        "death": {
+          "raw_x": 108.351562,
+          "raw_y": 107.255615,
+          "sample_tick": 96812,
+          "tick_delta": 0,
+          "world_x": 13869.0,
+          "world_y": 13728.71875
+        },
+        "minus_10s": {
+          "raw_x": 107.317871,
+          "raw_y": 108.484375,
+          "sample_tick": 96512,
+          "tick_delta": 0,
+          "world_x": 13736.6875,
+          "world_y": 13886.0
+        },
+        "minus_5s": {
+          "raw_x": 105.11499,
+          "raw_y": 104.534424,
+          "sample_tick": 96660,
+          "tick_delta": -2,
+          "world_x": 13454.71875,
+          "world_y": 13380.40625
+        }
+      },
+      "time": 2230,
+      "victim": "Malady",
+      "victim_hero": "npc_dota_hero_jakiro"
+    },
+    {
+      "death_tick": 96836,
+      "killer": "Nisha",
+      "positions": {
+        "death": {
+          "raw_x": 104.009766,
+          "raw_y": 109.986572,
+          "sample_tick": 96836,
+          "tick_delta": 0,
+          "world_x": 13313.25,
+          "world_y": 14078.28125
+        },
+        "minus_10s": {
+          "raw_x": 114.724854,
+          "raw_y": 98.027588,
+          "sample_tick": 96536,
+          "tick_delta": 0,
+          "world_x": 14684.78125,
+          "world_y": 12547.53125
+        },
+        "minus_5s": {
+          "raw_x": 103.595703,
+          "raw_y": 101.673828,
+          "sample_tick": 96684,
+          "tick_delta": -2,
+          "world_x": 13260.25,
+          "world_y": 13014.25
+        }
+      },
+      "time": 2231,
+      "victim": "CHIRA_JUNIOR",
+      "victim_hero": "npc_dota_hero_invoker"
+    },
+    {
+      "death_tick": 107310,
+      "killer": "watson",
+      "positions": {
+        "death": {
+          "raw_x": 143.631592,
+          "raw_y": 93.695312,
+          "sample_tick": 107310,
+          "tick_delta": 0,
+          "world_x": 18384.84375,
+          "world_y": 11993.0
+        },
+        "minus_10s": {
+          "raw_x": 151.934082,
+          "raw_y": 88.752686,
+          "sample_tick": 107010,
+          "tick_delta": 0,
+          "world_x": 19447.5625,
+          "world_y": 11360.34375
+        },
+        "minus_5s": {
+          "raw_x": 144.987061,
+          "raw_y": 91.574951,
+          "sample_tick": 107158,
+          "tick_delta": -2,
+          "world_x": 18558.34375,
+          "world_y": 11721.59375
+        }
+      },
+      "time": 2580,
+      "victim": "m1CKe",
+      "victim_hero": "npc_dota_hero_nevermore"
+    },
+    {
+      "death_tick": 107402,
+      "killer": "CHIRA_JUNIOR",
+      "positions": {
+        "death": {
+          "raw_x": 150.140625,
+          "raw_y": 94.884766,
+          "sample_tick": 107402,
+          "tick_delta": 0,
+          "world_x": 19218.0,
+          "world_y": 12145.25
+        },
+        "minus_10s": {
+          "raw_x": 144.836182,
+          "raw_y": 88.47876,
+          "sample_tick": 107102,
+          "tick_delta": 0,
+          "world_x": 18539.03125,
+          "world_y": 11325.28125
+        },
+        "minus_5s": {
+          "raw_x": 148.416992,
+          "raw_y": 94.065674,
+          "sample_tick": 107250,
+          "tick_delta": -2,
+          "world_x": 18997.375,
+          "world_y": 12040.40625
+        }
+      },
+      "time": 2583,
+      "victim": "tOfu",
+      "victim_hero": "npc_dota_hero_warlock"
+    },
+    {
+      "death_tick": 107428,
+      "killer": "Malady",
+      "positions": {
+        "death": {
+          "raw_x": 147.136963,
+          "raw_y": 90.371826,
+          "sample_tick": 107426,
+          "tick_delta": -2,
+          "world_x": 18833.53125,
+          "world_y": 11567.59375
+        },
+        "minus_10s": {
+          "raw_x": 142.403809,
+          "raw_y": 91.225586,
+          "sample_tick": 107126,
+          "tick_delta": -2,
+          "world_x": 18227.6875,
+          "world_y": 11676.875
+        },
+        "minus_5s": {
+          "raw_x": 143.917236,
+          "raw_y": 89.883789,
+          "sample_tick": 107278,
+          "tick_delta": 0,
+          "world_x": 18421.40625,
+          "world_y": 11505.125
+        }
+      },
+      "time": 2584,
+      "victim": "Boxi",
+      "victim_hero": "npc_dota_hero_tiny"
+    },
+    {
+      "death_tick": 110787,
+      "killer": "CHIRA_JUNIOR",
+      "positions": {
+        "death": {
+          "raw_x": 151.676025,
+          "raw_y": 170.253418,
+          "sample_tick": 110787,
+          "tick_delta": 0,
+          "world_x": 19414.53125,
+          "world_y": 21792.4375
+        },
+        "minus_10s": {
+          "raw_x": 156.068848,
+          "raw_y": 164.447266,
+          "sample_tick": 110487,
+          "tick_delta": 0,
+          "world_x": 19976.8125,
+          "world_y": 21049.25
+        },
+        "minus_5s": {
+          "raw_x": 150.270264,
+          "raw_y": 170.388916,
+          "sample_tick": 110635,
+          "tick_delta": -2,
+          "world_x": 19234.59375,
+          "world_y": 21809.78125
+        }
+      },
+      "time": 2696,
+      "victim": "Nisha",
+      "victim_hero": "npc_dota_hero_void_spirit"
+    },
+    {
+      "death_tick": 110975,
+      "killer": "Malady",
+      "positions": {
+        "death": {
+          "raw_x": 149.091309,
+          "raw_y": 166.72168,
+          "sample_tick": 110975,
+          "tick_delta": 0,
+          "world_x": 19083.6875,
+          "world_y": 21340.375
+        },
+        "minus_10s": {
+          "raw_x": 156.373535,
+          "raw_y": 176.258789,
+          "sample_tick": 110675,
+          "tick_delta": 0,
+          "world_x": 20015.8125,
+          "world_y": 22561.125
+        },
+        "minus_5s": {
+          "raw_x": 147.540283,
+          "raw_y": 170.467041,
+          "sample_tick": 110823,
+          "tick_delta": -2,
+          "world_x": 18885.15625,
+          "world_y": 21819.78125
+        }
+      },
+      "time": 2702,
+      "victim": "m1CKe",
+      "victim_hero": "npc_dota_hero_nevermore"
+    },
+    {
+      "death_tick": 110995,
+      "killer": "DM",
+      "positions": {
+        "death": {
+          "raw_x": 158.291992,
+          "raw_y": 166.636963,
+          "sample_tick": 110995,
+          "tick_delta": 0,
+          "world_x": 20261.375,
+          "world_y": 21329.53125
+        },
+        "minus_10s": {
+          "raw_x": 154.127441,
+          "raw_y": 176.576416,
+          "sample_tick": 110695,
+          "tick_delta": 0,
+          "world_x": 19728.3125,
+          "world_y": 22601.78125
+        },
+        "minus_5s": {
+          "raw_x": 155.954834,
+          "raw_y": 174.516846,
+          "sample_tick": 110843,
+          "tick_delta": -2,
+          "world_x": 19962.21875,
+          "world_y": 22338.15625
+        }
+      },
+      "time": 2703,
+      "victim": "Boxi",
+      "victim_hero": "npc_dota_hero_tiny"
+    },
+    {
+      "death_tick": 111051,
+      "killer": "Nisha",
+      "positions": {
+        "death": {
+          "raw_x": 145.107422,
+          "raw_y": 165.503174,
+          "sample_tick": 111051,
+          "tick_delta": 0,
+          "world_x": 18573.75,
+          "world_y": 21184.40625
+        },
+        "minus_10s": {
+          "raw_x": 146.448975,
+          "raw_y": 169.258057,
+          "sample_tick": 110751,
+          "tick_delta": 0,
+          "world_x": 18745.46875,
+          "world_y": 21665.03125
+        },
+        "minus_5s": {
+          "raw_x": 143.75,
+          "raw_y": 162.75,
+          "sample_tick": 110899,
+          "tick_delta": -2,
+          "world_x": 18400.0,
+          "world_y": 20832.0
+        }
+      },
+      "time": 2705,
+      "victim": "CHIRA_JUNIOR",
+      "victim_hero": "npc_dota_hero_invoker"
+    },
+    {
+      "death_tick": 120577,
+      "killer": "DM",
+      "positions": {
+        "death": {
+          "raw_x": 161.791016,
+          "raw_y": 178.181641,
+          "sample_tick": 120577,
+          "tick_delta": 0,
+          "world_x": 20709.25,
+          "world_y": 22807.25
+        },
+        "minus_10s": {
+          "raw_x": 150.037598,
+          "raw_y": 172.737305,
+          "sample_tick": 120277,
+          "tick_delta": 0,
+          "world_x": 19204.8125,
+          "world_y": 22110.375
+        },
+        "minus_5s": {
+          "raw_x": 157.260254,
+          "raw_y": 179.169189,
+          "sample_tick": 120425,
+          "tick_delta": -2,
+          "world_x": 20129.3125,
+          "world_y": 22933.65625
+        }
+      },
+      "time": 3023,
+      "victim": "Boxi",
+      "victim_hero": "npc_dota_hero_tiny"
+    },
+    {
+      "death_tick": 120630,
+      "killer": "m1CKe",
+      "positions": {
+        "death": {
+          "raw_x": 151.978516,
+          "raw_y": 174.775635,
+          "sample_tick": 120628,
+          "tick_delta": -2,
+          "world_x": 19453.25,
+          "world_y": 22371.28125
+        },
+        "minus_10s": {
+          "raw_x": 146.187744,
+          "raw_y": 166.59375,
+          "sample_tick": 120329,
+          "tick_delta": -1,
+          "world_x": 18712.03125,
+          "world_y": 21324.0
+        },
+        "minus_5s": {
+          "raw_x": 149.2146,
+          "raw_y": 174.369629,
+          "sample_tick": 120481,
+          "tick_delta": 1,
+          "world_x": 19099.46875,
+          "world_y": 22319.3125
+        }
+      },
+      "time": 3024,
+      "victim": "Malady",
+      "victim_hero": "npc_dota_hero_jakiro"
+    },
+    {
+      "death_tick": 120806,
+      "killer": "Nisha",
+      "positions": {
+        "death": {
+          "raw_x": 159.711182,
+          "raw_y": 169.174316,
+          "sample_tick": 120804,
+          "tick_delta": -2,
+          "world_x": 20443.03125,
+          "world_y": 21654.3125
+        },
+        "minus_10s": {
+          "raw_x": 158.935303,
+          "raw_y": 178.59668,
+          "sample_tick": 120505,
+          "tick_delta": -1,
+          "world_x": 20343.71875,
+          "world_y": 22860.375
+        },
+        "minus_5s": {
+          "raw_x": 162.603027,
+          "raw_y": 173.235107,
+          "sample_tick": 120656,
+          "tick_delta": 0,
+          "world_x": 20813.1875,
+          "world_y": 22174.09375
+        }
+      },
+      "time": 3030,
+      "victim": "DM",
+      "victim_hero": "npc_dota_hero_bristleback"
+    }
+  ],
+  "metadata": {
+    "event_scope": "OpenDota teamfight deaths within HUD 00:00-50:30",
+    "match_id": 8730786393,
+    "parser": "gem-dota",
+    "parser_version": "0.5.0",
+    "raw_coordinate_transform": "world_coordinate / 128",
+    "replay_bz2_sha256": "f5797e2cda60eadf125561c4b4221545977fb8d842055df94868e6bb8f4b16c5",
+    "replay_dem_sha256": "6d3917453024844349c8935536964c3bd925d5c3958b2946b82ab9b09ad6a9ac",
+    "replay_url": "http://replay191.valve.net/570/8730786393_126439567.dem.bz2",
+    "sample_interval_ticks": 3,
+    "ticks_per_second": 30
+  }
+}

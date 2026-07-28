@@ -1,0 +1,77 @@
+{
+  "reason": "ok",
+  "n_ground_truth_events": 39,
+  "n_predicted_events": 30,
+  "n_schema_valid_events": 30,
+  "game": 5,
+  "clock_tolerance_s": 2,
+  "grid": "14x14; exact three-point trajectory required for reward",
+  "reward_metric": "F1 over exact game/time/victim/killer/three-cell trajectories",
+  "components": {
+    "event_localization": {
+      "matches": 5,
+      "predicted": 30,
+      "expected": 39,
+      "precision": 0.166667,
+      "recall": 0.128205,
+      "f1": 0.144928
+    },
+    "victim_attribution": {
+      "matches": 0,
+      "predicted": 30,
+      "expected": 39,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "killer_attribution": {
+      "matches": 0,
+      "predicted": 30,
+      "expected": 39,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "cell_10s_before": {
+      "matches": 0,
+      "predicted": 30,
+      "expected": 39,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "cell_5s_before": {
+      "matches": 0,
+      "predicted": 30,
+      "expected": 39,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "death_cell": {
+      "matches": 0,
+      "predicted": 30,
+      "expected": 39,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "neighboring_trajectory": {
+      "matches": 0,
+      "predicted": 30,
+      "expected": 39,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "exact_trajectory": {
+      "matches": 0,
+      "predicted": 30,
+      "expected": 39,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "reward": 0.0
+}

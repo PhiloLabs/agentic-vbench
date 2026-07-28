@@ -1,0 +1,82 @@
+{
+  "event_definition": {
+    "game": 5,
+    "grid": "14x14; OpenDota game coordinates use (raw-64)/127; A-N west-east and 1-14 south-north; an internal boundary belongs to its east or north cell",
+    "hud_clock_range_inclusive": "00:00-50:30",
+    "population": "deaths in maximal sequences of at least three deaths where each consecutive gap is under 15 seconds",
+    "trajectory_offsets_s": [
+      -10,
+      -5,
+      0
+    ]
+  },
+  "open_dota_position_crosscheck": {
+    "events_compared": 39,
+    "exact_14x14_cell": 39,
+    "maximum_rounded_chebyshev_distance": 1,
+    "rounded_raw_coordinate_exact": 29,
+    "rounded_raw_coordinate_within_one": 39
+  },
+  "replay_positions_sha256": "a68f1b2ce47e81da458cefe7c99d63f6033c2f620832ddd3ec9a3dc75ef0c957",
+  "sampling": {
+    "maximum_absolute_tick_delta": 2,
+    "maximum_absolute_time_delta_s": 0.066667
+  },
+  "source": {
+    "match_id": 8730786393,
+    "replay": {
+      "event_scope": "OpenDota teamfight deaths within HUD 00:00-50:30",
+      "match_id": 8730786393,
+      "parser": "gem-dota",
+      "parser_version": "0.5.0",
+      "raw_coordinate_transform": "world_coordinate / 128",
+      "replay_bz2_sha256": "f5797e2cda60eadf125561c4b4221545977fb8d842055df94868e6bb8f4b16c5",
+      "replay_dem_sha256": "6d3917453024844349c8935536964c3bd925d5c3958b2946b82ab9b09ad6a9ac",
+      "replay_url": "http://replay191.valve.net/570/8730786393_126439567.dem.bz2",
+      "sample_interval_ticks": 3,
+      "ticks_per_second": 30
+    },
+    "source": "OpenDota automated Valve replay parsing"
+  },
+  "source_sha256": "a3ffe32e9310db281681647f458961eb1c417faef184ab453028b0e2a2cf3f3f",
+  "totals": {
+    "death_cells_used": 31,
+    "events": 39,
+    "events_by_death_cell": {
+      "C11": 1,
+      "C8": 1,
+      "D10": 1,
+      "D11": 1,
+      "D8": 1,
+      "D9": 1,
+      "E5": 1,
+      "E6": 1,
+      "F5": 1,
+      "F6": 1,
+      "F7": 1,
+      "G7": 1,
+      "I12": 1,
+      "I2": 1,
+      "I3": 3,
+      "I4": 1,
+      "I5": 1,
+      "I8": 1,
+      "J12": 2,
+      "J13": 1,
+      "J3": 3,
+      "J4": 1,
+      "K12": 2,
+      "K13": 1,
+      "K7": 1,
+      "L1": 1,
+      "L6": 1,
+      "L7": 2,
+      "M1": 2,
+      "M3": 1,
+      "M6": 1
+    },
+    "position_labels": 117,
+    "stationary_trajectories": 5,
+    "unique_trajectories": 39
+  }
+}
