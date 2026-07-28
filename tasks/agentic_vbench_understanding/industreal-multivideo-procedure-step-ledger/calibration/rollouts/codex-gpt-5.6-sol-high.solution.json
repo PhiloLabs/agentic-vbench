@@ -1,0 +1,268 @@
+{
+  "checkpoints": [
+    {
+      "video": "A",
+      "time_s": 3.5,
+      "changes": [0],
+      "state_after": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "video": "A",
+      "time_s": 35.5,
+      "changes": [3, 6],
+      "state_after": [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "video": "A",
+      "time_s": 79.0,
+      "changes": [9, 15],
+      "state_after": [1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0]
+    },
+    {
+      "video": "A",
+      "time_s": 90.5,
+      "changes": [18],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0]
+    },
+    {
+      "video": "A",
+      "time_s": 145.5,
+      "changes": [27],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0]
+    },
+    {
+      "video": "A",
+      "time_s": 248.5,
+      "changes": [21, 24],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "A",
+      "time_s": 286.0,
+      "changes": [30],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      "video": "B",
+      "time_s": 1.5,
+      "changes": [0],
+      "state_after": [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "video": "B",
+      "time_s": 17.5,
+      "changes": [3, 6],
+      "state_after": [1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]
+    },
+    {
+      "video": "B",
+      "time_s": 56.0,
+      "changes": [9, 15],
+      "state_after": [1, 1, 1, 1, 0, 1, 0, 0, 0, 0, 0]
+    },
+    {
+      "video": "B",
+      "time_s": 60.0,
+      "changes": [18],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0]
+    },
+    {
+      "video": "B",
+      "time_s": 121.5,
+      "changes": [27],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0]
+    },
+    {
+      "video": "B",
+      "time_s": 188.0,
+      "changes": [21, 24],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "B",
+      "time_s": 226.0,
+      "changes": [30],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      "video": "C",
+      "time_s": 9.5,
+      "changes": [32],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "C",
+      "time_s": 42.5,
+      "changes": [17],
+      "state_after": [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "C",
+      "time_s": 47.5,
+      "changes": [11, 20],
+      "state_after": [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0]
+    },
+    {
+      "video": "C",
+      "time_s": 82.0,
+      "changes": [9, 18],
+      "state_after": [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "C",
+      "time_s": 102.0,
+      "changes": [15],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "C",
+      "time_s": 132.5,
+      "changes": [30],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      "video": "D",
+      "time_s": 46.0,
+      "changes": [9, 15],
+      "state_after": [1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0]
+    },
+    {
+      "video": "D",
+      "time_s": 51.0,
+      "changes": [18],
+      "state_after": [1, 0, 0, 1, 0, 1, 1, 0, 0, 0, 0]
+    },
+    {
+      "video": "D",
+      "time_s": 120.5,
+      "changes": [3, 6],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0]
+    },
+    {
+      "video": "D",
+      "time_s": 201.0,
+      "changes": [27],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 0, 0, 1, 0]
+    },
+    {
+      "video": "D",
+      "time_s": 259.0,
+      "changes": [21, 24],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "D",
+      "time_s": 294.5,
+      "changes": [30],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      "video": "E",
+      "time_s": 22.0,
+      "changes": [32],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "E",
+      "time_s": 36.0,
+      "changes": [17],
+      "state_after": [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "E",
+      "time_s": 55.5,
+      "changes": [11, 20],
+      "state_after": [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0]
+    },
+    {
+      "video": "E",
+      "time_s": 105.5,
+      "changes": [12, 18],
+      "state_after": [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "E",
+      "time_s": 120.5,
+      "changes": [15],
+      "state_after": [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "E",
+      "time_s": 163.0,
+      "changes": [30],
+      "state_after": [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      "video": "F",
+      "time_s": 22.5,
+      "changes": [32],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "F",
+      "time_s": 39.5,
+      "changes": [17],
+      "state_after": [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "F",
+      "time_s": 55.5,
+      "changes": [11, 20],
+      "state_after": [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0]
+    },
+    {
+      "video": "F",
+      "time_s": 79.5,
+      "changes": [12, 18],
+      "state_after": [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "F",
+      "time_s": 90.5,
+      "changes": [15],
+      "state_after": [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "F",
+      "time_s": 136.5,
+      "changes": [30],
+      "state_after": [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1]
+    },
+    {
+      "video": "G",
+      "time_s": 19.0,
+      "changes": [32],
+      "state_after": [1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "G",
+      "time_s": 34.5,
+      "changes": [17],
+      "state_after": [1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "G",
+      "time_s": 45.0,
+      "changes": [11, 20],
+      "state_after": [1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0]
+    },
+    {
+      "video": "G",
+      "time_s": 99.0,
+      "changes": [12, 18],
+      "state_after": [1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "G",
+      "time_s": 119.5,
+      "changes": [15],
+      "state_after": [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0]
+    },
+    {
+      "video": "G",
+      "time_s": 162.5,
+      "changes": [30],
+      "state_after": [1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1]
+    }
+  ]
+}
