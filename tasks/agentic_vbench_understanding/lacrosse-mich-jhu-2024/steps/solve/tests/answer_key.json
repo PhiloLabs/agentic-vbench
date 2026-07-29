@@ -1,0 +1,171 @@
+{
+ "goals": [
+  {
+   "team": "NAVY",
+   "scorer": 89,
+   "assister": null
+  },
+  {
+   "team": "WHITE",
+   "scorer": 51,
+   "assister": null
+  },
+  {
+   "team": "NAVY",
+   "scorer": 2,
+   "assister": 40
+  },
+  {
+   "team": "NAVY",
+   "scorer": 44,
+   "assister": 40
+  },
+  {
+   "team": "NAVY",
+   "scorer": 2,
+   "assister": 9
+  },
+  {
+   "team": "WHITE",
+   "scorer": 77,
+   "assister": 12
+  },
+  {
+   "team": "WHITE",
+   "scorer": 31,
+   "assister": 40
+  },
+  {
+   "team": "WHITE",
+   "scorer": 40,
+   "assister": 31
+  },
+  {
+   "team": "NAVY",
+   "scorer": 44,
+   "assister": 2
+  },
+  {
+   "team": "NAVY",
+   "scorer": 5,
+   "assister": 38
+  },
+  {
+   "team": "WHITE",
+   "scorer": 31,
+   "assister": null
+  },
+  {
+   "team": "WHITE",
+   "scorer": 31,
+   "assister": 23
+  },
+  {
+   "team": "WHITE",
+   "scorer": 51,
+   "assister": 31
+  },
+  {
+   "team": "WHITE",
+   "scorer": 34,
+   "assister": 23
+  },
+  {
+   "team": "NAVY",
+   "scorer": 40,
+   "assister": 5
+  },
+  {
+   "team": "WHITE",
+   "scorer": 16,
+   "assister": 23
+  },
+  {
+   "team": "WHITE",
+   "scorer": 40,
+   "assister": 23
+  },
+  {
+   "team": "NAVY",
+   "scorer": 5,
+   "assister": null
+  },
+  {
+   "team": "WHITE",
+   "scorer": 9,
+   "assister": null
+  },
+  {
+   "team": "WHITE",
+   "scorer": 33,
+   "assister": null
+  },
+  {
+   "team": "NAVY",
+   "scorer": 44,
+   "assister": 5
+  },
+  {
+   "team": "WHITE",
+   "scorer": 51,
+   "assister": 7
+  },
+  {
+   "team": "WHITE",
+   "scorer": 40,
+   "assister": 16
+  },
+  {
+   "team": "NAVY",
+   "scorer": 19,
+   "assister": 2
+  },
+  {
+   "team": "WHITE",
+   "scorer": 23,
+   "assister": null
+  },
+  {
+   "team": "NAVY",
+   "scorer": 40,
+   "assister": 5
+  }
+ ],
+ "penalties": [
+  {
+   "team": "NAVY",
+   "offender": 5,
+   "type": "pushing"
+  },
+  {
+   "team": "NAVY",
+   "offender": 17,
+   "type": "cross-check"
+  },
+  {
+   "team": "TBD",
+   "offender": null,
+   "type": "faceoff violation"
+  },
+  {
+   "team": "WHITE",
+   "offender": 46,
+   "type": "slashing"
+  },
+  {
+   "team": "WHITE",
+   "offender": 6,
+   "type": "cross-check"
+  },
+  {
+   "team": "TBD",
+   "offender": null,
+   "type": "offside"
+  },
+  {
+   "team": "TBD",
+   "offender": null,
+   "type": "faceoff violation"
+  }
+ ]
+}

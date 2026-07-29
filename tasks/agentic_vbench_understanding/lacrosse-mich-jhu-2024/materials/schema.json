@@ -1,0 +1,30 @@
+{
+  "type": "object",
+  "required": ["goals", "penalties"],
+  "properties": {
+    "goals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["team", "scorer", "assister"],
+        "properties": {
+          "team": {"enum": ["NAVY", "WHITE"]},
+          "scorer": {"type": "integer"},
+          "assister": {"type": ["integer", "null"]}
+        }
+      }
+    },
+    "penalties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["team", "offender", "type"],
+        "properties": {
+          "team": {"enum": ["NAVY", "WHITE"]},
+          "offender": {"type": ["integer", "null"]},
+          "type": {"type": "string"}
+        }
+      }
+    }
+  }
+}

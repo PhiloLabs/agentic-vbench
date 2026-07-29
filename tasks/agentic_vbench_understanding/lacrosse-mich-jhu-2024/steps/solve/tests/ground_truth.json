@@ -1,0 +1,420 @@
+{
+ "game": "Michigan @ Johns Hopkins, 2024-03-30, Homewood Field",
+ "video_source": "youtube jr-le7CCyEs (full game ~102 min, 720p)",
+ "note_number_collisions": "Jersey numbers repeat across teams (e.g. MICH Cohen 40 and JHU Degnon 40). The scored key is (team, number), never number alone. Team is read from jersey color.",
+ "note_team_penalties": "Three 'TEAM' penalties (faceoff violation x2, offside) have no individual offender number; team affiliation still to confirm from the box-score PDF team column / PBP.",
+ "rosters_used": {
+  "MICH": "mgoblue.com 2024",
+  "JHU": "hopkinssports.com 2024"
+ },
+ "goals": [
+  {
+   "i": 1,
+   "q": 1,
+   "clock": "14:09",
+   "team": "MICH",
+   "scorer": 89,
+   "assister": null,
+   "score_mich_jhu": [
+    1,
+    0
+   ],
+   "man_up": false
+  },
+  {
+   "i": 2,
+   "q": 1,
+   "clock": "11:43",
+   "team": "JHU",
+   "scorer": 51,
+   "assister": null,
+   "score_mich_jhu": [
+    1,
+    1
+   ],
+   "man_up": false
+  },
+  {
+   "i": 3,
+   "q": 1,
+   "clock": "07:44",
+   "team": "MICH",
+   "scorer": 2,
+   "assister": 40,
+   "score_mich_jhu": [
+    2,
+    1
+   ],
+   "man_up": false
+  },
+  {
+   "i": 4,
+   "q": 1,
+   "clock": "06:38",
+   "team": "MICH",
+   "scorer": 44,
+   "assister": 40,
+   "score_mich_jhu": [
+    3,
+    1
+   ],
+   "man_up": false
+  },
+  {
+   "i": 5,
+   "q": 1,
+   "clock": "05:35",
+   "team": "MICH",
+   "scorer": 2,
+   "assister": 9,
+   "score_mich_jhu": [
+    4,
+    1
+   ],
+   "man_up": false
+  },
+  {
+   "i": 6,
+   "q": 1,
+   "clock": "02:59",
+   "team": "JHU",
+   "scorer": 77,
+   "assister": 12,
+   "score_mich_jhu": [
+    4,
+    2
+   ],
+   "man_up": false
+  },
+  {
+   "i": 7,
+   "q": 1,
+   "clock": "02:33",
+   "team": "JHU",
+   "scorer": 31,
+   "assister": 40,
+   "score_mich_jhu": [
+    4,
+    3
+   ],
+   "man_up": true
+  },
+  {
+   "i": 8,
+   "q": 2,
+   "clock": "10:28",
+   "team": "JHU",
+   "scorer": 40,
+   "assister": 31,
+   "score_mich_jhu": [
+    4,
+    4
+   ],
+   "man_up": false
+  },
+  {
+   "i": 9,
+   "q": 2,
+   "clock": "07:45",
+   "team": "MICH",
+   "scorer": 44,
+   "assister": 2,
+   "score_mich_jhu": [
+    5,
+    4
+   ],
+   "man_up": false
+  },
+  {
+   "i": 10,
+   "q": 2,
+   "clock": "07:36",
+   "team": "MICH",
+   "scorer": 5,
+   "assister": 38,
+   "score_mich_jhu": [
+    6,
+    4
+   ],
+   "man_up": false
+  },
+  {
+   "i": 11,
+   "q": 2,
+   "clock": "05:52",
+   "team": "JHU",
+   "scorer": 31,
+   "assister": null,
+   "score_mich_jhu": [
+    6,
+    5
+   ],
+   "man_up": false
+  },
+  {
+   "i": 12,
+   "q": 2,
+   "clock": "05:21",
+   "team": "JHU",
+   "scorer": 31,
+   "assister": 23,
+   "score_mich_jhu": [
+    6,
+    6
+   ],
+   "man_up": false
+  },
+  {
+   "i": 13,
+   "q": 2,
+   "clock": "04:42",
+   "team": "JHU",
+   "scorer": 51,
+   "assister": 31,
+   "score_mich_jhu": [
+    6,
+    7
+   ],
+   "man_up": false
+  },
+  {
+   "i": 14,
+   "q": 2,
+   "clock": "04:25",
+   "team": "JHU",
+   "scorer": 34,
+   "assister": 23,
+   "score_mich_jhu": [
+    6,
+    8
+   ],
+   "man_up": true
+  },
+  {
+   "i": 15,
+   "q": 2,
+   "clock": "03:37",
+   "team": "MICH",
+   "scorer": 40,
+   "assister": 5,
+   "score_mich_jhu": [
+    7,
+    8
+   ],
+   "man_up": true
+  },
+  {
+   "i": 16,
+   "q": 3,
+   "clock": "13:36",
+   "team": "JHU",
+   "scorer": 16,
+   "assister": 23,
+   "score_mich_jhu": [
+    7,
+    9
+   ],
+   "man_up": false
+  },
+  {
+   "i": 17,
+   "q": 3,
+   "clock": "12:22",
+   "team": "JHU",
+   "scorer": 40,
+   "assister": 23,
+   "score_mich_jhu": [
+    7,
+    10
+   ],
+   "man_up": false
+  },
+  {
+   "i": 18,
+   "q": 3,
+   "clock": "02:51",
+   "team": "MICH",
+   "scorer": 5,
+   "assister": null,
+   "score_mich_jhu": [
+    8,
+    10
+   ],
+   "man_up": true,
+   "assister_boxscore": 40,
+   "visibility_note": "mechanical rule (2026-07-23 audit): crease-scramble goal, no assisting pass visible anywhere in the broadcast (live, no replay aired) -> recorded unassisted in the video-derived key; box score credits #40. Mirrors the soccer task's buildup null rule."
+  },
+  {
+   "i": 19,
+   "q": 3,
+   "clock": "01:40",
+   "team": "JHU",
+   "scorer": 9,
+   "assister": null,
+   "score_mich_jhu": [
+    8,
+    11
+   ],
+   "man_up": false
+  },
+  {
+   "i": 20,
+   "q": 4,
+   "clock": "10:26",
+   "team": "JHU",
+   "scorer": 33,
+   "assister": null,
+   "score_mich_jhu": [
+    8,
+    12
+   ],
+   "man_up": false
+  },
+  {
+   "i": 21,
+   "q": 4,
+   "clock": "09:45",
+   "team": "MICH",
+   "scorer": 44,
+   "assister": 5,
+   "score_mich_jhu": [
+    9,
+    12
+   ],
+   "man_up": false
+  },
+  {
+   "i": 22,
+   "q": 4,
+   "clock": "05:34",
+   "team": "JHU",
+   "scorer": 51,
+   "assister": 7,
+   "score_mich_jhu": [
+    9,
+    13
+   ],
+   "man_up": false
+  },
+  {
+   "i": 23,
+   "q": 4,
+   "clock": "05:02",
+   "team": "JHU",
+   "scorer": 40,
+   "assister": 16,
+   "score_mich_jhu": [
+    9,
+    14
+   ],
+   "man_up": false
+  },
+  {
+   "i": 24,
+   "q": 4,
+   "clock": "04:03",
+   "team": "MICH",
+   "scorer": 19,
+   "assister": 2,
+   "score_mich_jhu": [
+    10,
+    14
+   ],
+   "man_up": false
+  },
+  {
+   "i": 25,
+   "q": 4,
+   "clock": "01:45",
+   "team": "JHU",
+   "scorer": 23,
+   "assister": null,
+   "score_mich_jhu": [
+    10,
+    15
+   ],
+   "man_up": false
+  },
+  {
+   "i": 26,
+   "q": 4,
+   "clock": "01:26",
+   "team": "MICH",
+   "scorer": 40,
+   "assister": 5,
+   "score_mich_jhu": [
+    11,
+    15
+   ],
+   "man_up": true
+  }
+ ],
+ "penalties": [
+  {
+   "i": 1,
+   "q": 1,
+   "clock": "02:48",
+   "team": "MICH",
+   "offender": 5,
+   "duration_s": 30,
+   "type": "pushing"
+  },
+  {
+   "i": 2,
+   "q": 2,
+   "clock": "12:53",
+   "team": "MICH",
+   "offender": 17,
+   "duration_s": 60,
+   "type": "cross-check"
+  },
+  {
+   "i": 3,
+   "q": 2,
+   "clock": "04:41",
+   "team": "TBD",
+   "offender": null,
+   "duration_s": 30,
+   "type": "faceoff violation"
+  },
+  {
+   "i": 4,
+   "q": 2,
+   "clock": "04:10",
+   "team": "JHU",
+   "offender": 46,
+   "duration_s": 60,
+   "type": "slashing"
+  },
+  {
+   "i": 5,
+   "q": 3,
+   "clock": "03:50",
+   "team": "JHU",
+   "offender": 6,
+   "duration_s": 60,
+   "type": "cross-check"
+  },
+  {
+   "i": 6,
+   "q": 3,
+   "clock": "00:04",
+   "team": "TBD",
+   "offender": null,
+   "duration_s": 30,
+   "type": "offside"
+  },
+  {
+   "i": 7,
+   "q": 4,
+   "clock": "01:45",
+   "team": "TBD",
+   "offender": null,
+   "duration_s": 30,
+   "type": "faceoff violation"
+  }
+ ],
+ "gt_rules": {
+  "assist_visibility": "An assist is kept only if the assisting pass/delivery is visible in this broadcast. Audit 2026-07-23: visible for 19/20 box-score assists; goal 18 nulled."
+ }
+}

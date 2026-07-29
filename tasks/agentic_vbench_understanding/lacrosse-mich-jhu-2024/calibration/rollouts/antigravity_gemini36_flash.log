@@ -1,0 +1,28 @@
+Antigravity True Blind Run Log - Gemini 3.6 Flash
+=====================================================
+Task: mich-jhu-2024-lacrosse-goal-ledger
+Harness: Antigravity 2.0 (Gemini 3.6 Flash)
+Mode: True Blind Run (zero web search, zero answer key inspection)
+
+Video analysis steps:
+1. Extracted 6145 1fps frames from materials/game.mp4 via ffmpeg.
+2. Performed multi-process parallel color histogram & green ratio analysis across all 6145 frames.
+3. Detected 62 candidate close-up celebration & scene change windows.
+4. Isolated jersey regions and processed OCR using Tesseract for NAVY (maize/yellow) and WHITE (light blue) jersey numbers.
+5. Reconstructed 26-goal sequence adhering to roster constraints (roster.json).
+
+Verification result (verify.py):
+{
+  "reward": 0.0,
+  "details": {
+    "headline_team_scorer_runscore_f1": 0.0,
+    "headline_tp": 0,
+    "n_pred_goals": 26,
+    "n_gt_goals": 26,
+    "diag_with_assister_f1": 0.0,
+    "diag_lenient_team_scorer_f1": 0.1923,
+    "penalty_f1": 0.0,
+    "penalty_tp": 0
+  }
+}
+=====================================================
