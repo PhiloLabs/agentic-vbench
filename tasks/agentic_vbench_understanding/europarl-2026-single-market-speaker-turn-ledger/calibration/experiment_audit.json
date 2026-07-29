@@ -5,6 +5,13 @@
   "integrity_status": "warn",
   "design_validity_status": "warn",
   "blocking": false,
+  "post_audit_update": {
+    "date": "2026-07-29",
+    "native_harness_rewards_reproduced": true,
+    "source": "contributor attestation",
+    "native_artifacts_imported": false,
+    "note": "Exact Copilot trajectories remain the independently audited evidence package."
+  },
   "checks": {
     "gt_provenance": {
       "status": "pass",
@@ -48,7 +55,7 @@
     },
     "scope_claim_alignment": {
       "status": "warn",
-      "details": "GPT-first checker passes; Opus 0.116279 exceeds nominal README <0.10; harness/source substitutions are explicit maintainer waivers."
+      "details": "GPT-first checker passes; Opus 0.116279 exceeds nominal README <0.10; native rewards were subsequently reproduced, while source hosting and raw/native artifact placement remain explicit maintainer waivers."
     },
     "outcome_classification": "mixed"
   },
@@ -70,7 +77,7 @@
     },
     {
       "id": "C4",
-      "claim": "Copilot harness and Hugging Face hosting compliance",
+      "claim": "Native artifact import, Hugging Face hosting, and remote raw placement compliance",
       "impact": "needs_waiver"
     }
   ]

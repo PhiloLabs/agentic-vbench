@@ -38,7 +38,7 @@ difficulty:
   strong_agent_reward: 0.023392
   strong_agent_reward_range: "0.000000-0.116279; Opus 5 is above the nominal 0.10 bar (10/86, exact 95% CI 0.057-0.204, P(TP>=10 | p=0.10)=0.357)"
   tool_call_turns: 231
-  agent_model: "GPT-5.6 Sol first; then Claude Opus 5 and Gemini 3.5 Flash through the disclosed local Copilot harness"
+  agent_model: "Native Codex CLI, Claude Code, and Antigravity reproduced the rewards per contributor attestation; exact auditable Copilot CLI runs retain versions, calls, solutions, rewards, proxy logs, and hashes."
   decomposition: "Binding difficulty is joining 742-way face identity with accurate turn localization: Opus resolves language/card on all 47 boundary-aligned turns but identity on 10; scripted CV resolves identity on 40/41 aligned turns but cards on 6. Combined-actor headroom is 0.4875."
 
 anti_shortcut:

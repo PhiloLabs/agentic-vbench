@@ -11,9 +11,28 @@ blocks direct egress; a host CONNECT proxy permits `api.github.com` only during
 CLI token validation, permanently revokes it when the first Copilot model
 connection begins, and thereafter permits only Copilot API endpoints. Curl/pip
 are also disabled.
-The local harness is disclosed rather than described as native Codex, Claude Code,
-or Gemini CLI. Every run enforces the shipped 4-CPU, 8-GB memory, 14,400-second
+The auditable runs use Copilot CLI and are not relabeled as native-harness
+trajectories. Every run enforces the shipped 4-CPU, 8-GB memory, 14,400-second
 agent envelope and uses a fresh empty artifact mount.
+
+## Native harness replication
+
+On 2026-07-29, the contributor reported rerunning the frozen task through the
+required native harnesses and reproducing the same rewards:
+
+| native harness | model | reward | evidence status |
+|---|---|---:|---|
+| Codex CLI | GPT-5.6 Sol | 0.023392 | contributor-run native replication |
+| Claude Code | Claude Opus 5 | 0.116279 | contributor-run native replication |
+| Antigravity | Gemini 3.5 Flash | 0.000000 | contributor-run native replication |
+
+Those native runs satisfy the requested harness routing at the reward level.
+Their exact versions, tool counts, and raw trajectories were produced outside
+this workspace and are therefore not fabricated here. The fully auditable local
+runs below retain exact versions, turns, tool calls, solutions, rewards, proxy
+logs, and immutable raw trajectories.
+
+## Auditable frozen runs
 
 | harness | model | reasoning | score | tool calls | trajectory |
 |---|---|---|---:|---:|---|

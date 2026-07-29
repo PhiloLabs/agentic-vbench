@@ -8,7 +8,14 @@
 
 ## Integrity Status: warn
 
-The evaluation package is technically transparent and reproducible enough for a warning, not a fraud fail. The key caveat is claim/policy alignment: the upstream strong-agent requirement is singular/GPT-first in the current checker, and GPT-5.6 Sol passes, but Claude Opus 5 is above the nominal `< 0.10` README threshold. The Copilot harness substitution and Hugging Face hosting substitution are explicit maintainer-policy waivers rather than hidden technical integrity failures.
+The evaluation package is technically transparent and reproducible enough for a warning, not a fraud fail. The key caveat is claim/policy alignment: the upstream strong-agent requirement is singular/GPT-first in the current checker, and GPT-5.6 Sol passes, but Claude Opus 5 is above the nominal `< 0.10` README threshold. At audit time the exact retained trajectories used Copilot; the post-audit contributor update records native reward replication, leaving native-artifact import, Hugging Face hosting, and remote raw placement as explicit maintainer evidence-policy decisions rather than hidden technical failures.
+
+**Post-audit update (2026-07-29):** the contributor reports native Codex CLI,
+Claude Code, and Antigravity reruns reproducing the same rewards. The native raw
+files and exact versions were generated outside this workspace and were not
+independently audited here; the exact Copilot trajectories remain the retained
+auditable evidence. Native routing is no longer claimed as unexercised, but
+native-artifact import remains a maintainer evidence-placement decision.
 
 ## Checks
 
@@ -54,17 +61,17 @@ No self-normalization was found: reward is standard F1 from true positives, pred
 
 ### K. Scope and Claim Alignment: WARN
 
-The technical claims are mostly aligned with one frozen task. The explicit weak point is policy/claim wording: README says a strong current agent must be `< 0.10` and calibration should cover Antigravity/Codex/Claude Code (`README.md:32`, `README.md:34`), while this package uses GitHub Copilot CLI for all three and reports Opus at 0.116279 (`calibration/scores.md:14`, `calibration/scores.md:23`). The staged result manifest explicitly lists the harness, source-hosting, and remote-raw placement waiver requests (`calibration/results.json:45`). This is a transparent warning, not hidden fraud.
+The technical claims are mostly aligned with one frozen task. The explicit weak point is policy/claim wording: README says a strong current agent must be `< 0.10`, while Opus is transparently reported at 0.116279 (`calibration/scores.md`). Contributor-attested native harness replications now reproduce all three rewards, while exact native versions/raw trajectories remain outside this workspace. The staged result manifest explicitly lists the remaining source-hosting and evidence-placement waiver requests. This is a transparent warning, not hidden fraud.
 
 ### L. Outcome Classification: mixed
 
-Supported: official ground truth, deterministic scoring, result existence, leakage firewall, and GPT-first checker pass. Needs qualifier: general "all strong agents < 0.10" is not supported because Opus is 0.116279. Policy-dependent: the three explicit substitutions in `calibration/results.json` require maintainer waiver acceptance.
+Supported: official ground truth, deterministic scoring, result existence, leakage firewall, GPT-first checker pass, and contributor-attested native harness reward replication. Needs qualifier: general "all strong agents < 0.10" is not supported because Opus is 0.116279. Policy-dependent: source hosting, remote lossless raw placement, and native-artifact import require maintainer acceptance.
 
 ## Action Items
 
 1. Narrow calibration wording to "GPT-5.6 Sol passes the singular upstream checker; Opus is a disclosed above-threshold warning."
 2. Keep semantic ceiling and scripted baselines labeled as controls/diagnostics, never fair solver comparators.
-3. Obtain explicit maintainer acceptance for Copilot harness substitution and Hugging Face hosting, or rerun in the native harness/source policy requested by README.
+3. Obtain explicit maintainer acceptance for Hugging Face hosting, remote lossless raw placement, and omission of the externally generated native raw trajectories.
 
 ## Claim Impact
 
@@ -72,4 +79,4 @@ Supported: official ground truth, deterministic scoring, result existence, leaka
 - Hard GPT-first calibration: supported.
 - All evaluated strong agents below `< 0.10`: unsupported; requires qualifier.
 - Anti-shortcut ablation gates: supported for measured GPT-5.6 Sol degraded-input runs.
-- Harness/source policy compliance: needs explicit waiver.
+- Source/evidence-placement policy compliance: needs explicit waiver.
