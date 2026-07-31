@@ -8,8 +8,8 @@ so a timestamp means the same moment in every video. Players `P1`-`P5` are one t
 and `P6`-`P10` the other; the teams swap sides at halftime. The HUD is not rendered:
 there is no killfeed, scoreboard, minimap, or round timer.
 
-Reconstruct the complete kill ledger of the match: every kill, in chronological
-order, with who killed whom, when, in which round, and whether the kill was traded.
+Reconstruct the complete kill ledger of the match: every kill, with who killed
+whom, when, in which round, and whether the kill was traded.
 
 Definitions (these are exactly what is scored):
 
@@ -20,10 +20,11 @@ Definitions (these are exactly what is scored):
   may differ from the true moment by up to 5 seconds.
 - **`round`**: rounds are numbered from 1 in order of play. A kill in the short
   aftermath after a round has been decided still belongs to that round.
-- **`was_traded`**: `true` if and only if the killer is themselves killed within
-  5.0 seconds, in the same round, by any player on the victim's team - including
-  the victim themselves, e.g. by a grenade they threw before dying. Trades never
-  carry across a round boundary.
+- **`was_traded`**: `true` if and only if the killer is themselves killed strictly
+  after the kill and within 5.0 seconds of it, in the same round, by another kill
+  as defined above whose killer is on the victim's team - including the victim
+  themselves, e.g. by a grenade they threw before dying. Trades never carry across
+  a round boundary.
 - **`trader`**: the player who killed the killer within that window, or `null` if
   `was_traded` is `false`.
 
@@ -41,11 +42,14 @@ Write `/workspace/output/solution.json` in exactly this shape:
 ```json
 {
   "ledger": [
-    {"t": 21.2,  "round": 1, "victim": "P2", "killer": "P7", "was_traded": false, "trader": null},
-    {"t": 191.3, "round": 3, "victim": "P8", "killer": "P3", "was_traded": true,  "trader": "P4"}
+    {"t": 75.0,  "round": 2, "victim": "P4", "killer": "P9", "was_traded": false, "trader": null},
+    {"t": 410.5, "round": 6, "victim": "P8", "killer": "P2", "was_traded": true,  "trader": "P10"}
   ]
 }
 ```
+
+The two entries above are made-up values illustrating the shape only; they do not
+describe events of this match.
 
 - One entry per kill, in any order.
 - `t`: seconds from the start of the videos, as a number.

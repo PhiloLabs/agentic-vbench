@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Build the trade-kill ledger ground truth from the private CS2 .dem file.
 
-Author-side tool (needs demoparser2 + pandas<3); the runtime judge is pure stdlib.
+Author-side tool (built and cross-checked with demoparser2==0.41.4 and pandas 2.3.x;
+pandas>=3 breaks demoparser2's dataframe bridge). The runtime judge is pure stdlib.
 The .dem is the oracle and never ships with the task. This script writes:
 
   provenance/gt_ledger.json                 (public: P-labels only, safe to commit)
@@ -34,6 +35,9 @@ import tempfile
 from pathlib import Path
 
 TRADE_WINDOW_S = 5.0
+# Must equal TOL in steps/solve/tests/judge.py: the no-ambiguous-pair assert below
+# uses 2x this value to guarantee the judge's greedy matcher is one-candidate.
+JUDGE_TOL_S = 5.0
 WORLD_WEAPONS = {"worldent", "planted_c4", "world"}
 
 HERE = Path(__file__).resolve().parent
@@ -59,6 +63,7 @@ roster = sorted(((int(r.team_number), int(r.steamid)) for r in info.itertuples()
 print(json.dumps({
     "header": {k: str(v) for k, v in header.items()},
     "roster": [str(sid) for _, sid in roster],
+    "teams": [team for team, _ in roster],
 }))
 """
 
@@ -68,6 +73,9 @@ def roster_and_header(dem_path: Path):
                          check=True, capture_output=True, text=True, timeout=300)
     data = json.loads(out.stdout.strip().splitlines()[-1])
     assert len(data["roster"]) == 10, f"expected 10 players, got {len(data['roster'])}"
+    teams = data["teams"]
+    assert teams[:5] == [teams[0]] * 5 and teams[5:] == [teams[5]] * 5 \
+        and teams[0] != teams[5], f"expected two teams of five, got {teams}"
     label = {sid: f"P{i + 1}" for i, sid in enumerate(data["roster"])}
     return label, data["header"]
 
@@ -153,7 +161,7 @@ def build(dem_path: Path, t0_tick: int | None):
     for i, a in enumerate(ledger):
         for b in ledger[i + 1:]:
             if a["victim"] == b["victim"] and a["killer"] == b["killer"]:
-                assert abs(a["t"] - b["t"]) > 2 * TRADE_WINDOW_S, "ambiguous match pair"
+                assert abs(a["t"] - b["t"]) > 2 * JUDGE_TOL_S, "ambiguous match pair"
 
     meta = {
         "map": header.get("map_name"),

@@ -60,8 +60,10 @@ Post-render checklist (before calibration):
    kit and player voices disabled.
 2. Renders start at tick 1441 = the GT's `t0_tick`, so no re-run is needed; verify
    3 random GT kills against the media at the stated `t` anyway.
-3. Spot-check 15 random GT kills: each recoverable from the media (victim POV
-   always; killer POV for direct fire; throw visible for the grenade kills).
+3. Spot-check 15 GT kills for recoverability from the media (victim POV always;
+   killer POV for direct fire; throw visible for the grenade kills) - biased
+   toward the weakest observability cases (grenade impacts, smoke kills,
+   wallbangs, the posthumous trade) rather than a uniform random draw.
 4. Run the audio ablation (below); if audio alone scores above the null band,
    strip audio from the renders and document it.
 5. Upload `P1.mp4..P10.mp4` to an archive.org item (direct per-file download
@@ -77,6 +79,13 @@ table, runs in an isolated env matching the shipped image. Ablations
 runs**, never argued numbers. Audit the Gemini trajectories for server-side
 search grounding; the match is private so there is nothing to find, but the
 audit is still recorded.
+
+Hardening lever, decided in advance: with per-entry F1, ~9 accurately
+reconstructed kills reach ~0.10, so a focus-one-round strategy is the realistic
+bar-breaker. If official calibration lands above 0.10, the pre-committed fix is
+to tighten the time tolerance (5 s -> 3 s) and, if still needed, add a scored
+`weapon` field from a closed vocabulary - both raise per-kill difficulty without
+changing the task's structure.
 
 ## Scoring
 

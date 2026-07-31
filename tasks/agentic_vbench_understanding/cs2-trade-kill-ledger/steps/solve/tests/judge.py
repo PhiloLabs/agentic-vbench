@@ -15,6 +15,7 @@ corrupts the was_traded of its neighbours. Oracle -> 1.0; empty or guessed -> ~0
 """
 import argparse
 import json
+import math
 import re
 from pathlib import Path
 
@@ -45,16 +46,17 @@ def norm_bool(v):
 
 def as_float(v):
     try:
-        return float(v)
+        f = float(v)
     except (TypeError, ValueError):
         return None
+    return f if math.isfinite(f) else None
 
 
 def as_int(v):
     try:
         f = float(v)
-        return int(f) if f == int(f) else None
-    except (TypeError, ValueError):
+        return int(f) if math.isfinite(f) and f == int(f) else None
+    except (TypeError, ValueError, OverflowError):
         return None
 
 
