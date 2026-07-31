@@ -1,0 +1,9 @@
+# The .dem is the answer key and contains other players' SteamIDs: never commit it.
+*.dem
+*.dem.info
+# steamid -> P-label map de-anonymizes the other nine players: keep private.
+provenance/player_map.json
+# renders are re-hosted, not committed
+*.mp4
+*.tar
+*.tar.gz

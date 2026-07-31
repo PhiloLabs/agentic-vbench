@@ -1,0 +1,35 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/cs2-trade-kill-ledger"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "esports", "counter-strike", "event-timeline", "agentic-vbench-sports"]
+# Full CS2 competitive match on de_cache, rendered from the author's own private
+# matchmaking .dem replay (10 time-aligned first-person POVs, HUD stripped).
+# Ground truth: the .dem itself, parsed with demoparser2 (see provenance/).
+source = "private CS2 matchmaking demo; renders re-hosted with pinned URL + SHA256"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+# Ten ~33-minute 720p30 POV renders; give the build and trial room.
+storage_mb = 24576
+# The renders are baked at build time and the answer is not online: keep this false.
+allow_internet = false
+
+[environment.env]
+HF_TOKEN = "${HF_TOKEN:-}"
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# ~170 kills across ten 33-minute streams: give the agent real time to seek and tally.
+timeout_sec = 5400.0
+
+[steps.verifier]
+timeout_sec = 600.0
