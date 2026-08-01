@@ -1,0 +1,26 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/medvedev-de-minaur-2023-us-open-break-point-ledger"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "sports-analytics", "tennis", "event-ledger", "agentic-vbench-sports"]
+source = "youtube:kYxKCsl4uN0"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 8192
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 3600.0
+
+[steps.verifier]
+timeout_sec = 600.0
