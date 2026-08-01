@@ -112,9 +112,62 @@ it handles the nine-minute deferral as comfortably as the twenty-second one.
 
 **So the deferral gap is not this task's difficulty axis.** What separates a solved row
 from an unsolved one is whether the execution is *visually conspicuous* — a pig landing,
-a block placed in an empty frame — not how long after the request it happened. A future
-revision should select footage on visual inconspicuousness, and this is the concrete
-finding this build produced.
+a block placed in an empty frame — not how long after the request it happened.
+
+### That axis was then measured, not left as a suggestion
+
+For every row: the fraction of pixels changing between exec−3 s and exec+8 s, minus the
+same span 45 s earlier in the same scene, which baselines how much this camera moves
+anyway. Deterministic; no model in the loop.
+
+The 21 rows split by what the agents did — SOLVED (4), request LOCATED but execution
+never grounded (4), never found at all (13). The third tier is confounded: those may be
+missed because the *request* was missed. The first two are not — in both the agent heard
+the request, so the only remaining difference is whether it could pin the execution.
+
+| measure (baseline-corrected) | solved (n=4) | located only (n=4) | diff | exact p |
+|---|---:|---:|---:|---:|
+| fraction of pixels changed | **+0.289** | −0.259 | +0.548 | **0.043** |
+| mean absolute difference | **+31.19** | −18.26 | +49.45 | **0.043** |
+
+Ranked by footprint, all four solved rows land in the top half of the ledger and three
+of the four located-only rows sit at the very bottom. **Every row below 0.35 — six of
+them — was solved by no agent at all.**
+
+Two honest limits. `n` is 4 vs 4, and 0.043 is close to the 1/70 = 0.014 floor that this
+design can produce at all, so this is suggestive rather than settled. And the 0.35
+threshold was chosen by looking at which rows went unsolved, so quoting it back on these
+same 21 rows would be circular; it has to be validated on rows the measurement never saw.
+
+### What building a revision on that axis would cost — surveyed, not guessed
+
+The obvious next task selects footage on inconspicuousness. That was scoped rather than
+assumed, and the scoping is discouraging enough to belong here.
+
+The channel holds 326 videos / 1357 h, 136 on this server. Licence is per video, not per
+channel — a sibling session in this same series is standard-licence — so each was checked
+individually: **42 CC-BY sessions, 191 h**. Seven were pulled as audio only (~200 MB each
+rather than ~3 GB), transcribed on SLURM (19,638 lines / 30 h, 99–100 % coverage), and
+swept for deferred requests by 16 subagents.
+
+Yield turns on whether the two players **co-build**, and almost none of them do:
+
+| | shared project | parallel play | solo |
+|---|---:|---:|---:|
+| 10 new half-sessions | **0** | 7 | 3 |
+| this session's 2 halves | **2** | 0 | 0 |
+
+A positive control keeps that comparison honest: the identical strict sweep, re-run on
+*this* session whose true ledger of 21 is known, returned 9 candidates — so the sweep has
+about **43 % recall**, and raw sweep counts are calibrated rather than believed. Per
+transcript line, this session still yields 3.2× the others.
+
+Extrapolating at that recall, seven further sessions plus this one give roughly **11–13**
+rows below the footprint threshold. At N=12 one lucky agent hit scores 2/(11+12) = 0.087
+and still passes; two hits give 0.174 and fail. That is a one-hit margin — and the
+hotel-era sessions, where this footage's collaboration actually happens, are almost all
+standard-licence (2 of 18 are CC-BY, and one of those is already swept and is parallel
+play). The axis is real. The footage to exploit it at scale is not obviously there.
 
 ## What the agents actually got wrong
 

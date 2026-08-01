@@ -119,9 +119,62 @@ difficulty:
        90 s   10   0.0952 (1 TP)  0.1111 (1 TP)  0.0000
       180 s    6   0.1176 (1 TP)  0.1429 (1 TP)  0.0000
     No floor clears the gate for both agents. The deferral gap is not this task's
-    difficulty axis; whether the execution is VISUALLY inconspicuous is. That is the
-    axis a future revision should select footage on.
+    difficulty axis; whether the execution is VISUALLY inconspicuous is. That axis was
+    then MEASURED rather than left as a suggestion — see below.
   agent_model: Claude Opus 5 (xhigh), Claude Opus 4.8, Codex GPT-5.6 Sol (xhigh)
+
+# 7b. The real difficulty axis, measured (2026-08-01)
+#     A controlled test of "visual inconspicuousness", plus what it would cost to build
+#     a task on it. Both are reported because the second half is discouraging.
+conspicuousness:
+  method: >
+    For every ground-truth row, the fraction of pixels changing between exec-3 s and
+    exec+8 s, minus the same span 45 s earlier in the same scene (a per-row baseline for
+    how much this camera moves anyway). Deterministic, no model in the loop.
+  controlled_comparison: >
+    The 21 rows split into three tiers by what the agents did: SOLVED (4), request
+    LOCATED but execution never grounded (4), and never found at all (13). Tier 3 is
+    confounded — those may be missed because the request was missed in the transcript.
+    Tiers 1 and 2 are not: in both, the agent heard the request, so the only difference
+    is whether it could pin the execution. That is a clean 4-vs-4 comparison.
+  result:
+    frac_changed_minus_baseline: solved +0.289 vs located-only -0.259   # diff +0.548
+    mean_abs_diff_minus_baseline: solved +31.19 vs located-only -18.26  # diff +49.45
+    exact_permutation_p: 0.043     # one-sided; the FLOOR for n=4 vs 4 is 1/70 = 0.014
+    rows_below_0.35_footprint: 6
+    of_those_solved_by_any_agent: 0
+  honest_limits: >
+    n is 4 vs 4 and p 0.043 is close to the best this design can produce, so this is
+    suggestive, not settled. The 0.35 threshold was also chosen by looking at which rows
+    went unsolved, so quoting it back on the same 21 rows would be circular — it has to
+    be validated on rows this measurement never saw.
+
+# 7c. What building that revision would cost — surveyed, not guessed
+revision_feasibility:
+  source_pool: >
+    The channel has 326 videos / 1357 h; 136 are the same server; per-video licence
+    checks (licence is per video, not per channel — a sibling session in this same
+    series is standard-licence) leave 42 CC-BY sessions / 191 h.
+  what_was_run: >
+    7 sessions pulled as audio only (~200 MB each instead of ~3 GB), transcribed on
+    SLURM (19,638 lines / 30 h, 99-100% coverage), then swept for deferred requests by
+    16 subagents across three passes.
+  blocking_finding: >
+    Yield depends on whether the two players CO-BUILD, and almost none of them do. Of
+    10 new half-sessions, 0 are shared projects (7 parallel play, 3 solo); both halves
+    of the shipped session are shared projects. A positive control — the identical
+    strict sweep re-run on THIS session, whose true ledger of 21 is known — returned 9
+    candidates, i.e. the sweep has ~43% recall, so the sweep counts are calibrated
+    rather than taken at face value. Per line, this session still yields 3.2x more than
+    the others.
+  projection: >
+    Extrapolating at the measured recall, 7 further sessions plus this one would produce
+    roughly 11-13 rows below the footprint threshold. At N=12 a single lucky agent hit
+    scores 2/(11+12) = 0.087 and still passes, but two hits give 0.174 and fail. That is
+    a one-hit margin, and the hotel-era sessions where this footage's collaboration
+    actually happens are almost all standard-licence: 2 of 18 are CC-BY, one of which is
+    already swept and is parallel play. The axis is real; the footage to exploit it at
+    scale is not obviously there.
 
 # 8. Anti-shortcut ablations — MEASURED 2026-07-30 with Codex GPT-5.6 Sol (xhigh)
 #    against the frozen 21-row ground truth. Gate is <= 0.15.
