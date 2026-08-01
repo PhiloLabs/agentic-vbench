@@ -84,3 +84,13 @@ tasks/agentic_vbench_sequencing/*/steps/solve/workdir/*.mp4
 # Understanding task media is hosted externally and baked from pinned URLs.
 release-assets/**/*.mp4
 tasks/agentic_vbench_understanding/*/environment/*.mp4
+
+# Local media + the annotation workbench that produced the understanding-family
+# ground truth: the 3.09 GB source bake and its ablation cuts, the per-candidate
+# frame packets, and the solver sandboxes/logs (~7 GB total). The bake is
+# re-derivable from the sha256-pinned URL in the task's Dockerfile; the shipped
+# evidence lives in the task dir (ground_truth_provenance.json, calibration/).
+media/
+
+__pycache__/
+*.pyc

@@ -1,0 +1,43 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/baddies-smp-pigs-can-fly-command-ledger"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "multiplayer-coop", "command-execution", "audio-visual", "agentic-vbench-understanding"]
+# 228-min window (00:10:00-03:58:00) of a raw multiplayer SMP stream VOD with live
+# voice chat: "Baddies SMP | Pigs can fly" (YouTube obx7hpd4ZfE, channel Nordic Nio
+# VODs, CC-BY, 1080p, 36 views at selection time).
+#
+# Ground truth: drafted by Claude Opus 5 (xhigh) vision passes, adjudicated from dense
+# frame sampling, then reviewed end-to-end by the contributor (2026-08-01), who found
+# no corrections. Per-row frame citations are in
+# steps/solve/tests/ground_truth_provenance.json. That is ONE human reviewer, and the
+# same person who built the pipeline — not the 2+ independent annotators the family
+# asks for. The gap is narrower than it was, but it is still a gap; SPEC.md states it
+# plainly rather than papering over it.
+source = "youtube:obx7hpd4ZfE (CC-BY), trimmed window re-hosted on HF with attribution"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+# 228 min at 720p is 3.09 GB; leave room for frame dumps and the ASR model.
+storage_mb = 16384
+# Media is baked at build time and the answer is not online: keep this false.
+allow_internet = false
+
+[environment.env]
+HF_TOKEN = "${HF_TOKEN:-}"
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# Nearly four hours of video to transcribe in chunks and sample frames across.
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 600.0
