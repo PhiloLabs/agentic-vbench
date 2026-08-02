@@ -24,6 +24,32 @@ Gemini 3.5 Flash 21 and matched none, Gemini 3.1 Pro 9 and matched none. Getting
 operation *approximately* right is common; getting callsign, family, landing-vs-takeoff
 and a 45 s window all right at once is not.
 
+### Where the zeros come from
+
+Worth reading before concluding the task is impossible. Opus 5's 33 submissions were
+not noise: **11 of them carry a callsign that is genuinely in the ground truth.** The
+audio side largely worked. Every one of those 11 failed on `video_time`, and the errors
+are not random — they are all negative and cluster tightly:
+
+    QXE2274  -66 s    SWA1567  -104 s
+    FFT2017  -68 s    FFT2408  -107 s
+    DAL544   -75 s    ASA531   -116 s
+    SWA2177  -78 s    AAL2785  -116 s
+    FFT3738  -84 s    DAL825   -290 s
+
+A systematic ~66-116 s lead, against a 45 s window. The agent heard the right aircraft
+and then anchored it to the wrong instant, because it never cleanly separated the two
+things stacked on top of each other here: the 105 s offset between the two files, and
+the 197 s-median / 97 s-sigma gap between a clearance being spoken and the operation
+happening. Estimate one while absorbing the other and every row lands just outside.
+
+Three more were visual mis-identifications in a consistent direction: Delta's B757s
+(DAL502, DAL544, DAL825) reported as `A320-family`. A 757's long thin fuselage in night
+silhouette does read like an Airbus narrowbody.
+
+This is the failure the conjunctive scorer exists to produce. "Roughly right" is common;
+all four fields right at once is not.
+
 Codex is the outlier on rollout length: it wraps up after ~22 minutes and 29 turns while
 the others run 70-80 minutes. That is an agent trait, not a task ceiling — the same task
 and prompt draw 260 turns out of Gemini 3.5 Flash.
