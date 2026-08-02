@@ -1,0 +1,9 @@
+{
+  "operations": [
+    {"video_time": "00:01:34", "operation": "takeoff", "aircraft_type": "B737-family", "callsign": "UAL706"},
+    {"video_time": "00:02:35", "operation": "takeoff", "aircraft_type": "B737-family", "callsign": "SWA4266"},
+    {"video_time": "00:11:10", "operation": "takeoff", "aircraft_type": "B737-family", "callsign": "SWA9477"},
+    {"video_time": "00:08:58", "operation": "landing", "aircraft_type": "A320-family", "callsign": "FFT2017"},
+    {"video_time": "00:13:25", "operation": "landing", "aircraft_type": "B737-family", "callsign": "UAL1995"}
+  ]
+}

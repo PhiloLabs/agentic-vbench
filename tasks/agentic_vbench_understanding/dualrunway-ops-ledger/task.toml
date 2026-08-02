@@ -1,0 +1,60 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/dualrunway-ops-ledger"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "audio-visual", "cross-modal", "airport", "event-timeline"]
+# Real public airport spotter livestream, dual-runway complex, recorded live at night
+# from a hand-operated PTZ camera.
+# Do not name the airport or the date anywhere agent-visible (instruction.md, file
+# metadata, filenames): the anti-shortcut design relies on the agent being unable to
+# look up a historical arrivals table and match it to ground truth by lookup. The
+# network block below (allow_internet=false) is the structural defense; obscurity is
+# defense-in-depth only.
+# source: TODO fill in the re-hosted archive.org identifier once media is uploaded.
+
+[environment]
+build_timeout_sec = 2400.0
+# 8, deliberately, and the one place this task departs from the 2-4 cpus the rest of the
+# family uses. Those tasks are read-the-picture tasks; this one also has to run 156 min
+# of tower radio through a local medium.en model inside the container, because callsigns
+# exist nowhere else. Measured: at 4 cpus / 3600 s a strong agent never finishes that
+# pass -- it produced no solution.json at all and only 24 tool-call turns, i.e. it fails
+# the >50-turn long-horizon check for lack of budget rather than for lack of depth.
+# The cores buy the ASR pass, not the reasoning; the time budget below is what keeps the
+# task hard.
+cpus = 8
+memory_mb = 8192
+# ~155 min of baked video (~2.3 GB) + a separate audio track + the baked ASR model.
+# setup.sh hard-links rather than copies, so only one copy of the media is on disk.
+# Matches the worked example, which also needs 16 GB for a full broadcast.
+storage_mb = 16384
+# The clip and audio are baked at build time; nothing scored is reachable online, and
+# the anti-shortcut design depends on the agent being unable to look up a historical
+# arrivals table. Keep this false.
+allow_internet = false
+
+[environment.env]
+HF_TOKEN = "${HF_TOKEN:-}"
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# 7200, chosen from measurement rather than from the family default of 3600.
+#   at  3600 s the agent produces no solution.json at all -- it is still building
+#         type-ID sheets when the cap lands. That passes the < 0.10 bar for the wrong
+#         reason: it measures whether the run fits, not whether the agent can do it.
+#   at  7200 s it finishes on its own in 5899 s, 61 tool-call turns, and submits one
+#         operation which is correct -- reward 0.04, precision 1.0, recall 1/49.
+#   at 10800 s an earlier build scored 0.1169, over the bar.
+# 7200 is the setting where the task is demonstrably attemptable and demonstrably hard,
+# which is the measurement worth shipping. The extra hour over the family default is
+# what 156 min of local ASR costs; the visual-only tasks in this family do not pay it.
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 600.0
