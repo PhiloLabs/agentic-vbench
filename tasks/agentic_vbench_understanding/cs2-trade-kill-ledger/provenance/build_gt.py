@@ -35,10 +35,25 @@ import tempfile
 from pathlib import Path
 
 TRADE_WINDOW_S = 5.0
-# Must equal TOL in steps/solve/tests/judge.py: the no-ambiguous-pair assert below
-# uses 2x this value to guarantee the judge's greedy matcher is one-candidate.
-JUDGE_TOL_S = 5.0
+# Timestamp tolerance the shipped judge uses when matching a kill (steps/solve/
+# tests/judge.py TOL). The no-ambiguous-pair assert below uses 2x this so two
+# kills that could match the same predicted kill cannot coexist within tolerance.
+JUDGE_TOL_S = 2.0
 WORLD_WEAPONS = {"worldent", "planted_c4", "world"}
+
+# demoparser2 weapon token -> the display name an agent would write for the
+# viewmodel, aligned with the CSDM render-side timelines (which call the silenced
+# M4A1-S "M4A1" and the base M4A4 "M4A4"). The judge canonicalizes both sides
+# (lowercase, strip punctuation), so exact formatting is not load-bearing - the
+# reduced tokens just have to agree. build() asserts every emitted weapon is in
+# this map, so a new weapon fails loudly rather than shipping an unscoreable field.
+WEAPON_DISPLAY = {
+    "ak47": "AK-47", "awp": "AWP", "bizon": "PP-Bizon", "deagle": "Desert Eagle",
+    "fiveseven": "Five-SeveN", "galilar": "Galil AR", "glock": "Glock-18",
+    "hegrenade": "HE Grenade", "m4a1": "M4A4", "m4a1_silencer": "M4A1",
+    "mac10": "MAC-10", "mp9": "MP9", "sg556": "SG 553", "ssg08": "SSG 08",
+    "ump45": "UMP-45", "usp_silencer": "USP-S", "xm1014": "XM1014",
+}
 
 HERE = Path(__file__).resolve().parent
 TASK = HERE.parent
@@ -121,6 +136,7 @@ def build(dem_path: Path, t0_tick: int | None):
         if atk == vic:
             continue  # suicide: not a kill
         assert atk in label and vic in label, f"non-roster steamid at tick {row.tick}"
+        assert row.weapon in WEAPON_DISPLAY, f"unmapped weapon {row.weapon!r} at tick {row.tick}"
         kills.append({
             "tick": int(row.tick),
             "round": round_of(int(row.tick)),
@@ -128,6 +144,7 @@ def build(dem_path: Path, t0_tick: int | None):
             "killer_sid": atk,
             "victim_team": int(row.user_team_num),
             "killer_team": int(row.attacker_team_num),
+            "weapon": WEAPON_DISPLAY[row.weapon],
         })
 
     # a player dies at most once per round; guards the round derivation
@@ -139,23 +156,30 @@ def build(dem_path: Path, t0_tick: int | None):
 
     window = TRADE_WINDOW_S * tickrate
     for k in kills:
-        k["was_traded"], k["trader_sid"] = False, None
+        k["was_traded"], k["trade_kill"] = False, None
         for k2 in kills:
             if (k2["victim_sid"] == k["killer_sid"]
                     and 0 < k2["tick"] - k["tick"] <= window
                     and k2["round"] == k["round"]
                     and k2["killer_team"] == k["victim_team"]):
-                k["was_traded"], k["trader_sid"] = True, k2["killer_sid"]
+                k["was_traded"], k["trade_kill"] = True, k2  # earliest by tick order
                 break
 
-    ledger = [{
-        "t": round((k["tick"] - t0_tick) / tickrate, 2),
-        "round": k["round"],
-        "victim": label[k["victim_sid"]],
-        "killer": label[k["killer_sid"]],
-        "was_traded": k["was_traded"],
-        "trader": label[k["trader_sid"]] if k["trader_sid"] else None,
-    } for k in kills]
+    def as_kill(k):
+        return {"t": round((k["tick"] - t0_tick) / tickrate, 2), "round": k["round"],
+                "killer": label[k["killer_sid"]], "victim": label[k["victim_sid"]],
+                "weapon": k["weapon"]}
+
+    ledger = [{**as_kill(k), "was_traded": k["was_traded"],
+               "trader": label[k["trade_kill"]["killer_sid"]] if k["trade_kill"] else None}
+              for k in kills]
+
+    # The SCORED ground truth: one trade episode per avenged kill.
+    episodes = sorted(
+        ({"round": k["round"], "initial_kill": as_kill(k),
+          "trade_kill": as_kill(k["trade_kill"])}
+         for k in kills if k["was_traded"]),
+        key=lambda e: e["initial_kill"]["t"])
 
     # no two same-(victim,killer) kills may fall within judge tolerance of each other
     for i, a in enumerate(ledger):
@@ -169,10 +193,11 @@ def build(dem_path: Path, t0_tick: int | None):
         "t0_tick": t0_tick,
         "n_rounds": round_of(int(deaths["tick"].max())),
         "n_kills": len(ledger),
-        "n_traded": sum(1 for e in ledger if e["was_traded"]),
+        "n_episodes": len(episodes),
         "trade_window_s": TRADE_WINDOW_S,
+        "weapons_used": sorted({k["weapon"] for k in kills}),
     }
-    return {"meta": meta, "ledger": ledger}, label
+    return {"meta": meta, "ledger": ledger, "trade_episodes": episodes}, label
 
 
 def self_check(gt: dict):
@@ -188,8 +213,8 @@ def self_check(gt: dict):
                             "--reward-txt", str(td / "reward.txt")], check=True)
             return json.loads((td / "reward.json").read_text())["reward"]
 
-        oracle = score({"ledger": gt["ledger"]})
-        empty = score({"ledger": []})
+        oracle = score({"trade_episodes": gt["trade_episodes"]})
+        empty = score({"trade_episodes": []})
     assert oracle == 1.0, f"verifier(oracle) == {oracle}, expected 1.0"
     assert empty == 0.0, f"verifier(empty) == {empty}, expected 0.0"
     print(f"self-check: oracle={oracle} empty={empty}")
@@ -206,11 +231,13 @@ def main():
     gt, label = build(args.dem, args.t0_tick)
     print(json.dumps(gt["meta"], indent=2))
 
+    # provenance (gt_ledger keeps the full per-kill derivation; PRIVATE map stays local)
     (HERE / "gt_ledger.json").write_text(json.dumps(gt, indent=2))
     (HERE / "player_map.json").write_text(json.dumps(label, indent=2))  # PRIVATE
-    (TASK / "steps/solve/tests/gt_ledger.json").write_text(json.dumps(gt, indent=2))
-    (TASK / "steps/solve/solution/oracle_ledger.json").write_text(
-        json.dumps({"ledger": gt["ledger"]}, indent=2))
+    # the SCORED ground truth and oracle: trade episodes
+    episodes = {"trade_episodes": gt["trade_episodes"]}
+    (TASK / "steps/solve/tests/gt_episodes.json").write_text(json.dumps(episodes, indent=2))
+    (TASK / "steps/solve/solution/oracle_episodes.json").write_text(json.dumps(episodes, indent=2))
 
     self_check(gt)
 
