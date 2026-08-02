@@ -160,21 +160,28 @@ revision_feasibility:
     SLURM (19,638 lines / 30 h, 99-100% coverage), then swept for deferred requests by
     16 subagents across three passes.
   blocking_finding: >
-    Yield depends on whether the two players CO-BUILD, and almost none of them do. Of
-    10 new half-sessions, 0 are shared projects (7 parallel play, 3 solo); both halves
-    of the shipped session are shared projects. A positive control — the identical
-    strict sweep re-run on THIS session, whose true ledger of 21 is known — returned 9
-    candidates, i.e. the sweep has ~43% recall, so the sweep counts are calibrated
-    rather than taken at face value. Per line, this session still yields 3.2x more than
-    the others.
-  projection: >
-    Extrapolating at the measured recall, 7 further sessions plus this one would produce
-    roughly 11-13 rows below the footprint threshold. At N=12 a single lucky agent hit
-    scores 2/(11+12) = 0.087 and still passes, but two hits give 0.174 and fail. That is
-    a one-hit margin, and the hotel-era sessions where this footage's collaboration
-    actually happens are almost all standard-licence: 2 of 18 are CC-BY, one of which is
-    already swept and is parallel play. The axis is real; the footage to exploit it at
-    scale is not obviously there.
+    Yield depends on whether the two players CO-BUILD, and none of them do. Of 12 new
+    half-sessions, 0 are shared projects (8 parallel play, 4 solo); both halves of the
+    shipped session are shared projects. A positive control — the identical strict sweep
+    re-run on THIS session, whose true ledger of 21 is known — returned 9 candidates,
+    i.e. the sweep has ~43% recall, so sweep counts are calibrated rather than taken at
+    face value. Per line, this session still yields 3.2x more than the others.
+  deciding_test: >
+    The last two of those twelve halves were a pre-registered decider. `32WK9Q8-Dcc`
+    ("Get a room…!") is the ONLY other CC-BY session from this footage's hotel-building
+    era, sits directly beside the shipped session in the channel timeline, and shares
+    its subject matter — the strongest test available of "collaboration is a property of
+    that era". It came back parallel play then solo. Its five candidates are all requests
+    from Noodle, Bread and Miller, who are Twitch-chat and Discord viewers commissioning
+    hotel rooms rather than players in the world; the sweep flagged that on each one and
+    the task's rules reject them all.
+  conclusion: >
+    The era hypothesis is dead, and the simpler explanation stands: this channel's format
+    is one streamer building alone while viewers commission rooms. The shipped session is
+    exceptional because a second player happened to log on and involve himself in the same
+    structure — an event, not an era. ON THIS AXIS THE CHANNEL IS EXHAUSTED. A revision
+    built on visual inconspicuousness needs a different source, not more sessions from
+    here; scaling within this channel was measured and does not work.
 
 # 8. Anti-shortcut ablations — MEASURED 2026-07-30 with Codex GPT-5.6 Sol (xhigh)
 #    against the frozen 21-row ground truth. Gate is <= 0.15.

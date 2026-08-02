@@ -154,8 +154,24 @@ Yield turns on whether the two players **co-build**, and almost none of them do:
 
 | | shared project | parallel play | solo |
 |---|---:|---:|---:|
-| 10 new half-sessions | **0** | 7 | 3 |
+| 12 new half-sessions | **0** | 8 | 4 |
 | this session's 2 halves | **2** | 0 | 0 |
+
+The last two of those twelve were the deciding test, chosen in advance and run with a
+byte-identical prompt: `32WK9Q8-Dcc` ("Get a room…!") is the only other CC-BY session
+from this footage's hotel-building era, sits directly beside the shipped session in the
+channel's timeline, and shares its subject matter. If collaboration were a property of
+that era, it would show there. It does not — parallel play in the first half, outright
+solo in the second. The five candidates it produced are all requests from **Noodle,
+Bread and Miller, who are Twitch-chat and Discord viewers redeeming hotel rooms, not
+players in the world**; the sweep flagged that caveat on each one itself, and the task's
+rules reject them.
+
+That kills the "collaboration correlates with era" hypothesis and leaves a simpler
+explanation: this channel's format is *one streamer building alone while viewers commission
+rooms*. The shipped session is exceptional because a second player happened to log on and
+involve himself in the same structure — an event, not an era. **On this axis the channel
+is exhausted; a revision would need a different source, not more sessions from here.**
 
 A positive control keeps that comparison honest: the identical strict sweep, re-run on
 *this* session whose true ledger of 21 is known, returned 9 candidates — so the sweep has
