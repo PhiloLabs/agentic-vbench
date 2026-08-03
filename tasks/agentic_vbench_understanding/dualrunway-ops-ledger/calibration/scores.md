@@ -69,12 +69,35 @@ all four fields right at once is not.
 
 ### Two limitations a reviewer should weigh
 
-**The scorer gives no partial credit, and that hides real progress.** Opus 5 sampled 88%
-of the recording, recovered 11 ground-truth callsigns from the radio, and got the family
-right on most of them. It scores exactly the same as an agent that did nothing: 0.0. The
-one thing it got wrong — separating the 105 s inter-file offset from the 197 s-median
-clearance lead — is a single scalar, and fixing that scalar alone would have turned eight
-zeros into eight hits. A metric that cannot see that is a coarse instrument.
+**The scorer gives no partial credit.** Opus 5 sampled 88% of the recording, recovered 11
+ground-truth callsigns from the radio, and got the family right on most of them. Its
+reward is the same as an agent that did nothing: 0.0. The one thing it got wrong —
+separating the 105 s inter-file offset from the 197 s-median clearance lead — is a single
+scalar, and fixing that scalar alone would have turned eight zeros into eight hits.
+
+That is a real limitation of a conjunctive F1, and it is not fixable by widening the
+tolerance: measured across all four rollouts, TOL 45 → 90 s takes Opus from 0.000 to
+0.104, past the bar, and TOL 120 s takes it to 0.208, while the other three barely move
+because their failures are not about timing. Widening it far enough to catch the misses
+would delete the cross-modal alignment from the task -- at 120 s an agent scores the same
+whether or not it ever recovered the offset, which is the thing being tested.
+
+So the reward is left alone and `judge.py` reports two diagnostics beside it instead:
+`callsign_matches_any_gt` and `median_time_error_s`. They do not enter the score. What
+they buy is that three identical zeros stop looking identical:
+
+| agent | reward | TP | callsigns matched | median time error |
+|---|---|---|---|---|
+| Claude Opus 5 | 0.0000 | 0 | **11** | **−84 s** |
+| Gemini 3.5 Flash | 0.0000 | 0 | 5 | −740 s |
+| Gemini 3.1 Pro | 0.0000 | 0 | 2 | +3003 s |
+| Codex GPT 5.6 Sol | 0.0741 | 2 | 2 | **+7 s** |
+
+Opus heard five times as many aircraft as the only agent that scored, and missed on one
+uniform 84-second shift. Gemini 3.5 Flash was out by 12 minutes, 3.1 Pro never aligned at
+all. Codex scored precisely because its two rows were 7 s out — it paired locally inside
+the first 9 minutes and never needed a global offset. Read together with the rollout
+lengths, that is a far more informative picture than four numbers near zero.
 
 **Every agent number here is n = 1.** This task has high run-to-run variance: the same
 model on the same media scored 0.1169 under one prompt revision and 0.0 under the next,

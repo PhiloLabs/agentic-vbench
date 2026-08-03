@@ -366,6 +366,32 @@ def main():
             continue
         scored_preds += 1
 
+    # Diagnostics only -- these never enter the reward. A conjunctive scorer reports 0.0
+    # for an agent that heard the right aircraft and put it a minute and a half off just
+    # as loudly as for one that did nothing, and that hides the difference between "no
+    # signal" and "one scalar wrong". These fields make that visible to whoever reads
+    # reward.json without softening the bar.
+    gt_by_call = {}
+    for g in GROUND_TRUTH:
+        gt_by_call.setdefault(norm_callsign(g["callsign"]), []).append(g)
+    callsign_hits, time_errors = 0, []
+    for pr in preds:
+        if not isinstance(pr, dict):
+            continue
+        pt = video_time_secs(pr.get("video_time"))
+        cands = gt_by_call.get(norm_callsign(pr.get("callsign", "")), [])
+        if not cands:
+            continue
+        callsign_hits += 1
+        if pt is None:
+            continue
+        best = min(cands, key=lambda g: abs(pt - (video_time_secs(g["video_time"]) or 0)))
+        gt_t = video_time_secs(best["video_time"])
+        if gt_t is not None:
+            time_errors.append(pt - gt_t)
+    time_errors.sort()
+    median_err = time_errors[len(time_errors) // 2] if time_errors else None
+
     n_gt = len(GROUND_TRUTH)
     precision = tp / scored_preds if scored_preds else 0.0
     recall = tp / n_gt if n_gt else 0.0
@@ -382,6 +408,9 @@ def main():
         "recall": round(recall, 4),
         "f1": round(f1, 4),
         "video_time_tolerance_s": TOL,
+        # diagnostics; not part of the reward
+        "callsign_matches_any_gt": callsign_hits,
+        "median_time_error_s": median_err,
     }
     args.reward_json.parent.mkdir(parents=True, exist_ok=True)
     args.reward_json.write_text(json.dumps({"reward": round(f1, 4), "details": details}, indent=2))
