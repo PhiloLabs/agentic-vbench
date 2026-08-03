@@ -47,8 +47,42 @@ Three more were visual mis-identifications in a consistent direction: Delta's B7
 (DAL502, DAL544, DAL825) reported as `A320-family`. A 757's long thin fuselage in night
 silhouette does read like an Airbus narrowbody.
 
+Row by row, with the ground truth beside it:
+
+    Opus reported                          ground truth                  why it scored 0
+    00:07:43 landing A320-family FFT2017   00:08:51 A320-family          time -68 s
+    00:09:17 landing B737-family SWA2177   00:10:35 B737-family          time -78 s
+    00:15:53 landing A320-family FFT3738   00:17:17 A320-family          time -84 s
+    00:18:15 landing B737-family ASA531    00:20:11 B737-family          time -116 s
+    00:29:07 landing regional-jet QXE2274  00:30:13 regional-jet         time -66 s
+    00:33:37 landing A320-family AAL2785   00:35:33 A320-family          time -116 s
+    01:47:55 landing B737-family SWA1567   01:49:39 B737-family          time -104 s
+    02:16:41 landing A320-family FFT2408   02:18:28 A320-family          time -107 s
+    02:27:06 takeoff A320-family DAL502    02:27:07 B757                 type only (1 s off)
+
+Callsign right, operation right, family right on eight of them — only the clock is wrong,
+and always in the same direction. DAL502 is the mirror image: the time is off by one
+second and only the type is wrong.
+
 This is the failure the conjunctive scorer exists to produce. "Roughly right" is common;
 all four fields right at once is not.
+
+### Two limitations a reviewer should weigh
+
+**The scorer gives no partial credit, and that hides real progress.** Opus 5 sampled 88%
+of the recording, recovered 11 ground-truth callsigns from the radio, and got the family
+right on most of them. It scores exactly the same as an agent that did nothing: 0.0. The
+one thing it got wrong — separating the 105 s inter-file offset from the 197 s-median
+clearance lead — is a single scalar, and fixing that scalar alone would have turned eight
+zeros into eight hits. A metric that cannot see that is a coarse instrument.
+
+**Every agent number here is n = 1.** This task has high run-to-run variance: the same
+model on the same media scored 0.1169 under one prompt revision and 0.0 under the next,
+and 0.04 at one time budget. The gap between the top row (0.0741) and the bottom (0.0) is
+two ledger rows out of 49 — noise, not a capability ordering. These numbers establish
+that all four agents sit near the floor, which is what the < 0.10 bar asks for. They do
+**not** rank the agents, and should not be read that way. Ranking would need at least
+three runs each.
 
 Codex is the outlier on rollout length: it wraps up after ~22 minutes and 29 turns while
 the others run 70-80 minutes. That is an agent trait, not a task ceiling — the same task
