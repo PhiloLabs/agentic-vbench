@@ -4,15 +4,17 @@ version = "1.0"
 name = "agentic-vbench/kart-race-telemetry-ledger-s1"
 
 [metadata]
-difficulty = "hard"
+difficulty = "medium"
 category = "video-understanding"
-tags = ["video-understanding", "game-analysis", "racing", "multi-object-tracking", "long-horizon", "event-timeline", "synthetic-ground-truth", "agentic-vbench-understanding"]
-# Six AI-driven SuperTuxKart races (41.5 min total), twelve karts each on six tracks. The agent
-# counts, per kart, the powerup boxes it collected — that total is not displayed on screen,
-# so it means following twelve karts and counting discrete events. GT is STK's own profile-mode
-# result table, so the recorded run is its own machine-exact ground truth. Real-life framing:
-# multi-object tracking plus fine-grained event counting in crowded gameplay/sports footage.
-source = "synthetic: SuperTuxKart 1.5 --profile-laps (SuperTux AI difficulty), recorded under Xvfb; tools/p4_stk/"
+tags = ["video-understanding", "game-analysis", "racing", "object-tracking", "long-horizon", "event-timeline", "synthetic-ground-truth", "agentic-vbench-understanding"]
+# Eight AI-driven SuperTuxKart races (34.5 min total) on eight tracks. The camera is a chase-cam
+# locked to one hero kart (tux) throughout; the agent counts the HERO's powerup-box pickups and
+# explosions in each race — neither is shown as a number — then the races are ranked by those
+# counts. Scoping to the camera-followed kart makes every scored event observable (the fairness
+# fix for the reviewer's twelve-kart objection). GT is STK's own profile-mode result table, so the
+# recorded run is its own machine-exact ground truth. Real-life framing: fine-grained event
+# counting on a tracked subject across long gameplay/sports footage.
+source = "synthetic: SuperTuxKart 1.5 --profile-laps --kart=tux (SuperTux AI difficulty), recorded under Xvfb; generator/ (run_suite.sh)"
 
 [environment]
 build_timeout_sec = 2400.0
