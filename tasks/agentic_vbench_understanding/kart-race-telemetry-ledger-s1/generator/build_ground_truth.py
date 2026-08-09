@@ -20,7 +20,7 @@ from pathlib import Path
 suite = Path(sys.argv[1])
 dst = Path(sys.argv[2])
 
-race_dirs = sorted([d for d in suite.iterdir() if d.is_dir() and d.name.startswith("race")],
+race_dirs = sorted([d for d in suite.iterdir() if d.is_dir() and d.name.startswith("race") and d.name[4:].isdigit()],
                    key=lambda d: int(d.name[4:]))
 if not race_dirs:
     sys.exit(f"no race*/ dirs under {suite}")

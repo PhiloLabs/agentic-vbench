@@ -27,9 +27,15 @@ STK=${STK:?set STK to the SuperTuxKart 1.5 install dir (contains run_game.sh)}
 # the previous Xvfb had not released the lock, the new one died with "Server is already
 # active", ffmpeg could not open the display, and the run still reported success with no
 # video written.
-for n in $(seq 77 99); do
-  if [ ! -e "/tmp/.X${n}-lock" ]; then DISPNUM=$n; break; fi
-done
+# A caller running races in parallel passes STK_DISP to guarantee a unique display (the
+# check-then-bind loop below races when several starts land at once). Otherwise pick a free one.
+if [ -n "${STK_DISP:-}" ]; then
+  DISPNUM=$STK_DISP
+else
+  for n in $(seq 77 99); do
+    if [ ! -e "/tmp/.X${n}-lock" ]; then DISPNUM=$n; break; fi
+  done
+fi
 : "${DISPNUM:?no free X display in 77..99}"
 DISP=":$DISPNUM"
 W=1280; H=720

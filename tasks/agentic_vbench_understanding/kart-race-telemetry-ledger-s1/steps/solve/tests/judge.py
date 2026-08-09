@@ -8,14 +8,15 @@ counts are scored, so **every scored quantity is on screen the whole race** ("sc
 to what the camera sees"). The rest of the field still races — competing for boxes and bombing
 the hero — it is just not the thing being counted.
 
-For each race the agent reports, for the hero:
+For each race the agent reports, for the hero, three counts:
 - **`items_collected`** — how many powerup boxes the hero drove through (the picked-up powerup
   then shows in the hero's HUD slot — visible, but never a running total, so it must be counted).
 - **`times_exploded`** — how many times the hero was blown up (thrown into the air, spins out).
+- **`bananas_hit`** — how many bananas the hero ran over (it visibly spins out; no counter).
 
 Scoring is **rank agreement across races**, not exact match:
 
-    reward = max(0, 0.65*tau(items over races) + 0.35*tau(explosions over races))
+    reward = max(0, 0.40*tau(items) + 0.30*tau(explosions) + 0.30*tau(bananas)), over the races
 
 where tau is the normalised Kendall correlation `(concordant - discordant)/n_pairs` over the
 races, ordering them by the hero's count. You do not have to count exactly — getting the
@@ -31,12 +32,14 @@ hero's pickups must be tallied accurately in each race and the races ordered by 
 one miscounted race flips several pairs.
 
 Which fields are scored, and why not the others:
-  * items / explosions — off-HUD (no on-screen counter) and unambiguously visible on the hero.
+  * items / explosions / bananas — off-HUD (no on-screen counter) and unambiguously visible on
+    the hero (a box driven through, a bomb throwing it up, a banana spinning it out). Over 4-lap
+    races each has real spread across the suite.
   * nitro — the hero's nitro METER is drawn and nitro use renders as boost flames, so it is a
     proxy an agent can read rather than count; reported for context, not scored.
   * finish / start position — displayed by the ranking column and starting grid; not scored.
-  * bananas / rescues — witnessable on the hero but sparse across a suite (few distinct values),
-    so ranking them is near-constant and not discriminative; reported for context, not scored.
+  * rescues — witnessable (the lift-back) but the SuperTux AI rarely falls, so it is near-constant
+    across the suite and not discriminative; reported for context, not scored.
 
 Races are matched by their order in the video (report them in order). Ground truth is baked
 verifier-side at /tests/ground_truth.json.
@@ -46,8 +49,13 @@ from pathlib import Path
 
 GT_PATH = Path(__file__).with_name("ground_truth.json")
 # (ground-truth field, prediction field, weight) — only OFF-HUD, hero-visible quantities.
-DIMS = [("items_collected", "items_collected", 0.65),
-        ("times_exploded",   "times_exploded",   0.35)]
+# Three counts are scored, which divides the agent's attention (the difficulty lives there):
+# powerup boxes driven through, times blown up, and bananas hit (each visibly spins/throws the
+# hero and has no on-screen counter). Over the 4-lap races all three vary across the suite; a flat
+# field is renormalised out so the oracle still reaches 1.0.
+DIMS = [("items_collected", "items_collected", 0.40),
+        ("times_exploded",   "times_exploded",   0.30),
+        ("bananas_hit",      "bananas_hit",      0.30)]
 
 
 def as_num(v):
