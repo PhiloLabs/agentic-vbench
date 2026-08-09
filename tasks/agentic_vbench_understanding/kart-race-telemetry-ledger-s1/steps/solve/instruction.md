@@ -1,28 +1,40 @@
 # Kart Race Telemetry Reconstruction
 
-You are given one video at `/workspace/materials/race.mp4`: a suite of **six AI-driven
-SuperTuxKart races**, one after another, each on a different track with **twelve karts**. A race
-change is obvious — the scene cuts to a new track and a new starting grid.
+You are given one video at `/workspace/materials/race.mp4`: a suite of **AI-driven SuperTuxKart
+races**, one after another, each on a different track. A race change is obvious — the scene cuts
+to a new track and a new starting grid.
 
-For each race, reconstruct **per kart, two counts**:
-- **`items_collected`** — how many powerup boxes (the question-mark boxes) that kart drove through.
-- **`times_exploded`** — how many times that kart was blown up (hit by a bomb/cake: the kart is
+In every race the **camera follows one kart the whole time** — the same character (the *hero*)
+in all races. It is the kart shown from behind, centred, with its name on the license plate; the
+other karts race around it (competing for boxes, bombing it) but the camera stays on the hero.
+
+For **each race**, reconstruct **two counts for the hero kart**:
+- **`items_collected`** — how many powerup boxes (the question-mark boxes) the hero drove
+  through. When it grabs one, the powerup appears in the hero's HUD slot (top of screen) — but
+  there is never a running total, so you have to count the pickups as they happen.
+- **`times_exploded`** — how many times the hero was blown up (hit by a bomb/cake: the kart is
   thrown into the air and spins out).
 
-Neither number appears anywhere on screen, so both require following each kart through the race and
-counting. You may also report `nitro_collected`, `start_position` and `finish_position` for context,
-but **only the two counts above are scored**: the ranking column and starting grid display the
-positions, and nitro use shows as boost flames, so none of those require the counting this task
-measures.
+Both require watching the hero across the whole race and counting; neither is displayed as a
+number anywhere. You may also report `nitro_collected`, `start_position` and `finish_position`
+for context, but **only the two counts above are scored** — the ranking column and starting grid
+display the positions, and nitro shows as a meter and boost flames, so none of those need the
+counting this task measures.
 
-Evidence is on screen throughout:
+## How it is scored
 
-- The **ranking column** (top left) lists the karts by current position, by character icon.
-- The **minimap** (bottom left) shows every kart as a marker, so you can follow who is where
-  even when a kart is off camera.
-- Karts are visually distinct characters; the same character keeps its colours all race.
-- A kart collects a powerup by driving through a **question-mark box**; the powerup then
-  appears in that kart's slot.
+Scoring is **rank agreement across races** (normalised Kendall correlation), not exact match:
+
+    reward = max(0, weighted mean over the two counts of
+                    agreement( races ordered by the hero's count ))
+
+You do not have to count exactly — ranking the **races** by how many powerups the hero collected
+(and, separately, how many times it was blown up) is what earns credit, so getting the hero's
+big-pickup and small-pickup races in roughly the right order scores well. Guessing earns nothing:
+a random ordering scores 0 in expectation, because agreeing and disagreeing race-pairs cancel.
+
+Because only the hero is scored and the camera is on the hero the entire race, **every scored
+event is on screen** — nothing you must count happens off camera.
 
 ## What to submit
 
@@ -31,37 +43,18 @@ Write `/workspace/output/solution.json`, races in the order they appear in the v
 ```json
 {
   "races": [
-    {
-      "track": "hacienda",
-      "karts": [
-        {"kart": "tux",    "items_collected": 10, "times_exploded": 2},
-        {"kart": "amanda", "items_collected": 17, "times_exploded": 0}
-      ]
-    }
+    {"track": "hacienda",     "items_collected": 14, "times_exploded": 1},
+    {"track": "snowmountain",  "items_collected": 2,  "times_exploded": 1}
   ]
 }
 ```
 
-- `kart`: the character name as shown in game (for example `tux`, `gnu`, `konqi`, `nolok`,
-  `amanda`, `beastie`, `kiki`, `adiumy`, `pidgin`, `puffy`, `hexley`, `wilber`, `xue`,
-  `emule`, `gavroche`, `suzanne`, `sara_the_racer`, `sara_the_wizard`).
-- `items_collected`: powerup boxes that kart drove through. **Scored (weight 0.65).**
-- `times_exploded`: how many times that kart was blown up. **Scored (weight 0.35).**
-- `nitro_collected`, `start_position`, `finish_position`, `track`: optional context, not scored.
-
-## How it is scored
-
-Scoring is **rank agreement** (normalised Kendall correlation), not exact match:
-
-    reward = max(0, mean over races of [ 0.65 * agreement(items order)
-                                      + 0.35 * agreement(explosion order) ])
-
-You do not have to count pickups exactly — ranking the karts by how many they collected is
-what matters, so getting the heavy and light collectors in roughly the right order earns
-credit. Guessing earns nothing: a random ordering scores 0 in expectation, because agreeing and
-disagreeing pairs cancel out.
+- `items_collected`: powerup boxes the **hero** drove through this race. **Scored (weight 0.65).**
+- `times_exploded`: how many times the **hero** was blown up this race. **Scored (weight 0.35).**
+- `track`, `nitro_collected`, `start_position`, `finish_position`: optional context, not scored.
+- Report the races **in the order they appear** — they are matched to the ground truth by order.
 
 ## Rules
 - Stay inside this working directory. Do not read, write, or search outside it.
 - Do not look anything up online. Reconstruct the results from the video.
-- Report all six races, in the order they appear.
+- Report every race, in the order it appears.
