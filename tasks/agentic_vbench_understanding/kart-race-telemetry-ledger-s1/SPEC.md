@@ -19,8 +19,8 @@ modalities_required:
   video: the hero, the track boxes/bananas, the drift sparks, ranking column and minimap are all visual.
   audio: not used.
 
-question: For each race, reconstruct the HERO kart's powerup boxes collected, times exploded, bananas hit, and total drift seconds (all off-HUD), in race order.
-output_schema: '{"races": [{"track": str, "items_collected": int, "times_exploded": int, "bananas_hit": int, "skid_time": number}]}'  # nitro/positions optional, unscored
+question: For each race, reconstruct the HERO kart's powerup boxes collected, spin-outs (banana OR bomb; scored jointly as they are visually identical), and total drift seconds (all off-HUD), in race order.
+output_schema: '{"races": [{"track": str, "items_collected": int, "spinouts": int, "skid_time": number}]}'  # spinouts = bananas+explosions (scored jointly); bananas/explosions/nitro/positions optional, unscored
 
 ground_truth:
   source: SuperTuxKart 1.5 profile mode (--profile-laps) result table; the AI drives every kart and
@@ -36,8 +36,7 @@ scorer:
   metric: "EXACT, not just rank. Per quantity q: score_q = clamp(tau_q,0,1) * accuracy_q, where
            accuracy_q = mean over races of max(0, 1 - |pred-gt| / max(1, 0.30*gt)) and tau_q is the
            signed Kendall correlation over the races (the guess gate). reward = sum_q w_q*score_q,
-           renormalised over quantities that vary in the GT. Weights: items 0.30, explosions 0.15,
-           bananas 0.25, skid_time 0.30."
+           renormalised over quantities that vary in the GT. Weights: items 0.40, spinouts 0.30 (=bananas+explosions), skid_time 0.30."
   # WHY exact, not rank. The earlier scorer used rank agreement only, which is too forgiving: an
   # agent that systematically UNDER-counts (Codex saw 8 of 20 powerups) still ranks the races
   # roughly right and scored ~0.35. Scoring against STK's full-precision telemetry (within ~30% per
@@ -53,23 +52,25 @@ scorer:
     codex_rescore_rank_vs_exact: "the earlier Codex rollout re-scored under this metric drops its
       items term 0.46 -> 0.096 (it under-counts); aggregate ~0.12 even before skid_time is asked for"
 
-difficulty: {strong_agent_reward: 0.0295, tool_call_turns: 542, agent_model: codex gpt-5.6-sol xhigh}
+difficulty: {strong_agent_reward: 0.0236, tool_call_turns: 542, agent_model: codex gpt-5.6-sol xhigh}
 # MEETS the family's <0.10 strong-agent bar. HISTORY of the hardening (all measured, Codex xhigh):
-#   v2 hero-scope, rank, 3 counts:        0.407
-#   + HUD powerup mask (identification):  0.345 (items tau 0.64 -> 0.46)
-#   + EXACT-count metric + skid_time dim:  0.0295  <-- COMPLETED 4-quantity run
-# Final = a completed run (542 tool calls, all 12 races' skid_time reported; rollout in
-# calibration/rollouts/codex_exact_full_*). Per-dim score: items 0.015 (accuracy 0.043 — essentially
-# NEVER within 30%, undercounts ~50%), explosions 0.103, bananas 0.0, skid_time 0.032 (drift-duration
-# barely ranked, tau 0.09). Requiring ACCURATE counts + a DURATION defeats Codex: it cannot count
-# precisely or time drifting over 53 min, even doing meticulous per-race vision analysis (542 calls).
-# HONEST n=1 caveat: an earlier PARTIAL re-score (skid unreported) gave ~0.12; the completed full run
-# gives 0.0295 — both put the task at/below <0.10. Still FAIR + LEARNABLE: oracle = 1.0, and a careful
-# agent that stays within 30% would score far higher; Codex simply isn't accurate enough.
-# Levers that worked: identification-hardness (mask) and especially the EXACT-count metric (both
-# attack WHAT the agent measures). Length was the weak lever (rank/coverage is forgiving). This is
-# now a fair HARD entry, ~0.12 — near the family's <0.10 ideal, with items/bananas already ~0.05-0.10
-# and only the deliberately-low-weight explosions holding the aggregate up.
+#   v2 hero-scope, rank, 3 counts:            0.407
+#   + HUD powerup mask (identification):      0.345 (items tau 0.64 -> 0.46)
+#   + EXACT-count metric (4 dims: items/expl/banana/skid): 0.0295 (completed 542-call run;
+#     rollout calibration/rollouts/codex_exact_full_*)
+#   + merge banana+explosion -> spinouts (3 dims: items/spinouts/skid): 0.0236 <-- SHIPPED
+# The spinouts merge is an OBSERVABILITY fix, not a difficulty knob: dense sampling of a 5-explosion
+# race found banana and bomb hits render as the SAME dizzy-stars spin-out (not distinguishable at
+# 720p), so scoring them separately demanded an un-observable split; their machine-exact SUM is what
+# a viewer can actually count. Per-dim under the shipped 3-dim metric (Codex's completed run,
+# bananas+explosions summed): items 0.015 (accuracy 0.04 — essentially NEVER within 30%, undercounts
+# ~50%), spinouts 0.027 (tau 0.32, acc 0.08), skid_time 0.032. Requiring ACCURATE counts + a drift
+# DURATION over 53 min defeats Codex even with meticulous per-race vision (542 calls). n=1; the
+# spinouts number re-scores the completed 4-quantity rollout (its banana+explosion predictions
+# summed) — a fresh spinouts-native run would be comparable. Still FAIR + LEARNABLE: oracle = 1.0,
+# and a careful within-30% agent scores far higher. skid_time is NOT load-bearing (drop it and the
+# task still scores <0.10 on items+spinouts alone). Length was the weak lever (coverage is forgiving);
+# the exact-count metric + identification-hardness (mask) are what work.
 
 anti_shortcut:
   single_frame: one frame gives one instant, not twelve races of accurate counts + drift durations.
@@ -112,6 +113,12 @@ input:
   character.
 
 ## Known limitations
+
+- **Bananas and explosions are scored JOINTLY as `spinouts`.** In this render both a banana hit and
+  a bomb/cake hit produce the SAME dizzy-stars spin-out; dense frame sampling of a 5-explosion race
+  found no visually-distinct explosion. Scoring them separately would require an un-observable split,
+  so the ground truth uses their sum (machine-exact). The spin-out event itself is plainly visible,
+  so it stays fully observable.
 
 - `skid_time` is a *duration* — within ±30% is achievable for a careful viewer but hard, so it is
   a genuine difficulty lever; if calibration shows it is effectively unmeasurable it can be dropped.

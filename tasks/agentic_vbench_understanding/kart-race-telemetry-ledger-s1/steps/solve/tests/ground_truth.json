@@ -11,7 +11,8 @@
       "nitro_collected": 15,
       "finish_position": 9,
       "field_size": 10,
-      "skid_time": 69.02
+      "skid_time": 69.02,
+      "spinouts": 6
     },
     {
       "track": "snowmountain",
@@ -22,7 +23,8 @@
       "nitro_collected": 4,
       "finish_position": 8,
       "field_size": 10,
-      "skid_time": 60.07
+      "skid_time": 60.07,
+      "spinouts": 5
     },
     {
       "track": "cornfield_crossing",
@@ -33,7 +35,8 @@
       "nitro_collected": 4,
       "finish_position": 9,
       "field_size": 10,
-      "skid_time": 40.68
+      "skid_time": 40.68,
+      "spinouts": 6
     },
     {
       "track": "lighthouse",
@@ -44,7 +47,8 @@
       "nitro_collected": 5,
       "finish_position": 8,
       "field_size": 10,
-      "skid_time": 73.35
+      "skid_time": 73.35,
+      "spinouts": 3
     },
     {
       "track": "gran_paradiso_island",
@@ -55,7 +59,8 @@
       "nitro_collected": 6,
       "finish_position": 6,
       "field_size": 10,
-      "skid_time": 92.09
+      "skid_time": 92.09,
+      "spinouts": 1
     },
     {
       "track": "sandtrack",
@@ -66,7 +71,8 @@
       "nitro_collected": 10,
       "finish_position": 3,
       "field_size": 10,
-      "skid_time": 22.67
+      "skid_time": 22.67,
+      "spinouts": 4
     },
     {
       "track": "olivermath",
@@ -77,7 +83,8 @@
       "nitro_collected": 8,
       "finish_position": 3,
       "field_size": 10,
-      "skid_time": 32.9
+      "skid_time": 32.9,
+      "spinouts": 3
     },
     {
       "track": "cocoa_temple",
@@ -88,7 +95,8 @@
       "nitro_collected": 5,
       "finish_position": 10,
       "field_size": 10,
-      "skid_time": 52.03
+      "skid_time": 52.03,
+      "spinouts": 1
     },
     {
       "track": "scotland",
@@ -99,7 +107,8 @@
       "nitro_collected": 19,
       "finish_position": 1,
       "field_size": 10,
-      "skid_time": 85.88
+      "skid_time": 85.88,
+      "spinouts": 1
     },
     {
       "track": "fortmagma",
@@ -110,7 +119,8 @@
       "nitro_collected": 8,
       "finish_position": 6,
       "field_size": 10,
-      "skid_time": 74.23
+      "skid_time": 74.23,
+      "spinouts": 5
     },
     {
       "track": "ravenbridge_mansion",
@@ -121,7 +131,8 @@
       "nitro_collected": 3,
       "finish_position": 8,
       "field_size": 10,
-      "skid_time": 44.99
+      "skid_time": 44.99,
+      "spinouts": 2
     },
     {
       "track": "stk_enterprise",
@@ -132,8 +143,10 @@
       "nitro_collected": 20,
       "finish_position": 3,
       "field_size": 10,
-      "skid_time": 39.53
+      "skid_time": 39.53,
+      "spinouts": 4
     }
   ],
-  "_note_skid": "skid_time = total drift/skidding seconds for the hero (machine-exact, STK profile)"
+  "_note_skid": "skid_time = total drift/skidding seconds for the hero (machine-exact, STK profile)",
+  "_note_spinouts": "spinouts = bananas_hit + times_exploded (both render as an identical dizzy-stars spin-out and are not reliably distinguishable at 720p, so they are scored jointly)"
 }

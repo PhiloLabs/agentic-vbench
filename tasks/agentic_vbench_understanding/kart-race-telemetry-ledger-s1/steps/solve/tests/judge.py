@@ -7,11 +7,13 @@ camera follows the player kart, and the generator makes the hero the player. Onl
 telemetry is scored, so **every scored quantity is on screen the whole race**. The top-center
 HUD powerup slot is masked, so pickups have no on-screen confirmation.
 
-For each race the agent reports, for the hero, four off-HUD quantities:
+For each race the agent reports, for the hero, three off-HUD quantities:
 - **`items_collected`** — powerup boxes the hero drove through (HUD indicator masked; count the
   drive-throughs).
-- **`times_exploded`** — times the hero was blown up (thrown up, spins out).
-- **`bananas_hit`** — bananas the hero ran over (visible spin-out).
+- **`spinouts`** — times the hero spun out (dizzy-stars). A banana and a bomb both cause the SAME
+  visible spin-out and are not reliably distinguishable at 720p, so they are scored JOINTLY
+  (spinouts = bananas_hit + times_exploded in the ground truth). bananas_hit / times_exploded may
+  be reported separately as context but only their sum is scored.
 - **`skid_time`** — total seconds the hero spent drifting/skidding (the slide + sparks). A
   *duration*, not a count — you estimate how long, cumulatively, the hero was drifting.
 
@@ -31,9 +33,8 @@ powerups) still ranks the races roughly right and scores well; requiring the cou
 was rejected in an earlier design because blind guessing scored 0.33; here blind guessing scores
 ~0.03, because a guess has no rank agreement to multiply the accuracy by.
 
-Weights (by how much each quantity tests sustained fine-grained observation, not by ease):
-  items 0.30, bananas 0.25, skid_time 0.30 — dense/continuous, hard to get accurate;
-  explosions 0.15 — sparse (0-5), easy to count exactly, so it carries the least weight.
+Weights: items 0.40, spinouts 0.30, skid_time 0.30. (spinouts = bananas + explosions, scored
+jointly because the two are not visually distinguishable; see below.)
 A field with no spread in the GT is renormalised out so the oracle still reaches 1.0.
 
 Ground truth is baked verifier-side at /tests/ground_truth.json.
@@ -43,10 +44,13 @@ from pathlib import Path
 
 GT_PATH = Path(__file__).with_name("ground_truth.json")
 # (ground-truth field, prediction field, weight)
-DIMS = [("items_collected", "items_collected", 0.30),
-        ("times_exploded",   "times_exploded",   0.15),
-        ("bananas_hit",      "bananas_hit",      0.25),
-        ("skid_time",        "skid_time",        0.30)]
+DIMS = [("items_collected", "items_collected", 0.40),
+        ("spinouts",         "spinouts",         0.30),
+        ("skid_time",        "skid_time",         0.30)]
+# spinouts = bananas_hit + times_exploded. A banana and a bomb both render as the SAME dizzy-stars
+# spin-out and are not reliably distinguishable at 720p, so they are scored JOINTLY (the visible
+# event is "the hero spun out"; its cause is not observable). Scoring them separately would demand
+# an un-observable split. bananas_hit / times_exploded remain reportable as unscored context.
 
 
 def as_num(v):

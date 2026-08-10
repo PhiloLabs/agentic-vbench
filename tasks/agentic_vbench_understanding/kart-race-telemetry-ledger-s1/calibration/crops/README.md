@@ -6,19 +6,16 @@ box the hero drives through, every banana/bomb that hits it, and all of its drif
 on-camera. No scored event can occur off-screen, so nothing caps the oracle below 1.0. (This is the
 fix for the reviewer's twelve-kart observability point on #73.)
 
-## Each of the four scored quantities and its on-screen tell
+## Each scored quantity and its on-screen tell (3 scored: items, spinouts, skid_time)
 1. **items_collected** — the hero drives THROUGH a floating question-mark / gift box on the track.
    The box is large and unmistakable at 720p (`zoom_item_box.png`, `spinout_and_itembox_720p.png`,
    and amid a start cluster in `pack_cluster_720p.png`). The HUD powerup slot is MASKED (black box,
    top-centre), so the pickup is counted from the visible drive-through, not read off a counter.
-2. **times_exploded** — a bomb/cake hit produces an explosion that throws the hero into the air; the
-   recovery is a visible spin-out with dizzy-stars (`hit_spinout_720p.png`, `zoom_spinout_stars.png`).
-3. **bananas_hit** — running over a banana spins the hero out with the same dizzy-stars tell
-   (`hit_spinout_720p.png`). NOTE: banana and explosion share this spin-out *aftermath*; they differ
-   only at the impact instant (banana = quick grounded spin; bomb = airborne launch + fireball).
-   Both are plainly visible events (so neither caps the score); telling the two apart is part of the
-   task's difficulty, which is why a strong agent scores near 0 on them.
-4. **skid_time** — drifting renders as a visible sideways slide with sparks off the wheels
+2. **spinouts** (= bananas + explosions, scored jointly) — a banana OR a bomb/cake hit spins the
+   hero out with the same dizzy-stars tell (`hit_spinout_720p.png`, `zoom_spinout_stars.png`). Dense
+   sampling of a 5-explosion race found NO visually-distinct explosion — banana and bomb are not
+   reliably distinguishable at 720p — so only their sum (the visible spin-out event) is scored.
+3. **skid_time** — drifting renders as a visible sideways slide with sparks off the wheels
    (`drift_720p.png`, `zoom_drift_sparks.png`). The *event* (drifting) is visible throughout;
    recovering the cumulative total seconds within tolerance is the hard part (and this dimension is
    not load-bearing — the task scores <0.10 even with skid_time removed).
