@@ -1,0 +1,914 @@
+{
+  "rallies": [
+    {
+      "set": 1,
+      "rally_start_s": 491.92,
+      "stroke_count": 27,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 494.88,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 9,
+          "destination_zone": 7
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 14,
+          "contact_s": 504.08,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "final",
+          "stroke_index": 27,
+          "contact_s": 517.68,
+          "hitter": "MOMOTA",
+          "hitter_zone": 6,
+          "receiver_zone": 8,
+          "destination_zone": 2
+        }
+      ]
+    },
+    {
+      "set": 1,
+      "rally_start_s": 650.12,
+      "stroke_count": 22,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 654.36,
+          "hitter": "MOMOTA",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 11,
+          "contact_s": 660.0,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 9
+        },
+        {
+          "kind": "final",
+          "stroke_index": 22,
+          "contact_s": 671.96,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 5
+        }
+      ]
+    },
+    {
+      "set": 1,
+      "rally_start_s": 719.6,
+      "stroke_count": 41,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 723.0,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 5
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 21,
+          "contact_s": 738.72,
+          "hitter": "MOMOTA",
+          "hitter_zone": 3,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "final",
+          "stroke_index": 41,
+          "contact_s": 762.48,
+          "hitter": "MOMOTA",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 15
+        }
+      ]
+    },
+    {
+      "set": 1,
+      "rally_start_s": 783.32,
+      "stroke_count": 34,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 786.72,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 7
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 17,
+          "contact_s": 799.96,
+          "hitter": "CHOU",
+          "hitter_zone": 6,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "final",
+          "stroke_index": 34,
+          "contact_s": 818.4,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 16
+        }
+      ]
+    },
+    {
+      "set": 1,
+      "rally_start_s": 840.24,
+      "stroke_count": 39,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 844.32,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 9
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 20,
+          "contact_s": 860.6,
+          "hitter": "MOMOTA",
+          "hitter_zone": 4,
+          "receiver_zone": 8,
+          "destination_zone": 3
+        },
+        {
+          "kind": "final",
+          "stroke_index": 39,
+          "contact_s": 883.2,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 4
+        }
+      ]
+    },
+    {
+      "set": 1,
+      "rally_start_s": 999.12,
+      "stroke_count": 40,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 1002.8,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 7
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 20,
+          "contact_s": 1019.6,
+          "hitter": "CHOU",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 7
+        },
+        {
+          "kind": "final",
+          "stroke_index": 40,
+          "contact_s": 1041.24,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 1
+        }
+      ]
+    },
+    {
+      "set": 1,
+      "rally_start_s": 1462.48,
+      "stroke_count": 44,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 1466.64,
+          "hitter": "MOMOTA",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 22,
+          "contact_s": 1484.28,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "final",
+          "stroke_index": 44,
+          "contact_s": 1508.92,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 12
+        }
+      ]
+    },
+    {
+      "set": 1,
+      "rally_start_s": 1624.52,
+      "stroke_count": 25,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 1626.96,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 13,
+          "contact_s": 1635.16,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 2
+        },
+        {
+          "kind": "final",
+          "stroke_index": 25,
+          "contact_s": 1648.56,
+          "hitter": "CHOU",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "rally_start_s": 2113.68,
+      "stroke_count": 34,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 2117.72,
+          "hitter": "MOMOTA",
+          "hitter_zone": 4,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 17,
+          "contact_s": 2129.44,
+          "hitter": "MOMOTA",
+          "hitter_zone": 6,
+          "receiver_zone": 8,
+          "destination_zone": 5
+        },
+        {
+          "kind": "final",
+          "stroke_index": 34,
+          "contact_s": 2146.96,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 7
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "rally_start_s": 2236.48,
+      "stroke_count": 20,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 2239.8,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 7
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 10,
+          "contact_s": 2244.88,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 4
+        },
+        {
+          "kind": "final",
+          "stroke_index": 20,
+          "contact_s": 2254.04,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 13
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "rally_start_s": 2550.12,
+      "stroke_count": 20,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 2553.56,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 9,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 10,
+          "contact_s": 2558.24,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "final",
+          "stroke_index": 20,
+          "contact_s": 2568.84,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 6,
+          "destination_zone": 7
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "rally_start_s": 2704.76,
+      "stroke_count": 42,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 2707.84,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 21,
+          "contact_s": 2723.76,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 3
+        },
+        {
+          "kind": "final",
+          "stroke_index": 42,
+          "contact_s": 2746.68,
+          "hitter": "MOMOTA",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 6
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "rally_start_s": 2807.08,
+      "stroke_count": 32,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 2812.24,
+          "hitter": "MOMOTA",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 9
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 16,
+          "contact_s": 2821.92,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 2
+        },
+        {
+          "kind": "final",
+          "stroke_index": 32,
+          "contact_s": 2838.04,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 9,
+          "destination_zone": 2
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "rally_start_s": 2915.4,
+      "stroke_count": 38,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 2918.76,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 5
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 19,
+          "contact_s": 2931.72,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 4
+        },
+        {
+          "kind": "final",
+          "stroke_index": 38,
+          "contact_s": 2953.28,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 1
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "rally_start_s": 3002.28,
+      "stroke_count": 22,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 3005.56,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 4
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 11,
+          "contact_s": 3011.68,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "final",
+          "stroke_index": 22,
+          "contact_s": 3023.48,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 5,
+          "destination_zone": 1
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "rally_start_s": 3193.28,
+      "stroke_count": 29,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 3196.84,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 9
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 15,
+          "contact_s": 3206.76,
+          "hitter": "MOMOTA",
+          "hitter_zone": 5,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "final",
+          "stroke_index": 29,
+          "contact_s": 3221.44,
+          "hitter": "MOMOTA",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 2
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "rally_start_s": 3354.28,
+      "stroke_count": 34,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 3357.44,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 9,
+          "destination_zone": 7
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 17,
+          "contact_s": 3368.2,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 2
+        },
+        {
+          "kind": "final",
+          "stroke_index": 34,
+          "contact_s": 3386.4,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 4
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "rally_start_s": 3832.28,
+      "stroke_count": 32,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 3835.04,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 7
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 16,
+          "contact_s": 3844.92,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "final",
+          "stroke_index": 32,
+          "contact_s": 3862.96,
+          "hitter": "CHOU",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 2
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "rally_start_s": 3997.08,
+      "stroke_count": 20,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 4000.68,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 7
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 10,
+          "contact_s": 4004.52,
+          "hitter": "MOMOTA",
+          "hitter_zone": 6,
+          "receiver_zone": 8,
+          "destination_zone": 1
+        },
+        {
+          "kind": "final",
+          "stroke_index": 20,
+          "contact_s": 4012.84,
+          "hitter": "MOMOTA",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 9
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "rally_start_s": 4062.24,
+      "stroke_count": 22,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 4066.0,
+          "hitter": "MOMOTA",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 11,
+          "contact_s": 4071.84,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 2
+        },
+        {
+          "kind": "final",
+          "stroke_index": 22,
+          "contact_s": 4082.8,
+          "hitter": "CHOU",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 7
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "rally_start_s": 4355.52,
+      "stroke_count": 38,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 4359.6,
+          "hitter": "MOMOTA",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 19,
+          "contact_s": 4372.24,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 1
+        },
+        {
+          "kind": "final",
+          "stroke_index": 38,
+          "contact_s": 4391.68,
+          "hitter": "CHOU",
+          "hitter_zone": 2,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "rally_start_s": 4599.72,
+      "stroke_count": 20,
+      "rally_winner": "CHOU",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 4603.36,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 1
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 10,
+          "contact_s": 4608.6,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 3
+        },
+        {
+          "kind": "final",
+          "stroke_index": 20,
+          "contact_s": 4619.64,
+          "hitter": "CHOU",
+          "hitter_zone": 3,
+          "receiver_zone": 8,
+          "destination_zone": 6
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "rally_start_s": 4671.0,
+      "stroke_count": 25,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 4675.0,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 13,
+          "contact_s": 4681.76,
+          "hitter": "CHOU",
+          "hitter_zone": 1,
+          "receiver_zone": 8,
+          "destination_zone": 1
+        },
+        {
+          "kind": "final",
+          "stroke_index": 25,
+          "contact_s": 4693.08,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 2
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "rally_start_s": 4756.16,
+      "stroke_count": 43,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 4759.48,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 3,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 22,
+          "contact_s": 4775.84,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 2
+        },
+        {
+          "kind": "final",
+          "stroke_index": 43,
+          "contact_s": 4798.12,
+          "hitter": "MOMOTA",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 6
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "rally_start_s": 5036.52,
+      "stroke_count": 39,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 5040.28,
+          "hitter": "CHOU",
+          "hitter_zone": 9,
+          "receiver_zone": 8,
+          "destination_zone": 5
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 20,
+          "contact_s": 5053.68,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 6
+        },
+        {
+          "kind": "final",
+          "stroke_index": 39,
+          "contact_s": 5072.64,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 2,
+          "destination_zone": 15
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "rally_start_s": 5249.88,
+      "stroke_count": 24,
+      "rally_winner": "MOMOTA",
+      "checkpoints": [
+        {
+          "kind": "fifth",
+          "stroke_index": 5,
+          "contact_s": 5253.16,
+          "hitter": "CHOU",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 8
+        },
+        {
+          "kind": "midpoint",
+          "stroke_index": 12,
+          "contact_s": 5258.92,
+          "hitter": "MOMOTA",
+          "hitter_zone": 7,
+          "receiver_zone": 8,
+          "destination_zone": 2
+        },
+        {
+          "kind": "final",
+          "stroke_index": 24,
+          "contact_s": 5270.32,
+          "hitter": "MOMOTA",
+          "hitter_zone": 8,
+          "receiver_zone": 8,
+          "destination_zone": 9
+        }
+      ]
+    }
+  ]
+}
