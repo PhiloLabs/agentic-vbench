@@ -1,0 +1,9 @@
+{
+  "utterances_expected": 65,
+  "utterances_transcribed": 65,
+  "maximum_start_error_s": 0.1999999999998181,
+  "target_exact_count": 65,
+  "semantic_count": 65,
+  "all_targets_exact": true,
+  "failures": []
+}

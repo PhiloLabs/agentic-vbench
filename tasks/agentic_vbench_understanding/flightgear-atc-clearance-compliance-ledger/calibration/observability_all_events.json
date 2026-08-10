@@ -1,0 +1,3392 @@
+{
+  "media_sha256": "a696502dc07cad2ac6e403027e3003f38c9508e527d6f37df2f6bb3b88eeab51",
+  "ground_truth_sha256": "9c21f212139d2d7decb4c9159252c3214c6637355659fba435407eb658260c4f",
+  "clearances": 65,
+  "records": [
+    {
+      "clearance_index": 1,
+      "leg": 1,
+      "command_type": "turn_right_heading",
+      "target_value": 293,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3694.939,
+        "issue_heading_deg": 267.0,
+        "issue_airspeed_kt": 117.0,
+        "execution_altitude_ft": 3694.939,
+        "execution_heading_deg": 267.0,
+        "execution_airspeed_kt": 117.0,
+        "completion_altitude_ft": 3694.939,
+        "completion_heading_deg": 285.401,
+        "completion_airspeed_kt": 117.0,
+        "ending_altitude_ft": 3974.661,
+        "ending_heading_deg": 293.0,
+        "ending_airspeed_kt": 99.0,
+        "execution_start_time_s": 24.475,
+        "completion_time_s": 29.017
+      },
+      "telemetry_maximum_commanded_progress": 26.0,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 20.0,
+          "file": "c01_issue_20.000.png",
+          "sha256": "a17f65737ae1da7a01db6c6e690f172ea2641ebe7c3d9547cb9206693713ba76"
+        },
+        "window_end": {
+          "time_s": 169.9,
+          "file": "c01_window_end_169.900.png",
+          "sha256": "160f188373f4fe4b82fa9c9ccb3d27a37d7553ee847723eecdfd63ce11116ea3"
+        },
+        "maximum_progress": {
+          "time_s": 36.683,
+          "file": "c01_maximum_progress_36.683.png",
+          "sha256": "3e4eab3216068ec009625ae31ca99e97996b9acef8d8508b70523ecc83d246ef"
+        },
+        "execution": {
+          "time_s": 24.475,
+          "file": "c01_execution_24.475.png",
+          "sha256": "2bd88680f6422a2d7bd668e2e231f806801ace274d352792843a12a108f6b5b4"
+        },
+        "completion": {
+          "time_s": 29.017,
+          "file": "c01_completion_29.017.png",
+          "sha256": "20ba88578a50c5673a5514c4503275c624df384e19d3af521f22a62b7ecd865f"
+        }
+      }
+    },
+    {
+      "clearance_index": 2,
+      "leg": 1,
+      "command_type": "climb",
+      "target_value": 4000,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3694.939,
+        "issue_heading_deg": 293.0,
+        "issue_airspeed_kt": 117.0,
+        "execution_altitude_ft": 3694.939,
+        "execution_heading_deg": 293.0,
+        "execution_airspeed_kt": 117.0,
+        "completion_altitude_ft": 3900.074,
+        "completion_heading_deg": 293.0,
+        "completion_airspeed_kt": 117.0,
+        "ending_altitude_ft": 3974.661,
+        "ending_heading_deg": 258.0,
+        "ending_airspeed_kt": 99.0,
+        "execution_start_time_s": 74.808,
+        "completion_time_s": 97.917
+      },
+      "telemetry_maximum_commanded_progress": 279.722,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 70.0,
+          "file": "c02_issue_70.000.png",
+          "sha256": "74feb3b4bfbcefbe6e40365c82201440a90098c46517cc774449e88eef6cff07"
+        },
+        "window_end": {
+          "time_s": 224.9,
+          "file": "c02_window_end_224.900.png",
+          "sha256": "17ced6acf7bd6e7823a4804e5c84aeb06aa1522f750143c249ae33cc83aaf172"
+        },
+        "maximum_progress": {
+          "time_s": 114.317,
+          "file": "c02_maximum_progress_114.317.png",
+          "sha256": "a3651b1fca04ad9370a1e44653eb8ff4ac6b2af706cb78a09f774c100bbc30e3"
+        },
+        "execution": {
+          "time_s": 74.808,
+          "file": "c02_execution_74.808.png",
+          "sha256": "4523688816ddcdbf151f98d64de278fcadc438f10c70c04bd3d65682bd04c834"
+        },
+        "completion": {
+          "time_s": 97.917,
+          "file": "c02_completion_97.917.png",
+          "sha256": "bda5f8c7f0e0523f426ed62abfda243c84b591cb839c0057379c1988683492b6"
+        }
+      }
+    },
+    {
+      "clearance_index": 3,
+      "leg": 1,
+      "command_type": "decelerate",
+      "target_value": 99,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3974.661,
+        "issue_heading_deg": 293.0,
+        "issue_airspeed_kt": 117.0,
+        "execution_altitude_ft": 3974.661,
+        "execution_heading_deg": 293.0,
+        "execution_airspeed_kt": 116.799,
+        "completion_altitude_ft": 3974.661,
+        "completion_heading_deg": 293.0,
+        "completion_airspeed_kt": 101.998,
+        "ending_altitude_ft": 4636.081,
+        "ending_heading_deg": 258.0,
+        "ending_airspeed_kt": 99.0,
+        "execution_start_time_s": 124.175,
+        "completion_time_s": 139.167
+      },
+      "telemetry_maximum_commanded_progress": 18.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 120.0,
+          "file": "c03_issue_120.000.png",
+          "sha256": "e03139aa5920d33e16f45f2981fcbfe461340df7a892dbe7b0847f2055dca665"
+        },
+        "window_end": {
+          "time_s": 299.9,
+          "file": "c03_window_end_299.900.png",
+          "sha256": "1b8b414c0fdba3e798e81a94109a1c271908ee1dc83d6a3722ea133a7e2b3b4b"
+        },
+        "maximum_progress": {
+          "time_s": 145.142,
+          "file": "c03_maximum_progress_145.142.png",
+          "sha256": "9ff467b76839b6e86db196eae6550b4f39b5c5531b624ec822668cacfa4276b8"
+        },
+        "execution": {
+          "time_s": 124.175,
+          "file": "c03_execution_124.175.png",
+          "sha256": "73c81457098456efdf80426b3168519e989f466e359d43561302286f9924c895"
+        },
+        "completion": {
+          "time_s": 139.167,
+          "file": "c03_completion_139.167.png",
+          "sha256": "eeaa05e06c0a1de798ed0866ab0b55d3e0ed1e1c98e14b49e45efdcb7ffc3714"
+        }
+      }
+    },
+    {
+      "clearance_index": 4,
+      "leg": 1,
+      "command_type": "turn_left_heading",
+      "target_value": 258,
+      "target_unit": "degrees",
+      "status": "complied_late",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3974.661,
+        "issue_heading_deg": 293.0,
+        "issue_airspeed_kt": 99.0,
+        "execution_altitude_ft": 3974.661,
+        "execution_heading_deg": 292.604,
+        "execution_airspeed_kt": 99.0,
+        "completion_altitude_ft": 3974.661,
+        "completion_heading_deg": 265.8,
+        "completion_airspeed_kt": 99.0,
+        "ending_altitude_ft": 4373.314,
+        "ending_heading_deg": 258.0,
+        "ending_airspeed_kt": 84.0,
+        "execution_start_time_s": 192.5,
+        "completion_time_s": 199.208
+      },
+      "telemetry_maximum_commanded_progress": 35.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 170.0,
+          "file": "c04_issue_170.000.png",
+          "sha256": "160f188373f4fe4b82fa9c9ccb3d27a37d7553ee847723eecdfd63ce11116ea3"
+        },
+        "window_end": {
+          "time_s": 359.9,
+          "file": "c04_window_end_359.900.png",
+          "sha256": "b4d67793fa7cb6be7c4c6eefde8de4050be14985a08347c94ba91b7dd52f463b"
+        },
+        "maximum_progress": {
+          "time_s": 207.183,
+          "file": "c04_maximum_progress_207.183.png",
+          "sha256": "8e235dda7a48e6f1455fdee995290a89fc83a936beb3467f3b0e43ea39cee418"
+        },
+        "execution": {
+          "time_s": 192.5,
+          "file": "c04_execution_192.500.png",
+          "sha256": "5e0088d5ebe299e0024ae95808093f96d4f36433a9446bbaa10ef57e8e8d1864"
+        },
+        "completion": {
+          "time_s": 199.208,
+          "file": "c04_completion_199.208.png",
+          "sha256": "b28425fc0fae4963a2bf55446d84829e4d244950c56b17528e0b4c6e40ec41aa"
+        }
+      }
+    },
+    {
+      "clearance_index": 5,
+      "leg": 1,
+      "command_type": "climb",
+      "target_value": 4400,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "large",
+      "state_snapshots": {
+        "issue_altitude_ft": 3974.661,
+        "issue_heading_deg": 258.0,
+        "issue_airspeed_kt": 99.0,
+        "execution_altitude_ft": 3974.661,
+        "execution_heading_deg": 258.0,
+        "execution_airspeed_kt": 99.0,
+        "completion_altitude_ft": 4499.832,
+        "completion_heading_deg": 258.0,
+        "completion_airspeed_kt": 84.0,
+        "ending_altitude_ft": 4367.175,
+        "ending_heading_deg": 323.0,
+        "ending_airspeed_kt": 84.0,
+        "execution_start_time_s": 230.6,
+        "completion_time_s": 337.617
+      },
+      "telemetry_maximum_commanded_progress": 737.363,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 225.0,
+          "file": "c05_issue_225.000.png",
+          "sha256": "17ced6acf7bd6e7823a4804e5c84aeb06aa1522f750143c249ae33cc83aaf172"
+        },
+        "window_end": {
+          "time_s": 429.9,
+          "file": "c05_window_end_429.900.png",
+          "sha256": "6005ec8db30660ce677806e39b7e28eb094ea06a1e8c4545c405d96bed263e9f"
+        },
+        "maximum_progress": {
+          "time_s": 315.783,
+          "file": "c05_maximum_progress_315.783.png",
+          "sha256": "38024cbf83a0d0672c125a5e773d64fbd9d52a7b8c21c8a11c9aa95f4f80ebe1"
+        },
+        "execution": {
+          "time_s": 230.6,
+          "file": "c05_execution_230.600.png",
+          "sha256": "6ea8bd2ac333887b794077eb9e51bdc40b0a8d7e71a7e2c214f09c5aaf077578"
+        },
+        "completion": {
+          "time_s": 337.617,
+          "file": "c05_completion_337.617.png",
+          "sha256": "e03a69dc04dbd6a9842ec2f603317af5037f2b343a746c8d0f1c03b150d04515"
+        }
+      }
+    },
+    {
+      "clearance_index": 6,
+      "leg": 1,
+      "command_type": "decelerate",
+      "target_value": 84,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "small",
+      "state_snapshots": {
+        "issue_altitude_ft": 4636.474,
+        "issue_heading_deg": 258.0,
+        "issue_airspeed_kt": 99.0,
+        "execution_altitude_ft": 4655.245,
+        "execution_heading_deg": 258.0,
+        "execution_airspeed_kt": 99.0,
+        "completion_altitude_ft": 4581.335,
+        "completion_heading_deg": 258.0,
+        "completion_airspeed_kt": 81.001,
+        "ending_altitude_ft": 4367.175,
+        "ending_heading_deg": 8.0,
+        "ending_airspeed_kt": 84.0,
+        "execution_start_time_s": 303.975,
+        "completion_time_s": 329.25
+      },
+      "telemetry_maximum_commanded_progress": 20.649,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 300.0,
+          "file": "c06_issue_300.000.png",
+          "sha256": "6971874c18e1f9f178b56f0140e15b09fbdd61a09290ec6540c3fd085d5a3078"
+        },
+        "window_end": {
+          "time_s": 539.9,
+          "file": "c06_window_end_539.900.png",
+          "sha256": "0bd40e32eaf6e4c8e54e2d8b0f5c3e134d892a7b83433f65fd7d84dd1142106f"
+        },
+        "maximum_progress": {
+          "time_s": 323.917,
+          "file": "c06_maximum_progress_323.917.png",
+          "sha256": "572c2116bb57a74101d8f581bab786b08abc3b01bce59fb0b1e2375258b1e5ce"
+        },
+        "execution": {
+          "time_s": 303.975,
+          "file": "c06_execution_303.975.png",
+          "sha256": "e171b820d85616d16a37cfe8dec50a95f4bce8d5042efc1d192a9161b7e58fa4"
+        },
+        "completion": {
+          "time_s": 329.25,
+          "file": "c06_completion_329.250.png",
+          "sha256": "78c3defec8e4f74a7ea9e6ee0df9980bdafddf20e742ff41074ad1bfa2ec0913"
+        }
+      }
+    },
+    {
+      "clearance_index": 7,
+      "leg": 1,
+      "command_type": "turn_right_heading",
+      "target_value": 358,
+      "target_unit": "degrees",
+      "status": "superseded",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4373.088,
+        "issue_heading_deg": 258.0,
+        "issue_airspeed_kt": 84.0,
+        "execution_altitude_ft": 4367.175,
+        "execution_heading_deg": 258.0,
+        "execution_airspeed_kt": 84.0,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 4367.175,
+        "ending_heading_deg": 311.997,
+        "ending_airspeed_kt": 84.0,
+        "execution_start_time_s": 364.458,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 53.599,
+      "progress_error": -0.398,
+      "frames": {
+        "issue": {
+          "time_s": 360.0,
+          "file": "c07_issue_360.000.png",
+          "sha256": "7cef3286a911e93f5db7adb720edf99a28c442188400e45e2b360d702ab69a0b"
+        },
+        "window_end": {
+          "time_s": 377.9,
+          "file": "c07_window_end_377.900.png",
+          "sha256": "436b0490d167c630835b539625646bc7e13a5d8b0a3939635d941c64c8b2831f"
+        },
+        "maximum_progress": {
+          "time_s": 377.833,
+          "file": "c07_maximum_progress_377.833.png",
+          "sha256": "d12199125c6623ec9bb78622e78291e9e17c0482ac57159a5368fb3c6bb79d9d"
+        },
+        "execution": {
+          "time_s": 364.458,
+          "file": "c07_execution_364.458.png",
+          "sha256": "df27ab924b9aa915f814a26e9421f18eaa74c5356c0fcd2bab4bee64fa13fbdc"
+        }
+      }
+    },
+    {
+      "clearance_index": 8,
+      "leg": 1,
+      "command_type": "turn_left_heading",
+      "target_value": 323,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4367.175,
+        "issue_heading_deg": 312.4,
+        "issue_airspeed_kt": 84.0,
+        "execution_altitude_ft": 4367.175,
+        "execution_heading_deg": 329.495,
+        "execution_airspeed_kt": 84.0,
+        "completion_altitude_ft": 4367.175,
+        "completion_heading_deg": 329.495,
+        "completion_airspeed_kt": 84.0,
+        "ending_altitude_ft": 4367.175,
+        "ending_heading_deg": 323.0,
+        "ending_airspeed_kt": 84.0,
+        "execution_start_time_s": 382.45,
+        "completion_time_s": 382.45
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 378.0,
+          "file": "c08_issue_378.000.png",
+          "sha256": "2c7edbe2e12c2b979e4536496ca314e23eeb61f2ae329a5ec21ff98e211dc896"
+        },
+        "window_end": {
+          "time_s": 484.9,
+          "file": "c08_window_end_484.900.png",
+          "sha256": "8553cba9fa5883722263f861b0106a14b73ad9ec5c5c57833b208a79b15922fe"
+        },
+        "maximum_progress": {
+          "time_s": 378.033,
+          "file": "c08_maximum_progress_378.033.png",
+          "sha256": "2c7edbe2e12c2b979e4536496ca314e23eeb61f2ae329a5ec21ff98e211dc896"
+        },
+        "execution": {
+          "time_s": 382.45,
+          "file": "c08_execution_382.450.png",
+          "sha256": "8bacdc22d7dd37a88c6202da1481350b3892501f7af4b11339fc8505ecf54410"
+        },
+        "completion": {
+          "time_s": 382.45,
+          "file": "c08_completion_382.450.png",
+          "sha256": "8bacdc22d7dd37a88c6202da1481350b3892501f7af4b11339fc8505ecf54410"
+        }
+      }
+    },
+    {
+      "clearance_index": 9,
+      "leg": 1,
+      "command_type": "climb",
+      "target_value": 4800,
+      "target_unit": "feet",
+      "status": "incomplete",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4367.175,
+        "issue_heading_deg": 323.0,
+        "issue_airspeed_kt": 84.0,
+        "execution_altitude_ft": null,
+        "execution_heading_deg": null,
+        "execution_airspeed_kt": null,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 4367.175,
+        "ending_heading_deg": 313.0,
+        "ending_airspeed_kt": 57.0,
+        "execution_start_time_s": null,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 430.0,
+          "file": "c09_issue_430.000.png",
+          "sha256": "6005ec8db30660ce677806e39b7e28eb094ea06a1e8c4545c405d96bed263e9f"
+        },
+        "window_end": {
+          "time_s": 719.9,
+          "file": "c09_window_end_719.900.png",
+          "sha256": "7a4101fdcdc1fd0e41223fb1d947ad4c97b88900444aa2126a9612157c2c0f7a"
+        },
+        "maximum_progress": {
+          "time_s": 430.1,
+          "file": "c09_maximum_progress_430.100.png",
+          "sha256": "6005ec8db30660ce677806e39b7e28eb094ea06a1e8c4545c405d96bed263e9f"
+        }
+      }
+    },
+    {
+      "clearance_index": 10,
+      "leg": 1,
+      "command_type": "turn_right_heading",
+      "target_value": 8,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4367.175,
+        "issue_heading_deg": 323.0,
+        "issue_airspeed_kt": 84.0,
+        "execution_altitude_ft": 4367.175,
+        "execution_heading_deg": 323.397,
+        "execution_airspeed_kt": 84.0,
+        "completion_altitude_ft": 4367.175,
+        "completion_heading_deg": 0.201,
+        "completion_airspeed_kt": 84.0,
+        "ending_altitude_ft": 4367.175,
+        "ending_heading_deg": 8.0,
+        "ending_airspeed_kt": 72.0,
+        "execution_start_time_s": 489.717,
+        "completion_time_s": 498.908
+      },
+      "telemetry_maximum_commanded_progress": 45.0,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 485.0,
+          "file": "c10_issue_485.000.png",
+          "sha256": "8553cba9fa5883722263f861b0106a14b73ad9ec5c5c57833b208a79b15922fe"
+        },
+        "window_end": {
+          "time_s": 599.9,
+          "file": "c10_window_end_599.900.png",
+          "sha256": "587a3fa39310d09532aba6d9bfe5b6214c3e32d6a9e0b797eca0af0563c8cf6c"
+        },
+        "maximum_progress": {
+          "time_s": 506.842,
+          "file": "c10_maximum_progress_506.842.png",
+          "sha256": "32549e7cb5ca97d1e2e0db21be6c05a5e9c1d63c51bc28574b927ca526283406"
+        },
+        "execution": {
+          "time_s": 489.717,
+          "file": "c10_execution_489.717.png",
+          "sha256": "5bc0ce3f6e14d06e911215e8cc0f2aff64bc5176cfa9eff812e9f36fceb4b7c1"
+        },
+        "completion": {
+          "time_s": 498.908,
+          "file": "c10_completion_498.908.png",
+          "sha256": "82e1e6868e5558584d1db658f8d1db1caa360836df33d899a6f09f95719ab3b9"
+        }
+      }
+    },
+    {
+      "clearance_index": 11,
+      "leg": 1,
+      "command_type": "decelerate",
+      "target_value": 72,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4367.175,
+        "issue_heading_deg": 8.0,
+        "issue_airspeed_kt": 84.0,
+        "execution_altitude_ft": 4367.175,
+        "execution_heading_deg": 8.0,
+        "execution_airspeed_kt": 83.797,
+        "completion_altitude_ft": 4367.175,
+        "completion_heading_deg": 8.0,
+        "completion_airspeed_kt": 74.998,
+        "ending_altitude_ft": 4367.175,
+        "ending_heading_deg": 313.0,
+        "ending_airspeed_kt": 72.0,
+        "execution_start_time_s": 544.283,
+        "completion_time_s": 556.133
+      },
+      "telemetry_maximum_commanded_progress": 12.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 540.0,
+          "file": "c11_issue_540.000.png",
+          "sha256": "0bd40e32eaf6e4c8e54e2d8b0f5c3e134d892a7b83433f65fd7d84dd1142106f"
+        },
+        "window_end": {
+          "time_s": 649.9,
+          "file": "c11_window_end_649.900.png",
+          "sha256": "2f71493ce441ef15414a4d85494edf84e623e69944538abda854778a4d9c085a"
+        },
+        "maximum_progress": {
+          "time_s": 562.192,
+          "file": "c11_maximum_progress_562.192.png",
+          "sha256": "d5684b1a1870fcbb406c4971f657fa758b0d8531eee5dd709ad49f6fe1af2802"
+        },
+        "execution": {
+          "time_s": 544.283,
+          "file": "c11_execution_544.283.png",
+          "sha256": "d104e8c27cad01ed4d6f574ebd554e0f7497ed95f87f228bd7c1b5980617ca5f"
+        },
+        "completion": {
+          "time_s": 556.133,
+          "file": "c11_completion_556.133.png",
+          "sha256": "f4663d66c29c7418550fd7141847eeffc8037af127f12333cfd31856e45650cb"
+        }
+      }
+    },
+    {
+      "clearance_index": 12,
+      "leg": 1,
+      "command_type": "turn_left_heading",
+      "target_value": 313,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4367.175,
+        "issue_heading_deg": 8.0,
+        "issue_airspeed_kt": 72.0,
+        "execution_altitude_ft": 4367.175,
+        "execution_heading_deg": 8.0,
+        "execution_airspeed_kt": 72.0,
+        "completion_altitude_ft": 4367.175,
+        "completion_heading_deg": 320.797,
+        "completion_airspeed_kt": 72.0,
+        "ending_altitude_ft": 4367.175,
+        "ending_heading_deg": 313.0,
+        "ending_airspeed_kt": 57.0,
+        "execution_start_time_s": 604.45,
+        "completion_time_s": 616.267
+      },
+      "telemetry_maximum_commanded_progress": 55.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 600.0,
+          "file": "c12_issue_600.000.png",
+          "sha256": "6149c99ee2564dc56352c77f89539bf862ac4abb74511c3aaf9a697b033b1fc5"
+        },
+        "window_end": {
+          "time_s": 719.9,
+          "file": "c12_window_end_719.900.png",
+          "sha256": "7a4101fdcdc1fd0e41223fb1d947ad4c97b88900444aa2126a9612157c2c0f7a"
+        },
+        "maximum_progress": {
+          "time_s": 624.1,
+          "file": "c12_maximum_progress_624.100.png",
+          "sha256": "72e91fc754abde6429195b4a5718fd30305a69b6462ca4965b64ef8a2e5bfccb"
+        },
+        "execution": {
+          "time_s": 604.45,
+          "file": "c12_execution_604.450.png",
+          "sha256": "a8cf1efc8f6c31752613fc05b8ab5adbd3e9c859fc3bf7c992fae0db8e6f5f6a"
+        },
+        "completion": {
+          "time_s": 616.267,
+          "file": "c12_completion_616.267.png",
+          "sha256": "f90b0b54c027a7ccc6a421a28b97ec4ae44168922c47873183d285138a91d482"
+        }
+      }
+    },
+    {
+      "clearance_index": 13,
+      "leg": 1,
+      "command_type": "accelerate",
+      "target_value": 87,
+      "target_unit": "knots",
+      "status": "violated",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4367.175,
+        "issue_heading_deg": 313.0,
+        "issue_airspeed_kt": 72.0,
+        "execution_altitude_ft": null,
+        "execution_heading_deg": null,
+        "execution_airspeed_kt": null,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 4367.175,
+        "ending_heading_deg": 313.0,
+        "ending_airspeed_kt": 57.0,
+        "execution_start_time_s": null,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 650.0,
+          "file": "c13_issue_650.000.png",
+          "sha256": "74cf4956ce67ecdb620f527ae545ac77716f6884dfa8d82cda85107995f1b6a8"
+        },
+        "window_end": {
+          "time_s": 719.9,
+          "file": "c13_window_end_719.900.png",
+          "sha256": "7a4101fdcdc1fd0e41223fb1d947ad4c97b88900444aa2126a9612157c2c0f7a"
+        },
+        "maximum_progress": {
+          "time_s": 650.0,
+          "file": "c13_maximum_progress_650.000.png",
+          "sha256": "74cf4956ce67ecdb620f527ae545ac77716f6884dfa8d82cda85107995f1b6a8"
+        }
+      }
+    },
+    {
+      "clearance_index": 14,
+      "leg": 2,
+      "command_type": "descend",
+      "target_value": 3600,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3893.426,
+        "issue_heading_deg": 284.0,
+        "issue_airspeed_kt": 119.0,
+        "execution_altitude_ft": 3893.426,
+        "execution_heading_deg": 284.0,
+        "execution_airspeed_kt": 119.0,
+        "completion_altitude_ft": 3699.473,
+        "completion_heading_deg": 284.0,
+        "completion_airspeed_kt": 119.0,
+        "ending_altitude_ft": 3577.765,
+        "ending_heading_deg": 254.0,
+        "ending_airspeed_kt": 88.0,
+        "execution_start_time_s": 753.667,
+        "completion_time_s": 773.333
+      },
+      "telemetry_maximum_commanded_progress": 315.661,
+      "progress_error": -0.001,
+      "frames": {
+        "issue": {
+          "time_s": 748.0,
+          "file": "c14_issue_748.000.png",
+          "sha256": "6af9163a9f211242605746ff36a42beb020a4fcdcce7f9f8066abd5bc4db9820"
+        },
+        "window_end": {
+          "time_s": 984.9,
+          "file": "c14_window_end_984.900.png",
+          "sha256": "34b69bee717c23aabda13a7212c3271e19ac84ad274988b535073ccb4a6fb9cc"
+        },
+        "maximum_progress": {
+          "time_s": 796.75,
+          "file": "c14_maximum_progress_796.750.png",
+          "sha256": "1452228d861e286ea861a0127afa9d61513f76f7fc3770c97a9e9a4372ec3478"
+        },
+        "execution": {
+          "time_s": 753.667,
+          "file": "c14_execution_753.667.png",
+          "sha256": "4e399992ece435204e34b921f32ac3c379ef02019e1fa613a3904b02711b1c52"
+        },
+        "completion": {
+          "time_s": 773.333,
+          "file": "c14_completion_773.333.png",
+          "sha256": "e3a0c3964e41d34d10434ba86434902ad03aa65ec45804372189c69f92d70083"
+        }
+      }
+    },
+    {
+      "clearance_index": 15,
+      "leg": 2,
+      "command_type": "decelerate",
+      "target_value": 101,
+      "target_unit": "knots",
+      "status": "complied_late",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3577.765,
+        "issue_heading_deg": 284.0,
+        "issue_airspeed_kt": 119.0,
+        "execution_altitude_ft": 3577.765,
+        "execution_heading_deg": 284.0,
+        "execution_airspeed_kt": 118.801,
+        "completion_altitude_ft": 3577.765,
+        "completion_heading_deg": 284.0,
+        "completion_airspeed_kt": 103.999,
+        "ending_altitude_ft": 3577.765,
+        "ending_heading_deg": 254.0,
+        "ending_airspeed_kt": 101.0,
+        "execution_start_time_s": 826.517,
+        "completion_time_s": 841.442
+      },
+      "telemetry_maximum_commanded_progress": 18.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 804.0,
+          "file": "c15_issue_804.000.png",
+          "sha256": "80b242feb5fe7b09e9b6db8c73910ee2e22d687a97e64d99734c88b385385a75"
+        },
+        "window_end": {
+          "time_s": 902.9,
+          "file": "c15_window_end_902.900.png",
+          "sha256": "7042118aca7ea53c22c74ad7d686606dfda5424e4317fc870732fb829d593b5a"
+        },
+        "maximum_progress": {
+          "time_s": 847.433,
+          "file": "c15_maximum_progress_847.433.png",
+          "sha256": "7f41a5f8d84db0cfaba53c663022a2e11bb5d7a9ee44116b0aeddfc93fec920d"
+        },
+        "execution": {
+          "time_s": 826.517,
+          "file": "c15_execution_826.517.png",
+          "sha256": "0baa277288438533ba2ed0e195926c22187e3d27e00224197849adb40914ba64"
+        },
+        "completion": {
+          "time_s": 841.442,
+          "file": "c15_completion_841.442.png",
+          "sha256": "ea650cee2ed37d8feb931453fd6b0f7f6a674618869b893f3acbe24734432485"
+        }
+      }
+    },
+    {
+      "clearance_index": 16,
+      "leg": 2,
+      "command_type": "turn_left_heading",
+      "target_value": 254,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3577.765,
+        "issue_heading_deg": 284.0,
+        "issue_airspeed_kt": 101.0,
+        "execution_altitude_ft": 3577.765,
+        "execution_heading_deg": 284.0,
+        "execution_airspeed_kt": 101.0,
+        "completion_altitude_ft": 3577.765,
+        "completion_heading_deg": 261.999,
+        "completion_airspeed_kt": 101.0,
+        "ending_altitude_ft": 3073.198,
+        "ending_heading_deg": 254.0,
+        "ending_airspeed_kt": 88.0,
+        "execution_start_time_s": 863.583,
+        "completion_time_s": 869.017
+      },
+      "telemetry_maximum_commanded_progress": 30.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 859.0,
+          "file": "c16_issue_859.000.png",
+          "sha256": "f613e12e3c9f437030daa28d0bb168183e6901bd162d3f0d5fc82988f3e2ac54"
+        },
+        "window_end": {
+          "time_s": 1044.9,
+          "file": "c16_window_end_1044.900.png",
+          "sha256": "44c96c9cb9614d0d3a6547318a81e85834b2ecc77485d1950661c46ecc08a3b4"
+        },
+        "maximum_progress": {
+          "time_s": 877.117,
+          "file": "c16_maximum_progress_877.117.png",
+          "sha256": "38cf43cb6354014ba9f70053b6ada5e890b94eedfaf61986faa16f432b7c888d"
+        },
+        "execution": {
+          "time_s": 863.583,
+          "file": "c16_execution_863.583.png",
+          "sha256": "5cb1cba3ff92a440ecb4920d02ed8455e8a7e3908df00f223be575a90d0c5f5b"
+        },
+        "completion": {
+          "time_s": 869.017,
+          "file": "c16_completion_869.017.png",
+          "sha256": "b49d8f3761e2d2c0394c05672542cc5c4e68ea575a6f04dada3513390635e482"
+        }
+      }
+    },
+    {
+      "clearance_index": 17,
+      "leg": 2,
+      "command_type": "decelerate",
+      "target_value": 66,
+      "target_unit": "knots",
+      "status": "superseded",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3577.765,
+        "issue_heading_deg": 254.0,
+        "issue_airspeed_kt": 101.0,
+        "execution_altitude_ft": 3577.765,
+        "execution_heading_deg": 254.0,
+        "execution_airspeed_kt": 101.0,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 3577.765,
+        "ending_heading_deg": 254.0,
+        "ending_airspeed_kt": 73.799,
+        "execution_start_time_s": 907.267,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 27.201,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 903.0,
+          "file": "c17_issue_903.000.png",
+          "sha256": "e615468f34430ae13dd9d0415066d46e13255ffaa9cb12e1fac753db671479f6"
+        },
+        "window_end": {
+          "time_s": 920.9,
+          "file": "c17_window_end_920.900.png",
+          "sha256": "d8c4ac52839e3f8c3d7fe842de7eacde76b9d6a3fcd8a159207046c5577de152"
+        },
+        "maximum_progress": {
+          "time_s": 920.892,
+          "file": "c17_maximum_progress_920.892.png",
+          "sha256": "d8c4ac52839e3f8c3d7fe842de7eacde76b9d6a3fcd8a159207046c5577de152"
+        },
+        "execution": {
+          "time_s": 907.267,
+          "file": "c17_execution_907.267.png",
+          "sha256": "14a905907958ddf76d74a06e128ee828822b140a71d963bfa84dc42ddd6f34f1"
+        }
+      }
+    },
+    {
+      "clearance_index": 18,
+      "leg": 2,
+      "command_type": "accelerate",
+      "target_value": 88,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3577.765,
+        "issue_heading_deg": 254.0,
+        "issue_airspeed_kt": 73.75,
+        "execution_altitude_ft": 3577.765,
+        "execution_heading_deg": 254.0,
+        "execution_airspeed_kt": 71.8,
+        "completion_altitude_ft": 3577.765,
+        "completion_heading_deg": 254.0,
+        "completion_airspeed_kt": 85.002,
+        "ending_altitude_ft": 3477.734,
+        "ending_heading_deg": 299.0,
+        "ending_airspeed_kt": 88.0,
+        "execution_start_time_s": 924.9,
+        "completion_time_s": 938.992
+      },
+      "telemetry_maximum_commanded_progress": 14.25,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 921.0,
+          "file": "c18_issue_921.000.png",
+          "sha256": "31207e04666fc1e57569d96e08f3b732d62148b78be4955c3cf76697225cc022"
+        },
+        "window_end": {
+          "time_s": 1159.9,
+          "file": "c18_window_end_1159.900.png",
+          "sha256": "060309246313f2d7d4ffbf0b53a357137cde5fe004fec3338fc81ce663f5c6a6"
+        },
+        "maximum_progress": {
+          "time_s": 945.017,
+          "file": "c18_maximum_progress_945.017.png",
+          "sha256": "b8a1806f76a5f5b721e85fd5a2411fc3fbb4612df14d4cf87d94be0aaa42e4ec"
+        },
+        "execution": {
+          "time_s": 924.9,
+          "file": "c18_execution_924.900.png",
+          "sha256": "dbe8b5b2910bda80907e5b4be4f041344e97dfb1dd5a1d6d516dc1f94f299f52"
+        },
+        "completion": {
+          "time_s": 938.992,
+          "file": "c18_completion_938.992.png",
+          "sha256": "d6d451069b8bc7dae1f4c6d0bcc243b3e76fff9ec6bf29867cd58e9df7a1475e"
+        }
+      }
+    },
+    {
+      "clearance_index": 19,
+      "leg": 2,
+      "command_type": "descend",
+      "target_value": 3200,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "small",
+      "state_snapshots": {
+        "issue_altitude_ft": 3577.765,
+        "issue_heading_deg": 254.0,
+        "issue_airspeed_kt": 88.0,
+        "execution_altitude_ft": 3577.765,
+        "execution_heading_deg": 254.0,
+        "execution_airspeed_kt": 88.0,
+        "completion_altitude_ft": 3100.019,
+        "completion_heading_deg": 299.596,
+        "completion_airspeed_kt": 88.0,
+        "ending_altitude_ft": 3180.842,
+        "ending_heading_deg": 299.0,
+        "ending_airspeed_kt": 88.0,
+        "execution_start_time_s": 990.567,
+        "completion_time_s": 1060.917
+      },
+      "telemetry_maximum_commanded_progress": 541.766,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 985.0,
+          "file": "c19_issue_985.000.png",
+          "sha256": "34b69bee717c23aabda13a7212c3271e19ac84ad274988b535073ccb4a6fb9cc"
+        },
+        "window_end": {
+          "time_s": 1101.9,
+          "file": "c19_window_end_1101.900.png",
+          "sha256": "36b03d889bceb5b780cefe8c1bcb353770e277cdd520fd7f640b2bf40af91cf6"
+        },
+        "maximum_progress": {
+          "time_s": 1052.65,
+          "file": "c19_maximum_progress_1052.650.png",
+          "sha256": "135e179338b3d49c0459cc1d14ed211abff39189a2dbb93983edf657e7292eb7"
+        },
+        "execution": {
+          "time_s": 990.567,
+          "file": "c19_execution_990.567.png",
+          "sha256": "938fba368d3d181b48d4efff584063506751d02650f6a5ce47b200a8f749d36c"
+        },
+        "completion": {
+          "time_s": 1060.917,
+          "file": "c19_completion_1060.917.png",
+          "sha256": "7ffc408be4584934bfdc1150d255ff860815d8c2bde104e8b1981afeeaabe736"
+        }
+      }
+    },
+    {
+      "clearance_index": 20,
+      "leg": 2,
+      "command_type": "turn_right_heading",
+      "target_value": 299,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "large",
+      "state_snapshots": {
+        "issue_altitude_ft": 3073.004,
+        "issue_heading_deg": 254.0,
+        "issue_airspeed_kt": 88.0,
+        "execution_altitude_ft": 3050.589,
+        "execution_heading_deg": 254.396,
+        "execution_airspeed_kt": 88.0,
+        "completion_altitude_ft": 3180.842,
+        "completion_heading_deg": 306.801,
+        "completion_airspeed_kt": 88.0,
+        "ending_altitude_ft": 3477.734,
+        "ending_heading_deg": 299.0,
+        "ending_airspeed_kt": 76.0,
+        "execution_start_time_s": 1049.592,
+        "completion_time_s": 1081.808
+      },
+      "telemetry_maximum_commanded_progress": 70.0,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1045.0,
+          "file": "c20_issue_1045.000.png",
+          "sha256": "bc2ee2af8a3a9a5702f3c5dc67a81f35e7f74ddb45d017ee2e724386787cf794"
+        },
+        "window_end": {
+          "time_s": 1219.9,
+          "file": "c20_window_end_1219.900.png",
+          "sha256": "474131d8672939b137b021405c8efd97436250e52d51332a4aa4e7020749fb8b"
+        },
+        "maximum_progress": {
+          "time_s": 1072.875,
+          "file": "c20_maximum_progress_1072.875.png",
+          "sha256": "aa9b5bb4e28b82744d63ff44c3dd93d39cf0e8d58b7fc21e8cb42fc5ae5d9c76"
+        },
+        "execution": {
+          "time_s": 1049.592,
+          "file": "c20_execution_1049.592.png",
+          "sha256": "9fc9d2abadb56524f15792981f4cfea7969d225812f1d2fbb969aadd07cb1d3f"
+        },
+        "completion": {
+          "time_s": 1081.808,
+          "file": "c20_completion_1081.808.png",
+          "sha256": "6b863ffa959106acf16cb56e44c401582a4f718de173ce92ea351ef36c1667cc"
+        }
+      }
+    },
+    {
+      "clearance_index": 21,
+      "leg": 2,
+      "command_type": "climb",
+      "target_value": 3500,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3180.842,
+        "issue_heading_deg": 299.0,
+        "issue_airspeed_kt": 88.0,
+        "execution_altitude_ft": 3180.842,
+        "execution_heading_deg": 299.0,
+        "execution_airspeed_kt": 88.0,
+        "completion_altitude_ft": 3400.058,
+        "completion_heading_deg": 299.0,
+        "completion_airspeed_kt": 88.0,
+        "ending_altitude_ft": 3477.734,
+        "ending_heading_deg": 249.0,
+        "ending_airspeed_kt": 76.0,
+        "execution_start_time_s": 1107.642,
+        "completion_time_s": 1132.217
+      },
+      "telemetry_maximum_commanded_progress": 296.892,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1102.0,
+          "file": "c21_issue_1102.000.png",
+          "sha256": "01306dbc1dc62a211618e64d8db905b5c627beb9ca478eb18b7c94b4b5383ada"
+        },
+        "window_end": {
+          "time_s": 1277.9,
+          "file": "c21_window_end_1277.900.png",
+          "sha256": "658b0a05bb878e40856fcebf13c5249bd1895ca6577439ceecf1468b54bd4654"
+        },
+        "maximum_progress": {
+          "time_s": 1148.833,
+          "file": "c21_maximum_progress_1148.833.png",
+          "sha256": "66283a49dd0c9925332bce4f8a525921996fe9a3080e857e8313d7aea344cb18"
+        },
+        "execution": {
+          "time_s": 1107.642,
+          "file": "c21_execution_1107.642.png",
+          "sha256": "4e1763e05ac7b5ca1fc5ba172c050b4d85589453fff7f4e23191d94971194f11"
+        },
+        "completion": {
+          "time_s": 1132.217,
+          "file": "c21_completion_1132.217.png",
+          "sha256": "13b710ef1be38111f161c8e049259f00355d705d511022ba0036bd61fc8f1d9e"
+        }
+      }
+    },
+    {
+      "clearance_index": 22,
+      "leg": 2,
+      "command_type": "decelerate",
+      "target_value": 76,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3477.734,
+        "issue_heading_deg": 299.0,
+        "issue_airspeed_kt": 88.0,
+        "execution_altitude_ft": 3477.734,
+        "execution_heading_deg": 299.0,
+        "execution_airspeed_kt": 87.796,
+        "completion_altitude_ft": 3477.734,
+        "completion_heading_deg": 299.0,
+        "completion_airspeed_kt": 78.997,
+        "ending_altitude_ft": 2942.938,
+        "ending_heading_deg": 249.0,
+        "ending_airspeed_kt": 76.0,
+        "execution_start_time_s": 1164.333,
+        "completion_time_s": 1176.3
+      },
+      "telemetry_maximum_commanded_progress": 12.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1160.0,
+          "file": "c22_issue_1160.000.png",
+          "sha256": "060309246313f2d7d4ffbf0b53a357137cde5fe004fec3338fc81ce663f5c6a6"
+        },
+        "window_end": {
+          "time_s": 1439.9,
+          "file": "c22_window_end_1439.900.png",
+          "sha256": "a0eac41cc2dd7e27f8b7620253476d04aba18b08f6884c0aeec5a482b88b3586"
+        },
+        "maximum_progress": {
+          "time_s": 1182.3,
+          "file": "c22_maximum_progress_1182.300.png",
+          "sha256": "45e2cec4a196d882305a53b0a63ea1e94a7cd3ce0cb5ea5ebf34c6a09a240315"
+        },
+        "execution": {
+          "time_s": 1164.333,
+          "file": "c22_execution_1164.333.png",
+          "sha256": "2ba80dce5d71ed7af6311d7f17b4d224d900aa1d3a24e5b32b58b930fdfb91e6"
+        },
+        "completion": {
+          "time_s": 1176.3,
+          "file": "c22_completion_1176.300.png",
+          "sha256": "ce326a80766e99ed08ce7aed322e894f31f07d521781f902a07fac88b6930880"
+        }
+      }
+    },
+    {
+      "clearance_index": 23,
+      "leg": 2,
+      "command_type": "turn_left_heading",
+      "target_value": 249,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3477.734,
+        "issue_heading_deg": 299.0,
+        "issue_airspeed_kt": 76.0,
+        "execution_altitude_ft": 3477.734,
+        "execution_heading_deg": 299.0,
+        "execution_airspeed_kt": 76.0,
+        "completion_altitude_ft": 3477.734,
+        "completion_heading_deg": 256.604,
+        "completion_airspeed_kt": 76.0,
+        "ending_altitude_ft": 3180.842,
+        "ending_heading_deg": 249.0,
+        "ending_airspeed_kt": 76.0,
+        "execution_start_time_s": 1224.525,
+        "completion_time_s": 1235.175
+      },
+      "telemetry_maximum_commanded_progress": 50.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1220.0,
+          "file": "c23_issue_1220.000.png",
+          "sha256": "b2393292fc7157fd133eefe0bdf410ac35734a7876f1a223c1e560cd5863a5cd"
+        },
+        "window_end": {
+          "time_s": 1339.9,
+          "file": "c23_window_end_1339.900.png",
+          "sha256": "069e8f746a20e8bb883663625552e2f941d5c5ce53dbe02d86ffeb569c8d1857"
+        },
+        "maximum_progress": {
+          "time_s": 1243.033,
+          "file": "c23_maximum_progress_1243.033.png",
+          "sha256": "190e645ec2f9760b21d35d4032e8b100f11dc47300948f8c7735877dcb7ef0cb"
+        },
+        "execution": {
+          "time_s": 1224.525,
+          "file": "c23_execution_1224.525.png",
+          "sha256": "0b8de04a78ae620e979f2d0889ff1d94c3b27c8225e640ac22e2a79d7f9eef41"
+        },
+        "completion": {
+          "time_s": 1235.175,
+          "file": "c23_completion_1235.175.png",
+          "sha256": "fd43e6f0b2cead8c4eda601f200c90b31d81d8a44463319682f5e61c6df209e5"
+        }
+      }
+    },
+    {
+      "clearance_index": 24,
+      "leg": 2,
+      "command_type": "descend",
+      "target_value": 3200,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3477.734,
+        "issue_heading_deg": 249.0,
+        "issue_airspeed_kt": 76.0,
+        "execution_altitude_ft": 3477.734,
+        "execution_heading_deg": 249.0,
+        "execution_airspeed_kt": 76.0,
+        "completion_altitude_ft": 3299.439,
+        "completion_heading_deg": 249.0,
+        "completion_airspeed_kt": 76.0,
+        "ending_altitude_ft": 3180.842,
+        "ending_heading_deg": 249.0,
+        "ending_airspeed_kt": 76.0,
+        "execution_start_time_s": 1283.55,
+        "completion_time_s": 1301.442
+      },
+      "telemetry_maximum_commanded_progress": 296.892,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1278.0,
+          "file": "c24_issue_1278.000.png",
+          "sha256": "658b0a05bb878e40856fcebf13c5249bd1895ca6577439ceecf1468b54bd4654"
+        },
+        "window_end": {
+          "time_s": 1399.9,
+          "file": "c24_window_end_1399.900.png",
+          "sha256": "614ce4411087c9ac64d88cb33a9e5263f208f4f77f3db5dbcf590d186f88bea7"
+        },
+        "maximum_progress": {
+          "time_s": 1324.925,
+          "file": "c24_maximum_progress_1324.925.png",
+          "sha256": "0ab78d4ec265c501cbbaeb6e620cf9b602d0e3762461b12d5b5defd70ea1bfd6"
+        },
+        "execution": {
+          "time_s": 1283.55,
+          "file": "c24_execution_1283.550.png",
+          "sha256": "ece42ec04ff9022a2dda1db4c29e462708b4f3d46e2725d20b75a803af581f0a"
+        },
+        "completion": {
+          "time_s": 1301.442,
+          "file": "c24_completion_1301.442.png",
+          "sha256": "700ad646b68dfffbd4401fef11e9e2f2f9b8d9504d8f7b78d4d322ccea0ca109"
+        }
+      }
+    },
+    {
+      "clearance_index": 25,
+      "leg": 2,
+      "command_type": "turn_right_heading",
+      "target_value": 309,
+      "target_unit": "degrees",
+      "status": "incomplete",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3180.842,
+        "issue_heading_deg": 249.0,
+        "issue_airspeed_kt": 76.0,
+        "execution_altitude_ft": null,
+        "execution_heading_deg": null,
+        "execution_airspeed_kt": null,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 2942.938,
+        "ending_heading_deg": 249.0,
+        "ending_airspeed_kt": 76.0,
+        "execution_start_time_s": null,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1340.0,
+          "file": "c25_issue_1340.000.png",
+          "sha256": "069e8f746a20e8bb883663625552e2f941d5c5ce53dbe02d86ffeb569c8d1857"
+        },
+        "window_end": {
+          "time_s": 1439.9,
+          "file": "c25_window_end_1439.900.png",
+          "sha256": "a0eac41cc2dd7e27f8b7620253476d04aba18b08f6884c0aeec5a482b88b3586"
+        },
+        "maximum_progress": {
+          "time_s": 1340.008,
+          "file": "c25_maximum_progress_1340.008.png",
+          "sha256": "069e8f746a20e8bb883663625552e2f941d5c5ce53dbe02d86ffeb569c8d1857"
+        }
+      }
+    },
+    {
+      "clearance_index": 26,
+      "leg": 2,
+      "command_type": "climb",
+      "target_value": 3500,
+      "target_unit": "feet",
+      "status": "violated",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3180.842,
+        "issue_heading_deg": 249.0,
+        "issue_airspeed_kt": 76.0,
+        "execution_altitude_ft": null,
+        "execution_heading_deg": null,
+        "execution_airspeed_kt": null,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 2942.938,
+        "ending_heading_deg": 249.0,
+        "ending_airspeed_kt": 76.0,
+        "execution_start_time_s": null,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1400.0,
+          "file": "c26_issue_1400.000.png",
+          "sha256": "614ce4411087c9ac64d88cb33a9e5263f208f4f77f3db5dbcf590d186f88bea7"
+        },
+        "window_end": {
+          "time_s": 1439.9,
+          "file": "c26_window_end_1439.900.png",
+          "sha256": "a0eac41cc2dd7e27f8b7620253476d04aba18b08f6884c0aeec5a482b88b3586"
+        },
+        "maximum_progress": {
+          "time_s": 1400.067,
+          "file": "c26_maximum_progress_1400.067.png",
+          "sha256": "614ce4411087c9ac64d88cb33a9e5263f208f4f77f3db5dbcf590d186f88bea7"
+        }
+      }
+    },
+    {
+      "clearance_index": 27,
+      "leg": 3,
+      "command_type": "accelerate",
+      "target_value": 139,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4090.744,
+        "issue_heading_deg": 301.0,
+        "issue_airspeed_kt": 121.0,
+        "execution_altitude_ft": 4090.744,
+        "execution_heading_deg": 301.0,
+        "execution_airspeed_kt": 121.199,
+        "completion_altitude_ft": 4090.744,
+        "completion_heading_deg": 301.0,
+        "completion_airspeed_kt": 136.049,
+        "ending_altitude_ft": 4309.672,
+        "ending_heading_deg": 329.0,
+        "ending_airspeed_kt": 139.0,
+        "execution_start_time_s": 1463.025,
+        "completion_time_s": 1477.708
+      },
+      "telemetry_maximum_commanded_progress": 18.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1458.0,
+          "file": "c27_issue_1458.000.png",
+          "sha256": "ebe22a5aa27fd415d7041a7f754ee9c1d2688c6007d7c4e5f150299ea64f015b"
+        },
+        "window_end": {
+          "time_s": 1615.9,
+          "file": "c27_window_end_1615.900.png",
+          "sha256": "41fcb18e2a955f3ffb780495016ef748bd460bd4ede018d47c8ac1177d55e9ae"
+        },
+        "maximum_progress": {
+          "time_s": 1483.692,
+          "file": "c27_maximum_progress_1483.692.png",
+          "sha256": "1cb89d794b1c01834888dad9fa78af25cf5f6391f199e9f555533668857abacf"
+        },
+        "execution": {
+          "time_s": 1463.025,
+          "file": "c27_execution_1463.025.png",
+          "sha256": "5ccadd41bd19228c9d4d22659287ec5477436c1a6b79ac43bec690bd6ebce6de"
+        },
+        "completion": {
+          "time_s": 1477.708,
+          "file": "c27_completion_1477.708.png",
+          "sha256": "ee0ebb0a1c444111264d242307868fdbe9334868e15962a58067fe7a98467a50"
+        }
+      }
+    },
+    {
+      "clearance_index": 28,
+      "leg": 3,
+      "command_type": "turn_right_heading",
+      "target_value": 329,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4090.744,
+        "issue_heading_deg": 301.0,
+        "issue_airspeed_kt": 139.0,
+        "execution_altitude_ft": 4090.744,
+        "execution_heading_deg": 301.405,
+        "execution_airspeed_kt": 139.0,
+        "completion_altitude_ft": 4090.744,
+        "completion_heading_deg": 321.003,
+        "completion_airspeed_kt": 139.0,
+        "ending_altitude_ft": 4368.505,
+        "ending_heading_deg": 329.0,
+        "ending_airspeed_kt": 154.0,
+        "execution_start_time_s": 1509.475,
+        "completion_time_s": 1514.425
+      },
+      "telemetry_maximum_commanded_progress": 28.0,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1505.0,
+          "file": "c28_issue_1505.000.png",
+          "sha256": "e91c5968a8316e310f988f6be23acac30a427e95f1bf5c598ebfb3c631462a92"
+        },
+        "window_end": {
+          "time_s": 1677.9,
+          "file": "c28_window_end_1677.900.png",
+          "sha256": "ba3cbae3e7435149698d92f358d5173d33441b2061df9e853ffaa6a24a9c63c1"
+        },
+        "maximum_progress": {
+          "time_s": 1522.483,
+          "file": "c28_maximum_progress_1522.483.png",
+          "sha256": "9036de89235a7c2ffd5e7e36f9f57bc9b15bcaa0c84fb7927e74247f721ddd5c"
+        },
+        "execution": {
+          "time_s": 1509.475,
+          "file": "c28_execution_1509.475.png",
+          "sha256": "97c49e0db569a23509502d61347555f180590e95efda9a98506b8447a6e37385"
+        },
+        "completion": {
+          "time_s": 1514.425,
+          "file": "c28_completion_1514.425.png",
+          "sha256": "8a504808dd5e9a33fc37db2254edf5be1b1104edaee39d69b4c8d395f69d1291"
+        }
+      }
+    },
+    {
+      "clearance_index": 29,
+      "leg": 3,
+      "command_type": "climb",
+      "target_value": 4400,
+      "target_unit": "feet",
+      "status": "complied_late",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4090.744,
+        "issue_heading_deg": 329.0,
+        "issue_airspeed_kt": 139.0,
+        "execution_altitude_ft": 4090.744,
+        "execution_heading_deg": 329.0,
+        "execution_airspeed_kt": 139.0,
+        "completion_altitude_ft": 4300.253,
+        "completion_heading_deg": 329.0,
+        "completion_airspeed_kt": 139.0,
+        "ending_altitude_ft": 4368.505,
+        "ending_heading_deg": 284.0,
+        "ending_airspeed_kt": 154.0,
+        "execution_start_time_s": 1589.617,
+        "completion_time_s": 1614.0
+      },
+      "telemetry_maximum_commanded_progress": 277.761,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1566.0,
+          "file": "c29_issue_1566.000.png",
+          "sha256": "325840518445dc48a9e804940e5ce0c6e169889575bf2e48fbc6ef8c01bffb76"
+        },
+        "window_end": {
+          "time_s": 1731.9,
+          "file": "c29_window_end_1731.900.png",
+          "sha256": "4d4e3a084f72dbebdb1b3aab203a0d1610b9e99b0034c31023001fc7182660cf"
+        },
+        "maximum_progress": {
+          "time_s": 1629.35,
+          "file": "c29_maximum_progress_1629.350.png",
+          "sha256": "1da7a3891adf17ec2f11c29c9388b8213896f06bb539f7abb629df8c266955af"
+        },
+        "execution": {
+          "time_s": 1589.617,
+          "file": "c29_execution_1589.617.png",
+          "sha256": "be8cbfc1ed5cf4ee05ef865815ebd7c5009d1e694fd4f158a857591fe515b4b0"
+        },
+        "completion": {
+          "time_s": 1614.0,
+          "file": "c29_completion_1614.000.png",
+          "sha256": "2bea8a19447f8267507d39c77a5ca9675956c95398ef196f3702b5b822c5afa5"
+        }
+      }
+    },
+    {
+      "clearance_index": 30,
+      "leg": 3,
+      "command_type": "accelerate",
+      "target_value": 154,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "large",
+      "state_snapshots": {
+        "issue_altitude_ft": 4310.119,
+        "issue_heading_deg": 329.0,
+        "issue_airspeed_kt": 139.0,
+        "execution_altitude_ft": 4334.434,
+        "execution_heading_deg": 329.0,
+        "execution_airspeed_kt": 139.203,
+        "completion_altitude_ft": 4368.505,
+        "completion_heading_deg": 329.0,
+        "completion_airspeed_kt": 156.999,
+        "ending_altitude_ft": 4074.568,
+        "ending_heading_deg": 284.0,
+        "ending_airspeed_kt": 154.0,
+        "execution_start_time_s": 1621.0,
+        "completion_time_s": 1660.667
+      },
+      "telemetry_maximum_commanded_progress": 27.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1616.0,
+          "file": "c30_issue_1616.000.png",
+          "sha256": "0d4b7e5304191be9a62cc6c41e8094e71708674d08c7393b29b756518b1d9b8b"
+        },
+        "window_end": {
+          "time_s": 1789.9,
+          "file": "c30_window_end_1789.900.png",
+          "sha256": "88c74c7b60892d40ff46c4e94530dee1ee0abdb074891561d08741f919573e54"
+        },
+        "maximum_progress": {
+          "time_s": 1646.117,
+          "file": "c30_maximum_progress_1646.117.png",
+          "sha256": "6780106d46c0d080b23e4afb999496855dc4279112d456b05ef892712257aa3d"
+        },
+        "execution": {
+          "time_s": 1621.0,
+          "file": "c30_execution_1621.000.png",
+          "sha256": "45f6842b9d084a8f95f4ca0e3415fd4e01dcad80475c630a229ad4de0017a1a7"
+        },
+        "completion": {
+          "time_s": 1660.667,
+          "file": "c30_completion_1660.667.png",
+          "sha256": "d7560a3652f1284b61fe22cbac54c829674898afe078a5a41a75df2f243b5916"
+        }
+      }
+    },
+    {
+      "clearance_index": 31,
+      "leg": 3,
+      "command_type": "turn_left_heading",
+      "target_value": 284,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "small",
+      "state_snapshots": {
+        "issue_altitude_ft": 4368.505,
+        "issue_heading_deg": 329.0,
+        "issue_airspeed_kt": 154.0,
+        "execution_altitude_ft": 4368.505,
+        "execution_heading_deg": 328.597,
+        "execution_airspeed_kt": 154.0,
+        "completion_altitude_ft": 4368.505,
+        "completion_heading_deg": 276.106,
+        "completion_airspeed_kt": 154.0,
+        "ending_altitude_ft": 4074.568,
+        "ending_heading_deg": 284.0,
+        "ending_airspeed_kt": 142.0,
+        "execution_start_time_s": 1682.467,
+        "completion_time_s": 1703.408
+      },
+      "telemetry_maximum_commanded_progress": 56.899,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1678.0,
+          "file": "c31_issue_1678.000.png",
+          "sha256": "ba3cbae3e7435149698d92f358d5173d33441b2061df9e853ffaa6a24a9c63c1"
+        },
+        "window_end": {
+          "time_s": 1839.9,
+          "file": "c31_window_end_1839.900.png",
+          "sha256": "bddfafc0e93b6dbad4ff96764a359dfc3eb60cce61e103f664972b13d41c6c4f"
+        },
+        "maximum_progress": {
+          "time_s": 1702.417,
+          "file": "c31_maximum_progress_1702.417.png",
+          "sha256": "b75599beea6ace908416b31c87b91ec1992f660b0bd0d4d69fb84b0f491af058"
+        },
+        "execution": {
+          "time_s": 1682.467,
+          "file": "c31_execution_1682.467.png",
+          "sha256": "8ff32d3cd731012e223094266cf6b1df677ab0cf10d4bc55ccffce4b2d26f08c"
+        },
+        "completion": {
+          "time_s": 1703.408,
+          "file": "c31_completion_1703.408.png",
+          "sha256": "f45e955572c65d1a6f3190033fb4a30993a16c085aff81944e3bfb43cd8b33ee"
+        }
+      }
+    },
+    {
+      "clearance_index": 32,
+      "leg": 3,
+      "command_type": "descend",
+      "target_value": 4100,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4368.505,
+        "issue_heading_deg": 284.0,
+        "issue_airspeed_kt": 154.0,
+        "execution_altitude_ft": 4368.505,
+        "execution_heading_deg": 284.0,
+        "execution_airspeed_kt": 154.0,
+        "completion_altitude_ft": 4199.906,
+        "completion_heading_deg": 284.0,
+        "completion_airspeed_kt": 154.0,
+        "ending_altitude_ft": 4074.568,
+        "ending_heading_deg": 334.0,
+        "ending_airspeed_kt": 142.0,
+        "execution_start_time_s": 1737.642,
+        "completion_time_s": 1754.942
+      },
+      "telemetry_maximum_commanded_progress": 293.937,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1732.0,
+          "file": "c32_issue_1732.000.png",
+          "sha256": "4d4e3a084f72dbebdb1b3aab203a0d1610b9e99b0034c31023001fc7182660cf"
+        },
+        "window_end": {
+          "time_s": 1894.9,
+          "file": "c32_window_end_1894.900.png",
+          "sha256": "7dd930c4f4a87472b1fe5f3d3096787b25d85451f1806374975f9e9c54a0b78b"
+        },
+        "maximum_progress": {
+          "time_s": 1779.033,
+          "file": "c32_maximum_progress_1779.033.png",
+          "sha256": "b7ca55b50e567a74200e5a784846c2b35f63b2d143564e5146a889a907a267e9"
+        },
+        "execution": {
+          "time_s": 1737.642,
+          "file": "c32_execution_1737.642.png",
+          "sha256": "70e0ba3140ef62c4690a5aa3acbfd631db80fa4a94f384d01dd4bcd523ecb345"
+        },
+        "completion": {
+          "time_s": 1754.942,
+          "file": "c32_completion_1754.942.png",
+          "sha256": "da394f322ee9e7fad049b1635373a2af27f092ea3f58c029631c7b6c4b13b300"
+        }
+      }
+    },
+    {
+      "clearance_index": 33,
+      "leg": 3,
+      "command_type": "decelerate",
+      "target_value": 142,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4074.568,
+        "issue_heading_deg": 284.0,
+        "issue_airspeed_kt": 154.0,
+        "execution_altitude_ft": 4074.568,
+        "execution_heading_deg": 284.0,
+        "execution_airspeed_kt": 153.801,
+        "completion_altitude_ft": 4074.568,
+        "completion_heading_deg": 284.0,
+        "completion_airspeed_kt": 144.998,
+        "ending_altitude_ft": 4172.837,
+        "ending_heading_deg": 279.0,
+        "ending_airspeed_kt": 142.0,
+        "execution_start_time_s": 1794.95,
+        "completion_time_s": 1806.5
+      },
+      "telemetry_maximum_commanded_progress": 12.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1790.0,
+          "file": "c33_issue_1790.000.png",
+          "sha256": "ecc07e7944050f0c1dfa70f4e993d98c2b7040638f72ae8fc23e3e6140d14a2c"
+        },
+        "window_end": {
+          "time_s": 2031.9,
+          "file": "c33_window_end_2031.900.png",
+          "sha256": "b670cf82d8e2f59bb2898f5927f0488686d5a121d29f9f98814f09e44c1f4172"
+        },
+        "maximum_progress": {
+          "time_s": 1812.475,
+          "file": "c33_maximum_progress_1812.475.png",
+          "sha256": "1cfe39563acc6b813621380cf2621f9cf92b69c6b3e3728093c51af89b8b3c30"
+        },
+        "execution": {
+          "time_s": 1794.95,
+          "file": "c33_execution_1794.950.png",
+          "sha256": "a7f74e2ce3831d19a7631801fe56eaaa7fb44c8ca224c69817f53c7ff85974da"
+        },
+        "completion": {
+          "time_s": 1806.5,
+          "file": "c33_completion_1806.500.png",
+          "sha256": "fa046b98e875a0d9098636d8bcc84488be570267b52009c7d4ce57cacc101666"
+        }
+      }
+    },
+    {
+      "clearance_index": 34,
+      "leg": 3,
+      "command_type": "turn_right_heading",
+      "target_value": 334,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4074.568,
+        "issue_heading_deg": 284.0,
+        "issue_airspeed_kt": 142.0,
+        "execution_altitude_ft": 4074.568,
+        "execution_heading_deg": 284.399,
+        "execution_airspeed_kt": 142.0,
+        "completion_altitude_ft": 4074.568,
+        "completion_heading_deg": 326.002,
+        "completion_airspeed_kt": 142.0,
+        "ending_altitude_ft": 4172.837,
+        "ending_heading_deg": 334.0,
+        "ending_airspeed_kt": 142.0,
+        "execution_start_time_s": 1844.508,
+        "completion_time_s": 1854.917
+      },
+      "telemetry_maximum_commanded_progress": 50.0,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1840.0,
+          "file": "c34_issue_1840.000.png",
+          "sha256": "4b65d8e592d90f7908c2de50609fcf8cbb62d131f5501b6c56a1a331b777d7eb"
+        },
+        "window_end": {
+          "time_s": 1969.9,
+          "file": "c34_window_end_1969.900.png",
+          "sha256": "796c6fca696119d62b815ea4d56655208a72da6df277db12cbd609abe1bbd3b5"
+        },
+        "maximum_progress": {
+          "time_s": 1863.058,
+          "file": "c34_maximum_progress_1863.058.png",
+          "sha256": "28a931b3ca3954bebbaa3ecd654fd5583caacbbbb830569f19863ed29553f06f"
+        },
+        "execution": {
+          "time_s": 1844.508,
+          "file": "c34_execution_1844.508.png",
+          "sha256": "9899c0724b61c1a580d73ea8d56320c1eea038c44c5459844b61322221687ff5"
+        },
+        "completion": {
+          "time_s": 1854.917,
+          "file": "c34_completion_1854.917.png",
+          "sha256": "e139c738054e0f174d7f38b606a938ccdb82590f6c43e14ac825e0c09ec65f28"
+        }
+      }
+    },
+    {
+      "clearance_index": 35,
+      "leg": 3,
+      "command_type": "climb",
+      "target_value": 4700,
+      "target_unit": "feet",
+      "status": "superseded",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4074.568,
+        "issue_heading_deg": 334.0,
+        "issue_airspeed_kt": 142.0,
+        "execution_altitude_ft": 4074.568,
+        "execution_heading_deg": 334.0,
+        "execution_airspeed_kt": 142.0,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 4193.984,
+        "ending_heading_deg": 334.0,
+        "ending_airspeed_kt": 142.0,
+        "execution_start_time_s": 1900.725,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 118.383,
+      "progress_error": -1.033,
+      "frames": {
+        "issue": {
+          "time_s": 1895.0,
+          "file": "c35_issue_1895.000.png",
+          "sha256": "7dd930c4f4a87472b1fe5f3d3096787b25d85451f1806374975f9e9c54a0b78b"
+        },
+        "window_end": {
+          "time_s": 1912.9,
+          "file": "c35_window_end_1912.900.png",
+          "sha256": "c2480727336a5cb0d6d65c4f4fcf7c558535d1e79c8704603f19535b70f678e8"
+        },
+        "maximum_progress": {
+          "time_s": 1912.817,
+          "file": "c35_maximum_progress_1912.817.png",
+          "sha256": "19a15c59a9befed9353017a722a362fe5377d21d3c02b7f0198073d64081d6f2"
+        },
+        "execution": {
+          "time_s": 1900.725,
+          "file": "c35_execution_1900.725.png",
+          "sha256": "5637daddc7c18e7a0cc89315bb8a05ad033d897ad55afad53eba2815a7c22752"
+        }
+      }
+    },
+    {
+      "clearance_index": 36,
+      "leg": 3,
+      "command_type": "descend",
+      "target_value": 4200,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4194.858,
+        "issue_heading_deg": 334.0,
+        "issue_airspeed_kt": 142.0,
+        "execution_altitude_ft": 4248.853,
+        "execution_heading_deg": 334.0,
+        "execution_airspeed_kt": 142.0,
+        "completion_altitude_ft": 4248.853,
+        "completion_heading_deg": 334.0,
+        "completion_airspeed_kt": 142.0,
+        "ending_altitude_ft": 4172.837,
+        "ending_heading_deg": 279.0,
+        "ending_airspeed_kt": 142.0,
+        "execution_start_time_s": 1918.558,
+        "completion_time_s": 1918.558
+      },
+      "telemetry_maximum_commanded_progress": 22.021,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1913.0,
+          "file": "c36_issue_1913.000.png",
+          "sha256": "6413ffc39128fcb85ac885d74fa6a14d33e576c9caaaec5b6e0145c7593c5eb4"
+        },
+        "window_end": {
+          "time_s": 2094.9,
+          "file": "c36_window_end_2094.900.png",
+          "sha256": "05396daa45977412e8ec2ae4aa6dfa962a6f3d8b80ac0259274e9853b3d4fc8b"
+        },
+        "maximum_progress": {
+          "time_s": 1935.858,
+          "file": "c36_maximum_progress_1935.858.png",
+          "sha256": "7c0f3ecf9186f78bdcf0fc6275b78355298ef060b489694bfd35fd2324edcb28"
+        },
+        "execution": {
+          "time_s": 1918.558,
+          "file": "c36_execution_1918.558.png",
+          "sha256": "5c517dedd70afa7bcd5b777b55988ef9ddb82669a8df8a3ff41861650e04654c"
+        },
+        "completion": {
+          "time_s": 1918.558,
+          "file": "c36_completion_1918.558.png",
+          "sha256": "5c517dedd70afa7bcd5b777b55988ef9ddb82669a8df8a3ff41861650e04654c"
+        }
+      }
+    },
+    {
+      "clearance_index": 37,
+      "leg": 3,
+      "command_type": "turn_left_heading",
+      "target_value": 279,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4172.837,
+        "issue_heading_deg": 334.0,
+        "issue_airspeed_kt": 142.0,
+        "execution_altitude_ft": 4172.837,
+        "execution_heading_deg": 333.598,
+        "execution_airspeed_kt": 142.0,
+        "completion_altitude_ft": 4172.837,
+        "completion_heading_deg": 286.699,
+        "completion_airspeed_kt": 142.0,
+        "ending_altitude_ft": 3926.617,
+        "ending_heading_deg": 279.0,
+        "ending_airspeed_kt": 142.0,
+        "execution_start_time_s": 1974.717,
+        "completion_time_s": 1986.458
+      },
+      "telemetry_maximum_commanded_progress": 55.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 1970.0,
+          "file": "c37_issue_1970.000.png",
+          "sha256": "796c6fca696119d62b815ea4d56655208a72da6df277db12cbd609abe1bbd3b5"
+        },
+        "window_end": {
+          "time_s": 2159.9,
+          "file": "c37_window_end_2159.900.png",
+          "sha256": "77a328f115c71f61c45a7a56c8ded03770d1c7544a6d7bdfd9448aa1aba5200e"
+        },
+        "maximum_progress": {
+          "time_s": 1994.292,
+          "file": "c37_maximum_progress_1994.292.png",
+          "sha256": "14476c17abd9a6d78019d7e4ed14dcc6984e08e8e4d89e05df5c1ad1affc5871"
+        },
+        "execution": {
+          "time_s": 1974.717,
+          "file": "c37_execution_1974.717.png",
+          "sha256": "e2fb113f7bed1fced122527c40d4d5aac7a466b6beb206ae730e39447b48105e"
+        },
+        "completion": {
+          "time_s": 1986.458,
+          "file": "c37_completion_1986.458.png",
+          "sha256": "d7d37598b17469694a94e061aafd667c59859ad27a21c655ba1f01e628970b64"
+        }
+      }
+    },
+    {
+      "clearance_index": 38,
+      "leg": 3,
+      "command_type": "accelerate",
+      "target_value": 157,
+      "target_unit": "knots",
+      "status": "incomplete",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4172.837,
+        "issue_heading_deg": 279.0,
+        "issue_airspeed_kt": 142.0,
+        "execution_altitude_ft": null,
+        "execution_heading_deg": null,
+        "execution_airspeed_kt": null,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 3926.617,
+        "ending_heading_deg": 279.0,
+        "ending_airspeed_kt": 142.0,
+        "execution_start_time_s": null,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2032.0,
+          "file": "c38_issue_2032.000.png",
+          "sha256": "b670cf82d8e2f59bb2898f5927f0488686d5a121d29f9f98814f09e44c1f4172"
+        },
+        "window_end": {
+          "time_s": 2159.9,
+          "file": "c38_window_end_2159.900.png",
+          "sha256": "77a328f115c71f61c45a7a56c8ded03770d1c7544a6d7bdfd9448aa1aba5200e"
+        },
+        "maximum_progress": {
+          "time_s": 2032.033,
+          "file": "c38_maximum_progress_2032.033.png",
+          "sha256": "b670cf82d8e2f59bb2898f5927f0488686d5a121d29f9f98814f09e44c1f4172"
+        }
+      }
+    },
+    {
+      "clearance_index": 39,
+      "leg": 3,
+      "command_type": "climb",
+      "target_value": 4500,
+      "target_unit": "feet",
+      "status": "violated",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4172.837,
+        "issue_heading_deg": 279.0,
+        "issue_airspeed_kt": 142.0,
+        "execution_altitude_ft": null,
+        "execution_heading_deg": null,
+        "execution_airspeed_kt": null,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 3926.617,
+        "ending_heading_deg": 279.0,
+        "ending_airspeed_kt": 142.0,
+        "execution_start_time_s": null,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2095.0,
+          "file": "c39_issue_2095.000.png",
+          "sha256": "05396daa45977412e8ec2ae4aa6dfa962a6f3d8b80ac0259274e9853b3d4fc8b"
+        },
+        "window_end": {
+          "time_s": 2159.9,
+          "file": "c39_window_end_2159.900.png",
+          "sha256": "77a328f115c71f61c45a7a56c8ded03770d1c7544a6d7bdfd9448aa1aba5200e"
+        },
+        "maximum_progress": {
+          "time_s": 2095.008,
+          "file": "c39_maximum_progress_2095.008.png",
+          "sha256": "05396daa45977412e8ec2ae4aa6dfa962a6f3d8b80ac0259274e9853b3d4fc8b"
+        }
+      }
+    },
+    {
+      "clearance_index": 40,
+      "leg": 4,
+      "command_type": "turn_left_heading",
+      "target_value": 290,
+      "target_unit": "degrees",
+      "status": "complied_late",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4286.897,
+        "issue_heading_deg": 318.0,
+        "issue_airspeed_kt": 123.0,
+        "execution_altitude_ft": 4286.897,
+        "execution_heading_deg": 318.0,
+        "execution_airspeed_kt": 123.0,
+        "completion_altitude_ft": 4286.897,
+        "completion_heading_deg": 297.999,
+        "completion_airspeed_kt": 123.0,
+        "ending_altitude_ft": 3979.295,
+        "ending_heading_deg": 290.0,
+        "ending_airspeed_kt": 105.0,
+        "execution_start_time_s": 2214.708,
+        "completion_time_s": 2219.675
+      },
+      "telemetry_maximum_commanded_progress": 28.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2192.0,
+          "file": "c40_issue_2192.000.png",
+          "sha256": "c7fed8dede824d539ae2e993434338cbe32ce72a24f8bdebd7adff4c6c6e86fe"
+        },
+        "window_end": {
+          "time_s": 2364.9,
+          "file": "c40_window_end_2364.900.png",
+          "sha256": "d4abaf1fb42d1ed7dbfa26ea4aaee0581dd9adc54782c8e1dae453bf6fcd972f"
+        },
+        "maximum_progress": {
+          "time_s": 2227.808,
+          "file": "c40_maximum_progress_2227.808.png",
+          "sha256": "9f0f1ec7d69225dccaefdbed8258d7e514c1fc5ab6ed205f6b6a3704efd17ef1"
+        },
+        "execution": {
+          "time_s": 2214.708,
+          "file": "c40_execution_2214.708.png",
+          "sha256": "26326a80bb08325e7953714a56db34da70076bfd8cfa256857b2c443006774f0"
+        },
+        "completion": {
+          "time_s": 2219.675,
+          "file": "c40_completion_2219.675.png",
+          "sha256": "01f16542ac27b6da317dd1368954030ecce85f35f2ded028e6cb7b22f6a56b6d"
+        }
+      }
+    },
+    {
+      "clearance_index": 41,
+      "leg": 4,
+      "command_type": "descend",
+      "target_value": 4000,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4286.897,
+        "issue_heading_deg": 290.0,
+        "issue_airspeed_kt": 123.0,
+        "execution_altitude_ft": 4286.897,
+        "execution_heading_deg": 290.0,
+        "execution_airspeed_kt": 123.0,
+        "completion_altitude_ft": 4099.116,
+        "completion_heading_deg": 290.0,
+        "completion_airspeed_kt": 123.0,
+        "ending_altitude_ft": 3979.295,
+        "ending_heading_deg": 335.0,
+        "ending_airspeed_kt": 105.0,
+        "execution_start_time_s": 2256.875,
+        "completion_time_s": 2276.258
+      },
+      "telemetry_maximum_commanded_progress": 307.602,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2252.0,
+          "file": "c41_issue_2252.000.png",
+          "sha256": "26f13550dd99d6a250cc3f12f90a428a876f79cbb481e277b12570d3dea09d7a"
+        },
+        "window_end": {
+          "time_s": 2425.9,
+          "file": "c41_window_end_2425.900.png",
+          "sha256": "1b61beff9e4e4d01d8e90616778be0692b683c807a154fbb46e49f2c7d1dd506"
+        },
+        "maximum_progress": {
+          "time_s": 2299.708,
+          "file": "c41_maximum_progress_2299.708.png",
+          "sha256": "8581e4ef10870ae2c68d08ced2db1c0055bde5774a3b98eca944a680c51ef143"
+        },
+        "execution": {
+          "time_s": 2256.875,
+          "file": "c41_execution_2256.875.png",
+          "sha256": "bbda1b660c8af2d4a1fdc2fa6a2879dfbb3b188d82563cc4d27d09c388a56aae"
+        },
+        "completion": {
+          "time_s": 2276.258,
+          "file": "c41_completion_2276.258.png",
+          "sha256": "8d7a8d3ef4f73b7d9b496393558399e9dfd329a8c42525068552144f3a691d5d"
+        }
+      }
+    },
+    {
+      "clearance_index": 42,
+      "leg": 4,
+      "command_type": "decelerate",
+      "target_value": 105,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3979.295,
+        "issue_heading_deg": 290.0,
+        "issue_airspeed_kt": 123.0,
+        "execution_altitude_ft": 3979.295,
+        "execution_heading_deg": 290.0,
+        "execution_airspeed_kt": 123.0,
+        "completion_altitude_ft": 3979.295,
+        "completion_heading_deg": 290.0,
+        "completion_airspeed_kt": 107.901,
+        "ending_altitude_ft": 3979.295,
+        "ending_heading_deg": 335.0,
+        "ending_airspeed_kt": 105.0,
+        "execution_start_time_s": 2309.55,
+        "completion_time_s": 2324.458
+      },
+      "telemetry_maximum_commanded_progress": 18.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2305.0,
+          "file": "c42_issue_2305.000.png",
+          "sha256": "acf00a56c99f226e2f4a3db845f3af127b597b3a96b18984287af384e6396180"
+        },
+        "window_end": {
+          "time_s": 2509.9,
+          "file": "c42_window_end_2509.900.png",
+          "sha256": "3542515a0c635e35ded7fdbfbaa689d1dad4c564f479f4de41ca90f504136e7a"
+        },
+        "maximum_progress": {
+          "time_s": 2330.417,
+          "file": "c42_maximum_progress_2330.417.png",
+          "sha256": "6ddf14cdbeb8c0e1757905224433ee09e50143faf9e22e8e9e64b455873cdf52"
+        },
+        "execution": {
+          "time_s": 2309.55,
+          "file": "c42_execution_2309.550.png",
+          "sha256": "bd4596e810dbd3201be5ad69fb7b6856127ac72daaa547b5f92be9f060f28f28"
+        },
+        "completion": {
+          "time_s": 2324.458,
+          "file": "c42_completion_2324.458.png",
+          "sha256": "43ee69438682a68d01b1a8d98790cc7c0dcab74d278237288a9bca3043a533ef"
+        }
+      }
+    },
+    {
+      "clearance_index": 43,
+      "leg": 4,
+      "command_type": "turn_right_heading",
+      "target_value": 335,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "large",
+      "state_snapshots": {
+        "issue_altitude_ft": 3979.295,
+        "issue_heading_deg": 290.0,
+        "issue_airspeed_kt": 105.0,
+        "execution_altitude_ft": 3979.295,
+        "execution_heading_deg": 290.0,
+        "execution_airspeed_kt": 105.0,
+        "completion_altitude_ft": 3979.295,
+        "completion_heading_deg": 342.8,
+        "completion_airspeed_kt": 105.0,
+        "ending_altitude_ft": 3979.295,
+        "ending_heading_deg": 335.0,
+        "ending_airspeed_kt": 90.0,
+        "execution_start_time_s": 2369.542,
+        "completion_time_s": 2401.9
+      },
+      "telemetry_maximum_commanded_progress": 70.0,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2365.0,
+          "file": "c43_issue_2365.000.png",
+          "sha256": "d4abaf1fb42d1ed7dbfa26ea4aaee0581dd9adc54782c8e1dae453bf6fcd972f"
+        },
+        "window_end": {
+          "time_s": 2569.9,
+          "file": "c43_window_end_2569.900.png",
+          "sha256": "0bf58d670d85471a69fa3f1789363869493d2622c3ae99596afdce1a22b8da55"
+        },
+        "maximum_progress": {
+          "time_s": 2392.908,
+          "file": "c43_maximum_progress_2392.908.png",
+          "sha256": "124aee3e0d7631fc84253fc8ebcc1574f079e65a5b303716a7d7bcad8a12d53a"
+        },
+        "execution": {
+          "time_s": 2369.542,
+          "file": "c43_execution_2369.542.png",
+          "sha256": "fc312b21b0c111d8a980818552b802c584a6d10471761f96c54d7973827482e8"
+        },
+        "completion": {
+          "time_s": 2401.9,
+          "file": "c43_completion_2401.900.png",
+          "sha256": "4b029fa1e5f4c8e40932a77c86e797acb9bb00d7ae4a1018e11009dd614e2094"
+        }
+      }
+    },
+    {
+      "clearance_index": 44,
+      "leg": 4,
+      "command_type": "descend",
+      "target_value": 3400,
+      "target_unit": "feet",
+      "status": "superseded",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3979.295,
+        "issue_heading_deg": 335.0,
+        "issue_airspeed_kt": 105.0,
+        "execution_altitude_ft": 3979.295,
+        "execution_heading_deg": 335.0,
+        "execution_airspeed_kt": 105.0,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 3858.307,
+        "ending_heading_deg": 335.0,
+        "ending_airspeed_kt": 105.0,
+        "execution_start_time_s": 2431.642,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 119.688,
+      "progress_error": -1.3,
+      "frames": {
+        "issue": {
+          "time_s": 2426.0,
+          "file": "c44_issue_2426.000.png",
+          "sha256": "1b61beff9e4e4d01d8e90616778be0692b683c807a154fbb46e49f2c7d1dd506"
+        },
+        "window_end": {
+          "time_s": 2443.9,
+          "file": "c44_window_end_2443.900.png",
+          "sha256": "ef5c5770082811b42975e9c56bf6ee1991e102ef01d9d2c62ea5f28f172b6e6e"
+        },
+        "maximum_progress": {
+          "time_s": 2443.883,
+          "file": "c44_maximum_progress_2443.883.png",
+          "sha256": "ef5c5770082811b42975e9c56bf6ee1991e102ef01d9d2c62ea5f28f172b6e6e"
+        },
+        "execution": {
+          "time_s": 2431.642,
+          "file": "c44_execution_2431.642.png",
+          "sha256": "7abb0e9acdb40f2b54b4eb6ce81b221072337dcb40ef9db5151083dc2679e64b"
+        }
+      }
+    },
+    {
+      "clearance_index": 45,
+      "leg": 4,
+      "command_type": "climb",
+      "target_value": 4000,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3857.22,
+        "issue_heading_deg": 335.0,
+        "issue_airspeed_kt": 105.0,
+        "execution_altitude_ft": 3810.607,
+        "execution_heading_deg": 335.0,
+        "execution_airspeed_kt": 105.0,
+        "completion_altitude_ft": 3900.216,
+        "completion_heading_deg": 335.0,
+        "completion_airspeed_kt": 105.0,
+        "ending_altitude_ft": 3979.295,
+        "ending_heading_deg": 285.0,
+        "ending_airspeed_kt": 90.0,
+        "execution_start_time_s": 2448.783,
+        "completion_time_s": 2460.058
+      },
+      "telemetry_maximum_commanded_progress": 122.075,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2444.0,
+          "file": "c45_issue_2444.000.png",
+          "sha256": "9a0146ff759ffc47cf9b7009909866d8493d95d20403358db833b39472af98f1"
+        },
+        "window_end": {
+          "time_s": 2627.9,
+          "file": "c45_window_end_2627.900.png",
+          "sha256": "fe9652a2cc3aa4b554dc3ff54c348241c8b143e341a2069bdb83629e549f2686"
+        },
+        "maximum_progress": {
+          "time_s": 2477.342,
+          "file": "c45_maximum_progress_2477.342.png",
+          "sha256": "b0381b1727310d0fe9797d22256a335684d059a08f2f34b37f662cb910aaa259"
+        },
+        "execution": {
+          "time_s": 2448.783,
+          "file": "c45_execution_2448.783.png",
+          "sha256": "08b0f87730c8825956d1b6c102a963cca23d8340963e2ea15b8c466513510b72"
+        },
+        "completion": {
+          "time_s": 2460.058,
+          "file": "c45_completion_2460.058.png",
+          "sha256": "6212596edd7095261d686ff451bfa41cdbc2e40ed7878678f04b737b6b21fcc1"
+        }
+      }
+    },
+    {
+      "clearance_index": 46,
+      "leg": 4,
+      "command_type": "decelerate",
+      "target_value": 90,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "small",
+      "state_snapshots": {
+        "issue_altitude_ft": 3979.295,
+        "issue_heading_deg": 335.0,
+        "issue_airspeed_kt": 105.0,
+        "execution_altitude_ft": 3979.295,
+        "execution_heading_deg": 335.0,
+        "execution_airspeed_kt": 105.0,
+        "completion_altitude_ft": 3979.295,
+        "completion_heading_deg": 335.0,
+        "completion_airspeed_kt": 87.048,
+        "ending_altitude_ft": 3781.317,
+        "ending_heading_deg": 285.0,
+        "ending_airspeed_kt": 90.0,
+        "execution_start_time_s": 2513.892,
+        "completion_time_s": 2539.033
+      },
+      "telemetry_maximum_commanded_progress": 20.502,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2510.0,
+          "file": "c46_issue_2510.000.png",
+          "sha256": "242107fa9614e9cd281b4caa71b701ba02f8af71188dddd451d5a88eb981eebf"
+        },
+        "window_end": {
+          "time_s": 2684.9,
+          "file": "c46_window_end_2684.900.png",
+          "sha256": "548d570ee2d83645518b9f022dff0798ca61e495308eda8f237acfb71646c49c"
+        },
+        "maximum_progress": {
+          "time_s": 2533.883,
+          "file": "c46_maximum_progress_2533.883.png",
+          "sha256": "0a5b0a3c7502f1591ed6dcefe6a88aad72e72ac3a259a6af173e01ec44e6a1c5"
+        },
+        "execution": {
+          "time_s": 2513.892,
+          "file": "c46_execution_2513.892.png",
+          "sha256": "301aec0b5e14e3c75ac6ac7207a2ef85d7a8eea170499fed8490b35de7f240d8"
+        },
+        "completion": {
+          "time_s": 2539.033,
+          "file": "c46_completion_2539.033.png",
+          "sha256": "a604799c422b96a0dd6f35cd08893430bfbd5dc47c6f480cbe0bd980864f7e1b"
+        }
+      }
+    },
+    {
+      "clearance_index": 47,
+      "leg": 4,
+      "command_type": "turn_left_heading",
+      "target_value": 285,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3979.295,
+        "issue_heading_deg": 335.0,
+        "issue_airspeed_kt": 90.0,
+        "execution_altitude_ft": 3979.295,
+        "execution_heading_deg": 335.0,
+        "execution_airspeed_kt": 90.0,
+        "completion_altitude_ft": 3979.295,
+        "completion_heading_deg": 292.602,
+        "completion_airspeed_kt": 90.0,
+        "ending_altitude_ft": 3781.317,
+        "ending_heading_deg": 285.0,
+        "ending_airspeed_kt": 102.0,
+        "execution_start_time_s": 2574.558,
+        "completion_time_s": 2585.25
+      },
+      "telemetry_maximum_commanded_progress": 50.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2570.0,
+          "file": "c47_issue_2570.000.png",
+          "sha256": "0bf58d670d85471a69fa3f1789363869493d2622c3ae99596afdce1a22b8da55"
+        },
+        "window_end": {
+          "time_s": 2739.9,
+          "file": "c47_window_end_2739.900.png",
+          "sha256": "57436d43f87014b1d5e6a8a403de4fb0818f3bbef5b3ee4c2c6d6ae7606a9e7a"
+        },
+        "maximum_progress": {
+          "time_s": 2592.875,
+          "file": "c47_maximum_progress_2592.875.png",
+          "sha256": "6d4a8879d37fd1dc37e68576e18e95ad3633c471a71823ef1cc6255134a73537"
+        },
+        "execution": {
+          "time_s": 2574.558,
+          "file": "c47_execution_2574.558.png",
+          "sha256": "dd940edbccbb73fcabd2a79f952996c43af9b35112d80107559c5bd517856b57"
+        },
+        "completion": {
+          "time_s": 2585.25,
+          "file": "c47_completion_2585.250.png",
+          "sha256": "1d019a7a2a282af65eccf06d0fed21308eb07620526213b4de4d9210e0b13a8b"
+        }
+      }
+    },
+    {
+      "clearance_index": 48,
+      "leg": 4,
+      "command_type": "descend",
+      "target_value": 3800,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3979.295,
+        "issue_heading_deg": 285.0,
+        "issue_airspeed_kt": 90.0,
+        "execution_altitude_ft": 3979.295,
+        "execution_heading_deg": 285.0,
+        "execution_airspeed_kt": 90.0,
+        "completion_altitude_ft": 3899.725,
+        "completion_heading_deg": 285.0,
+        "completion_airspeed_kt": 90.0,
+        "ending_altitude_ft": 3781.317,
+        "ending_heading_deg": 340.0,
+        "ending_airspeed_kt": 102.0,
+        "execution_start_time_s": 2633.483,
+        "completion_time_s": 2641.733
+      },
+      "telemetry_maximum_commanded_progress": 197.978,
+      "progress_error": -0.001,
+      "frames": {
+        "issue": {
+          "time_s": 2628.0,
+          "file": "c48_issue_2628.000.png",
+          "sha256": "fe9652a2cc3aa4b554dc3ff54c348241c8b143e341a2069bdb83629e549f2686"
+        },
+        "window_end": {
+          "time_s": 2849.9,
+          "file": "c48_window_end_2849.900.png",
+          "sha256": "0fcab78a35ab63cac7a3c92cfab93450dc9604053a87f9e02d6ea2b614098655"
+        },
+        "maximum_progress": {
+          "time_s": 2664.983,
+          "file": "c48_maximum_progress_2664.983.png",
+          "sha256": "b4bdd5739eb14115ad0b5f3f129b8b0bfbac1ce46e9e196ed1e77496d8a7e8b3"
+        },
+        "execution": {
+          "time_s": 2633.483,
+          "file": "c48_execution_2633.483.png",
+          "sha256": "8a6746881cb217749ad19f63416de222c7e9c9890ccbbdff625a5b9ced260939"
+        },
+        "completion": {
+          "time_s": 2641.733,
+          "file": "c48_completion_2641.733.png",
+          "sha256": "3ea8e57df18ce66d1fc3dad93de22ab0ada3cc18588eacdf1f390079b26858bc"
+        }
+      }
+    },
+    {
+      "clearance_index": 49,
+      "leg": 4,
+      "command_type": "accelerate",
+      "target_value": 102,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3781.317,
+        "issue_heading_deg": 285.0,
+        "issue_airspeed_kt": 90.0,
+        "execution_altitude_ft": 3781.317,
+        "execution_heading_deg": 285.0,
+        "execution_airspeed_kt": 90.0,
+        "completion_altitude_ft": 3781.317,
+        "completion_heading_deg": 285.0,
+        "completion_airspeed_kt": 99.001,
+        "ending_altitude_ft": 3781.317,
+        "ending_heading_deg": 340.0,
+        "ending_airspeed_kt": 102.0,
+        "execution_start_time_s": 2689.467,
+        "completion_time_s": 2701.175
+      },
+      "telemetry_maximum_commanded_progress": 12.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2685.0,
+          "file": "c49_issue_2685.000.png",
+          "sha256": "548d570ee2d83645518b9f022dff0798ca61e495308eda8f237acfb71646c49c"
+        },
+        "window_end": {
+          "time_s": 2794.9,
+          "file": "c49_window_end_2794.900.png",
+          "sha256": "9494739041dd74db08e6020fd2aa788744513f9b5cb2f498c39d7d4b0699e297"
+        },
+        "maximum_progress": {
+          "time_s": 2707.242,
+          "file": "c49_maximum_progress_2707.242.png",
+          "sha256": "5f4f78ba806daab68277bb5899b33c720647b3f529d3d2cf88eb05dc98ba447d"
+        },
+        "execution": {
+          "time_s": 2689.467,
+          "file": "c49_execution_2689.467.png",
+          "sha256": "eeff757bb0dd2a3016dcb9167e372264451939df9820a233011afc63ad614b7c"
+        },
+        "completion": {
+          "time_s": 2701.175,
+          "file": "c49_completion_2701.175.png",
+          "sha256": "863d2c538b7b34d3471cc85335467fe8ede2bcc349b217108ce08adace59a360"
+        }
+      }
+    },
+    {
+      "clearance_index": 50,
+      "leg": 4,
+      "command_type": "turn_right_heading",
+      "target_value": 340,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3781.317,
+        "issue_heading_deg": 285.0,
+        "issue_airspeed_kt": 102.0,
+        "execution_altitude_ft": 3781.317,
+        "execution_heading_deg": 285.401,
+        "execution_airspeed_kt": 102.0,
+        "completion_altitude_ft": 3781.317,
+        "completion_heading_deg": 332.202,
+        "completion_airspeed_kt": 102.0,
+        "ending_altitude_ft": 3585.44,
+        "ending_heading_deg": 340.0,
+        "ending_airspeed_kt": 102.0,
+        "execution_start_time_s": 2744.683,
+        "completion_time_s": 2756.433
+      },
+      "telemetry_maximum_commanded_progress": 55.0,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2740.0,
+          "file": "c50_issue_2740.000.png",
+          "sha256": "57436d43f87014b1d5e6a8a403de4fb0818f3bbef5b3ee4c2c6d6ae7606a9e7a"
+        },
+        "window_end": {
+          "time_s": 2879.9,
+          "file": "c50_window_end_2879.900.png",
+          "sha256": "493fd2a93aa5d59c5cb4d2cdc71526a14e4af3d8bf0c0cb153ba7cf4ecee838b"
+        },
+        "maximum_progress": {
+          "time_s": 2764.375,
+          "file": "c50_maximum_progress_2764.375.png",
+          "sha256": "5b816bfb0e9e5b9aebc0bfbc231bcec16331d7d259e5372fe249cdaadcb88a6b"
+        },
+        "execution": {
+          "time_s": 2744.683,
+          "file": "c50_execution_2744.683.png",
+          "sha256": "6de876d5a9e6f8daa95c3a0ce7dbc33b468a2f5d47c632a17d0bfa8eaef48994"
+        },
+        "completion": {
+          "time_s": 2756.433,
+          "file": "c50_completion_2756.433.png",
+          "sha256": "47d116f7cc1a9986ecd135cb8964ddf3d132dfc44549e5eaa8bc7b8c7ded4df9"
+        }
+      }
+    },
+    {
+      "clearance_index": 51,
+      "leg": 4,
+      "command_type": "decelerate",
+      "target_value": 87,
+      "target_unit": "knots",
+      "status": "incomplete",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3781.317,
+        "issue_heading_deg": 340.0,
+        "issue_airspeed_kt": 102.0,
+        "execution_altitude_ft": null,
+        "execution_heading_deg": null,
+        "execution_airspeed_kt": null,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 3585.44,
+        "ending_heading_deg": 340.0,
+        "ending_airspeed_kt": 102.0,
+        "execution_start_time_s": null,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2795.0,
+          "file": "c51_issue_2795.000.png",
+          "sha256": "9494739041dd74db08e6020fd2aa788744513f9b5cb2f498c39d7d4b0699e297"
+        },
+        "window_end": {
+          "time_s": 2879.9,
+          "file": "c51_window_end_2879.900.png",
+          "sha256": "493fd2a93aa5d59c5cb4d2cdc71526a14e4af3d8bf0c0cb153ba7cf4ecee838b"
+        },
+        "maximum_progress": {
+          "time_s": 2795.058,
+          "file": "c51_maximum_progress_2795.058.png",
+          "sha256": "9494739041dd74db08e6020fd2aa788744513f9b5cb2f498c39d7d4b0699e297"
+        }
+      }
+    },
+    {
+      "clearance_index": 52,
+      "leg": 4,
+      "command_type": "climb",
+      "target_value": 4100,
+      "target_unit": "feet",
+      "status": "violated",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 3781.317,
+        "issue_heading_deg": 340.0,
+        "issue_airspeed_kt": 102.0,
+        "execution_altitude_ft": null,
+        "execution_heading_deg": null,
+        "execution_airspeed_kt": null,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 3585.44,
+        "ending_heading_deg": 340.0,
+        "ending_airspeed_kt": 102.0,
+        "execution_start_time_s": null,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2850.0,
+          "file": "c52_issue_2850.000.png",
+          "sha256": "0fcab78a35ab63cac7a3c92cfab93450dc9604053a87f9e02d6ea2b614098655"
+        },
+        "window_end": {
+          "time_s": 2879.9,
+          "file": "c52_window_end_2879.900.png",
+          "sha256": "493fd2a93aa5d59c5cb4d2cdc71526a14e4af3d8bf0c0cb153ba7cf4ecee838b"
+        },
+        "maximum_progress": {
+          "time_s": 2850.083,
+          "file": "c52_maximum_progress_2850.083.png",
+          "sha256": "0fcab78a35ab63cac7a3c92cfab93450dc9604053a87f9e02d6ea2b614098655"
+        }
+      }
+    },
+    {
+      "clearance_index": 53,
+      "leg": 5,
+      "command_type": "climb",
+      "target_value": 4800,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4481.89,
+        "issue_heading_deg": 335.0,
+        "issue_airspeed_kt": 125.0,
+        "execution_altitude_ft": 4481.89,
+        "execution_heading_deg": 335.0,
+        "execution_airspeed_kt": 125.0,
+        "completion_altitude_ft": 4700.17,
+        "completion_heading_deg": 335.0,
+        "completion_airspeed_kt": 125.0,
+        "ending_altitude_ft": 4762.387,
+        "ending_heading_deg": 3.0,
+        "ending_airspeed_kt": 143.0,
+        "execution_start_time_s": 2909.475,
+        "completion_time_s": 2935.592
+      },
+      "telemetry_maximum_commanded_progress": 280.497,
+      "progress_error": 0.001,
+      "frames": {
+        "issue": {
+          "time_s": 2904.0,
+          "file": "c53_issue_2904.000.png",
+          "sha256": "5a0a2d43c628d3b1ae3bcdebc33e5030c7407236f6e398bec08210befd2399a1"
+        },
+        "window_end": {
+          "time_s": 3073.9,
+          "file": "c53_window_end_3073.900.png",
+          "sha256": "b91c0452def5ca1d9e55145f365cb399010ed2f9f308fd0f59ca55c5a544a64e"
+        },
+        "maximum_progress": {
+          "time_s": 2949.892,
+          "file": "c53_maximum_progress_2949.892.png",
+          "sha256": "791124a801e282c49539080213d9929602ac685b63e49babe3408dc99a2a2d76"
+        },
+        "execution": {
+          "time_s": 2909.475,
+          "file": "c53_execution_2909.475.png",
+          "sha256": "397de9a6db5633156929add4069dffbab918cde9ff642d91916fded007ec036d"
+        },
+        "completion": {
+          "time_s": 2935.592,
+          "file": "c53_completion_2935.592.png",
+          "sha256": "c3b437eb798e086ecdba0c301a6b013ecb278d7d5937147bdec396f75cf52f53"
+        }
+      }
+    },
+    {
+      "clearance_index": 54,
+      "leg": 5,
+      "command_type": "turn_right_heading",
+      "target_value": 3,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4762.387,
+        "issue_heading_deg": 335.0,
+        "issue_airspeed_kt": 125.0,
+        "execution_altitude_ft": 4762.387,
+        "execution_heading_deg": 335.804,
+        "execution_airspeed_kt": 125.0,
+        "completion_altitude_ft": 4762.387,
+        "completion_heading_deg": 355.007,
+        "completion_airspeed_kt": 125.0,
+        "ending_altitude_ft": 5239.671,
+        "ending_heading_deg": 3.0,
+        "ending_airspeed_kt": 143.0,
+        "execution_start_time_s": 2960.792,
+        "completion_time_s": 2965.542
+      },
+      "telemetry_maximum_commanded_progress": 28.0,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 2956.0,
+          "file": "c54_issue_2956.000.png",
+          "sha256": "f30d3ddf5dcdc796d4d6043523abbadf958211fda73c0514bb3f0a07d6b1cd69"
+        },
+        "window_end": {
+          "time_s": 3127.9,
+          "file": "c54_window_end_3127.900.png",
+          "sha256": "76f9fcadb299acd90985516b47caecab7ab26e535405411724f3363838fd8c64"
+        },
+        "maximum_progress": {
+          "time_s": 2973.667,
+          "file": "c54_maximum_progress_2973.667.png",
+          "sha256": "d28917f20fc47adf13b05eef5e20834e1751cb45f9d889f05302a2b6c59dc382"
+        },
+        "execution": {
+          "time_s": 2960.792,
+          "file": "c54_execution_2960.792.png",
+          "sha256": "e4f8708f55a37fa7b22cd41fc567b3c753777c94e5d56e03129c270ed73e55ee"
+        },
+        "completion": {
+          "time_s": 2965.542,
+          "file": "c54_completion_2965.542.png",
+          "sha256": "547734d4fa8f9ee58c1dd6f2c8f03820f4364293d7d09e4c08d952e78fba57a3"
+        }
+      }
+    },
+    {
+      "clearance_index": 55,
+      "leg": 5,
+      "command_type": "accelerate",
+      "target_value": 143,
+      "target_unit": "knots",
+      "status": "complied_late",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4762.387,
+        "issue_heading_deg": 3.0,
+        "issue_airspeed_kt": 125.0,
+        "execution_altitude_ft": 4762.387,
+        "execution_heading_deg": 3.0,
+        "execution_airspeed_kt": 125.401,
+        "completion_altitude_ft": 4762.387,
+        "completion_heading_deg": 3.0,
+        "completion_airspeed_kt": 140.048,
+        "ending_altitude_ft": 5259.382,
+        "ending_heading_deg": 318.0,
+        "ending_airspeed_kt": 143.0,
+        "execution_start_time_s": 3036.925,
+        "completion_time_s": 3051.583
+      },
+      "telemetry_maximum_commanded_progress": 18.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 3014.0,
+          "file": "c55_issue_3014.000.png",
+          "sha256": "8c7f465308b48e91583fc61f2bf693ea173b69ceac5428a37e1016ce7f85a0e3"
+        },
+        "window_end": {
+          "time_s": 3189.9,
+          "file": "c55_window_end_3189.900.png",
+          "sha256": "94774ef6f56cf3e22966dc4fcfdf7873ed66acc92295632d5c892a476b620757"
+        },
+        "maximum_progress": {
+          "time_s": 3057.55,
+          "file": "c55_maximum_progress_3057.550.png",
+          "sha256": "4ba7bcd131d4f22af822ab73bdeab481f6a18de9df5c57d9939c80b8dfc405c5"
+        },
+        "execution": {
+          "time_s": 3036.925,
+          "file": "c55_execution_3036.925.png",
+          "sha256": "2018c38b1ed326b5bb9c1a360296cbf75977bc3d381c71c4bd8816ed05f20fff"
+        },
+        "completion": {
+          "time_s": 3051.583,
+          "file": "c55_completion_3051.583.png",
+          "sha256": "98330716831dedd6e05221e3d5838b925e1e02a6793273614546348bdb7f3728"
+        }
+      }
+    },
+    {
+      "clearance_index": 56,
+      "leg": 5,
+      "command_type": "climb",
+      "target_value": 5200,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "large",
+      "state_snapshots": {
+        "issue_altitude_ft": 4762.387,
+        "issue_heading_deg": 3.0,
+        "issue_airspeed_kt": 143.0,
+        "execution_altitude_ft": 4763.043,
+        "execution_heading_deg": 3.0,
+        "execution_airspeed_kt": 143.0,
+        "completion_altitude_ft": 5299.471,
+        "completion_heading_deg": 318.0,
+        "completion_airspeed_kt": 143.0,
+        "ending_altitude_ft": 5157.085,
+        "ending_heading_deg": 318.0,
+        "ending_airspeed_kt": 128.0,
+        "execution_start_time_s": 3079.633,
+        "completion_time_s": 3185.858
+      },
+      "telemetry_maximum_commanded_progress": 747.883,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 3074.0,
+          "file": "c56_issue_3074.000.png",
+          "sha256": "b91c0452def5ca1d9e55145f365cb399010ed2f9f308fd0f59ca55c5a544a64e"
+        },
+        "window_end": {
+          "time_s": 3249.9,
+          "file": "c56_window_end_3249.900.png",
+          "sha256": "fa8e1e36e19f480e7a010d002bb2b92cd2623bf89a8f62625917834afdfa0150"
+        },
+        "maximum_progress": {
+          "time_s": 3164.592,
+          "file": "c56_maximum_progress_3164.592.png",
+          "sha256": "47f8799ca1e9f16bce00703c139f88fdef3734368f44d95716c3e96cf2fef1d2"
+        },
+        "execution": {
+          "time_s": 3079.633,
+          "file": "c56_execution_3079.633.png",
+          "sha256": "1ecbbc7656b9b9d2004f8b9eab1a9be6a262f49370bccced89b9dc96e204f802"
+        },
+        "completion": {
+          "time_s": 3185.858,
+          "file": "c56_completion_3185.858.png",
+          "sha256": "68c9143777111b0fa161cfb9dbf4e423c7ca58cae9789794dbb46be1b5aea701"
+        }
+      }
+    },
+    {
+      "clearance_index": 57,
+      "leg": 5,
+      "command_type": "turn_left_heading",
+      "target_value": 318,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "small",
+      "state_snapshots": {
+        "issue_altitude_ft": 5240.654,
+        "issue_heading_deg": 3.0,
+        "issue_airspeed_kt": 143.0,
+        "execution_altitude_ft": 5284.565,
+        "execution_heading_deg": 2.201,
+        "execution_airspeed_kt": 143.0,
+        "completion_altitude_ft": 5454.263,
+        "completion_heading_deg": 310.093,
+        "completion_airspeed_kt": 143.0,
+        "ending_altitude_ft": 4858.618,
+        "ending_heading_deg": 318.0,
+        "ending_airspeed_kt": 128.0,
+        "execution_start_time_s": 3132.425,
+        "completion_time_s": 3153.283
+      },
+      "telemetry_maximum_commanded_progress": 56.904,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 3128.0,
+          "file": "c57_issue_3128.000.png",
+          "sha256": "00265fbdf89f1560c37543a151add864fd0c02fc5128ea681aa6eac9e7a811b4"
+        },
+        "window_end": {
+          "time_s": 3309.9,
+          "file": "c57_window_end_3309.900.png",
+          "sha256": "d380f6186d99b1e09cfa246fd39acb853cae3b3f099ec101ba9aa888509cf14c"
+        },
+        "maximum_progress": {
+          "time_s": 3152.308,
+          "file": "c57_maximum_progress_3152.308.png",
+          "sha256": "31b077d7345dec75b854cf3ac82c259e0dfc48f6a03e7f20b791a2590f35360d"
+        },
+        "execution": {
+          "time_s": 3132.425,
+          "file": "c57_execution_3132.425.png",
+          "sha256": "a79f8460c139e598c04ae9c58d2c1c9308a9474c0d26d7e69d5179a23a51fc55"
+        },
+        "completion": {
+          "time_s": 3153.283,
+          "file": "c57_completion_3153.283.png",
+          "sha256": "6a04bc49c622733ce0f6f88ca48e96a8ada49a897b5ac08dec256ccd1850d212"
+        }
+      }
+    },
+    {
+      "clearance_index": 58,
+      "leg": 5,
+      "command_type": "decelerate",
+      "target_value": 128,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 5257.612,
+        "issue_heading_deg": 318.0,
+        "issue_airspeed_kt": 143.0,
+        "execution_altitude_ft": 5232.229,
+        "execution_heading_deg": 318.0,
+        "execution_airspeed_kt": 142.799,
+        "completion_altitude_ft": 5166.777,
+        "completion_heading_deg": 318.0,
+        "completion_airspeed_kt": 130.95,
+        "ending_altitude_ft": 4858.618,
+        "ending_heading_deg": 8.0,
+        "ending_airspeed_kt": 128.0,
+        "execution_start_time_s": 3195.033,
+        "completion_time_s": 3208.15
+      },
+      "telemetry_maximum_commanded_progress": 15.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 3190.0,
+          "file": "c58_issue_3190.000.png",
+          "sha256": "52e42c54cc655677374f5969e52b63d217252a41f004d7269c5ae72316edb4df"
+        },
+        "window_end": {
+          "time_s": 3359.9,
+          "file": "c58_window_end_3359.900.png",
+          "sha256": "baa54852159179a088d0aa0b516ef7e83c176e13e13337c52cbfa22c32af41bd"
+        },
+        "maximum_progress": {
+          "time_s": 3214.05,
+          "file": "c58_maximum_progress_3214.050.png",
+          "sha256": "4ef1cdb019d283e2c15129e57550237e8f57a8dfcabce52a8ccc2253ae4732c5"
+        },
+        "execution": {
+          "time_s": 3195.033,
+          "file": "c58_execution_3195.033.png",
+          "sha256": "45fa503c78e43541e28bf28de94719ba4b713699773999bf4937c75d88737370"
+        },
+        "completion": {
+          "time_s": 3208.15,
+          "file": "c58_completion_3208.150.png",
+          "sha256": "fca918c4e19811fab560cdd1189fa40ec358073be17a671547d7ce8917e34686"
+        }
+      }
+    },
+    {
+      "clearance_index": 59,
+      "leg": 5,
+      "command_type": "descend",
+      "target_value": 4900,
+      "target_unit": "feet",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 5157.085,
+        "issue_heading_deg": 318.0,
+        "issue_airspeed_kt": 128.0,
+        "execution_altitude_ft": 5157.085,
+        "execution_heading_deg": 318.0,
+        "execution_airspeed_kt": 128.0,
+        "completion_altitude_ft": 4998.969,
+        "completion_heading_deg": 318.0,
+        "completion_airspeed_kt": 128.0,
+        "ending_altitude_ft": 4858.618,
+        "ending_heading_deg": 73.0,
+        "ending_airspeed_kt": 140.0,
+        "execution_start_time_s": 3255.592,
+        "completion_time_s": 3271.45
+      },
+      "telemetry_maximum_commanded_progress": 298.467,
+      "progress_error": -0.001,
+      "frames": {
+        "issue": {
+          "time_s": 3250.0,
+          "file": "c59_issue_3250.000.png",
+          "sha256": "fa8e1e36e19f480e7a010d002bb2b92cd2623bf89a8f62625917834afdfa0150"
+        },
+        "window_end": {
+          "time_s": 3489.9,
+          "file": "c59_window_end_3489.900.png",
+          "sha256": "b5f5119ac7c81a34743e77ba1a326981ac92130e2e59d03a08a8ef6e537fbe84"
+        },
+        "maximum_progress": {
+          "time_s": 3296.975,
+          "file": "c59_maximum_progress_3296.975.png",
+          "sha256": "733270ad23abcd6ef17b437234908100bb9ca044f86d9ba04ed0951c44b6da38"
+        },
+        "execution": {
+          "time_s": 3255.592,
+          "file": "c59_execution_3255.592.png",
+          "sha256": "e51a07b73d1b9d756b293008fd35fe2da407a7304f6b909e885a604b04805a30"
+        },
+        "completion": {
+          "time_s": 3271.45,
+          "file": "c59_completion_3271.450.png",
+          "sha256": "10611a904dc47b2282fbb2c7a79523b36db7880769e424c17b2f8e378712488c"
+        }
+      }
+    },
+    {
+      "clearance_index": 60,
+      "leg": 5,
+      "command_type": "turn_right_heading",
+      "target_value": 8,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4858.618,
+        "issue_heading_deg": 318.0,
+        "issue_airspeed_kt": 128.0,
+        "execution_altitude_ft": 4858.618,
+        "execution_heading_deg": 318.0,
+        "execution_airspeed_kt": 128.0,
+        "completion_altitude_ft": 4858.618,
+        "completion_heading_deg": 0.404,
+        "completion_airspeed_kt": 128.0,
+        "ending_altitude_ft": 4858.618,
+        "ending_heading_deg": 8.0,
+        "ending_airspeed_kt": 140.0,
+        "execution_start_time_s": 3314.625,
+        "completion_time_s": 3325.217
+      },
+      "telemetry_maximum_commanded_progress": 50.0,
+      "progress_error": -0.0,
+      "frames": {
+        "issue": {
+          "time_s": 3310.0,
+          "file": "c60_issue_3310.000.png",
+          "sha256": "d380f6186d99b1e09cfa246fd39acb853cae3b3f099ec101ba9aa888509cf14c"
+        },
+        "window_end": {
+          "time_s": 3404.9,
+          "file": "c60_window_end_3404.900.png",
+          "sha256": "ef672020b918b690b9578191f7b85ed9d06051a88560701fc0d72aa3d271deb3"
+        },
+        "maximum_progress": {
+          "time_s": 3332.833,
+          "file": "c60_maximum_progress_3332.833.png",
+          "sha256": "b0dd06839371a1a106be0ef1195c91d4ca3e10122123a720cbb26edcd546ca15"
+        },
+        "execution": {
+          "time_s": 3314.625,
+          "file": "c60_execution_3314.625.png",
+          "sha256": "b454ba9cabcd4888af3bdea2d1df72a3c964f69ba718628e8bac77323f0043fc"
+        },
+        "completion": {
+          "time_s": 3325.217,
+          "file": "c60_completion_3325.217.png",
+          "sha256": "2435a3a452d89096a18a19b961995b28553d28038e90526aafeec175f9ca14fe"
+        }
+      }
+    },
+    {
+      "clearance_index": 61,
+      "leg": 5,
+      "command_type": "accelerate",
+      "target_value": 140,
+      "target_unit": "knots",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4858.618,
+        "issue_heading_deg": 8.0,
+        "issue_airspeed_kt": 128.0,
+        "execution_altitude_ft": 4858.618,
+        "execution_heading_deg": 8.0,
+        "execution_airspeed_kt": 128.201,
+        "completion_altitude_ft": 4858.618,
+        "completion_heading_deg": 8.0,
+        "completion_airspeed_kt": 137.048,
+        "ending_altitude_ft": 4858.618,
+        "ending_heading_deg": 73.0,
+        "ending_airspeed_kt": 140.0,
+        "execution_start_time_s": 3364.675,
+        "completion_time_s": 3376.4
+      },
+      "telemetry_maximum_commanded_progress": 12.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 3360.0,
+          "file": "c61_issue_3360.000.png",
+          "sha256": "baa54852159179a088d0aa0b516ef7e83c176e13e13337c52cbfa22c32af41bd"
+        },
+        "window_end": {
+          "time_s": 3549.9,
+          "file": "c61_window_end_3549.900.png",
+          "sha256": "3d2816d1bc6500155fbcc60eb9dda6ca8ee042919e594ced5ceed65f9664e516"
+        },
+        "maximum_progress": {
+          "time_s": 3382.367,
+          "file": "c61_maximum_progress_3382.367.png",
+          "sha256": "dafd43998e772ebd5fadf4f4bc43dae0469f02f170decfbe162e2f3c955b2fa9"
+        },
+        "execution": {
+          "time_s": 3364.675,
+          "file": "c61_execution_3364.675.png",
+          "sha256": "8cc60299ae4622773a85e61344000a3e6daaae910c2cc1a510bb5b0b2bec205d"
+        },
+        "completion": {
+          "time_s": 3376.4,
+          "file": "c61_completion_3376.400.png",
+          "sha256": "dc1e5344ff365311931dfc16555c7373635dd3c2c20b0d5f00dbe45b0c339790"
+        }
+      }
+    },
+    {
+      "clearance_index": 62,
+      "leg": 5,
+      "command_type": "turn_right_heading",
+      "target_value": 108,
+      "target_unit": "degrees",
+      "status": "superseded",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4858.618,
+        "issue_heading_deg": 8.0,
+        "issue_airspeed_kt": 140.0,
+        "execution_altitude_ft": 4858.618,
+        "execution_heading_deg": 8.402,
+        "execution_airspeed_kt": 140.0,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 4858.618,
+        "ending_heading_deg": 62.399,
+        "ending_airspeed_kt": 140.0,
+        "execution_start_time_s": 3409.508,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 54.001,
+      "progress_error": -0.398,
+      "frames": {
+        "issue": {
+          "time_s": 3405.0,
+          "file": "c62_issue_3405.000.png",
+          "sha256": "ef672020b918b690b9578191f7b85ed9d06051a88560701fc0d72aa3d271deb3"
+        },
+        "window_end": {
+          "time_s": 3422.9,
+          "file": "c62_window_end_3422.900.png",
+          "sha256": "e113f2fe1a7318e8c145746479f149f985e4f3444ea987e76e288df1556884ec"
+        },
+        "maximum_progress": {
+          "time_s": 3422.867,
+          "file": "c62_maximum_progress_3422.867.png",
+          "sha256": "e113f2fe1a7318e8c145746479f149f985e4f3444ea987e76e288df1556884ec"
+        },
+        "execution": {
+          "time_s": 3409.508,
+          "file": "c62_execution_3409.508.png",
+          "sha256": "e3f7732ad624bb042cde20bf8249e65c0b2d6cf03eeffbe1f94168611f2a9bf0"
+        }
+      }
+    },
+    {
+      "clearance_index": 63,
+      "leg": 5,
+      "command_type": "turn_left_heading",
+      "target_value": 73,
+      "target_unit": "degrees",
+      "status": "complied",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4858.618,
+        "issue_heading_deg": 62.799,
+        "issue_airspeed_kt": 140.0,
+        "execution_altitude_ft": 4858.618,
+        "execution_heading_deg": 80.796,
+        "execution_airspeed_kt": 140.0,
+        "completion_altitude_ft": 4858.618,
+        "completion_heading_deg": 80.796,
+        "completion_airspeed_kt": 140.0,
+        "ending_altitude_ft": 4858.618,
+        "ending_heading_deg": 73.0,
+        "ending_airspeed_kt": 155.0,
+        "execution_start_time_s": 3427.8,
+        "completion_time_s": 3427.8
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 3423.0,
+          "file": "c63_issue_3423.000.png",
+          "sha256": "466d0c861dc6ddbbef339a1c1f425dc5c9030517d050807cb587364f091a1167"
+        },
+        "window_end": {
+          "time_s": 3599.9,
+          "file": "c63_window_end_3599.900.png",
+          "sha256": "e1b4c5c7c974db50ec4ea7ed23fb5a18a7eca55a7e389d08016f608d442136d0"
+        },
+        "maximum_progress": {
+          "time_s": 3423.058,
+          "file": "c63_maximum_progress_3423.058.png",
+          "sha256": "d831d064f89d42e19e3f68330b081c68fdda44e60ad38bc11dd1663cd2edfd8a"
+        },
+        "execution": {
+          "time_s": 3427.8,
+          "file": "c63_execution_3427.800.png",
+          "sha256": "fbbef907a1527536aa8c467ed973d8150f78443a1ddbe4bc02fd9575cc9ebb93"
+        },
+        "completion": {
+          "time_s": 3427.8,
+          "file": "c63_completion_3427.800.png",
+          "sha256": "fbbef907a1527536aa8c467ed973d8150f78443a1ddbe4bc02fd9575cc9ebb93"
+        }
+      }
+    },
+    {
+      "clearance_index": 64,
+      "leg": 5,
+      "command_type": "climb",
+      "target_value": 5300,
+      "target_unit": "feet",
+      "status": "incomplete",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4858.618,
+        "issue_heading_deg": 73.0,
+        "issue_airspeed_kt": 140.0,
+        "execution_altitude_ft": null,
+        "execution_heading_deg": null,
+        "execution_airspeed_kt": null,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 4858.618,
+        "ending_heading_deg": 73.0,
+        "ending_airspeed_kt": 155.0,
+        "execution_start_time_s": null,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 3490.0,
+          "file": "c64_issue_3490.000.png",
+          "sha256": "b5f5119ac7c81a34743e77ba1a326981ac92130e2e59d03a08a8ef6e537fbe84"
+        },
+        "window_end": {
+          "time_s": 3599.9,
+          "file": "c64_window_end_3599.900.png",
+          "sha256": "e1b4c5c7c974db50ec4ea7ed23fb5a18a7eca55a7e389d08016f608d442136d0"
+        },
+        "maximum_progress": {
+          "time_s": 3490.067,
+          "file": "c64_maximum_progress_3490.067.png",
+          "sha256": "b5f5119ac7c81a34743e77ba1a326981ac92130e2e59d03a08a8ef6e537fbe84"
+        }
+      }
+    },
+    {
+      "clearance_index": 65,
+      "leg": 5,
+      "command_type": "decelerate",
+      "target_value": 125,
+      "target_unit": "knots",
+      "status": "violated",
+      "overshoot_bucket": "none",
+      "state_snapshots": {
+        "issue_altitude_ft": 4858.618,
+        "issue_heading_deg": 73.0,
+        "issue_airspeed_kt": 140.0,
+        "execution_altitude_ft": null,
+        "execution_heading_deg": null,
+        "execution_airspeed_kt": null,
+        "completion_altitude_ft": null,
+        "completion_heading_deg": null,
+        "completion_airspeed_kt": null,
+        "ending_altitude_ft": 4858.618,
+        "ending_heading_deg": 73.0,
+        "ending_airspeed_kt": 155.0,
+        "execution_start_time_s": null,
+        "completion_time_s": null
+      },
+      "telemetry_maximum_commanded_progress": 0.0,
+      "progress_error": 0.0,
+      "frames": {
+        "issue": {
+          "time_s": 3550.0,
+          "file": "c65_issue_3550.000.png",
+          "sha256": "3d2816d1bc6500155fbcc60eb9dda6ca8ee042919e594ced5ceed65f9664e516"
+        },
+        "window_end": {
+          "time_s": 3599.9,
+          "file": "c65_window_end_3599.900.png",
+          "sha256": "e1b4c5c7c974db50ec4ea7ed23fb5a18a7eca55a7e389d08016f608d442136d0"
+        },
+        "maximum_progress": {
+          "time_s": 3550.058,
+          "file": "c65_maximum_progress_3550.058.png",
+          "sha256": "3d2816d1bc6500155fbcc60eb9dda6ca8ee042919e594ced5ceed65f9664e516"
+        }
+      }
+    }
+  ]
+}
