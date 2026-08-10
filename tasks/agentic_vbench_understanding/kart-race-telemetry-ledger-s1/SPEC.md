@@ -58,7 +58,7 @@ scorer:
   # only per-race COUNTS (no headless race-replay recording, and the replay format logs no pickup /
   # explosion events), so counts are the ceiling for this engine.
 
-difficulty: {strong_agent_reward: recalibrating, tool_call_turns: TBD, agent_model: codex gpt-5.6-sol xhigh}
+difficulty: {strong_agent_reward: 0.345, tool_call_turns: ~432, agent_model: codex gpt-5.6-sol xhigh}
 # HARDER VARIANT (HUD powerup slot masked). On the UN-masked 12-race suite Codex scored 0.407
 # (items tau 0.64, explosions 0.54, bananas -0.04; rollout calibration/rollouts/codex_12x4_*). This
 # shipped video MASKS the top-center HUD powerup indicator, so the agent loses the pickup
