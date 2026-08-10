@@ -38,8 +38,8 @@ task and makes kart identity easier to track, but the HUD must be cropped out.
 
 ## Task shape
 
-Question: per kart (identified by character/colour, never by the HUD), reconstruct
-`{kart, items_collected, nitro_collected}` (the scored fields; start/finish are exported for
-context but deliberately not scored — see the task SPEC).
-Deterministic scorer: per-field accuracy over karts; the finishing order is a permutation
-so a single-frame glance cannot recover it, and rescues/items require watching the race.
+Question: for the camera-followed **hero kart**, per race, reconstruct the three off-HUD scored
+quantities `{items_collected, spinouts, skid_time}` (spinouts = bananas + explosions; positions /
+nitro / the banana-vs-bomb split are exported for context but not scored — see the task SPEC).
+Deterministic scorer: exact-count (`clamp(tau,0,1) · within-30%-accuracy`) over the 12 races, so a
+single-frame glance cannot recover it and accurate counting/timing requires watching each race.
