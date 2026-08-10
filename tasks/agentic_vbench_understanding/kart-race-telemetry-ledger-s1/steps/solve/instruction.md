@@ -59,8 +59,8 @@ below show the SCHEMA only — replace them with your own observed values for ea
 ```
 
 - `items_collected`: powerup boxes the **hero** drove through this race. **Scored (weight 0.40).**
-- `skid_time`: total **seconds** the **hero** spent drifting (yellow wheel-sparks) this race. **Scored (weight 0.30).**
 - `spinouts`: how many times the **hero** spun out (banana or bomb) this race. **Scored (weight 0.30).**
+- `skid_time`: total **seconds** the **hero** spent drifting (yellow wheel-sparks) this race. **Scored (weight 0.30).**
 - `bananas_hit`, `times_exploded`, `track`, `nitro_collected`, `start_position`, `finish_position`: optional context, not scored.
 - Report the races **in the order they appear** — they are matched to the ground truth by order.
 

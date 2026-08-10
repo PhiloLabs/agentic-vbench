@@ -37,10 +37,14 @@ for d in race_dirs:
     races.append({
         "track": track,
         "hero": hero,
+        # scored fields: items_collected, spinouts, skid_time (see steps/solve/tests/judge.py)
         "items_collected": row["items_collected"],
-        "times_exploded": row["times_exploded"],
-        "bananas_hit": row["bananas_hit"],
+        "spinouts": row["bananas_hit"] + row["times_exploded"],   # banana + bomb hits look identical,
+                                                                  # so they are scored jointly
         "skid_time": round(row["skid_time"], 2),
+        # context (unscored): kept for reference / calibration
+        "bananas_hit": row["bananas_hit"],
+        "times_exploded": row["times_exploded"],
         "nitro_collected": row["nitro_collected"],
         "finish_position": row["finish_position"],
         "field_size": gt["n_karts"],
@@ -49,18 +53,16 @@ for d in race_dirs:
 if len(hero_set) != 1:
     sys.exit(f"hero must be constant across the suite for a clean cross-race ranking, got {hero_set}")
 
-# The primary scored field (items) must vary across races, or the rank target is degenerate and
-# the oracle cannot reach 1.0. Explosions may be flat (the judge renormalises around it).
-item_vals = [r["items_collected"] for r in races]
-if len(set(item_vals)) < 2:
-    sys.exit(f"items_collected has no spread across races ({item_vals}) — vary tracks/laps so the "
-             f"hero's pickups differ, else the cross-race ranking is degenerate")
-if len(set(r["times_exploded"] for r in races)) < 2:
-    print("NOTE: times_exploded is flat across races; judge will score items only (weights "
-          "renormalise). Consider difficulty 3 / more races to get explosion spread.")
+# Every scored field must vary across races, or its rank target is degenerate and the oracle cannot
+# reach 1.0. (The judge renormalises weights over the fields that do vary, but the suite should have
+# spread in all three.)
+for field in ("items_collected", "spinouts", "skid_time"):
+    if len({r[field] for r in races}) < 2:
+        sys.exit(f"{field} has no spread across races ({[r[field] for r in races]}) — vary "
+                 f"tracks/laps so the hero's values differ, else that dimension is degenerate")
 
 dst.write_text(json.dumps({"hero": hero_set.pop(), "n_races": len(races), "races": races}, indent=2))
-print(f"wrote {dst} — {len(races)} races, hero-scoped")
+print(f"wrote {dst} — {len(races)} races, hero-scoped (scored: items_collected, spinouts, skid_time)")
 for r in races:
-    print(f"  {r['track']:22s} items {r['items_collected']:2d}  explosions {r['times_exploded']:2d}"
-          f"  bananas {r['bananas_hit']:2d}  nitro {r['nitro_collected']:2d}  (P{r['finish_position']}/{r['field_size']})")
+    print(f"  {r['track']:22s} items {r['items_collected']:2d}  spinouts {r['spinouts']:2d}"
+          f"  skid {r['skid_time']:6.1f}s  (P{r['finish_position']}/{r['field_size']})")
