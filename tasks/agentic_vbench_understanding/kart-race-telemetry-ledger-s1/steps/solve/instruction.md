@@ -44,13 +44,14 @@ event is on screen** — nothing you must measure happens off camera.
 
 ## What to submit
 
-Write `/workspace/output/solution.json`, races in the order they appear in the video:
+Write `/workspace/output/solution.json`, races in the order they appear in the video (the zeros
+below show the SCHEMA only — replace them with your own observed values for each race):
 
 ```json
 {
   "races": [
-    {"track": "hacienda",     "items_collected": 24, "times_exploded": 1, "bananas_hit": 3, "skid_time": 69},
-    {"track": "snowmountain",  "items_collected": 9, "times_exploded": 2, "bananas_hit": 0, "skid_time": 60}
+    {"track": "<first track shown>",  "items_collected": 0, "times_exploded": 0, "bananas_hit": 0, "skid_time": 0},
+    {"track": "<second track shown>", "items_collected": 0, "times_exploded": 0, "bananas_hit": 0, "skid_time": 0}
   ]
 }
 ```
