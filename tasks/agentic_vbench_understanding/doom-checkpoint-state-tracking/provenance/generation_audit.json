@@ -1,0 +1,1991 @@
+{
+  "episodes": [
+    {
+      "distractors": [
+        "ArmorBonus",
+        "HealthBonus",
+        "Stimpack",
+        "Clip",
+        "ArmorBonus",
+        "Clip"
+      ],
+      "duration_seconds": 433.4,
+      "episode_id": "episode_01",
+      "event_count": 23,
+      "failed_interaction_count": 3,
+      "frame_count": 15169,
+      "observability": {
+        "actor_checks": [
+          {
+            "actor": "AVRedKey",
+            "event_sequence": 1,
+            "max_bbox_area": 15851,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVVioletSwitch",
+            "event_sequence": 2,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVChaingun",
+            "event_sequence": 3,
+            "max_bbox_area": 83460,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 76
+          },
+          {
+            "actor": "AVCheckpointAlpha",
+            "event_sequence": 4,
+            "max_bbox_area": 568010,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVRedDoor",
+            "event_sequence": 5,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 6,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 8,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVBlueKey",
+            "event_sequence": 9,
+            "max_bbox_area": 15960,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVRocketLauncher",
+            "event_sequence": 10,
+            "max_bbox_area": 72215,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVCyanSwitch",
+            "event_sequence": 11,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCheckpointBeta",
+            "event_sequence": 12,
+            "max_bbox_area": 529903,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVBlueDoor",
+            "event_sequence": 13,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 14,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 16,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVYellowKey",
+            "event_sequence": 17,
+            "max_bbox_area": 15827,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVShotgun",
+            "event_sequence": 18,
+            "max_bbox_area": 22436,
+            "pass": true,
+            "visibility_gap": 1,
+            "visible_run": 76
+          },
+          {
+            "actor": "AVYellowDoor",
+            "event_sequence": 19,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVPlasmaRifle",
+            "event_sequence": 20,
+            "max_bbox_area": 44472,
+            "pass": true,
+            "visibility_gap": 1,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 22,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVEpisodeExit",
+            "event_sequence": 23,
+            "max_bbox_area": 388260,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          }
+        ],
+        "all_passed": true,
+        "restore_checks": [
+          {
+            "displacement": 117.081,
+            "event_frame": 3712,
+            "event_sequence": 7,
+            "from_position": [
+              652.658,
+              529.691
+            ],
+            "pass": true,
+            "to_position": [
+              706.935,
+              633.43
+            ],
+            "weapon_after": 4,
+            "weapon_before": 4
+          },
+          {
+            "displacement": 80.825,
+            "event_frame": 8049,
+            "event_sequence": 15,
+            "from_position": [
+              738.653,
+              712.654
+            ],
+            "pass": true,
+            "to_position": [
+              658.916,
+              699.436
+            ],
+            "weapon_after": 5,
+            "weapon_before": 5
+          },
+          {
+            "displacement": 168.631,
+            "event_frame": 11425,
+            "event_sequence": 21,
+            "from_position": [
+              806.733,
+              618.279
+            ],
+            "pass": true,
+            "to_position": [
+              658.916,
+              699.436
+            ],
+            "weapon_after": 6,
+            "weapon_before": 6
+          }
+        ],
+        "teleport_fog_visible_frames": 195
+      },
+      "plan": [
+        [
+          "key",
+          3
+        ],
+        [
+          "switch",
+          3
+        ],
+        [
+          "weapon",
+          3
+        ],
+        [
+          "checkpoint",
+          1
+        ],
+        [
+          "door",
+          3
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "restore",
+          1
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "key",
+          1
+        ],
+        [
+          "weapon",
+          4
+        ],
+        [
+          "switch",
+          2
+        ],
+        [
+          "checkpoint",
+          2
+        ],
+        [
+          "door",
+          1
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "key",
+          2
+        ],
+        [
+          "weapon",
+          2
+        ],
+        [
+          "door",
+          2
+        ],
+        [
+          "weapon",
+          5
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "exit",
+          1
+        ]
+      ],
+      "seed": 20261737
+    },
+    {
+      "distractors": [
+        "ArmorBonus",
+        "Clip",
+        "Stimpack",
+        "HealthBonus",
+        "Stimpack",
+        "Stimpack"
+      ],
+      "duration_seconds": 434.0,
+      "episode_id": "episode_02",
+      "event_count": 23,
+      "failed_interaction_count": 3,
+      "frame_count": 15190,
+      "observability": {
+        "actor_checks": [
+          {
+            "actor": "AVShotgun",
+            "event_sequence": 1,
+            "max_bbox_area": 22436,
+            "pass": true,
+            "visibility_gap": 3,
+            "visible_run": 75
+          },
+          {
+            "actor": "AVRedKey",
+            "event_sequence": 2,
+            "max_bbox_area": 15827,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVVioletSwitch",
+            "event_sequence": 3,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCheckpointAlpha",
+            "event_sequence": 4,
+            "max_bbox_area": 629844,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVRedDoor",
+            "event_sequence": 5,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 6,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 8,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVPlasmaRifle",
+            "event_sequence": 9,
+            "max_bbox_area": 44472,
+            "pass": true,
+            "visibility_gap": 1,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVYellowKey",
+            "event_sequence": 10,
+            "max_bbox_area": 15827,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVCyanSwitch",
+            "event_sequence": 11,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCheckpointBeta",
+            "event_sequence": 12,
+            "max_bbox_area": 529903,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 13,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVYellowDoor",
+            "event_sequence": 14,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 16,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVRocketLauncher",
+            "event_sequence": 17,
+            "max_bbox_area": 72215,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVBlueKey",
+            "event_sequence": 18,
+            "max_bbox_area": 15960,
+            "pass": true,
+            "visibility_gap": 1,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVBlueDoor",
+            "event_sequence": 19,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVChaingun",
+            "event_sequence": 20,
+            "max_bbox_area": 86304,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 74
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 22,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVEpisodeExit",
+            "event_sequence": 23,
+            "max_bbox_area": 388260,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          }
+        ],
+        "all_passed": true,
+        "restore_checks": [
+          {
+            "displacement": 140.639,
+            "event_frame": 3470,
+            "event_sequence": 7,
+            "from_position": [
+              691.179,
+              509.996
+            ],
+            "pass": true,
+            "to_position": [
+              686.204,
+              650.547
+            ],
+            "weapon_after": 3,
+            "weapon_before": 3
+          },
+          {
+            "displacement": 110.112,
+            "event_frame": 7699,
+            "event_sequence": 15,
+            "from_position": [
+              466.174,
+              685.35
+            ],
+            "pass": true,
+            "to_position": [
+              566.148,
+              639.2
+            ],
+            "weapon_after": 6,
+            "weapon_before": 6
+          },
+          {
+            "displacement": 198.409,
+            "event_frame": 10918,
+            "event_sequence": 21,
+            "from_position": [
+              408.64,
+              759.853
+            ],
+            "pass": true,
+            "to_position": [
+              566.148,
+              639.2
+            ],
+            "weapon_after": 4,
+            "weapon_before": 4
+          }
+        ],
+        "teleport_fog_visible_frames": 213
+      },
+      "plan": [
+        [
+          "weapon",
+          2
+        ],
+        [
+          "key",
+          3
+        ],
+        [
+          "switch",
+          3
+        ],
+        [
+          "checkpoint",
+          1
+        ],
+        [
+          "door",
+          3
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "restore",
+          1
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "weapon",
+          5
+        ],
+        [
+          "key",
+          2
+        ],
+        [
+          "switch",
+          2
+        ],
+        [
+          "checkpoint",
+          2
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "door",
+          2
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "weapon",
+          4
+        ],
+        [
+          "key",
+          1
+        ],
+        [
+          "door",
+          1
+        ],
+        [
+          "weapon",
+          3
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "exit",
+          1
+        ]
+      ],
+      "seed": 20262746
+    },
+    {
+      "distractors": [
+        "Clip",
+        "HealthBonus",
+        "Stimpack",
+        "ArmorBonus",
+        "ArmorBonus",
+        "HealthBonus"
+      ],
+      "duration_seconds": 447.37142857142857,
+      "episode_id": "episode_03",
+      "event_count": 23,
+      "failed_interaction_count": 3,
+      "frame_count": 15658,
+      "observability": {
+        "actor_checks": [
+          {
+            "actor": "AVRedKey",
+            "event_sequence": 1,
+            "max_bbox_area": 15851,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVVioletSwitch",
+            "event_sequence": 2,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVRocketLauncher",
+            "event_sequence": 3,
+            "max_bbox_area": 72215,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVCheckpointAlpha",
+            "event_sequence": 4,
+            "max_bbox_area": 629844,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVRedDoor",
+            "event_sequence": 5,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCyanSwitch",
+            "event_sequence": 6,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCyanSwitch",
+            "event_sequence": 8,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 9,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVPlasmaRifle",
+            "event_sequence": 10,
+            "max_bbox_area": 44472,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 74
+          },
+          {
+            "actor": "AVYellowKey",
+            "event_sequence": 11,
+            "max_bbox_area": 15851,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVCheckpointBeta",
+            "event_sequence": 12,
+            "max_bbox_area": 529903,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 13,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVYellowDoor",
+            "event_sequence": 14,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 16,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVShotgun",
+            "event_sequence": 17,
+            "max_bbox_area": 22436,
+            "pass": true,
+            "visibility_gap": 2,
+            "visible_run": 75
+          },
+          {
+            "actor": "AVBlueKey",
+            "event_sequence": 18,
+            "max_bbox_area": 15960,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVChaingun",
+            "event_sequence": 19,
+            "max_bbox_area": 84912,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVBlueDoor",
+            "event_sequence": 20,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 22,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVEpisodeExit",
+            "event_sequence": 23,
+            "max_bbox_area": 388260,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          }
+        ],
+        "all_passed": true,
+        "restore_checks": [
+          {
+            "displacement": 113.545,
+            "event_frame": 3379,
+            "event_sequence": 7,
+            "from_position": [
+              811.687,
+              701.781
+            ],
+            "pass": true,
+            "to_position": [
+              733.736,
+              619.222
+            ],
+            "weapon_after": 5,
+            "weapon_before": 5
+          },
+          {
+            "displacement": 118.103,
+            "event_frame": 7737,
+            "event_sequence": 15,
+            "from_position": [
+              805.589,
+              540.766
+            ],
+            "pass": true,
+            "to_position": [
+              882.66,
+              630.255
+            ],
+            "weapon_after": 6,
+            "weapon_before": 6
+          },
+          {
+            "displacement": 111.508,
+            "event_frame": 10887,
+            "event_sequence": 21,
+            "from_position": [
+              782.478,
+              679.222
+            ],
+            "pass": true,
+            "to_position": [
+              882.66,
+              630.255
+            ],
+            "weapon_after": 4,
+            "weapon_before": 4
+          }
+        ],
+        "teleport_fog_visible_frames": 142
+      },
+      "plan": [
+        [
+          "key",
+          3
+        ],
+        [
+          "switch",
+          3
+        ],
+        [
+          "weapon",
+          4
+        ],
+        [
+          "checkpoint",
+          1
+        ],
+        [
+          "door",
+          3
+        ],
+        [
+          "switch",
+          2
+        ],
+        [
+          "restore",
+          1
+        ],
+        [
+          "switch",
+          2
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "weapon",
+          5
+        ],
+        [
+          "key",
+          2
+        ],
+        [
+          "checkpoint",
+          2
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "door",
+          2
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "weapon",
+          2
+        ],
+        [
+          "key",
+          1
+        ],
+        [
+          "weapon",
+          3
+        ],
+        [
+          "door",
+          1
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "exit",
+          1
+        ]
+      ],
+      "seed": 20263755
+    },
+    {
+      "distractors": [
+        "Clip",
+        "ArmorBonus",
+        "HealthBonus",
+        "ArmorBonus",
+        "Stimpack",
+        "ArmorBonus"
+      ],
+      "duration_seconds": 425.8857142857143,
+      "episode_id": "episode_04",
+      "event_count": 23,
+      "failed_interaction_count": 3,
+      "frame_count": 14906,
+      "observability": {
+        "actor_checks": [
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 1,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVShotgun",
+            "event_sequence": 2,
+            "max_bbox_area": 22436,
+            "pass": true,
+            "visibility_gap": 2,
+            "visible_run": 76
+          },
+          {
+            "actor": "AVYellowKey",
+            "event_sequence": 3,
+            "max_bbox_area": 15851,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVCheckpointAlpha",
+            "event_sequence": 4,
+            "max_bbox_area": 629844,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVCyanSwitch",
+            "event_sequence": 5,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVYellowDoor",
+            "event_sequence": 6,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCyanSwitch",
+            "event_sequence": 8,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 9,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVBlueKey",
+            "event_sequence": 10,
+            "max_bbox_area": 15960,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVRocketLauncher",
+            "event_sequence": 11,
+            "max_bbox_area": 72215,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVCheckpointBeta",
+            "event_sequence": 12,
+            "max_bbox_area": 529903,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVBlueDoor",
+            "event_sequence": 13,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVVioletSwitch",
+            "event_sequence": 14,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVVioletSwitch",
+            "event_sequence": 16,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVRedKey",
+            "event_sequence": 17,
+            "max_bbox_area": 15851,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVChaingun",
+            "event_sequence": 18,
+            "max_bbox_area": 85840,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVRedDoor",
+            "event_sequence": 19,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVPlasmaRifle",
+            "event_sequence": 20,
+            "max_bbox_area": 44472,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVVioletSwitch",
+            "event_sequence": 22,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVEpisodeExit",
+            "event_sequence": 23,
+            "max_bbox_area": 386822,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          }
+        ],
+        "all_passed": true,
+        "restore_checks": [
+          {
+            "displacement": 139.326,
+            "event_frame": 3416,
+            "event_sequence": 7,
+            "from_position": [
+              423.182,
+              633.775
+            ],
+            "pass": true,
+            "to_position": [
+              560.475,
+              610.057
+            ],
+            "weapon_after": 3,
+            "weapon_before": 3
+          },
+          {
+            "displacement": 140.472,
+            "event_frame": 7683,
+            "event_sequence": 15,
+            "from_position": [
+              319.827,
+              737.775
+            ],
+            "pass": true,
+            "to_position": [
+              459.226,
+              755.105
+            ],
+            "weapon_after": 5,
+            "weapon_before": 5
+          },
+          {
+            "displacement": 140.916,
+            "event_frame": 10829,
+            "event_sequence": 21,
+            "from_position": [
+              325.654,
+              710.208
+            ],
+            "pass": true,
+            "to_position": [
+              459.226,
+              755.105
+            ],
+            "weapon_after": 6,
+            "weapon_before": 6
+          }
+        ],
+        "teleport_fog_visible_frames": 213
+      },
+      "plan": [
+        [
+          "switch",
+          1
+        ],
+        [
+          "weapon",
+          2
+        ],
+        [
+          "key",
+          2
+        ],
+        [
+          "checkpoint",
+          1
+        ],
+        [
+          "switch",
+          2
+        ],
+        [
+          "door",
+          2
+        ],
+        [
+          "restore",
+          1
+        ],
+        [
+          "switch",
+          2
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "key",
+          1
+        ],
+        [
+          "weapon",
+          4
+        ],
+        [
+          "checkpoint",
+          2
+        ],
+        [
+          "door",
+          1
+        ],
+        [
+          "switch",
+          3
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          3
+        ],
+        [
+          "key",
+          3
+        ],
+        [
+          "weapon",
+          3
+        ],
+        [
+          "door",
+          3
+        ],
+        [
+          "weapon",
+          5
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          3
+        ],
+        [
+          "exit",
+          1
+        ]
+      ],
+      "seed": 20264764
+    },
+    {
+      "distractors": [
+        "ArmorBonus",
+        "Stimpack",
+        "Clip",
+        "ArmorBonus",
+        "ArmorBonus",
+        "Clip"
+      ],
+      "duration_seconds": 445.25714285714287,
+      "episode_id": "episode_05",
+      "event_count": 23,
+      "failed_interaction_count": 3,
+      "frame_count": 15584,
+      "observability": {
+        "actor_checks": [
+          {
+            "actor": "AVChaingun",
+            "event_sequence": 1,
+            "max_bbox_area": 83848,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVYellowKey",
+            "event_sequence": 2,
+            "max_bbox_area": 15827,
+            "pass": true,
+            "visibility_gap": 1,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 3,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCheckpointAlpha",
+            "event_sequence": 4,
+            "max_bbox_area": 629844,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVYellowDoor",
+            "event_sequence": 5,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCyanSwitch",
+            "event_sequence": 6,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCyanSwitch",
+            "event_sequence": 8,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVRedKey",
+            "event_sequence": 9,
+            "max_bbox_area": 15827,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVVioletSwitch",
+            "event_sequence": 10,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVShotgun",
+            "event_sequence": 11,
+            "max_bbox_area": 22436,
+            "pass": true,
+            "visibility_gap": 3,
+            "visible_run": 75
+          },
+          {
+            "actor": "AVCheckpointBeta",
+            "event_sequence": 12,
+            "max_bbox_area": 437871,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 76
+          },
+          {
+            "actor": "AVRedDoor",
+            "event_sequence": 13,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 14,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 16,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVBlueKey",
+            "event_sequence": 17,
+            "max_bbox_area": 15960,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVPlasmaRifle",
+            "event_sequence": 18,
+            "max_bbox_area": 44472,
+            "pass": true,
+            "visibility_gap": 2,
+            "visible_run": 76
+          },
+          {
+            "actor": "AVRocketLauncher",
+            "event_sequence": 19,
+            "max_bbox_area": 72215,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVBlueDoor",
+            "event_sequence": 20,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 22,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVEpisodeExit",
+            "event_sequence": 23,
+            "max_bbox_area": 386822,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          }
+        ],
+        "all_passed": true,
+        "restore_checks": [
+          {
+            "displacement": 106.299,
+            "event_frame": 3215,
+            "event_sequence": 7,
+            "from_position": [
+              769.776,
+              625.81
+            ],
+            "pass": true,
+            "to_position": [
+              682.273,
+              565.456
+            ],
+            "weapon_after": 4,
+            "weapon_before": 4
+          },
+          {
+            "displacement": 104.505,
+            "event_frame": 8178,
+            "event_sequence": 15,
+            "from_position": [
+              892.321,
+              507.18
+            ],
+            "pass": true,
+            "to_position": [
+              790.65,
+              483.004
+            ],
+            "weapon_after": 3,
+            "weapon_before": 3
+          },
+          {
+            "displacement": 101.64,
+            "event_frame": 11523,
+            "event_sequence": 21,
+            "from_position": [
+              690.872,
+              502.37
+            ],
+            "pass": true,
+            "to_position": [
+              790.65,
+              483.004
+            ],
+            "weapon_after": 5,
+            "weapon_before": 5
+          }
+        ],
+        "teleport_fog_visible_frames": 213
+      },
+      "plan": [
+        [
+          "weapon",
+          3
+        ],
+        [
+          "key",
+          2
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "checkpoint",
+          1
+        ],
+        [
+          "door",
+          2
+        ],
+        [
+          "switch",
+          2
+        ],
+        [
+          "restore",
+          1
+        ],
+        [
+          "switch",
+          2
+        ],
+        [
+          "key",
+          3
+        ],
+        [
+          "switch",
+          3
+        ],
+        [
+          "weapon",
+          2
+        ],
+        [
+          "checkpoint",
+          2
+        ],
+        [
+          "door",
+          3
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "key",
+          1
+        ],
+        [
+          "weapon",
+          5
+        ],
+        [
+          "weapon",
+          4
+        ],
+        [
+          "door",
+          1
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "exit",
+          1
+        ]
+      ],
+      "seed": 20265773
+    },
+    {
+      "distractors": [
+        "Clip",
+        "HealthBonus",
+        "HealthBonus",
+        "Stimpack",
+        "Stimpack",
+        "Stimpack"
+      ],
+      "duration_seconds": 434.2857142857143,
+      "episode_id": "episode_06",
+      "event_count": 23,
+      "failed_interaction_count": 3,
+      "frame_count": 15200,
+      "observability": {
+        "actor_checks": [
+          {
+            "actor": "AVBlueKey",
+            "event_sequence": 1,
+            "max_bbox_area": 15960,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVRocketLauncher",
+            "event_sequence": 2,
+            "max_bbox_area": 72215,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVCyanSwitch",
+            "event_sequence": 3,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCheckpointAlpha",
+            "event_sequence": 4,
+            "max_bbox_area": 629844,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 5,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVBlueDoor",
+            "event_sequence": 6,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVAmberSwitch",
+            "event_sequence": 8,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVPlasmaRifle",
+            "event_sequence": 9,
+            "max_bbox_area": 44472,
+            "pass": true,
+            "visibility_gap": 2,
+            "visible_run": 76
+          },
+          {
+            "actor": "AVRedKey",
+            "event_sequence": 10,
+            "max_bbox_area": 15851,
+            "pass": true,
+            "visibility_gap": 1,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVWhiteSwitch",
+            "event_sequence": 11,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVCheckpointBeta",
+            "event_sequence": 12,
+            "max_bbox_area": 476697,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 77
+          },
+          {
+            "actor": "AVVioletSwitch",
+            "event_sequence": 13,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVRedDoor",
+            "event_sequence": 14,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVVioletSwitch",
+            "event_sequence": 16,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVShotgun",
+            "event_sequence": 17,
+            "max_bbox_area": 22436,
+            "pass": true,
+            "visibility_gap": 2,
+            "visible_run": 76
+          },
+          {
+            "actor": "AVYellowKey",
+            "event_sequence": 18,
+            "max_bbox_area": 15827,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 78
+          },
+          {
+            "actor": "AVChaingun",
+            "event_sequence": 19,
+            "max_bbox_area": 86005,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 76
+          },
+          {
+            "actor": "AVYellowDoor",
+            "event_sequence": 20,
+            "max_bbox_area": 492515,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVVioletSwitch",
+            "event_sequence": 22,
+            "max_bbox_area": 294931,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          },
+          {
+            "actor": "AVEpisodeExit",
+            "event_sequence": 23,
+            "max_bbox_area": 388260,
+            "pass": true,
+            "visibility_gap": 0,
+            "visible_run": 71
+          }
+        ],
+        "all_passed": true,
+        "restore_checks": [
+          {
+            "displacement": 86.44,
+            "event_frame": 3634,
+            "event_sequence": 7,
+            "from_position": [
+              734.095,
+              515.841
+            ],
+            "pass": true,
+            "to_position": [
+              649.131,
+              531.748
+            ],
+            "weapon_after": 5,
+            "weapon_before": 5
+          },
+          {
+            "displacement": 129.228,
+            "event_frame": 8035,
+            "event_sequence": 15,
+            "from_position": [
+              736.701,
+              401.642
+            ],
+            "pass": true,
+            "to_position": [
+              637.246,
+              484.156
+            ],
+            "weapon_after": 6,
+            "weapon_before": 6
+          },
+          {
+            "displacement": 134.131,
+            "event_frame": 11388,
+            "event_sequence": 21,
+            "from_position": [
+              730.381,
+              387.632
+            ],
+            "pass": true,
+            "to_position": [
+              637.246,
+              484.156
+            ],
+            "weapon_after": 4,
+            "weapon_before": 4
+          }
+        ],
+        "teleport_fog_visible_frames": 139
+      },
+      "plan": [
+        [
+          "key",
+          1
+        ],
+        [
+          "weapon",
+          4
+        ],
+        [
+          "switch",
+          2
+        ],
+        [
+          "checkpoint",
+          1
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "door",
+          1
+        ],
+        [
+          "restore",
+          1
+        ],
+        [
+          "switch",
+          1
+        ],
+        [
+          "weapon",
+          5
+        ],
+        [
+          "key",
+          3
+        ],
+        [
+          "switch",
+          4
+        ],
+        [
+          "checkpoint",
+          2
+        ],
+        [
+          "switch",
+          3
+        ],
+        [
+          "door",
+          3
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          3
+        ],
+        [
+          "weapon",
+          2
+        ],
+        [
+          "key",
+          2
+        ],
+        [
+          "weapon",
+          3
+        ],
+        [
+          "door",
+          2
+        ],
+        [
+          "restore",
+          2
+        ],
+        [
+          "switch",
+          3
+        ],
+        [
+          "exit",
+          1
+        ]
+      ],
+      "seed": 20266782
+    }
+  ],
+  "event_count": 138,
+  "ground_truth_tier": "logged",
+  "manual_event_annotations": 0,
+  "render": {
+    "episode_output_frame_offsets": [
+      0,
+      5081,
+      10169,
+      15413,
+      20406,
+      25625
+    ],
+    "ffprobe": {
+      "avg_frame_rate": "35/3",
+      "duration_seconds": 2630.742857,
+      "height": 720,
+      "nb_frames": 30692,
+      "width": 1280
+    },
+    "output_frame_stride": 3,
+    "path": "doom-checkpoint-state-tracking.mp4",
+    "replay_hash_mismatch_count": 0,
+    "sha256": "257680b3284d97a108b779fab034f5ad8d89ed08db4527bd203a601806b5736c"
+  },
+  "scope": "final benchmark media",
+  "source_sha256": {
+    "acs": "d6d455f85f97286f060387838d8423c9cee04b185de09f141642937c96e79c22",
+    "decorate": "5c943eb3316cc402cb5a251c598894e6b994b3eef51663afceea08a6a0f4b879",
+    "generator": "459b2f63e8bace3a8fbb70a9d8d9ca6493ac19409a56d0592381207119ffd5af"
+  },
+  "status": "pass"
+}

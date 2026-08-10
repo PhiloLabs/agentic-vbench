@@ -1,0 +1,2894 @@
+{
+  "episodes": [
+    {
+      "episode_id": "episode_01",
+      "events": [
+        {
+          "entity_id": "red_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [],
+            "active_weapon": "pistol",
+            "current_checkpoint": null,
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 8571
+        },
+        {
+          "entity_id": "switch_violet",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "pistol",
+            "current_checkpoint": null,
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 25686
+        },
+        {
+          "entity_id": "chaingun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": null,
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 37971
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 53714
+        },
+        {
+          "entity_id": "door_red",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 70429
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 87514
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 106057
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 119600
+        },
+        {
+          "entity_id": "blue_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 137200
+        },
+        {
+          "entity_id": "rocket_launcher",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 153286
+        },
+        {
+          "entity_id": "switch_cyan",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 168657
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 185286
+        },
+        {
+          "entity_id": "door_blue",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 202143
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 217514
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 229971
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 244200
+        },
+        {
+          "entity_id": "yellow_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 263686
+        },
+        {
+          "entity_id": "shotgun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 279771
+        },
+        {
+          "entity_id": "door_yellow",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 294400
+        },
+        {
+          "entity_id": "plasma_rifle",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 312543
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 326429
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 342200
+        },
+        {
+          "entity_id": "episode_exit",
+          "event_type": "level_exit",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 430343
+        }
+      ]
+    },
+    {
+      "episode_id": "episode_02",
+      "events": [
+        {
+          "entity_id": "shotgun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [],
+            "active_weapon": "shotgun",
+            "current_checkpoint": null,
+            "held_keys": [],
+            "open_doors": []
+          },
+          "timestamp_ms": 5286
+        },
+        {
+          "entity_id": "red_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [],
+            "active_weapon": "shotgun",
+            "current_checkpoint": null,
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 26171
+        },
+        {
+          "entity_id": "switch_violet",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": null,
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 39686
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 54514
+        },
+        {
+          "entity_id": "door_red",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 69000
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_violet"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 85457
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 99143
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_violet"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 112514
+        },
+        {
+          "entity_id": "plasma_rifle",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_violet"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 126029
+        },
+        {
+          "entity_id": "yellow_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_violet"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 142714
+        },
+        {
+          "entity_id": "switch_cyan",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 159571
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 175200
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 187400
+        },
+        {
+          "entity_id": "door_yellow",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 207571
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 219971
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 236029
+        },
+        {
+          "entity_id": "rocket_launcher",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 253086
+        },
+        {
+          "entity_id": "blue_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 271600
+        },
+        {
+          "entity_id": "door_blue",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 286771
+        },
+        {
+          "entity_id": "chaingun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 301057
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 311943
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 330600
+        },
+        {
+          "entity_id": "episode_exit",
+          "event_type": "level_exit",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 430943
+        }
+      ]
+    },
+    {
+      "episode_id": "episode_03",
+      "events": [
+        {
+          "entity_id": "red_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [],
+            "active_weapon": "pistol",
+            "current_checkpoint": null,
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 8571
+        },
+        {
+          "entity_id": "switch_violet",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "pistol",
+            "current_checkpoint": null,
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 23286
+        },
+        {
+          "entity_id": "rocket_launcher",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": null,
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 38486
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 52229
+        },
+        {
+          "entity_id": "door_red",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 71743
+        },
+        {
+          "entity_id": "switch_cyan",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 84343
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_violet"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 96543
+        },
+        {
+          "entity_id": "switch_cyan",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 112514
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 127086
+        },
+        {
+          "entity_id": "plasma_rifle",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 140857
+        },
+        {
+          "entity_id": "yellow_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 158257
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 176400
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 191600
+        },
+        {
+          "entity_id": "door_yellow",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 207943
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 221057
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 238114
+        },
+        {
+          "entity_id": "shotgun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 253429
+        },
+        {
+          "entity_id": "blue_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 270200
+        },
+        {
+          "entity_id": "chaingun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 284657
+        },
+        {
+          "entity_id": "door_blue",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 298543
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 311057
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 330800
+        },
+        {
+          "entity_id": "episode_exit",
+          "event_type": "level_exit",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 444314
+        }
+      ]
+    },
+    {
+      "episode_id": "episode_04",
+      "events": [
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber"
+            ],
+            "active_weapon": "pistol",
+            "current_checkpoint": null,
+            "held_keys": [],
+            "open_doors": []
+          },
+          "timestamp_ms": 5086
+        },
+        {
+          "entity_id": "shotgun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": null,
+            "held_keys": [],
+            "open_doors": []
+          },
+          "timestamp_ms": 19857
+        },
+        {
+          "entity_id": "yellow_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": null,
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 37171
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 50029
+        },
+        {
+          "entity_id": "switch_cyan",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 65600
+        },
+        {
+          "entity_id": "door_yellow",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 82086
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_amber"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 97600
+        },
+        {
+          "entity_id": "switch_cyan",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 111943
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 127743
+        },
+        {
+          "entity_id": "blue_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key",
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 146857
+        },
+        {
+          "entity_id": "rocket_launcher",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key",
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 162171
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 178686
+        },
+        {
+          "entity_id": "door_blue",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 190857
+        },
+        {
+          "entity_id": "switch_violet",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 205886
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 219514
+        },
+        {
+          "entity_id": "switch_violet",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 235143
+        },
+        {
+          "entity_id": "red_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 252514
+        },
+        {
+          "entity_id": "chaingun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 268629
+        },
+        {
+          "entity_id": "door_red",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 282971
+        },
+        {
+          "entity_id": "plasma_rifle",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 295343
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 309400
+        },
+        {
+          "entity_id": "switch_violet",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 326086
+        },
+        {
+          "entity_id": "episode_exit",
+          "event_type": "level_exit",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 422829
+        }
+      ]
+    },
+    {
+      "episode_id": "episode_05",
+      "events": [
+        {
+          "entity_id": "chaingun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [],
+            "active_weapon": "chaingun",
+            "current_checkpoint": null,
+            "held_keys": [],
+            "open_doors": []
+          },
+          "timestamp_ms": 5286
+        },
+        {
+          "entity_id": "yellow_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [],
+            "active_weapon": "chaingun",
+            "current_checkpoint": null,
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 23000
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": null,
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 35371
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 48486
+        },
+        {
+          "entity_id": "door_yellow",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 61629
+        },
+        {
+          "entity_id": "switch_cyan",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 78943
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_amber"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 91857
+        },
+        {
+          "entity_id": "switch_cyan",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 107771
+        },
+        {
+          "entity_id": "red_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 129886
+        },
+        {
+          "entity_id": "switch_violet",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 148971
+        },
+        {
+          "entity_id": "shotgun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 169857
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow"
+            ]
+          },
+          "timestamp_ms": 189771
+        },
+        {
+          "entity_id": "door_red",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 203771
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 220343
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 233657
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 251229
+        },
+        {
+          "entity_id": "blue_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 269086
+        },
+        {
+          "entity_id": "plasma_rifle",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 284714
+        },
+        {
+          "entity_id": "rocket_launcher",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 301371
+        },
+        {
+          "entity_id": "door_blue",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 318114
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 329229
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 346629
+        },
+        {
+          "entity_id": "episode_exit",
+          "event_type": "level_exit",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 442200
+        }
+      ]
+    },
+    {
+      "episode_id": "episode_06",
+      "events": [
+        {
+          "entity_id": "blue_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [],
+            "active_weapon": "pistol",
+            "current_checkpoint": null,
+            "held_keys": [
+              "blue_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 8571
+        },
+        {
+          "entity_id": "rocket_launcher",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": null,
+            "held_keys": [
+              "blue_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 27571
+        },
+        {
+          "entity_id": "switch_cyan",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_cyan"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": null,
+            "held_keys": [
+              "blue_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 43886
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_cyan"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 59229
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key"
+            ],
+            "open_doors": []
+          },
+          "timestamp_ms": 71914
+        },
+        {
+          "entity_id": "door_blue",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key"
+            ],
+            "open_doors": [
+              "door_blue"
+            ]
+          },
+          "timestamp_ms": 89286
+        },
+        {
+          "entity_id": "checkpoint_alpha",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_cyan"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key"
+            ],
+            "open_doors": [
+              "door_blue"
+            ]
+          },
+          "timestamp_ms": 103829
+        },
+        {
+          "entity_id": "switch_amber",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "rocket_launcher",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key"
+            ],
+            "open_doors": [
+              "door_blue"
+            ]
+          },
+          "timestamp_ms": 119371
+        },
+        {
+          "entity_id": "plasma_rifle",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key"
+            ],
+            "open_doors": [
+              "door_blue"
+            ]
+          },
+          "timestamp_ms": 134543
+        },
+        {
+          "entity_id": "red_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue"
+            ]
+          },
+          "timestamp_ms": 157229
+        },
+        {
+          "entity_id": "switch_white",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_alpha",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue"
+            ]
+          },
+          "timestamp_ms": 170257
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue"
+            ]
+          },
+          "timestamp_ms": 185257
+        },
+        {
+          "entity_id": "switch_violet",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue"
+            ]
+          },
+          "timestamp_ms": 198743
+        },
+        {
+          "entity_id": "door_red",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 215629
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 229571
+        },
+        {
+          "entity_id": "switch_violet",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "plasma_rifle",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 243600
+        },
+        {
+          "entity_id": "shotgun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 260543
+        },
+        {
+          "entity_id": "yellow_key",
+          "event_type": "key_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "shotgun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 284314
+        },
+        {
+          "entity_id": "chaingun",
+          "event_type": "weapon_pickup",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 298629
+        },
+        {
+          "entity_id": "door_yellow",
+          "event_type": "locked_door_open",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 314114
+        },
+        {
+          "entity_id": "checkpoint_beta",
+          "event_type": "checkpoint_restore",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 325371
+        },
+        {
+          "entity_id": "switch_violet",
+          "event_type": "switch_activate",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 338829
+        },
+        {
+          "entity_id": "episode_exit",
+          "event_type": "level_exit",
+          "state": {
+            "active_switches": [
+              "switch_amber",
+              "switch_cyan",
+              "switch_violet",
+              "switch_white"
+            ],
+            "active_weapon": "chaingun",
+            "current_checkpoint": "checkpoint_beta",
+            "held_keys": [
+              "blue_key",
+              "yellow_key",
+              "red_key"
+            ],
+            "open_doors": [
+              "door_blue",
+              "door_yellow",
+              "door_red"
+            ]
+          },
+          "timestamp_ms": 431229
+        }
+      ]
+    }
+  ]
+}

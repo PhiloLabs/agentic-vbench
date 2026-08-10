@@ -80,3 +80,7 @@ tasks/agentic_vbench_repair/exp-*-task*/steps/solve/solution/*.wav
 tasks/agentic_vbench_repair/exp-*-task*/steps/solve/solution/*.json
 tasks/agentic_vbench_assembly/*/steps/solve/workdir/*.mp4
 tasks/agentic_vbench_sequencing/*/steps/solve/workdir/*.mp4
+
+# Understanding task media is hosted externally and baked from pinned URLs.
+release-assets/**/*.mp4
+tasks/agentic_vbench_understanding/*/environment/*.mp4

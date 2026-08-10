@@ -1,0 +1,201 @@
+#library "AVBENCH"
+
+#include "zcommon.acs"
+
+global int 41: event_sequence;
+global int 42: event_type;
+global int 43: event_entity;
+global int 44: active_weapon;
+global int 45: held_keys;
+global int 46: active_switches;
+global int 47: open_doors;
+global int 48: current_checkpoint;
+global int 49: checkpoint_switches;
+global int 50: event_active_weapon;
+global int 51: event_held_keys;
+global int 52: event_active_switches;
+global int 53: event_open_doors;
+global int 54: event_checkpoint;
+global int 56: checkpoint_x;
+global int 57: checkpoint_y;
+global int 58: checkpoint_z;
+
+function void EmitEvent(int type_id, int entity_id)
+{
+    event_type = type_id;
+    event_entity = entity_id;
+    event_active_weapon = active_weapon;
+    event_held_keys = held_keys;
+    event_active_switches = active_switches;
+    event_open_doors = open_doors;
+    event_checkpoint = current_checkpoint;
+    event_sequence++;
+}
+
+script "AVReset" (void)
+{
+    event_sequence = 0;
+    event_type = 0;
+    event_entity = 0;
+    active_weapon = 1;
+    held_keys = 0;
+    active_switches = 0;
+    open_doors = 0;
+    current_checkpoint = 0;
+    checkpoint_switches = 0;
+    event_active_weapon = 1;
+    event_held_keys = 0;
+    event_active_switches = 0;
+    event_open_doors = 0;
+    event_checkpoint = 0;
+}
+
+script "AVKey" (int entity_id)
+{
+    int bit = 1 << (entity_id - 1);
+    if (!(held_keys & bit))
+    {
+        held_keys |= bit;
+        EmitEvent(1, entity_id);
+    }
+}
+
+script "AVWeapon" (int entity_id)
+{
+    active_weapon = entity_id;
+    EmitEvent(2, entity_id);
+}
+
+script "AVSwitch" (int entity_id)
+{
+    int bit = 1 << (entity_id - 1);
+    if (!(active_switches & bit))
+    {
+        active_switches |= bit;
+        EmitEvent(3, entity_id);
+    }
+}
+
+script "AVCheckpoint" (int entity_id)
+{
+    if (current_checkpoint != entity_id)
+    {
+        current_checkpoint = entity_id;
+        checkpoint_switches = active_switches;
+        checkpoint_x = GetActorX(0);
+        checkpoint_y = GetActorY(0);
+        checkpoint_z = GetActorZ(0);
+        EmitEvent(4, entity_id);
+    }
+}
+
+script "AVDoor" (int entity_id, int key_bit, int actor_tid)
+{
+    int bit = 1 << (entity_id - 1);
+    if ((held_keys & key_bit) && !(open_doors & bit))
+    {
+        open_doors |= bit;
+        SetActorProperty(actor_tid, APROP_Radius, 0);
+        SetActorProperty(actor_tid, APROP_Height, 0);
+        EmitEvent(5, entity_id);
+        SetResultValue(1);
+    }
+    else
+    {
+        SetResultValue(0);
+    }
+}
+
+script "AVRestore" (void)
+{
+    if (current_checkpoint)
+    {
+        SpawnForced(
+            "TeleportFog",
+            GetActorX(0),
+            GetActorY(0),
+            GetActorZ(0),
+            0,
+            0
+        );
+        SetActorPosition(
+            0,
+            checkpoint_x,
+            checkpoint_y,
+            checkpoint_z,
+            0
+        );
+        active_switches = checkpoint_switches;
+        SpawnForced(
+            "TeleportFog",
+            GetActorX(0),
+            GetActorY(0),
+            GetActorZ(0),
+            0,
+            0
+        );
+        EmitEvent(6, current_checkpoint);
+    }
+}
+
+script "AVExit" (void)
+{
+    EmitEvent(7, 1);
+    FadeTo(0, 0, 0, 1.0, 0.5);
+}
+
+script "AVSpawn" (int kind, int entity_id, int actor_tid)
+{
+    int distance = 56.0;
+    int angle = GetActorAngle(0);
+    int x = GetActorX(0) + FixedMul(distance, Cos(angle));
+    int y = GetActorY(0) + FixedMul(distance, Sin(angle));
+    int z = GetActorZ(0);
+    str class_name = "";
+
+    Thing_Remove(actor_tid);
+    if (kind == 1)
+    {
+        if (entity_id == 1) class_name = "AVBlueKey";
+        if (entity_id == 2) class_name = "AVYellowKey";
+        if (entity_id == 3) class_name = "AVRedKey";
+    }
+    if (kind == 2)
+    {
+        if (entity_id == 2) class_name = "AVShotgun";
+        if (entity_id == 3) class_name = "AVChaingun";
+        if (entity_id == 4) class_name = "AVRocketLauncher";
+        if (entity_id == 5) class_name = "AVPlasmaRifle";
+    }
+    if (kind == 3)
+    {
+        if (entity_id == 1) class_name = "AVAmberSwitch";
+        if (entity_id == 2) class_name = "AVCyanSwitch";
+        if (entity_id == 3) class_name = "AVVioletSwitch";
+        if (entity_id == 4) class_name = "AVWhiteSwitch";
+    }
+    if (kind == 4)
+    {
+        if (entity_id == 1) class_name = "AVCheckpointAlpha";
+        if (entity_id == 2) class_name = "AVCheckpointBeta";
+    }
+    if (kind == 5)
+    {
+        if (entity_id == 1) class_name = "AVBlueDoor";
+        if (entity_id == 2) class_name = "AVYellowDoor";
+        if (entity_id == 3) class_name = "AVRedDoor";
+    }
+    if (kind == 7)
+    {
+        class_name = "AVEpisodeExit";
+    }
+    if (StrLen(class_name))
+    {
+        Spawn(class_name, x, y, z, actor_tid, angle + 0.5);
+    }
+}
+
+script "AVRemove" (int actor_tid)
+{
+    Thing_Remove(actor_tid);
+}
