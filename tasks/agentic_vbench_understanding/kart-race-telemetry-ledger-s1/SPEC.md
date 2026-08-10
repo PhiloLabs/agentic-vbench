@@ -58,10 +58,13 @@ scorer:
   # only per-race COUNTS (no headless race-replay recording, and the replay format logs no pickup /
   # explosion events), so counts are the ceiling for this engine.
 
-difficulty: {strong_agent_reward: TBD (est. medium ~0.25-0.40), tool_call_turns: TBD, agent_model: TBD}
-# Strong-agent calibration (Codex gpt-5.6-sol, README order) is pending a harness run; the estimate
-# is bracketed by perfect-items (0.40) / perfect-two-of-three (0.70) above and the recall-limited
-# long-video behaviour seen on the sibling Minecraft task (agents watch only part of a long video).
+difficulty: {strong_agent_reward: 0.407, tool_call_turns: ~262, agent_model: codex gpt-5.6-sol xhigh}
+# MEASURED (Codex gpt-5.6-sol, xhigh, ~28 min, 262 tool calls; rollout in calibration/rollouts/
+# codex_12x4_*). Per-field tau: items 0.64, explosions 0.54, BANANAS -0.04 — the agent counts
+# powerups/explosions partially but essentially fails to count bananas over the 53-min video, and
+# systematically UNDERCOUNTS items (e.g. 8/20 fortmagma, 2/9 olivermath). A fair medium result,
+# above the family's <0.10 ideal but in line with its honest-medium practice (the sibling Minecraft
+# ordered-ledger is 0.164).
 
 anti_shortcut:
   single_frame: one frame gives one instantaneous ranking, not twelve races' worth of counts.

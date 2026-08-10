@@ -27,7 +27,7 @@ counting this task measures.
 
 Scoring is **rank agreement across races** (normalised Kendall correlation), not exact match:
 
-    reward = max(0, 0.50*agreement(items) + 0.30*agreement(explosions) + 0.20*agreement(bananas)),
+    reward = max(0, 0.40*agreement(items) + 0.30*agreement(explosions) + 0.30*agreement(bananas)),
              over the races, ranked by the hero's count of each
 
 You do not have to count exactly — ranking the **races** by each count is what earns credit, so
@@ -51,9 +51,9 @@ Write `/workspace/output/solution.json`, races in the order they appear in the v
 }
 ```
 
-- `items_collected`: powerup boxes the **hero** drove through this race. **Scored (weight 0.50).**
+- `items_collected`: powerup boxes the **hero** drove through this race. **Scored (weight 0.40).**
 - `times_exploded`: how many times the **hero** was blown up this race. **Scored (weight 0.30).**
-- `bananas_hit`: how many bananas the **hero** ran over this race. **Scored (weight 0.20).**
+- `bananas_hit`: how many bananas the **hero** ran over this race. **Scored (weight 0.30).**
 - `track`, `nitro_collected`, `start_position`, `finish_position`: optional context, not scored.
 - Report the races **in the order they appear** — they are matched to the ground truth by order.
 
