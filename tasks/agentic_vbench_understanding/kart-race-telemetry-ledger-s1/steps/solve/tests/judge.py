@@ -7,15 +7,13 @@ camera follows the player kart, and the generator makes the hero the player. Onl
 telemetry is scored, so **every scored quantity is on screen the whole race**. The top-center
 HUD powerup slot is masked, so pickups have no on-screen confirmation.
 
-For each race the agent reports, for the hero, three off-HUD quantities:
+For each race the agent reports, for the hero, two off-HUD quantities:
 - **`items_collected`** — powerup boxes the hero drove through (HUD indicator masked; count the
   drive-throughs).
 - **`spinouts`** — times the hero spun out (dizzy-stars). A banana and a bomb both cause the SAME
   visible spin-out and are not reliably distinguishable at 720p, so they are scored JOINTLY
   (spinouts = bananas_hit + times_exploded in the ground truth). bananas_hit / times_exploded may
   be reported separately as context but only their sum is scored.
-- **`skid_time`** — total seconds the hero spent drifting/skidding (the slide + sparks). A
-  *duration*, not a count — you estimate how long, cumulatively, the hero was drifting.
 
 ## Scoring — EXACT, not just rank
 
@@ -33,8 +31,9 @@ powerups) still ranks the races roughly right and scores well; requiring the cou
 was rejected in an earlier design because blind guessing scored 0.33; here blind guessing scores
 ~0.03, because a guess has no rank agreement to multiply the accuracy by.
 
-Weights: items 0.40, spinouts 0.30, skid_time 0.30. (spinouts = bananas + explosions, scored
-jointly because the two are not visually distinguishable; see below.)
+Weights: items 0.55, spinouts 0.45 (spinouts = bananas + explosions, scored jointly because
+the two are not visually distinguishable). skid_time was dropped: drifting is not cleanly separable
+from the constant nitro flames, so drift seconds are not reliably observable.
 A field with no spread in the GT is renormalised out so the oracle still reaches 1.0.
 
 Ground truth is baked verifier-side at /tests/ground_truth.json.
@@ -44,13 +43,16 @@ from pathlib import Path
 
 GT_PATH = Path(__file__).with_name("ground_truth.json")
 # (ground-truth field, prediction field, weight)
-DIMS = [("items_collected", "items_collected", 0.40),
-        ("spinouts",         "spinouts",         0.30),
-        ("skid_time",        "skid_time",         0.30)]
-# spinouts = bananas_hit + times_exploded. A banana and a bomb both render as the SAME dizzy-stars
-# spin-out and are not reliably distinguishable at 720p, so they are scored JOINTLY (the visible
-# event is "the hero spun out"; its cause is not observable). Scoring them separately would demand
-# an un-observable split. bananas_hit / times_exploded remain reportable as unscored context.
+DIMS = [("items_collected", "items_collected", 0.55),
+        ("spinouts",         "spinouts",         0.45)]
+# Two cleanly-observable, machine-exact quantities.
+#  * items_collected  — the hero drives through a question-mark box (HUD powerup slot masked).
+#  * spinouts (= bananas_hit + times_exploded) — the dizzy-stars spin-out. A banana and a bomb are
+#    not reliably distinguishable at 720p, so their SUM (the visible spin-out event) is scored.
+# NOT scored (kept as optional context in the GT): skid_time — drifting cannot be cleanly separated
+# from the near-constant nitro-boost flames on screen, so drift SECONDS are not reliably
+# observable; it would cap the oracle unfairly. bananas_hit / times_exploded / nitro / positions
+# are likewise context-only.
 
 
 def as_num(v):
