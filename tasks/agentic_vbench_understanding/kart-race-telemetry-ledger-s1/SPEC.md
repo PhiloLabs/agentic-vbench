@@ -53,16 +53,22 @@ scorer:
     codex_rescore_rank_vs_exact: "the earlier Codex rollout re-scored under this metric drops its
       items term 0.46 -> 0.096 (it under-counts); aggregate ~0.12 even before skid_time is asked for"
 
-difficulty: {strong_agent_reward: recalibrating, tool_call_turns: TBD, agent_model: codex gpt-5.6-sol xhigh}
+difficulty: {strong_agent_reward: ~0.12, tool_call_turns: >430, agent_model: codex gpt-5.6-sol xhigh}
 # HISTORY of the hardening (all measured, Codex gpt-5.6-sol xhigh):
 #   v2 hero-scope, rank, 3 counts:        0.407
 #   + HUD powerup mask (identification):  0.345 (items tau 0.64 -> 0.46)
-#   + EXACT-count metric + skid_time dim: recalibrating (existing rollout re-scores ~0.12; the
-#     full run with skid_time reported is re-running -> calibration/rollouts/codex_exact_*)
-# Levers that worked: identification-hardness (mask) and the exact-count metric (both attack WHAT
-# the agent samples, not how much). Length was a weak lever (rank agreement is forgiving; a strong
-# agent scales its sampling). Whether this reaches the family's <0.10 ideal is what the
-# recalibration decides; if it lands ~0.10-0.15 it is a fair HARD entry.
+#   + EXACT-count metric + skid_time dim:  ~0.12  (see below)
+# The exact-count number is the completed masked rollout RE-SCORED under this metric: 0.122 with
+# skid_time unreported (->0), 0.174 if skid_time is excluded and the other three renormalised.
+# Per-dim under exact-count: items 0.096, explosions 0.62 (sparse -> easy, hence its low 0.15
+# weight), bananas 0.0 — the exact metric exposes that Codex systematically under-counts (it never
+# gets within 30%). A FRESH full run reporting skid_time exceeded Codex's session budget (it did
+# meticulous per-race vision analysis and reached only race 2/12 in ~100 min before dying) — itself
+# a hardness signal, though it means the clean 4-quantity number is a re-score estimate (n=1).
+# Levers that worked: identification-hardness (mask) and especially the EXACT-count metric (both
+# attack WHAT the agent measures). Length was the weak lever (rank/coverage is forgiving). This is
+# now a fair HARD entry, ~0.12 — near the family's <0.10 ideal, with items/bananas already ~0.05-0.10
+# and only the deliberately-low-weight explosions holding the aggregate up.
 
 anti_shortcut:
   single_frame: one frame gives one instant, not twelve races of accurate counts + drift durations.
