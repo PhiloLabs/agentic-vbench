@@ -10,7 +10,8 @@
       "bananas_hit": 1,
       "nitro_collected": 15,
       "finish_position": 9,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 69.02
     },
     {
       "track": "snowmountain",
@@ -20,7 +21,8 @@
       "bananas_hit": 3,
       "nitro_collected": 4,
       "finish_position": 8,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 60.07
     },
     {
       "track": "cornfield_crossing",
@@ -30,7 +32,8 @@
       "bananas_hit": 4,
       "nitro_collected": 4,
       "finish_position": 9,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 40.68
     },
     {
       "track": "lighthouse",
@@ -40,7 +43,8 @@
       "bananas_hit": 0,
       "nitro_collected": 5,
       "finish_position": 8,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 73.35
     },
     {
       "track": "gran_paradiso_island",
@@ -50,7 +54,8 @@
       "bananas_hit": 0,
       "nitro_collected": 6,
       "finish_position": 6,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 92.09
     },
     {
       "track": "sandtrack",
@@ -60,7 +65,8 @@
       "bananas_hit": 3,
       "nitro_collected": 10,
       "finish_position": 3,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 22.67
     },
     {
       "track": "olivermath",
@@ -70,7 +76,8 @@
       "bananas_hit": 1,
       "nitro_collected": 8,
       "finish_position": 3,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 32.9
     },
     {
       "track": "cocoa_temple",
@@ -80,7 +87,8 @@
       "bananas_hit": 0,
       "nitro_collected": 5,
       "finish_position": 10,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 52.03
     },
     {
       "track": "scotland",
@@ -90,7 +98,8 @@
       "bananas_hit": 0,
       "nitro_collected": 19,
       "finish_position": 1,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 85.88
     },
     {
       "track": "fortmagma",
@@ -100,7 +109,8 @@
       "bananas_hit": 1,
       "nitro_collected": 8,
       "finish_position": 6,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 74.23
     },
     {
       "track": "ravenbridge_mansion",
@@ -110,7 +120,8 @@
       "bananas_hit": 1,
       "nitro_collected": 3,
       "finish_position": 8,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 44.99
     },
     {
       "track": "stk_enterprise",
@@ -120,7 +131,9 @@
       "bananas_hit": 1,
       "nitro_collected": 20,
       "finish_position": 3,
-      "field_size": 10
+      "field_size": 10,
+      "skid_time": 39.53
     }
-  ]
+  ],
+  "_note_skid": "skid_time = total drift/skidding seconds for the hero (machine-exact, STK profile)"
 }

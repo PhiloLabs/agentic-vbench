@@ -40,6 +40,7 @@ for d in race_dirs:
         "items_collected": row["items_collected"],
         "times_exploded": row["times_exploded"],
         "bananas_hit": row["bananas_hit"],
+        "skid_time": round(row["skid_time"], 2),
         "nitro_collected": row["nitro_collected"],
         "finish_position": row["finish_position"],
         "field_size": gt["n_karts"],

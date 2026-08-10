@@ -44,7 +44,7 @@ if header is None:
     sys.exit("no profile header found — was --profile-laps used?")
 
 KEEP = {"start_position": int, "end_position": int, "time": float, "top_speed": float,
-        "rescue_count": int, "bonus_count": int, "banana_count": int,
+        "skid_time": float, "rescue_count": int, "bonus_count": int, "banana_count": int,
         "explosion_count": int, "small_nitro_count": int, "large_nitro_count": int}
 
 karts = []
