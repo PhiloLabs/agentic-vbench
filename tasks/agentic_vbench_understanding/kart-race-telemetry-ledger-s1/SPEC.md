@@ -59,14 +59,16 @@ scorer:
   # explosion events), so counts are the ceiling for this engine.
 
 difficulty: {strong_agent_reward: 0.345, tool_call_turns: ~432, agent_model: codex gpt-5.6-sol xhigh}
-# HARDER VARIANT (HUD powerup slot masked). On the UN-masked 12-race suite Codex scored 0.407
-# (items tau 0.64, explosions 0.54, bananas -0.04; rollout calibration/rollouts/codex_12x4_*). This
-# shipped video MASKS the top-center HUD powerup indicator, so the agent loses the pickup
-# confirmation and must catch each item from the hero driving through a box — expected to lower the
-# items term further. Masked-variant calibration is re-running (calibration/rollouts/codex_masked_*).
-# For reference, the un-masked run: per-field tau items 0.64, explosions 0.54, bananas -0.04 — a fair medium result,
-# above the family's <0.10 ideal but in line with its honest-medium practice (the sibling Minecraft
-# ordered-ledger is 0.164).
+# HARDER VARIANT (HUD powerup slot masked). Codex gpt-5.6-sol (xhigh) MEASURED:
+#   un-masked 12-race: 0.407 (items tau 0.64, explosions 0.54, bananas -0.04; codex_12x4_*)
+#   masked (SHIPPED):  0.345 (items tau 0.46, explosions 0.83, bananas -0.29; codex_masked_*, 432 calls)
+# The mask WORKED on its target — items tau fell 0.64 -> 0.46 (pickups must be caught from the box
+# drive-through, no HUD confirmation) — but the aggregate moved only 0.407 -> 0.345 because
+# explosions tau swung UP (0.54 -> 0.83) on the masked run: n=1 per-dimension variance dominates the
+# aggregate. Still a fair MEDIUM, above the family's <0.10 ideal. Length is a weak lever for kart
+# (rank agreement is forgiving); identification-hardness (the mask) is the effective one, but is
+# capped by counting one kart being fundamentally tractable. A sub-0.10 kart would need a machine-
+# exact ORDERED ledger (overtakes/pickup sequence), which STK's prebuilt binary does not expose.
 
 anti_shortcut:
   single_frame: one frame gives one instantaneous ranking, not twelve races' worth of counts.
