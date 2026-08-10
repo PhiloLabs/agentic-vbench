@@ -9,9 +9,10 @@ in all races. It is the kart shown from behind, centred, with its name on the li
 other karts race around it (competing for boxes, bombing it) but the camera stays on the hero.
 
 For **each race**, reconstruct **three counts for the hero kart**:
-- **`items_collected`** — how many powerup boxes (the question-mark boxes) the hero drove
-  through. When it grabs one, the powerup appears in the hero's HUD slot (top of screen) — but
-  there is never a running total, so you have to count the pickups as they happen.
+- **`items_collected`** — how many powerup boxes (the floating question-mark boxes on the track)
+  the hero drove **through**. The HUD powerup indicator is **masked** (a black box covers the
+  top-center slot), so there is no on-screen confirmation and no running total — you must catch
+  each pickup from the hero visibly driving through a box.
 - **`times_exploded`** — how many times the hero was blown up (hit by a bomb/cake: the kart is
   thrown into the air and spins out).
 - **`bananas_hit`** — how many bananas the hero ran over (it visibly spins out, like a small

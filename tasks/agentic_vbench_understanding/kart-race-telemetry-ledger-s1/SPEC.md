@@ -58,11 +58,13 @@ scorer:
   # only per-race COUNTS (no headless race-replay recording, and the replay format logs no pickup /
   # explosion events), so counts are the ceiling for this engine.
 
-difficulty: {strong_agent_reward: 0.407, tool_call_turns: ~262, agent_model: codex gpt-5.6-sol xhigh}
-# MEASURED (Codex gpt-5.6-sol, xhigh, ~28 min, 262 tool calls; rollout in calibration/rollouts/
-# codex_12x4_*). Per-field tau: items 0.64, explosions 0.54, BANANAS -0.04 — the agent counts
-# powerups/explosions partially but essentially fails to count bananas over the 53-min video, and
-# systematically UNDERCOUNTS items (e.g. 8/20 fortmagma, 2/9 olivermath). A fair medium result,
+difficulty: {strong_agent_reward: recalibrating, tool_call_turns: TBD, agent_model: codex gpt-5.6-sol xhigh}
+# HARDER VARIANT (HUD powerup slot masked). On the UN-masked 12-race suite Codex scored 0.407
+# (items tau 0.64, explosions 0.54, bananas -0.04; rollout calibration/rollouts/codex_12x4_*). This
+# shipped video MASKS the top-center HUD powerup indicator, so the agent loses the pickup
+# confirmation and must catch each item from the hero driving through a box — expected to lower the
+# items term further. Masked-variant calibration is re-running (calibration/rollouts/codex_masked_*).
+# For reference, the un-masked run: per-field tau items 0.64, explosions 0.54, bananas -0.04 — a fair medium result,
 # above the family's <0.10 ideal but in line with its honest-medium practice (the sibling Minecraft
 # ordered-ledger is 0.164).
 
@@ -74,13 +76,15 @@ anti_shortcut:
 
 input:
   url: https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/main/kart-race-telemetry-ledger-s1/race.mp4
-  sha256: 039ff71ab577da042ca7fa7249e31b65c75d1a7d73652573c5b3c39eb0c60aac
+  sha256: a84170a13f0d8392e18a0fd0535e5ddad7ceae4888d5c826b6b77850f78bf322
   length_min: 53.4
   resolution: 720
   contents: 12 races (hacienda, snowmountain, cornfield_crossing, lighthouse, gran_paradiso_island,
             sandtrack, olivermath, cocoa_temple, scotland, fortmagma, ravenbridge_mansion,
             stk_enterprise), 4 laps each, 10-kart fields on SuperTux (hardest) AI. The hero (tux) is
-            in every race and the camera follows it throughout; the other nine race around it
+            in every race and the camera follows it throughout; the TOP-CENTER HUD powerup slot is
+            MASKED (black box) so pickups must be counted from the hero driving through a box, not
+            from a HUD confirmation; the other nine race around it
             (contesting boxes, bombing it) for realism. (black_forest was dropped — its dense
             foliage renders in slow-motion under software GL.)
 ```
