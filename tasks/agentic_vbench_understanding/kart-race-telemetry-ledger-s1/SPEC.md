@@ -92,8 +92,6 @@ input:
             in every race and the camera follows it throughout; the TOP-CENTER HUD powerup slot is
             MASKED (black box) so pickups must be caught from the hero driving through a box. The
             other nine karts race around it (contesting boxes, bombing it) for realism.
-  annotated_explainer: kart-race-telemetry-ledger-s1/race_annotated_explainer.mp4  # same footage with
-            per-race captions naming the scored quantities; a human aid, NOT the task input.
 
 ```
 
