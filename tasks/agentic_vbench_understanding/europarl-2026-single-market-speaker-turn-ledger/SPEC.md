@@ -38,7 +38,7 @@ difficulty:
   strong_agent_reward: 0.034884
   strong_agent_reward_range: "0.023256-0.034884 across accepted Codex and Claude runs"
   tool_call_turns: 184
-  agent_model: "Codex CLI 0.147.0 with GPT-5.6 Sol xhigh; maintainer-approved VS Code Claude Agent SDK with Claude Opus 4.8 high."
+  agent_model: "Codex CLI 0.147.0 with GPT-5.6 Sol xhigh; VS Code Claude Agent SDK with Claude Opus 4.8 high."
   decomposition: "Binding difficulty is joining 742-way face identity with accurate turn localization: Opus resolves language/card on all 47 boundary-aligned turns but identity on 10; scripted CV resolves identity on 40/41 aligned turns but cards on 6. Combined-actor headroom is 0.4875."
 
 anti_shortcut:
