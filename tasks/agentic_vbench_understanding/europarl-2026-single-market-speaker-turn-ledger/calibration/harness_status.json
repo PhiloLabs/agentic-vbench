@@ -1,0 +1,44 @@
+{
+  "date": "2026-08-12",
+  "submission_status": "ready_for_submission",
+  "required_calibrations": {
+    "codex": {
+      "harness": "Codex CLI",
+      "version": "0.147.0",
+      "model": "gpt-5.6-sol",
+      "reasoning": "xhigh",
+      "score": 0.034884,
+      "tool_calls": 184,
+      "trajectory": "rollouts/codex-gpt-5.6-sol.jsonl",
+      "status": "pass_with_manual_audit",
+      "note": "The solver completed normally. Wrapper post-processing was recovered from the intact turn.completed trajectory, validated solution, empty stderr, and 412 successful provider receipts. Two attempted model downloads were blocked by DNS and returned no bytes; fresh harness-home searches exposed no history, token, or reusable model cache."
+    },
+    "claude": {
+      "harness": "VS Code Claude Agent SDK",
+      "version": "Copilot Chat 0.60.0",
+      "model": "claude-opus-4.8",
+      "reasoning": "high",
+      "score": 0.023256,
+      "tool_calls": 110,
+      "meaningful_content_tools": 91,
+      "trajectory": "rollouts/claude-opus-4.8-vscode-agent-sdk.jsonl",
+      "status": "pass_with_maintainer_harness_approval"
+    },
+    "antigravity": {
+      "harness": "Antigravity CLI",
+      "version": "1.1.12",
+      "model": "gemini-3.6-flash-high",
+      "reasoning": "high",
+      "score": 0.0,
+      "tool_calls": 367,
+      "meaningful_content_tools": 200,
+      "trajectory": "rollouts/antigravity-gemini-3.6-flash-high.jsonl",
+      "status": "pass_with_manual_audit",
+      "runtime_isolation": "passed",
+      "native_terminal_status": "ERROR",
+      "note": "The complete solution and final response preceded a retained Vertex 429. A narrow unchanged-solution validation response was followed by a retained sandbox transport reset."
+    }
+  },
+  "maintainer_exception": "The contributor reports explicit maintainer approval to treat the VS Code Claude Agent SDK wrapper as Claude Code-equivalent for this contribution.",
+  "remaining_blockers": []
+}

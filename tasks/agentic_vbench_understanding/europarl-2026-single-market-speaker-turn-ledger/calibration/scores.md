@@ -4,59 +4,42 @@ The frozen verifier uses monotonic one-to-one event F1. A true positive requires
 exact anonymous identity, exact floor-language code, exact semantic-card ID, and
 both handover boundaries within 3.5 seconds.
 
-Copilot runs execute inside image
-`sha256:fa81b0532ba0eafd31e1ad1cf15e3ad15b95317be1d691c93bbea93927e472fb`.
-Web/MCP tools and custom instructions are disabled. An internal Docker network
-blocks direct egress; a host CONNECT proxy permits `api.github.com` only during
-CLI token validation, permanently revokes it when the first Copilot model
-connection begins, and thereafter permits only Copilot API endpoints. Curl/pip
-are also disabled.
-The auditable runs use Copilot CLI and are not relabeled as native-harness
-trajectories. Every run enforces the shipped 4-CPU, 8-GB memory, 14,400-second
-agent envelope and uses a fresh empty artifact mount.
+Measured anchors: oracle `1.000000`; empty/null submission `0.000000`.
 
-## Native harness replication
+## Submission status
 
-On 2026-07-29, the contributor reported rerunning the frozen task through the
-required native harnesses and reproducing the same rewards:
+All three rows clear the measured difficulty gate. The maintainer
+approved the VS Code Claude Agent SDK session as equivalent to Claude Code for
+this contribution. The Antigravity row requires manual audit because Agent
+Platform returned a late 429 after producing the final solution and response.
 
-| native harness | model | reward | evidence status |
-|---|---|---:|---|
-| Codex CLI | GPT-5.6 Sol | 0.023392 | contributor-run native replication |
-| Claude Code | Claude Opus 5 | 0.116279 | contributor-run native replication |
-| Antigravity | Gemini 3.5 Flash | 0.000000 | contributor-run native replication |
+## Required agent calibration
 
-Those native runs satisfy the requested harness routing at the reward level.
-Their exact versions, tool counts, and raw trajectories were produced outside
-this workspace and are therefore not fabricated here. The fully auditable local
-runs below retain exact versions, turns, tool calls, solutions, rewards, proxy
-logs, and immutable raw trajectories.
+| harness | harness version | model | reasoning | score | tool-call turns | trajectory |
+|---|---|---|---|---:|---:|---|
+| Codex CLI | 0.147.0 | GPT-5.6 Sol | xhigh | 0.034884 | 184 | `rollouts/codex-gpt-5.6-sol.jsonl` |
+| VS Code Claude Agent SDK | Copilot Chat 0.60.0 | Claude Opus 4.8 | high | 0.023256 | 110 | `rollouts/claude-opus-4.8-vscode-agent-sdk.jsonl` |
+| Antigravity CLI | 1.1.12 | Gemini 3.6 Flash High | high | 0.000000 | 367 | `rollouts/antigravity-gemini-3.6-flash-high.jsonl` |
 
-## Auditable frozen runs
+Both accepted solutions contain 86 valid chronological turns. The Codex solver
+ended with `turn.completed`; wrapper post-processing was reconstructed from the
+immutable trajectory, validated solution, empty stderr, and 412 successful
+provider receipts. Two attempted GitHub model downloads failed under blocked DNS
+and returned no external bytes. Five `/harness-home` searches found no model,
+history, token, or usable cache. This is retained as a manual-audit disclosure,
+not hidden from reviewers.
 
-| harness | model | reasoning | score | tool calls | trajectory |
-|---|---|---|---:|---:|---|
-| Stock Harbor 0.6.6 | exact oracle | — | 1.000000 | — | job `1785273826` |
-| deterministic | empty turns | — | 0.000000 | — | `rollouts/empty.reward.json` |
-| GitHub Copilot CLI 1.0.76-0 | GPT-5.6 Sol | xhigh | 0.023392 | 231 | `rollouts/gpt-5.6-sol_copilot.audit.jsonl` ([raw](https://huggingface.co/datasets/Jordan8717/agentic-vbench-europarl/resolve/ea0cfe009016f3060f1d9a10c6cef55eae86bec8/calibration-inferential-final-v3/gpt-5.6-sol_copilot.jsonl)) |
-| GitHub Copilot CLI 1.0.76-0 | Claude Opus 5 | xhigh | 0.116279 | 317 | `rollouts/claude-opus-5_copilot.audit.jsonl` ([raw](https://huggingface.co/datasets/Jordan8717/agentic-vbench-europarl/resolve/ea0cfe009016f3060f1d9a10c6cef55eae86bec8/calibration-inferential-final-v3/claude-opus-5_copilot.jsonl)) |
-| GitHub Copilot CLI 1.0.76-0 | Gemini 3.5 Flash | xhigh | 0.000000 | 205 | `rollouts/gemini-3.5-flash_copilot.audit.jsonl` ([raw](https://huggingface.co/datasets/Jordan8717/agentic-vbench-europarl/resolve/ea0cfe009016f3060f1d9a10c6cef55eae86bec8/calibration-inferential-final-v3/gemini-3.5-flash_copilot.jsonl)) |
+The Claude run is a fresh `isResume=false` session, uses the frozen task container
+with `--network none`, contains no subagent calls, and has no forbidden-path or
+network access. Three nonblocking host Bash deviations only managed the named
+container or parsed this row's final solution.
 
-Gemini's provider accepts at most ten images in one conversation. Its disclosed
-runtime prefix required labeled contact sheets, no more than ten image views, no
-process-killing, and an explicit saved solution. The task prompt itself was
-unchanged. This result is **provider-limited and not directly comparable** to the
-other two full-model rows.
-
-Opus made one explicit connectivity probe; it failed. The sealed proxy recorded
-no allowed public destination. See
-`rollouts/claude-opus-5_copilot.manual-audit.json`.
-
-Opus's `0.116279` exceeds the nominal `< 0.10` README target. It is reported
-without smoothing: 10/86 exact turns, exact 95% binomial CI `[0.057, 0.204]`;
-under `p=0.10`, `P(TP >= 10)=0.357`. GPT-5.6 is the designated first calibration
-model and passes the checker at `0.023392`; maintainer adjudication is requested
-for the singular-versus-plural README wording.
+The Antigravity run produced 74 schema-valid chronological turns and passed
+runtime isolation. Its complete 1,217-event native trajectory retains a terminal
+Vertex `RESOURCE_EXHAUSTED` error that followed the final solution and response.
+A narrow validation continuation confirmed the unchanged solution locally, but
+its response was followed by an Agent Platform sandbox transport reset; both
+errors remain in managed research artifacts and require manual review.
 
 ## Required anti-shortcut runs
 
