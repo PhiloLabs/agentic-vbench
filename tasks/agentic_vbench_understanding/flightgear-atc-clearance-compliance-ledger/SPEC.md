@@ -59,7 +59,7 @@ difficulty:
   strong_agent_reward: 0.0
   strong_agent_reward_range: "0.000000-0.010800 across accepted Codex and Claude runs"
   tool_call_turns: 88
-  agent_model: Codex CLI 0.147.0 with GPT-5.6 Sol high; maintainer-approved VS Code Claude Agent SDK with Claude Opus 4.8 high.
+  agent_model: Codex CLI 0.147.0 with GPT-5.6 Sol high; VS Code Claude Agent SDK with Claude Opus 4.8 high.
 
 anti_shortcut:
   single_frame: 0.0
