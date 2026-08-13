@@ -11,5 +11,5 @@ inputs:
   transcript, with media-analysis tools unavailable.
 
 Each JSONL file is the raw trajectory with local absolute paths redacted. The
-matching `.solution.json` is the scored output. Measured rewards are in
-`../scores.md`.
+measured rewards and verifier diagnostics are recorded once in `../scores.md`;
+duplicate solution and reward sidecars are intentionally omitted.

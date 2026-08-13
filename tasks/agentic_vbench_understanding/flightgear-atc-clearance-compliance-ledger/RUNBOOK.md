@@ -63,7 +63,7 @@ Required full-media runs:
 
 - Codex CLI with GPT-5.6 Sol;
 - Claude Code with Opus 4.8;
-- Antigravity with Gemini 3.5 Flash.
+- Antigravity with Gemini 3.6 Flash High.
 
 Required degraded-input runs use the same prompt/model family with no media,
 one representative frame, video-only, audio-only, and a pre-extracted frame
