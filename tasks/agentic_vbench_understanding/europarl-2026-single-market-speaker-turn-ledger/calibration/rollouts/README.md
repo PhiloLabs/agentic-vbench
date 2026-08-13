@@ -1,19 +1,15 @@
 # Raw calibration trajectories
 
-Keep one complete raw trajectory per required agent and degraded-input run. Each
-trajectory must include all tool calls and the final answer; summaries are not
-acceptable calibration evidence.
+Keep one complete raw trajectory per required agent. Each trajectory includes
+all tool calls and the final answer.
 
 - `codex-gpt-5.6-sol.jsonl`: complete native Codex CLI JSONL.
-- `claude-opus-4.8-vscode-agent-sdk.jsonl`: complete VS Code Claude Agent SDK
+- `claude-opus-4.8.jsonl`: complete VS Code Claude Agent SDK
   AHP stream.
 - `antigravity-gemini-3.6-flash-high.jsonl`: complete native Antigravity CLI
   stream-json trajectory.
 
-The other retained JSONL files are measured degraded-input audit trajectories.
-They are not substitutes for the required full-agent raw streams above. Scores
-and verifier outcomes are recorded once in `../scores.md`; duplicate reward,
-solution, manifest, proxy, and summary sidecars are intentionally omitted.
+Degraded-input scores and verifier outcomes are recorded in `../scores.md`.
 
 Personal home paths and task-specific calibration workspace roots are
 deterministically redacted. Redaction replaces path strings only; no events,

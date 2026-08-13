@@ -46,10 +46,6 @@
     "language_source": "official per-unit original-language speech URL suffix",
     "excerpt_source": "English meaning-level semantic cards derived from complete official per-unit intervention DOCX transcripts",
     "excerpt_seed": 20260717,
-    "semantic_card_generation": "Deterministic development/heldout translation split; fresh inferential-card writing from complete official transcripts; independent 86-card source audit; 24-card correction and independent recheck; exact identities, exclusions, and hashes are in semantic_card_qualification.json",
-    "semantic_card_qualification": "semantic_card_qualification.json",
-    "semantic_card_sources": "semantic_card_sources.json",
-    "semantic_card_sources_sha256": "b76fd3fd61b3ca556c81b5f62914ff9b3f6c76b808e277314c535a4e8f2365f1",
     "gt_sha256": "d6132575d114be9d3a23884c781b98a2af6b472797e980421ce3578a629bbb73",
     "excerpts_sha256": "4137bc63db3590aefd27df8d3e8ff0285c95f8af8d1c13a630065525d24d74f1",
     "constructor": "build_ground_truth.py"
