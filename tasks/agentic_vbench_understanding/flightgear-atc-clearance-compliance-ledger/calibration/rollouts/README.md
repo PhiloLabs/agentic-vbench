@@ -1,10 +1,10 @@
 # Raw calibration trajectories
 
 This directory contains exactly one full raw trajectory for each required
-harness, plus the measured anti-shortcut runs listed in `../scores.md`.
+harness. Measured anti-shortcut results are listed in `../scores.md`.
 
 - `codex-gpt-5.6-sol.jsonl`: complete native Codex CLI JSONL.
-- `claude-opus-4.8-vscode-agent-sdk.jsonl`: complete VS Code Claude Agent SDK
+- `claude-opus-4.8.jsonl`: complete VS Code Claude Agent SDK
   AHP stream.
 - `antigravity-gemini-3.6-flash-high.jsonl`: complete native Antigravity CLI
   stream-json trajectory.
