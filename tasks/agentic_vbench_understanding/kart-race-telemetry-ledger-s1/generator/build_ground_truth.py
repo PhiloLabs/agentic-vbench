@@ -14,11 +14,20 @@ rest of the field still races and is visible in the video, it is just not what i
 The final GT ranks races by the hero's counts (see judge.py), so what is stored per race is
 the hero's row plus the track name and race order.
 """
-import json, sys
+import json, os, subprocess, sys
 from pathlib import Path
 
 suite = Path(sys.argv[1])
 dst = Path(sys.argv[2])
+
+FFPROBE = os.environ.get("FFPROBE", "/pkg/ffmpeg/4.2.2/bin/ffprobe")
+def clip_duration(p):
+    """Duration (s) of a race clip — used to tag each race with its window in the concatenated video."""
+    try:
+        return float(subprocess.run([FFPROBE, "-v", "error", "-show_entries", "format=duration",
+                                     "-of", "csv=p=0", str(p)], capture_output=True, text=True).stdout.strip() or 0)
+    except Exception:
+        return 0.0
 
 race_dirs = sorted([d for d in suite.iterdir() if d.is_dir() and d.name.startswith("race") and d.name[4:].isdigit()],
                    key=lambda d: int(d.name[4:]))
@@ -49,6 +58,17 @@ for d in race_dirs:
         "finish_position": row["finish_position"],
         "field_size": gt["n_karts"],
     })
+
+# Tag each race with its window [t_start, t_end] in the concatenated video (seconds). The suite
+# concatenates race0/race_raw.mp4, race1/..., in this order, so a race's start time is the running
+# sum of the earlier clips' durations. The judge matches a predicted race to the GT race whose
+# window contains the predicted time t (time-anchored, instead of positional).
+_t = 0.0
+for r, d in zip(races, race_dirs):
+    cd = clip_duration(d / "race_raw.mp4")
+    r["t_start"] = round(_t, 2)
+    r["t_end"] = round(_t + cd, 2)
+    _t += cd
 
 if len(hero_set) != 1:
     sys.exit(f"hero must be constant across the suite for a clean cross-race ranking, got {hero_set}")

@@ -1,0 +1,40 @@
+{
+  "reward": 0.0892,
+  "details": {
+    "reason": "ok",
+    "hero": "tux",
+    "n_races": 12,
+    "n_predicted_races": 12,
+    "n_time_matched": 12,
+    "time_tol_s": 15.0,
+    "dims": {
+      "items_collected": {
+        "tau": 0.4462,
+        "accuracy": 0.0526,
+        "score": 0.0235,
+        "n_pairs": 65,
+        "gt_varies": true
+      },
+      "spinouts": {
+        "tau": 0.661,
+        "accuracy": 0.2639,
+        "score": 0.1744,
+        "n_pairs": 59,
+        "gt_varies": true
+      },
+      "skid_time": {
+        "tau": 0.3182,
+        "accuracy": 0.2881,
+        "score": 0.0917,
+        "n_pairs": 66,
+        "gt_varies": true
+      }
+    },
+    "weights": {
+      "items_collected": 0.4,
+      "spinouts": 0.3,
+      "skid_time": 0.3
+    },
+    "note": "each predicted race is matched to the GT race whose video window contains its t (+/-15 s); reward = (sum_d w*clamp(tau,0,1)*accuracy) / (sum_d w over varying fields); tau gates guessing to ~0, accuracy (within ~30% of the machine-exact value) requires accurate counts/durations at the right time, oracle = 1.0"
+  }
+}

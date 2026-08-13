@@ -1,0 +1,16 @@
+{
+  "races": [
+    {"track": "Desert", "t": 60, "items_collected": 10, "spinouts": 2, "skid_time": 35.0},
+    {"track": "Snow", "t": 300, "items_collected": 10, "spinouts": 2, "skid_time": 36.0},
+    {"track": "Farm", "t": 540, "items_collected": 8, "spinouts": 3, "skid_time": 42.0},
+    {"track": "Stormy Wind Farm", "t": 820, "items_collected": 8, "spinouts": 2, "skid_time": 34.0},
+    {"track": "Tropical Island", "t": 1080, "items_collected": 14, "spinouts": 2, "skid_time": 58.0},
+    {"track": "Egypt", "t": 1500, "items_collected": 7, "spinouts": 1, "skid_time": 25.0},
+    {"track": "Kitchen", "t": 1740, "items_collected": 6, "spinouts": 1, "skid_time": 22.0},
+    {"track": "Jungle", "t": 1900, "items_collected": 10, "spinouts": 3, "skid_time": 42.0},
+    {"track": "Scottish Highlands", "t": 2240, "items_collected": 8, "spinouts": 1, "skid_time": 35.0},
+    {"track": "Volcano", "t": 2460, "items_collected": 9, "spinouts": 3, "skid_time": 40.0},
+    {"track": "Haunted Estate", "t": 2740, "items_collected": 8, "spinouts": 1, "skid_time": 34.0},
+    {"track": "Laboratory", "t": 3040, "items_collected": 8, "spinouts": 2, "skid_time": 38.0}
+  ]
+}

@@ -115,16 +115,42 @@ def main():
     except Exception as exc:  # noqa: BLE001
         reason = f"unreadable solution.json: {exc}"
 
+    # Time-windowed race matching: each GT race is paired with the predicted race whose reported
+    # video time `t` falls within its [t_start, t_end] window (+/-15 s slack), one-to-one, nearest
+    # first. This anchors each count-vector to the correct video SEGMENT instead of assuming the
+    # agent listed races in order — a right-count / wrong-time (or wrong-race) entry earns nothing.
+    TOL = 15.0
+    def race_t(r):
+        return as_num(r.get("t", r.get("t_start", r.get("time")))) if isinstance(r, dict) else None
+    used, matched = set(), []
+    for g in gt_races:
+        ts, te = g.get("t_start"), g.get("t_end")
+        best, bestd = None, None
+        if ts is not None and te is not None:
+            mid = (ts + te) / 2.0
+            for i, p in enumerate(pred_races):
+                if i in used:
+                    continue
+                pt = race_t(p)
+                if pt is not None and ts - TOL <= pt <= te + TOL:
+                    d = abs(pt - mid)
+                    if bestd is None or d < bestd:
+                        bestd, best = d, i
+        matched.append((g, pred_races[best] if best is not None else None))
+        if best is not None:
+            used.add(best)
+    n_matched = sum(1 for _, p in matched if isinstance(p, dict))
+
     dims, num, wsum = {}, 0.0, 0.0
-    n_matched = min(len(gt_races), len(pred_races))
     for gt_field, pred_field, w in DIMS:
         pairs = []
-        for i in range(n_matched):
-            p = pred_races[i] if isinstance(pred_races[i], dict) else {}
+        for g, p in matched:
+            if not isinstance(p, dict):
+                continue
             pv = as_num(p.get(pred_field))
-            if pv is not None and gt_field in gt_races[i]:
-                pairs.append((float(gt_races[i][gt_field]), pv))
-        gt_has_spread = tau([(g, g) for g in (r[gt_field] for r in gt_races if gt_field in r)])[1] > 0
+            if pv is not None and gt_field in g:
+                pairs.append((float(g[gt_field]), pv))
+        gt_has_spread = tau([(x, x) for x in (r[gt_field] for r in gt_races if gt_field in r)])[1] > 0
         t, npairs = tau(pairs)
         acc = accuracy(pairs)
         ds = max(0.0, t) * acc
@@ -136,11 +162,12 @@ def main():
     reward = max(0.0, num / wsum) if wsum else 0.0
 
     det = {"reason": reason, "hero": gt.get("hero"), "n_races": len(gt_races),
-           "n_predicted_races": len(pred_races), "dims": dims,
-           "weights": {f: w for f, _, w in DIMS},
-           "note": "reward = (sum_d w*clamp(tau,0,1)*accuracy) / (sum_d w over varying fields); "
-                   "tau gates guessing to ~0, accuracy (within ~30% of the machine-exact value) "
-                   "requires accurate counts/durations, oracle = 1.0"}
+           "n_predicted_races": len(pred_races), "n_time_matched": n_matched, "time_tol_s": TOL,
+           "dims": dims, "weights": {f: w for f, _, w in DIMS},
+           "note": "each predicted race is matched to the GT race whose video window contains its t "
+                   "(+/-15 s); reward = (sum_d w*clamp(tau,0,1)*accuracy) / (sum_d w over varying "
+                   "fields); tau gates guessing to ~0, accuracy (within ~30% of the machine-exact "
+                   "value) requires accurate counts/durations at the right time, oracle = 1.0"}
     a.reward_json.parent.mkdir(parents=True, exist_ok=True)
     a.reward_json.write_text(json.dumps({"reward": round(reward, 4), "details": det}, indent=2))
     a.reward_txt.write_text(f"{round(reward, 4)}\n")

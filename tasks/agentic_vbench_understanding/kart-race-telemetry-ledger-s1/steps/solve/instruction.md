@@ -41,6 +41,10 @@ correctly (the rank term gates guessing — a constant or random answer scores ~
 races in roughly the right order but with counts that are consistently too low will **not** score
 well. Accurate counting/timing across a dozen races, on three independent quantities, is the task.
 
+Each race you report is matched to the true race whose **video segment contains your `t`** (±15 s
+window), so you must anchor each race to the right point in the video — correct counts placed at the
+wrong time earn nothing.
+
 Because only the hero is scored and the camera is on the hero the entire race, **every scored
 event is on screen** — nothing you must measure happens off camera.
 
@@ -52,8 +56,8 @@ below show the SCHEMA only — replace them with your own observed values for ea
 ```json
 {
   "races": [
-    {"track": "<first track shown>",  "items_collected": 0, "spinouts": 0, "skid_time": 0},
-    {"track": "<second track shown>", "items_collected": 0, "spinouts": 0, "skid_time": 0}
+    {"track": "<first track shown>",  "t": 40,  "items_collected": 0, "spinouts": 0, "skid_time": 0},
+    {"track": "<second track shown>", "t": 250, "items_collected": 0, "spinouts": 0, "skid_time": 0}
   ]
 }
 ```
@@ -61,8 +65,11 @@ below show the SCHEMA only — replace them with your own observed values for ea
 - `items_collected`: powerup boxes the **hero** drove through this race. **Scored (weight 0.40).**
 - `spinouts`: how many times the **hero** spun out (banana or bomb) this race. **Scored (weight 0.30).**
 - `skid_time`: total **seconds** the **hero** spent drifting (yellow wheel-sparks) this race. **Scored (weight 0.30).**
+- `t`: the video time in **seconds** (from the start) at which this race happens — any moment during
+  the race, or its start. Your race is matched to the true race whose video segment contains this
+  time (±15 s), so it need not be exact. **Required per race.**
 - `bananas_hit`, `times_exploded`, `track`, `nitro_collected`, `start_position`, `finish_position`: optional context, not scored.
-- Report the races **in the order they appear** — they are matched to the ground truth by order.
+- Races are matched to the ground truth by the video time `t` you give each — **not** by list order.
 
 ## Rules
 - Stay inside this working directory. Do not read, write, or search outside it.
