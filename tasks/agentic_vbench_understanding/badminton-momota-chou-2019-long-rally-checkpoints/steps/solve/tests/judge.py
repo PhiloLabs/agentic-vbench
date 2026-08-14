@@ -26,6 +26,16 @@ def numeric(value: Any) -> float | None:
         return None
 
 
+def f1_from_hits(hits: int, predicted: int, reference: int) -> float:
+    precision = hits / predicted if predicted else 0.0
+    recall = hits / reference if reference else 0.0
+    return (
+        2 * precision * recall / (precision + recall)
+        if precision + recall
+        else 0.0
+    )
+
+
 def match_rallies(
     predictions: list[Any], references: list[dict[str, Any]]
 ) -> list[tuple[int, int, float]]:
@@ -88,17 +98,22 @@ def score(solution: Any, references: list[dict[str, Any]]) -> dict[str, Any]:
     field_total = defaultdict(int)
     composite_hits = defaultdict(int)
     composite_total = defaultdict(int)
+    parent_hits = defaultdict(int)
     parent_exact_rallies = 0
     matched_details = []
 
     for pred_index, ref_index, start_delta in matches:
         prediction = predictions[pred_index]
         reference = references[ref_index]
-        parent_ok = (
+        stroke_count_ok = (
             prediction.get("stroke_count") == reference["stroke_count"]
-            and prediction.get("rally_winner") == reference["rally_winner"]
         )
-        parent_exact_rallies += int(parent_ok)
+        winner_ok = (
+            prediction.get("rally_winner") == reference["rally_winner"]
+        )
+        parent_hits["stroke_count"] += int(stroke_count_ok)
+        parent_hits["rally_winner"] += int(winner_ok)
+        parent_exact_rallies += int(stroke_count_ok and winner_ok)
         pred_checkpoints = prediction.get("checkpoints", [])
         if not isinstance(pred_checkpoints, list):
             pred_checkpoints = []
@@ -163,12 +178,7 @@ def score(solution: Any, references: list[dict[str, Any]]) -> dict[str, Any]:
                 composite_total[name] += 1
                 composite_hits[name] += int(value)
 
-            parent_required = kind == "final"
-            if (
-                (parent_ok or not parent_required)
-                and exact_checkpoint
-                and contact_ok
-            ):
+            if exact_checkpoint and contact_ok:
                 true_positives += 1
                 rally_true_positives += 1
 
@@ -178,12 +188,8 @@ def score(solution: Any, references: list[dict[str, Any]]) -> dict[str, Any]:
                 "reference_set": reference["set"],
                 "reference_start_s": reference["rally_start_s"],
                 "start_delta_s": round(start_delta, 3),
-                "stroke_count_ok": (
-                    prediction.get("stroke_count") == reference["stroke_count"]
-                ),
-                "winner_ok": (
-                    prediction.get("rally_winner") == reference["rally_winner"]
-                ),
+                "stroke_count_ok": stroke_count_ok,
+                "winner_ok": winner_ok,
                 "checkpoint_true_positives": rally_true_positives,
             }
         )
@@ -198,13 +204,8 @@ def score(solution: Any, references: list[dict[str, Any]]) -> dict[str, Any]:
         if matched_reference_count
         else 0.0
     )
-    checkpoint_f1 = (
-        2
-        * checkpoint_precision
-        * checkpoint_recall
-        / (checkpoint_precision + checkpoint_recall)
-        if checkpoint_precision + checkpoint_recall
-        else 0.0
+    checkpoint_f1 = f1_from_hits(
+        true_positives, matched_predicted_count, matched_reference_count
     )
     qualification_precision = (
         len(matches) / len(predictions) if predictions else 0.0
@@ -212,15 +213,38 @@ def score(solution: Any, references: list[dict[str, Any]]) -> dict[str, Any]:
     qualification_recall = (
         len(matches) / len(references) if references else 0.0
     )
-    qualification_f1 = (
-        2
-        * qualification_precision
-        * qualification_recall
-        / (qualification_precision + qualification_recall)
-        if qualification_precision + qualification_recall
-        else 0.0
+    qualification_f1 = f1_from_hits(
+        len(matches), len(predictions), len(references)
     )
-    reward = qualification_f1 * checkpoint_f1
+    parent_accuracies = {
+        field: parent_hits[field] / len(matches) if matches else 0.0
+        for field in ("stroke_count", "rally_winner")
+    }
+    parent_metadata_score = sum(parent_accuracies.values()) / len(
+        parent_accuracies
+    )
+    timing_f1 = f1_from_hits(
+        field_hits["contact_s"],
+        matched_predicted_count,
+        matched_reference_count,
+    )
+    checkpoint_field_f1 = {
+        field: f1_from_hits(
+            field_hits[field],
+            matched_predicted_count,
+            matched_reference_count,
+        )
+        for field in CHECKPOINT_FIELDS
+    }
+    checkpoint_state_score = sum(checkpoint_field_f1.values()) / len(
+        checkpoint_field_f1
+    )
+    reward = (
+        qualification_f1
+        * parent_metadata_score
+        * timing_f1
+        * checkpoint_state_score
+    )
 
     return {
         "reward": round(reward, 6),
@@ -234,6 +258,45 @@ def score(solution: Any, references: list[dict[str, Any]]) -> dict[str, Any]:
             "precision": round(qualification_precision, 6),
             "recall": round(qualification_recall, 6),
             "f1": round(qualification_f1, 6),
+        },
+        "parent_metadata_on_matched_rallies": {
+            "stroke_count_accuracy": round(
+                parent_accuracies["stroke_count"], 6
+            ),
+            "winner_accuracy": round(
+                parent_accuracies["rally_winner"], 6
+            ),
+            "mean_accuracy": round(parent_metadata_score, 6),
+        },
+        "checkpoint_timing_on_matched_rallies": {
+            "hits": field_hits["contact_s"],
+            "precision": round(
+                field_hits["contact_s"] / matched_predicted_count
+                if matched_predicted_count
+                else 0.0,
+                6,
+            ),
+            "recall": round(
+                field_hits["contact_s"] / matched_reference_count
+                if matched_reference_count
+                else 0.0,
+                6,
+            ),
+            "f1": round(timing_f1, 6),
+        },
+        "checkpoint_field_f1_on_matched_rallies": {
+            field: round(value, 6)
+            for field, value in checkpoint_field_f1.items()
+        },
+        "reward_components": {
+            "qualification_f1": round(qualification_f1, 6),
+            "parent_metadata_mean_accuracy": round(
+                parent_metadata_score, 6
+            ),
+            "checkpoint_timing_f1": round(timing_f1, 6),
+            "checkpoint_state_mean_f1": round(
+                checkpoint_state_score, 6
+            ),
         },
         "checkpoint_reconstruction_on_matched_rallies": {
             "true_positives": true_positives,

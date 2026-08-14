@@ -17,6 +17,8 @@ full video. Do not use the Internet, pre-existing annotations, or files outside
   before the point is awarded.
 - A rally qualifies when `stroke_count >= 20`.
 - `rally_start_s` and `contact_s` are seconds from the first video frame.
+- Audio may be used as auxiliary evidence to find candidate racket contacts and
+  refine their timing. Use video for player identity and every spatial field.
 - Use set values `1`, `2`, or `3`.
 - Use player names exactly as `MOMOTA` and `CHOU`.
 - For a qualifying rally with `N` strokes, report exactly:
@@ -24,9 +26,9 @@ full video. Do not use the Internet, pre-existing annotations, or files outside
   - `midpoint`: stroke `ceil(N / 2)`
   - `final`: stroke `N`
 
-At each checkpoint, record the hitter, the hitter's court zone at contact, the
-receiver's court zone at the same moment, and the shuttle destination zone for
-that stroke.
+At each checkpoint, record the hitter, the hitter's court zone at the exact
+contact frame, the receiver's court zone in that same frame, and the shuttle
+destination zone for that stroke.
 
 ## Court-zone convention
 
@@ -35,13 +37,23 @@ player's viewpoint: stand behind the player's baseline and face the net.
 
 - Orient `hitter_zone` from the hitter's viewpoint.
 - Orient `receiver_zone` independently from the receiver's viewpoint.
-- Orient `destination_zone` from the receiving player's viewpoint.
+- For a non-terminal stroke, `destination_zone` is the zone where the opponent
+  makes the next racket contact, not a projected floor landing point.
+- For the final stroke, `destination_zone` is the terminal landing or endpoint
+  that awards the rally, including in-court winners, out shots, and shots that
+  hit the net or fail to cross it.
+- Orient `destination_zone` from the player whose half-court contains that
+  destination: normally the receiver, or the hitter when a terminal shot does
+  not cross the net.
 - Player-location zones are `1..9`.
 - Shuttle destinations may be inside (`1..9`) or outside (`10..16`).
-- If a player's feet straddle a boundary, use the zone containing the midpoint
-  between the feet.
-- If the shuttle lands on a boundary, use the zone containing most of the shuttle
-  cork at first floor contact.
+- At the checkpoint contact frame, if a player's feet straddle a boundary, use
+  the zone containing the midpoint between the feet.
+- For a terminal landing on a boundary, use the zone containing most of the
+  shuttle cork at first floor contact.
+- Outside zones `10`, `11`, and `12` are left front, middle, and back;
+  `13` is behind the baseline; and `14`, `15`, and `16` are right back,
+  middle, and front, all in the selected half-court viewpoint.
 
 The normalized grid is:
 
