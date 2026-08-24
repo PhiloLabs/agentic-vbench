@@ -111,6 +111,115 @@ class ScoreTest(unittest.TestCase):
         self.assertEqual(episode["field_exact_matches"]["held_keys"], 0)
         self.assertEqual(result["reward"], 0.053333)
 
+    def test_missing_episode_only_loses_its_reward(self) -> None:
+        ground_truth = document([EVENT])
+        prediction = copy.deepcopy(ground_truth)
+        prediction["episodes"].pop(0)
+        result = score(ground_truth, prediction)
+        episode = result["details"]["episodes"]["episode_01"]
+        self.assertEqual(result["reward"], 0.833333)
+        self.assertEqual(episode["predicted_events"], 0)
+        self.assertEqual(episode["validation_errors"], ["missing episode"])
+
+    def test_invalid_episode_only_loses_its_reward(self) -> None:
+        ground_truth = document([EVENT])
+        prediction = copy.deepcopy(ground_truth)
+        prediction["episodes"][0]["unexpected"] = True
+        result = score(ground_truth, prediction)
+        episode = result["details"]["episodes"]["episode_01"]
+        self.assertEqual(result["reward"], 0.833333)
+        self.assertEqual(episode["predicted_events"], 0)
+        self.assertEqual(
+            episode["validation_errors"],
+            ["invalid episode schema"],
+        )
+
+    def test_invalid_episode_id_does_not_discard_siblings(self) -> None:
+        ground_truth = document([EVENT])
+        prediction = copy.deepcopy(ground_truth)
+        prediction["episodes"][0]["episode_id"] = []
+        result = score(ground_truth, prediction)
+        episode = result["details"]["episodes"]["episode_01"]
+        self.assertEqual(result["reward"], 0.833333)
+        self.assertEqual(
+            result["details"]["validation_errors"],
+            ["episodes[0]: unknown episode"],
+        )
+        self.assertEqual(episode["validation_errors"], ["missing episode"])
+
+    def test_duplicate_episode_only_loses_its_reward(self) -> None:
+        ground_truth = document([EVENT])
+        prediction = copy.deepcopy(ground_truth)
+        prediction["episodes"].append(
+            copy.deepcopy(prediction["episodes"][0])
+        )
+        result = score(ground_truth, prediction)
+        episode = result["details"]["episodes"]["episode_01"]
+        self.assertEqual(result["reward"], 0.833333)
+        self.assertEqual(episode["predicted_events"], 0)
+        self.assertEqual(
+            episode["validation_errors"],
+            ["duplicate episode entries at indices 0, 6"],
+        )
+
+    def test_invalid_event_is_dropped_without_losing_episode(self) -> None:
+        events = []
+        for timestamp in (1000, 2000, 3000):
+            event = copy.deepcopy(EVENT)
+            event["timestamp_ms"] = timestamp
+            events.append(event)
+        ground_truth = document(events)
+        prediction = copy.deepcopy(ground_truth)
+        prediction["episodes"][0]["events"][1]["state"][
+            "active_weapon"
+        ] = []
+        result = score(ground_truth, prediction)
+        episode = result["details"]["episodes"]["episode_01"]
+        self.assertEqual(result["reward"], 0.966667)
+        self.assertEqual(episode["predicted_events"], 2)
+        self.assertEqual(episode["episode_reward"], 0.8)
+        self.assertEqual(
+            episode["validation_errors"],
+            ["events[1]: unknown active weapon"],
+        )
+
+    def test_backward_event_does_not_poison_later_events(self) -> None:
+        events = []
+        for timestamp in (1000, 2000, 3000):
+            event = copy.deepcopy(EVENT)
+            event["timestamp_ms"] = timestamp
+            events.append(event)
+        ground_truth = document(events)
+        prediction = copy.deepcopy(ground_truth)
+        prediction["episodes"][0]["events"][1]["timestamp_ms"] = 500
+        result = score(ground_truth, prediction)
+        episode = result["details"]["episodes"]["episode_01"]
+        self.assertEqual(result["reward"], 0.966667)
+        self.assertEqual(episode["predicted_events"], 2)
+        self.assertEqual(episode["episode_reward"], 0.8)
+        self.assertEqual(
+            episode["validation_errors"],
+            ["events[1]: invalid event timestamp"],
+        )
+
+    def test_oversized_event_array_only_loses_its_episode(self) -> None:
+        ground_truth = document([EVENT])
+        prediction = copy.deepcopy(ground_truth)
+        events = []
+        for timestamp in range(101):
+            event = copy.deepcopy(EVENT)
+            event["timestamp_ms"] = timestamp
+            events.append(event)
+        prediction["episodes"][0]["events"] = events
+        result = score(ground_truth, prediction)
+        episode = result["details"]["episodes"]["episode_01"]
+        self.assertEqual(result["reward"], 0.833333)
+        self.assertEqual(episode["predicted_events"], 0)
+        self.assertEqual(
+            episode["validation_errors"],
+            ["invalid events array"],
+        )
+
     def test_invalid_prediction_scores_zero(self) -> None:
         result = score(document([EVENT]), {"unexpected": []})
         self.assertEqual(result["reward"], 0.0)

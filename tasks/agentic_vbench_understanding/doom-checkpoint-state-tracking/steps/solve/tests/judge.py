@@ -74,7 +74,10 @@ def _set_field(
     values = state[field]
     if (
         not isinstance(values, list)
-        or any(value not in vocabulary for value in values)
+        or any(
+            not isinstance(value, str) or value not in vocabulary
+            for value in values
+        )
         or len(values) != len(set(values))
     ):
         raise ValueError(f"invalid {field}")
@@ -86,9 +89,11 @@ def _state(value: Any) -> tuple[Any, ...]:
         raise ValueError("invalid state schema")
     weapon = value["active_weapon"]
     checkpoint = value["current_checkpoint"]
-    if weapon not in WEAPONS:
+    if not isinstance(weapon, str) or weapon not in WEAPONS:
         raise ValueError("unknown active weapon")
-    if checkpoint is not None and checkpoint not in CHECKPOINTS:
+    if checkpoint is not None and (
+        not isinstance(checkpoint, str) or checkpoint not in CHECKPOINTS
+    ):
         raise ValueError("unknown checkpoint")
     return (
         weapon,
@@ -96,6 +101,37 @@ def _state(value: Any) -> tuple[Any, ...]:
         _set_field(value, "active_switches", SWITCHES),
         _set_field(value, "open_doors", DOORS),
         checkpoint,
+    )
+
+
+def _normalize_event(
+    value: Any,
+    previous_timestamp: int,
+) -> tuple[Any, ...]:
+    if not isinstance(value, dict) or set(value) != EVENT_KEYS:
+        raise ValueError("invalid event schema")
+    timestamp = value["timestamp_ms"]
+    event_type = value["event_type"]
+    entity = value["entity_id"]
+    if (
+        isinstance(timestamp, bool)
+        or not isinstance(timestamp, int)
+        or timestamp < previous_timestamp
+        or timestamp < 0
+    ):
+        raise ValueError("invalid event timestamp")
+    if (
+        not isinstance(event_type, str)
+        or event_type not in EVENT_ENTITIES
+        or not isinstance(entity, str)
+        or entity not in EVENT_ENTITIES[event_type]
+    ):
+        raise ValueError("invalid event identity")
+    return (
+        timestamp,
+        event_type,
+        entity,
+        _state(value["state"]),
     )
 
 
@@ -114,43 +150,74 @@ def _episodes(
             raise ValueError("invalid episode schema")
         episode_id = episode["episode_id"]
         events = episode["events"]
-        if episode_id not in EPISODE_IDS or episode_id in result:
+        if (
+            not isinstance(episode_id, str)
+            or episode_id not in EPISODE_IDS
+            or episode_id in result
+        ):
             raise ValueError("unknown or duplicate episode")
         if not isinstance(events, list) or len(events) > MAX_EVENTS_PER_EPISODE:
             raise ValueError("invalid events array")
         previous = -1
-        normalized: list[Any] = []
+        normalized_events: list[Any] = []
         for event in events:
-            if not isinstance(event, dict) or set(event) != EVENT_KEYS:
-                raise ValueError("invalid event schema")
-            timestamp = event["timestamp_ms"]
-            event_type = event["event_type"]
-            entity = event["entity_id"]
-            if (
-                isinstance(timestamp, bool)
-                or not isinstance(timestamp, int)
-                or timestamp < previous
-                or timestamp < 0
-            ):
-                raise ValueError("invalid event timestamp")
-            if (
-                event_type not in EVENT_ENTITIES
-                or entity not in EVENT_ENTITIES[event_type]
-            ):
-                raise ValueError("invalid event identity")
-            normalized.append(
-                (
-                    timestamp,
-                    event_type,
-                    entity,
-                    _state(event["state"]),
-                )
-            )
-            previous = timestamp
-        result[episode_id] = normalized
+            normalized_event = _normalize_event(event, previous)
+            normalized_events.append(normalized_event)
+            previous = normalized_event[0]
+        result[episode_id] = normalized_events
     if require_all and set(result) != EPISODE_IDS:
         raise ValueError("all six episodes are required")
     return result
+
+
+def _prediction_episode_entries(
+    document: Any,
+) -> tuple[dict[str, list[tuple[int, dict[str, Any]]]], list[str]]:
+    if not isinstance(document, dict) or set(document) != TOP_KEYS:
+        raise ValueError("invalid top-level schema")
+    values = document["episodes"]
+    if not isinstance(values, list):
+        raise ValueError("invalid episodes array")
+    result: dict[str, list[tuple[int, dict[str, Any]]]] = {}
+    errors: list[str] = []
+    for index, episode in enumerate(values):
+        if not isinstance(episode, dict):
+            errors.append(f"episodes[{index}]: invalid episode schema")
+            continue
+        episode_id = episode.get("episode_id")
+        if not isinstance(episode_id, str) or episode_id not in EPISODE_IDS:
+            errors.append(f"episodes[{index}]: unknown episode")
+            continue
+        result.setdefault(episode_id, []).append((index, episode))
+    return result, errors
+
+
+def _prediction_events(
+    entries: list[tuple[int, dict[str, Any]]],
+) -> tuple[list[Any], list[str]]:
+    if not entries:
+        return [], ["missing episode"]
+    if len(entries) > 1:
+        indices = ", ".join(str(index) for index, _ in entries)
+        return [], [f"duplicate episode entries at indices {indices}"]
+    _, episode = entries[0]
+    if set(episode) != EPISODE_KEYS:
+        return [], ["invalid episode schema"]
+    events = episode["events"]
+    if not isinstance(events, list) or len(events) > MAX_EVENTS_PER_EPISODE:
+        return [], ["invalid events array"]
+    previous = -1
+    normalized_events: list[Any] = []
+    errors: list[str] = []
+    for index, event in enumerate(events):
+        try:
+            normalized_event = _normalize_event(event, previous)
+        except ValueError as error:
+            errors.append(f"events[{index}]: {error}")
+            continue
+        normalized_events.append(normalized_event)
+        previous = normalized_event[0]
+    return normalized_events, errors
 
 
 def _identity_matches(left: Any, right: Any, tolerance_ms: int) -> bool:
@@ -217,16 +284,25 @@ def score(
 ) -> dict[str, Any]:
     truth = _episodes(ground_truth, require_all=True)
     parse_error = None
+    validation_errors: list[str] = []
     try:
-        predicted = _episodes(prediction, require_all=True)
+        prediction_entries, validation_errors = _prediction_episode_entries(
+            prediction
+        )
     except ValueError as error:
-        predicted = {}
+        prediction_entries = {}
         parse_error = str(error)
     details: dict[str, Any] = {}
     rewards: list[float] = []
     for episode_id in sorted(EPISODE_IDS):
         truth_events = truth[episode_id]
-        predicted_events = predicted.get(episode_id, [])
+        if parse_error is None:
+            predicted_events, episode_errors = _prediction_events(
+                prediction_entries.get(episode_id, [])
+            )
+        else:
+            predicted_events = []
+            episode_errors = []
         alignment = _ordered_alignment(
             truth_events,
             predicted_events,
@@ -273,11 +349,13 @@ def score(
             },
             "gated_field_f1": round(gated_field_f1, 6),
             "episode_reward": round(reward, 6),
+            "validation_errors": episode_errors,
         }
     return {
         "reward": round(sum(rewards) / len(rewards), 6),
         "details": {
             "parse_error": parse_error,
+            "validation_errors": validation_errors,
             "timestamp_tolerance_ms": tolerance_ms,
             "weights": {
                 "full_event_f1": FULL_EVENT_WEIGHT,

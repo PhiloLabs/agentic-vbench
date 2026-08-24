@@ -51,8 +51,10 @@ The generation and observability audit is retained in
 The deterministic verifier aligns events by episode, type, entity, and timestamp
 within 750 ms. Ties minimize timestamp error before using the earlier prediction.
 Reward is 90% exact full-state event-F1 and 10% gated per-field F1, macro-averaged
-over six episodes. Set fields require exact set equality. Oracle: `1.000000`.
-Null: `0.000000`.
+over six episodes. Missing, duplicate, or malformed predicted episodes score as
+empty only for that episode, and malformed events are discarded individually.
+Unreadable JSON and invalid top-level schemas still score as an empty submission.
+Set fields require exact set equality. Oracle: `1.000000`. Null: `0.000000`.
 
 ## Difficulty
 
