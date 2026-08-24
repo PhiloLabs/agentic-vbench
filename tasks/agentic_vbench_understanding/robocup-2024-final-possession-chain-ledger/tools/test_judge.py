@@ -20,6 +20,7 @@ def score_bytes(payload: bytes) -> dict[str, object]:
         solution = root / "solution.json"
         reward_json = root / "reward.json"
         reward_txt = root / "reward.txt"
+        details_json = root / "verifier-details.json"
         solution.write_bytes(payload)
         subprocess.run(
             [
@@ -31,10 +32,13 @@ def score_bytes(payload: bytes) -> dict[str, object]:
                 str(reward_json),
                 "--reward-txt",
                 str(reward_txt),
+                "--details-json",
+                str(details_json),
             ],
             check=True,
         )
         result = json.loads(reward_json.read_text(encoding="utf-8"))
+        result["details"] = json.loads(details_json.read_text(encoding="utf-8"))
         assert float(reward_txt.read_text(encoding="utf-8")) == result["reward"]
         return result
 

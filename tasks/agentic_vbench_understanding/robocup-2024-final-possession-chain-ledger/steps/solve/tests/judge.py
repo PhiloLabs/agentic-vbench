@@ -19,6 +19,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--solution", required=True, type=Path)
     parser.add_argument("--reward-json", required=True, type=Path)
     parser.add_argument("--reward-txt", required=True, type=Path)
+    parser.add_argument("--details-json", type=Path)
     return parser.parse_args()
 
 
@@ -193,10 +194,21 @@ def main() -> None:
     }
     args.reward_json.parent.mkdir(parents=True, exist_ok=True)
     args.reward_json.write_text(
-        json.dumps({"reward": round(reward, 4), "details": details}, indent=2) + "\n",
+        json.dumps(
+            {
+                "reward": round(reward, 4),
+                "precision": round(precision, 4),
+                "recall": round(recall, 4),
+                "f1": round(reward, 4),
+            },
+            indent=2,
+        )
+        + "\n",
         encoding="utf-8",
     )
     args.reward_txt.write_text(f"{round(reward, 4)}\n", encoding="utf-8")
+    details_path = args.details_json or args.reward_json.with_name("verifier-details.json")
+    details_path.write_text(json.dumps(details, indent=2) + "\n", encoding="utf-8")
 
 
 if __name__ == "__main__":

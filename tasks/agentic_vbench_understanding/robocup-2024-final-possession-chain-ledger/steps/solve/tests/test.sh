@@ -9,4 +9,5 @@ fi
 python3 /tests/judge.py \
     --solution /workspace/output/solution.json \
     --reward-json /logs/verifier/reward.json \
-    --reward-txt /logs/verifier/reward.txt
+    --reward-txt /logs/verifier/reward.txt \
+    --details-json /logs/verifier/verifier-details.json
