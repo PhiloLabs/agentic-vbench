@@ -54,7 +54,7 @@ scorer:
   null_reward: 0.0
   measured_ablations:            # on the shipped 12-race ground truth, current 2-dim scorer
     correct_counts_wrong_times: 0.0    # right counts at shuffled video times -> the time window rejects
-    blind_guess: 0.007           # random solutions; the tau gate collapses guessing
+    blind_guess: 0.027           # random solutions (seed-dependent, ~0.007-0.03); the tau gate collapses guessing
     single_frame: 0.0            # one frame -> no per-race differentiation -> constant -> tau 0
     no_media: 0.007              # prompt + schema only; nothing to differentiate races
     ocr_only: 0.0                # NO scored quantity is on-screen text (HUD masked, off-HUD) -> guess
@@ -93,7 +93,7 @@ difficulty: {strong_agent_reward: 0.052, agent_model: codex gpt-5.6-sol xhigh}  
 #   + time-anchored (races matched by video time +/-15 s)
 #   + skid_time rescaled to VIDEO seconds (timebase fix)
 #   + DROP spinouts (too countable; broke the bar at n=3) -> items+skid, Codex n=3 mean 0.027
-# FAIR + LEARNABLE: oracle = 1.0, blind-guess 0.007; a within-30% agent scores far higher. Difficulty
+# FAIR + LEARNABLE: oracle = 1.0, blind-guess ~0.027; a within-30% agent scores far higher. Difficulty
 # is ACCURATE pickup-counting under a masked HUD + a drift DURATION over a 55-min video, not a hack.
 
 anti_shortcut:

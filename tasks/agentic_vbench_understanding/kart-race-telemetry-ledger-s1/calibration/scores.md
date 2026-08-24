@@ -34,7 +34,7 @@ revision (not mutable `main`; trajectory SHA256s in `rollouts/README.md`):
 |---|---|---|
 | oracle | **1.0000** | harness path (`solve.sh` → `judge.py`); items & skid both tau 1.0, acc 1.0 |
 | correct counts, wrong times | 0.0000 | right values at shuffled video times — the ±15 s window rejects |
-| blind guess (deterministic) | 0.0069 | the tau gate collapses guessing |
+| blind guess (random) | ~0.027 | seed-dependent (0.007–0.03); the tau gate collapses guessing |
 | single frame | 0.0000 | one frame → no per-race differentiation → constant → tau 0 |
 | no media / OCR-only | 0.007 / 0.0 | no scored quantity is on-screen text (HUD masked, off-HUD) |
 | constant counts | 0.0000 | all races equal → predicted ties → 0 |
