@@ -28,22 +28,27 @@ ground_truth:
   verification: TIGERs kicked_ball events are filtered by official referee live-play segments; the visible 3:0 state at second-half 0:00 is cross-checked against the log; the later post-live 4:0 change is excluded; tracker jitter is merged by time, position, and persistence.
 
 scorer:
-  metric: Event-level F1 using exact order-preserving one-to-one matching over half, team, kick_count, compressed zone_path, and terminal.
+  metric: Maximum-credit order-preserving one-to-one alignment followed by weighted event-level F1.
+  core_gate: A prediction can earn credit only when half and team align; neither field earns standalone credit.
+  full_credit: 1.0 for an exact kick_count, compressed zone_path, and terminal after the core gate.
+  partial_credit: At most 0.5; kick_count exact/off-by-one earns 0.25/0.125 and zone_path exact/edit-distance-one earns 0.25/0.125. Terminal earns no partial credit.
+  denominator: Every submitted list entry remains in the precision denominator, including schema-invalid entries and duplicates.
   oracle_reward: 1.0
   null_reward: 0.0
 
 difficulty:
-  strong_agent_reward: 0.0385
-  tool_call_turns: 176
-  agent_model: Antigravity local run; Codex Desktop gpt-5.6-sol high and Claude local agent claude-sonnet-5 also measured
+  strong_agent_reward: pending a clean final-image calibration pass
+  tool_call_turns: pending a clean final-image calibration pass
+  required_lineup: GPT-5.6 Sol; Fable 5 or Opus 4.8; Gemini 3.1 Pro or 3.5 Flash
+  prior_runs: superseded because they predate the final scorer and were not run through the pinned isolated environment
 
 anti_shortcut:
-  single_frame: not measured in the current submission
+  single_frame: protocol fixed; clean Codex measurement pending
   video_only: not applicable as a degradation because the full task input is video-only
   audio_only: not applicable because audio is absent
-  no_media: not measured in the current submission
-  ocr_only: not measured in the current submission
-  frame_dump_no_tools: not measured in the current submission
+  no_media: protocol fixed; clean Codex measurement pending
+  ocr_only: protocol fixed; clean Codex measurement pending
+  frame_dump_no_tools: protocol fixed over all 44032 native frames; clean Codex measurement pending
 
 input:
   url: https://www.youtube.com/watch?v=364zEAsOclU
@@ -69,7 +74,17 @@ temporal gameplay analysis.
 
 ## Calibration qualification
 
-Three local agent outputs have been measured below 0.10; see
-`calibration/scores.md`. They are reported as the final current calibration. The
-runs were outside Harbor and degraded-input ablations were not measured; no stronger
-claim is made.
+The scorer, null/spam regressions, native-frame contact evidence, pinned base image,
+and exact ablation protocols are complete. The old local outputs are not claimed as
+qualification because they predate the final scorer and isolated environment. One
+clean final-image pass remains: Codex plus four Codex ablations, followed by Claude
+and Gemini end-to-end runs on the unchanged task. Results and whole-file trajectory
+digests belong in `calibration/scores.md`.
+
+## Contact observability
+
+Four sequences of consecutive native 720p50 frames cover both halves and show ball
+approach, contact occlusion, direction reversal, and free-flight separation. They are
+checked in under `calibration/contact-evidence/` with a digest-checking generator.
+This evidence directly audits the perception primitive used by every ground-truth
+chain; it is reviewer evidence and is not available to the agent.

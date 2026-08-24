@@ -63,6 +63,56 @@ def main() -> None:
     malformed_entry = score({"chains": [*chains, {"half": 1}]})
     assert malformed_entry["details"]["n_schema_valid"] == len(chains)
     assert malformed_entry["reward"] < 1.0
+
+    wrong_terminal = [dict(chain) for chain in chains]
+    wrong_terminal[0]["terminal"] = "stoppage"
+    terminal_result = score({"chains": wrong_terminal})
+    assert terminal_result["details"]["full_chain_matches"] == len(chains) - 1
+    assert terminal_result["details"]["partial_chain_matches"] == 1
+    assert terminal_result["details"]["credited_matches"] == len(chains) - 0.5
+
+    graded = [dict(chain) for chain in chains]
+    graded[0]["kick_count"] += 1
+    graded_result = score({"chains": graded})
+    assert graded_result["details"]["credited_matches"] == len(chains) - 0.625
+
+    zone_graded = [dict(chain) for chain in chains]
+    zone_graded[0]["zone_path"] = ["defensive", "attacking"]
+    zone_result = score({"chains": zone_graded})
+    assert zone_result["details"]["credited_matches"] == len(chains) - 0.625
+
+    terminal_only = {
+        "half": 1,
+        "team": "white",
+        "kick_count": 99,
+        "zone_path": ["attacking", "defensive", "attacking"],
+        "terminal": "turnover",
+    }
+    assert score({"chains": [terminal_only]})["reward"] == 0.0
+
+    wrong_core = dict(chains[0], team="black")
+    assert score({"chains": [wrong_core]})["reward"] == 0.0
+
+    boolean_half = dict(chains[0], half=True)
+    boolean_result = score({"chains": [boolean_half]})
+    assert boolean_result["details"]["n_schema_valid"] == 0
+    assert boolean_result["reward"] == 0.0
+
+    out_of_order = [dict(chain) for chain in chains]
+    out_of_order[2], out_of_order[3] = out_of_order[3], out_of_order[2]
+    assert score({"chains": out_of_order})["reward"] < 1.0
+
+    spam = [
+        {
+            "half": index % 2 + 1,
+            "team": ("white", "black")[(index // 2) % 2],
+            "kick_count": 99,
+            "zone_path": ["attacking", "defensive", "attacking"],
+            "terminal": "goal",
+        }
+        for index in range(500)
+    ]
+    assert score({"chains": spam})["reward"] <= 0.01
     print("judge regression tests: PASS")
 
 

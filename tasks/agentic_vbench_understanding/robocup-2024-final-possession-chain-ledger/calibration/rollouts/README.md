@@ -1,18 +1,23 @@
 # Rollout records
 
-One retained JSONL transcript is stored for each evaluated agent:
+The old Codex, Claude, and metadata-less schema-invalid Gemini files have been
+removed. They predated the final scorer and pinned isolated environment and cannot
+be cited as qualification results.
 
-- `codex.jsonl`: Codex Desktop 0.144.2, `gpt-5.6-sol`, high reasoning.
-- `claude-code.jsonl`: Claude local agent 2.1.209, `claude-sonnet-5`.
-- `antigravity.jsonl`: Antigravity export; model and harness version were not
-  recorded by the export.
+For the clean pass, retain the unmodified harness trajectory first, run
+`tools/scrub_trajectory.py` only if a release asset requires local-path or opaque
+payload redaction, and publish the raw or deterministically scrubbed whole file as a
+fork release asset. Record its URL and SHA256 in `../scores.md`; do not replace the
+raw trajectory with a summary.
 
-The exports have three mechanical redactions. Original local home-directory
-prefixes are replaced with `/home/agent`. The Codex export's 144 embedded base64
-image values are replaced by placeholders containing each original value's SHA256
-and character count. Its opaque encrypted-content blobs are replaced by the same
-kind of placeholder because they cannot be reviewed and resemble secrets. Model
-messages, tool calls, textual tool results, and timestamps are otherwise unchanged.
+Example deterministic scrub:
 
-Candidate output and reward dumps are intentionally not duplicated here; measured
-verifier diagnostics are in `../scores.md`.
+```bash
+python3 tools/scrub_trajectory.py \
+  --input /path/to/raw.jsonl \
+  --output /path/to/release.jsonl \
+  --replace-path "/Users/name=/home/agent"
+```
+
+The script sorts JSON object keys and emits one compact JSON object per line, so the
+same input and replacement arguments reproduce the recorded digest.

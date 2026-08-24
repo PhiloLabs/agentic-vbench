@@ -57,14 +57,31 @@ Run the deterministic scorer tests with:
 python3 tools/test_judge.py
 ```
 
-Three retained local agent outputs have been scored by the formal verifier:
+The scorer first aligns predictions to ground truth in chronological order. A pair
+can earn credit only after `half` and `team` agree. An exact remaining tuple earns
+`1.0`; otherwise exact/off-by-one `kick_count` earns `0.25`/`0.125`, and an
+exact/edit-distance-one `zone_path` earns `0.25`/`0.125`. Partial credit is capped
+at `0.5`; `terminal`, `team`, and `half` have no standalone partial value. The final
+reward is weighted event-level F1, and invalid or duplicate submitted entries remain
+in the prediction denominator.
 
-| harness | reward | tool calls |
-|---|---:|---:|
-| Codex Desktop (`gpt-5.6-sol`, high) | 0.0 | 163 |
-| Claude local agent (`claude-sonnet-5`) | 0.0385 | 46 |
-| Antigravity (model metadata unavailable) | 0.0 | 176 |
+Four deterministic panels under `calibration/contact-evidence/` show consecutive
+native 720p50 frames around three first-half contacts and one second-half launch.
+They establish that ball approach, contact/occlusion, reversal, and free-flight
+separation resolve in the supplied pixels.
 
-See `calibration/scores.md` for diagnostics and counting rules. These are the final
-results reported by this submission. The runs were outside the shipped Harbor image,
-and no measured anti-shortcut ablation results are claimed.
+The earlier local runs were removed as superseded diagnostics. They predate the
+final scorer and were not executed in the pinned isolated environment, so they do
+not qualify the task. The required clean pass is:
+
+1. GPT-5.6 Sol end to end, plus no-media, single-frame, OCR-only, and every-native-frame/no-tools ablations.
+2. Fable 5 or Opus 4.8 end to end on the unchanged task.
+3. Gemini 3.1 Pro or 3.5 Flash end to end on the unchanged task.
+
+See `calibration/scores.md` for the qualification table and
+`calibration/ablations/README.md` for exact degraded-input definitions. Raw final
+trajectories are published as fork release assets; their whole-file SHA256 values,
+harness versions, image ID, task commit, and tool-call record types are recorded in
+the score table. `tools/scrub_trajectory.py` makes any required path/payload
+redactions reproducible. `calibration/RUNBOOK.md` contains the exact Harbor commands
+for all three end-to-end agents.
