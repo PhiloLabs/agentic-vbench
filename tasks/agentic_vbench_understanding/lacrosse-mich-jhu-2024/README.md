@@ -7,28 +7,29 @@ silent, graphics-free broadcast: every goal in sequence with its team, scorer's
 jersey number, whether it was assisted, and (implicitly, from the ordered team
 sequence) the running score after it.
 
-## Task material (agent-visible: `materials/`)
+## Layout
+
+```
+task.toml                     # harness config (family layout)
+SPEC.md                       # task spec card (every field filled + measured)
+environment/Dockerfile        # bakes the video at build; SHA-256 mismatch FAILS the build
+environment/{roster,schema}.json
+steps/solve/instruction.md    # the agent-facing prompt
+steps/solve/workdir/setup.sh  # copies baked materials into /workspace/materials
+steps/solve/solution/solve.sh # oracle (answer key mounted only for this step)
+steps/solve/tests/judge.py    # deterministic grader (pure stdlib)
+steps/solve/tests/test.sh     # verifier entry point
+calibration/                  # scores.md, raw trajectories, scorer crops, run-pack
+```
+
+## Task material (agent-visible at `/workspace/materials/`)
 
 - `game.mp4` — the full game (~102 min, 720p, silent). The **entire lower third
   is blacked out**: no scoreboard, no score cards, no player-bio lower-thirds.
-  SHA-256 pinned in `game.mp4.sha256`.
-- `instruction.md`, `schema.json`, `roster.json` (closed set of valid jersey
-  numbers per team color; teams referred to only as NAVY / WHITE).
-
-Anonymization: the packaging carries no team names, date, broadcast title, or
-audio, and the instruction refers to the teams only as NAVY / WHITE.
-**The game is identifiable from the pixels:** the jerseys read
-"HOPKINS" / "MICHIGAN" and the venue is recognizable, so a web-enabled agent
-could name the game and look up its box score. (Measured — review comment #3:
-given a single frame and no web, a strong agent named it *Michigan at Johns
-Hopkins, Homewood Field, Big Ten*; the identity is on the field.) Visual identity cannot be masked
-without destroying the task. The no-recall defense is therefore NOT visual
-anonymization — it is exactly the posture of the accepted volleyball tasks
-(whose games are named outright): (1) the no-web / no-lookup calibration rule,
-enforced in the harness and verified by raw-trajectory audits (our Claude run:
-zero web attempts); and (2) the measured **no_media = 0.0**, which proves that
-knowing the identity without watching yields nothing — the goal-by-goal ledger
-is not in any public record at the granularity scored.
+  Fetched at build time from a pinned URL and verified against the pinned
+  SHA-256; a mismatch fails the build.
+- `roster.json` (closed set of valid jersey numbers per team colour) and
+  `schema.json`. Teams are referred to only as NAVY / WHITE.
 
 ## Ground truth & provenance (verifier-side: `steps/solve/tests/`)
 
@@ -47,7 +48,7 @@ is not in any public record at the granularity scored.
   scorer numbers reading above the mask line (review comment #2).
 - Jersey numbers repeat across teams; the scored key is always (team, number).
 
-## Scoring (`steps/solve/tests/verify.py`)
+## Scoring (`steps/solve/tests/judge.py`)
 
 Pure-Python, deterministic, no LLM/VLM, no network.
 
@@ -77,6 +78,7 @@ Pure-Python, deterministic, no LLM/VLM, no network.
 | blind strong-agent probe (masked video) | 0.000 | 99 |
 | blind probe, counting-coached | 0.034 | 97 |
 | no_media | 0.0 | — |
+| no_media, adversarial (game named outright, answer from recall) | 0.0 | — |
 | single_frame | 0.0 | — |
 | frame_dump_no_tools (102 frames @ 1/60 s) | 0.0 | — |
 

@@ -12,8 +12,10 @@ SRC="$(cd "$(dirname "$0")/../.." && pwd)"          # task folder
 W="/private/tmp/avb_calib_${H}"
 
 rm -rf "$W"; mkdir -p "$W/output"
-cp "$SRC/materials/game.mp4" "$SRC/materials/instruction.md" \
-   "$SRC/materials/roster.json" "$SRC/materials/schema.json" "$W/"
+cp "$SRC/materials/game.mp4"        "$W/game.mp4"
+cp "$SRC/steps/solve/instruction.md" "$W/instruction.md"
+cp "$SRC/environment/roster.json"    "$W/roster.json"
+cp "$SRC/environment/schema.json"    "$W/schema.json"
 
 # harness-specific rules file (both read their conventional filename)
 cp "$(dirname "$0")/AGENTS.md" "$W/AGENTS.md"

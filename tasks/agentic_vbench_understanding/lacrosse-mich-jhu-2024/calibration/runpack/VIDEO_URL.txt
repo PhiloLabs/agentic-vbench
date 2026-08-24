@@ -1,6 +1,7 @@
-# Paste ONE direct-download URL to the exact task video (game.mp4) below the
-# line below (a link that downloads the FILE directly — e.g. a Dropbox link
-# ending in ?dl=1, a Google Drive direct-download link, or a Hugging Face
-# .../resolve/main/game.mp4 URL). fetch_video.sh auto-verifies its SHA-256
-# against materials/game.mp4.sha256, so a wrong/altered file is rejected.
+# Direct-download URL for the exact task video (materials/game.mp4).
+# fetch_video.sh downloads this and verifies its SHA-256 against
+# materials/game.mp4.sha256, so a wrong or altered file is rejected.
+#
+# Pinned SHA-256: 7e53feeb327da479448203385e3b76016bf9c78f78422bb715a7f906b0429a34
 # --- URL below this line ---
+https://huggingface.co/datasets/willw96/agentic_vbench_lacrosse/resolve/main/game.mp4

@@ -104,3 +104,27 @@ replay score/bio cards — all sit inside the masked lower third; no score appea
 outside the band, and the stadium scoreboard is never in shot. The only timing display
 outside the band is a field-level **80-second shot clock** (the "57/47/37/27/17"
 countdown at each end) — a possession timer carrying no score or goal information.
+
+## Adversarial recall ablation (PR #88 review item 2) — 2026-08-24
+
+Stronger form of `no_media`: the agent is **given the exact game identity** —
+"Michigan at Johns Hopkins, 2024-03-30, Homewood Field, Big Ten", with the
+NAVY=Michigan / WHITE=Johns Hopkins mapping — **no video**, and is explicitly
+instructed to reconstruct the ledger from its own recall of that specific game.
+This simulates perfect identification off the pixels (venue, uniforms, wordmarks).
+
+| condition | reward | pred goals | note |
+|---|---:|---:|---|
+| adversarial recall (identity given, no video, no web) | **0.0000** | 26 (NAVY 14 / WHITE 12) | 0 tuples matched; lenient team+scorer F1 0.1923 |
+
+Truth: 26 goals, NAVY 11 / WHITE 15. The model produced a complete, schema- and
+roster-valid ledger with the **exact right goal count** and still matched zero
+tuples. It also called the winner backwards (Michigan 14-12 vs the true Hopkins
+15-11) — a box-score lookup would have gotten the result right, so this is
+behavioural evidence that no external lookup occurred. The model's own report:
+"I do not actually recall this specific game… this is an inferred, constructed
+ledger, not a retrieval."
+
+**Conclusion:** identifying the game yields nothing. The goal-by-goal ledger at
+the scored granularity (ordered team + scorer + assisted-flag + running score)
+is not recoverable from memory even when the game is named outright.
