@@ -118,9 +118,20 @@ scorer:
     field was cut outright for failing this same test far worse.
 
 difficulty:
-  strong_agent_reward: TODO (measure; must be < 0.10)
-  tool_call_turns: TODO (measure; must be > 50)
-  agent_model: TODO
+  strong_agent_reward: >
+    0.0741 (Codex CLI, GPT 5.6 Sol) -- highest of four agents measured. Claude Code CLI
+    (Opus 5), Antigravity/Gemini 3.5 Flash and Antigravity/Gemini 3.1 Pro all scored
+    0.0000. See calibration/scores.md for the full table and what the zeros mean (11 of
+    Opus 5's submissions carry a correct callsign, missed only on a systematic ~66-116 s
+    time offset -- not "no signal").
+  tool_call_turns: >
+    260 (Gemini 3.5 Flash, longest rollout) -- 93 (Opus 5), 101 (Gemini 3.1 Pro), 29
+    (Codex, the outlier: it converges in ~22 min by pairing locally instead of solving
+    the global offset).
+  agent_model: >
+    Four agents, all measured 2026-08-02 on one 40-core Linux host, same image/media/
+    prompt/resources (8 cpus / 8 GB / 7200 s): Claude Code CLI (Opus 5), Codex CLI
+    (GPT 5.6 Sol), Antigravity (Gemini 3.5 Flash), Antigravity (Gemini 3.1 Pro).
   prior_finding: >
     A daytime version of this task at a different airport was measured with headless
     Claude Opus and came out TOO EASY -- 28 of 31 callsigns correct. That run is why
@@ -129,14 +140,13 @@ difficulty:
     camera does not stay on the runway.
 
 anti_shortcut:
-  single_frame: TODO
-  video_only: TODO (expected ~0: no path to callsign without audio)
-  audio_only: TODO (expected 0 -- verified mechanically against the shipped scorer: a
-    submission carrying every real callsign and operation but no usable times or types
-    scores 0.0000. The daytime predecessor confirmed this behaviourally too, producing
-    only 2 entries because video_time has no anchor without the video.)
-  no_media: TODO (expected ~0: schema alone gives no usable prior)
-  frame_dump_no_tools: TODO
+  single_frame: 0.0 (measured, Opus 5, 5400 s)
+  video_only: 0.0 (measured, Opus 5, 5400 s) -- no path to callsign without audio
+  audio_only: >
+    0.0 (measured, Opus 5, 5400 s) -- the agent produced no solution.json at all: with
+    no video there is no timeline to anchor an entry to, so it had nothing to write.
+  no_media: 0.0 (measured, Opus 5, 5400 s) -- schema alone gives no usable prior
+  frame_dump_no_tools: 0.0 (measured, Opus 5, 5400 s)
   alignment_is_load_bearing: >
     Verified mechanically: a submission that is perfect except for a uniform 90 s time
     offset -- an agent that solved everything but never recovered the audio/video
