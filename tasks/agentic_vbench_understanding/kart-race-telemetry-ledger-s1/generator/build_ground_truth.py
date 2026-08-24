@@ -50,7 +50,11 @@ for d in race_dirs:
         "items_collected": row["items_collected"],
         "spinouts": row["bananas_hit"] + row["times_exploded"],   # banana + bomb hits look identical,
                                                                   # so they are scored jointly
-        "skid_time": round(row["skid_time"], 2),
+        # skid_time is rescaled from telemetry GAME seconds into VIDEO seconds below (see the window
+        # loop): the software-GL capture runs below realtime, so an agent timing drift off the video
+        # must be scored on the video clock.
+        "_skid_game": round(row["skid_time"], 2),
+        "_game_dur": round(max(k["time"] for k in gt["karts"]), 3),  # race length, GAME seconds
         # context (unscored): kept for reference / calibration
         "bananas_hit": row["bananas_hit"],
         "times_exploded": row["times_exploded"],
@@ -69,6 +73,16 @@ for r, d in zip(races, race_dirs):
     r["t_start"] = round(_t, 2)
     r["t_end"] = round(_t + cd, 2)
     _t += cd
+    # Rescale drift-time from telemetry GAME seconds into VIDEO seconds. Under software-GL the capture
+    # runs below realtime by a per-race factor (heavy tracks slow llvmpipe more), so a race of length
+    # _game_dur game-seconds spans cd video-seconds. The agent times the yellow drift-sparks in VIDEO
+    # seconds off the video, so the scored GT must be on the same clock, else an honest measurement is
+    # graded against a different clock. factor = video_clip_duration / game_race_duration.
+    factor = (cd / r["_game_dur"]) if r["_game_dur"] else 1.0
+    r["speed_factor"] = round(factor, 3)
+    r["skid_time"] = round(r["_skid_game"] * factor, 2)   # VIDEO-second drift total (scored)
+    r["skid_time_game"] = r["_skid_game"]                 # raw telemetry drift (context, unscored)
+    del r["_skid_game"], r["_game_dur"]
 
 if len(hero_set) != 1:
     sys.exit(f"hero must be constant across the suite for a clean cross-race ranking, got {hero_set}")
@@ -76,7 +90,7 @@ if len(hero_set) != 1:
 # Every scored field must vary across races, or its rank target is degenerate and the oracle cannot
 # reach 1.0. (The judge renormalises weights over the fields that do vary, but the suite should have
 # spread in all three.)
-for field in ("items_collected", "spinouts", "skid_time"):
+for field in ("items_collected", "skid_time"):   # scored dims (spinouts is unscored context now)
     if len({r[field] for r in races}) < 2:
         sys.exit(f"{field} has no spread across races ({[r[field] for r in races]}) — vary "
                  f"tracks/laps so the hero's values differ, else that dimension is degenerate")

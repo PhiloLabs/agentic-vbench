@@ -33,10 +33,11 @@ powerups) still ranks the races roughly right and scores well; requiring the cou
 was rejected in an earlier design because blind guessing scored 0.33; here blind guessing scores
 ~0.03, because a guess has no rank agreement to multiply the accuracy by.
 
-Weights: items 0.40, spinouts 0.30, skid_time 0.30. spinouts = bananas + explosions (scored
-jointly - not distinguishable). skid_time = drift seconds; drift's yellow-wheel-sparks tell is
-distinct from straight driving, so it is witnessable (hard to time to within 30%).
-A field with no spread in the GT is renormalised out so the oracle still reaches 1.0.
+Weights: items_collected 0.55, skid_time 0.45 (drift seconds, in VIDEO time). Two off-HUD quantities
+that both defeat a strong agent (it undercounts pickups ~half and cannot time drift within 30%).
+spinouts is NOT scored — the dizzy-stars spin-out is legible enough that a strong agent counts it
+well, so it is not a valid difficulty lever; it stays as unscored context. A field with no spread in
+the GT is renormalised out so the oracle still reaches 1.0.
 
 Ground truth is baked verifier-side at /tests/ground_truth.json.
 """
@@ -45,17 +46,19 @@ from pathlib import Path
 
 GT_PATH = Path(__file__).with_name("ground_truth.json")
 # (ground-truth field, prediction field, weight)
-DIMS = [("items_collected", "items_collected", 0.40),
-        ("spinouts",         "spinouts",         0.30),
-        ("skid_time",        "skid_time",         0.30)]
-# Three cleanly-observable, machine-exact quantities:
-#  * items_collected — the hero drives through a question-mark box (HUD powerup slot masked).
-#  * spinouts (= bananas_hit + times_exploded) — the dizzy-stars spin-out. Banana and bomb hits are
-#    not distinguishable at 720p, so their SUM (the visible spin-out event) is scored.
-#  * skid_time — total DRIFT SECONDS. Drift has a distinct tell: bright YELLOW sparks spray from
-#    BOTH rear wheels while skidding (calibration/crops/drift_720p.png), absent when running
-#    straight - so drift is witnessable and its duration scorable (hard: time + sum the drifts to
-#    within 30%). bananas_hit / times_exploded / nitro / positions remain unscored context.
+DIMS = [("items_collected", "items_collected", 0.55),
+        ("skid_time",        "skid_time",        0.45)]
+# Two off-HUD, machine-exact quantities that are HARD for a strong agent (n=3 calibration showed both
+# defeat it: it undercounts pickups by ~half and cannot time drift to within 30%):
+#  * items_collected — the hero drives through a question-mark box (HUD powerup slot masked, no
+#    on-screen count), so pickups must be caught from the video.
+#  * skid_time — total DRIFT SECONDS in VIDEO time (the GT is rescaled from telemetry game-seconds to
+#    the video clock; see generator/build_ground_truth.py). Drift's tell is bright YELLOW sparks from
+#    BOTH rear wheels while skidding (calibration/crops/drift_720p.png), absent when running straight,
+#    so it is witnessable and its duration scorable (hard: time + sum the drifts to within 30%).
+# spinouts is NOT scored: the dizzy-stars spin-out is legible enough that a strong agent counts it
+# well (n=3 calibration: accuracy up to 0.60), so it is not a valid difficulty lever and only weakened
+# the <0.10 bar. It, bananas_hit, times_exploded, nitro and positions remain unscored context.
 
 
 def as_num(v):

@@ -1,6 +1,6 @@
 ---
 title: Task Spec Card
-summary: kart-race-telemetry-ledger-s1 — reconstruct the camera-followed hero kart's powerup pickups, spin-outs and drift-time across twelve AI-driven SuperTuxKart races, scored exactly against machine telemetry.
+summary: kart-race-telemetry-ledger-s1 — reconstruct the camera-followed hero kart's powerup pickups and drift-time across twelve AI-driven SuperTuxKart races, scored exactly against machine telemetry.
 ---
 
 # Task Spec Card
@@ -10,27 +10,28 @@ task: agentic_vbench_understanding/kart-race-telemetry-ledger-s1
 
 cognitive_level: understanding
 # The camera is a chase-cam locked to one hero kart (tux) for the whole suite. For each of twelve
-# races the agent reconstructs THREE off-HUD quantities for the hero — how many powerup boxes it
-# drove through, how many times it spun out, and how many seconds it spent drifting — none shown as
-# a number, and the powerup HUD slot is masked. Accurate fine-grained counting + one duration over a
-# ~55-min horizon. The ranking column and minimap are navigation aids (position/timing), never answers.
+# races the agent reconstructs TWO off-HUD quantities for the hero — how many powerup boxes it drove
+# through, and how many seconds it spent drifting — neither shown as a number, and the powerup HUD
+# slot is masked. Accurate fine-grained counting + a duration over a ~55-min horizon. The ranking
+# column and minimap are navigation aids (position/timing), never answers.
 
 modalities_required:
-  video: the hero, the track boxes, the spin-outs, the drift sparks, ranking column and minimap are all visual.
+  video: the hero, the track boxes, the drift sparks, ranking column and minimap are all visual.
   audio: not used.
 
-question: For each race, reconstruct the HERO kart's powerup boxes collected, spin-outs (banana OR bomb, scored jointly), and drift seconds — all off-HUD — in race order.
-output_schema: '{"races": [{"track": str, "t": number, "items_collected": int, "spinouts": int, "skid_time": number}]}'  # t = video seconds; bananas/nitro/positions optional, unscored
+question: For each race, reconstruct the HERO kart's powerup boxes collected and drift seconds — both off-HUD — anchored to when the race happens in the video.
+output_schema: '{"races": [{"track": str, "t": number, "items_collected": int, "skid_time": number}]}'  # t = video seconds; spinouts/bananas/nitro/positions optional, UNSCORED
 
 ground_truth:
   source: SuperTuxKart 1.5 profile mode (--profile-laps) result table; the AI drives every kart and
           STK prints exact per-kart telemetry (bonus_count, banana_count, explosion_count, skid_time,
           ...). The camera follows the hero because the generator makes it the player kart (--kart=tux
           --ai=<rest>), so the recorded run is its own ground truth AND the scored kart is on screen
-          the whole race.
+          the whole race. skid_time is RESCALED from telemetry game-seconds into VIDEO seconds (see
+          SKID TIMEBASE below and generator/build_ground_truth.py).
   tier: machine-truth
   verification: oracle solution.json = the hero's telemetry rows; judge.py scores it 1.0 through the
-                harness path (solve.sh -> judge.py) on all three scored quantities.
+                harness path (solve.sh -> judge.py) on both scored quantities.
 
 scorer:
   metric: "EXACT + TIME-ANCHORED. Each predicted race is matched to the GT race whose video window
@@ -39,59 +40,67 @@ scorer:
            clamp(tau_q,0,1) * accuracy_q, where accuracy_q = mean over matched races of
            max(0, 1 - |pred-gt| / max(1, 0.30*gt)) and tau_q is the signed Kendall correlation (the
            guess gate). reward = sum_q w_q*score_q, renormalised over quantities that vary in the GT.
-           Weights: items 0.40, spinouts 0.30, skid_time 0.30."
+           Weights: items_collected 0.55, skid_time 0.45."
   # WHY exact, not rank. Rank agreement alone is too forgiving: an agent that systematically
-  # UNDER-counts (Codex saw ~8 of 20 powerups) still ranks the races roughly right and scored ~0.35.
+  # UNDER-counts (Codex sees ~half the powerups) still ranks the races roughly right and scored ~0.35.
   # Scoring against STK's full-precision telemetry (within ~30% per race) removes that free credit.
   # The tau gate keeps it guess-proof: an ungated exact metric was rejected in an early design
   # (blind guessing 0.33), but multiplying by rank agreement drops blind guessing to ~0.02.
+  # WHY only items + skid (spinouts dropped). n=3 calibration showed the dizzy-stars spin-out is
+  # legible enough that a strong agent counts it well (accuracy up to 0.60), so scoring it broke the
+  # <0.10 bar (2 of 3 Codex runs 0.10-0.19). The two quantities kept both genuinely defeat a strong
+  # agent — it undercounts pickups ~half and cannot time drift to within 30%.
   oracle_reward: 1.0
   null_reward: 0.0
-  measured_ablations:            # on the shipped 12-race ground truth
-    correct_counts_wrong_times: 0.005  # right counts at shuffled video times -> the time window rejects
-    blind_guess: 0.020           # random solutions; the tau gate collapses guessing
+  measured_ablations:            # on the shipped 12-race ground truth, current 2-dim scorer
+    correct_counts_wrong_times: 0.0    # right counts at shuffled video times -> the time window rejects
+    blind_guess: 0.007           # random solutions; the tau gate collapses guessing
+    single_frame: 0.0            # one frame -> no per-race differentiation -> constant -> tau 0
+    no_media: 0.007              # prompt + schema only; nothing to differentiate races
+    ocr_only: 0.0                # NO scored quantity is on-screen text (HUD masked, off-HUD) -> guess
     constant_counts: 0.0         # every race identical -> predicted ties -> 0
     empty: 0.0
 
-# OBSERVABILITY — every scored quantity is visible on the hero; only cleanly-visible ones are scored
-# (crops in calibration/crops/):
+# SKID TIMEBASE (correctness). The software-GL capture runs BELOW realtime, and by a per-race factor
+# (heavy tracks slow llvmpipe more), so a race of G game-seconds spans V > G video-seconds. Telemetry
+# skid_time is in GAME seconds; the agent times drift off the VIDEO in VIDEO seconds. So the GT is
+# rescaled per race: skid_time_video = skid_time_game * (video_clip_duration / game_race_duration).
+# Measured per-race speed factors V/G (published so the map is auditable):
+#   hacienda 1.13  snowmountain 1.31  cornfield_crossing 1.56  lighthouse 1.47  gran_paradiso 1.87
+#   sandtrack 1.23  olivermath 1.18  cocoa_temple 1.75  scotland 1.28  fortmagma 1.31
+#   ravenbridge 1.47  stk_enterprise 1.13   (mean 1.39). GT keeps skid_time_game + speed_factor per
+# race for reference. Oracle = 1.0 on the rescaled values.
+
+# OBSERVABILITY — both scored quantities are visible on the hero (crops in calibration/crops/):
 #  * items_collected — the hero drives THROUGH a question-mark box (visible; HUD confirmation masked).
-#  * spinouts (= banana_count + explosion_count) — the dizzy-stars spin-out. A banana hit and a bomb
-#    hit render as the SAME spin-out and are NOT reliably distinguishable at 720p, so only their SUM
-#    (the visible spin-out event) is scored — the cause is not scored because it is not observable.
 #  * skid_time (drift seconds) — drift has a DISTINCT tell: bright YELLOW sparks spray from BOTH rear
 #    wheels while skidding (drift_720p.png / zoom_drift_sparks.png) and vanish the instant the kart
-#    runs straight (zoom_no_drift_straight.png). So drift is witnessable and its duration is scorable
-#    — HARD (time + sum the drifts to within 30%) but fair. It is not load-bearing: items+spinouts
-#    alone already score <0.10.
+#    runs straight (zoom_no_drift_straight.png). Witnessable, and its duration scorable — HARD (time
+#    + sum the drifts to within 30%). spinouts (banana/bomb dizzy-stars) is NOT scored: it is legible
+#    enough to be countable by a strong agent, so it is not a difficulty lever; it stays as context.
 
-difficulty: {strong_agent_reward: 0.0892, agent_model: codex gpt-5.6-sol xhigh}  # shipped time-anchored 3-dim metric; n=1
-# MEETS the family's <0.10 strong-agent bar. Per-dim on the shipped run (Codex matched all 12 races
-# to the right video window):
-#   items_collected: score 0.024 (tau 0.45, accuracy 0.05) — the agent undercounts powerups by ~half,
-#                    so it is almost never within 30%; nearly unscored.
-#   spinouts:        score 0.174 (tau 0.66, accuracy 0.26) — the dizzy-stars spin-out is the most
-#                    legible event and carries most of the reward.
-#   skid_time:       score 0.092 (tau 0.32, accuracy 0.29) — timing the cumulative drift to within
-#                    30% over a 55-min video is hard.
+difficulty: {strong_agent_reward: 0.052, agent_model: codex gpt-5.6-sol xhigh}  # 2-dim; Codex n=3 max
+# MEETS the family's <0.10 strong-agent bar with margin. n=3 on the shipped video + shipped scorer:
+#   Codex gpt-5.6-sol (xhigh): 0.030 / 0.000 / 0.052  (n=3, mean 0.027, max 0.052)
+#   Claude Code (Opus 4.8):    0.045   (n=1)
+#   (Antigravity + Gemini 3.x: pending, added by maintainer/owner — see calibration/scores.md)
+# Per-dim on the max Codex run: items accuracy ~0.01-0.05 (undercounts pickups ~half, almost never
+# within 30%); skid accuracy ~0.13-0.17 (cannot time cumulative drift within 30% over a 55-min video).
 # HISTORY of the hardening (all measured, Codex xhigh):
 #   v2 hero-scope, rank agreement, 3 counts:              0.407
-#   + HUD powerup mask (identification-hardness):         0.345 (items tau 0.64 -> 0.46)
+#   + HUD powerup mask (identification-hardness):         0.345
 #   + EXACT-count metric (accuracy within 30%, not rank): items term 0.46 -> 0.10
-#   + merge banana+explosion -> spinouts (visually identical): positional re-score 0.0236
-#   + TIME-ANCHORED (races matched by video time +/-15 s):     fresh run 0.0892
-# n=1, run-dependent. The time window only ever REMOVES credit from a given submission (it adds a
-# constraint), so it is strictly no easier; the 0.0892-vs-0.0236 gap is run-to-run variance (a fresh
-# 12-race run that engaged more on spinouts vs a re-score of the earlier completed 542-call run), not
-# the metric. Still FAIR + LEARNABLE: oracle = 1.0, blind-guess 0.020, correct-counts-wrong-times
-# 0.005; a within-30% agent scores far higher. Difficulty is ACCURATE counting + a drift DURATION
-# over a 55-min video, not a metric hack.
+#   + time-anchored (races matched by video time +/-15 s)
+#   + skid_time rescaled to VIDEO seconds (timebase fix)
+#   + DROP spinouts (too countable; broke the bar at n=3) -> items+skid, Codex n=3 mean 0.027
+# FAIR + LEARNABLE: oracle = 1.0, blind-guess 0.007; a within-30% agent scores far higher. Difficulty
+# is ACCURATE pickup-counting under a masked HUD + a drift DURATION over a 55-min video, not a hack.
 
 anti_shortcut:
-  single_frame: one frame gives one instant, not twelve races of accurate per-kart counts + drift time.
-  no_media: the twelve races' quantities are not knowable blind — measured blind-guess ~0.02.
-  frame_dump_no_tools: a 55-min video at 1 fps is >3000 frames, past any context window, so an
-    agent cannot ingest it without seeking tools.
+  single_frame: 0.0     # one frame -> no per-race differentiation -> constant -> tau gate = 0
+  no_media: 0.007       # prompt + schema only; the twelve races' quantities are not knowable blind
+  ocr_only: 0.0         # neither scored quantity is on-screen text (HUD masked, off-HUD) -> guess
+  frame_dump_no_tools:  # a 55-min video at 1 fps is >3000 frames, past any context window
 
 input:
   url: https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/main/kart-race-telemetry-ledger-s1/race.mp4
@@ -109,36 +118,37 @@ input:
 
 ## Notes
 
-- **Why it is a real reconstruction problem.** None of the three scored quantities is displayed as a
-  number. Recovering them means following the hero through every lap of every race and *accurately*
-  measuring three independent things — powerup-box drive-throughs (HUD masked), spin-outs, and drift
-  seconds — then reporting exact per-race values, not just an ordering. On SuperTux difficulty the
-  hero genuinely fights for boxes, is genuinely bombed/slipped, and drifts hard corners.
+- **Why it is a real reconstruction problem.** Neither scored quantity is displayed as a number.
+  Recovering them means following the hero through every lap of every race and *accurately* measuring
+  two independent things — powerup-box drive-throughs (HUD masked) and drift seconds — then reporting
+  exact per-race values, not just an ordering. On SuperTux difficulty the hero genuinely fights for
+  boxes and drifts hard corners.
 - **Observability is the point.** The camera is locked to the hero and only the hero is scored, so
-  every scored event is on screen by construction. A quantity that is *not* cleanly visible (the
-  banana-vs-bomb cause) is deliberately excluded from scoring — see the observability block.
-  `calibration/crops/` shows 720p frames of each scored tell (incl. the yellow drift sparks).
+  every scored event is on screen by construction. `calibration/crops/` shows 720p frames of each
+  scored tell (incl. the yellow drift sparks).
 - **Exact scoring, guess-gated.** Accuracy (within ~30% of the machine value) forces real counting
   and timing; the tau gate zeroes a guesser. The oracle scores exactly 1.0.
 
 ## Fairness constraints enforced during generation
 
 - **The hero is always present and always the camera target.** run_race.sh passes
-  `--kart=<hero> --ai=<rest>`; build_ground_truth.py asserts the hero is in every race and that the
-  primary scored field varies, or it refuses to emit a degenerate ground truth.
+  `--kart=<hero> --ai=<rest>`; build_ground_truth.py asserts the hero is in every race and that both
+  scored fields vary, or it refuses to emit a degenerate ground truth.
 - **The field stays legible.** parse_profile.py asserts the parsed field size and rejects duplicate
   kart ids (STK backfills unknown `--ai` ids with a duplicate), so every kart is a distinct visible
   character.
 
 ## Known limitations
 
-- Only banana-vs-explosion CAUSE is excluded from scoring (unobservable — both are the same
-  spin-out); the three scored quantities are each cleanly observable on the hero at 720p.
-- `skid_time` (drift seconds) is the hardest dimension: the drift event is clearly visible (yellow
-  wheel sparks) but summing the total duration to within 30% is demanding. It is not load-bearing —
-  the task scores <0.10 on items+spinouts alone — so it adds difficulty without gating fairness.
-- Each race is now TIME-ANCHORED: the GT tags every race with its video window and the agent must
-  report each race's video time t, matched within +/-15 s (correct counts at the wrong segment score
-  ~0 — see scorer, ablation correct_counts_wrong_times 0.005). Per-EVENT ordering *within* a race
-  (each pickup/spin-out timestamped) would need machine-exact per-event times, which STK's prebuilt
-  binary does not expose headless; per-race aggregates at per-race timestamps are the ceiling.
+- **skid_time timebase is corrected but approximate.** The GT rescales each race's drift-seconds from
+  game-seconds to video-seconds by the per-race factor video_clip_duration / game_race_duration
+  (published above). The factor is a whole-race average; if the software-GL slowdown is non-uniform
+  *within* a race, the per-race drift total in video-seconds has some residual error — absorbed by the
+  ±30% accuracy tolerance. The map was measured, not assumed (see build_ground_truth.py).
+- **spinouts is not scored.** The dizzy-stars spin-out is legible enough that a strong agent counts it
+  well (n=3: accuracy up to 0.60), so scoring it broke the <0.10 bar; it is kept as unscored context.
+- Each race is TIME-ANCHORED: the GT tags every race with its video window and the agent must report
+  each race's video time t, matched within +/-15 s (correct counts at the wrong segment score ~0 —
+  see scorer, correct_counts_wrong_times 0.0). Per-EVENT ordering *within* a race (each pickup
+  timestamped) would need machine-exact per-event times, which STK's prebuilt binary does not expose
+  headless; per-race aggregates at per-race timestamps are the ceiling.
