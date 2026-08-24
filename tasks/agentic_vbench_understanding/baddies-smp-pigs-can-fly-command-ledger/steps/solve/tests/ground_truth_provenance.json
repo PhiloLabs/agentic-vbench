@@ -1,0 +1,149 @@
+[
+ {
+  "candidate_id": 11,
+  "command_time_s": 872.0,
+  "gap_s": 53.0,
+  "adjudicator": "lead",
+  "frames_cited": "907s still grounded beside the leashed boat (rockets 57); 925s F5 shows the camera player airborne with elytra spread (rockets 56) \u2014 execution happened, so one annotator's not_done is refuted; the manoeuvre still fails afterwards, hence partial"
+ },
+ {
+  "candidate_id": 13,
+  "command_time_s": 940.0,
+  "gap_s": 36.0,
+  "adjudicator": "workflow+verified",
+  "frames_cited": "968s at hill base on gravel with Oak Boat in hand (tooltip + slot-5 boat icon), terraced rise ahead; 972s and 974s pressed against the hill face, grass/dirt ledges above head, boat still in hand = last frames clearly NOT on the hill; 976s on top of the grass plateau, oak boat now PLACED on the ground and slot 5 empty, broad vista of plains and distant mesas = first frame clearly on the hill; 978s and 980s looking down on the gravel flat from that high ground (Lead selected); 982s-996s back down on gravel re-leashing the pig; 1004s same plateau, a cow now sitting in the boat he placed at 976s; 1028s leather added to hotbar, 1036s pig in the boat, 1044s standing on the high ground with rockets 56; 1052s airborne with elytra, rockets 55, leash taut (the glide off that hill the coach asks for at 1040s)"
+ },
+ {
+  "candidate_id": 86,
+  "command_time_s": 1262.0,
+  "gap_s": 20.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "Direct reply to Nio's give-up line at 1257s ('I'll probably hire you to fly them home if I can't do this'), so 2nd-person imperative from the coach; discrete observable action = make more flight attempts, not vague manner advice. Clearly executed: f4 (1282s) Nio airborne in F5 with Firework Rocket named in the hotbar, f5 (1292s) back on the ground holding the Lead with the pig in a boat (that try failed), f6 (1307s) airborne again with the leashed pig below him, f7 (1322s) still climbing with the pig on the lead during Death's 'you just have to do it very slowly', f8 (1352s) landed at his own base/city. Rocket count decrements 52->46 across the frames, confirming successive launches."
+ },
+ {
+  "candidate_id": 23,
+  "command_time_s": 1405.0,
+  "gap_s": 107.0,
+  "adjudicator": "lead",
+  "frames_cited": "1512s a purple-armoured player with the nameplate 'ThatDeath' stands inside the pink room holding a lead with the pig behind him; 1518s the pig is on the room carpet with the leash line running to him \u2014 executor is ThatDeath, not the camera player"
+ },
+ {
+  "candidate_id": 24,
+  "command_time_s": 1466.0,
+  "gap_s": 34.0,
+  "adjudicator": "lead",
+  "frames_cited": "1496s the wooden door is still hung in the doorway; 1520s the doorway is clear and the pig walks through \u2014 so the 1478s start proposed by one annotator is refuted and the removal falls just after 1496s"
+ },
+ {
+  "candidate_id": 31,
+  "command_time_s": 2106.0,
+  "gap_s": 72.0,
+  "adjudicator": "lead",
+  "frames_cited": "2106s command (the co-player in the room is ThatDeath; the cyan 'North Pick You' text above the hotbar is a custom-named pickaxe tooltip, which I initially misread as a nameplate); 2142s chest GUI open pulling redstone; 2178s a piston is placed by the bed and a redstone block is in hand \u2014 that is the action itself starting; 2226s redstone dust on the floor. The boat is never seen pushed into the wall, so partial"
+ },
+ {
+  "candidate_id": 95,
+  "command_time_s": 2230.0,
+  "gap_s": 20.0,
+  "adjudicator": "lead",
+  "frames_cited": "2250s the tooltip reads 'Smooth Quartz Block' with 26 in the stack while he faces the piston; 2270s a white quartz block is standing in front of the piston and the stack has dropped to 25 \u2014 placement is visible, refuting the other annotator's not_done"
+ },
+ {
+  "candidate_id": 96,
+  "command_time_s": 2356.0,
+  "gap_s": 20.0,
+  "adjudicator": "lead",
+  "frames_cited": "2376s 'Nordic Battle Axe' selected and the wall already shows a broken gap \u2014 demolition underway, so not_done is refuted; 2406s he is in an 'Edit Sign Message' screen instead, so the second half of the request (build the replacement wall) never happens: partial"
+ },
+ {
+  "candidate_id": 68,
+  "command_time_s": 4826.0,
+  "gap_s": 41.0,
+  "adjudicator": "workflow+verified",
+  "frames_cited": "4844s Large Chest GUI - inventory row3 EMPTY at slot7, no vine stack anywhere (before-state); 4866.0s shulker box closed, crosshair on magenta shulker atop barrel; 4866.4s Shulker Box GUI open, box packed with vine stacks; 4866.9s 58-stack still in shulker slot 5, inventory row3 slot7 still empty; 4867.1s tooltip reads \"Vines / minecraft:vine\" over the 58-stack, still in shulker; 4867.2s 58-stack GONE from shulker slot 5 and PRESENT as green vine stack in inventory row3 slot7 (transfer pinned to 4867.1-4867.2); 4867.4s GUI closed; 4880s Barrel GUI - 58 vine stack still in inventory row3 slot7; 4908s inventory/search screen - 58 vine stack still held, slot highlighted"
+ },
+ {
+  "candidate_id": 301,
+  "command_time_s": 5745.0,
+  "gap_s": 549.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "Speaker settled by the voice HUD: Death's (bottom) icon is white-framed at 5740.0, 5741, 5743, 5744, 5746 while nio's is not; nio's icon takes over from 5748.5 onward ('Yeah, it'd even it out maybe. Okay, I need to go and get a brown wool at least'). So Death directs nio: 'Might want to put another light on the other side of the bed to even it out.' Bed referenced = the green jungle-room bed (nio is standing at it with Death at 5731). Fulfilment is delayed ~555 s and is NOT in the packet frames (they stop at 5865). Sampled ahead with ffmpeg: at 6291 the bed has ONE green light block, at the head-RIGHT only. At 6294 nio says 'if we move that light over by one here', pulls Verdant Froglight from the inventory at 6305 and Jungle Leaves at 6309, and by 6311/6313/6316 there is a matching green block on BOTH sides of the bed head - i.e. the light is evened out across the bed exactly as Death a"
+ },
+ {
+  "candidate_id": 407,
+  "command_time_s": 6958.0,
+  "gap_s": 732.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "SPEAKER: cropped voice HUD at 6954/6958/6960/6966 shows the TOP icon (nio) white-framed, so nio speaks 'before doing more, maybe go and get some tropical fish'. TARGET: ThatDeath - proved independently by candidate 408, where the HUD bottom icon (purple = ThatDeath) is white-framed while he asks 'Where can I find those?' ~36s later. Death would not be asking for the location unless he had accepted the errand, so this is a real player-to-player request, not nio narrating (nio stays in the hotel the whole time: a2/a3/a4 and 7150-7250 show him in the purple-block room and the vine room). EXECUTION EVIDENCE: at 7690 the selected hotbar slot is a Bucket of Tropical Fish (zoomed hotbar crop shows the bucket with an orange fish inside) and a clownfish-pattern tropical fish is visible inside the glass tank; at 7722 ThatDeath ('Death' nameplate, purple/amethyst armour) is at the pool with a dropp"
+ },
+ {
+  "candidate_id": 306,
+  "command_time_s": 7142.0,
+  "gap_s": 133.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "nio answers Death's 'Do you want one like a clown fish?' (7139). Voice HUD is decisive on speaker: nio's icon carries the white speaking frame at 7142/7143/7144/7146 while Death's does not. Death is the one out at the reef with a single bucket ('I'm gonna have to take them one by one', 7176 - HUD shows Death framed at 7176 and again at 7238 for 'I'm getting them one by one'). The ten packet frames show nothing because the errand is entirely off-camera; sampling far ahead: tropical fish first appear in nio's view at ~7275 and repeatedly 7289-7313; ThatDeath (nameplate) is back at base at 7350, at the aquarium at 7610, and holding a bucket beside it at 7735/7765; nio holds 'Bucket of Tropical Fish' at 7675/7716/7744 while recapturing fish that escaped into the hallway at 7648-7675; the last bucket is emptied at 7775 ('That's it. That's all of them'). Distinct variants named across the erra"
+ },
+ {
+  "candidate_id": 310,
+  "command_time_s": 7372.0,
+  "gap_s": 475.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "Offer accepted ('Okay.' at 7374), so actionable under the offers rule; nio is the offerer and executor, Death the beneficiary. Voice HUD: nio framed at 7372, 7373, 7375. Execution is delayed ~475 s and conditioned on 'when you go back' - nothing at all in f0-f9. Sampling ahead: nio opens his inventory/bundle at 7843-7845, the yellow held-item name 'Bottle o' Enchanting' is legible above the hotbar at 7846, the thrown bottle entity is visible at 7847 and again at 7853, and blue 'effect' particle bursts engulf ThatDeath (nameplate visible) from ~7848 through ~7856. Verbally confirmed at 7854-7857: 'That did it a bit, right?' (nio framed) then 'Yep. It's all healed. Thank you.' (Death framed). Note the spoken verb was 'splash', but the item actually thrown is a Bottle o' Enchanting - XP feeding Mending on Death's dying elytra ('my elytra is dying', ASR 'my Elijah is dying', at 7364)."
+ },
+ {
+  "candidate_id": 226,
+  "command_time_s": 7722.0,
+  "gap_s": 20.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "Voice HUD is top-icon-only (nio) for 7723.5-7728.5, covering 'Can I? Uh, can you throw them onto me from down there?', and again N at 7731-7732.5 for 'I gave you another bucket as well'; ThatDeath only takes over at 7733-7741 (his nameplate carries the in-world speaker icon in the frames I pulled at 7733/7736/7739). Nio is above at the tank ('I can reach from here... so I deposit in the fish here now', 7712), Death is below in the flooded room - so nio is the requester and Death the target. Execution: nio's bucket slot empties at 7730-7739 (he tosses Death a spare bucket), then repeatedly refills - held-item tooltip 'Bucket' at 7745, slot empty 7748/7754, 'Bucket' again 7758 and 7774 - while dropped item entities sit next to Death at 7754, 7762 and 7770 (f5/f6 show Death handling an orange item at the water's edge). That empty/full cycling is the fish buckets arriving from Death and nio "
+ },
+ {
+  "candidate_id": 236,
+  "command_time_s": 8834.0,
+  "gap_s": 160.9,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "Voice HUD is decisive on speaker: nio's icon is white-framed at 8830/8832/8834/8836/8837 (ThatDeath's unframed), so nio says 'I'm bored. Can you eat bread? That would be funny. Eat bread.' addressed to ThatDeath, who is standing on the reception counter (nameplate visible in f1 at 8834). Concrete, observable act requested from another player, so actionable despite the jokey framing; nio then supplies the bread ('want a bread?' 8847). Execution chain: nio pulls a 19-stack of Bread into hotbar slot 9 (f3, 8846); at 8849 count is still 19; at 8850 the count is 18 with a thrown bread entity in flight toward ThatDeath, and at 8851/8852 a bread item lies on the lobby floor - so the 19->18 decrement is the TOSS, not nio eating (nio's hunger bar is full in every frame, and the stack stays at 18 through f9=8954 and beyond at 8984/9014, so nio never eats). The commanded act itself appears late, at"
+ },
+ {
+  "candidate_id": 336,
+  "command_time_s": 10787.0,
+  "gap_s": 269.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "Actionable: a concrete decoration request from one player to the other, explicitly accepted, and executed ~270 s later. Speaker ID from the voice HUD at high zoom: at 10786 neither icon framed; at 10787 and 10789 ONLY the bottom purple icon (ThatDeath) is white-framed -> ThatDeath speaks 'Maybe even some banners on the walls'; at 10792 the top cyan-accented icon (Nordic_Nio) gains a frame -> Nio replies 'Oh yeah, that could work as well. Custom banners. Good shout.' Corroborated at 10781, where the top (Nio) icon is framed for 'I'll go make more item frames', so Nio is the one decorating the hallways and ThatDeath is the suggester. Target/executor is therefore Nio, the first-person camera player. Packet frames are useless here: f0 (10777) is a dark interior with ThatDeath, f1/f2 (10787/10793) are Nio flying with a Firework Rocket away from the build, and f3-f9 all collapse to the same 10"
+ },
+ {
+  "candidate_id": 500,
+  "command_time_s": 11414.0,
+  "gap_s": 488.4,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "SPEAKER SETTLED BY HUD, NOT SELF-PLAN. Voice-chat HUD top-left has two icons: TOP = grey/cyan head (nio, Nordic_Nio), BOTTOM = black-hair/purple-band head (ThatDeath). I measured the 50x50 white ring around each icon programmatically at 2-4 fps. At the request (11409.5-11413.0 and 11414.5-11418.0) only the BOTTOM/purple icon is framed => ThatDeath speaks the spyglass suggestion; nio's icon flashes only at 11413.5-11414.0 and 11418.5-11420.0, matching his backchannel and then his praise reply. The re-press ('just get spy glass') at 11728.25-11733.0 is again BOTTOM/purple = ThatDeath. Icon identity independently corroborated by loudness: pooled over 11400-11520, 11550-11670, 11680-11800, top-icon-only speech medians -31.1 dB vs bottom-icon-only -41.6 dB, i.e. top icon = near mic = recording player nio. So the requester (ThatDeath) is NOT the executor (nio). EXECUTION: at ~11788-11792 nio o"
+ },
+ {
+  "candidate_id": 503,
+  "command_time_s": 11728.0,
+  "gap_s": 62.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "NOT a self-plan - the speaker and the doer are different people, verified two ways. (1) HUD: I built a contrast-based detector for the white speaking-frame on the two voice-chat icons (top = dark head w/ cyan eyes = nio, bottom = purple = ThatDeath) that survives GUI dimming. Over the exact VTT word span of 'Yeah, I mean, just get spy glass' (11728.48-11730.93) the DEATH icon is lit in 100% of 4fps samples and the nio icon in 0% (exclusive DEATH run 11728.25-11731.25). The reply 'I have everything in my vault for that ... I'll make three, maybe one for each floor going further up' (11733.76-11750.1) ends in a clean exclusive-NIO run (11742.5-11750.5). (2) Icon identity calibrated on 11400-12300: top-icon-exclusive median audio RMS 0.0350 (near mic), bottom-icon-exclusive 0.0078 with 26% near-silence (proximity-attenuated remote). Context: they are filling exhibition item frames; nio says"
+ },
+ {
+  "candidate_id": 504,
+  "command_time_s": 11949.0,
+  "gap_s": 406.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "Genuine cross-player request, not a self-plan. Word-level VTT timings: 'Get'@11949.04 'some'@11949.20 'turtle'@11949.44 'eggs,'@11949.84 'too.'@11950.32. The 8fps HUD scan gives an exclusive DEATH run 11949.62-11952.62 covering 'turtle eggs, too', and Death's follow-up 'If you don't have them, uh, I have them in the turtle, right?' is also DEATH-dominant. Critically the immediately preceding line 'Well, let me go and get some sniffer eggs' (11944.00-11946.93) sits in an exclusive NIO run 11945.00-11948.62 - so nio announces his OWN sniffer-egg errand and Death piggybacks a separate turtle-egg request onto it. nio then acts on it: he rummages storage (a4 at 11989 shows a shulker box open, tooltip 'Turtle Scute'), reports 'I don't have turtle shells, I mean turtle eggs' (11999, NIO), and Death adds 'just grab the turtle eggs from the giant turtle' (12049.76, exclusive DEATH). LANDING REFUT"
+ },
+ {
+  "candidate_id": 506,
+  "command_time_s": 12892.0,
+  "gap_s": 126.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "NOT a self-plan: speaker != executor. Voice-HUD at 8fps shows ThatDeath's icon framed continuously 12884.4-12895.25 while nio's icon is UNFRAMED and nio's own bottom-left mic-transmit indicator is OFF across 12884.4-12885.75, 12886.9-12889.0, 12890.6-12890.9 and 12893.0-12895.25 -- the last of these covers the clause 'this item frame is empty'. Independent corroboration: ThatDeath's loud instants in that span are perfectly mono (side/mid 0.0001-0.005, L/R=1.0000), the signature of the remote voice-chat stream; nio's near mic always reads L/R 1.02-1.05. nio's exclusive turns in the same chunk are only 0.3-0.5s backchannels (12889.4-12889.6, 12891.0-12891.4). nio then answers exclusively 12896.9-12899.6 ('we have an empty item frame'), and at 12910.0-12916.8 (nio only, mic on, rms up to 2870) says 'I forgot, I meant to bring...' -- i.e. nio is the addressee who owns the fix. Context corrob"
+ },
+ {
+  "candidate_id": 509,
+  "command_time_s": 13125.0,
+  "gap_s": 98.0,
+  "adjudicator": "opus5-vision-pass",
+  "frames_cited": "SPEAKER METHOD: the two-icon voice HUD top-left was read at 10 fps. Top icon = nio (dark torso, cyan legs), bottom icon = ThatDeath (purple armour). Identity of the top icon is PROVEN, not assumed: the Simple-Voice-Chat mic-transmit glyph at the bottom-left of the screen turns on/off in exact lockstep with the top icon's white frame across ~250 sampled frames, and never with the bottom icon alone. TURNS: 13123.3-13128.3 Death ONLY = 'You didn't bring the copper, did you?' (ASR 13125). 13128.6-13131.2 nio = 'No, I just made ... what I needed and then--'. 13131.3-13132.4 Death only; 13132.5-13135.7 both (crosstalk). 13135.8-13136.3 Death ONLY = 'Yeah.'. 13136.4-13138.5 nio ONLY = 'You want to make a new brush is what you're saying?'. Silence 13138.6-13140.7. 13140.8-13141.9 nio = 'I'll go make one.' NOT A SELF-PLAN: the paraphrase 'YOU want to make a new brush' is spoken by nio and address"
+ }
+]
