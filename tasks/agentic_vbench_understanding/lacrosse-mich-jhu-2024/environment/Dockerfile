@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # bytes do not match the pin, `sha256sum -c` exits non-zero and the BUILD FAILS,
 # so a wrong or re-encoded video can never reach the agent or the grader (the
 # ground-truth timings are only valid for this exact encode).
-ARG MATERIALS_URL=https://huggingface.co/datasets/willw96/agentic_vbench_lacrosse/resolve/main/game.mp4
+ARG MATERIALS_URL=https://huggingface.co/datasets/yingshuow/agentic_vbench_lacrosse/resolve/main/game.mp4
 ARG MATERIALS_SHA256=7e53feeb327da479448203385e3b76016bf9c78f78422bb715a7f906b0429a34
 RUN mkdir -p /baked \
  && curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \

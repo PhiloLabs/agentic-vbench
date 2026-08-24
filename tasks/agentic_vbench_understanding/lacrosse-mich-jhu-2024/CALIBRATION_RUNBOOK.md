@@ -23,29 +23,25 @@ reconstruct the ordered goal ledger. A valid task keeps the strong agent **below
 ## Prerequisites (check first; if any is missing, stop and tell the human)
 
 - `ffmpeg`, `python3`, `shasum`, `zip`/`unzip` on PATH.
-- The video `materials/game.mp4` is present. (If it is missing, the human must
-  copy it in — its SHA-256 is in `materials/game.mp4.sha256`.)
+- Network access to download the public, SHA-pinned task video.
 - For **Codex**: the `codex` CLI installed and logged in.
 - For **Gemini**: the `agy` (Antigravity) CLI installed and logged in.
 
 All scripts below live in `calibration/runpack/`. `cd` there first.
 
-## Step 0 — verify the video (bundled, ~1 GB)
+## Step 0 — download and verify the video (~1 GB)
 
-The processed task video `materials/game.mp4` is included in this kit. Confirm
-it is intact:
+Download the exact processed task video from `VIDEO_URL.txt` and verify its
+SHA-256 before staging a solver workspace:
 
 ```
 cd calibration/runpack
 ./fetch_video.sh
 ```
 
-If the bundled file is present and its SHA-256 matches `materials/game.mp4.sha256`
-this prints "already present, official hash verified" and does nothing else.
-(Only if the video is missing does it rebuild it from the public YouTube source
-via the official mask+mute recipe, needing `yt-dlp` + `ffmpeg`; a reproduced
-file won't be byte-identical, so the script re-pins the local hash and prints a
-NOTE — record that in `scores.md`.) Do not proceed until it prints `OK`/verified.
+This downloads the exact public file if needed and checks it against
+`materials/game.mp4.sha256`. It prints `OK` only when the bytes match. Do not
+proceed until verification succeeds.
 
 ## Run Codex (GPT-5.6 Sol)
 

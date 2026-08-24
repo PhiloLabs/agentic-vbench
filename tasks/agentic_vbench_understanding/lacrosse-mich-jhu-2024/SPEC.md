@@ -84,7 +84,7 @@ anti_shortcut:
 
 # 9. Input media.
 input:
-  url: https://huggingface.co/datasets/willw96/agentic_vbench_lacrosse/resolve/main/game.mp4
+  url: https://huggingface.co/datasets/yingshuow/agentic_vbench_lacrosse/resolve/main/game.mp4
   sha256: 7e53feeb327da479448203385e3b76016bf9c78f78422bb715a7f906b0429a34
   length_min: 102
   resolution: 720

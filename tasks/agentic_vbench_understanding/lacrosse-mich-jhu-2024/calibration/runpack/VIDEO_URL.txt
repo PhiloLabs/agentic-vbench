@@ -4,4 +4,4 @@
 #
 # Pinned SHA-256: 7e53feeb327da479448203385e3b76016bf9c78f78422bb715a7f906b0429a34
 # --- URL below this line ---
-https://huggingface.co/datasets/willw96/agentic_vbench_lacrosse/resolve/main/game.mp4
+https://huggingface.co/datasets/yingshuow/agentic_vbench_lacrosse/resolve/main/game.mp4
