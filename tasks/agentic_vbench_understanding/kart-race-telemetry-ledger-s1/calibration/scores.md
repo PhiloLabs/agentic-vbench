@@ -16,13 +16,14 @@ powerup slot masked.
 
 ## Strong-agent calibration lineup
 
-Each raw trajectory is committed here (secret-free audit record); the reward/solution **dumps live on
-HF** (pinned links below), not in git.
+The audit record for each row is the agent's **full raw session transcript** (every tool call,
+output, turn, and frame; only secrets + home paths redacted), hosted immutably on HF and pinned by
+revision with whole-file SHA256 in `rollouts/README.md`. Reward/solution dumps are alongside on HF.
 
 | harness (version) | model | reasoning | reward | tool-call turns | trajectory |
 |---|---|---|---|---|---|
-| Codex CLI (0.145.0) | gpt-5.6-sol | xhigh | **n=3: 0.030 / 0.000 / 0.052** (mean 0.027) | 242 / 120 / 237 | `rollouts/codex_trajectory.md` |
-| Claude Code CLI (2.1.241) | claude-opus-4-8 | extended thinking | **0.045** | 108 | `rollouts/claude_trajectory.md` |
+| Codex CLI (0.145.0) | gpt-5.6-sol | xhigh | **n=3: 0.030 / 0.000 / 0.052** (mean 0.027) | 242 / 120 / 237 | raw archive (`rollouts/README.md`) |
+| Claude Code CLI (2.1.241) | claude-opus-4-8 | extended thinking | **0.045** | 108 | raw archive (`rollouts/README.md`) |
 | Antigravity CLI | Gemini 3.x | — | _pending (added by maintainer/owner)_ | — | — |
 
 All measured on the shipped video + shipped 2-dim scorer. Strong-agent **max 0.052 (< 0.10)** across

@@ -1,25 +1,19 @@
-# Calibration trajectories (in-repo audit record)
+# Calibration trajectories — POL-1 raw archives
 
-One secret-free trajectory per strong-agent row in `../scores.md`. Each keeps the agent's own
-commentary and the shell commands it ran; tool outputs, encrypted reasoning, and all
-environment/credential context were dropped at extraction and re-scanned for keys (0 hits).
-
-- `codex_trajectory.md` — Codex CLI `gpt-5.6-sol` (xhigh); committed trajectory is run 1 of the n=3
-  (session tool calls per run: 242 / 120 / 237).
-- `claude_trajectory.md` — Claude Code CLI `claude-opus-4-8`, 108 tool calls.
-
-(Turn counts here and in `scores.md` are the raw session tool-call totals; the committed trajectory
-collapses consecutive identical calls, so its visible `→ run` count is a few lower.)
-
-**Rollout dumps (solution.json + reward.json) are on HF**, pinned to an immutable revision (not a
-mutable `main` link), whole-file SHA256 recorded:
+The **audit record** for each strong-agent row in `../scores.md` is the agent's **full raw session
+transcript** — every tool call, tool output, turn, and frame kept intact. Only credentials and
+home-directory prefixes were redacted (`sanitize_raw.py`: masks API keys / tokens / `Bearer` /
+private keys / `/home/<user>`; re-scanned to 0 residual secrets). The archives are tens of MB of
+base64 frames, so they are hosted immutably on HF (this repo has no git-LFS) and pinned by revision,
+with whole-file SHA256 recorded here:
 
 ```
-REV=39f1b933102acb3e52348752eb736b31c4c9d50b
-base=https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/$REV/kart-race-telemetry-ledger-s1/calibration
+REV=4a1142050c59375a7a833d7253549eb6205a7119
+base=https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/$REV/kart-race-telemetry-ledger-s1/calibration/raw
 ```
-- `$base/codex_solution.json`, `$base/codex_reward.json` (Codex run 3, the max of n=3)
-- `$base/claude_solution.json`, `$base/claude_reward.json`
-- trajectory copies also on HF; SHA256:
-  - `codex_trajectory.md`  `91ad2adbf6cb17915c4af42ec22dd38edd5348a276404f581853e7eaf20cb609`
-  - `claude_trajectory.md` `5feeb91ccbe04bf6435deab251419d8851e01a364ce4626128655ea913204cc0`
+| row | raw archive (`$base/…`) | sha256 |
+|---|---|---|
+| Codex CLI · gpt-5.6-sol (xhigh), run 1 of n=3 | `kart_codex_gpt-5.6-sol_raw.jsonl` | `ad3127d1424482713ae78ef1b98c41640454ba4577d8e45844a5709633930fd0` |
+| Claude Code CLI · claude-opus-4-8 | `kart_claude_opus-4.8_raw.jsonl` | `9ee2ce6c916bc49122711fdab91899950761f8abdfce9401e57e3c46d94f02e1` |
+
+The reward/solution JSON dumps are alongside at `.../calibration/` (same pinned revision).
