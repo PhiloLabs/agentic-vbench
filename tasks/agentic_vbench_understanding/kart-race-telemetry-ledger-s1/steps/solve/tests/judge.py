@@ -161,14 +161,24 @@ def main():
         if gt_has_spread:
             num += w * ds
             wsum += w
-    reward = max(0.0, num / wsum) if wsum else 0.0
+    base = max(0.0, num / wsum) if wsum else 0.0
+    # COVERAGE. A GT race with no matched prediction (omitted, or a prediction timed into the wrong
+    # segment) must contribute ZERO — otherwise a correct answer covering only k of n races would
+    # score as if complete (e.g. a 2-of-12 oracle would reach 1.0). Scale the reward by the fraction
+    # of GT races that got a matched prediction, so a partial answer cannot reach 1.0 while the full
+    # oracle (every race matched) still does. tau/accuracy are computed over the matched pairs; this
+    # factor puts the omitted races back into the denominator.
+    coverage = n_matched / len(gt_races) if gt_races else 0.0
+    reward = base * coverage
 
     det = {"reason": reason, "hero": gt.get("hero"), "n_races": len(gt_races),
-           "n_predicted_races": len(pred_races), "n_time_matched": n_matched, "time_tol_s": TOL,
+           "n_predicted_races": len(pred_races), "n_time_matched": n_matched, "coverage": round(coverage, 4),
+           "reward_before_coverage": round(base, 4), "time_tol_s": TOL,
            "dims": dims, "weights": {f: w for f, _, w in DIMS},
            "note": "each predicted race is matched to the GT race whose video window contains its t "
-                   "(+/-15 s); reward = (sum_d w*clamp(tau,0,1)*accuracy) / (sum_d w over varying "
-                   "fields); tau gates guessing to ~0, accuracy (within ~30% of the machine-exact "
+                   "(+/-15 s); reward = coverage * (sum_d w*clamp(tau,0,1)*accuracy)/(sum_d w over "
+                   "varying fields), coverage = matched_races / total_races (omitted races score 0); "
+                   "tau gates guessing to ~0, accuracy (within ~30% of the machine-exact "
                    "value) requires accurate counts/durations at the right time, oracle = 1.0"}
     a.reward_json.parent.mkdir(parents=True, exist_ok=True)
     a.reward_json.write_text(json.dumps({"reward": round(reward, 4), "details": det}, indent=2))

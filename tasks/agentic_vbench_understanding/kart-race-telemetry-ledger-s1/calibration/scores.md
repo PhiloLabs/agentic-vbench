@@ -3,7 +3,10 @@
 **Scorer (as shipped).** TIME-ANCHORED + EXACT, **two** scored quantities. Each predicted race is
 matched to the GT race whose video window `[t_start,t_end]` contains its reported `t` (±15 s); then
 per quantity `score_q = clamp(tau_q,0,1) · accuracy_q`, `accuracy_q = mean max(0, 1 − |pred−gt| /
-max(1, 0.30·gt))`, renormalised over quantities that vary. Scored: **items_collected (0.55)** and
+max(1, 0.30·gt))`, renormalised over quantities that vary, then scaled by **coverage =
+matched_races / total_races** so an omitted (or mis-timed) race contributes zero — a partial answer
+cannot reach 1.0 (a correct 2-of-12 answer scores ~0.17), the full oracle stays 1.0 (regression test
+`steps/solve/tests/test_coverage.py`). Scored: **items_collected (0.55)** and
 **skid_time / drift-seconds (0.45)**. `skid_time` is in VIDEO seconds (rescaled from telemetry
 game-seconds — see the timebase note). `spinouts` is **no longer scored** (kept as context).
 
@@ -36,7 +39,7 @@ revision (not mutable `main`; trajectory SHA256s in `rollouts/README.md`):
 | correct counts, wrong times | 0.0000 | right values at shuffled video times — the ±15 s window rejects |
 | blind guess (random) | ~0.027 | seed-dependent (0.007–0.03); the tau gate collapses guessing |
 | single frame | 0.0000 | one frame → no per-race differentiation → constant → tau 0 |
-| no media / OCR-only | 0.007 / 0.0 | no scored quantity is on-screen text (HUD masked, off-HUD) |
+| no media / OCR-only | 0.009 / 0.0 | no scored quantity is on-screen text (HUD masked, off-HUD) |
 | constant counts | 0.0000 | all races equal → predicted ties → 0 |
 | empty | 0.0000 | |
 

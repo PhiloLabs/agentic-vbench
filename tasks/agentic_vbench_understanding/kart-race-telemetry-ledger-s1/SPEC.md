@@ -39,8 +39,12 @@ scorer:
            segment earns nothing (not a bare rank permutation). Per quantity q: score_q =
            clamp(tau_q,0,1) * accuracy_q, where accuracy_q = mean over matched races of
            max(0, 1 - |pred-gt| / max(1, 0.30*gt)) and tau_q is the signed Kendall correlation (the
-           guess gate). reward = sum_q w_q*score_q, renormalised over quantities that vary in the GT.
-           Weights: items_collected 0.55, skid_time 0.45."
+           guess gate). reward = COVERAGE * sum_q w_q*score_q, renormalised over quantities that vary
+           in the GT, where coverage = matched_races / total_races: a GT race with no matched
+           prediction (omitted, or timed into the wrong segment) contributes ZERO, so a partial answer
+           cannot reach 1.0 (a correct 2-of-12 answer scores ~0.17) while the full oracle (all races
+           matched) stays 1.0. Weights: items_collected 0.55, skid_time 0.45. Regression-tested in
+           steps/solve/tests/test_coverage.py."
   # WHY exact, not rank. Rank agreement alone is too forgiving: an agent that systematically
   # UNDER-counts (Codex sees ~half the powerups) still ranks the races roughly right and scored ~0.35.
   # Scoring against STK's full-precision telemetry (within ~30% per race) removes that free credit.
@@ -56,7 +60,7 @@ scorer:
     correct_counts_wrong_times: 0.0    # right counts at shuffled video times -> the time window rejects
     blind_guess: 0.027           # random solutions (seed-dependent, ~0.007-0.03); the tau gate collapses guessing
     single_frame: 0.0            # one frame -> no per-race differentiation -> constant -> tau 0
-    no_media: 0.007              # prompt + schema only; nothing to differentiate races
+    no_media: 0.009              # prompt + schema only; nothing to differentiate races
     ocr_only: 0.0                # NO scored quantity is on-screen text (HUD masked, off-HUD) -> guess
     constant_counts: 0.0         # every race identical -> predicted ties -> 0
     empty: 0.0
@@ -98,7 +102,7 @@ difficulty: {strong_agent_reward: 0.052, agent_model: codex gpt-5.6-sol xhigh}  
 
 anti_shortcut:
   single_frame: 0.0     # one frame -> no per-race differentiation -> constant -> tau gate = 0
-  no_media: 0.007       # prompt + schema only; the twelve races' quantities are not knowable blind
+  no_media: 0.009       # prompt + schema only; the twelve races' quantities are not knowable blind
   ocr_only: 0.0         # neither scored quantity is on-screen text (HUD masked, off-HUD) -> guess
   frame_dump_no_tools:  # a 55-min video at 1 fps is >3000 frames, past any context window
 
