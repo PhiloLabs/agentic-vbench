@@ -7,15 +7,14 @@ camera follows the player kart, and the generator makes the hero the player. Onl
 telemetry is scored, so **every scored quantity is on screen the whole race**. The top-center
 HUD powerup slot is masked, so pickups have no on-screen confirmation.
 
-For each race the agent reports, for the hero, three off-HUD quantities:
+For each race the agent reports, for the hero, TWO scored off-HUD quantities:
 - **`items_collected`** — powerup boxes the hero drove through (HUD indicator masked; count the
   drive-throughs).
-- **`spinouts`** — times the hero spun out (dizzy-stars). A banana and a bomb both cause the SAME
-  visible spin-out and are not reliably distinguishable at 720p, so they are scored JOINTLY
-  (spinouts = bananas_hit + times_exploded in the ground truth). bananas_hit / times_exploded may
-  be reported separately as context but only their sum is scored.
-- **`skid_time`** — total seconds the hero spent drifting. Drift shows as bright yellow sparks from
-  BOTH rear wheels (distinct from straight driving); estimate the cumulative drift duration.
+- **`skid_time`** — total seconds the hero spent drifting, in VIDEO time. Drift shows as bright
+  yellow sparks from BOTH rear wheels (distinct from straight driving); estimate the cumulative
+  drift duration.
+(`spinouts` — times the hero spun out, banana or bomb dizzy-stars — may be reported as context but
+is NOT scored; see the DIMS note below for why.)
 
 ## Scoring — EXACT, not just rank
 

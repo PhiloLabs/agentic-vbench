@@ -4,8 +4,12 @@ One secret-free trajectory per strong-agent row in `../scores.md`. Each keeps th
 commentary and the shell commands it ran; tool outputs, encrypted reasoning, and all
 environment/credential context were dropped at extraction and re-scanned for keys (0 hits).
 
-- `codex_trajectory.md` — Codex CLI `gpt-5.6-sol` (xhigh), 241 tool calls (n=3 runs: 242/120/237).
+- `codex_trajectory.md` — Codex CLI `gpt-5.6-sol` (xhigh); committed trajectory is run 1 of the n=3
+  (session tool calls per run: 242 / 120 / 237).
 - `claude_trajectory.md` — Claude Code CLI `claude-opus-4-8`, 108 tool calls.
+
+(Turn counts here and in `scores.md` are the raw session tool-call totals; the committed trajectory
+collapses consecutive identical calls, so its visible `→ run` count is a few lower.)
 
 **Rollout dumps (solution.json + reward.json) are on HF**, pinned to an immutable revision (not a
 mutable `main` link), whole-file SHA256 recorded:
