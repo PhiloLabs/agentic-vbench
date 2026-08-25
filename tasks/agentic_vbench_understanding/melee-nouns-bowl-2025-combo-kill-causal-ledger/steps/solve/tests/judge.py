@@ -11,7 +11,6 @@ from pathlib import Path
 VALID_ATTACKERS = {"Ferriswheel", "Zain", "JoJo", "Bard", "Axe", "SRM13"}
 VALID_BANDS = {"light", "heavy", "devastating"}
 VALID_TERMINALS = {"escape", "reversal", "kill"}
-MAX_PREDICTIONS = 300
 
 
 def parse_args() -> argparse.Namespace:
@@ -89,8 +88,6 @@ def main() -> None:
         predictions_raw = solution.get("events", [])
         if not isinstance(predictions_raw, list):
             raise ValueError("events is not a list")
-        if len(predictions_raw) > MAX_PREDICTIONS:
-            raise ValueError(f"events exceeds {MAX_PREDICTIONS} entries")
     except Exception as exc:
         reason = f"unreadable solution.json: {exc}"
         predictions_raw = []
@@ -116,8 +113,12 @@ def main() -> None:
         "matching": "exact order-preserving one-to-one",
     }
     args.reward_json.parent.mkdir(parents=True, exist_ok=True)
+    args.reward_json.with_name("reward-details.json").write_text(
+        json.dumps(details, indent=2) + "\n",
+        encoding="utf-8",
+    )
     args.reward_json.write_text(
-        json.dumps({"reward": round(reward, 4), "details": details}, indent=2) + "\n",
+        json.dumps({"reward": round(reward, 4)}, indent=2) + "\n",
         encoding="utf-8",
     )
     args.reward_txt.write_text(f"{round(reward, 4)}\n", encoding="utf-8")

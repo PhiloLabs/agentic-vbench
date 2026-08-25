@@ -101,15 +101,15 @@ Run deterministic scorer regression tests with:
 python3 tools/test_judge.py
 ```
 
-Three retained local agent outputs have been scored by the formal verifier:
+The formal verifier reports exact event-level F1 only. Three retained clean
+calibration outputs have been scored:
 
-| harness | reward | auditable tool calls |
-|---|---:|---:|
-| Codex Desktop (`gpt-5.6-sol`, high) | 0.0899 | 145 |
-| Claude local agent (`claude-sonnet-5`) | 0.0 | 83 |
-| Antigravity (model metadata unavailable) | 0.0169 | 90 |
+| harness | model | harness version | exact F1 | auditable tool calls |
+|---|---|---|---:|---:|
+| Codex | `gpt-5.6-sol` | `0.147.0-alpha.6.5` | 0.0132 | 72 |
+| Claude | `claude-sonnet-5` | `2.1.209` | 0.0000 | 83 |
+| Antigravity | `Gemini 3.5 Flash` | `Antigravity.app 2.3.1` | 0.0169 | 90 |
 
-See `calibration/scores.md` for diagnostics, counting rules, and qualification
-caveats. These are the final results reported by this submission. The runs were
-outside the shipped Harbor image, and no measured anti-shortcut ablation results are
-claimed.
+The Codex row is Full baseline r3. The four recorded Codex ablations are all exact
+F1 `0.0000` (OCR-only, single-frame, no-media, and all-frames/no-tools). See
+`calibration/scores.md` for diagnostics and the local execution environment.

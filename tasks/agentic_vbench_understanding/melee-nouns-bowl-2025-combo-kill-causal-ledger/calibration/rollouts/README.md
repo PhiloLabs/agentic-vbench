@@ -1,14 +1,17 @@
 # Rollout records
 
-One retained JSONL transcript is stored for each evaluated agent:
+Retained supplemental transcripts are stored for the evaluated agents:
 
-- `codex.jsonl`: Codex Desktop 0.144.2, `gpt-5.6-sol`, high reasoning.
-- `claude-code.jsonl`: Claude local agent 2.1.209, `claude-sonnet-5`.
-- `antigravity.jsonl`: Antigravity export; model and harness version were not
-  recorded by the export.
+- `codex.jsonl`: compact retained Codex export. The selected Full baseline r3 raw
+  trajectory is the Harbor artifact at the path recorded in `../scores.md`.
+- `claude-code.jsonl`: retained Claude calibration export, version 2.1.209,
+  `claude-sonnet-5`.
+- `antigravity.jsonl`: retained Antigravity calibration export, model `Gemini 3.5
+  Flash`, harness `Antigravity.app 2.3.1`.
 
-The Antigravity file contains 90 explicit planner tool calls and is the final
-Antigravity artifact reported by this submission.
+The Antigravity file contains 90 explicit planner tool calls and is the retained
+Antigravity artifact reported by this submission. Exact-F1 diagnostics are in
+`../scores.md`.
 
 The exports have three mechanical redactions. Original local home-directory prefixes
 are replaced with `/home/agent`. The Codex export's 33 embedded base64 JPEG values are

@@ -35,6 +35,9 @@ def score_bytes(payload: bytes) -> dict[str, object]:
             check=True,
         )
         result = json.loads(reward_json.read_text(encoding="utf-8"))
+        result["details"] = json.loads(
+            reward_json.with_name("reward-details.json").read_text(encoding="utf-8")
+        )
         assert float(reward_txt.read_text(encoding="utf-8")) == result["reward"]
         return result
 
@@ -59,6 +62,11 @@ def main() -> None:
     duplicated = score({"events": events + [events[0]]})
     expected_duplicate = round(2 * len(events) / (2 * len(events) + 1), 4)
     assert duplicated["reward"] == expected_duplicate
+
+    excess_predictions = score({"events": events + [events[0]] * (301 - len(events))})
+    expected_excess = round(2 * len(events) / (len(events) + 301), 4)
+    assert excess_predictions["details"]["n_predicted"] == 301
+    assert excess_predictions["reward"] == expected_excess
 
     malformed_entry = score({"events": [*events, {"game": 1}]})
     assert malformed_entry["details"]["n_schema_valid"] == len(events)

@@ -33,17 +33,17 @@ scorer:
   null_reward: 0.0
 
 difficulty:
-  strong_agent_reward: 0.0899
-  tool_call_turns: 145
-  agent_model: gpt-5.6-sol with high reasoning via Codex Desktop 0.144.2; local run, no Harbor rerun claimed
+  strong_agent_exact_f1: 0.0132
+  tool_call_turns: 72
+  agent_model: gpt-5.6-sol with high reasoning via Codex 0.147.0-alpha.6.5 in Harbor 0.20.0/Docker 29.5.2
 
 anti_shortcut:
-  single_frame: not measured in the current submission
+  single_frame: exact F1 0.0000
   video_only: not applicable as a degradation because the full task input is video-only
   audio_only: not applicable because audio is absent
-  no_media: not measured in the current submission
-  ocr_only: not measured in the current submission
-  frame_dump_no_tools: not measured in the current submission
+  no_media: exact F1 0.0000
+  ocr_only: exact F1 0.0000
+  frame_dump_no_tools: exact F1 0.0000
 
 input:
   urls:
@@ -73,7 +73,6 @@ the scored ledger without temporal gameplay analysis.
 
 ## Calibration qualification
 
-Three local agent outputs have been measured below 0.10; see
-`calibration/scores.md`. They are reported as the final current calibration. The
-runs were outside Harbor and degraded-input ablations were not measured; no stronger
-claim is made.
+Three clean calibration outputs have been measured below exact F1 `0.10`; see
+`calibration/scores.md`. The Codex Full baseline r3 is the Codex row, while the
+retained Claude and Antigravity outputs are the other two clean-calibration rows.

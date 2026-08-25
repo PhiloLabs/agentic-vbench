@@ -1,8 +1,10 @@
 FROM python:3.12-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        ffmpeg ca-certificates curl \
+        ffmpeg ca-certificates curl nodejs npm ripgrep \
     && rm -rf /var/lib/apt/lists/*
+
+RUN npm install -g @openai/codex@0.147.0-alpha.6.5
 
 COPY fetch_youtube.py /usr/local/bin/fetch_youtube.py
 COPY concat.txt /baked/concat.txt
@@ -32,7 +34,8 @@ RUN mkdir -p /baked/parts \
     fi \
  && ffprobe -v error -select_streams v:0 \
       -show_entries stream=width,height,r_frame_rate -show_entries format=duration \
-      -of default=noprint_wrappers=1 /baked/match.mp4
+      -of default=noprint_wrappers=1 /baked/match.mp4 \
+ && rm -rf /baked/parts /usr/local/bin/fetch_youtube.py
 
 WORKDIR /workspace
 RUN mkdir -p /workspace/materials /workspace/output /workspace/work
