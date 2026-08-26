@@ -5,8 +5,8 @@
 # The camera follows a single HERO kart (tux) in every race (run_race.sh passes --kart=tux), so
 # every scored count is on camera. TWELVE 4-lap races on twelve tracks: long enough (~55 min) that
 # an agent cannot rely on watching a fraction, and each race yields high pickup/explosion/banana
-# counts that must be tallied precisely, then ranked across the suite. Three off-HUD quantities are
-# scored (items, explosions, bananas), which divides the agent's attention.
+# counts that must be tallied precisely, then ranked across the suite. Two off-HUD quantities are
+# scored (items_collected + skid_time; spinouts/positions are unscored context).
 #
 # Races are rendered in PARALLEL (each on its own Xvfb display) with a concurrency cap, because a
 # sequential 12x4 suite would take ~1 h of software-GL wall time; the machine has plenty of cores.

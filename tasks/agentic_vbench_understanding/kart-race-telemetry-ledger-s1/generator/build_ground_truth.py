@@ -46,10 +46,10 @@ for d in race_dirs:
     races.append({
         "track": track,
         "hero": hero,
-        # scored fields: items_collected, spinouts, skid_time (see steps/solve/tests/judge.py)
+        # scored fields: items_collected, skid_time (spinouts is UNSCORED context; see steps/solve/tests/judge.py)
         "items_collected": row["items_collected"],
         "spinouts": row["bananas_hit"] + row["times_exploded"],   # banana + bomb hits look identical,
-                                                                  # so they are scored jointly
+                                                                  # so their sum is kept as UNSCORED context (spinouts is not scored)
         # skid_time is rescaled from telemetry GAME seconds into VIDEO seconds below (see the window
         # loop): the software-GL capture runs below realtime, so an agent timing drift off the video
         # must be scored on the video clock.
@@ -89,14 +89,14 @@ if len(hero_set) != 1:
 
 # Every scored field must vary across races, or its rank target is degenerate and the oracle cannot
 # reach 1.0. (The judge renormalises weights over the fields that do vary, but the suite should have
-# spread in all three.)
+# spread in the scored fields.)
 for field in ("items_collected", "skid_time"):   # scored dims (spinouts is unscored context now)
     if len({r[field] for r in races}) < 2:
         sys.exit(f"{field} has no spread across races ({[r[field] for r in races]}) — vary "
                  f"tracks/laps so the hero's values differ, else that dimension is degenerate")
 
 dst.write_text(json.dumps({"hero": hero_set.pop(), "n_races": len(races), "races": races}, indent=2))
-print(f"wrote {dst} — {len(races)} races, hero-scoped (scored: items_collected, spinouts, skid_time)")
+print(f"wrote {dst} — {len(races)} races, hero-scoped (scored: items_collected, skid_time; spinouts is context)")
 for r in races:
     print(f"  {r['track']:22s} items {r['items_collected']:2d}  spinouts {r['spinouts']:2d}"
           f"  skid {r['skid_time']:6.1f}s  (P{r['finish_position']}/{r['field_size']})")

@@ -109,7 +109,7 @@ anti_shortcut:
   frame_dump_no_tools:  # a 55-min video at 1 fps is >3000 frames, past any context window
 
 input:
-  url: https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/main/kart-race-telemetry-ledger-s1/race.mp4
+  url: https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/39f1b933102acb3e52348752eb736b31c4c9d50b/kart-race-telemetry-ledger-s1/race.mp4
   sha256: 4b4cee91675cf7b9699e645dc490343026a7022a2de008b7e1397c69ee59eb42
   length_min: 55.1
   resolution: 720

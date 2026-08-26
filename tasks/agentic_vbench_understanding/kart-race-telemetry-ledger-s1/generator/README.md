@@ -14,7 +14,7 @@ run_suite.sh OUTDIR                                   # render the 12-race suite
        └─ SuperTuxKart --profile-laps --kart=HERO --ai=<rest>   # Xvfb + software GL + ffmpeg x11grab
   └─ parse_profile.py  stk_stdout.log gt.json --expect K        # profile table -> per-race GT
   └─ (concat -> race_suite.mp4; the shipped race.mp4 masks the top-center HUD powerup slot)
-  └─ build_ground_truth.py OUTDIR ground_truth.json             # hero-scoped GT (items/spinouts/skid)
+  └─ build_ground_truth.py OUTDIR ground_truth.json             # hero-scoped GT (items+skid scored; spinouts context)
 ```
 
 ## Requirements
@@ -26,13 +26,13 @@ run_suite.sh OUTDIR                                   # render the 12-race suite
 
 ## What is scored (and why it is observable)
 
-Three off-HUD, machine-exact quantities of the **hero** kart, per race:
+Two off-HUD, machine-exact SCORED quantities of the **hero** kart, per race (plus spinouts, computed but UNSCORED context):
 - **`items_collected`** — powerup boxes driven through (HUD powerup slot masked in the shipped video).
 - **`spinouts`** = `bananas_hit + times_exploded` — a banana hit and a bomb hit render as the *same*
-  dizzy-stars spin-out and are not distinguishable at 720p, so they are scored jointly.
+  dizzy-stars spin-out and are not distinguishable at 720p; their sum (spinouts) is kept as UNSCORED context — not scored, since a strong agent counts it too well to be a difficulty lever.
 - **`skid_time`** — drift seconds; drifting shows as bright yellow sparks off both rear wheels.
 
-`build_ground_truth.py` emits these three scored fields (plus context) and refuses to ship a suite
+`build_ground_truth.py` emits the two scored fields (plus context incl. spinouts) and refuses to ship a suite
 where any scored field has no spread across races.
 
 ## Design notes (learned the hard way — see NOTES.md)
@@ -63,8 +63,7 @@ laps** on SuperTux (53.4 min).
 ## Verifier
 
 Task-side, at the task dir's `steps/solve/tests/judge.py`. Scores an **exact-count** metric —
-`clamp(tau,0,1) · within-30%-accuracy` — over the three hero quantities above (weights
-items 0.40 / spinouts 0.30 / skid_time 0.30), renormalised over fields that vary. Positions, nitro
+`clamp(tau,0,1) · within-30%-accuracy` — over the two scored hero quantities above (weights
+items 0.55 / skid_time 0.45), renormalised over fields that vary. Positions, nitro
 and the banana/explosion split are reported for context but not scored (positions are on the HUD;
-the split is not visually distinguishable). Oracle 1.0, blind guess ~0.02, Codex `gpt-5.6-sol`
-0.0236. See the task's `SPEC.md`.
+the split is not visually distinguishable). Oracle 1.0, blind guess ~0.02; the 3-agent lineup (Codex / Claude Code / Gemini-3.5-flash) all score < 0.10 (max 0.0885). See the task's `SPEC.md`.
