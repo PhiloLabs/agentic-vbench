@@ -1,0 +1,40 @@
+{
+  "actions": [
+    {
+      "verb": "turn on",
+      "nouns": [
+        "burner"
+      ],
+      "start_frame": 970,
+      "end_frame": 1080
+    },
+    {
+      "verb": "take",
+      "nouns": [
+        "oil",
+        "oil_container"
+      ],
+      "start_frame": 1133,
+      "end_frame": 1149
+    },
+    {
+      "verb": "pour",
+      "nouns": [
+        "oil",
+        "oil_container",
+        "skillet"
+      ],
+      "start_frame": 1247,
+      "end_frame": 1306
+    },
+    {
+      "verb": "put",
+      "nouns": [
+        "oil",
+        "oil_container"
+      ],
+      "start_frame": 1345,
+      "end_frame": 1362
+    }
+  ]
+}

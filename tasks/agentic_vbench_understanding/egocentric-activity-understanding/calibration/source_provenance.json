@@ -1,0 +1,76 @@
+{
+  "retrieved_utc": "2026-08-25",
+  "dataset": {
+    "name": "Georgia Tech Egocentric Activity Datasets - GTEA Gaze+",
+    "institution": "Georgia Institute of Technology",
+    "session": "subject Ahmad, American breakfast",
+    "annotation_contact": "Yin Li, yli440@gatech.edu",
+    "annotation_last_update": "2015-01-22"
+  },
+  "media": {
+    "url": "https://www.dropbox.com/scl/fi/0sfkl9r59qchz71183s19/Ahmad_American.avi?rlkey=zlywl5mhpv3ycwgurbitq1fn2&dl=1",
+    "sha256": "f78b9f2c34bdb74eaf125bbb200fece6fd9d285f50b02905c91157f935a1ee24",
+    "bytes": 1300036635,
+    "published_extension": ".avi",
+    "actual_container": "matroska",
+    "muxing_app": "Lavf53.4.0",
+    "segment_uid": "3cd814730b18fab83a10a20e2d31e5d8",
+    "video_codec": "V_MPEG4/ISO/AVC",
+    "width": 1280,
+    "height": 960,
+    "fps": 24.0,
+    "default_duration_ns": 41666666,
+    "video_frames": 25692,
+    "last_frame_timecode_ms": 1070458,
+    "duration_s": 1070.5,
+    "audio_tracks": 0,
+    "baked_as": "/baked/session.mkv, byte-for-byte, never re-encoded or remuxed"
+  },
+  "annotation": {
+    "file": "steps/solve/tests/Ahmad_American.txt",
+    "readme": "steps/solve/tests/labels_readme.txt",
+    "format": "<verb><noun1,noun2,...> (start_frame-end_frame)",
+    "annotation_rate_hz": 24,
+    "first_frame_index": 0,
+    "lines": 172,
+    "shipped_verbatim": true,
+    "coverage": {
+      "note": "the annotation is sparse, not a dense per-frame segmentation",
+      "video_frames": 25692,
+      "frames_with_no_label": 6366,
+      "frames_with_exactly_one_label": 19138,
+      "frames_with_two_labels": 188,
+      "max_labels_on_any_frame": 2,
+      "uncovered_runs": 119,
+      "longest_uncovered_run_frames": 1042,
+      "overlapping_action_pairs": 44,
+      "pairs_overlapping_by_1_or_2_frames": 32,
+      "fully_nested_pairs": 1
+    },
+    "published_nouns_before_aliasing": 36
+  },
+  "ground_truth_build": {
+    "constructor": "calibration/build_ground_truth.py",
+    "actions": 172,
+    "verbs": 15,
+    "nouns": 35,
+    "first_action_start_frame": 1042,
+    "last_action_end_frame": 24905,
+    "sort_key": "(start_frame, end_frame, verb, nouns)",
+    "noun_normalization": "sorted, with NOUN_ALIASES applied (eggs -> egg); compared as a set by the judge. egg_container, egg_mixture and egg_shells stay distinct nouns.",
+    "gt_sha256": "9882ca7102abae525d8aebadca4248fd2ef3ad65cb215609a2db054376fd8e7b",
+    "vocabulary_sha256": "862be7fbb71634eb65026464e39ad0c6f3836ddd7dc28fcb1103f9d8c29e0faa",
+    "oracle_sha256": "9882ca7102abae525d8aebadca4248fd2ef3ad65cb215609a2db054376fd8e7b",
+    "oracle_reward": 1.0,
+    "noun_aliases": {
+      "eggs": "egg"
+    }
+  },
+  "scorer": {
+    "file": "steps/solve/tests/judge.py",
+    "metric": "order-preserving one-to-one 4-field F1",
+    "frame_tolerance": 12,
+    "tolerance_seconds": 0.5,
+    "ambiguity_check": "at a 12-frame tolerance no two annotated actions sharing a verb and noun set are mutually confusable (checked at 6/8/12/16/24)"
+  }
+}

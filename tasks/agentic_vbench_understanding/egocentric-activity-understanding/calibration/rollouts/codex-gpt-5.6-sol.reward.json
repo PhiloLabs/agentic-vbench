@@ -1,0 +1,16 @@
+{
+  "reward": 0.039474,
+  "ground_truth_actions": 172,
+  "predicted_actions": 132,
+  "valid_predicted_actions": 132,
+  "invalid_predicted_actions": 0,
+  "true_positives": 6,
+  "false_positives": 126,
+  "false_negatives": 166,
+  "precision": 0.045455,
+  "recall": 0.034884,
+  "f1": 0.039474,
+  "frame_tolerance": 12,
+  "verb_and_boundary_matches": 10,
+  "boundary_only_matches": 12
+}
