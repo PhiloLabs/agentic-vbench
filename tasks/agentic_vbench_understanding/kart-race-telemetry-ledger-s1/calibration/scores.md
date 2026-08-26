@@ -24,10 +24,12 @@ revision with whole-file SHA256 in `rollouts/README.md`. Reward/solution dumps a
 |---|---|---|---|---|---|
 | Codex CLI (0.145.0) | gpt-5.6-sol | xhigh | **n=3: 0.030 / 0.000 / 0.052** (mean 0.027) | 242 / 120 / 237 | raw archive (`rollouts/README.md`) |
 | Claude Code CLI (2.1.241) | claude-opus-4-8 | extended thinking | **0.045** | 108 | raw archive (`rollouts/README.md`) |
-| Antigravity CLI | Gemini 3.x | — | _pending (added by maintainer/owner)_ | — | — |
+| Gemini CLI (0.57.0) | gemini-3.5-flash | default | **0.0885** | 134 | raw archive (`rollouts/README.md`) |
 
-All measured on the shipped video + shipped 2-dim scorer. Strong-agent **max 0.052 (< 0.10)** across
-the lineup. The n=3 Codex runs settle the variance the reviewer asked about: mean 0.027, max 0.052 —
+All measured on the shipped video + shipped 2-dim scorer. Strong-agent **max 0.0885 (< 0.10)** across
+the lineup (gemini-3.5-flash — it counts powerups better than Codex/Claude, items accuracy 0.31, so it
+is the strongest agent and the tightest to the bar; skid still 0). The n=3 Codex runs settle the
+variance the reviewer asked about: mean 0.027, max 0.052 —
 comfortably under the bar. Rollout dumps (solution.json + reward.json) on HF, pinned to an immutable
 revision (not mutable `main`; trajectory SHA256s in `rollouts/README.md`):
 <https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/39f1b933102acb3e52348752eb736b31c4c9d50b/kart-race-telemetry-ledger-s1/calibration>

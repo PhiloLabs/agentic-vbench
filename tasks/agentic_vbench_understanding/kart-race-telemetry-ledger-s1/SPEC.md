@@ -83,11 +83,13 @@ scorer:
 #    + sum the drifts to within 30%). spinouts (banana/bomb dizzy-stars) is NOT scored: it is legible
 #    enough to be countable by a strong agent, so it is not a difficulty lever; it stays as context.
 
-difficulty: {strong_agent_reward: 0.052, agent_model: codex gpt-5.6-sol xhigh}  # 2-dim; Codex n=3 max
+difficulty: {strong_agent_reward: 0.0885, agent_model: gemini-3.5-flash}  # 2-dim; lineup max, still < 0.10
 # MEETS the family's <0.10 strong-agent bar with margin. n=3 on the shipped video + shipped scorer:
 #   Codex gpt-5.6-sol (xhigh): 0.030 / 0.000 / 0.052  (n=3, mean 0.027, max 0.052)
 #   Claude Code (Opus 4.8):    0.045   (n=1)
-#   (Antigravity + Gemini 3.x: pending, added by maintainer/owner — see calibration/scores.md)
+#   Gemini CLI (gemini-3.5-flash): 0.0885 (n=1) — LINEUP MAX, still < 0.10; it counts powerups better
+#     (items accuracy 0.31) so it is the tightest agent to the bar; skid still 0. (Gemini CLI, not the
+#     Antigravity IDE, which cannot run headless here; model is the reviewer's named 3.5-flash.)
 # Per-dim on the max Codex run: items accuracy ~0.01-0.05 (undercounts pickups ~half, almost never
 # within 30%); skid accuracy ~0.13-0.17 (cannot time cumulative drift within 30% over a 55-min video).
 # HISTORY of the hardening (all measured, Codex xhigh):
