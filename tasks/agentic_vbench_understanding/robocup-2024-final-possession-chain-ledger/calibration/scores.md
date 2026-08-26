@@ -13,6 +13,7 @@ this table.
 |---|---|---|---|---:|---:|---:|---|---|
 | Codex | Harbor 0.20.0 + direct Responses harness | GPT-5.6 Sol | high | 0.0000 | 0.1600 | 64 | retained raw trajectory | `a426ec0c084362eb5fe6de75643d18ac151d9d1252e08e81976c97cc278d97d3` |
 | Claude Code | Harbor 0.20.0 + manual wrapper | Claude Opus 4.8 | xhigh | 0.0952 | 0.2368 | 173 | retained raw trajectory | `faacb6ba2ecadf161063ab6ee4f15c2993a79f94fbeb0a8ebdda4735a5539fda` |
+| Antigravity CLI | 1.1.21 | Gemini 3.5 Flash | high | 0.0253 | 0.1224 | 145 | retained native log | `ad1f9812032649f8a59c8a996da901e88ca9814f32e7885d44429c29f1b96350` |
 
 ## Anti-shortcut ablations
 
@@ -60,6 +61,10 @@ referenced subagent trajectories. Record the raw tool-call count and any harness
 comparison count separately when they differ. A run clears the difficulty gate only
 when exact precision is below `0.10` for every reported strong-agent and ablation row,
 and a genuine end-to-end attempt exceeds 50 tool-call turns.
+
+Antigravity records its tool progress in its native agent log rather than ATIF
+`tool_calls` objects. Its 145 tool-call turns are the non-empty action records before
+the final answer in that retained log.
 
 The old desktop/local-agent measurements are superseded diagnostics, not formal
 calibration: they predate the reviewer-requested scorer and did not use this pinned
