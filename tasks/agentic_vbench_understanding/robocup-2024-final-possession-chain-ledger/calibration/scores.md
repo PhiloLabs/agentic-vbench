@@ -1,28 +1,30 @@
 # Calibration - robocup-2024-final-possession-chain-ledger
 
 The final qualification pass must use the exact checked-in instruction, verifier,
-task commit, and image built from the digest-pinned Dockerfile. The reported
-calibration statistic is exact order-preserving full-chain precision. Do not mix
-results from earlier scorer or prompt revisions into this table.
+task commit, and image built from the digest-pinned Dockerfile. The required
+calibration statistic is exact order-preserving full-chain precision. The retained
+partial-credit F1 is reported separately as a scorer diagnostic; it is not the
+calibration gate. Do not mix results from earlier scorer or prompt revisions into
+this table.
 
 ## End-to-end agents
 
-| harness | harness version | model | reasoning | exact precision | tool-call turns | trajectory asset | whole-file SHA256 |
-|---|---|---|---|---:|---:|---|---|
-| Codex | Harbor 0.20.0 + direct Responses harness | GPT-5.6 Sol | high | 0.0000 | 64 | retained raw trajectory | `a426ec0c084362eb5fe6de75643d18ac151d9d1252e08e81976c97cc278d97d3` |
-| Claude Code | Harbor 0.20.0 + manual wrapper | Claude Opus 4.8 | xhigh | 0.0952 | 173 | retained raw trajectory | `faacb6ba2ecadf161063ab6ee4f15c2993a79f94fbeb0a8ebdda4735a5539fda` |
+| harness | harness version | model | reasoning | exact precision (gate) | partial-credit F1 (diagnostic) | tool-call turns | trajectory asset | whole-file SHA256 |
+|---|---|---|---|---:|---:|---:|---|---|
+| Codex | Harbor 0.20.0 + direct Responses harness | GPT-5.6 Sol | high | 0.0000 | 0.1600 | 64 | retained raw trajectory | `a426ec0c084362eb5fe6de75643d18ac151d9d1252e08e81976c97cc278d97d3` |
+| Claude Code | Harbor 0.20.0 + manual wrapper | Claude Opus 4.8 | xhigh | 0.0952 | 0.2368 | 173 | retained raw trajectory | `faacb6ba2ecadf161063ab6ee4f15c2993a79f94fbeb0a8ebdda4735a5539fda` |
 
 ## Anti-shortcut ablations
 
 All four rows are real GPT-5.6 Sol runs under the final image and scorer. Exact input
 conditions are fixed in `ablations/README.md`.
 
-| condition | exact precision | tool-call turns | trajectory asset | whole-file SHA256 |
-|---|---:|---:|---|---|
-| Prompt/schema, no media | 0.0000 | 2 | pending fork release upload | `55dbfa7c3be082e6c3b7c523c3d93987e53cc59952204b4f33043f6323dceab1` |
-| One temporal-midpoint frame | 0.0000 | 7 | pending fork release upload | `b3eb7a96e0a5df534223c06cdeda6f66e3f5140e2615fd7fe37fd8dc70383250` |
-| OCR-only timeline | 0.0000 | 4 | pending fork release upload | `6ca09d160ef1c730367f24fc269682d5ea4f83587138099a0c1d829bd9a8c2c3` |
-| Every native frame pasted, no tools (independent replicate) | 0.0263 | 0 | pending fork release upload | `06a8d15016e4f0688121875450c2ff363911fd42af2a129d9560d509012b25ba` |
+| condition | exact precision (gate) | partial-credit F1 (diagnostic) | tool-call turns | trajectory asset | whole-file SHA256 |
+|---|---:|---:|---:|---|---|
+| Prompt/schema, no media | 0.0000 | 0.0000 | 2 | pending fork release upload | `55dbfa7c3be082e6c3b7c523c3d93987e53cc59952204b4f33043f6323dceab1` |
+| One temporal-midpoint frame | 0.0000 | 0.0000 | 7 | pending fork release upload | `b3eb7a96e0a5df534223c06cdeda6f66e3f5140e2615fd7fe37fd8dc70383250` |
+| OCR-only timeline | 0.0000 | 0.0000 | 4 | pending fork release upload | `6ca09d160ef1c730367f24fc269682d5ea4f83587138099a0c1d829bd9a8c2c3` |
+| Every native frame pasted, no tools (independent replicate) | 0.0263 | 0.2091 | 0 | pending fork release upload | `06a8d15016e4f0688121875450c2ff363911fd42af2a129d9560d509012b25ba` |
 
 The reported all-frame row is the pre-registered independent replicate, with exact
 precision 0.0263. It used all 44,032 decoded frames in 111 chronological 20-by-20
