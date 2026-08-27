@@ -29,8 +29,12 @@ output_schema: >
   "completion_time_s": seconds|null, "status": closed vocabulary,
   "superseded_by_index": integer|null,
   "overshoot_bucket": none|small|large|not_applicable}]}.
-  Issue times use a 2-second tolerance; response/completion times use 4 seconds;
-  targets use 25 feet, 2 degrees, or 2 knots.
+  Issue times use a 2-second tolerance; execution and completion times are
+  graded, earning full credit within 1 second and half within 4; spoken targets
+  use 25 feet, 2 degrees, or 2 knots; gauge-read values (state snapshots and
+  commanded progress) use 100 feet, 8 degrees, or 3 knots, compared against the
+  trajectory interpolated to the timestamp the answer itself reports for that
+  snapshot rather than to the true event time.
 
 evidence:
   - t=20.0-29.0s, audio+video, a right-heading clearance is spoken and the heading card visibly turns to and holds 293 degrees.
@@ -47,24 +51,36 @@ ground_truth:
     Five segment validators enforce planned outcome class and overshoot bucket,
     response-after-speech timing, stable holds, visible heading and airspeed
     instrument tracking, and controller/telemetry consistency. The combined
-    65-event release passed automated media audits and an independent 19-event
-    enlarged-frame observability audit.
+    65-event release passed automated media audits and a full 65-event
+    observability audit covering all 235 state snapshots.
 
 scorer:
-  metric: 0.9 * exact complete-leg chain accuracy + 0.1 * monotonic clearance-chain F1 over five independent 13-clearance legs.
+  metric: >
+    Per-clearance graded credit. A predicted clearance matches an expected one
+    on command_type plus an issue time inside the 2-second window, aligned
+    order-preservingly; it then earns credit group by group out of 20 units:
+    target 4, status 4, instrument snapshots 4, timing 4, supersession chain 2
+    (which requires a correct overshoot_bucket as well as the resolved link),
+    progress 2. Each
+    clearance is discounted by the units a transcript-only ledger could have
+    earned on that same clearance, so only what the video adds is scored; the
+    signed gain is clipped to [-1, 1] so a reading worse than the transcript
+    subtracts instead of clipping to zero, and clearances the transcript already
+    answers in full are dropped from the denominator. Reward is total credit
+    over gradable clearances plus unmatched submissions.
   oracle_reward: 1.0
   null_reward: 0.0
 
 difficulty:
-  strong_agent_reward: 0.0
-  strong_agent_reward_range: "0.000000-0.010800 across accepted Codex and Claude runs"
+  strong_agent_reward: 0.0938
+  strong_agent_reward_range: "0.000000-0.093800 across the three required native runs (Codex 0.0938, Claude 0.0000, Antigravity 0.0000)"
   tool_call_turns: 88
-  agent_model: Codex CLI 0.147.0 with GPT-5.6 Sol high; VS Code Claude Agent SDK with Claude Opus 4.8 high.
+  agent_model: Codex CLI 0.147.0 with GPT-5.6 Sol high; Claude Code 2.1.226 native `claude -p` with Claude Opus 4.8 high; Antigravity CLI 1.1.12 with Gemini 3.6 Flash High.
 
 anti_shortcut:
   single_frame: 0.0
   video_only: 0.0
-  audio_only: 0.0031
+  audio_only: 0.0
   no_media: 0.0
   frame_dump_no_tools: 0.0
 

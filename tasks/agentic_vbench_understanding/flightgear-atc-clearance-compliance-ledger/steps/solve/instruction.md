@@ -69,12 +69,20 @@ For each clearance report exactly:
 - `overshoot_bucket`: `none`, `small`, `large`, or `not_applicable`.
 
 Report times to the nearest 0.1 second. Issue times are evaluated within 2
-seconds; execution and completion times within 4 seconds.
+seconds, and execution and completion times within 4 seconds; report all of them
+as precisely as you can.
 
-Heading targets use normalized values from 0 through 359 degrees. Target,
-progress, and every state snapshot are evaluated within 25 feet, 2 degrees, or
-2 knots according to their unit. Heading progress uses circular distance in the
-spoken turn direction.
+Heading targets use normalized values from 0 through 359 degrees. Spoken
+targets are evaluated within 25 feet, 2 degrees, or 2 knots according to their
+unit. Values you have to read off an analog gauge — every instrument snapshot
+and `maximum_commanded_progress` — are evaluated within 100 feet, 8 degrees, or
+3 knots, the same capture band that defines completion below. Heading progress
+uses circular distance in the spoken turn direction.
+
+Each instrument snapshot is compared against where the aircraft actually was at
+the timestamp you report for that snapshot, not at the true event time. During a
+manoeuvre those are different points on the trajectory, so report instrument
+values consistent with the times you give.
 
 ## Closed vocabularies
 
