@@ -1,0 +1,16 @@
+{
+  "reward": 0.083832,
+  "ground_truth_strokes": 211,
+  "predicted_strokes": 123,
+  "valid_predicted_strokes": 123,
+  "invalid_predicted_strokes": 0,
+  "true_positives": 14,
+  "false_positives": 109,
+  "false_negatives": 197,
+  "precision": 0.113821,
+  "recall": 0.066351,
+  "f1": 0.083832,
+  "frame_tolerance": 8,
+  "player_and_frame_matches": 26,
+  "frame_only_matches": 37
+}

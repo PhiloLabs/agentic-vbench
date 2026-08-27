@@ -1,0 +1,1039 @@
+{
+  "strokes": [
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 25861
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 25891
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 25919
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 26607
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 27185
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 27768
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 27798
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 27830
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 28030
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 28051
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 29357
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 29393
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 29421
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 29437
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 29776
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 30752
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 30780
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 30808
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 30836
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 31508
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 31919
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 31947
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 31975
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 32003
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 32031
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 32734
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 32779
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 32813
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 34000
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 34797
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 34833
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 34858
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 34898
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 34926
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 36210
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 37550
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 37576
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 38507
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 38535
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 38567
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 38594
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 41135
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 41168
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 41199
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 41686
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 42324
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 43296
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 43321
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 43348
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 43385
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 44193
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 45079
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 45757
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 45799
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 45824
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 46141
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 46177
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 47191
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 47233
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 48335
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 48365
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 48384
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 48428
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 49058
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 49310
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 49339
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 49869
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 49888
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 50682
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 51847
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 51872
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 51902
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 52385
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 53000
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 53783
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 54210
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 55399
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 56329
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 56371
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 56405
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 56425
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 57101
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 60019
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 60055
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 60901
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 61569
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 63760
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 64206
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 65154
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 65192
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 65215
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 65240
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 66019
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 67770
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 67801
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 67835
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 68302
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 69110
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 70400
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 70439
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 70872
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 74346
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 74388
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 74423
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 74464
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 74486
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 74514
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 74535
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 74571
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 74592
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 74613
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 74643
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 76125
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 76152
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 76651
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 76683
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 76718
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 76743
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 76780
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 76816
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 76843
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 77123
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 77150
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 77799
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 79333
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 79358
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 79401
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 79425
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 80580
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 81166
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 83009
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 83048
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 83071
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 83116
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 84447
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 84689
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 84708
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 85358
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 85379
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 85701
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 85738
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 85771
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 86377
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 86417
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 89588
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 90458
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 90490
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 91169
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 91196
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 91544
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 91580
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 92499
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 93298
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 93375
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 94180
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 95270
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 95310
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 95345
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 95374
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 96256
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 97019
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 97063
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 97084
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 99380
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 101035
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 101064
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 101097
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 101771
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 102123
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 102159
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 102194
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 102530
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 103436
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 104370
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 104934
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 104972
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 105187
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 106008
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 108800
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 108827
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 108865
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 109869
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 110280
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 110318
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 111016
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 111043
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 111895
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 111933
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 111959
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 111985
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 112370
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 112978
+    },
+    {
+      "player": "Williams",
+      "stroke": "backhand",
+      "start_frame": 112997
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 115466
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 115494
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 115533
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 115886
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 116768
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 116790
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 116825
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 116849
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 116873
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 118224
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 118264
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "backhand",
+      "start_frame": 118953
+    },
+    {
+      "player": "Williams",
+      "stroke": "forehand",
+      "start_frame": 118993
+    },
+    {
+      "player": "Sharapova",
+      "stroke": "forehand",
+      "start_frame": 119992
+    }
+  ]
+}
