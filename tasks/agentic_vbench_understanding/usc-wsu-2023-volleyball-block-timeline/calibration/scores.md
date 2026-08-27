@@ -1,8 +1,8 @@
-# Calibration — usc-wsu-2023-volleyball-ace-block-timeline
+# Calibration — usc-wsu-2023-volleyball-block-timeline
 
 Block-only timeline. Deterministic F1 scorer (`steps/solve/tests/judge.py`). A task
-clears the bar when **every real agent scores below the ~0.10 line** (reviewer
-accepts <= 0.109) and a real attempt takes **more than 50 tool-call turns**. Oracle
+clears the bar when **every real agent scores below the ~0.10 line** and a real
+attempt takes **more than 50 tool-call turns**. Oracle
 must be 1.0 and an empty attempt near 0.
 
 | run | score | rollout (tool-call turns) |
@@ -10,16 +10,17 @@ must be 1.0 and an empty attempt near 0.
 | oracle | 1.0 | — |
 | empty / null | 0.0 | — |
 | 23-block guess (right anchors, wrong names) | 0.0 | — |
-| Codex CLI (gpt-5.6-sol, xhigh) | 0.015 | 43-event attempt (>50 turns) |
-| Claude Code CLI (Fable 5, xhigh) | 0.031 | ~597 tool-call turns |
-| Antigravity | ~0.0 (by sister-task recipe) | not independently re-run — see note |
+| Codex CLI (gpt-5.6-sol, xhigh) | 0.015 (exploratory re-grade) | 43-event attempt (>50 turns) |
+| Claude Code CLI (Fable 5, xhigh) | 0.031 (exploratory re-grade) | ~597 tool-call turns |
+| fresh block-only matrix | _pending_ | fresh runs under the final instruction |
+| Antigravity | not run | per-task rollout pending — see note |
 
 Oracle, empty, and the anchor-only guess are verified locally (oracle 1.0; empty and
 the names-wrong guess both 0.0). Neither strong agent got a single block point fully
 correct (0 full matches each) — the two-jersey net attribution (blocker multiset +
 stuffed hitter) is the hard skill, and both stay far under the bar.
 
-**Antigravity.** Not independently re-run on this match. The sister BYU task
+**Antigravity.** Not run on this match — no number is claimed. The sister BYU task
 established that a genuine, integrity-verified Antigravity 0.0 needs three cheat
 vectors closed at once — server-side Gemini web grounding (always-on "pixels only, no
 web" rule in AGENTS.md), local answer-file theft (workspace outside the repo with
@@ -28,7 +29,8 @@ stores before the run). That recipe applies unchanged here — same broadcast
 production, same public NCAA record. This block-only task makes web grounding the
 dominant risk, because the one derived field (the blocked hitter) IS named in the
 public play-by-play, so an ungrounded, memory-wiped run has nothing to look up and
-falls to ~0. Can be re-run under that recipe for a per-task number on request.
+falls to ~0. A per-task rollout under that recipe is required before reporting a
+score here.
 
 **Design note (ace+block -> block-only).** This task was first built as an ace+block
 timeline. In calibration Fable nailed 4 of the 5 service aces — a legible

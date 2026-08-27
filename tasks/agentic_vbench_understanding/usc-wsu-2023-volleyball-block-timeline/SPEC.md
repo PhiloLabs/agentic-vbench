@@ -1,10 +1,9 @@
-# Spec Card — usc-wsu-2023-volleyball-ace-block-timeline
+# Spec Card — usc-wsu-2023-volleyball-block-timeline
 
-> Block-only timeline (service aces are excluded by design — see `scorer` note). The
-> directory keeps the `ace-block` slug of its sister task for tooling continuity.
+> Block-only timeline (service aces are excluded by design — see `scorer` note).
 
 ```yaml
-task: agentic_vbench_understanding/usc-wsu-2023-volleyball-ace-block-timeline
+task: agentic_vbench_understanding/usc-wsu-2023-volleyball-block-timeline
 
 cognitive_level: understanding
 
@@ -51,8 +50,7 @@ scorer:
     blocked; partial credit (0.5) when set, score_after, and type match and the
     credited names are off by exactly one. Names normalized (unambiguous-lastname
     rule — every GT lastname here is unique); greedy one-to-one matching, exact
-    matches assigned first. Bar: a strong agent stays at/under ~0.10 (reviewer
-    accepts <= 0.109).
+    matches assigned first. Bar: a strong agent stays under ~0.10.
   design_note: an earlier ace+block version of this task leaked score — a strong
     agent (Fable) nailed 4 of the 5 service aces (a legible single-jersey read with
     the ball landing untouched) and, being high-precision, reached F1 0.24. Removing
@@ -63,14 +61,15 @@ scorer:
   null_reward: 0.0 (measured; empty list)
 
 difficulty:
-  strong_agent_reward: Codex ~0.015, Fable ~0.031 (measured; neither got a single
-    block point fully correct — 0 full matches each); clean block-only Codex run
-    TBD to confirm
+  strong_agent_reward: exploratory re-grades Codex ~0.015 / Fable ~0.031 (their
+    complete genuine runs scored on the block-only judge; neither got a single
+    block fully correct). Fresh calibration under the final block-only
+    instruction is pending and will replace these as the headline numbers.
   tool_call_turns: Codex 43-event attempt; Fable ~597 tool-call turns of genuine
     frame analysis (both well over 50)
   agent_model: Codex CLI (gpt-5.6-sol xhigh), Claude Code CLI (Fable 5 xhigh);
-    Antigravity excluded (server-side Gemini grounding cheats, unblockable — see
-    sister task report)
+    Antigravity not run on this task yet (a per-task rollout under the sister
+    task's isolation recipe is required before any number is reported)
 
 anti_shortcut:
   single_frame: ~0 expected — no graphic ever lists blocks; one frame shows one rally

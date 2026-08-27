@@ -74,8 +74,7 @@ GROUND_TRUTH = [
 
 PARTIAL_CREDIT = 0.5  # right rally and type, credited names off by exactly one
 
-TYPE_ALIASES = {"service_ace": "ace", "service ace": "ace", "stuff": "block",
-                "block_point": "block", "block point": "block"}
+TYPE_ALIASES = {"stuff": "block", "block_point": "block", "block point": "block"}
 
 
 def norm(s):
@@ -137,42 +136,42 @@ def players_exact(pred_list, gt_list):
 
 
 def players_off_by_one(pred_list, gt_list):
-    """One name missing, one extra, or one wrong — everything else matched."""
-    if not isinstance(pred_list, list) or not pred_list:
+    """Exactly one name-level error: one blocker missing, extra, or substituted.
+
+    Errors are counted as max(unmatched-GT, unmatched-pred), so a substitution
+    (a wrong name in place of a right one) is ONE error, not two. This makes the
+    rule symmetric between solo and shared blocks: a solo block with the wrong
+    name, a solo block left unattributed, a solo block with a spurious second
+    name, and a two-player block with one wrong name are each exactly one error
+    (partial); two or more name errors earn nothing. An exact match has zero
+    errors and is handled by players_exact, never here.
+    """
+    if not isinstance(pred_list, list):
         return False
     m = matched_names(pred_list, gt_list)
-    if m < 1 or m < len(gt_list) - 1:
-        return False
-    if abs(len(pred_list) - len(gt_list)) > 1:
-        return False
-    return not players_exact(pred_list, gt_list)
+    missing = len(gt_list) - m   # GT names the prediction failed to produce
+    extra = len(pred_list) - m   # predicted names not in GT
+    return max(missing, extra) == 1
 
 
 def blocked_ok(pred_blocked, gt_blocked):
-    # The one corrupted-PBP event has gt_blocked None -> not required.
-    return gt_blocked is None or name_match(pred_blocked, gt_blocked)
+    # Every GT block carries a recoverable blocked hitter; it is always required.
+    return name_match(pred_blocked, gt_blocked)
 
 
 def event_grade(p, gt):
-    """Return 'full', 'partial', or None for a prediction p against GT event gt
-    (anchor set+score+type already matched by the caller)."""
-    if gt["type"] == "ace":
-        if players_exact(p["players"], gt["players"]):
-            return "full"
-        if players_off_by_one(p["players"], gt["players"]):
-            return "partial"
-        return None
-    # block: blockers (players) + blocked hitter
+    """Return 'full', 'partial', or None for a prediction p against GT block gt
+    (anchor set+score+type already matched by the caller). Full requires the
+    exact blocker multiset AND the blocked hitter; partial allows exactly one
+    thing off — the blockers off by one name (hitter right), or the hitter wrong
+    (blockers exact)."""
     blk_exact = players_exact(p["players"], gt["players"])
     hit_ok = blocked_ok(p.get("blocked"), gt.get("blocked"))
     if blk_exact and hit_ok:
         return "full"
-    # exactly one thing off: blockers off-by-one (hitter right), or hitter wrong
-    # (blockers exact). gt_blocked None can't be "wrong", so that branch needs a
-    # real blocker error to be partial.
     if players_off_by_one(p["players"], gt["players"]) and hit_ok:
         return "partial"
-    if blk_exact and gt.get("blocked") is not None and not hit_ok:
+    if blk_exact and not hit_ok:
         return "partial"
     return None
 
