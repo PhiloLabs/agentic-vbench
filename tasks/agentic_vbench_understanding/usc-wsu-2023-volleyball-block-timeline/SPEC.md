@@ -65,7 +65,8 @@ difficulty:
     xhigh) 0.0. Both ran to completion on the final block-only instruction in a fresh
     workspace and wrote their own answer; neither got a single block point fully
     correct. A Fable 5 run reached 210 tool-call turns before that model's credit pool
-    ran out and is archived unscored.
+    ran out; it is archived unscored, and resuming it with Opus 5 was tested and also
+    scored 0.0, so it is not completed under another model's name.
   tool_call_turns: Codex 160 items / 289 commands; Opus 270 (both far above the 50 floor)
   agent_model: Codex CLI, Claude Code (Opus 5); Antigravity not run — the sister task
     established that its Gemini backends ground against the public record unless a

@@ -29,8 +29,12 @@ records CLI version, model, effort, instruction hash, media hash and judge commi
 |---|---|---|---|---|
 | Codex CLI | gpt-5.6-sol, xhigh | **0.0185** | 160 items / 289 commands | key 0, web 0 |
 | Claude Code | Opus 5, xhigh | **0.0** | 270 | key 0, web 0 |
-| Claude Code | Fable 5, xhigh | not scored | 210 before the account ran out of credits | key 0, web 0 |
 | Antigravity | — | not run | — | — |
+
+Two strong agents, both far under the bar, neither getting a single block point
+fully correct. A Fable 5 run is archived unscored — it reached 210 tool-call turns of
+genuine frame work before that model's credit pool ran out, and finishing it with a
+different model was tested and rejected (see `rollouts/hybrid-fable-then-opus.md`).
 
 Both scored runs ended normally rather than being cut off, and both wrote their own
 `solution.json`. Codex submitted 31 events and got **no block fully correct** (one
@@ -44,7 +48,10 @@ attribution layer is not, unless the agent finds the one place it is visible.
 
 Fable's run is archived but unscored: it reached 210 tool-call turns of genuine frame
 work before the account's credit pool for that model ran out, so no answer was
-written. Reporting a number for it would misrepresent an interrupted run.
+written. Resuming that session with Opus 5 was tried, to see whether an interrupted
+run can be completed by another model — it scored 0.0 and matched no rally at all,
+so the archived run stays unscored rather than being finished under a name that did
+not produce it. Details in `rollouts/hybrid-fable-then-opus.md`.
 
 ## Ablations
 
