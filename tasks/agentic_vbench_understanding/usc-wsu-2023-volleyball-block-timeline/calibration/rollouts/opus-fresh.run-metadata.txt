@@ -1,0 +1,7 @@
+date: 2026-08-28T07:20:59Z
+agent: Claude Code CLI 2.1.248 (Claude Code)
+model: opus (claude-opus-5)  effort: xhigh
+instruction sha256: 2619a14d1159da0200e6a72fc7ed096a91638548bdac609bab70a60fcb3ccbb4
+video sha256: 13ccbabbdd9540da851099d138bef3c8eafe6de9426c3681593edba32d08ba9e
+judge: git task/usc-wsu-2023-volleyball-ace-block-timeline @ 01ef602
+workspace: fresh (materials + instruction only; no prior artifacts reachable)

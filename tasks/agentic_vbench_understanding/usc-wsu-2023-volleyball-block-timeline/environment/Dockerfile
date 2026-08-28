@@ -19,7 +19,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #
 # Baked 2026-07-15 via environment/bake_media.sh (yt-dlp 720p + ffmpeg -an) and
 # uploaded to the dataset repo below; the build verifies the SHA256.
-ARG MATERIALS_URL=https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/main/usc-wsu-2023-11-12-720p-noaudio.mp4
+# Pinned to an immutable dataset revision, so the URL cannot start serving other
+# bytes if the dataset's main branch moves; the SHA256 below is checked regardless.
+ARG MATERIALS_REVISION=859cb6877dc31b75d336648c4d3c87509e3373ab
+ARG MATERIALS_URL=https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/${MATERIALS_REVISION}/usc-wsu-2023-11-12-720p-noaudio.mp4
 ARG MATERIALS_SHA256=13ccbabbdd9540da851099d138bef3c8eafe6de9426c3681593edba32d08ba9e
 RUN mkdir -p /baked \
  && curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \

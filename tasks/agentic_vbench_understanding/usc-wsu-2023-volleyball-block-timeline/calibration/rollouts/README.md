@@ -1,24 +1,36 @@
 # Rollouts
 
-Genuine calibration runs for the block-only USC task. Scores in `../scores.md` are
-the block-only re-grades of these complete runs (see that file for why fresh
-block-only re-runs were cut off by calibration infra, not the task).
+Artifacts from every calibration run of the block-only task. Scores and context are
+in `../scores.md`.
 
-- `codex-aceblock-run.solution.json` — Codex CLI (gpt-5.6-sol, xhigh), the full
-  43-event answer from the genuine complete run (43 predicted, well over 50 tool-call
-  turns; integrity: 0 answer-key refs, 0 web/grounding refs). Re-grades to **0.015**
-  on the block-only judge (0 blocks fully correct, 1 partial).
-- `fable-run.solution.json` — Claude Code (Fable 5, xhigh), the 9-event answer from
-  the genuine run (finished after resuming a Max-session-limit interruption; ~597
-  tool-call turns total; integrity: 0 answer-key refs, 0 web refs). Re-grades to
-  **0.031** on the block-only judge (0 blocks fully correct, 1 partial).
-- `fable-run.tool-histogram.txt` — digest of Fable's stream (435 tool-call turns in
-  the first session: Read 280 for frames, Bash 146 for ffmpeg) in place of the raw
-  ~300 MB stream-json.
+## Fresh runs on the final block-only instruction
 
-Antigravity is not archived here — not independently re-run on this match; see the
-Antigravity note in `../scores.md` for the sister-task isolation recipe that applies.
+| file prefix | agent | score |
+|---|---|---|
+| `codex-fresh.*` | Codex CLI, gpt-5.6-sol, xhigh | 0.0185 |
+| `opus-fresh.*` | Claude Code, Opus 5, xhigh | 0.0 |
 
-Both agents genuinely sampled the video (hundreds of ffmpeg frame reads) and neither
-got a single block point fully correct — the blocker-multiset + stuffed-hitter net
-attribution is the hard skill this task isolates.
+Each carries the answer the agent wrote (`*.solution.json`), the run's provenance
+(`*.run-metadata.txt`: CLI version, model, effort, instruction hash, media hash,
+judge commit) and a tool-call histogram. Both runs ended normally and wrote their own
+answer file; neither referenced an answer key or the web.
+
+`opus-fresh.final-report.md` is the agent's own closing account, verbatim. It is
+worth reading: Opus rebuilt the full 200-rally timeline from the score bug and then
+reported honestly that it could confirm only one block point, and that even that
+blocker credit was inferred rather than read. That is the difficulty of this task
+described from the inside.
+
+## Interrupted
+
+`fable-run.*` — Claude Code, Fable 5, xhigh: 210 tool-call turns of genuine frame
+work, then the account's credit pool for that model ran out before an answer was
+written. Archived as evidence of effort, deliberately unscored.
+
+## Superseded
+
+`codex-aceblock-run.solution.json` — the answer from the earlier ace+block version of
+this task, kept because `../scores.md` cites its re-grade in the design note.
+
+Raw stream logs run to hundreds of MB and are not committed; the histograms and
+answer files here, plus the metadata, are what a reviewer needs to check a score.

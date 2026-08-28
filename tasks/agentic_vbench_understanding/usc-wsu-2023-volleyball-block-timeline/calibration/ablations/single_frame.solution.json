@@ -1,0 +1,15 @@
+{
+  "events": [
+    {"set": 1, "score_after": "8-5",   "type": "block", "players": ["Gala Trubint", "Mia Tuaniga"], "blocked": "Iman Isanovic"},
+    {"set": 1, "score_after": "15-10", "type": "block", "players": ["Skylar Fields"], "blocked": "Katy Ryan"},
+    {"set": 1, "score_after": "22-16", "type": "block", "players": ["Magda Jehlarova", "Lana Radakovic"], "blocked": "Kalyah Williams"},
+    {"set": 2, "score_after": "6-4",   "type": "block", "players": ["Kalyah Williams", "Gala Trubint"], "blocked": "Pia Timmer"},
+    {"set": 2, "score_after": "14-11", "type": "block", "players": ["Lana Radakovic"], "blocked": "London Wijay"},
+    {"set": 2, "score_after": "20-17", "type": "block", "players": ["Mia Tuaniga"], "blocked": "Shea Rubright"},
+    {"set": 2, "score_after": "25-20", "type": "block", "players": ["Gala Trubint", "Skylar Fields"], "blocked": "Iman Isanovic"},
+    {"set": 3, "score_after": "5-2",   "type": "block", "players": ["Mia Tuaniga", "Gala Trubint"], "blocked": "Katy Ryan"},
+    {"set": 3, "score_after": "12-4",  "type": "block", "players": ["Kalyah Williams"], "blocked": "Iman Isanovic"},
+    {"set": 3, "score_after": "18-6",  "type": "block", "players": ["Magda Jehlarova"], "blocked": "London Wijay"},
+    {"set": 3, "score_after": "25-9",  "type": "block", "players": ["Gala Trubint", "Mia Tuaniga"], "blocked": "Pia Timmer"}
+  ]
+}

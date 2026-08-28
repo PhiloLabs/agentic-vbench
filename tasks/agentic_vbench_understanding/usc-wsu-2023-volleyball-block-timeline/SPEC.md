@@ -61,27 +61,32 @@ scorer:
   null_reward: 0.0 (measured; empty list)
 
 difficulty:
-  strong_agent_reward: exploratory re-grades Codex ~0.015 / Fable ~0.031 (their
-    complete genuine runs scored on the block-only judge; neither got a single
-    block fully correct). Fresh calibration under the final block-only
-    instruction is pending and will replace these as the headline numbers.
-  tool_call_turns: Codex 43-event attempt; Fable ~597 tool-call turns of genuine
-    frame analysis (both well over 50)
-  agent_model: Codex CLI (gpt-5.6-sol xhigh), Claude Code CLI (Fable 5 xhigh);
-    Antigravity not run on this task yet (a per-task rollout under the sister
-    task's isolation recipe is required before any number is reported)
+  strong_agent_reward: Codex CLI (gpt-5.6-sol, xhigh) 0.0185; Claude Code (Opus 5,
+    xhigh) 0.0. Both ran to completion on the final block-only instruction in a fresh
+    workspace and wrote their own answer; neither got a single block point fully
+    correct. A Fable 5 run reached 210 tool-call turns before that model's credit pool
+    ran out and is archived unscored.
+  tool_call_turns: Codex 160 items / 289 commands; Opus 270 (both far above the 50 floor)
+  agent_model: Codex CLI, Claude Code (Opus 5); Antigravity not run — the sister task
+    established that its Gemini backends ground against the public record unless a
+    three-vector isolation recipe is applied
 
 anti_shortcut:
-  single_frame: ~0 expected — no graphic ever lists blocks; one frame shows one rally
+  single_frame: 0.0 measured — one frame from the midpoint; the model was required to
+    answer anyway and submitted 11 events, none correct
   video_only: n/a — the task ships video-only by construction
   audio_only: n/a — no audio track exists in the baked media
-  no_media: ~0 expected — ordinary regular-season college match; the exact per-event
-    score anchors and blocker/blocked pairs are unguessable
-  frame_dump_no_tools: ~0 expected — a block window is under a second; uniform frames
-    miss it, and block classification needs targeted dense sampling
+  no_media: 0.0 measured — instruction only. The NCAA rally-by-rally log for this
+    match is public, so this is the leak that matters: forced to answer, the model
+    submitted 15 plausible events and matched none
+  frame_dump: 0.0 measured — 60 uniform frames, no seeking; 22 events submitted, none
+    correct
+  observability: calibration/observability/ shows the answer key IS visible in the
+    video, but only in a 0.8-3.2 s net close-up after each point
 
 input:
-  url: https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/main/usc-wsu-2023-11-12-720p-noaudio.mp4
+  url: https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/859cb6877dc31b75d336648c4d3c87509e3373ab/usc-wsu-2023-11-12-720p-noaudio.mp4
+  dataset_revision: 859cb6877dc31b75d336648c4d3c87509e3373ab
     (research re-host of the official WSU Athletics upload
     https://www.youtube.com/watch?v=RgJjVgi7rZY — provenance, rights and takedown
     policy documented in the dataset README)
