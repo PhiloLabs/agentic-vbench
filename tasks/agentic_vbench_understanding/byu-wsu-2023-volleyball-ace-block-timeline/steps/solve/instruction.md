@@ -18,8 +18,8 @@ Write `/workspace/output/solution.json` in exactly this shape:
 ```json
 {
   "events": [
-    {"set": 1, "score_after": "7-7",  "type": "ace",   "players": ["First Last"]},
-    {"set": 2, "score_after": "10-11", "type": "block", "players": ["First Last", "First Last"], "blocked": "First Last"}
+    {"set": 1, "score_after": "5-9",  "type": "ace",   "players": ["First Last"]},
+    {"set": 3, "score_after": "21-18", "type": "block", "players": ["First Last", "First Last"], "blocked": "First Last"}
   ]
 }
 ```
