@@ -48,7 +48,7 @@ scorer:
     judgments a perfect agent can miss). Names normalized (unambiguous-lastname
     rule); greedy one-to-one matching, exact matches assigned first. The one
     corrupted-PBP block (set 2, 1-2) carries no blocked hitter and does not require
-    one. Bar: a strong agent stays at/under ~0.10 (reviewer accepts <= 0.109).
+    one. Bar: a strong agent stays at/under ~0.10.
   oracle_reward: 1.0
   null_reward: 0.0 (measured; empty list)
 

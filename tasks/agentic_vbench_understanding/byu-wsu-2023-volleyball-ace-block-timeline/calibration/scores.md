@@ -1,7 +1,7 @@
 # Calibration — byu-wsu-2023-volleyball-ace-block-timeline
 
 Deterministic F1 scorer (`steps/solve/tests/judge.py`). A task clears the bar when
-every strong agent scores low (target **< 0.10**; reviewer accepts **≤ 0.109**) and a
+every strong agent scores low (target **< 0.10**) and a
 real attempt takes **more than 50 tool-call turns**. Oracle must be 1.0 and an empty
 attempt ≈ 0.
 
@@ -10,7 +10,7 @@ attempt ≈ 0.
 | oracle (exact answer key) | 1.0 | — |
 | empty / null | 0.0 | — |
 | 24-entry plausible guess | 0.0 | — |
-| Codex CLI (gpt-5.6, xhigh) | 0.02 | 126 |
+| Codex CLI (gpt-5.6, xhigh) | 0.04 | 126 |
 | Claude Code CLI (Opus 4.8 [1m], xhigh) | 0.0 | 291 |
 | Claude Code CLI (Fable 5, xhigh) | 0.15 | 733 |
 | Antigravity (Gemini 3.5 Flash, High) | 0.0 † | 2 windows, 54 frames (integrity-verified clean) |
@@ -58,3 +58,17 @@ measured row above verifies it is ≈ 0.
 
 `frames/` (added with calibration) holds sample frames at block moments from the baked
 720p file, showing that jersey numbers resolve at the shipped resolution.
+
+## Scorer symmetry fix, and what it changed
+
+The partial-credit rule was asymmetric: one wrong name in a two-player block earned
+partial credit, but a solo block credited to the wrong player earned nothing. Errors
+are now counted as `max(unmatched-GT, unmatched-pred)`, so a substitution is one
+error either way, and solo-wrong, solo-missing, solo-extra and one-wrong-pair all sit
+in the same tier. `steps/solve/tests/test_judge.py` pins all four cases plus the
+hitter tiers, the unrecoverable-hitter event and the two-Bower lastname ambiguity.
+
+Re-grading the archived runs under the corrected scorer moves one published number:
+**Codex 0.02 -> 0.04**, because several of its solo-block credits were wrong rather
+than absent and now earn partial credit. Fable stays 0.15, Opus 4.8 stays 0.0,
+Antigravity stays 0.0. The table above carries the corrected figure.

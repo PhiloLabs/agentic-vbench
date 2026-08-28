@@ -135,15 +135,21 @@ def players_exact(pred_list, gt_list):
 
 
 def players_off_by_one(pred_list, gt_list):
-    """One name missing, one extra, or one wrong — everything else matched."""
-    if not isinstance(pred_list, list) or not pred_list:
+    """Exactly one name-level error: one name missing, extra, or substituted.
+
+    Errors are counted as max(unmatched-GT, unmatched-pred), so a substitution is
+    ONE error rather than two. That makes the rule symmetric between solo and
+    shared credit: a solo block with the wrong name, one left unattributed, one
+    with a spurious extra name, and a two-player block with one name wrong are each
+    a single error (partial); two or more earn nothing. An exact match has zero
+    errors and is handled by players_exact.
+    """
+    if not isinstance(pred_list, list):
         return False
     m = matched_names(pred_list, gt_list)
-    if m < 1 or m < len(gt_list) - 1:
-        return False
-    if abs(len(pred_list) - len(gt_list)) > 1:
-        return False
-    return not players_exact(pred_list, gt_list)
+    missing = len(gt_list) - m
+    extra = len(pred_list) - m
+    return max(missing, extra) == 1
 
 
 def blocked_ok(pred_blocked, gt_blocked):
