@@ -1,0 +1,25 @@
+{
+  "schema_version": "avb-hierarchical-judge-anchors-v1",
+  "task": "agentic_vbench_understanding/medvedev-de-minaur-2023-us-open-break-point-ledger",
+  "scorer_version": "hierarchical-bottleneck-v1",
+  "formula": "2 * sum(min(per_event_summary_accuracy, per_event_ordered_shot_accuracy)) / (n_predicted + n_reference)",
+  "generation": {
+    "oracle": "Run steps/solve/solution/solve.sh with MEDVEDEV_OUTPUT_DIR set to anchors/oracle, then invoke the current judge on oracle/solution.json.",
+    "empty": "Use the literal object {\"break_points\": []}, then invoke the current judge.",
+    "judge": "python3 steps/solve/tests/judge.py --solution <solution> --reward-json <reward.json> --reward-txt <reward.txt>"
+  },
+  "anchors": {
+    "oracle": {
+      "reward": 1.0,
+      "n_predicted": 16,
+      "n_reference": 16,
+      "hierarchical_true_positive_credit": 16.0
+    },
+    "empty": {
+      "reward": 0.0,
+      "n_predicted": 0,
+      "n_reference": 16,
+      "hierarchical_true_positive_credit": 0.0
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": "avb-formal-run-validation-v2",
+  "validation_policy": "avb-formal-run-strict-v3",
+  "validator_sha256": "cd7331f3e250c97731aefaaa83c70e251545eae1a79fae9483ee28a312a0f099",
+  "valid": true,
+  "trial_name": "single-frame__WbE57Pf",
+  "task_checksum": "86aec74e4f5b50810d155bad4a54e8031bb0eefe42f6a7c44de83cc145d4cf31",
+  "overlay_task_checksum_recomputed": "86aec74e4f5b50810d155bad4a54e8031bb0eefe42f6a7c44de83cc145d4cf31",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "high",
+  "agent_import_path": "avb_preinstalled_codex:PreinstalledCodex",
+  "agent": {
+    "name": "codex",
+    "version": "0.149.1"
+  },
+  "reward": 0.0,
+  "reward_inputs": {
+    "n_predicted": 0,
+    "n_ground_truth": 16,
+    "exact_event_matches_ordered": 0,
+    "reward_denominator": 16
+  },
+  "soft_event_f1": 0.0,
+  "formula": "2 * exact_ordered_event_matches / (n_predicted + n_reference)",
+  "tool_call_turns": 7,
+  "atif_observed_tool_results": 7,
+  "native_tool_operations": 9,
+  "atif_tool_call_turns": 7,
+  "atif_total_tool_calls": 7,
+  "image": {
+    "reference": "avb-medvedev-codex@sha256:390fb56051fafb49b5b4b797cb15704469294f816255994e9ee0fd21fe2da06b",
+    "id": "sha256:390fb56051fafb49b5b4b797cb15704469294f816255994e9ee0fd21fe2da06b",
+    "os": "linux",
+    "architecture": "arm64",
+    "size": 1085220502
+  },
+  "gateway": {
+    "sha256": "225d1330665fa916ecaad02d7e142b057a42b1bb6d2b803f47818dac67418994",
+    "start_count": 1,
+    "allow_count": 13,
+    "deny_count": 2,
+    "closed_world_line_count": 29,
+    "error_count": 0,
+    "startup_network_degraded": false,
+    "startup_dns_error_count": 0,
+    "startup_dns_first_timestamp": null,
+    "startup_dns_last_timestamp": null,
+    "startup_dns_duration_seconds": 0.0,
+    "first_successful_close_timestamp": "2026-08-27T01:01:29.140173+00:00",
+    "first_productive_session_timestamp": "2026-08-27T01:01:37.651000+00:00",
+    "first_atif_agent_timestamp": "2026-08-27T01:01:38.934000+00:00",
+    "last_atif_agent_timestamp": "2026-08-27T01:02:46.582000+00:00",
+    "last_productive_session_timestamp": "2026-08-27T01:02:46.582000+00:00",
+    "native_startup_recovery_count": 0,
+    "recoverable_connection_reset_count": 0,
+    "recoverable_broken_pipe_count": 0,
+    "native_transport_recovery_count": 0
+  },
+  "hashes": {
+    "final_task_files": {
+      "steps/solve/instruction.md": "2b025b557a17f2443e9b8f5951ee19562eee570038d092a7757b957555d1cd55",
+      "steps/solve/tests/judge.py": "3ece409c4c223c2bf2120fb1ef251d76c88bc6150fb59b4d0b6963bcf69c4b40",
+      "steps/solve/tests/test_judge.py": "6b1801277acdc2b73ee13c4a0f51b0ef90a2860edd43d834c872aec623cda5b4",
+      "steps/solve/solution/solve.sh": "75c03d3084ebc3670ffbf77ee2ca5b0a46f16f8a4feb6b1d834c80aaa3a4c5c5"
+    },
+    "native_codex_jsonl": "bee11618a3b6d6d66d78705b47bce37a59c80740bd12a4c650be773b00a7dd55",
+    "atif_trajectory": "649519d0768ba9ad22b893a744857c2c472afb4d8b8e75de6b3cfc008c4ec4b5",
+    "reward_json": "3f8835e0158272248b33cf19825d0adfe83ed4f3c58157c1bb60f24431f60ea9",
+    "input_manifest": "2e55933a049ee100354cbb9c87caddd2820062d58d1cc5d7dd1fc713a8eab693",
+    "raw_session_jsonl": "156eb040a29d8b4cb0c2cae26e0cb232542ce578c66187218db8e0a75d09e94c",
+    "submitted_solution": null
+  },
+  "started_at": "2026-08-27T00:58:11.335639Z",
+  "finished_at": "2026-08-27T01:03:08.442740Z"
+}

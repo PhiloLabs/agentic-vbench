@@ -1,0 +1,20 @@
+ablation=frame_dump_no_tools
+source_validation=passed
+canonical_image_id=sha256:f592cda4dfc09ca25ae3a19d7e65d17248fb01059f061368eecf14ae1ae9cb28
+expected_harness_image_id=sha256:390fb56051fafb49b5b4b797cb15704469294f816255994e9ee0fd21fe2da06b
+source_sha256=d61bee17596a28dbc8f8b607e4fc0dd6542885dbe9cdad18e1953e89363b0860
+source_bytes=685013111
+source_duration_seconds=7152.578767
+source_frames=214363
+cell_width=64
+cell_height=36
+grid_columns=40
+grid_rows=30
+expected_sheets=179
+actual_sheets=179
+last_sheet_valid_cells=763
+last_valid_global_frame=214362
+Python 3.12.14
+ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers
+codex-cli 0.149.1
+ripgrep 14.1.1

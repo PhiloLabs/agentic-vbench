@@ -1,0 +1,351 @@
+{
+  "reward": 0.0,
+  "details": {
+    "reason": "ok",
+    "root_schema_issue": false,
+    "n_ground_truth": 16,
+    "n_predicted": 16,
+    "identity_matches_ordered": 16,
+    "identity_matches_in_quality_alignment": 16,
+    "exact_event_matches_ordered": 0,
+    "identity_matches_unordered": 16,
+    "invalid_identity_events": 0,
+    "false_identity_events": 0,
+    "duplicate_identity_events": 0,
+    "out_of_order_identity_matches": 0,
+    "schema_issue_events": 0,
+    "malformed_shot_sequences": 0,
+    "shot_schema_issue_entries": 0,
+    "invalid_shot_entries": 0,
+    "identity_precision": 1.0,
+    "identity_recall": 1.0,
+    "identity_f1": 1.0,
+    "exact_event_precision": 0.0,
+    "exact_event_recall": 0.0,
+    "exact_event_f1": 0.0,
+    "summary_fields_correct": 75,
+    "summary_fields_present": 144,
+    "summary_fields_predicted": 144,
+    "summary_fields_total": 144,
+    "summary_accuracy": 0.5208,
+    "summary_correct_by_field": {
+      "outcome": 16,
+      "first_serve_in": 10,
+      "serve_direction": 7,
+      "rally_shots": 3,
+      "terminal_player": 10,
+      "terminal_stroke": 7,
+      "terminal_court_position": 10,
+      "terminal_result": 5,
+      "terminal_error": 7
+    },
+    "shot_fields_correct_ordered": 23,
+    "shot_fields_predicted_in_matched_events": 32,
+    "shot_fields_reference_in_matched_events": 224,
+    "shot_precision": 0.7188,
+    "shot_recall": 0.1027,
+    "shot_f1": 0.1797,
+    "shot_denominator": 224,
+    "shot_accuracy": 0.1027,
+    "detail_fields_correct": 98,
+    "detail_fields_predicted": 176,
+    "detail_fields_reference": 368,
+    "detail_precision": 0.5568,
+    "detail_recall": 0.2663,
+    "detail_f1": 0.3603,
+    "detail_denominator": 368,
+    "detail_accuracy": 0.2663,
+    "fully_correct_events": 0,
+    "fully_correct_events_in_quality_alignment": 0,
+    "soft_true_positive_credit": 1.5688,
+    "soft_event_f1": 0.098,
+    "reward_denominator": 32,
+    "matched_pairs": [
+      {
+        "prediction_index": 0,
+        "reference_index": 0,
+        "correct_summary_fields": [
+          "outcome",
+          "first_serve_in",
+          "terminal_player",
+          "terminal_court_position"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 8,
+        "correct_shot_fields": 1,
+        "summary_accuracy": 0.4444,
+        "shot_denominator": 16,
+        "shot_accuracy": 0.0625,
+        "event_credit": 0.0278
+      },
+      {
+        "prediction_index": 1,
+        "reference_index": 1,
+        "correct_summary_fields": [
+          "outcome",
+          "first_serve_in",
+          "terminal_player",
+          "terminal_stroke",
+          "terminal_result",
+          "terminal_error"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 4,
+        "correct_shot_fields": 1,
+        "summary_accuracy": 0.6667,
+        "shot_denominator": 8,
+        "shot_accuracy": 0.125,
+        "event_credit": 0.0833
+      },
+      {
+        "prediction_index": 2,
+        "reference_index": 2,
+        "correct_summary_fields": [
+          "outcome",
+          "first_serve_in",
+          "terminal_court_position"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 3,
+        "correct_shot_fields": 1,
+        "summary_accuracy": 0.3333,
+        "shot_denominator": 6,
+        "shot_accuracy": 0.1667,
+        "event_credit": 0.0556
+      },
+      {
+        "prediction_index": 3,
+        "reference_index": 3,
+        "correct_summary_fields": [
+          "outcome",
+          "serve_direction",
+          "terminal_stroke",
+          "terminal_court_position"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 10,
+        "correct_shot_fields": 2,
+        "summary_accuracy": 0.4444,
+        "shot_denominator": 20,
+        "shot_accuracy": 0.1,
+        "event_credit": 0.0444
+      },
+      {
+        "prediction_index": 4,
+        "reference_index": 4,
+        "correct_summary_fields": [
+          "outcome",
+          "first_serve_in",
+          "terminal_player",
+          "terminal_result",
+          "terminal_error"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 3,
+        "correct_shot_fields": 1,
+        "summary_accuracy": 0.5556,
+        "shot_denominator": 6,
+        "shot_accuracy": 0.1667,
+        "event_credit": 0.0926
+      },
+      {
+        "prediction_index": 5,
+        "reference_index": 5,
+        "correct_summary_fields": [
+          "outcome",
+          "serve_direction",
+          "terminal_player",
+          "terminal_court_position",
+          "terminal_result",
+          "terminal_error"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 25,
+        "correct_shot_fields": 2,
+        "summary_accuracy": 0.6667,
+        "shot_denominator": 50,
+        "shot_accuracy": 0.04,
+        "event_credit": 0.0267
+      },
+      {
+        "prediction_index": 6,
+        "reference_index": 6,
+        "correct_summary_fields": [
+          "outcome",
+          "first_serve_in",
+          "serve_direction",
+          "rally_shots",
+          "terminal_stroke",
+          "terminal_court_position"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 2,
+        "correct_shot_fields": 2,
+        "summary_accuracy": 0.6667,
+        "shot_denominator": 4,
+        "shot_accuracy": 0.5,
+        "event_credit": 0.3333
+      },
+      {
+        "prediction_index": 7,
+        "reference_index": 7,
+        "correct_summary_fields": [
+          "outcome",
+          "first_serve_in",
+          "rally_shots",
+          "terminal_player",
+          "terminal_error"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 1,
+        "correct_shot_fields": 1,
+        "summary_accuracy": 0.5556,
+        "shot_denominator": 2,
+        "shot_accuracy": 0.5,
+        "event_credit": 0.2778
+      },
+      {
+        "prediction_index": 8,
+        "reference_index": 8,
+        "correct_summary_fields": [
+          "outcome",
+          "first_serve_in",
+          "serve_direction",
+          "terminal_player",
+          "terminal_court_position"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 7,
+        "correct_shot_fields": 2,
+        "summary_accuracy": 0.5556,
+        "shot_denominator": 14,
+        "shot_accuracy": 0.1429,
+        "event_credit": 0.0794
+      },
+      {
+        "prediction_index": 9,
+        "reference_index": 9,
+        "correct_summary_fields": [
+          "outcome",
+          "first_serve_in",
+          "terminal_player",
+          "terminal_stroke",
+          "terminal_court_position"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 13,
+        "correct_shot_fields": 1,
+        "summary_accuracy": 0.5556,
+        "shot_denominator": 26,
+        "shot_accuracy": 0.0385,
+        "event_credit": 0.0214
+      },
+      {
+        "prediction_index": 10,
+        "reference_index": 10,
+        "correct_summary_fields": [
+          "outcome",
+          "terminal_player",
+          "terminal_court_position"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 3,
+        "correct_shot_fields": 1,
+        "summary_accuracy": 0.3333,
+        "shot_denominator": 6,
+        "shot_accuracy": 0.1667,
+        "event_credit": 0.0556
+      },
+      {
+        "prediction_index": 11,
+        "reference_index": 11,
+        "correct_summary_fields": [
+          "outcome",
+          "first_serve_in",
+          "terminal_stroke",
+          "terminal_result",
+          "terminal_error"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 11,
+        "correct_shot_fields": 1,
+        "summary_accuracy": 0.5556,
+        "shot_denominator": 22,
+        "shot_accuracy": 0.0455,
+        "event_credit": 0.0253
+      },
+      {
+        "prediction_index": 12,
+        "reference_index": 12,
+        "correct_summary_fields": [
+          "outcome",
+          "serve_direction",
+          "terminal_player"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 7,
+        "correct_shot_fields": 2,
+        "summary_accuracy": 0.3333,
+        "shot_denominator": 14,
+        "shot_accuracy": 0.1429,
+        "event_credit": 0.0476
+      },
+      {
+        "prediction_index": 13,
+        "reference_index": 13,
+        "correct_summary_fields": [
+          "outcome",
+          "serve_direction",
+          "terminal_stroke",
+          "terminal_court_position",
+          "terminal_result",
+          "terminal_error"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 8,
+        "correct_shot_fields": 2,
+        "summary_accuracy": 0.6667,
+        "shot_denominator": 16,
+        "shot_accuracy": 0.125,
+        "event_credit": 0.0833
+      },
+      {
+        "prediction_index": 14,
+        "reference_index": 14,
+        "correct_summary_fields": [
+          "outcome",
+          "first_serve_in",
+          "rally_shots",
+          "terminal_error"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 1,
+        "correct_shot_fields": 1,
+        "summary_accuracy": 0.4444,
+        "shot_denominator": 2,
+        "shot_accuracy": 0.5,
+        "event_credit": 0.2222
+      },
+      {
+        "prediction_index": 15,
+        "reference_index": 15,
+        "correct_summary_fields": [
+          "outcome",
+          "serve_direction",
+          "terminal_player",
+          "terminal_stroke",
+          "terminal_court_position"
+        ],
+        "predicted_shots": 1,
+        "reference_shots": 6,
+        "correct_shot_fields": 2,
+        "summary_accuracy": 0.5556,
+        "shot_denominator": 12,
+        "shot_accuracy": 0.1667,
+        "event_credit": 0.0926
+      }
+    ],
+    "formula": "2 * exact_ordered_event_matches / (n_predicted + n_reference)",
+    "soft_formula": "2 * sum(per_event_summary_accuracy * per_event_shot_accuracy) / (n_predicted + n_reference)"
+  }
+}
