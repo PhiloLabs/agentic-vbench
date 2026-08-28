@@ -1,0 +1,33 @@
+{
+  "events": [
+    {
+      "set": 1,
+      "score_after": "8-4",
+      "type": "block",
+      "players": [
+        "Tyrah Ariail",
+        "Lindsey Miller"
+      ],
+      "blocked": "Shea Rubright"
+    },
+    {
+      "set": 1,
+      "score_after": "18-14",
+      "type": "block",
+      "players": [
+        "Magda Jehlarova"
+      ],
+      "blocked": "Skylar Fields"
+    },
+    {
+      "set": 2,
+      "score_after": "16-9",
+      "type": "block",
+      "players": [
+        "Tyrah Ariail",
+        "London Wijay"
+      ],
+      "blocked": "Pia Timmer"
+    }
+  ]
+}
