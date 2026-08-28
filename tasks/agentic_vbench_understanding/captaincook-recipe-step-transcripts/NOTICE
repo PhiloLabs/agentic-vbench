@@ -1,0 +1,22 @@
+This task packages video derived from CaptainCook4D.
+
+    CaptainCook4D: A dataset for understanding errors in procedural activities
+    Rohith Peddi, Shivvrat Arya, Bharath Challa, Likhitha Pallapothula, Akshay Vyas,
+    Jikai Wang, Qifan Zhang, Vasundhara Komaragiri, Eric Ragan, Nicholas Ruozzi,
+    Yu Xiang, Vibhav Gogate
+    arXiv:2312.14556
+    https://captaincook4d.github.io/captain-cook/
+
+CaptainCook4D is released by its authors under the Apache License 2.0
+(https://www.apache.org/licenses/LICENSE-2.0).
+
+Changes made to the licensed material: the published 3840x2160 GoPro stream of each of
+the 22 recordings listed in task.toml was scaled to 1080p, its audio track was dropped,
+and container metadata and chapters were removed. No frames were cut, cropped or
+reordered, and no annotation was modified. The transformation is reproducible with
+provenance/data_setup/02_prepare_media.sh, and provenance/media_manifest.json records
+the publisher's own URL and the SHA256 of the publisher's own object for every file.
+
+The step and error annotations this task derives its answer key from are the same
+release's, pinned by commit in provenance/data_setup/01_download_annotations.sh, and are
+transformed by provenance/build_gt.py without being edited.

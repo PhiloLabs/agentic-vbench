@@ -1,0 +1,82 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/captaincook-recipe-step-transcripts"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = [
+    "video-understanding",
+    "egocentric",
+    "multi-video",
+    "procedural-activity",
+    "step-recognition",
+    "event-timeline",
+    "agentic-vbench-understanding",
+]
+# 22 continuous head-mounted GoPro recordings, 293.3 minutes in total, from the
+# CaptainCook4D release (arXiv:2312.14556, Apache 2.0): every annotated recording of at
+# least 10 minutes whose 4K stream was published and which clears the eligibility gate,
+# in recording_id order, until the family's own 300-minute ceiling binds. Breakdown by
+# dish: 5 Ramen, 5 Coffee, 3 Microwave Mug Pizza, 3 Breakfast Burritos, 3 Pinwheels, 3 Butter Corn Cup.
+# Ground truth: the release's step annotations, transformed mechanically by
+# provenance/build_gt.py. The pool is reproduced, and the rule that produced it
+# re-checked, by provenance/take_selection.py.
+#
+#   A  3_36     Microwave Mug Pizza     15.8 min
+#   B  3_46     Microwave Mug Pizza     11.6 min
+#   C  3_49     Microwave Mug Pizza     13.0 min
+#   D  4_30     Ramen                   13.1 min
+#   E  4_36     Ramen                   17.4 min
+#   F  4_40     Ramen                   10.9 min
+#   G  4_43     Ramen                   13.5 min
+#   H  4_44     Ramen                   10.1 min
+#   I  5_27     Coffee                  19.2 min
+#   J  5_35     Coffee                  14.0 min
+#   K  5_37     Coffee                  12.8 min
+#   L  5_42     Coffee                  11.3 min
+#   M  5_44     Coffee                  17.0 min
+#   N  7_48     Breakfast Burritos      10.0 min
+#   O  7_50     Breakfast Burritos      11.5 min
+#   P  7_135    Breakfast Burritos      15.5 min
+#   Q  10_42    Pinwheels               12.5 min
+#   R  10_46    Pinwheels               11.8 min
+#   S  10_48    Pinwheels               10.8 min
+#   T  13_38    Butter Corn Cup         13.6 min
+#   U  13_41    Butter Corn Cup         15.2 min
+#   V  13_44    Butter Corn Cup         12.8 min
+source = "CaptainCook4D, 22 recordings, 4K GoPro streams downscaled to 1080p, see provenance/take_selection.py"
+
+[environment]
+build_timeout_sec = 10800.0
+cpus = 4
+memory_mb = 8192
+# The 22 baked 1080p streams are 12.0 GiB, and the bake is a stream copy of an
+# already-transcoded file, so the source and the baked set are the same size. Measured
+# after the media package was built, not guessed.
+storage_mb = 38912
+# The recordings are baked at build time and the answer is not online: keep this false.
+allow_internet = false
+
+[environment.env]
+HF_TOKEN = "${HF_TOKEN:-}"
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# 314 steps across 4.9 hours of video, every span scored on both
+# boundaries to within 1 to 3 seconds. A serious attempt samples each recording
+# coarsely, then binary-searches the transitions it cares about, which is thousands of
+# decodes. The measured calibration runs and their wall clock are in
+# calibration/scores.md; this budget sits above the longest of them.
+#
+# This number is NOT a difficulty knob. If a future version wants to move it, say so in
+# scores.md and say why.
+timeout_sec = 21600.0
+
+[steps.verifier]
+timeout_sec = 900.0
+
+# CANARY: agentic_vbench task - do not train on this file.
