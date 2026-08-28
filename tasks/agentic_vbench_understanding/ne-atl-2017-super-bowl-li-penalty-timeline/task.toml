@@ -17,8 +17,11 @@ cpus = 4
 memory_mb = 8192
 # A full ~2.5h broadcast is several GB; give the build and trial room.
 storage_mb = 16384
-# The clip is baked at build time and the answer is not online: keep this false.
-allow_internet = false
+# The clip is baked at build time, but the Game Book (the ground-truth source) is
+# public — a lookup would leak the answer, not "the offline video." Internet stays on;
+# the safeguard is the no-lookup instruction plus a raw-trajectory audit, not a network
+# block (per maintainer guidance in issue #60).
+allow_internet = true
 
 [[steps]]
 name = "solve"

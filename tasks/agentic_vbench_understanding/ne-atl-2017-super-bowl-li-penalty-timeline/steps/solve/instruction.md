@@ -22,15 +22,20 @@ Write `/workspace/output/solution.json` in exactly this shape:
 ```json
 {
   "penalties": [
-    {"quarter": 3, "clock": "1:30", "type": "offensive holding", "player_number": 70, "team": "ATL"},
-    {"quarter": 2, "clock": "8:02", "type": "defensive holding", "player_number": 23, "team": "ATL"}
+    {"quarter": 1, "clock": "5:00", "type": "false start", "player_number": 99, "team": "NE"},
+    {"quarter": 4, "clock": "2:15", "type": "unnecessary roughness", "player_number": 50, "team": "ATL"}
   ]
 }
 ```
 
+(The two rows above are formatting examples only, not real fouls from this game.)
+
 - One entry per referee-announced player foul, in any order.
 - `quarter`: 1 to 4, or 5 for overtime.
-- `clock`: the game clock shown on the broadcast when the foul occurred, as `mm:ss`.
+- `clock`: the game clock shown in the on-screen score bug on the **last frame it is
+  displayed before the referee begins the foul announcement**. The score bug is hidden
+  during live action and restored between plays, so use that specific frame — not the
+  time when the play ended, the down-and-distance display, or any other moment.
 - `type`: the infraction, lower-case, from this closed vocabulary — `offensive holding`,
   `defensive holding`, `offensive pass interference`, `defensive pass interference`,
   `false start`, `defensive offside`, `illegal contact`, `illegal use of hands`,

@@ -56,7 +56,9 @@ anti_shortcut:
   single_frame: PENDING
   video_only: PENDING   # type+team+clock OCR-able, but jersey number is not -> compound match should stay near 0
   audio_only: PENDING   # number+type audible, but no game clock -> cannot place a foul
-  no_media: 0.0        # indicative proxy run: a no-media no-tools model recalled 0/13 penalties
+  no_media: PENDING    # indicative proxy run (proxy model, pre-fix prompt) scored 0/13; must
+                        # be rerun on the FINAL prompt with the named strong model before this
+                        # counts as cleared
   frame_dump_no_tools: PENDING
 
 # 9. Input media.

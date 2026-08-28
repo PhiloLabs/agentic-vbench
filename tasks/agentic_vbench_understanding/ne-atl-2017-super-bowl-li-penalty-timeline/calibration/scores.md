@@ -8,8 +8,8 @@ tool-call turns**. Oracle must be 1.0 and an empty attempt 0.
 |---|---|---|
 | oracle (full 13-foul ground truth) | 1.0 | — |
 | empty / null | 0.0 | — |
-| plausible guess | 0.0 | — |
-| no_media (indicative proxy) | 0.0 | 0 |
+| plausible guess (pre-fix prompt) | 0.0 — stale, rerun pending | — |
+| no_media (indicative proxy, pre-fix prompt) | 0.0 — stale, rerun pending | 0 |
 | GPT 5.6 Sol | _to run_ | _to run_ |
 | Codex CLI | _to run_ | _to run_ |
 | Antigravity | _to run_ | _to run_ |
@@ -19,13 +19,19 @@ task structure (all required files), input video (143.1 min, **1080p**, confirme
 checker's ffprobe), oracle == 1.0, baseline == 0.0. The agent-reward, agent-turns, and
 ablation inputs are reported SKIP (they need the strong-agent stack).
 
-Status: PRE-CALIBRATION. Oracle / empty / no_media verified locally. The three-agent
-calibration (GPT 5.6 Sol first, per the README) has not been run — it requires the
-maintainer's agent stack and is the gating step before this task is PR-ready. Raw
-trajectories will be added under `rollouts/` once run.
+Status: PRE-CALIBRATION. Oracle / empty verified locally against the current prompt.
+`no_media` and `plausible guess` were run against the prompt **before** the leaked
+example rows in `instruction.md` were fixed (issue #60 review) — both must be rerun
+against the current prompt before being counted. The three-agent calibration (GPT 5.6
+Sol first, per the README) has not been run — it requires the maintainer's agent stack
+and is the gating step before this task is PR-ready. Raw trajectories will be added
+under `rollouts/` once run.
 
 Notes on what is already measured:
-- no_media: a strong model with no media and no tools reconstructed 0 of 13 accepted
-  penalties. Indicative (proxy model, not GPT 5.6 Sol), but de-risks the fame concern.
+- no_media (stale, pre-fix): a strong model with no media and no tools reconstructed 0
+  of 13 accepted penalties. Indicative (proxy model, not GPT 5.6 Sol); de-risks the fame
+  concern but needs rerunning on the fixed prompt with the named strong model.
 - audio intelligibility: the referee's announced jersey number transcribed cleanly on a
-  small CPU ASR model for 4/4 sampled player fouls (#70, #23, #34, #59).
+  small CPU ASR model for 4/4 sampled player fouls (#70, #23, #34, #59) — all 4 are
+  accepted fouls; the 3 declined fouls kept in scope are not yet audio-verified (see
+  PROVENANCE.md).
