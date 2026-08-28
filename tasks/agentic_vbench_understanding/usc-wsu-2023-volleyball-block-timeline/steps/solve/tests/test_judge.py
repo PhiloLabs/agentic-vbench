@@ -59,7 +59,7 @@ oracle = details([dict(g) for g in GT])
 check("oracle -> 1.0 (23 full)", oracle["full_matches"] == 23 and oracle["f1"] == 1.0)
 check("empty -> 0.0", details([])["f1"] == 0.0)
 
-print("== partial-credit symmetry (reviewer inline case) ==")
+print("== partial-credit symmetry ==")
 solo = find(3, "16-25")           # solo block: Jehlarova, blocked Ariail
 pair = find(1, "4-2")             # pair block: Tuaniga+Miller, blocked Isanovic
 base = {"set": solo["set"], "score_after": solo["score_after"], "type": "block",

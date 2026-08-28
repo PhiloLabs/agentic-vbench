@@ -44,8 +44,7 @@ from pathlib import Path
 # attacker kills through a block touch, not block points, and are excluded; the
 # match's 5 service aces are excluded by design (legible single-jersey reads that do
 # not test the hard net attribution). Scores are written USC-WSU (visitor-home) as on
-# the broadcast graphic. No rally line is corrupted, so every block has a recoverable
-# blocked hitter (the None branch below is retained but unused).
+# the broadcast graphic. Every block carries a recoverable blocked hitter.
 GROUND_TRUTH = [
   {"set": 1, "score_after": "4-2",       "type": "block", "players": ["Mia Tuaniga", "Lindsey Miller"],                         "blocked": "Iman Isanovic"},
   {"set": 1, "score_after": "14-10",     "type": "block", "players": ["Lindsey Miller"],                                        "blocked": "Magda Jehlarova"},
