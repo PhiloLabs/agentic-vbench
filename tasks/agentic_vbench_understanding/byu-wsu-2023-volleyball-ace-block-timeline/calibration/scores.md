@@ -70,10 +70,11 @@ same instruction as the real task.
 | ablation | inputs | events submitted | score |
 |---|---|---|---|
 | no_media | instruction only | 16 | **0.0** |
-| single_frame | one frame from the match midpoint | _pending_ | _pending_ |
-| frame_dump | 60 uniform frames, no seeking | _pending_ | _pending_ |
+| single_frame | one frame from the match midpoint | 9 | **0.0** |
+| frame_dump | 60 uniform frames, no seeking | 16 | **0.0** |
 
-`no_media` is the one that matters most here, since this match's rally-by-rally log is
+All three land at zero after submitting a full-looking answer, so nothing here is
+obtainable without working the video. `no_media` is the one that matters most, since this match's rally-by-rally log is
 public: forced to answer, the model produced 16 plausible events from recall and
 matched none. The per-event score anchors and the blocker/hitter/setter triples are
 not recallable.

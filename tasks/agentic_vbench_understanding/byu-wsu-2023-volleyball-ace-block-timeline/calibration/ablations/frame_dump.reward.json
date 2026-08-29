@@ -2,8 +2,8 @@
   "reward": 0.0,
   "details": {
     "reason": "ok",
-    "n_ground_truth": 24,
-    "n_predicted": 35,
+    "n_ground_truth": 18,
+    "n_predicted": 16,
     "full_matches": 0,
     "partial_matches": 0,
     "credit": 0.0,

@@ -1,26 +1,13 @@
 {
   "events": [
-    {"set": 1, "score_after": "5-3",   "type": "ace",   "players": ["Erin Livingston"]},
-    {"set": 1, "score_after": "8-6",   "type": "block",  "players": ["Claire Little", "Elyse Stowell"], "blocked": "Iman Isanovic"},
-    {"set": 1, "score_after": "12-9",  "type": "ace",   "players": ["Karly Basham"]},
-    {"set": 1, "score_after": "18-14", "type": "block",  "players": ["Argentina Ung"], "blocked": "Whitney Bower"},
-    {"set": 1, "score_after": "25-20", "type": "block",  "players": ["Elyse Stowell"], "blocked": "Katy Ryan"},
-
-    {"set": 2, "score_after": "3-5",   "type": "ace",   "players": ["Iman Isanovic"]},
-    {"set": 2, "score_after": "9-12",  "type": "block",  "players": ["Emma Barbero", "Magda Jehlarova"], "blocked": "Hannah Billeter"},
-    {"set": 2, "score_after": "14-16", "type": "ace",   "players": ["Kate Prior"]},
-    {"set": 2, "score_after": "20-23", "type": "block",  "players": ["Claire Little"], "blocked": "Karly Basham"},
-    {"set": 2, "score_after": "22-25", "type": "ace",   "players": ["Julia Norville"]},
-
-    {"set": 3, "score_after": "7-4",   "type": "block",  "players": ["Whitney Bower", "Claire Little"], "blocked": "Pia Timmer"},
-    {"set": 3, "score_after": "12-7",  "type": "ace",   "players": ["Alyssa Erickson"]},
-    {"set": 3, "score_after": "16-10", "type": "block",  "players": ["Elyse Stowell"], "blocked": "Emma Barbero"},
-    {"set": 3, "score_after": "25-18", "type": "ace",   "players": ["Erin Livingston"]},
-
-    {"set": 4, "score_after": "6-8",   "type": "ace",   "players": ["Katy Ryan"]},
-    {"set": 4, "score_after": "13-11", "type": "block",  "players": ["Claire Little", "Elyse Stowell"], "blocked": "Iman Isanovic"},
-    {"set": 4, "score_after": "18-16", "type": "ace",   "players": ["Kate Prior"]},
-    {"set": 4, "score_after": "22-21", "type": "block",  "players": ["Argentina Ung"], "blocked": "Whitney Bower"},
-    {"set": 4, "score_after": "25-23", "type": "block",  "players": ["Elyse Stowell"], "blocked": "Katy Ryan"}
+    {"set": 1, "score_after": "9-6", "type": "block", "players": ["Eden Bower"], "blocked": "Karly Basham", "setter": "Argentina Ung"},
+    {"set": 1, "score_after": "22-18", "type": "block", "players": ["Kamaile Hiapo", "Brielle Kemavor"], "blocked": "Pia Timmer", "setter": "Julia Norville"},
+    {"set": 2, "score_after": "11-13", "type": "block", "players": ["Iman Isanovic"], "blocked": "Mia Lee", "setter": "Erin Livingston"},
+    {"set": 2, "score_after": "21-23", "type": "block", "players": ["Magda Jehlarova", "Lana Radakovic"], "blocked": "Kate Prior", "setter": "Erin Livingston"},
+    {"set": 3, "score_after": "14-10", "type": "block", "players": ["Eden Bower"], "blocked": "Katy Ryan", "setter": "Argentina Ung"},
+    {"set": 3, "score_after": "25-18", "type": "block", "players": ["Brielle Kemavor"], "blocked": "Emma Barbero", "setter": "Julia Norville"},
+    {"set": 4, "score_after": "17-15", "type": "block", "players": ["Iman Isanovic"], "blocked": "Aria McComber", "setter": "Erin Livingston"},
+    {"set": 4, "score_after": "23-21", "type": "block", "players": ["Kamaile Hiapo"], "blocked": "Karly Basham", "setter": "Argentina Ung"},
+    {"set": 4, "score_after": "25-23", "type": "block", "players": ["Eden Bower", "Kamaile Hiapo"], "blocked": "Pia Timmer", "setter": "Julia Norville"}
   ]
 }
