@@ -3,9 +3,12 @@
 
 Guards the coverage bug: an answer that correctly reconstructs only k of the n races used to score
 1.0 because omitted GT races were dropped from the tau and accuracy denominators. The judge now
-scales the reward by coverage = matched_races / total_races, so:
+scales the reward by coverage = matched_races / total_races AND a race counts as matched only if it
+carries a numeric value for every scored dimension, so:
   * the full oracle (all races) still scores 1.0,
   * a correct 2-of-12 subset scores ~2/12 (NOT 1.0),
+  * 2 real races padded with 10 time-matched {track, t} placeholders (no scored values) score ~2/12
+    (NOT 1.0) — the placeholders earn no coverage,
   * an empty answer scores 0.
 
 Run: `python3 test_coverage.py` (exit 0 = pass). Pure stdlib; runs judge.py as the harness does.
@@ -34,10 +37,19 @@ def oracle_races(n=None):
                        "items_collected": r["items_collected"], "skid_time": r["skid_time"]} for r in rows]}
 
 
+def oracle_plus_placeholders(k=2):
+    """k real oracle races + (n-k) time-matched {track, t} placeholders that carry NO scored values.
+    The reviewer's repro: the placeholders must earn no coverage, so this must NOT reach 1.0."""
+    real = oracle_races(k)["races"]
+    ph = [{"track": r["track"], "t": round((r["t_start"] + r["t_end"]) / 2, 1)} for r in GT[k:]]
+    return {"races": real + ph}
+
+
 def main():
     n = len(GT)
     full = score(oracle_races())["reward"]
     part = score(oracle_races(2))
+    padded = score(oracle_plus_placeholders(2))
     empty = score({"races": []})["reward"]
 
     checks = [
@@ -47,6 +59,12 @@ def main():
          f"reward={part['reward']} vs {2.0/n:.4f}"),
         ("2-of-%d coverage == 2/%d" % (n, n), abs(part["details"]["coverage"] - 2.0 / n) < 1e-3,
          f"coverage={part['details']['coverage']} (det is rounded to 4dp)"),
+        ("2 real + %d {track,t} placeholders < 1.0" % (n - 2), padded["reward"] < 0.5,
+         f"reward={padded['reward']}"),
+        ("placeholder-padded reward ~= 2/%d" % n, abs(padded["reward"] - 2.0 / n) < 0.02,
+         f"reward={padded['reward']}"),
+        ("placeholder-padded coverage == 2/%d" % n, abs(padded["details"]["coverage"] - 2.0 / n) < 1e-3,
+         f"coverage={padded['details']['coverage']}"),
         ("empty == 0.0", empty == 0.0, f"reward={empty}"),
     ]
     ok = True

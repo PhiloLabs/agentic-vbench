@@ -124,6 +124,12 @@ def main():
     TOL = 15.0
     def race_t(r):
         return as_num(r.get("t", r.get("t_start", r.get("time")))) if isinstance(r, dict) else None
+    def has_all_scores(r):
+        # A race counts as matched only if it carries a numeric value for EVERY scored dimension.
+        # A time-matched {track, t} placeholder (no items_collected / skid_time) is not a real answer
+        # and must earn no coverage — otherwise a few real races padded with in-window placeholders
+        # would reach coverage 1.0 and score as if complete.
+        return isinstance(r, dict) and all(as_num(r.get(pf)) is not None for _, pf, _ in DIMS)
     used, matched = set(), []
     for g in gt_races:
         ts, te = g.get("t_start"), g.get("t_end")
@@ -131,7 +137,7 @@ def main():
         if ts is not None and te is not None:
             mid = (ts + te) / 2.0
             for i, p in enumerate(pred_races):
-                if i in used:
+                if i in used or not has_all_scores(p):
                     continue
                 pt = race_t(p)
                 if pt is not None and ts - TOL <= pt <= te + TOL:
