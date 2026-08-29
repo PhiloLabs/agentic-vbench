@@ -17,5 +17,6 @@ The two histograms count different things because the CLIs do: the Codex figure 
 completed tool-call items in its rollout, the Claude figure is assistant turns
 carrying at least one tool call. Each file says which.
 
-Raw stream logs run to hundreds of MB and are not committed; the answers, the prompt,
-the histograms and the metadata are what a reviewer needs to check a score.
+The raw streams themselves run to hundreds of MB, so they are published at an
+immutable dataset revision rather than committed here; `../scores.md` lists every URL
+with its SHA256.

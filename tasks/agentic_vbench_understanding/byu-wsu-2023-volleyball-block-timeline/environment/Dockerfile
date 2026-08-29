@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 #
 # Pinned to an immutable dataset revision, so the URL cannot start serving other
 # bytes if the dataset's main branch moves; the SHA256 below is checked regardless.
-ARG MATERIALS_REVISION=859cb6877dc31b75d336648c4d3c87509e3373ab
+ARG MATERIALS_REVISION=7dc08d8a25c1192b411f586e60db6542776ae075
 ARG MATERIALS_URL=https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/${MATERIALS_REVISION}/byu-wsu-2023-09-08-720p-noaudio.mp4
 ARG MATERIALS_SHA256=ee887b18cf3dc9afce05087b24b629d1c44433344d7d4ccf612a4e548796dc60
 RUN mkdir -p /baked \

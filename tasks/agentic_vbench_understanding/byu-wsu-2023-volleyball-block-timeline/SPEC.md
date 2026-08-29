@@ -91,8 +91,8 @@ anti_shortcut:
   (see calibration/scores.md for the submitted-event counts and scores)
 
 input:
-  url: https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/859cb6877dc31b75d336648c4d3c87509e3373ab/byu-wsu-2023-09-08-720p-noaudio.mp4
-  dataset_revision: 859cb6877dc31b75d336648c4d3c87509e3373ab
+  url: https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/7dc08d8a25c1192b411f586e60db6542776ae075/byu-wsu-2023-09-08-720p-noaudio.mp4
+  dataset_revision: 7dc08d8a25c1192b411f586e60db6542776ae075
     (research re-host of the official WSU Athletics upload
     https://www.youtube.com/watch?v=5KC1jC90lT8 — provenance, rights and takedown
     policy documented in the dataset README)
