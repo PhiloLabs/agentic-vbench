@@ -9,12 +9,18 @@ high, same instruction as the real task.
 | no_media | instruction only | shell | 16 | 0.0 |
 | single_frame | one frame from the match midpoint | shell | 9 | 0.0 |
 | frame_dump | 60 uniform frames, no seeking | shell | 16 | 0.0 |
-| all_frames | 77 stills, one every 90 s | none | 10 | 0.0 |
+| all_frames | 77 stills, one every 90 s | Read, Write | 10 | 0.0 |
 
 `all_frames` differs from `frame_dump` in what the model is allowed to do, not just
 what it is given: the whole match is already in context as a uniform sweep, and the
 shell is taken away, so there is no seeking, cropping, upscaling or scripting — only
-reading the frames and writing an answer.
+opening an image and writing an answer.
+
+Two conditions make that measurable rather than self-defeating. A model with no shell
+and no directory listing cannot discover filenames, so all 77 are given in the prompt;
+and the workspace lives outside the repository, so no judge, answer key or sibling run
+is on a path it could open. `all_frames.instruction-as-run.md` is the exact prompt, and
+the native trace is published with the other streams (`../scores.md`).
 
 `no_media` is the one that matters most: this match's rally-by-rally log is public, so
 the question is whether the answer can be recalled rather than watched. Forced to

@@ -1,11 +1,16 @@
 FROM python:3.12-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        ffmpeg curl ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+        ffmpeg curl ca-certificates tesseract-ocr imagemagick \
+    && rm -rf /var/lib/apt/lists/* \
+ && pip install --no-cache-dir --root-user-action=ignore numpy==2.1.3 pillow==11.0.0
 
-# The agent uses ffmpeg/ffprobe to seek and sample frames. The grader is pure
-# stdlib (it only compares strings and integers), so it needs nothing extra.
+# The tool profile is the working set for a video task: ffmpeg/ffprobe to seek and
+# sample, ImageMagick and Pillow to crop and upscale a still, NumPy to compare one
+# against another, and Tesseract to read the score graphic. Without these the task
+# would measure whether an agent can reimplement image processing in pure Python,
+# which is not the skill under test. The grader itself is pure stdlib — it only
+# compares strings and integers — so it needs none of them.
 
 # Bake the full-match broadcast at build time with a pinned URL and a SHA256
 # verified at build, the same way the worked example does.

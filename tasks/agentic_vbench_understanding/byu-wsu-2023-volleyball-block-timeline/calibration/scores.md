@@ -74,13 +74,18 @@ same instruction as the real task.
 | no_media | instruction only | shell | 16 | **0.0** |
 | single_frame | one frame from the match midpoint | shell | 9 | **0.0** |
 | frame_dump | 60 uniform frames, no seeking | shell | 16 | **0.0** |
-| all_frames | 77 stills, one every 90 s | none | 10 | **0.0** |
+| all_frames | 77 stills, one every 90 s | Read, Write | 12 | **0.0** |
 
 All four land at zero after submitting a full-looking answer, so nothing here is
-obtainable without working the video. `all_frames` is the strictest: the whole match is
-already in front of the model as a uniform sweep and the shell is gone, so it cannot
-seek, crop, zoom or script — only look and answer. It matched no rally anchor, and its
-answers name players as "BYU #unknown", which is what the frames actually support. `no_media` is the one that matters most, since
+obtainable without working the video. `all_frames` is the strictest of the four and the only one whose harness had to be
+built rather than trimmed. The whole match goes into context as a uniform still sweep
+and the shell is taken away: no seeking, cropping, upscaling or scripting, only opening
+an image and writing the answer. Two things the condition needs to be real — a model
+that cannot list a directory also cannot discover filenames, so every filename is given
+in the prompt; and the workspace sits outside the repository, so no judge, key or
+sibling run is on a path it could open. The exact prompt is committed beside the answer
+as `all_frames.instruction-as-run.md`, and the native trace is published with the rest.
+It opened 76 of 77 frames, submitted 12 events and matched no block point: **0.0**. `no_media` is the one that matters most, since
 this match's rally-by-rally log is public: forced to answer, the model produced 16
 plausible events from recall and matched none. The per-event score anchors and the
 blocker/hitter/setter triples are not recallable.
@@ -102,6 +107,7 @@ envelope those streams were audited against.
 | ablation, no_media | [`ablations/no_media.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/no_media.stream-json.gz) (12 kB) | `7f85d12481c326822d4614b2422ba7ebc359c8185ad79a23bcdc6741d07248c5` |
 | ablation, single_frame | [`ablations/single_frame.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/single_frame.stream-json.gz) (146 kB) | `026bdd99624662ea01185055a35be77b334419faa17b1ea4b4c07a48b38c3789` |
 | ablation, frame_dump | [`ablations/frame_dump.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/frame_dump.stream-json.gz) (6.5 MB) | `ef2b62bc88edf6665925c21f735a2c9d75cc4ee01e7e503b9ddcd66627f928e2` |
+| ablation, all_frames | [`ablations/all_frames.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/c66a1ed95a6664c1f423cc0b8f1eee4d2f242e01/byu-wsu-2023-volleyball-block-timeline/ablations/all_frames.stream-json.gz) (17.0 MB) | `76afe71d06f59262629b8c00a71e069551ae3abd9dbf534a69d5261ec171d0c3` |
 
 `gunzip -c <file> | sha256sum` checks the stream itself; `sha256sum <file>` checks the
 archive as served. The two Opus legs are one session: the first was cut off by a
@@ -109,3 +115,4 @@ network drop and resumed in place, which is what the 386-turn figure counts.
 
 Artifacts in `ablations/`; answers, prompt and provenance for the scored runs in
 `rollouts/`; the Antigravity web-grounding finding in `agent-integrity/`.
+
