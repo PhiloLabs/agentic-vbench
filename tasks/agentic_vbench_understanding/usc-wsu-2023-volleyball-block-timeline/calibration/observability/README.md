@@ -1,7 +1,7 @@
 # Observability ledger
 
-Purpose: show that every field the scorer asks for is actually recoverable from the
-shipped 720p video, so that a low agent score means the task is hard rather than
+Purpose: establish, from the shipped 720p video alone, that the fields the scorer asks
+for are actually there — so that a low agent score means the task is hard rather than
 impossible.
 
 ## How each point was located
@@ -14,7 +14,9 @@ black margin added because strokes touching the crop edge are misread as an extr
 digit), a 20 s coarse pass builds the score-versus-time curve, and each target score
 is then bisected to ~0.5 s and re-read to confirm the bug shows exactly that score.
 The two set-winning points and one point where the sides do not reach the target
-simultaneously needed a directed scan; all 23 are confirmed.
+simultaneously needed a directed scan; **all 23 are confirmed**, and every sheet in
+`sheets/` carries the score bug in frame, so the anchor of each event can be checked
+by eye.
 
 Cross-check: an independent Opus 5 calibration run, which reconstructed the whole
 200-rally timeline by template-matching the same bug, put the first block point at
@@ -22,24 +24,25 @@ Cross-check: an independent Opus 5 calibration run, which reconstructed the whol
 
 ## What the broadcast shows, and when
 
-Measured on this file, the pattern is the same at every point examined:
-
 - **During the rally the wide sideline shot never resolves jersey numbers.** Players
-  are 40-80 px tall; the ball is 15-40 px and usually motion-blurred.
-- **There is no replay.** After a point the feed cuts to the next server, not to a
-  slow-motion of the play.
-- **Roughly 0.8-3.2 s after the point the feed cuts to a net close-up** where numbers
-  are large and sharp. This window is where attribution is recoverable, and it is the
-  only place it is recoverable.
+  are 40-80 px tall; the ball is 15-40 px and usually motion-blurred. This holds on
+  every event examined.
+- **There is no replay.** After a point the feed cuts to the next server or stays
+  wide; it never cuts to a slow-motion of the play.
+- **After some points the feed cuts to a net close-up**, where numbers are large and
+  sharp. Where that cut happens it is the one place a number can simply be read.
+- **It does not happen after every point.** On set 1 at 14-10 and set 1 at 23-15 the
+  feed stays on the wide shot through the whole post-point window, so nothing is
+  directly legible there.
 
-This is the crux of the task's difficulty: the information is present, but only in a
-~2 s window per point that has to be found first, and a single frame from that window
-is often not enough — the camera pans, and the credited players enter and leave the
-shot within it.
+That split is the crux of the task's difficulty. Where a close-up exists it is short —
+the camera pans and the credited players enter and leave the shot inside it — and
+where it does not, a number cannot be read at all and the players have to be carried
+forward from an earlier close-up through the rotation.
 
 ## Per-event verification
 
-`sheets/` holds, for every one of the 23 points, four frames spanning the close-up
+`sheets/` holds, for every one of the 23 points, four frames spanning the post-point
 window (t+0.8, +1.6, +2.4, +3.2 relative to the flip), full frame at source
 resolution.
 
@@ -63,19 +66,23 @@ Spot-checked at t+1.6 only (one frame, not the window):
 | set 1, 25-15 | K. Williams, Ariail | opposing side in shot; not legible at this instant |
 | set 2, 10-7 | Ariail | still the wide shot at this instant; not legible |
 
-The last two illustrate the point above: a single sample from the window is not
-enough, which is why the sheets carry four frames each and why an agent that samples
-only the rally — as the Opus 5 run did — comes away with nothing.
-
 ## Findings
 
-- **Credited blockers are recoverable.** On every event examined with the full
-  four-frame window the credited blockers were legible, and the numbers matched the
-  ground truth exactly.
-- **The blocked hitter is recoverable less often.** The close-up follows the players
-  at the net, which usually favours the side that won the point; the hitter is
-  sometimes present (set 1, 14-10 reads 15) and sometimes not. The scorer already
+- **Every event's anchor is verified.** Set and exact score-after — the fields the
+  scorer matches on before it looks at any name — are confirmed for all 23 from the
+  score bug itself.
+- **Where a close-up follows the point, the credited blockers are legible**, and on
+  every event examined that way the numbers matched the answer key exactly.
+- **The blocked hitter is legible less often.** The close-up follows the players at
+  the net, which usually favours the side that won the point. The scorer already
   treats this as the harder half: a wrong or missing hitter with the blockers exact
   earns partial credit rather than nothing.
+- **Direct legibility is not universal.** On the events checked where the feed stays
+  wide, no jersey can be read in the post-point window at all. Identification there
+  depends on carrying players forward from an earlier close-up rather than reading a
+  number in the moment.
 - No event was found where the ground truth names a player who cannot be seen at all,
   so nothing in the answer key is unsupported by the video.
+
+What this ledger does not yet contain is a frame-level witness for **each** credited
+name on **all** 23 events; the table above is the subset examined directly.

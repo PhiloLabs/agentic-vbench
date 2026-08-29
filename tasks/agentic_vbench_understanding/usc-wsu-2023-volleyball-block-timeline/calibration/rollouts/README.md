@@ -36,5 +36,6 @@ the point it stopped, not something the agent submitted.
 which scored 0.0 and matched no rally at all. The write-up explains why the archived
 run stays unscored rather than being completed under a name that did not produce it.
 
-Raw stream logs run to hundreds of MB and are not committed; the histograms and
-answer files here, plus the metadata, are what a reviewer needs to check a score.
+The raw streams themselves run to hundreds of MB, so they are published at an
+immutable dataset revision rather than committed here; `../scores.md` lists every URL
+with its SHA256.

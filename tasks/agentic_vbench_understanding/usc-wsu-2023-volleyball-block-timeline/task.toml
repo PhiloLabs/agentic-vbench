@@ -23,8 +23,6 @@ storage_mb = 12288
 # The clip is baked at build time and the answer is not online: keep this false.
 allow_internet = false
 
-[environment.env]
-HF_TOKEN = "${HF_TOKEN:-}"
 
 [[steps]]
 name = "solve"

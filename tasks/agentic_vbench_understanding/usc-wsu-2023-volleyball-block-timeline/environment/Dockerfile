@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # uploaded to the dataset repo below; the build verifies the SHA256.
 # Pinned to an immutable dataset revision, so the URL cannot start serving other
 # bytes if the dataset's main branch moves; the SHA256 below is checked regardless.
-ARG MATERIALS_REVISION=859cb6877dc31b75d336648c4d3c87509e3373ab
+ARG MATERIALS_REVISION=7dc08d8a25c1192b411f586e60db6542776ae075
 ARG MATERIALS_URL=https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/${MATERIALS_REVISION}/usc-wsu-2023-11-12-720p-noaudio.mp4
 ARG MATERIALS_SHA256=13ccbabbdd9540da851099d138bef3c8eafe6de9426c3681593edba32d08ba9e
 RUN mkdir -p /baked \

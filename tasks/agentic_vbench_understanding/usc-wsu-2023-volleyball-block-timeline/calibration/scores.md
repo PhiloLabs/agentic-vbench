@@ -83,17 +83,22 @@ awarded (derived verifier-side by OCR'ing the score bug, independent of any agen
 four frames per event spanning the post-point close-up, and what can be read off
 them. Summary of the finding:
 
+- every event's anchor is verified: set and exact score-after, the fields the scorer
+  matches on before it looks at a name, are confirmed for all 23 from the bug itself;
 - the wide sideline shot never resolves jersey numbers, and the broadcast shows no
   replays;
-- a net close-up 0.8-3.2 s after each point does resolve them, and that window is the
-  only place attribution is recoverable;
-- on every event examined across that full window the credited blockers were legible
-  and matched the answer key; the blocked hitter is legible less often, which the
-  scorer already handles with partial credit.
+- after some points the feed cuts to a net close-up where numbers are large and sharp,
+  and on every event examined that way the credited blockers were legible and matched
+  the answer key;
+- that cut does not follow every point — where the feed stays wide, no number is
+  readable in the moment and the players have to be carried forward from an earlier
+  close-up through the rotation;
+- the blocked hitter is legible less often than the blockers, which the scorer already
+  handles with partial credit.
 
 So the information is present but narrowly placed — hard, not impossible. The Opus
 run's own conclusion that blockers "face away from the camera" came from sampling the
-rally rather than that window.
+rally rather than the close-up.
 
 ## Design note: why every target is a block point
 
@@ -104,4 +109,26 @@ high-precision ace hits is enough to carry F1 on their own. Dropping them leaves
 block points that each need two opposing jersey reads inside a sub-second window at
 the net, so there is no legible easy class left to score off.
 
-Raw trajectories for every scored run are in `rollouts/`.
+## Raw trajectories
+
+Every scored run and every ablation is published whole, as the CLI wrote it, at an
+immutable dataset revision. `MANIFEST.json` in that dataset repeats each hash and adds
+the SHA256 of the uncompressed stream inside each archive.
+
+| run | file | sha256 (of the .gz as served) |
+|---|---|---|
+| codex-fresh, Codex event stream | [`codex-fresh/rollout.jsonl.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/codex-fresh/rollout.jsonl.gz) (77 kB) | `5fb3f337bf11c5e619ce2a5d9f1b214718eb2481bc1ac9790b9939b0d1db8c74` |
+| codex-fresh, stderr | [`codex-fresh/stderr.txt.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/codex-fresh/stderr.txt.gz) (4 kB) | `0a100e085160ad37b212ce18e701390f81f7cd52e57e53c6aac82e709f5a7fef` |
+| opus-fresh, Claude stream-json | [`opus-fresh/rollout.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/opus-fresh/rollout.stream-json.gz) (124.8 MB) | `917d683e8718dbc8ac32cb2552e4456375ee79bdc4debcfda2cec3e61a36ca35` |
+| fable-interrupted | [`fable-interrupted/rollout.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/fable-interrupted/rollout.stream-json.gz) (103.1 MB) | `df69c1d7cbf5a9e70fd09eb8c7a7f12c9d499e5ba21078ebe68e6bdd767a7a7b` |
+| ablation, no_media | [`ablations/no_media.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/ablations/no_media.stream-json.gz) (11 kB) | `bb9cc56a5d6444542f0df8b2369eea4d6dd4abc56b7fb21bac1d2b3c5722640e` |
+| ablation, single_frame | [`ablations/single_frame.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/ablations/single_frame.stream-json.gz) (647 kB) | `e0e4447f1080b82565ef02e418ef473dee627d76f90e7de576be0283e1b4c05e` |
+| ablation, frame_dump | [`ablations/frame_dump.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/ablations/frame_dump.stream-json.gz) (3.8 MB) | `014f44c745389c5ac76b770c3876bfd5157cdb2bad8f086e6638222f36ff25b4` |
+
+`gunzip -c <file> | sha256sum` checks the stream itself; `sha256sum <file>` checks the
+archive as served. The traces carry every tool call and result, including the frames
+the agents extracted, so turn counts and the no-web / no-key-access audits are
+checkable without trusting this file.
+
+Answer files, prompts, provenance and tool-call histograms for the same runs are in
+`rollouts/`.

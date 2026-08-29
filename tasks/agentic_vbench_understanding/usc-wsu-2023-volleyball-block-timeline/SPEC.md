@@ -87,8 +87,8 @@ anti_shortcut:
     video, but only in a 0.8-3.2 s net close-up after each point
 
 input:
-  url: https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/859cb6877dc31b75d336648c4d3c87509e3373ab/usc-wsu-2023-11-12-720p-noaudio.mp4
-  dataset_revision: 859cb6877dc31b75d336648c4d3c87509e3373ab
+  url: https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/7dc08d8a25c1192b411f586e60db6542776ae075/usc-wsu-2023-11-12-720p-noaudio.mp4
+  dataset_revision: 7dc08d8a25c1192b411f586e60db6542776ae075
     (research re-host of the official WSU Athletics upload
     https://www.youtube.com/watch?v=RgJjVgi7rZY — provenance, rights and takedown
     policy documented in the dataset README)
