@@ -88,6 +88,8 @@ anti_shortcut:
     so this is the leak that matters: the model answers from recall and matches
     nothing
   frame_dump: measured — 60 uniform frames, no seeking
+  all_frames: measured — the match as 77 stills, one every 90 s, with no shell at
+    all: no seeking, cropping or scripting, only reading the frames
   (see calibration/scores.md for the submitted-event counts and scores)
 
 input:

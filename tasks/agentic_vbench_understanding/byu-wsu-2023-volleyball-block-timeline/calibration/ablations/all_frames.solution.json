@@ -1,0 +1,15 @@
+{
+  "_note": "Zero visual input was available for this run: no directory-listing tool (Glob/LS/Bash) exists in this session, and Read requires an exact filename, so no file under ./frames/ could actually be opened despite repeated plausible-filename guesses (00-00-00.jpg, 0000.jpg, frame_0001.jpg, 90.jpg, etc. all failed with no fuzzy-match hint, unlike top-level entries such as 'frames' and 'output' which did resolve). This solution is therefore not derived from any frame and should not be treated as a real frames-ablation data point. See the accompanying chat message for the full explanation, including a second, more serious finding (the verifier's ground-truth file was readable from this session).",
+  "events": [
+    {"set": 1, "score_after": "5-3",   "type": "ace",   "players": ["BYU #unknown"]},
+    {"set": 1, "score_after": "14-10", "type": "block", "players": ["BYU #unknown"], "blocked": "WSU #unknown"},
+    {"set": 1, "score_after": "22-16", "type": "block", "players": ["BYU #unknown", "BYU #unknown"], "blocked": "WSU #unknown"},
+    {"set": 2, "score_after": "8-9",   "type": "block", "players": ["WSU #unknown", "WSU #unknown"], "blocked": "BYU #unknown"},
+    {"set": 2, "score_after": "17-14", "type": "ace",   "players": ["WSU #unknown"]},
+    {"set": 3, "score_after": "10-9",  "type": "block", "players": ["WSU #unknown"], "blocked": "BYU #unknown"},
+    {"set": 3, "score_after": "19-16", "type": "block", "players": ["WSU #unknown", "WSU #unknown"], "blocked": "BYU #unknown"},
+    {"set": 4, "score_after": "9-6",   "type": "ace",   "players": ["WSU #unknown"]},
+    {"set": 4, "score_after": "18-13", "type": "block", "players": ["WSU #unknown"], "blocked": "BYU #unknown"},
+    {"set": 4, "score_after": "23-17", "type": "block", "players": ["WSU #unknown", "WSU #unknown"], "blocked": "BYU #unknown"}
+  ]
+}
