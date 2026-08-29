@@ -55,7 +55,7 @@ RUN pip install --no-cache-dir pillow==11.1.0 numpy==2.4.3
 # U = 13_41    Butter Corn Cup          914.61 s     656 MiB
 # V = 13_44    Butter Corn Cup          766.03 s     549 MiB
 
-ARG BASE=https://huggingface.co/datasets/Maxine668/captaincook-recipe-step-transcripts/resolve/main
+ARG BASE=https://huggingface.co/datasets/Maxine668/captaincook-recipe-step-transcripts/resolve/780715458c1da7f4c49f03acc3842f73fa90514a
 ARG A_URL=${BASE}/A.mp4
 ARG A_SHA256=25bb369f249360f2214d6f3a8cc65e221b36d6ed02b8286920ea356e8f668528
 ARG B_URL=${BASE}/B.mp4

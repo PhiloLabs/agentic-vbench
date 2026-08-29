@@ -34,6 +34,17 @@ script exits non-zero and reports nothing else.
 
 ## Results
 
+> **These three runs are stale as of the review of PR #115 and are kept for reference,
+> not as the calibration.** Two task-contract bugs found in that review have been fixed:
+> the prompt's schema examples were real key rows, and the judge made the key's arbitrary
+> order among steps with the same onset a hidden requirement. Fixing the first changed the
+> prompt, so every arm below answered a slightly different question than the one now
+> shipped, and `calibration/verify_scores.py` refuses to bless them: it reports all three
+> as STALE and exits non-zero. The judge change is a no-op on these three submissions,
+> which regrade to the same 0.0173, 0.0073 and 0.0762, so what has to be redone is the
+> runs, not the scoring. They will be re-measured once the contract is frozen.
+
+
 | harness | harness version | model | reasoning | score | tool-call turns | trajectory | wall clock | audit |
 |---|---|---|---|---|---|---|---|---|
 | Codex | codex-cli 0.144.1 | gpt-5.6-sol | xhigh | **0.0173** | **72** | `rollouts/codex.jsonl` | 72.8 min | clean |

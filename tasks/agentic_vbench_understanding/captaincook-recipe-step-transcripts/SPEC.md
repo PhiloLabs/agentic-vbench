@@ -25,10 +25,14 @@
 # 2. Which modalities are REQUIRED?
 #
 # Video only, and the video is load-bearing rather than decorative. The clips carry no
-# audio track, no captions, no on-screen text and no recipe card. The moment a step
-# begins and the moment it ends exist only in the pixels. Nothing in the prompt says
-# which dish any clip is, and nothing in the prompt says which steps a given person
-# performed, so both have to be read off the video.
+# audio track and no captions. They are NOT free of on-screen text: the tablet the study
+# prompts its participants with is often in frame and its step list is legible after
+# upscaling, which open item 6 states in full. An earlier version of this section claimed
+# there was no on-screen text, which was wrong. The moment a step begins and the moment
+# it ends still exist only in the pixels, and that is what is scored: the tablet shows
+# the canonical script, worth 0.0032 as an answer, and it is the timing it does not
+# supply. Nothing in the prompt says which dish any clip is, and nothing in the prompt
+# says which steps a given person performed, so both have to be read off the video.
 
 # 3. The exact question and output schema.
 #
@@ -103,8 +107,20 @@
 # alignment within that video (an LCS-style DP). Tolerance is a quarter of the step's
 # annotated duration, floored at 1 s and capped at 3 s, applied to both boundaries. The
 # reward is F1 over the totals, so misses and false positives both cost. The judge is
-# generated from the key by provenance/make_judge.py and its scoring code is copied
-# verbatim from the Ego-Exo4D task in this family, so the two are graded identically.
+# generated from the key by provenance/make_judge.py.
+#
+# ONE DELIBERATE DIVERGENCE from the Ego-Exo4D task this scorer was copied from. Before
+# aligning, the judge sorts each video's entries by (onset, label). Without that, the
+# key's arbitrary order among steps that begin at the same second became a requirement
+# the prompt never states and the video cannot reveal: U has two steps that both start at
+# 455.647, and submitting them the other way round dropped a perfect oracle to 0.9968.
+# The prompt now states the same rule, so an agent can produce the canonical order
+# itself. A consequence worth naming rather than burying: because the submission is
+# canonicalised first, the POSITION of a row in the submitted list no longer carries any
+# information. Order is carried by the timestamps, which is what the prompt asked for all
+# along, and the alignment still refuses to match two steps whose times are in the wrong
+# sequence. provenance/test_judge_contract.py covers both, each with a control that must
+# fail.
 
 # 7. Difficulty: measured with real strong-agent runs.
 #

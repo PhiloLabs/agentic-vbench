@@ -59,9 +59,6 @@ storage_mb = 38912
 # The recordings are baked at build time and the answer is not online: keep this false.
 allow_internet = false
 
-[environment.env]
-HF_TOKEN = "${HF_TOKEN:-}"
-
 [[steps]]
 name = "solve"
 

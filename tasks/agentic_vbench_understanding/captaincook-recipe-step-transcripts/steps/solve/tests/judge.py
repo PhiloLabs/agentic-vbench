@@ -565,6 +565,17 @@ def grade(entries):
         if p is not None:
             by_video[p["video"]].append(p)
 
+    # Canonical order within each video: by onset, ties broken by label id. The alignment
+    # below is order-preserving, so without this the key's own arbitrary order among steps
+    # that start at the same second becomes a hidden requirement: video U has two steps
+    # that both start at 455.647, and submitting them the other way round dropped a
+    # perfect oracle to 0.9968. The prompt states this same rule, so an agent can produce
+    # the canonical order itself, and applying it here means it does not have to. For a
+    # submission that already follows the prompt's "order by the moment the step begins",
+    # this is a no-op.
+    for letter in by_video:
+        by_video[letter].sort(key=lambda e: (e["t_start"], e["id"]))
+
     per_video = {}
     tp = tp_onset = tp_label = 0
     for letter, gt in GROUND_TRUTH.items():

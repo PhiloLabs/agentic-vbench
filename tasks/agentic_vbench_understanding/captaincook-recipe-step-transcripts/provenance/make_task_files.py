@@ -59,7 +59,8 @@ Write `/workspace/output/solution.json` in exactly this shape:
 ```
 
 One entry per step performed. Within each video, order the entries by the moment
-the step begins; the videos themselves may come in any order. Fields:
+the step begins; if two steps begin at the same second, put the smaller `id` first.
+The videos themselves may come in any order. Fields:
 
 - `video`: one of `"A"` through `"{last}"`, the clip this entry belongs to.
 - `id`: the step's label, an integer from the closed vocabulary below.
@@ -126,6 +127,35 @@ print(f"wrote {{len(SEQUENCE)}} entries")
 '''
 
 
+def schema_examples(inst, letters):
+    """Three JSON rows that show the schema and CANNOT be correct answers.
+
+    An earlier version selected these straight out of `inst`, so the shipped prompt
+    carried three exact ground-truth events. Submitting nothing but the prompt's own
+    examples scored 3 true positives and 0.0189 without watching a frame. Each example
+    here names a label that does not occur ANYWHERE in the video it is filed under, which
+    makes a match impossible whatever the times are, and the assertion below refuses to
+    write a prompt where that has stopped being true.
+    """
+    all_labels = sorted({e["id"] for v in inst.values() for e in v})
+    out = []
+    for L in (letters[0], letters[0], letters[-1]):
+        used = {json.loads(o)["id"] for o in out if json.loads(o)["video"] == L}
+        absent = [i for i in all_labels
+                  if all(g["id"] != i for g in inst[L]) and i not in used]
+        assert absent, f"every label occurs in {L}, so no impossible example exists"
+        label = absent[(len(out) * 7) % len(absent)]
+        t0 = 10.0 + 25.0 * len(out)
+        out.append(json.dumps({"video": L, "id": label,
+                               "t_start": round(t0, 3), "t_end": round(t0 + 12.0, 3)}))
+    for o in out:
+        e = json.loads(o)
+        assert all(g["id"] != e["id"] for g in inst[e["video"]]), (
+            f"schema example {o} names a label that DOES occur in {e['video']}, so the "
+            f"prompt would be leaking an answer")
+    return out
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--derived", required=True, type=Path)
@@ -142,10 +172,7 @@ def main() -> int:
         rows.append(f"| `{v['letter']}` | `/workspace/materials/{v['letter']}.mp4` | "
                     f"{v['duration_sec']/60:.1f} min | `t = 0` to `t = {v['duration_sec']:.1f}` |")
     first, last = letters[0], letters[-1]
-    picks = [(first, 0), (first, min(1, len(inst[first]) - 1)), (last, 0)]
-    ex = [json.dumps({"video": L, "id": inst[L][k]["id"],
-                      "t_start": inst[L][k]["t_start"], "t_end": inst[L][k]["t_end"]})
-          for L, k in picks]
+    ex = schema_examples(inst, letters)
     prompt = PROMPT.format(
         n=n, word=WORDS.get(n, str(n)), table="\n".join(rows), last=last,
         ex0=ex[0], ex1=ex[1], ex2=ex[2],
@@ -203,9 +230,6 @@ memory_mb = 8192
 storage_mb = {storage}
 # The recordings are baked at build time and the answer is not online: keep this false.
 allow_internet = false
-
-[environment.env]
-HF_TOKEN = "${{HF_TOKEN:-}}"
 
 [[steps]]
 name = "solve"

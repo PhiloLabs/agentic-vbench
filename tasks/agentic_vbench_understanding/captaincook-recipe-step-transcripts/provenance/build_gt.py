@@ -89,6 +89,9 @@ def transcript(rec: dict) -> list[dict]:
             "t_end": round(float(s["end_time"]), 3),
             "has_errors": bool(s.get("has_errors"))}
            for s in rec["steps"] if usable(s)]
+    # `id` is still the step TEXT here; the integer label is assigned later, once the
+    # vocabulary is numbered. The canonical (t_start, label) sort therefore happens at
+    # emit time, not here.
     out.sort(key=lambda i: (i["t_start"], i["t_end"]))
     return out
 
@@ -212,10 +215,17 @@ def main() -> int:
         })
         out["eligibility"][letter] = r["elig"]
         out["canonical_order"][letter] = [label_of[k] for k in r["canon"] if k in label_of]
-        out["instances"][letter] = [
-            {"id": label_of[i["id"]], "t_start": i["t_start"], "t_end": i["t_end"],
-             "tau": round(min(TAU_MAX, max(TAU_MIN, ALPHA * (i["t_end"] - i["t_start"]))), 3)}
-            for i in r["inst"]]
+        # Canonical order: by onset, ties broken by the integer label. The judge's
+        # alignment is order-preserving, so any order chosen here among steps that share
+        # an onset would become a hidden requirement on the agent. U has one such pair,
+        # both starting at 455.647, and submitting them the other way round dropped a
+        # perfect oracle to 0.9968. The prompt now states this rule and the judge applies
+        # it to submissions, so the two sides agree by construction.
+        out["instances"][letter] = sorted(
+            ({"id": label_of[i["id"]], "t_start": i["t_start"], "t_end": i["t_end"],
+              "tau": round(min(TAU_MAX, max(TAU_MIN, ALPHA * (i["t_end"] - i["t_start"]))), 3)}
+             for i in r["inst"]),
+            key=lambda e: (e["t_start"], e["id"]))
 
     # ---- refuse to emit a key that cannot be answered ----
     for letter, inst in out["instances"].items():

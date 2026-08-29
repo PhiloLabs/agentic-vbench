@@ -172,6 +172,7 @@ def main() -> int:
     # has to appear somewhere in the prose is the hole defect 2 came through.
     measured = arms()
     notes: list[str] = []
+    stale: list[str] = []
     for name, man in measured:
         sol_path = ROLLOUTS / f"{name}-solution.json"
         entries = json.loads(sol_path.read_text())["sequence"]
@@ -195,10 +196,17 @@ def main() -> int:
         assert turns > 50, f"{name} ran {turns} turns, at or below the family's floor of 50"
 
         # The prompt each arm was handed must be the shipped prompt with paths moved.
+        # A mismatch here does not mean the arm was cheated; the ordinary cause is that
+        # the shipped prompt has been edited since the arm ran, which makes the arm stale
+        # rather than invalid. Either way the calibration no longer speaks for the task as
+        # it currently stands, so it is collected and reported instead of asserted, and
+        # the run still exits non-zero.
         prompt = base_prompt(man["run_dir"])
-        assert hashlib.sha256(prompt.encode()).hexdigest() == man["prompt_sha256"], (
-            f"{name}: the manifest's prompt hash is not the shipped prompt rewritten to "
-            f"{man['run_dir']}, so this arm did not see the shipped question")
+        if hashlib.sha256(prompt.encode()).hexdigest() != man["prompt_sha256"]:
+            stale.append(name)
+            notes.append(f"  STALE   {name:<12} {r['f1']:.4f} / {turns} turns / ran "
+                         f"against a different prompt than the one shipped now")
+            continue
         notes.append(f"  ok      {name:<12} {r['f1']:.4f} / {turns} turns / prompt is the "
                      f"shipped prompt at {man['run_dir']}")
 
@@ -239,12 +247,17 @@ def main() -> int:
           f"strategy at or under {best_spam:.4f}.")
     print("\n".join(notes))
 
-    ran = {name for name, _ in measured}
+    if stale:
+        print(f"\n  {len(stale)} arm(s) ran against an older prompt: {', '.join(stale)}.")
+        print("  The shipped question has changed since, so these scores do not speak")
+        print("  for the task as it now stands and must be re-measured.")
+
+    ran = {name for name, _ in measured if name not in stale}
     pending = [a for a in ("codex", "claude", "antigravity") if a not in ran]
     if pending:
-        print(f"  NOT MEASURED YET: {', '.join(pending)}. Both family gates are cleared "
-              f"by the arms above,\n  but this file cannot speak for the ones that have "
-              f"not run, and does not.")
+        print(f"  NOT MEASURED AGAINST THE CURRENT PROMPT: {', '.join(pending)}. This "
+              f"file cannot say the task\n  clears either gate, and does not.")
+        return 1
     return 0
 
 
