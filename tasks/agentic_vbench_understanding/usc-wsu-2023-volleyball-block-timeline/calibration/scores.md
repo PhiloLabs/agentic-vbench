@@ -64,14 +64,18 @@ Run on the same instruction. A model that declines to answer measures nothing, s
 each ablation also demands a best-effort answer; the counts below are what the model
 actually submitted.
 
-| ablation | inputs | events submitted | score |
-|---|---|---|---|
-| no_media | instruction only, no video | 15 | **0.0** |
-| single_frame | one frame from the match midpoint | 11 | **0.0** |
-| frame_dump | 60 uniform frames, no seeking | 22 | **0.0** |
+| ablation | inputs | tools | events submitted | score |
+|---|---|---|---|---|
+| no_media | instruction only, no video | shell | 15 | **0.0** |
+| single_frame | one frame from the match midpoint | shell | 11 | **0.0** |
+| frame_dump | 60 uniform frames, no seeking | shell | 22 | **0.0** |
+| all_frames | 80 stills, one every 90 s | none | 15 | **0.0** |
 
-All three land at zero even after submitting a full-looking answer, so nothing in
-the task is obtainable without working the video. `no_media` is the one that matters
+All four land at zero even after submitting a full-looking answer, so nothing in
+the task is obtainable without working the video. `all_frames` is the strictest of
+them: the whole match is already in front of the model as a uniform sweep and the
+shell is gone, so it cannot seek, crop, zoom or script — only look and answer. It
+submitted 15 events and matched no rally anchor at all. `no_media` is the one that matters
 most, since the NCAA rally-by-rally log for this match is public: forced to answer,
 the model produced 15 plausible-looking events and matched none of them. The per-event
 score anchors and blocker/hitter pairs are not recallable.

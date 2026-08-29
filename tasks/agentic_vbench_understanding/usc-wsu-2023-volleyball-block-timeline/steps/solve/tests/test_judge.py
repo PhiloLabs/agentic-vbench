@@ -109,6 +109,7 @@ PUBLISHED = {
     "ablations/no_media.solution.json": 0.0,
     "ablations/single_frame.solution.json": 0.0,
     "ablations/frame_dump.solution.json": 0.0,
+    "ablations/all_frames.solution.json": 0.0,
 }
 for rel, expected in PUBLISHED.items():
     events = json.loads((CALIB / rel).read_text())["events"]

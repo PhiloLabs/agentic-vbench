@@ -83,6 +83,9 @@ anti_shortcut:
     submitted 15 plausible events and matched none
   frame_dump: 0.0 measured — 60 uniform frames, no seeking; 22 events submitted, none
     correct
+  all_frames: 0.0 measured — the match as 80 stills, one every 90 s, with no shell at
+    all: no seeking, cropping or scripting, only reading the frames. 15 events
+    submitted, no rally anchor matched
   observability: calibration/observability/ shows the answer key IS visible in the
     video, but only in a 0.8-3.2 s net close-up after each point
 
