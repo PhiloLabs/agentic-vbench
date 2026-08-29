@@ -1,0 +1,6 @@
+<invoke name="bash">
+<parameter name="command">mkdir -p /workspace/output && ls /workspace</parameter>
+</invoke>
+
+
+output
