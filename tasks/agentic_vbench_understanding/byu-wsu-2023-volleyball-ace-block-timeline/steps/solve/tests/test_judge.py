@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """Regression tests for judge.py. Pure stdlib; run: python3 test_judge.py
 
-Pins the partial-credit rule's symmetry (a solo credit that is wrong, missing, or
-padded is one error, exactly like one wrong name in a pair), the blocked-hitter
-tiers, the two-Bower lastname ambiguity, and the oracle/empty invariants.
+Pins the three-attribution rule (blockers, blocked hitter, setter: all three for
+full credit, exactly one wrong for partial), the symmetry of the blocker rule
+between solo and shared credit, the two-Bower lastname ambiguity, and the
+oracle/empty invariants.
 """
 import json
 import subprocess
@@ -41,43 +42,48 @@ def find(setno, score):
 
 
 print("== invariants ==")
-check("24 events, 5 aces and 19 blocks",
-      len(GT) == 24 and sum(g["type"] == "ace" for g in GT) == 5)
-oracle = details([{k: v for k, v in g.items() if v is not None} for g in GT])
-check("oracle -> 1.0", oracle["full_matches"] == 24 and oracle["f1"] == 1.0)
+check("18 block points, every one with a setter",
+      len(GT) == 18 and all(g["type"] == "block" and g.get("setter") for g in GT))
+check("oracle -> 1.0", details([dict(g) for g in GT])["full_matches"] == 18)
 check("empty -> 0.0", details([])["f1"] == 0.0)
 
-print("== partial-credit symmetry ==")
-solo = find(3, "11-15")     # Jehlarova solo, blocked Mia Lee
-pair = find(2, "9-6")       # Prior + Lee, blocked Isanovic
-sbase = {"set": solo["set"], "score_after": solo["score_after"], "type": "block",
-         "blocked": solo["blocked"]}
-pbase = {"set": pair["set"], "score_after": pair["score_after"], "type": "block",
-         "blocked": pair["blocked"]}
-check("solo-wrong -> partial", details([{**sbase, "players": ["Wrong Person"]}])["partial_matches"] == 1)
-check("solo-missing -> partial", details([{**sbase, "players": []}])["partial_matches"] == 1)
+SOLO = find(3, "6-7")
+PAIR = find(1, "18-14")
+
+print("== the three attributions ==")
+check("all three right -> full", details([dict(PAIR)])["full_matches"] == 1)
+check("setter wrong -> partial",
+      details([{**dict(PAIR), "setter": "Wrong Person"}])["partial_matches"] == 1)
+check("setter omitted -> partial",
+      details([{k: v for k, v in PAIR.items() if k != "setter"}])["partial_matches"] == 1)
+check("hitter wrong -> partial",
+      details([{**dict(PAIR), "blocked": "Wrong Person"}])["partial_matches"] == 1)
+check("one blocker wrong -> partial",
+      details([{**dict(PAIR), "players": [PAIR["players"][0], "Wrong Person"]}])["partial_matches"] == 1)
+check("setter AND hitter wrong -> nothing",
+      details([{**dict(PAIR), "setter": "Wrong A", "blocked": "Wrong B"}])["partial_matches"] == 0)
+check("blocker AND setter wrong -> nothing",
+      details([{**dict(PAIR), "players": [PAIR["players"][0], "Wrong A"],
+                "setter": "Wrong B"}])["partial_matches"] == 0)
+
+print("== blocker rule is symmetric for solo and shared credit ==")
+check("solo-wrong -> partial",
+      details([{**dict(SOLO), "players": ["Wrong Person"]}])["partial_matches"] == 1)
+check("solo-missing -> partial", details([{**dict(SOLO), "players": []}])["partial_matches"] == 1)
 check("solo-extra -> partial",
-      details([{**sbase, "players": [solo["players"][0], "Extra Person"]}])["partial_matches"] == 1)
-check("one-wrong-pair -> partial",
-      details([{**pbase, "players": [pair["players"][0], "Wrong Person"]}])["partial_matches"] == 1)
-check("two-wrong-pair -> nothing",
-      details([{**pbase, "players": ["Wrong One", "Wrong Two"]}])["partial_matches"] == 0)
+      details([{**dict(SOLO), "players": [SOLO["players"][0], "Extra Person"]}])["partial_matches"] == 1)
+check("two wrong blockers -> nothing",
+      details([{**dict(PAIR), "players": ["Wrong One", "Wrong Two"]}])["partial_matches"] == 0)
 
-print("== blocked hitter ==")
-check("blockers exact + hitter wrong -> partial",
-      details([{**pbase, "players": list(pair["players"]), "blocked": "Wrong Hitter"}])["partial_matches"] == 1)
-check("exact block -> full", details([dict(pair)])["full_matches"] == 1)
-corrupt = find(2, "1-2")    # the one rally line whose hitter is unrecoverable
-check("hitter not required where the source lost it",
-      corrupt.get("blocked") is None and
-      details([{"set": 2, "score_after": "1-2", "type": "block",
-                "players": list(corrupt["players"])}])["full_matches"] == 1)
-
-print("== names ==")
-ace = find(3, "21-23")      # Whitney Bower
+print("== names and anchors ==")
+BOWER = find(4, "17-23")   # Eden Bower blocking; Whitney Bower also appears in the key
 check("ambiguous lastname alone does not match",
-      details([{**{k: v for k, v in ace.items()}, "players": ["Bower"]}])["full_matches"] == 0)
-check("full name matches", details([dict(ace)])["full_matches"] == 1)
+      details([{**dict(BOWER), "players": ["Bower"]}])["full_matches"] == 0)
+check("the full name does match", details([dict(BOWER)])["full_matches"] == 1)
+check("wrong score_after -> nothing",
+      details([{**dict(PAIR), "score_after": "99-99"}])["full_matches"] == 0)
+check("duplicate prediction consumes one slot",
+      details([dict(PAIR), dict(PAIR)])["full_matches"] == 1)
 
 print()
 if FAILS:

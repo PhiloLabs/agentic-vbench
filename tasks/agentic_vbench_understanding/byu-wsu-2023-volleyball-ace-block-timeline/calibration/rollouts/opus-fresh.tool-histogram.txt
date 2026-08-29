@@ -1,0 +1,5 @@
+opus fresh three-attribution run
+assistant turns with tool calls: 140
+  Bash: 84
+  Read: 55
+  ToolSearch: 1

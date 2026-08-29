@@ -1,12 +1,13 @@
-# Ace and Block Timeline Reconstruction
+# Block Timeline Reconstruction
 
 You are given one video at `/workspace/materials/match.mp4`: the full broadcast of a
 college women's volleyball match (BYU at Washington State, four sets). The video has
-no audio track. Find every point in the match that ended as a **service ace** or as a
-**block**, by either team.
+no audio track. Find every point in the match that ended as a **block**, by either
+team.
 
-For each such point, report the set, the score immediately after the point, whether
-it was an ace or a block, and the player(s) credited. Use any tools in the image (for
+For each block point, report the set, the score immediately after the point, the
+player(s) credited with the block, the opposing hitter who was blocked, and the
+setter who fed that attack. Use any tools in the image (for
 example `ffmpeg` and `ffprobe`) to seek through and sample the video. The on-screen
 score graphic, the players' jersey numbers, and the play action are your evidence.
 The rosters below map jersey numbers to names.
@@ -18,14 +19,15 @@ Write `/workspace/output/solution.json` in exactly this shape:
 ```json
 {
   "events": [
-    {"set": 1, "score_after": "5-9",  "type": "ace",   "players": ["First Last"]},
-    {"set": 3, "score_after": "21-18", "type": "block", "players": ["First Last", "First Last"], "blocked": "First Last"}
+    {"set": 2, "score_after": "7-12", "type": "block", "players": ["First Last", "First Last"], "blocked": "First Last", "setter": "First Last"},
+    {"set": 4, "score_after": "20-16", "type": "block", "players": ["First Last"], "blocked": "First Last", "setter": "First Last"}
   ]
 }
 ```
 
 - One entry per qualifying point, in any order.
 - `set`: 1 to 4.
+- `type`: always `"block"`.
 - `score_after`: the score right after the point, written `BYU-WashingtonState` —
   the same order the broadcast score graphic displays (BYU on the left).
 - `type`: `"ace"` — the serve scored directly (untouched, or unplayable off the
@@ -35,9 +37,10 @@ Write `/workspace/output/solution.json` in exactly this shape:
   blockers (one or two names, order does not matter). Credit follows the official
   scorer's rules: a stuff by one player is one name; a block shared by two players
   at the net is two names.
-- `blocked`: **for a block only**, the opposing hitter who was blocked — the player
-  whose attack the block stopped (one name, on the team opposite the blockers). Omit
-  this field for aces.
+- `blocked`: the opposing hitter who was blocked — the player whose attack the block
+  stopped (one name, on the team opposite the blockers).
+- `setter`: the player who set that attack — the team-mate who delivered the ball to
+  the blocked hitter earlier in the same rally (one name, same team as `blocked`).
 
 ## Rosters (jersey number → name)
 
