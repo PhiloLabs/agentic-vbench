@@ -1,5 +1,5 @@
 #!/bin/bash
-# Oracle: write the verified ace-and-block timeline as solution.json.
+# Oracle: write the verified block timeline as solution.json.
 #
 # The reference answer is the official NCAA rally-by-rally log (stats.ncaa.org
 # contest 3241315). Block credit is reconciled per player against the official box
