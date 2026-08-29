@@ -76,5 +76,25 @@ this match's rally-by-rally log is public: forced to answer, the model produced 
 plausible events from recall and matched none. The per-event score anchors and the
 blocker/hitter/setter triples are not recallable.
 
+## Raw trajectories
+
+Every scored run and every ablation is published whole, as the CLI wrote it, at an
+immutable dataset revision. `MANIFEST.json` in that dataset repeats each hash and adds
+the SHA256 of the uncompressed stream inside each archive.
+
+| run | file | sha256 (of the .gz as served) |
+|---|---|---|
+| codex-fresh, Codex event stream | [`codex-fresh/rollout.jsonl.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/codex-fresh/rollout.jsonl.gz) (22 kB) | `9bcb80320fece252d553b7d3d7f5778aa316620fc36b5a8d5a2a93e49aa6767e` |
+| codex-fresh, stderr | [`codex-fresh/stderr.txt.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/codex-fresh/stderr.txt.gz) (1 kB) | `3c45a319a3088ee3ef5839abd8cbbf69d0d3b79cfc577ef16485a761b60e522e` |
+| opus-fresh, leg 1 | [`opus-fresh/rollout.leg1.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/opus-fresh/rollout.leg1.stream-json.gz) (27.7 MB) | `711850547184b410d8cd593f179af9e16b75674250feabb22edea1ebe6c7ac35` |
+| opus-fresh, leg 2 | [`opus-fresh/rollout.leg2.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/opus-fresh/rollout.leg2.stream-json.gz) (186.7 MB) | `8e4eb6fffcac9e6f84cf2228313dfecd0b0631c10caa4f91de398ba786603e3a` |
+| ablation, no_media | [`ablations/no_media.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/no_media.stream-json.gz) (12 kB) | `7f85d12481c326822d4614b2422ba7ebc359c8185ad79a23bcdc6741d07248c5` |
+| ablation, single_frame | [`ablations/single_frame.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/single_frame.stream-json.gz) (146 kB) | `026bdd99624662ea01185055a35be77b334419faa17b1ea4b4c07a48b38c3789` |
+| ablation, frame_dump | [`ablations/frame_dump.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/frame_dump.stream-json.gz) (6.5 MB) | `ef2b62bc88edf6665925c21f735a2c9d75cc4ee01e7e503b9ddcd66627f928e2` |
+
+`gunzip -c <file> | sha256sum` checks the stream itself; `sha256sum <file>` checks the
+archive as served. The two Opus legs are one session: the first was cut off by a
+network drop and resumed in place, which is what the 386-turn figure counts.
+
 Artifacts in `ablations/`; answers, prompt and provenance for the scored runs in
 `rollouts/`; the Antigravity web-grounding finding in `agent-integrity/`.
