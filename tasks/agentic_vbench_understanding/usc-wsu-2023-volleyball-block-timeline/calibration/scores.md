@@ -82,27 +82,34 @@ score anchors and blocker/hitter pairs are not recallable.
 
 ## Is the answer key visible in the video?
 
-`observability/` carries the ledger: the exact second each of the 23 points is
-awarded (derived verifier-side by OCR'ing the score bug, independent of any agent),
-four frames per event spanning the post-point close-up, and what can be read off
-them. Summary of the finding:
+`observability/` answers this field by field rather than in summary.
+`observability/witness.md` lists, for every one of the 23 points, each credited blocker
+and the blocked hitter, whether it is legible in the post-point window and at which
+offset, with the frame strip it was read from in `observability/witness/`.
 
-- every event's anchor is verified: set and exact score-after, the fields the scorer
-  matches on before it looks at a name, are confirmed for all 23 from the bug itself;
-- the wide sideline shot never resolves jersey numbers, and the broadcast shows no
-  replays;
-- after some points the feed cuts to a net close-up where numbers are large and sharp,
-  and on every event examined that way the credited blockers were legible and matched
-  the answer key;
-- that cut does not follow every point — where the feed stays wide, no number is
-  readable in the moment and the players have to be carried forward from an earlier
-  close-up through the rotation;
-- the blocked hitter is legible less often than the blockers, which the scorer already
-  handles with partial credit.
+| | events |
+|---|---|
+| every credited blocker legible | **11 / 23** |
+| some credited blockers legible | 4 / 23 |
+| no credited blocker legible | 8 / 23 |
+| blocked hitter legible | **1 / 23** |
+| blocked hitter plausible but occluded | 2 / 23 |
+| blocked hitter not legible | 20 / 23 |
 
-So the information is present but narrowly placed — hard, not impossible. The Opus
-run's own conclusion that blockers "face away from the camera" came from sampling the
-rally rather than the close-up.
+Every event's anchor — set and exact score-after, what the scorer matches on before it
+looks at a name — is confirmed for all 23 from the score bug itself, with the read-back
+recorded per event in `observability/flips.json`.
+
+The asymmetry between the two name fields is structural. The broadcast cuts to whoever
+is celebrating, which is the blocking side, so the blockers resolve on most points and
+the stuffed hitter almost never does. Where a number is legible it matches the answer
+key; no event was found where the video contradicts the official record. An agent that
+wants the hitter has to identify the player from the rally it just watched — position
+and rotation — rather than by reading a number after the whistle, which is why the
+scorer gives partial credit when the blockers are exact and the hitter is wrong.
+
+The Opus run's own conclusion that blockers "face away from the camera" came from
+sampling the rally rather than the close-up.
 
 ## Design note: why every target is a block point
 
