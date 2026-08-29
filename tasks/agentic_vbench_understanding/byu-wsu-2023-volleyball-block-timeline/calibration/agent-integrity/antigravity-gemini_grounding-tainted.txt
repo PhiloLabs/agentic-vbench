@@ -3,8 +3,8 @@ I will run a command to check the current working directory path and see the str
 I will find the location of the `match.mp4` file in the workspace or parent directories to verify its path.
 I will terminate the full disk search because searching the root directory is too slow, and instead look in more specific parent directories of the workspace.
 I will list the files in the `antigravity-cli` configuration directory to see if the materials folder is located there.
-I will list the contents of the home directory `/Users/luojiaxuan` to see if there is a workspace folder or `materials` folder there.
-I will search for `match.mp4` in `/Users/luojiaxuan` up to 3 levels deep to locate the video file.
+I will list the contents of the home directory `$HOME` to see if there is a workspace folder or `materials` folder there.
+I will search for `match.mp4` in `$HOME` up to 3 levels deep to locate the video file.
 I will search for `match.mp4` specifically in the `Downloads`, `Desktop`, and `Documents` directories.
 I will list the workspace directory where the match video and output directories are located.
 I will read the instruction file `INSTRUCTION.md` in the workspace to confirm it aligns with the task.
@@ -323,7 +323,7 @@ I will view the Set 1 grid image `set1_grid_offset3.jpg` using `view_file` to in
 I will search Google for the exact play-by-play or stats report that mentions "ace" or "block" in Set 1 for BYU vs Washington State volleyball on September 8, 2023. This might find a forum, blog, or secondary stats site that lists the point progression with descriptions.
 I will search Google specifically on the Cloudfront domain `d2o2figo6ddd0g.cloudfront.net` (which hosts WSU's athletic documents) for any PDF containing "Brigham Young" from the 2023 season. This should give us the exact match box score PDF.
 I will fetch the content of the search result redirection link. Since this link represents the match summary or stats PDF referenced in Google's index, reading it will give us the detailed play-by-play or game events.
-I will read the contents of the converted markdown file `/Users/luojiaxuan/.gemini/antigravity-cli/brain/10b57c62-5a09-47a2-af40-f1a1c57bdecf/.system_generated/steps/635/content.md` using `view_file` to see the match statistics or play-by-play.
+I will read the contents of the converted markdown file `$HOME/.gemini/antigravity-cli/brain/10b57c62-5a09-47a2-af40-f1a1c57bdecf/.system_generated/steps/635/content.md` using `view_file` to see the match statistics or play-by-play.
 I will write a python script to check for PDF parsing libraries (`pypdf`, `pdfplumber`, `pdfminer.high_level`, or the system utility `pdftotext`) and use them to extract all text from the downloaded PDF `8f138ef8282e6571.pdf`. This will extract the box score stats and play-by-play.
 I will run the PDF text extraction script.
 I will write a python script to probe for other common PDF extraction libraries in the python environment (`PyPDF2`, `pdfminer`, and `fitz`/PyMuPDF) to extract the PDF text.

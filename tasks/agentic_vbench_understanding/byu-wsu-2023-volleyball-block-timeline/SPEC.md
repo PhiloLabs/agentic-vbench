@@ -44,9 +44,10 @@ ground_truth:
     8 (BYU) and 11 (WSU), 19 in total. 18 are in the key: one rally line (set 2 at
     1-2, a WSU block point) is corrupted in the raw log — its name field credits a
     blocker on the scoring team's opponent, and neither the stuffed hitter nor the
-    setter survives — so it carries no answerable attribution and is left out. An
-    agent that finds and reports that 19th point loses 1/19 of precision and nothing
-    else; the key holds every block point the official record pins unambiguously.
+    setter survives — so it carries no answerable attribution and is left out. Finding
+    it is correct play, so the scorer sets a prediction anchored there aside: it earns
+    nothing and costs nothing, and `test_judge.py` pins that. The key holds every block
+    point the official record fixes unambiguously.
 
 scorer:
   metric: two-tier F1 over block points — full credit (1.0) requires set, exact

@@ -21,6 +21,11 @@ Media inside the image hashes to `ee887b18…8796dc60`, matching the pin.
 committed under `rollouts/` and `ablations/`, so the numbers below are a test failure
 if they ever drift from the scorer.
 
+The official record holds 19 block points and the key holds 18: the 19th (set 2 at 1-2)
+is corrupted in the source and has no answerable attribution. Reporting it is correct
+play, so the scorer sets a prediction anchored there aside — it earns nothing and costs
+nothing — rather than charging it as a false positive.
+
 ## Model matrix
 
 Each run used a workspace holding only the video and the instruction, with no prior

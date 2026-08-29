@@ -67,6 +67,12 @@ GROUND_TRUTH = [
 
 PARTIAL_CREDIT = 0.5  # right rally and type, credited names off by exactly one
 
+# The official record has 19 block points; the 19th (set 2 at 1-2) is corrupted in the
+# source and carries no answerable attribution, so it is not in the key. Finding it is
+# correct play, so a prediction anchored there is set aside: it earns nothing and costs
+# nothing.
+UNSCORED_ANCHORS = {(2, "1-2")}
+
 TYPE_ALIASES = {"stuff": "block", "block_point": "block", "block point": "block"}
 
 
@@ -214,6 +220,10 @@ def main():
                 "setter": pr.get("setter")}
 
     parsed = [parse(pr) for pr in preds]
+    set_aside = sum(1 for p in parsed
+                    if p is not None and (p["set"], p["score"]) in UNSCORED_ANCHORS)
+    parsed = [None if (p is not None and (p["set"], p["score"]) in UNSCORED_ANCHORS)
+              else p for p in parsed]
 
     def anchor_match(p, gt):
         return p["set"] == gt["set"] and p["score"] == gt["score_after"] \
@@ -257,7 +267,8 @@ def main():
                 break
 
     credit = full + PARTIAL_CREDIT * partial
-    n_pred, n_gt = len(preds), len(GROUND_TRUTH)
+    n_gt = len(GROUND_TRUTH)
+    n_pred = len(preds) - set_aside
     precision = credit / n_pred if n_pred else 0.0
     recall = credit / n_gt if n_gt else 0.0
     f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) else 0.0
@@ -265,7 +276,9 @@ def main():
     details = {
         "reason": reason,
         "n_ground_truth": n_gt,
-        "n_predicted": n_pred,
+        "n_predicted": len(preds),
+        "n_scored": n_pred,
+        "set_aside_unscored_anchor": set_aside,
         "full_matches": full,
         "partial_matches": partial,
         "credit": round(credit, 4),

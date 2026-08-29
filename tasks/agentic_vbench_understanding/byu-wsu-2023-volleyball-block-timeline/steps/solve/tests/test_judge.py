@@ -85,6 +85,22 @@ check("wrong score_after -> nothing",
 check("duplicate prediction consumes one slot",
       details([dict(PAIR), dict(PAIR)])["full_matches"] == 1)
 
+print("== the 19th block point costs nothing to report ==")
+EXCLUDED = {"set": 2, "score_after": "1-2", "type": "block",
+            "players": ["Magda Jehlarova"], "blocked": "Kate Prior",
+            "setter": "Whitney Bower"}
+base = details([dict(PAIR)])
+withit = details([dict(PAIR), dict(EXCLUDED)])
+check("reporting it does not change the reward", base["f1"] == withit["f1"])
+check("it is set aside rather than scored", withit["set_aside_unscored_anchor"] == 1)
+check("it leaves the scored denominator alone", withit["n_scored"] == base["n_scored"])
+check("the raw submission count still reflects it", withit["n_predicted"] == 2)
+check("an empty answer plus that point alone is still 0.0",
+      details([dict(EXCLUDED)])["f1"] == 0.0)
+check("a wrong-name report of it is equally free",
+      details([dict(PAIR), {**dict(EXCLUDED), "players": ["Wrong Person"]}])["f1"]
+      == base["f1"])
+
 print("== published calibration rewards still reproduce ==")
 CALIB = HERE.parents[2] / "calibration"
 PUBLISHED = {
