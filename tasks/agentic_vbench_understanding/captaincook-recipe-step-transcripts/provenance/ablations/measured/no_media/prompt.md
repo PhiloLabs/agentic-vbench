@@ -1,4 +1,4 @@
-You are given ONE still image from each of twenty-two videos, twenty-two images in all, in the order A through V. Each still is taken from the midpoint of its recording. You have NO video, NO tools, and no way to ask for another frame. Answer from the stills alone. You must still produce a complete answer in the schema below: an empty sequence is not an acceptable response, so give your best guess for every recording.
+You are given NO video and NO images. You have NO tools. Answer from what you already know about these recordings and about how these dishes are usually prepared. You must still produce a complete answer in the schema below: an empty sequence is not an acceptable response, so give your best guess for every recording.
 
 | video | path | length | time range |
 |---|---|---|---|

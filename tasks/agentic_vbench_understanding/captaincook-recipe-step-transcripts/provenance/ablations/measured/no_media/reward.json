@@ -1,38 +1,38 @@
 {
- "reward": 0.0031,
+ "reward": 0.0,
  "details": {
   "n_ground_truth": 314,
-  "n_predicted": 326,
-  "true_positives": 1,
-  "onset_only_matches": 6,
-  "label_and_order_only_matches": 161,
-  "precision": 0.0031,
-  "recall": 0.0032,
-  "f1": 0.0031,
+  "n_predicted": 352,
+  "true_positives": 0,
+  "onset_only_matches": 0,
+  "label_and_order_only_matches": 32,
+  "precision": 0.0,
+  "recall": 0.0,
+  "f1": 0.0,
   "per_video": {
    "A": {
     "n_ground_truth": 16,
-    "n_predicted": 14,
+    "n_predicted": 24,
     "true_positives": 0
    },
    "B": {
     "n_ground_truth": 14,
-    "n_predicted": 14,
+    "n_predicted": 17,
     "true_positives": 0
    },
    "C": {
     "n_ground_truth": 14,
-    "n_predicted": 15,
+    "n_predicted": 16,
     "true_positives": 0
    },
    "D": {
     "n_ground_truth": 15,
-    "n_predicted": 14,
+    "n_predicted": 16,
     "true_positives": 0
    },
    "E": {
     "n_ground_truth": 15,
-    "n_predicted": 14,
+    "n_predicted": 24,
     "true_positives": 0
    },
    "F": {
@@ -42,23 +42,23 @@
    },
    "G": {
     "n_ground_truth": 16,
-    "n_predicted": 8,
+    "n_predicted": 16,
     "true_positives": 0
    },
    "H": {
     "n_ground_truth": 16,
-    "n_predicted": 8,
+    "n_predicted": 7,
     "true_positives": 0
    },
    "I": {
     "n_ground_truth": 15,
-    "n_predicted": 16,
+    "n_predicted": 24,
     "true_positives": 0
    },
    "J": {
     "n_ground_truth": 15,
     "n_predicted": 16,
-    "true_positives": 1
+    "true_positives": 0
    },
    "K": {
     "n_ground_truth": 15,
@@ -67,57 +67,57 @@
    },
    "L": {
     "n_ground_truth": 16,
-    "n_predicted": 16,
+    "n_predicted": 13,
     "true_positives": 0
    },
    "M": {
     "n_ground_truth": 16,
-    "n_predicted": 16,
+    "n_predicted": 24,
     "true_positives": 0
    },
    "N": {
     "n_ground_truth": 11,
-    "n_predicted": 13,
+    "n_predicted": 7,
     "true_positives": 0
    },
    "O": {
     "n_ground_truth": 11,
-    "n_predicted": 15,
+    "n_predicted": 13,
     "true_positives": 0
    },
    "P": {
     "n_ground_truth": 10,
-    "n_predicted": 20,
+    "n_predicted": 16,
     "true_positives": 0
    },
    "Q": {
     "n_ground_truth": 19,
-    "n_predicted": 16,
+    "n_predicted": 17,
     "true_positives": 0
    },
    "R": {
     "n_ground_truth": 18,
-    "n_predicted": 16,
+    "n_predicted": 17,
     "true_positives": 0
    },
    "S": {
     "n_ground_truth": 16,
-    "n_predicted": 16,
+    "n_predicted": 7,
     "true_positives": 0
    },
    "T": {
     "n_ground_truth": 9,
-    "n_predicted": 20,
+    "n_predicted": 16,
     "true_positives": 0
    },
    "U": {
     "n_ground_truth": 12,
-    "n_predicted": 15,
+    "n_predicted": 16,
     "true_positives": 0
    },
    "V": {
     "n_ground_truth": 11,
-    "n_predicted": 15,
+    "n_predicted": 17,
     "true_positives": 0
    }
   },

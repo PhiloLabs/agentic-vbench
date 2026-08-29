@@ -21,24 +21,36 @@ from pathlib import Path
 TASK = Path(__file__).resolve().parent.parent.parent
 SHIPPED = TASK / "steps" / "solve" / "instruction.md"
 
+# Every degraded run is forced to answer. A refusal scores 0.0 too, but a 0.0 from a
+# model that declined to guess says nothing about whether the degraded input is enough,
+# which is the whole question. The first single-frame run returned an empty sequence.
+FORCE = (" You must still produce a complete answer in the schema below: an empty "
+         "sequence is not an acceptable response, so give your best guess for every "
+         "recording.")
+
 MEDIA = {
     "single_frame": (
         "You are given ONE still image from each of twenty-two videos, twenty-two images "
         "in all, in the order A through V. Each still is taken from the midpoint of its "
         "recording. You have NO video, NO tools, and no way to ask for another frame. "
-        "Answer from the stills alone."),
+        "Answer from the stills alone." + FORCE),
+    "no_media": (
+        "You are given NO video and NO images. You have NO tools. Answer from what you "
+        "already know about these recordings and about how these dishes are usually "
+        "prepared." + FORCE),
     "frame_dump": (
         "You are given ONE contact sheet for each of twenty-two videos, twenty-two images "
         "in all, in the order A through V. Each sheet is a 4x4 grid of sixteen frames "
         "sampled at even intervals across that whole recording, read left to right and "
         "top to bottom, with the timestamp in seconds burned into the corner of every "
         "frame. You have NO video, NO tools, and no way to ask for another frame. Answer "
-        "from the sheets alone."),
+        "from the sheets alone." + FORCE),
 }
 
 
 def build(mode: str) -> str:
     ship = SHIPPED.read_text()
+
     # The shipped prompt opens with a paragraph about the clips and a section about the
     # tools. Both are replaced; everything between and after them is left alone.
     head_end = ship.index("\n\n", ship.index("You are given twenty-two videos"))

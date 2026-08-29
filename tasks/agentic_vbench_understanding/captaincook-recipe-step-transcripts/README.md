@@ -143,7 +143,11 @@ one recording: download, checksum match, bake to a single 1920x1080 video stream
 audio, metadata or chapters. `provenance/media_manifest.json` records for every letter
 both the publisher's URL and the SHA256 of the publisher's own object, so a reviewer can
 pull the 4K original, confirm our source was the real one, and rerun
-`02_prepare_media.sh` to reproduce the derivative. Hosting it elsewhere is one run of
+`02_prepare_media.sh` to reproduce the derivative. That rerun reproduces the same
+content from the same verified source rather than the same bytes, because the encode runs
+on a hardware encoder whose output is not identical across machines; what is pinned byte
+for byte is the file the image bakes, by the SHA256 `bake.sh` verifies. Rerunning with the
+committed manifest present makes the script check each digest against it. Hosting it elsewhere is one run of
 `make_dockerfile.py` with a different `--base`.
 
 ## Known weaknesses, stated rather than left to be found

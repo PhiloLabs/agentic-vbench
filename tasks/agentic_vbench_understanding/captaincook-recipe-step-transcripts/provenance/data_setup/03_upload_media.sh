@@ -30,36 +30,46 @@ WANT=$(python3 -c "import json,sys;print(len(json.load(open(sys.argv[1]))['video
        "$TASK/provenance/step-derived.json")
 test "$N" -eq "$WANT" || { echo "expected $WANT mp4 files in $OUT, found $N" >&2; exit 1; }
 
+# What is in the repo, as "<name> <sha256>". The digest matters, not the name: an earlier
+# version skipped any file whose NAME was already there, so regenerating three recordings
+# and re-uploading them would silently skip all three and leave the old media in place
+# under the new manifest. HuggingFace exposes the LFS sha256, which for these files is the
+# same digest the manifest pins and bake.sh verifies.
 have_remote() {
-    python3 - "$REPO" <<'PY'
+    python3 - "$REPO" <<'HF_EOF'
 import sys
 from huggingface_hub import HfApi
 try:
-    for f in HfApi().list_repo_files(sys.argv[1], repo_type="dataset"):
-        print(f)
+    for e in HfApi().list_repo_tree(sys.argv[1], repo_type="dataset", expand=True):
+        lfs = getattr(e, "lfs", None)
+        print(getattr(e, "path", ""), (getattr(lfs, "sha256", "-") if lfs else "-"))
 except Exception as e:
     print(f"could not list {sys.argv[1]}: {type(e).__name__}: {e}", file=sys.stderr)
     sys.exit(1)
-PY
+HF_EOF
+}
+
+# The digest the committed manifest says this recording must have.
+want_sha() {
+    python3 -c "import json,sys;print(json.load(open(sys.argv[1]))[sys.argv[2]]['derivative_sha256'])" \
+        "$TASK/provenance/media_manifest.json" "$1"
 }
 
 REMOTE=$(have_remote)
 for f in $(find "$OUT" -name '*.mp4' | sort); do
     b=$(basename "$f")
-    if printf '%s\n' "$REMOTE" | grep -qx "$b"; then
-        echo "  already there  $b"
+    L=$(basename "$b" .mp4)
+    WANT=$(want_sha "$L")
+    if printf '%s\n' "$REMOTE" | grep -qx "$b $WANT"; then
+        echo "  already there  $b  (digest matches the manifest)"
         continue
     fi
-    i=1
-    while [ "$i" -le "$RETRIES" ]; do
-        echo "  uploading      $b (attempt $i/$RETRIES)"
-        if hf upload "$REPO" "$f" "$b" --repo-type dataset; then
-            break
-        fi
-        i=$((i + 1))
-        sleep $((i * 20))
-    done
-    test "$i" -le "$RETRIES" || { echo "gave up on $b after $RETRIES attempts" >&2; exit 1; }
+    if printf '%s\n' "$REMOTE" | grep -q "^$b "; then
+        echo "  REPLACING      $b  (present, but its digest is not the manifest's)"
+    fi
+    echo "  uploading      $b"
+    python3 "$(dirname "$0")/_upload_one.py" "$REPO" "$f" "$b" "$RETRIES" "${STALL:-120}" \
+        || { echo "gave up on $b" >&2; exit 1; }
 done
 
 # NOTICE must reach the dataset repo, because Apache 2.0 requires the attribution to
@@ -77,9 +87,10 @@ MISSING=""
 REMOTE=$(have_remote)
 for f in $(find "$OUT" -name '*.mp4' | sort); do
     b=$(basename "$f")
-    printf '%s\n' "$REMOTE" | grep -qx "$b" || MISSING="$MISSING $b"
+    L=$(basename "$b" .mp4)
+    printf '%s\n' "$REMOTE" | grep -qx "$b $(want_sha "$L")" || MISSING="$MISSING $b"
 done
-printf '%s\n' "$REMOTE" | grep -qx NOTICE || MISSING="$MISSING NOTICE"
+printf '%s\n' "$REMOTE" | grep -q "^NOTICE " || MISSING="$MISSING NOTICE"
 if [ -n "$MISSING" ]; then
     echo "the repo listing is missing:$MISSING" >&2
     echo "rerun this script to resume; it skips what is already there" >&2

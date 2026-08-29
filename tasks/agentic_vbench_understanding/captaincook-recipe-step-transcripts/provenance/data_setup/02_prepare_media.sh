@@ -42,6 +42,16 @@ import time
 from pathlib import Path
 
 derived, work = Path(sys.argv[1]), Path(sys.argv[2])
+# The committed manifest, when this script is run from inside the task, so a regeneration
+# can be compared against what the image actually bakes instead of only recording itself.
+_committed = Path(sys.argv[1]).resolve().parent / "media_manifest.json"
+EXPECTED = json.loads(_committed.read_text()) if _committed.exists() else {}
+# A silently empty EXPECTED turns every digest comparison below into a no-op that looks
+# exactly like a clean rerun, which is the failure this whole check exists to prevent.
+print(f"committed manifest: {_committed} -> "
+      + (f"{len(EXPECTED)} entries, digests will be compared"
+         if EXPECTED else "NOT FOUND, digests will only be recorded, not compared"),
+      flush=True)
 spec = json.loads(derived.read_text())
 man = work / "media_manifest.json"
 prior = json.loads(man.read_text()) if man.exists() else {}
@@ -131,13 +141,33 @@ def transcode(video, src, src_sha, src_bytes):
     assert height >= 1080, f"{letter}: transcoded to {width}x{height}, below 1080p"
     assert abs(dur - video["duration_sec"]) < 2.0, \
         f"{letter}: transcode is {dur}s, key says {video['duration_sec']}s"
+    dst_sha = sha(dst)
+    # The source is checked against the committed manifest as a matter of correctness:
+    # a different publisher object is a different recording and nothing downstream is
+    # valid. The derivative is compared and REPORTED rather than asserted, because
+    # h264_videotoolbox is a hardware encoder and its output is not guaranteed identical
+    # across machines or OS versions. Recording a fresh digest without ever comparing it
+    # to the committed one, which is what this script used to do, means a regeneration
+    # that silently produced different media would look exactly like a clean rerun.
+    exp = EXPECTED.get(letter)
+    verdict = ""
+    if exp:
+        assert exp["source_sha256"] == src_sha, (
+            f"{letter}: the publisher object hashes {src_sha[:16]}, the committed "
+            f"manifest says {exp['source_sha256'][:16]}; this is a different recording")
+        same = exp.get("derivative_sha256") == dst_sha
+        verdict = ("  derivative == committed digest" if same else
+                   f"  DERIVATIVE DIFFERS from the committed digest "
+                   f"({dst_sha[:12]} vs {exp.get('derivative_sha256', '')[:12]}), which "
+                   f"is expected on different encoder hardware; the image bakes the "
+                   f"committed digest, so re-pin it deliberately or keep the old file")
     side.write_text(json.dumps({
         "recording_id": video["recording_id"], "source_url": video["source_url"],
         "source_sha256": src_sha, "source_bytes": src_bytes,
-        "derivative_sha256": sha(dst), "derivative_bytes": dst.stat().st_size,
+        "derivative_sha256": dst_sha, "derivative_bytes": dst.stat().st_size,
         "width": width, "height": height, "duration_sec": round(dur, 3)}) + "\n")
     say(f"{letter} {video['recording_id']} {src_bytes/2**30:.2f}GiB -> "
-        f"{dst.stat().st_size/2**20:.0f}MiB  {width}x{height}  {dur:.1f}s")
+        f"{dst.stat().st_size/2**20:.0f}MiB  {width}x{height}  {dur:.1f}s{verdict}")
 
 
 todo = spec["videos"]

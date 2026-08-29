@@ -1,4 +1,4 @@
-You are given ONE contact sheet for each of twenty-two videos, twenty-two images in all, in the order A through V. Each sheet is a 4x4 grid of sixteen frames sampled at even intervals across that whole recording, read left to right and top to bottom, with the timestamp in seconds burned into the corner of every frame. You have NO video, NO tools, and no way to ask for another frame. Answer from the sheets alone.
+You are given ONE contact sheet for each of twenty-two videos, twenty-two images in all, in the order A through V. Each sheet is a 4x4 grid of sixteen frames sampled at even intervals across that whole recording, read left to right and top to bottom, with the timestamp in seconds burned into the corner of every frame. You have NO video, NO tools, and no way to ask for another frame. Answer from the sheets alone. You must still produce a complete answer in the schema below: an empty sequence is not an acceptable response, so give your best guess for every recording.
 
 | video | path | length | time range |
 |---|---|---|---|
@@ -44,15 +44,16 @@ Print the JSON object and nothing else as your final message.
 ```json
 {
   "sequence": [
-    {"video": "A", "id": 59, "t_start": 1.827, "t_end": 21.012},
-    {"video": "A", "id": 1, "t_start": 58.468, "t_end": 89.529},
-    {"video": "V", "id": 24, "t_start": 87.996, "t_end": 124.489}
+    {"video": "A", "id": 2, "t_start": 10.0, "t_end": 22.0},
+    {"video": "A", "id": 11, "t_start": 35.0, "t_end": 47.0},
+    {"video": "V", "id": 19, "t_start": 60.0, "t_end": 72.0}
   ]
 }
 ```
 
 One entry per step performed. Within each video, order the entries by the moment
-the step begins; the videos themselves may come in any order. Fields:
+the step begins; if two steps begin at the same second, put the smaller `id` first.
+The videos themselves may come in any order. Fields:
 
 - `video`: one of `"A"` through `"V"`, the clip this entry belongs to.
 - `id`: the step's label, an integer from the closed vocabulary below.

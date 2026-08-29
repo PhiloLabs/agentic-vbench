@@ -250,19 +250,25 @@ Measured on this key, in `provenance/ablations/run_ablations.py` and reproducibl
 | best spam of any shape | 0.0013 |
 | oracle answers filed under the wrong video | 0.0 |
 
-And the two degraded-input runs the family's ablation gate asks for, both real runs of
-gpt-5.6-sol at xhigh rather than simulations, with transcripts under
-`provenance/ablations/measured/`:
+And the three degraded-input runs the family's ablation gate asks for, all real runs of
+gpt-5.6-sol at xhigh rather than simulations, each in its own empty working directory and
+each forced to answer, with transcripts under `provenance/ablations/measured/`:
 
-| degraded input | n entries | label+order | F1 |
+| degraded input | entries | label+order | F1 |
 |---|---|---|---|
-| one still per recording, no tools | 0 | 0 | **0.0** |
-| 16 uniform frames per recording, no tools | 268 | **193** | **0.0** |
+| no media at all | 352 | 32 | **0.0** |
+| one still per recording, no tools | 326 | 161 | **0.0031** |
+| 16 uniform frames per recording, no tools | 312 | **211** | **0.0032** |
 
-The second row is worth pausing on. With no video and no way to ask for another frame,
-the model still placed 193 of 314 steps correctly by label and sequence position, more
-than Codex managed with the full video and tools. It scored zero. Whatever this task is
-measuring, it is not recognition of the procedure, and the tools are not decoration.
+All three ran with **zero shell commands**, which the retained transcripts show. All three
+are forced to answer, because a zero from a model that declined to guess would say nothing
+about whether the degraded input was enough.
+
+The last row is worth pausing on. With no video and no way to ask for another frame, the
+model placed 211 of 314 steps correctly by label and sequence position, more than any
+calibrated agent managed with the full video and tools, and scored 0.0032. Whatever this
+task is measuring, it is not recognition of the procedure, and the tools are not
+decoration.
 
 And two shapes of partial competence, which bracket where the 0.10 gate actually sits:
 

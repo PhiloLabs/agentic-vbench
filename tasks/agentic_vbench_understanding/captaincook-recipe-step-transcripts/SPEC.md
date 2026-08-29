@@ -129,23 +129,29 @@
 
 # 8. Anti-shortcut ablations. Target: each <= 0.15. Measured, all far below.
 #
-# Two of these are real runs of a strong model under degraded input, not simulations:
-# gpt-5.6-sol at xhigh, prompts derived from the shipped one by
+# Three of these are real runs of a strong model under degraded input, not simulations:
+# gpt-5.6-sol at xhigh, each in its own empty working directory so that nothing but the
+# attached images was reachable, prompts derived from the shipped one by
 # provenance/ablations/make_ablation_prompt.py (which asserts all 84 vocabulary rows
-# survive), transcripts and answers under provenance/ablations/measured/.
+# survive), transcripts and answers under provenance/ablations/measured/. Every one of
+# the three ran with ZERO shell commands, which the retained transcripts show.
 #
-#   single_frame         one still per recording, no tools     0.0  (it returned an
-#                                                                    empty sequence)
-#   frame_dump_no_tools  16 uniform frames per recording as a  0.0
-#                        contact sheet with burned-in times,
-#                        no tools
+#   degraded input                              entries  label+order   F1
+#   no media at all, forced to answer               352           32   0.0
+#   one still per recording, no tools               326          161   0.0031
+#   16 uniform frames per recording, no tools       312          211   0.0032
 #
-# The frame-dump row is the most informative number in this file. Handed 16 frames per
-# recording and no way to ask for more, the model wrote 268 entries and matched 193 of
-# the 314 steps by label in the right sequence position, which is MORE than Codex managed
-# with the full video and tools (183). It scored 0.0, because not one of those 193 had
-# both boundaries inside tolerance. Recognising the procedure is not what this task pays
-# for, and seeking through the video is not optional.
+# All three are forced to answer. A refusal also scores 0.0, but a zero from a model that
+# declined to guess says nothing about whether the degraded input was enough, and an
+# earlier single-frame run did exactly that.
+#
+# The last row is the most informative number in this file. Handed 16 frames per
+# recording and no way to ask for more, the model matched 211 of the 314 steps by label
+# in the right sequence position, MORE than any calibrated agent managed with the full
+# video and tools, and scored 0.0032. Recognising the procedure is not what this task
+# pays for, and seeking through the video is not optional.
+#
+# The deterministic constructions, recomputable with run_ablations.py:
 #
 #   oracle, the key itself                                        1.0
 #   empty submission                                              0.0
@@ -159,15 +165,13 @@
 #   spam, top-5 per-recording labels at 2 s stride (upper bound)  0.0007
 #   oracle answers filed under the wrong video                    0.0
 #
-# The canonical order is derived leave-one-out from the OTHER recordings of the same
-# dish, which is the strongest recipe prior an agent could build from the dataset, and
-# it scores 0.0032. The spam row is the standard attack on an order-preserving
-# alignment; F1 charges for every entry that does not match, so flooding cannot pay, and
-# the best spam of any kind reaches 0.0013. The top-5 row is handed the labels that
-# actually occur most often in each specific recording, which no attacker could know, so
-# it is an upper bound rather than a strategy. The wrong-video row is what makes the
-# video field load-bearing. Reproduce all of it with
-# provenance/ablations/run_ablations.py.
+# Reciting the canonical recipe is the strategy an agent that recognises the dish would
+# reach for, and it scores 0.0032. The spam row is the standard attack on an
+# order-preserving alignment; F1 charges for every entry that does not match, so flooding
+# cannot pay, and the best spam of any kind reaches 0.0013. The top-5 row is handed the
+# labels that actually occur most often in each specific recording, which a real attacker
+# could not know, so it is an upper bound rather than a strategy. Audio-only and
+# video-only do not apply: the clips carry no audio track.
 
 # 9. Input media.
 #
@@ -197,7 +201,14 @@
    provenance/media_manifest.json records for every letter both the publisher's URL and
    the SHA256 of the publisher's own object alongside the derivative's, so a reviewer
    can verify the derivative was made from the real source and rerun
-   provenance/data_setup/02_prepare_media.sh to reproduce it byte for byte. If the
+   provenance/data_setup/02_prepare_media.sh. On reproducibility: what a rerun of provenance/data_setup/02_prepare_media.sh reproduces is
+   the same content from the same verified source, not the same bytes: the encode runs on
+   h264_videotoolbox, a hardware encoder, and its output is not guaranteed identical
+   across machines or OS versions. What IS pinned byte for byte is the artifact the image
+   actually bakes, by the derivative SHA256 in the manifest, which environment/bake.sh
+   verifies and refuses to proceed without. Rerunning the script with the committed
+   manifest present makes it CHECK each digest against the manifest rather than only
+   record a new one, and it says so per file. If the
    maintainers would rather host it themselves, one run of provenance/make_dockerfile.py
    with a different --base rewrites the Dockerfile and nothing else changes.
 
