@@ -51,26 +51,27 @@ scorer:
     credited names are off by exactly one. Names normalized (unambiguous-lastname
     rule — every GT lastname here is unique); greedy one-to-one matching, exact
     matches assigned first. Bar: a strong agent stays under ~0.10.
-  design_note: an earlier ace+block version of this task leaked score — a strong
-    agent (Fable) nailed 4 of the 5 service aces (a legible single-jersey read with
-    the ball landing untouched) and, being high-precision, reached F1 0.24. Removing
-    aces makes every target a hard two-jersey net attribution; the same runs re-grade
-    to Codex 0.015 / Fable 0.031 (both got 0 blocks fully correct). This also makes
-    the task distinct from the sister BYU ace+block task.
+  design_note: service aces are excluded on purpose. An ace is a single legible
+    jersey read with the ball landing untouched, and agents get them — in testing on
+    this match a strong agent identified 4 of the 5 while getting no block right, and
+    a handful of high-precision ace hits carries F1 on its own. Every target is
+    instead a block point needing two opposing jersey reads at the net, so there is no
+    legible easy class left to score off.
   oracle_reward: 1.0
   null_reward: 0.0 (measured; empty list)
 
 difficulty:
   strong_agent_reward: Codex CLI (gpt-5.6-sol, xhigh) 0.0185; Claude Code (Opus 5,
-    xhigh) 0.0. Both ran to completion on the final block-only instruction in a fresh
-    workspace and wrote their own answer; neither got a single block point fully
-    correct. A Fable 5 run reached 210 tool-call turns before that model's credit pool
-    ran out; it is archived unscored, and resuming it with Opus 5 was tested and also
-    scored 0.0, so it is not completed under another model's name.
-  tool_call_turns: Codex 160 items / 289 commands; Opus 270 (both far above the 50 floor)
-  agent_model: Codex CLI, Claude Code (Opus 5); Antigravity not run — the sister task
-    established that its Gemini backends ground against the public record unless a
-    three-vector isolation recipe is applied
+    xhigh) 0.0. Both ran to completion in a fresh workspace and wrote their own
+    answer; neither got a single block point fully correct. A Fable 5 run reached 210
+    tool-call turns before that model's credit pool ran out; it is archived unscored,
+    and resuming it with Opus 5 was tested and also scored 0.0, so it is not completed
+    under another model's name.
+  tool_call_turns: Codex 158 completed tool-call items; Opus 270 tool-call turns
+    (both far above the 50 floor)
+  agent_model: Codex CLI, Claude Code (Opus 5); Antigravity not run — on the sister
+    BYU match its Gemini backends reconstruct the game from the public rally log
+    unless three isolation vectors are applied at once
 
 anti_shortcut:
   single_frame: 0.0 measured — one frame from the midpoint; the model was required to

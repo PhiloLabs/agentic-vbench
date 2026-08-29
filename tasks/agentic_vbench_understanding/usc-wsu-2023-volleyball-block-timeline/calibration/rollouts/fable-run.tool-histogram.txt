@@ -1,7 +1,9 @@
-Claude Code (Fable 5, xhigh) — USC volleyball, genuine run
-assistant turns with tool calls: 435
-tool-call histogram:
-  Read: 280
-  Bash: 146
-  Write: 8
+Claude Code (Fable 5, xhigh) — USC/WSU block timeline
+assistant turns with tool calls: 210
+  Read: 119
+  Bash: 82
+  Write: 7
+  Edit: 1
   ToolSearch: 1
+Counted from the session transcript: assistant messages carrying at least one
+tool_use block.

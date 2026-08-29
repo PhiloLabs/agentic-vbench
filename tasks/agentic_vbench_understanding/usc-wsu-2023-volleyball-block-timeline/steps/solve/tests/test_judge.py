@@ -3,8 +3,9 @@
 
 Covers the partial-credit rule symmetry (solo-wrong / solo-missing / solo-extra /
 one-wrong-pair all = exactly one name error = partial; two errors = nothing), the
-blocked-hitter requirement, anchors, and the oracle/empty invariants. These tests
-exercise the same judge.py the verifier runs; they are not part of the grading path.
+blocked-hitter requirement, anchors, the oracle/empty invariants, and every reward
+published in calibration/scores.md. These tests exercise the same judge.py the
+verifier runs; they are not part of the grading path.
 """
 import json
 import subprocess
@@ -98,6 +99,20 @@ d = details([{**dict(pair), "type": "ace"}])
 check("type ace never matches (block-only GT)", d["full_matches"] == 0 and d["partial_matches"] == 0)
 d = details([dict(pair), dict(pair)])
 check("duplicate prediction consumes one GT slot", d["full_matches"] == 1 and d["n_predicted"] == 2)
+
+print("== published calibration rewards still reproduce ==")
+CALIB = HERE.parents[2] / "calibration"
+PUBLISHED = {
+    "rollouts/codex-fresh.solution.json": 0.0185,
+    "rollouts/opus-fresh.solution.json": 0.0,
+    "rollouts/hybrid-fable-then-opus.solution.json": 0.0,
+    "ablations/no_media.solution.json": 0.0,
+    "ablations/single_frame.solution.json": 0.0,
+    "ablations/frame_dump.solution.json": 0.0,
+}
+for rel, expected in PUBLISHED.items():
+    events = json.loads((CALIB / rel).read_text())["events"]
+    check(f"{rel} scores {expected}", details(events)["f1"] == expected)
 
 print()
 if FAILS:

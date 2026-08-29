@@ -1,0 +1,11 @@
+Codex CLI (gpt-5.6-sol, xhigh) — USC/WSU block timeline
+completed tool-call items: 158
+  command_execution: 144
+  file_change: 11
+  mcp_tool_call: 3
+(also 13 agent messages and 1 todo list, which are not tool calls)
+The three MCP calls are the agent trying to leave the workspace: one app listing
+that returned, then a QuickTime Player request and a browser-runtime request that
+were both refused by the host. No web content entered the run.
+Counted from the run's rollout.jsonl: items of type item.completed whose
+item_type is a tool call.

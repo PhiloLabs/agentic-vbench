@@ -1,9 +1,8 @@
 # Rollouts
 
-Artifacts from every calibration run of the block-only task. Scores and context are
-in `../scores.md`.
+Artifacts from every calibration run. Scores and context are in `../scores.md`.
 
-## Fresh runs on the final block-only instruction
+## Scored
 
 | file prefix | agent | score |
 |---|---|---|
@@ -15,6 +14,10 @@ Each carries the answer the agent wrote (`*.solution.json`), the run's provenanc
 judge commit) and a tool-call histogram. Both runs ended normally and wrote their own
 answer file; neither referenced an answer key or the web.
 
+The histograms count different things because the CLIs do: the Codex figure is
+completed tool-call items in its rollout, the Claude figures are assistant turns
+carrying at least one tool call. Each file says which.
+
 `opus-fresh.final-report.md` is the agent's own closing account, verbatim. It is
 worth reading: Opus rebuilt the full 200-rally timeline from the score bug and then
 reported honestly that it could confirm only one block point, and that even that
@@ -25,12 +28,13 @@ described from the inside.
 
 `fable-run.*` — Claude Code, Fable 5, xhigh: 210 tool-call turns of genuine frame
 work, then the account's credit pool for that model ran out before an answer was
-written. Archived as evidence of effort, deliberately unscored.
+written. Archived as evidence of effort and deliberately unscored;
+`fable-run.solution.json` is the partial event list recoverable from its transcript at
+the point it stopped, not something the agent submitted.
 
-## Superseded
-
-`codex-aceblock-run.solution.json` — the answer from the earlier ace+block version of
-this task, kept because `../scores.md` cites its re-grade in the design note.
+`hybrid-fable-then-opus.*` — resuming that interrupted session with a different model,
+which scored 0.0 and matched no rally at all. The write-up explains why the archived
+run stays unscored rather than being completed under a name that did not produce it.
 
 Raw stream logs run to hundreds of MB and are not committed; the histograms and
 answer files here, plus the metadata, are what a reviewer needs to check a score.

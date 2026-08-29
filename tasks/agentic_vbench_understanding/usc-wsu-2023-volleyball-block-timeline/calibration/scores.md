@@ -17,27 +17,25 @@ the media at a pinned dataset revision and verifies its SHA256 during the build:
 | 23-block guess, right anchors and wrong names | 0.0 |
 
 Media inside the image hashes to `13ccbabb…d08ba9e`, matching the pin.
-`steps/solve/tests/test_judge.py` covers the scorer's tiers: 17 cases, all passing.
+`steps/solve/tests/test_judge.py` covers the scorer's tiers and re-grades every answer
+committed under `rollouts/` and `ablations/`, so the numbers below are a test failure
+if they ever drift from the scorer.
 
-## Model matrix — fresh runs on the final block-only instruction
+## Model matrix
 
 Every run below used a workspace containing only the video and the instruction, with
 no prior artifact of this task reachable; `run-metadata.txt` beside each rollout
 records CLI version, model, effort, instruction hash, media hash and judge commit.
 
-| agent | model / setting | score | tool-call turns | integrity |
+| agent | model / setting | score | work | integrity |
 |---|---|---|---|---|
-| Codex CLI | gpt-5.6-sol, xhigh | **0.0185** | 160 items / 289 commands | key 0, web 0 |
-| Claude Code | Opus 5, xhigh | **0.0** | 270 | key 0, web 0 |
+| Codex CLI | gpt-5.6-sol, xhigh | **0.0185** | 158 tool-call items, 31 events | key 0, web 0 |
+| Claude Code | Opus 5, xhigh | **0.0** | 270 tool-call turns, 1 event | key 0, web 0 |
 | Antigravity | — | not run | — | — |
 
-Two strong agents, both far under the bar, neither getting a single block point
-fully correct. A Fable 5 run is archived unscored — it reached 210 tool-call turns of
-genuine frame work before that model's credit pool ran out, and finishing it with a
-different model was tested and rejected (see `rollouts/hybrid-fable-then-opus.md`).
-
-Both scored runs ended normally rather than being cut off, and both wrote their own
-`solution.json`. Codex submitted 31 events and got **no block fully correct** (one
+Two strong agents, both far under the bar, neither getting a single block point fully
+correct. Both ended normally rather than being cut off, and both wrote their own
+`solution.json`. Codex submitted 31 events and got no block fully correct (one
 partial). Opus submitted a single event, and said so plainly: it rebuilt the entire
 200-rally timeline from the score bug — reconciling exactly with the final box score,
 including two overturned challenges — then reported that it could confirm only one
@@ -46,12 +44,19 @@ block point, and that even there the blocker credit was "an inference, not a rea
 That is the intended shape of this task. The timeline layer is tractable; the
 attribution layer is not, unless the agent finds the one place it is visible.
 
-Fable's run is archived but unscored: it reached 210 tool-call turns of genuine frame
-work before the account's credit pool for that model ran out, so no answer was
-written. Resuming that session with Opus 5 was tried, to see whether an interrupted
-run can be completed by another model — it scored 0.0 and matched no rally at all,
-so the archived run stays unscored rather than being finished under a name that did
-not produce it. Details in `rollouts/hybrid-fable-then-opus.md`.
+Both integrity columns are from the raw transcripts: no reference to a judge, a
+ground-truth file or a search. The Codex run is worth one note — three of its 158 tool
+calls are attempts to leave the workspace: it listed the host's applications, then
+asked for QuickTime Player ("Computer Use was not approved") and for a browser
+runtime ("No browser is available"). Both were refused, the only URL string anywhere
+in its transcript is `https://example.com/`, and no external content reached it.
+
+A Fable 5 run is archived unscored — it reached 210 tool-call turns of genuine frame
+work before that model's credit pool ran out, so it never submitted an answer.
+`fable-run.solution.json` is the partial event list recoverable from its transcript at
+that point, kept as evidence of where it had got to, not as a submission. Finishing an
+interrupted run with a different model was tested and rejected; see
+`rollouts/hybrid-fable-then-opus.md`.
 
 ## Ablations
 
@@ -66,11 +71,10 @@ actually submitted.
 | frame_dump | 60 uniform frames, no seeking | 22 | **0.0** |
 
 All three land at zero even after submitting a full-looking answer, so nothing in
-the task is obtainable without working the video. `no_media` is the one the review
-asked about specifically, since the NCAA
-rally-by-rally log for this match is public: forced to answer, the model produced 15
-plausible-looking events and matched none of them. The per-event score anchors and
-blocker/hitter pairs are not recallable.
+the task is obtainable without working the video. `no_media` is the one that matters
+most, since the NCAA rally-by-rally log for this match is public: forced to answer,
+the model produced 15 plausible-looking events and matched none of them. The per-event
+score anchors and blocker/hitter pairs are not recallable.
 
 ## Is the answer key visible in the video?
 
@@ -91,13 +95,13 @@ So the information is present but narrowly placed — hard, not impossible. The 
 run's own conclusion that blockers "face away from the camera" came from sampling the
 rally rather than that window.
 
-## Design note: why block-only
+## Design note: why every target is a block point
 
-Built first as an ace+block timeline. In calibration Fable nailed 4 of the 5 service
-aces — a legible single-jersey read with the ball landing untouched — and, reporting
-few but precise events, reached F1 0.24 off aces alone while getting no block right;
-Codex, over-reporting, was 0.099. Dropping the aces removes the only legible event
-class, leaving 23 block points that each need two opposing jersey reads. It also
-makes this task distinct from the sister BYU ace+block task.
+Service aces are excluded on purpose. An ace is a single legible jersey read with the
+ball landing untouched, and agents get them: in testing on this match a strong agent
+identified 4 of the 5 aces while getting no block right, and a handful of
+high-precision ace hits is enough to carry F1 on their own. Dropping them leaves 23
+block points that each need two opposing jersey reads inside a sub-second window at
+the net, so there is no legible easy class left to score off.
 
 Raw trajectories for every scored run are in `rollouts/`.
