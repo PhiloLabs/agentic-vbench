@@ -1,4 +1,4 @@
-FROM python:3.12-slim
+FROM python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ffmpeg ca-certificates curl nodejs npm ripgrep \
@@ -32,6 +32,7 @@ RUN mkdir -p /baked/parts \
       ffmpeg -v error -f concat -safe 0 -i /baked/concat.txt -c copy \
         -movflags +faststart /baked/match.mp4; \
     fi \
+ && printf '%s  /baked/match.mp4\n' "$MATERIALS_SHA256" | sha256sum -c - \
  && ffprobe -v error -select_streams v:0 \
       -show_entries stream=width,height,r_frame_rate -show_entries format=duration \
       -of default=noprint_wrappers=1 /baked/match.mp4 \

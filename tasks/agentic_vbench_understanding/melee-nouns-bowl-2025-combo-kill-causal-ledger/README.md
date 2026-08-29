@@ -60,6 +60,16 @@ the image build. Benchmark publication still requires the organizer's normal med
 rights review; public accessibility alone is not asserted to grant redistribution
 rights.
 
+## Durable materials plan
+
+For repeatable builds, maintainers may set `MATERIALS_URL` to a stable,
+rights-cleared host-controlled copy of the concatenated video. The Dockerfile
+verifies that copy against the pinned final SHA256. When no such hosted copy is
+available, the default path resolves and verifies the three public source streams,
+concatenates them, and applies the same final-file SHA256 check before the image is
+usable. The canonical final digest is
+`02f18fd7f4796800eece0400b1b1f315a36778b57b9ef4a64d1b30aa3b539749`.
+
 ## Ground truth
 
 `tools/build_ground_truth.js` uses `@slippi/slippi-js` 9.1.2. A conversion is
