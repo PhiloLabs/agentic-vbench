@@ -64,14 +64,18 @@ Each ablation removes the video work and demands a best-effort answer anyway —
 that declines to answer measures nothing. Model: Claude Code CLI, Sonnet, effort high,
 same instruction as the real task.
 
-| ablation | inputs | events submitted | score |
-|---|---|---|---|
-| no_media | instruction only | 16 | **0.0** |
-| single_frame | one frame from the match midpoint | 9 | **0.0** |
-| frame_dump | 60 uniform frames, no seeking | 16 | **0.0** |
+| ablation | inputs | tools | events submitted | score |
+|---|---|---|---|---|
+| no_media | instruction only | shell | 16 | **0.0** |
+| single_frame | one frame from the match midpoint | shell | 9 | **0.0** |
+| frame_dump | 60 uniform frames, no seeking | shell | 16 | **0.0** |
+| all_frames | 77 stills, one every 90 s | none | 10 | **0.0** |
 
-All three land at zero after submitting a full-looking answer, so nothing here is
-obtainable without working the video. `no_media` is the one that matters most, since
+All four land at zero after submitting a full-looking answer, so nothing here is
+obtainable without working the video. `all_frames` is the strictest: the whole match is
+already in front of the model as a uniform sweep and the shell is gone, so it cannot
+seek, crop, zoom or script — only look and answer. It matched no rally anchor, and its
+answers name players as "BYU #unknown", which is what the frames actually support. `no_media` is the one that matters most, since
 this match's rally-by-rally log is public: forced to answer, the model produced 16
 plausible events from recall and matched none. The per-event score anchors and the
 blocker/hitter/setter triples are not recallable.
@@ -80,7 +84,9 @@ blocker/hitter/setter triples are not recallable.
 
 Every scored run and every ablation is published whole, as the CLI wrote it, at an
 immutable dataset revision. `MANIFEST.json` in that dataset repeats each hash and adds
-the SHA256 of the uncompressed stream inside each archive.
+the SHA256 of the uncompressed stream inside each archive; `rollouts/run-envelope.md`
+records the CLI versions, the tool profile each run was given, and the network
+envelope those streams were audited against.
 
 | run | file | sha256 (of the .gz as served) |
 |---|---|---|
