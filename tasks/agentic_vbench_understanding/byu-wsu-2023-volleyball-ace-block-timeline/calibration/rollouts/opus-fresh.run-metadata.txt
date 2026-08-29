@@ -1,0 +1,7 @@
+date: 2026-08-29T01:05:37Z
+agent: opus
+model/effort: opus (claude-opus-5) / xhigh
+schema: block-only, three attributions required (blockers + blocked hitter + setter)
+instruction sha256: 2cf7a9b803e2993e72d04cdc45a6521ef5352d91f61130741e6c1c85604d7222
+media sha256: ee887b18cf3dc9afce05087b24b629d1c44433344d7d4ccf612a4e548796dc60
+workspace: fresh (materials + instruction only)

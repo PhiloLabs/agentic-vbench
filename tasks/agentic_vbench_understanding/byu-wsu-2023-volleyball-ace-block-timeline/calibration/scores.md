@@ -1,74 +1,102 @@
 # Calibration — byu-wsu-2023-volleyball-ace-block-timeline
 
+Block-only timeline, 18 block points, three attributions per point (the credited
+blocker(s), the hitter who was blocked, and the setter who fed that attack).
 Deterministic F1 scorer (`steps/solve/tests/judge.py`). A task clears the bar when
-every strong agent scores low (target **< 0.10**) and a
-real attempt takes **more than 50 tool-call turns**. Oracle must be 1.0 and an empty
-attempt ≈ 0.
+every real agent scores under the ~0.10 line and a real attempt takes more than 50
+tool-call turns. Oracle must be 1.0 and an empty attempt near 0.
 
-| run | score | rollout (tool-call turns) |
-|---|---|---|
-| oracle (exact answer key) | 1.0 | — |
-| empty / null | 0.0 | — |
-| 24-entry plausible guess | 0.0 | — |
-| Codex CLI (gpt-5.6, xhigh) | 0.04 | 126 |
-| Claude Code CLI (Opus 4.8 [1m], xhigh) | 0.0 | 291 |
-| Claude Code CLI (Fable 5, xhigh) | 0.15 | 733 |
-| Antigravity (Gemini 3.5 Flash, High) | 0.0 † | 2 windows, 54 frames (integrity-verified clean) |
+## Invariants, from the built image
 
-Opus (0.0), Codex (0.02) and Fable (0.15) are clean, genuine runs well past 50 turns
-(mean ≈ 0.057). Opus shipped only 6 events and none matched — not even set+score+type —
-so 0.0 holds under both the old and hardened schema; Codex and Fable bracket the ~0.10
-line. The terminal ace/block moment is a sub-second blur and net-front jersey ID at 720p
-is genuinely hard, which is what keeps strong agents low. Run-to-run variance is real:
-F1 is scale-invariant in the number of events, so the spread reflects how many terminal
-moments a run happens to resolve, not how long its list is.
+Built clean (`docker build --no-cache`) from `environment/Dockerfile`, which pulls the
+media at a pinned dataset revision and verifies its SHA256 during the build:
 
-† **Antigravity's 0.0 is integrity-verified, but only after defeating three separate
-cheat vectors** — reviewers using Antigravity/Gemini should know about all three:
-1. **Web grounding.** Un-isolated, Gemini grounds against the public NCAA box score —
-   server-side Google Search inside the model↔API channel, which no local or container
-   network policy can block — and returns a near-perfect list without watching the
-   video. Defeated by an always-on "pixels only, no web" rule (verified 0 grounding
-   references across every isolated run).
-2. **Local answer-file theft.** With grounding blocked, if any prior-run answer file is
-   reachable on disk it enumerates sibling directories and copies it, self-approving a
-   `BypassSandbox` to escape `--sandbox`. Defeated by running in a workspace outside the
-   repo with `trustedWorkspaces` narrowed to that dir only, so the sandbox blocks every
-   path except the workspace (8 escape attempts blocked in the clean run).
-3. **Cross-conversation memory.** Once it has seen the answer via any vector, agy's
-   persistent local store (`conversations/`, `brain/`, `conversation_summaries.db`)
-   retains it, so even a *fresh* `agy -p` regurgitates the memorised answer. Defeated by
-   wiping those stores before the run.
-Only with all three closed does it do honest work: a 4-set partition, template-matched
-scoreboard OCR, an LNDS-filtered 107-update timeline, and fuzzy nameplate matching — yet
-across two ~3 h windows it isolated just 3 event candidates and shipped 1 (wrong) event,
-because 720p broadcast nameplate/jersey OCR defeats it. The run is **not converging**
-(window 2 added 0 events in 3 h), so the honest score is 0.0. Transcripts for all three
-cheat vectors and the clean run are in
+| run | reward |
+|---|---|
+| oracle (`steps/solve/solution/solve.sh`) | **1.0** |
+| null (`{"events": []}`) | **0.0** |
+
+Media inside the image hashes to `ee887b18…8796dc60`, matching the pin.
+`steps/solve/tests/test_judge.py` covers the scorer's tiers: 17 cases, all passing.
+
+## Model matrix — fresh runs on the final three-attribution instruction
+
+Each run used a workspace holding only the video and the instruction, with no prior
+artifact of this task reachable; `run-metadata.txt` beside each rollout records model,
+effort, schema, instruction hash and media hash.
+
+| agent | model / setting | score | work | integrity |
+|---|---|---|---|---|
+| Codex CLI | gpt-5.6-sol, xhigh | **0.0189** | 29 events submitted | key 0, web 0 |
+| Claude Code | Opus 5, xhigh | **0.0** | 386 tool-call turns, 23 events | key 0, web 0 |
+| Antigravity | — | not run | — | — |
+
+Both wrote their own `solution.json`, both filled all three attributions on every
+event they submitted, and **neither got a single block point fully correct** — Codex
+managed one partial, Opus none. Between them they identified only 2 of 18 rallies
+correctly at all.
+
+## Why the schema changed, and what it cost
+
+This task previously asked for aces and blocks, with two attributions per block. Under
+that schema it did not clear the bar: a fresh Codex run scored **0.1887**. Two things
+were wrong with it.
+
+**The aces were a giveaway.** A service ace is one legible jersey read with the ball
+landing untouched, and agents get them. Dropping the 5 aces leaves only net exchanges.
+
+**Two attributions were not enough.** Block-only alone still left Codex at 0.1333: with
+19 events, two correct blocks carry a lot of recall. The scorer now also asks for the
+setter who fed the blocked attack — a third jersey read, and the only one that sits
+mid-rally rather than at the terminal instant, so it cannot be recovered from the
+post-point celebration. The official rally log records the whole chain
+(`Set by X → Attack by Y → Block by Z`), so the answer key is as solid as before.
+
+Re-grading the block-only runs under the three-attribution scorer drops Codex from
+0.1333 to 0.0426 — the two blocks it had fully right become partials, and its partials
+become nothing. The fresh runs above, on the new instruction, land lower still.
+
+One rally line in the source is corrupted (set 2 at 1-2: its name field contradicts
+the box score, and neither hitter nor setter is recoverable). It is now excluded from
+the key rather than carried with a hidden exemption, so the scorer no longer has a
+special case the task contract does not mention.
+
+## Ablations
+
+Each ablation removes the video work and demands a best-effort answer anyway — a model
+that declines to answer measures nothing. Model: Claude Code CLI, Sonnet, effort high,
+same instruction as the real task.
+
+| ablation | inputs | events submitted | score |
+|---|---|---|---|
+| no_media | instruction only | 16 | **0.0** |
+| single_frame | one frame from the match midpoint | _pending_ | _pending_ |
+| frame_dump | 60 uniform frames, no seeking | _pending_ | _pending_ |
+
+`no_media` is the one that matters most here, since this match's rally-by-rally log is
+public: forced to answer, the model produced 16 plausible events from recall and
+matched none. The per-event score anchors and the blocker/hitter/setter triples are
+not recallable.
+
+Artifacts in `ablations/`; raw answers and provenance for the scored runs in
 `rollouts/`.
 
-Raw transcripts are in `rollouts/` — one file per agent, so a reviewer can confirm each
-score was earned honestly (or, for Antigravity, see exactly how each cheat vector was
-detected) and count the tool-call turns.
-
-Note on `no_media`: the official NCAA rally-by-rally log for this match is public web
-data. The container builds with `allow_internet = false` and the prompt forbids lookups,
-so the no-media ablation measures pure model recall/guessing of that public record; the
-measured row above verifies it is ≈ 0.
-
-`frames/` (added with calibration) holds sample frames at block moments from the baked
-720p file, showing that jersey numbers resolve at the shipped resolution.
-
-## Scorer symmetry fix, and what it changed
+## Scorer symmetry fix
 
 The partial-credit rule was asymmetric: one wrong name in a two-player block earned
 partial credit, but a solo block credited to the wrong player earned nothing. Errors
-are now counted as `max(unmatched-GT, unmatched-pred)`, so a substitution is one
-error either way, and solo-wrong, solo-missing, solo-extra and one-wrong-pair all sit
-in the same tier. `steps/solve/tests/test_judge.py` pins all four cases plus the
-hitter tiers, the unrecoverable-hitter event and the two-Bower lastname ambiguity.
+are now counted as `max(unmatched-GT, unmatched-pred)`, so a substitution is one error
+either way, and solo-wrong, solo-missing, solo-extra and one-wrong-pair sit in the same
+tier. The name-ambiguity table is also computed over setters now, not just blockers and
+hitters, so a setter who appears nowhere else in the key still participates in the
+unambiguous-lastname rule.
 
-Re-grading the archived runs under the corrected scorer moves one published number:
-**Codex 0.02 -> 0.04**, because several of its solo-block credits were wrong rather
-than absent and now earn partial credit. Fable stays 0.15, Opus 4.8 stays 0.0,
-Antigravity stays 0.0. The table above carries the corrected figure.
+## A note on the numbers this file used to carry
+
+Earlier versions reported Codex 0.02, Fable 0.15, Opus 4.8 0.0 and Antigravity 0.0.
+Those runs were made against the pre-hardening instruction, which did not ask for the
+blocked hitter, and were then graded under the hardened scorer — so none of them could
+score full credit on any block no matter how good they were. They measured a schema
+the task no longer ships. They have been replaced by the fresh runs above rather than
+carried forward, and the lesson is recorded here because it is easy to repeat: after
+changing a task's schema, re-run the agents; do not re-grade their old answers.

@@ -1,0 +1,255 @@
+{
+ "events": [
+  {
+   "set": 1,
+   "score_after": "2-1",
+   "type": "block",
+   "players": [
+    "Whitney McEwan-Llarenas",
+    "Mia Lee"
+   ],
+   "blocked": "Pia Timmer",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 1,
+   "score_after": "5-5",
+   "type": "block",
+   "players": [
+    "Whitney McEwan-Llarenas",
+    "Erin Livingston"
+   ],
+   "blocked": "Pia Timmer",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 1,
+   "score_after": "12-11",
+   "type": "block",
+   "players": [
+    "Mia Lee",
+    "Kate Prior"
+   ],
+   "blocked": "Iman Isanovic",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 2,
+   "score_after": "3-2",
+   "type": "block",
+   "players": [
+    "Whitney McEwan-Llarenas",
+    "Mia Lee"
+   ],
+   "blocked": "Magda Jehlarova",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 2,
+   "score_after": "11-11",
+   "type": "block",
+   "players": [
+    "Kate Prior",
+    "Whitney McEwan-Llarenas"
+   ],
+   "blocked": "Pia Timmer",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 2,
+   "score_after": "13-16",
+   "type": "block",
+   "players": [
+    "Elyse Stowell",
+    "Whitney McEwan-Llarenas"
+   ],
+   "blocked": "Pia Timmer",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 2,
+   "score_after": "17-18",
+   "type": "block",
+   "players": [
+    "Mia Lee",
+    "Whitney McEwan-Llarenas"
+   ],
+   "blocked": "Iman Isanovic",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 2,
+   "score_after": "19-23",
+   "type": "block",
+   "players": [
+    "Magda Jehlarova",
+    "Pia Timmer"
+   ],
+   "blocked": "Kate Prior",
+   "setter": "Whitney Bower"
+  },
+  {
+   "set": 3,
+   "score_after": "4-3",
+   "type": "block",
+   "players": [
+    "Lana Radakovic",
+    "Magda Jehlarova"
+   ],
+   "blocked": "Erin Livingston",
+   "setter": "Whitney Bower"
+  },
+  {
+   "set": 3,
+   "score_after": "5-3",
+   "type": "block",
+   "players": [
+    "Mia Lee"
+   ],
+   "blocked": "Pia Timmer",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 3,
+   "score_after": "9-8",
+   "type": "block",
+   "players": [
+    "Whitney McEwan-Llarenas",
+    "Erin Livingston"
+   ],
+   "blocked": "Magda Jehlarova",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 3,
+   "score_after": "11-13",
+   "type": "block",
+   "players": [
+    "Magda Jehlarova",
+    "Argentina Ung"
+   ],
+   "blocked": "Kate Prior",
+   "setter": "Whitney Bower"
+  },
+  {
+   "set": 3,
+   "score_after": "13-18",
+   "type": "block",
+   "players": [
+    "Whitney McEwan-Llarenas"
+   ],
+   "blocked": "Iman Isanovic",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 3,
+   "score_after": "20-23",
+   "type": "block",
+   "players": [
+    "Mia Lee",
+    "Whitney McEwan-Llarenas"
+   ],
+   "blocked": "Pia Timmer",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 4,
+   "score_after": "3-0",
+   "type": "block",
+   "players": [
+    "Whitney McEwan-Llarenas",
+    "Elyse Stowell"
+   ],
+   "blocked": "Katy Ryan",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 4,
+   "score_after": "3-2",
+   "type": "block",
+   "players": [
+    "Magda Jehlarova",
+    "Lana Radakovic"
+   ],
+   "blocked": "Erin Livingston",
+   "setter": "Whitney Bower"
+  },
+  {
+   "set": 4,
+   "score_after": "5-5",
+   "type": "block",
+   "players": [
+    "Whitney McEwan-Llarenas",
+    "Mia Lee"
+   ],
+   "blocked": "Pia Timmer",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 4,
+   "score_after": "6-6",
+   "type": "block",
+   "players": [
+    "Elyse Stowell",
+    "Kate Prior"
+   ],
+   "blocked": "Iman Isanovic",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 4,
+   "score_after": "7-12",
+   "type": "block",
+   "players": [
+    "Magda Jehlarova",
+    "Katy Ryan"
+   ],
+   "blocked": "Kate Prior",
+   "setter": "Whitney Bower"
+  },
+  {
+   "set": 4,
+   "score_after": "11-17",
+   "type": "block",
+   "players": [
+    "Lana Radakovic",
+    "Magda Jehlarova"
+   ],
+   "blocked": "Brielle Kemavor",
+   "setter": "Whitney Bower"
+  },
+  {
+   "set": 4,
+   "score_after": "12-18",
+   "type": "block",
+   "players": [
+    "Brielle Kemavor",
+    "Whitney McEwan-Llarenas"
+   ],
+   "blocked": "Pia Timmer",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 4,
+   "score_after": "13-18",
+   "type": "block",
+   "players": [
+    "Kate Prior",
+    "Brielle Kemavor"
+   ],
+   "blocked": "Iman Isanovic",
+   "setter": "Argentina Ung"
+  },
+  {
+   "set": 4,
+   "score_after": "19-25",
+   "type": "block",
+   "players": [
+    "Magda Jehlarova",
+    "Lana Radakovic"
+   ],
+   "blocked": "Kate Prior",
+   "setter": "Whitney Bower"
+  }
+ ]
+}

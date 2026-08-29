@@ -1,5 +1,9 @@
 # Spec Card — byu-wsu-2023-volleyball-ace-block-timeline
 
+> Block-only timeline requiring three attributions per point. The directory keeps its
+> original `ace-block` slug so the open PR survives; the task ID should be renamed to
+> `byu-wsu-2023-volleyball-block-timeline` before merge.
+
 ```yaml
 task: agentic_vbench_understanding/byu-wsu-2023-volleyball-ace-block-timeline
 
@@ -13,22 +17,24 @@ modalities_required:
   audio: not used (audio track stripped at bake time; the task is single-modality
     by construction, so commentary can never leak attributions)
 
-question: Find every point that ended as a service ace or a block, and report set,
-  exact score after the point, event type, and the credited player(s).
+question: Find every point that ended as a block, and report set, exact score after
+  the point, the credited blocker(s), the opposing hitter who was blocked, and the
+  setter who fed that attack.
 output_schema: >
-  {"events": [{"set": 1-4, "score_after": "BYU-WSU digits", "type": "ace"|"block",
-  "players": ["First Last", ...]}]}. Scores increase monotonically within a set, so
-  the exact score-after string anchors each event uniquely (this task's game clock);
-  duplicates are handled by one-to-one multiset matching. Block credit follows the
-  official scorer (one or two names, order-insensitive).
+  {"events": [{"set": 1-4, "score_after": "BYU-WSU digits", "type": "block",
+  "players": ["First Last", ...], "blocked": "First Last", "setter": "First Last"}]}.
+  Scores increase monotonically within a set, so the exact score-after string anchors
+  each event uniquely; duplicates are handled by one-to-one multiset matching. Block
+  credit follows the official scorer (one or two names, order-insensitive).
 
 evidence:
-  - 24 target events (5 aces, 19 block points) hidden among ~170 rallies across
-    four sets of a ~2h broadcast; finding them means triaging every score change
-  - each TP chains the rally action with the score bug after it and the set context
-    minutes away; blocker identification requires jersey numbers glimpsed at the
-    net mid-play, mapped through the provided roster (note BYU fields two Bowers,
-    so a lastname alone is not enough)
+  - 18 block points scattered across four sets of a ~2 h broadcast; finding them means
+    triaging every score change
+  - each point needs THREE attributions, not one: the credited blocker(s) at the net,
+    the opposing hitter they stopped, and the setter who fed that hitter earlier in
+    the same rally. The first two are opposing jerseys at the terminal instant; the
+    third sits mid-rally, before the attack, and has to be tracked back to
+  - college jerseys carry numbers, not names, so every read goes through the roster
 
 ground_truth:
   source: official NCAA rally-by-rally log, stats.ncaa.org contest 3241315
@@ -40,36 +46,39 @@ ground_truth:
     credit (set 2 at 1-2, a Jehlarova solo block)
 
 scorer:
-  metric: two-tier F1 over events — full credit (1.0) requires set, exact
-    score_after, type, and every credited name (for a block: the exact blocker
-    multiset AND the opposing hitter who was blocked); partial credit (0.5) when
-    set, score_after, and type match and the credited names are off by exactly one
-    (block credit and reading the stuffed hitter's number are stats-crew/visual
-    judgments a perfect agent can miss). Names normalized (unambiguous-lastname
-    rule); greedy one-to-one matching, exact matches assigned first. The one
-    corrupted-PBP block (set 2, 1-2) carries no blocked hitter and does not require
-    one. Bar: a strong agent stays at/under ~0.10.
+  metric: two-tier F1 over block points — full credit (1.0) requires set, exact
+    score_after, the exact blocker multiset, the blocked hitter AND the setter;
+    partial credit (0.5) when exactly one of those three attributions is wrong. Names
+    normalized (unambiguous-lastname rule, computed over blockers, hitters and setters
+    alike, so the two Bowers stay distinct); greedy one-to-one matching, exact matches
+    assigned first. Bar: a strong agent stays under ~0.10.
   oracle_reward: 1.0
   null_reward: 0.0 (measured; empty list)
 
 difficulty:
-  strong_agent_reward: TBD (to be measured, target < 0.10)
-  tool_call_turns: TBD (to be measured, target > 50)
-  agent_model: Antigravity, Codex CLI, Claude Code CLI (per family requirements)
+  strong_agent_reward: Codex CLI (gpt-5.6-sol, xhigh) 0.0189; Claude Code (Opus 5,
+    xhigh) 0.0. Both ran fresh on the final three-attribution instruction in clean
+    workspaces, wrote their own answers, and got no block point fully correct.
+  tool_call_turns: Codex 29-event answer over a 146 KB rollout; Opus 386 tool-call
+    turns (both far above the 50 floor)
+  agent_model: Codex CLI, Claude Code (Opus 5); Antigravity not run — its Gemini
+    backends ground against the public record unless the three-vector isolation
+    recipe from this task's earlier calibration is applied
 
 anti_shortcut:
-  single_frame: ~0 expected — no graphic ever lists aces or blocks; one frame shows
-    one rally at most (to be measured)
+  single_frame: measured — one frame from the match midpoint, model required to
+    answer anyway
   video_only: n/a — the task ships video-only by construction
   audio_only: n/a — no audio track exists in the baked media
-  no_media: ~0 expected — ordinary early-season college match; the exact per-event
-    score anchors and credited-player pairs are unguessable (to be measured)
-  frame_dump_no_tools: ~0 expected — a block window is under a second; uniform
-    frames miss it, and rally-end classification needs targeted dense sampling
-    (to be measured)
+  no_media: measured — instruction only. This match's rally-by-rally log is public,
+    so this is the leak that matters: the model answers from recall and matches
+    nothing
+  frame_dump: measured — 60 uniform frames, no seeking
+  (see calibration/scores.md for the submitted-event counts and scores)
 
 input:
-  url: https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/main/byu-wsu-2023-09-08-720p-noaudio.mp4
+  url: https://huggingface.co/datasets/gavinlaw/agentic-vbench-media/resolve/859cb6877dc31b75d336648c4d3c87509e3373ab/byu-wsu-2023-09-08-720p-noaudio.mp4
+  dataset_revision: 859cb6877dc31b75d336648c4d3c87509e3373ab
     (research re-host of the official WSU Athletics upload
     https://www.youtube.com/watch?v=5KC1jC90lT8 — provenance, rights and takedown
     policy documented in the dataset README)

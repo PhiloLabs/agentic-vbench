@@ -6,11 +6,9 @@ reports the set, the score after the point, and the server. For a block it repor
 set, the score after the point, the credited blocker(s), AND the opposing hitter who
 was blocked. Scoring is two-tier:
 
-  * full credit (1.0)    — set, score_after, type, and every credited name match
-    (for a block: the exact blocker multiset AND the blocked hitter);
-  * partial credit (0.5) — set, score_after, and type match and the credited names
-    are off by exactly one (a blocker missing/extra/wrong, or the blocked hitter
-    wrong) while everything else is correct.
+  * full credit (1.0)    — set, score_after, the exact blocker multiset, the hitter
+    who was blocked, AND the setter who fed that attack;
+  * partial credit (0.5) — exactly one of those three attributions is wrong.
 
 The partial tier exists because block credit (solo vs shared, who gets the assist)
 and reading a stuffed hitter's number in the sub-second window at the net are things
@@ -45,30 +43,24 @@ from pathlib import Path
 # a Jehlarova solo, and the blocked hitter is unrecoverable from the corrupted line,
 # so `blocked` is None there and the judge does not require it for that one event.
 GROUND_TRUTH = [
-  {"set": 1, "score_after": "7-7",   "type": "ace",   "players": ["Erin Livingston"]},
-  {"set": 1, "score_after": "16-13", "type": "ace",   "players": ["Erin Livingston"]},
-  {"set": 1, "score_after": "18-14", "type": "block", "players": ["Whitney McEwan-Llarenas", "Elyse Stowell"], "blocked": "Katy Ryan"},
-  {"set": 1, "score_after": "18-17", "type": "block", "players": ["Argentina Ung", "Magda Jehlarova"],         "blocked": "Elyse Stowell"},
-  {"set": 1, "score_after": "20-17", "type": "ace",   "players": ["Aria McComber"]},
-  {"set": 2, "score_after": "1-2",   "type": "block", "players": ["Magda Jehlarova"],                          "blocked": None},
-  {"set": 2, "score_after": "9-6",   "type": "block", "players": ["Kate Prior", "Mia Lee"],                    "blocked": "Iman Isanovic"},
-  {"set": 2, "score_after": "10-10", "type": "block", "players": ["Pia Timmer", "Lana Radakovic"],             "blocked": "Kate Prior"},
-  {"set": 2, "score_after": "10-11", "type": "block", "players": ["Katy Ryan", "Lana Radakovic"],              "blocked": "Elyse Stowell"},
-  {"set": 3, "score_after": "6-7",   "type": "block", "players": ["Lana Radakovic"],                           "blocked": "Erin Livingston"},
-  {"set": 3, "score_after": "11-15", "type": "block", "players": ["Magda Jehlarova"],                          "blocked": "Mia Lee"},
-  {"set": 3, "score_after": "12-18", "type": "block", "players": ["Iman Isanovic", "Magda Jehlarova"],         "blocked": "Kate Prior"},
-  {"set": 3, "score_after": "14-18", "type": "block", "players": ["Whitney Bower", "Whitney McEwan-Llarenas"], "blocked": "Iman Isanovic"},
-  {"set": 3, "score_after": "18-22", "type": "block", "players": ["Katy Ryan", "Lana Radakovic"],              "blocked": "Erin Livingston"},
-  {"set": 3, "score_after": "21-23", "type": "ace",   "players": ["Whitney Bower"]},
-  {"set": 4, "score_after": "2-0",   "type": "block", "players": ["Whitney McEwan-Llarenas", "Erin Livingston"], "blocked": "Iman Isanovic"},
-  {"set": 4, "score_after": "6-6",   "type": "block", "players": ["Kate Prior"],                               "blocked": "Pia Timmer"},
-  {"set": 4, "score_after": "6-9",   "type": "block", "players": ["Magda Jehlarova"],                          "blocked": "Mia Lee"},
-  {"set": 4, "score_after": "11-18", "type": "block", "players": ["Katy Ryan", "Magda Jehlarova"],             "blocked": "Erin Livingston"},
-  {"set": 4, "score_after": "13-18", "type": "ace",   "players": ["Whitney Bower"]},
-  {"set": 4, "score_after": "16-23", "type": "block", "players": ["Eden Bower", "Whitney McEwan-Llarenas"],    "blocked": "Magda Jehlarova"},
-  {"set": 4, "score_after": "17-23", "type": "block", "players": ["Eden Bower"],                               "blocked": "Magda Jehlarova"},
-  {"set": 4, "score_after": "18-23", "type": "block", "players": ["Kate Prior", "Whitney McEwan-Llarenas"],   "blocked": "Iman Isanovic"},
-  {"set": 4, "score_after": "19-25", "type": "block", "players": ["Argentina Ung", "Lana Radakovic"],          "blocked": "Eden Bower"},
+  {"set": 1, "score_after": "18-14",     "type": "block", "players": ["Whitney McEwan-Llarenas", "Elyse Stowell"],              "blocked": "Katy Ryan", "setter": "Argentina Ung"},
+  {"set": 1, "score_after": "18-17",     "type": "block", "players": ["Argentina Ung", "Magda Jehlarova"],                      "blocked": "Elyse Stowell", "setter": "Whitney Bower"},
+  {"set": 2, "score_after": "9-6",       "type": "block", "players": ["Kate Prior", "Mia Lee"],                                 "blocked": "Iman Isanovic", "setter": "Argentina Ung"},
+  {"set": 2, "score_after": "10-10",     "type": "block", "players": ["Pia Timmer", "Lana Radakovic"],                          "blocked": "Kate Prior", "setter": "Whitney Bower"},
+  {"set": 2, "score_after": "10-11",     "type": "block", "players": ["Katy Ryan", "Lana Radakovic"],                           "blocked": "Elyse Stowell", "setter": "Whitney Bower"},
+  {"set": 3, "score_after": "6-7",       "type": "block", "players": ["Lana Radakovic"],                                        "blocked": "Erin Livingston", "setter": "Whitney Bower"},
+  {"set": 3, "score_after": "11-15",     "type": "block", "players": ["Magda Jehlarova"],                                       "blocked": "Mia Lee", "setter": "Whitney Bower"},
+  {"set": 3, "score_after": "12-18",     "type": "block", "players": ["Iman Isanovic", "Magda Jehlarova"],                      "blocked": "Kate Prior", "setter": "Whitney Bower"},
+  {"set": 3, "score_after": "14-18",     "type": "block", "players": ["Whitney Bower", "Whitney McEwan-Llarenas"],              "blocked": "Iman Isanovic", "setter": "Argentina Ung"},
+  {"set": 3, "score_after": "18-22",     "type": "block", "players": ["Katy Ryan", "Lana Radakovic"],                           "blocked": "Erin Livingston", "setter": "Whitney Bower"},
+  {"set": 4, "score_after": "2-0",       "type": "block", "players": ["Whitney McEwan-Llarenas", "Erin Livingston"],            "blocked": "Iman Isanovic", "setter": "Karly Basham"},
+  {"set": 4, "score_after": "6-6",       "type": "block", "players": ["Kate Prior"],                                            "blocked": "Pia Timmer", "setter": "Karly Basham"},
+  {"set": 4, "score_after": "6-9",       "type": "block", "players": ["Magda Jehlarova"],                                       "blocked": "Mia Lee", "setter": "Whitney Bower"},
+  {"set": 4, "score_after": "11-18",     "type": "block", "players": ["Katy Ryan", "Magda Jehlarova"],                          "blocked": "Erin Livingston", "setter": "Whitney Bower"},
+  {"set": 4, "score_after": "16-23",     "type": "block", "players": ["Eden Bower", "Whitney McEwan-Llarenas"],                 "blocked": "Magda Jehlarova", "setter": "Argentina Ung"},
+  {"set": 4, "score_after": "17-23",     "type": "block", "players": ["Eden Bower"],                                            "blocked": "Magda Jehlarova", "setter": "Argentina Ung"},
+  {"set": 4, "score_after": "18-23",     "type": "block", "players": ["Kate Prior", "Whitney McEwan-Llarenas"],                 "blocked": "Iman Isanovic", "setter": "Karly Basham"},
+  {"set": 4, "score_after": "19-25",     "type": "block", "players": ["Argentina Ung", "Lana Radakovic"],                       "blocked": "Eden Bower", "setter": "Whitney Bower"},
 ]
 
 PARTIAL_CREDIT = 0.5  # right rally and type, credited names off by exactly one
@@ -98,8 +90,10 @@ def _lastname(name):
     return norm(name.split()[-1]) if str(name).split() else norm(name)
 
 
+# Every name the answer key can ask for — blockers, the blocked hitter and the
+# setter — so a lastname is only treated as unambiguous against the whole key.
 _GT_NAMES = sorted({n for g in GROUND_TRUTH
-                    for n in (g["players"] + ([g["blocked"]] if g.get("blocked") else []))})
+                    for n in (g["players"] + [g["blocked"], g["setter"]])})
 _GT_LASTS = [_lastname(n) for n in _GT_NAMES]
 _UNIQUE_LASTS = {ln for ln in _GT_LASTS if _GT_LASTS.count(ln) == 1}
 
@@ -153,30 +147,36 @@ def players_off_by_one(pred_list, gt_list):
 
 
 def blocked_ok(pred_blocked, gt_blocked):
-    # The one corrupted-PBP event has gt_blocked None -> not required.
-    return gt_blocked is None or name_match(pred_blocked, gt_blocked)
+    return name_match(pred_blocked, gt_blocked)
+
+
+def setter_ok(pred_setter, gt_setter):
+    return name_match(pred_setter, gt_setter)
 
 
 def event_grade(p, gt):
-    """Return 'full', 'partial', or None for a prediction p against GT event gt
-    (anchor set+score+type already matched by the caller)."""
-    if gt["type"] == "ace":
-        if players_exact(p["players"], gt["players"]):
-            return "full"
-        if players_off_by_one(p["players"], gt["players"]):
-            return "partial"
-        return None
-    # block: blockers (players) + blocked hitter
-    blk_exact = players_exact(p["players"], gt["players"])
-    hit_ok = blocked_ok(p.get("blocked"), gt.get("blocked"))
-    if blk_exact and hit_ok:
+    """Return 'full', 'partial', or None for a prediction against GT block gt
+    (anchor set+score+type already matched by the caller).
+
+    A block point is credited to its blockers, but it is one link in a chain the
+    official scorer records in full: a setter feeds a hitter, and the block stops
+    that attack. Full credit asks for all three — the blocker multiset, the hitter
+    who was stopped, and the setter who fed him. Partial credit (0.5) covers
+    exactly one of the three being wrong, since each is an independent jersey read
+    and a perfect visual agent can lose any one of them.
+    """
+    wrong = 0
+    if not players_exact(p["players"], gt["players"]):
+        if not players_off_by_one(p["players"], gt["players"]):
+            return None          # two or more blocker errors: no credit
+        wrong += 1
+    if not blocked_ok(p.get("blocked"), gt.get("blocked")):
+        wrong += 1
+    if not setter_ok(p.get("setter"), gt.get("setter")):
+        wrong += 1
+    if wrong == 0:
         return "full"
-    # exactly one thing off: blockers off-by-one (hitter right), or hitter wrong
-    # (blockers exact). gt_blocked None can't be "wrong", so that branch needs a
-    # real blocker error to be partial.
-    if players_off_by_one(p["players"], gt["players"]) and hit_ok:
-        return "partial"
-    if blk_exact and gt.get("blocked") is not None and not hit_ok:
+    if wrong == 1:
         return "partial"
     return None
 
@@ -209,7 +209,8 @@ def main():
         if sc is None:
             return None
         return {"set": st, "score": sc, "type": norm_type(pr.get("type", "")),
-                "players": pr.get("players"), "blocked": pr.get("blocked")}
+                "players": pr.get("players"), "blocked": pr.get("blocked"),
+                "setter": pr.get("setter")}
 
     parsed = [parse(pr) for pr in preds]
 
