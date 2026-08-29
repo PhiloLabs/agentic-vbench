@@ -84,3 +84,6 @@ tasks/agentic_vbench_sequencing/*/steps/solve/workdir/*.mp4
 # Understanding task media is hosted externally and baked from pinned URLs.
 release-assets/**/*.mp4
 tasks/agentic_vbench_understanding/*/environment/*.mp4
+
+# The BYU task lives on its own branch and worktree; keep its files out of this one.
+tasks/agentic_vbench_understanding/byu-wsu-2023-volleyball-ace-block-timeline/
