@@ -69,13 +69,19 @@ actually submitted.
 | no_media | instruction only, no video | shell | 15 | **0.0** |
 | single_frame | one frame from the match midpoint | shell | 11 | **0.0** |
 | frame_dump | 60 uniform frames, no seeking | shell | 22 | **0.0** |
-| all_frames | 80 stills, one every 90 s | none | 15 | **0.0** |
+| all_frames | 80 stills, one every 90 s | Read, Write | 10 | **0.0** |
 
 All four land at zero even after submitting a full-looking answer, so nothing in
-the task is obtainable without working the video. `all_frames` is the strictest of
-them: the whole match is already in front of the model as a uniform sweep and the
-shell is gone, so it cannot seek, crop, zoom or script — only look and answer. It
-submitted 15 events and matched no rally anchor at all. `no_media` is the one that matters
+the task is obtainable without working the video. `all_frames` is the strictest of the four and the only one whose harness had to be
+built rather than trimmed. The whole match goes into context as a uniform still sweep
+and the shell is taken away: no seeking, cropping, upscaling or scripting, only opening
+an image and writing the answer. Two things the condition needs to be real — a model
+that cannot list a directory also cannot discover filenames, so every filename is given
+in the prompt; and the workspace sits outside the repository, so no judge, key or
+sibling run is on a path it could open. The exact prompt is committed beside the answer
+as `all_frames.instruction-as-run.md`, and the native trace is published with the rest.
+It opened all 80 frames (80 Read calls, one error), reconstructed the set scores from
+the graphic, submitted 10 events and matched no block point: **0.0**. `no_media` is the one that matters
 most, since the NCAA rally-by-rally log for this match is public: forced to answer,
 the model produced 15 plausible-looking events and matched none of them. The per-event
 score anchors and blocker/hitter pairs are not recallable.
@@ -137,6 +143,7 @@ envelope those streams were audited against.
 | ablation, no_media | [`ablations/no_media.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/ablations/no_media.stream-json.gz) (11 kB) | `bb9cc56a5d6444542f0df8b2369eea4d6dd4abc56b7fb21bac1d2b3c5722640e` |
 | ablation, single_frame | [`ablations/single_frame.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/ablations/single_frame.stream-json.gz) (647 kB) | `e0e4447f1080b82565ef02e418ef473dee627d76f90e7de576be0283e1b4c05e` |
 | ablation, frame_dump | [`ablations/frame_dump.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/ablations/frame_dump.stream-json.gz) (3.8 MB) | `014f44c745389c5ac76b770c3876bfd5157cdb2bad8f086e6638222f36ff25b4` |
+| ablation, all_frames | [`ablations/all_frames.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/c66a1ed95a6664c1f423cc0b8f1eee4d2f242e01/usc-wsu-2023-volleyball-block-timeline/ablations/all_frames.stream-json.gz) (21.0 MB) | `e6132b8b3a73fca3dd9205a6108ec24e6d8f6facf456b96b6ce494338a30a3be` |
 
 `gunzip -c <file> | sha256sum` checks the stream itself; `sha256sum <file>` checks the
 archive as served. The traces carry every tool call and result, including the frames
@@ -145,3 +152,4 @@ checkable without trusting this file.
 
 Answer files, prompts, provenance and tool-call histograms for the same runs are in
 `rollouts/`.
+

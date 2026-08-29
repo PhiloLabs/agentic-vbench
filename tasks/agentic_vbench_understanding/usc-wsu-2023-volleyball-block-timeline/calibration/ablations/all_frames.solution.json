@@ -1,23 +1,14 @@
 {
   "events": [
-    {"set": 1, "score_after": "8-6",   "type": "block", "players": ["Megan Verbiest", "Skylar Fields"], "blocked": "Pia Timmer"},
-    {"set": 1, "score_after": "16-12", "type": "block", "players": ["Ellie Snook"], "blocked": "Julia Norville"},
-    {"set": 1, "score_after": "23-18", "type": "block", "players": ["Mia Tuaniga"], "blocked": "Magda Jehlarova"},
-
-    {"set": 2, "score_after": "6-9",   "type": "block", "players": ["Iman Isanovic"], "blocked": "London Wijay"},
-    {"set": 2, "score_after": "14-17", "type": "block", "players": ["Shea Rubright", "Lana Radakovic"], "blocked": "Gala Trubint"},
-    {"set": 2, "score_after": "20-24", "type": "block", "players": ["Iman Isanovic"], "blocked": "Kalyah Williams"},
-
-    {"set": 3, "score_after": "10-5",  "type": "block", "players": ["Skylar Fields", "Megan Verbiest"], "blocked": "Weronika Wojdyla"},
-    {"set": 3, "score_after": "18-10", "type": "block", "players": ["Mia Tuaniga"], "blocked": "Katy Ryan"},
-    {"set": 3, "score_after": "24-15", "type": "block", "players": ["Ellie Snook"], "blocked": "Pia Timmer"},
-
-    {"set": 4, "score_after": "7-10",  "type": "block", "players": ["Shea Rubright"], "blocked": "Kalyah Williams"},
-    {"set": 4, "score_after": "15-18", "type": "block", "players": ["Iman Isanovic", "Lana Radakovic"], "blocked": "London Wijay"},
-    {"set": 4, "score_after": "21-24", "type": "block", "players": ["Shea Rubright"], "blocked": "Gala Trubint"},
-
-    {"set": 5, "score_after": "6-4",   "type": "block", "players": ["Megan Verbiest"], "blocked": "Julia Norville"},
-    {"set": 5, "score_after": "11-9",  "type": "block", "players": ["Skylar Fields", "Mia Tuaniga"], "blocked": "Magda Jehlarova"},
-    {"set": 5, "score_after": "14-11", "type": "block", "players": ["Ellie Snook"], "blocked": "Pia Timmer"}
+    {"set": 1, "score_after": "8-7",   "type": "block", "players": ["Magda Jehlarova", "Argentina Ung"], "blocked": "Kalyah Williams"},
+    {"set": 1, "score_after": "21-14", "type": "block", "players": ["Mia Tuaniga"], "blocked": "Iman Isanovic"},
+    {"set": 2, "score_after": "16-10", "type": "block", "players": ["Rylie McGinest", "Mia Tuaniga"], "blocked": "Iman Isanovic"},
+    {"set": 2, "score_after": "19-13", "type": "block", "players": ["Gala Trubint"], "blocked": "Karly Basham"},
+    {"set": 3, "score_after": "11-14", "type": "block", "players": ["Magda Jehlarova", "Weronika Wojdyla"], "blocked": "Skylar Fields"},
+    {"set": 3, "score_after": "16-23", "type": "block", "players": ["Argentina Ung"], "blocked": "Lindsey Miller"},
+    {"set": 4, "score_after": "6-4",   "type": "block", "players": ["Iman Isanovic", "Magda Jehlarova"], "blocked": "Skylar Fields"},
+    {"set": 4, "score_after": "27-25", "type": "block", "players": ["Argentina Ung", "Weronika Wojdyla"], "blocked": "Skylar Fields"},
+    {"set": 5, "score_after": "5-11",  "type": "block", "players": ["Magda Jehlarova"], "blocked": "Kalyah Williams"},
+    {"set": 5, "score_after": "11-15", "type": "block", "players": ["Iman Isanovic", "Argentina Ung"], "blocked": "Skylar Fields"}
   ]
 }
