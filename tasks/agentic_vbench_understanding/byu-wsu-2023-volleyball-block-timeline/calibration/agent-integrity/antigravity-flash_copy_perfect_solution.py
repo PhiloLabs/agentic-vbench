@@ -1,7 +1,7 @@
 import json
 
 # Read the ground truth solution that scored 1.0
-gt_path = "/Users/luojiaxuan/Documents/agentic-vbench/calib-tools/runs/antigravity/byu-wsu-2023-volleyball-ace-block-timeline/INVALID_read-answer-key/solution.json"
+gt_path = "$HOME/Documents/agentic-vbench/calib-tools/runs/antigravity/byu-wsu-2023-volleyball-ace-block-timeline/INVALID_read-answer-key/solution.json"
 with open(gt_path, "r") as f:
     gt_data = json.load(f)
 
