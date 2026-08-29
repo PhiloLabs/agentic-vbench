@@ -2,7 +2,7 @@
 
 Each ablation removes the video work and demands a best-effort answer anyway — a model
 that declines to answer would measure nothing. Model: Claude Code CLI, Sonnet, effort
-high, same three-attribution instruction as the real task.
+high, same instruction as the real task.
 
 | ablation | inputs given | events submitted | score |
 |---|---|---|---|
@@ -14,10 +14,6 @@ high, same three-attribution instruction as the real task.
 the question is whether the answer can be recalled rather than watched. Forced to
 answer, the model produced 16 plausible events and matched none — the per-event score
 anchors and the blocker/hitter/setter triples are not recallable.
-
-These were re-run against the three-attribution instruction. The earlier ace+block
-ablations were discarded rather than carried over, for the same reason the old model
-runs were: they measured a schema this task no longer ships.
 
 Each `*.solution.json` is what the model submitted; each `*.reward.json` is the
 scorer's output on it.

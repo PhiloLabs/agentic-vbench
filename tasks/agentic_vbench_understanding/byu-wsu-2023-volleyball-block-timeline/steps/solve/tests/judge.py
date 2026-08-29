@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
-"""Grade an ace-and-block-timeline reconstruction. Pure Python stdlib, deterministic.
+"""Grade a block-point-timeline reconstruction. Pure Python stdlib, deterministic.
 
-The agent must list every point that ended as a service ace or a block. For an ace it
-reports the set, the score after the point, and the server. For a block it reports the
-set, the score after the point, the credited blocker(s), AND the opposing hitter who
-was blocked. Scoring is two-tier:
+The agent must list every point that ended as a block, and for each one report the
+set, the score after the point, the credited blocker(s), the opposing hitter who was
+blocked, and the setter who fed that attack. Scoring is two-tier:
 
   * full credit (1.0)    — set, score_after, the exact blocker multiset, the hitter
     who was blocked, AND the setter who fed that attack;
@@ -16,9 +15,10 @@ a perfect visual agent can legitimately miss. reward = F1 over summed credit (mi
 and false positives both hurt). Exact matches are assigned in a first pass so a
 partial match can never steal a slot from an exact one.
 
-Why the blocked hitter: a block point requires identifying not just the blocker(s)
-but the opposing attacker who was stuffed — a second jersey read at the net, from a
-different team, at the terminal moment. The score bug says a point was scored, never
+Why three attributions: the blocker(s) and the stuffed hitter are two opposing jersey
+reads at the terminal instant, and the setter is a third read that sits mid-rally,
+before the attack — so it cannot be recovered from the post-point celebration and has
+to be tracked back through the rally. The score bug says a point was scored, never
 why or by whom; scores increase monotonically within a set, so the exact score-after
 string anchors each event uniquely (this task's game clock). Duplicates are handled
 by greedy one-to-one multiset matching.
@@ -28,20 +28,22 @@ import json
 import re
 from pathlib import Path
 
-# Official record: 24 events (5 aces — all BYU — and 19 block points, BYU 8 / WSU 11),
-# 2023-09-08, BYU at Washington State (BYU won only set 1, 25-18; WSU 25-19, 25-21,
+# Official record: 19 block points (BYU 8 / WSU 11), 2023-09-08, BYU at Washington
+# State, a four-set match WSU won 3-1 (BYU took set 1, 25-18; WSU 25-19, 25-21,
 # 25-19). Extracted from the official NCAA rally-by-rally log (stats.ncaa.org contest
-# 3241315) and reconciled per player against the official box score: every SA, block
-# solo, and block assist column matches this list exactly (team block points
-# BS + BA/2 = 8 and 11). Each block also carries `blocked`, the opposing hitter who
-# was stuffed (the "Attack by X" immediately preceding the "Block by ..." rally line,
-# direction-verified: the hitter is always on the team opposite the blockers).
-# Scores are written BYU-WSU as on the broadcast graphic.
+# 3241315) and reconciled per player against the official box score: every block solo
+# and block assist column matches, so team block points BS + BA/2 come out 8 and 11.
+# Each block carries `blocked`, the opposing hitter who was stuffed (the "Attack by X"
+# immediately preceding the "Block by ..." rally line, direction-verified: the hitter
+# is always on the team opposite the blockers), and `setter`, the "Set by X" earlier
+# in the same rally chain. Scores are written BYU-WSU as on the broadcast graphic.
 #
-# One rally line (set 2 at 1-2) is corrupted in the raw PBP (its name field names a
-# blocker on the scoring team's opponent); the box score resolves the block point to
-# a Jehlarova solo, and the blocked hitter is unrecoverable from the corrupted line,
-# so `blocked` is None there and the judge does not require it for that one event.
+# 18 of the 19 are in the key. One rally line (set 2 at 1-2, a WSU block point the box
+# score resolves to a Jehlarova solo) is corrupted in the raw log — its name field
+# credits a blocker on the scoring team's opponent, and neither the stuffed hitter nor
+# the setter is recoverable from it — so that point carries no answerable attribution
+# and is left out. The key is every block point whose three attributions the official
+# record fixes unambiguously.
 GROUND_TRUTH = [
   {"set": 1, "score_after": "18-14",     "type": "block", "players": ["Whitney McEwan-Llarenas", "Elyse Stowell"],              "blocked": "Katy Ryan", "setter": "Argentina Ung"},
   {"set": 1, "score_after": "18-17",     "type": "block", "players": ["Argentina Ung", "Magda Jehlarova"],                      "blocked": "Elyse Stowell", "setter": "Whitney Bower"},
@@ -65,8 +67,7 @@ GROUND_TRUTH = [
 
 PARTIAL_CREDIT = 0.5  # right rally and type, credited names off by exactly one
 
-TYPE_ALIASES = {"service_ace": "ace", "service ace": "ace", "stuff": "block",
-                "block_point": "block", "block point": "block"}
+TYPE_ALIASES = {"stuff": "block", "block_point": "block", "block point": "block"}
 
 
 def norm(s):
@@ -161,7 +162,7 @@ def event_grade(p, gt):
     A block point is credited to its blockers, but it is one link in a chain the
     official scorer records in full: a setter feeds a hitter, and the block stops
     that attack. Full credit asks for all three — the blocker multiset, the hitter
-    who was stopped, and the setter who fed him. Partial credit (0.5) covers
+    who was stopped, and the setter who fed them. Partial credit (0.5) covers
     exactly one of the three being wrong, since each is an independent jersey read
     and a perfect visual agent can lose any one of them.
     """

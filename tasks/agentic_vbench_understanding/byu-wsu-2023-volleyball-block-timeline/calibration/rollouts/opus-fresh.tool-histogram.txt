@@ -1,0 +1,8 @@
+Claude Code (Opus 5, xhigh) — BYU/WSU block timeline
+assistant turns with tool calls: 386
+  Read: 248
+  Bash: 137
+  ToolSearch: 1
+Two legs of one session (140 turns, then 246 after a network drop was resumed in
+the same session). Counted from the session transcript: assistant messages
+carrying at least one tool_use block.

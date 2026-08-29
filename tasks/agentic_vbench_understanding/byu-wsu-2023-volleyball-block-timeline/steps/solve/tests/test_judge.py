@@ -3,8 +3,8 @@
 
 Pins the three-attribution rule (blockers, blocked hitter, setter: all three for
 full credit, exactly one wrong for partial), the symmetry of the blocker rule
-between solo and shared credit, the two-Bower lastname ambiguity, and the
-oracle/empty invariants.
+between solo and shared credit, the two-Bower lastname ambiguity, the
+oracle/empty invariants, and every reward published in calibration/scores.md.
 """
 import json
 import subprocess
@@ -84,6 +84,20 @@ check("wrong score_after -> nothing",
       details([{**dict(PAIR), "score_after": "99-99"}])["full_matches"] == 0)
 check("duplicate prediction consumes one slot",
       details([dict(PAIR), dict(PAIR)])["full_matches"] == 1)
+
+print("== published calibration rewards still reproduce ==")
+CALIB = HERE.parents[2] / "calibration"
+PUBLISHED = {
+    "rollouts/codex-fresh.solution.json": 0.0213,
+    "rollouts/opus-fresh.solution.json": 0.0,
+    "ablations/no_media.solution.json": 0.0,
+    "ablations/single_frame.solution.json": 0.0,
+    "ablations/frame_dump.solution.json": 0.0,
+}
+for rel, expected in PUBLISHED.items():
+    events = json.loads((CALIB / rel).read_text())["events"]
+    got = details(events)["f1"]
+    check(f"{rel} scores {expected}", got == expected)
 
 print()
 if FAILS:
