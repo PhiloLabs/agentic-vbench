@@ -117,7 +117,9 @@ the net, so there is no legible easy class left to score off.
 
 Every scored run and every ablation is published whole, as the CLI wrote it, at an
 immutable dataset revision. `MANIFEST.json` in that dataset repeats each hash and adds
-the SHA256 of the uncompressed stream inside each archive.
+the SHA256 of the uncompressed stream inside each archive; `rollouts/run-envelope.md`
+records the CLI versions, the tool profile each run was given, and the network
+envelope those streams were audited against.
 
 | run | file | sha256 (of the .gz as served) |
 |---|---|---|

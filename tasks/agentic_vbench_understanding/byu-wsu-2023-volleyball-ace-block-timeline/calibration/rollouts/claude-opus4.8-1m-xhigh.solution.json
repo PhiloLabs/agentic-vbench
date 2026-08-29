@@ -1,0 +1,10 @@
+{
+  "events": [
+    {"set": 1, "score_after": "4-5",   "type": "block", "players": ["Lana Radakovic"]},
+    {"set": 1, "score_after": "11-11", "type": "block", "players": ["Whitney McEwan-Llarenas", "Erin Livingston"]},
+    {"set": 1, "score_after": "14-13", "type": "block", "players": ["Whitney Bower", "Erin Livingston"]},
+    {"set": 1, "score_after": "16-14", "type": "block", "players": ["Pia Timmer", "Lana Radakovic"]},
+    {"set": 1, "score_after": "20-17", "type": "block", "players": ["Aria McComber", "Erin Livingston"]},
+    {"set": 2, "score_after": "0-1",   "type": "block", "players": ["Pia Timmer"]}
+  ]
+}
