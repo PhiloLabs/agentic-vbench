@@ -61,14 +61,18 @@ scorer:
   null_reward: 0.0 (measured; empty list)
 
 difficulty:
-  strong_agent_reward: Codex CLI (gpt-5.6-sol, xhigh) 0.0185; Claude Code (Opus 5,
-    xhigh) 0.0. Both ran to completion in a fresh workspace and wrote their own
-    answer; neither got a single block point fully correct. A Fable 5 run reached 210
+  strong_agent_reward: measured inside the shipped task image, where every action on
+    the video runs in a container built from environment/Dockerfile with no network —
+    Codex CLI (gpt-5.6-sol, xhigh) 0.0789; Claude Code (Opus 5, xhigh) 0.0. Neither got
+    a single block point fully correct: Codex matched 5 rally anchors and earned 3
+    partials out of 15 submitted events, Opus submitted none. The same agents on the
+    calibration host scored 0.0185 and 0.0; see calibration/parity/. A Fable 5 run reached 210
     tool-call turns before that model's credit pool ran out; it is archived unscored,
     and resuming it with Opus 5 was tested and also scored 0.0, so it is not completed
     under another model's name.
-  tool_call_turns: Codex 158 completed tool-call items; Opus 270 tool-call turns
-    (both far above the 50 floor)
+  tool_call_turns: in the task image, Codex 194 command executions and Opus 242
+    tool-call turns; on the host, 158 completed items and 270 turns (all far above the
+    50 floor)
   agent_model: Codex CLI, Claude Code (Opus 5); Antigravity not run — on the sister
     BYU match its Gemini backends reconstruct the game from the public rally log
     unless three isolation vectors are applied at once

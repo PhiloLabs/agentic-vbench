@@ -23,15 +23,30 @@ if they ever drift from the scorer.
 
 ## Model matrix
 
-Every run below used a workspace containing only the video and the instruction, with
-no prior artifact of this task reachable; `run-metadata.txt` beside each rollout
-records CLI version, model, effort, instruction hash, media hash and judge commit.
+Both agents were run twice: once on the calibration host, and once confined to the
+shipped task image, where every action on the video happens inside a container built
+from `environment/Dockerfile` with `--network none`. **The confined runs are the ones
+that describe the task**, because the host gave the agents tools the image does not
+have to ship; `parity/README.md` explains the confinement and `parity/environment.txt`
+records the image digest and tool inventory.
 
-| agent | model / setting | score | work | integrity |
+| agent | model / setting | in the task image | on the host | integrity |
 |---|---|---|---|---|
-| Codex CLI | gpt-5.6-sol, xhigh | **0.0185** | 158 tool-call items, 31 events | key 0, web 0 |
-| Claude Code | Opus 5, xhigh | **0.0** | 270 tool-call turns, 1 event | key 0, web 0 |
+| Codex CLI | gpt-5.6-sol, xhigh | **0.0789** | 0.0185 | key 0, web 0 |
+| Claude Code | Opus 5, xhigh | **0.0** | 0.0 | key 0, web 0 |
 | Antigravity | — | not run | — | — |
+
+Confined, Codex submitted 15 events, matched 5 rally anchors, earned 3 partials and
+**no block point fully correct**; Opus submitted none. Both remain under the ~0.10 bar,
+Codex less comfortably than the host number suggested. On the host the same two agents
+scored 0.0185 and 0.0; the host figures are kept for comparison, not as the headline.
+
+Opus's confined run is the clearest statement of the task's shape yet. Over 242
+tool-call turns it rebuilt 196 of the match's 200 points from the score bug, including
+two overturned calls, anchored 168 rallies to a camera cut — and then submitted an
+empty list rather than guess, because deciding how a rally *ended* needs the ball, and
+the ball is 8-14 px and motion-blurred with no replay to fall back on. Its own account
+is committed verbatim as `parity/opus.agent-notes.md`.
 
 Two strong agents, both far under the bar, neither getting a single block point fully
 correct. Both ended normally rather than being cut off, and both wrote their own
@@ -142,6 +157,8 @@ envelope those streams were audited against.
 | fable-interrupted | [`fable-interrupted/rollout.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/fable-interrupted/rollout.stream-json.gz) (103.1 MB) | `df69c1d7cbf5a9e70fd09eb8c7a7f12c9d499e5ba21078ebe68e6bdd767a7a7b` |
 | ablation, no_media | [`ablations/no_media.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/ablations/no_media.stream-json.gz) (11 kB) | `bb9cc56a5d6444542f0df8b2369eea4d6dd4abc56b7fb21bac1d2b3c5722640e` |
 | ablation, single_frame | [`ablations/single_frame.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/ablations/single_frame.stream-json.gz) (647 kB) | `e0e4447f1080b82565ef02e418ef473dee627d76f90e7de576be0283e1b4c05e` |
+| parity, Codex in the task image | [`parity-codex/rollout.jsonl.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/c88071f7988507cc81fdb83e7c0b81ce25b8e1cc/usc-wsu-2023-volleyball-block-timeline/parity-codex/rollout.jsonl.gz) (105 kB) | `6e7bbee1a408f3944fddeacf962574cf9a5a97e43a2f6576aaf94a315f07632b` |
+| parity, Opus in the task image | [`parity-opus/rollout.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/c88071f7988507cc81fdb83e7c0b81ce25b8e1cc/usc-wsu-2023-volleyball-block-timeline/parity-opus/rollout.stream-json.gz) (66.4 MB) | `9c073c3044db54e19b18be306e5c71851871f58fcd697eccce590de8b35b2b2c` |
 | ablation, frame_dump | [`ablations/frame_dump.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/usc-wsu-2023-volleyball-block-timeline/ablations/frame_dump.stream-json.gz) (3.8 MB) | `014f44c745389c5ac76b770c3876bfd5157cdb2bad8f086e6638222f36ff25b4` |
 | ablation, all_frames | [`ablations/all_frames.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/c66a1ed95a6664c1f423cc0b8f1eee4d2f242e01/usc-wsu-2023-volleyball-block-timeline/ablations/all_frames.stream-json.gz) (21.0 MB) | `e6132b8b3a73fca3dd9205a6108ec24e6d8f6facf456b96b6ce494338a30a3be` |
 
