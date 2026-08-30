@@ -48,6 +48,10 @@ included as the reported Claude clean-calibration score.
 
 ## Execution environment
 
+The current HEAD Docker image, final media fingerprint, and Harbor install-only
+setup smoke are documented in
+[`calibration/infra-validation-20260830/README.md`](infra-validation-20260830/README.md).
+
 | item | value |
 |---|---|
 | host OS | macOS `15.7.4` (Build `24G517`) |
