@@ -66,4 +66,4 @@ Task-side, at the task dir's `steps/solve/tests/judge.py`. Scores an **exact-cou
 `clamp(tau,0,1) · within-30%-accuracy` — over the two scored hero quantities above (weights
 items 0.55 / skid_time 0.45), renormalised over fields that vary. Positions, nitro
 and the banana/explosion split are reported for context but not scored (positions are on the HUD;
-the split is not visually distinguishable). Oracle 1.0, blind guess ~0.02; the 3-agent lineup (Codex / Claude Code / Gemini-3.5-flash) all score < 0.10 (max 0.0885). See the task's `SPEC.md`.
+the split is not visually distinguishable). Oracle 1.0, blind guess ~0.02; the image-parity 3-agent lineup (Codex / Claude Code / Gemini-3.5-flash, run under the shipped python:3.12-slim tool surface with no opencv/numpy) all score < 0.10 (max 0.0436, Claude). See the task's `SPEC.md`.

@@ -14,25 +14,32 @@ game-seconds — see the timebase note). `spinouts` is **no longer scored** (kep
 camera locked to the hero kart `tux`, 55.1 min, race.mp4 sha `4b4cee91…`, 1280×720, no audio, HUD
 powerup slot masked.
 
-## Strong-agent calibration lineup
+## Strong-agent calibration lineup (image-parity)
 
-The audit record for each row is the agent's **full raw session transcript** (every tool call,
-output, turn, and frame; only secrets + home paths redacted), hosted immutably on HF and pinned by
-revision with whole-file SHA256 in `rollouts/README.md`. Reward/solution dumps are alongside on HF.
+Every row is a fresh run under the **shipped task image's tool surface** — a stdlib-only `python3`
+(no `numpy`/`opencv`/`PIL`/`scipy`, exactly as in `python:3.12-slim`) plus `ffmpeg`/`ffprobe` and
+coreutils — driven by the **final agent prompt** (no scoring formula, weights, or telemetry-GT
+source). It replaces an earlier lineup that let the agents call host-only `opencv`/`numpy` (absent
+from the image); removing those tools lowers every score and *widens* the margin under the family's
+<0.10 bar. The audit record for each row is the agent's **full raw session transcript** (every tool
+call, output, turn, and frame; only secrets + local paths redacted → `/workspace`), hosted immutably
+on HF and pinned by revision with whole-file SHA256 in `rollouts/README.md`. Reward/solution dumps
+are alongside on HF.
 
 | harness (version) | model | reasoning | reward | tool-call turns | trajectory |
 |---|---|---|---|---|---|
-| Codex CLI (0.145.0) | gpt-5.6-sol | xhigh | **n=3: 0.030 / 0.000 / 0.052** (mean 0.027) | 242 / 120 / 237 | raw archive (`rollouts/README.md`) |
-| Claude Code CLI (2.1.241) | claude-opus-4-8 | extended thinking | **0.045** | 108 | raw archive (`rollouts/README.md`) |
-| Gemini CLI (0.57.0) | gemini-3.5-flash | default | **0.0885** | 134 | raw archive (`rollouts/README.md`) |
+| Codex CLI (0.145.0) | gpt-5.6-sol | xhigh | **0.0101** | ~163 | image-parity raw archive (`rollouts/README.md`) |
+| Claude Code CLI (2.1.241) | claude-opus-4-8 | extended thinking | **0.0436** | 104 | image-parity raw archive (`rollouts/README.md`) |
+| Gemini CLI (0.57.0) | gemini-3.5-flash | default | **0.0082** | 189 | image-parity raw archive (`rollouts/README.md`) |
 
-All measured on the shipped video + shipped 2-dim scorer. Strong-agent **max 0.0885 (< 0.10)** across
-the lineup (gemini-3.5-flash — it counts powerups better than Codex/Claude, items accuracy 0.31, so it
-is the strongest agent and the tightest to the bar; skid still 0). The n=3 Codex runs settle the
-variance the reviewer asked about: mean 0.027, max 0.052 —
-comfortably under the bar. Rollout dumps (solution.json + reward.json) on HF, pinned to an immutable
-revision (not mutable `main`; trajectory SHA256s in `rollouts/README.md`):
-<https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/39f1b933102acb3e52348752eb736b31c4c9d50b/kart-race-telemetry-ledger-s1/calibration>
+All measured on the shipped video (sha `4b4cee91…`) + shipped 2-dim scorer, in the image-parity
+sandbox. Strong-agent **max 0.0436 (< 0.10)** — now **Claude Opus 4.8**. Gemini, the opencv-era max
+(0.0885), collapses to **0.0082** once it can no longer colour-threshold frames with opencv,
+confirming that number was tool-inflated. Per-dim accuracies stay low for every agent (items
+0.01–0.22, skid 0.00–0.06): none can count masked-HUD pickups or time cumulative drift to within 30%
+off raw frames + model vision. Rollout dumps (solution.json + reward.json) on HF, pinned to the
+immutable revision (not mutable `main`; trajectory SHA256s in `rollouts/README.md`):
+<https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/b49ffb9b8d83405dba6ab8dee30126bd1d53f196/kart-race-telemetry-ledger-s1/calibration>
 
 ## Results & ablations (shipped 2-dim scorer)
 
@@ -46,10 +53,11 @@ revision (not mutable `main`; trajectory SHA256s in `rollouts/README.md`):
 | constant counts | 0.0000 | all races equal → predicted ties → 0 |
 | empty | 0.0000 | |
 
-Per-dim on the strong runs: **items** accuracy ~0.00–0.05 (a strong agent undercounts pickups by
-~half under the masked HUD, so it is almost never within 30%); **skid** accuracy ~0.08–0.17 (it
-cannot sum the cumulative drift to within 30% over a 55-min video). Both defeat the agent; the oracle
-is 1.0 and a within-30% agent would score far higher.
+Per-dim on the image-parity runs: **items** accuracy 0.01–0.22 (agents mis-count pickups under the
+masked HUD — under-counting off raw frames, or over-counting when they guess high, so rarely within
+30%); **skid** accuracy 0.00–0.06 (none can sum cumulative drift to within 30% over a 55-min video
+without opencv). Both defeat the agent; the oracle is 1.0 and a within-30% agent would score far
+higher.
 
 ## skid_time timebase (correctness)
 
@@ -66,5 +74,7 @@ gran_paradiso 1.87, sandtrack 1.23, olivermath 1.18, cocoa_temple 1.75, scotland
 
 hero-scope + rank agreement 0.407 → + HUD powerup mask 0.345 → + exact-count metric (accuracy, not
 rank) → + time-anchored (races matched by video time ±15 s) → + skid rescaled to video-seconds
-(timebase fix) → + **drop spinouts** (too countable — n=3 with spinouts scored 0.073/0.103/0.186,
-breaking the bar) → items+skid, **Codex n=3 mean 0.027, max 0.052**. See `SPEC.md`.
+(timebase fix) → + **drop spinouts** (too countable — with spinouts scored 0.073/0.103/0.186,
+breaking the bar) → items+skid. Under the host-tool lineup this settled at Codex mean 0.027 / Gemini
+max 0.0885; re-run in the **image-parity sandbox** (opencv/numpy removed, as in the shipped image)
+the whole lineup drops — **max 0.0436 (Claude)**, Codex 0.0101, Gemini 0.0082. See `SPEC.md`.
