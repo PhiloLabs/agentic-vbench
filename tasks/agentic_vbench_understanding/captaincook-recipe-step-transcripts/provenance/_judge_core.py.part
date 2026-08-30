@@ -6,6 +6,7 @@ def _norm(entry):
     label = entry.get("id", entry.get("label", entry.get("step_id")))
     onset = entry.get("t_start", entry.get("t", entry.get("start", entry.get("onset"))))
     offset = entry.get("t_end", entry.get("end", entry.get("offset")))
+    err = entry.get("error", entry.get("error_tag", entry.get("err")))
     try:
         video = str(video).strip().upper()
         label = int(label)
@@ -15,7 +16,30 @@ def _norm(entry):
         return None
     if video not in GROUND_TRUTH:
         return None
-    return {"video": video, "id": label, "t_start": onset, "t_end": offset}
+    return {"video": video, "id": label, "t_start": onset, "t_end": offset,
+            "error": _norm_error(err)}
+
+
+# The release's own taxonomy, keyed by a squashed form so that case and inner spacing do
+# not decide a match. An unrecognised or absent value normalizes to None, which no ground
+# truth entry carries, so the entry still counts as a prediction and still costs
+# precision. Dropping it instead would let a submission that omits the field be graded as
+# though it had made fewer claims.
+_ERROR_CANON = {"".join(t.lower().split()): t for t in ERROR_TAGS}
+_ERROR_CANON["none"] = "none"
+_ERROR_CANON[""] = "none"
+
+
+def _norm_error(value):
+    if value is None:
+        return None
+    if isinstance(value, (list, tuple)):
+        value = value[0] if len(value) == 1 else None
+        if value is None:
+            return None
+    if not isinstance(value, str):
+        return None
+    return _ERROR_CANON.get("".join(value.lower().split()))
 
 
 def _max_monotonic(preds, gt, matcher):
@@ -40,7 +64,29 @@ def _max_monotonic(preds, gt, matcher):
     return prev[m]
 
 
+def _error_ok(p, g):
+    """The reported error must be one the release annotates for this step.
+
+    Any one of them, not all of them: 59 of the key's instances carry more than one tag,
+    and requiring the full set would ask the agent to reproduce an annotator's list rather
+    than to notice what went wrong. Naming one the annotator also named is the claim being
+    scored. A step with no annotated error requires "none".
+    """
+    return p["error"] is not None and p["error"] in g["error"]
+
+
 def _match(p, g):
+    return (
+        p["id"] == g["id"]
+        and abs(p["t_start"] - g["t_start"]) <= g["tau"]
+        and abs(p["t_end"] - g["t_end"]) <= g["tau"]
+        and _error_ok(p, g)
+    )
+
+
+def _match_without_error(p, g):
+    # diagnostic: label, order and both boundaries right, error tag ignored. The gap
+    # between this and the reward is what the error field costs a given submission.
     return (
         p["id"] == g["id"]
         and abs(p["t_start"] - g["t_start"]) <= g["tau"]

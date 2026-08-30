@@ -34,33 +34,107 @@ script exits non-zero and reports nothing else.
 
 ## Results
 
-> **These three runs are stale as of the review of PR #115 and are kept for reference,
-> not as the calibration.** Two task-contract bugs found in that review have been fixed:
-> the prompt's schema examples were real key rows, and the judge made the key's arbitrary
-> order among steps with the same onset a hidden requirement. Fixing the first changed the
-> prompt, so every arm below answered a slightly different question than the one now
-> shipped, and `calibration/verify_scores.py` refuses to bless them: it reports all three
-> as STALE and exits non-zero. The judge change is a no-op on these three submissions,
-> which regrade to the same 0.0173, 0.0073 and 0.0762, so what has to be redone is the
-> runs, not the scoring. They will be re-measured once the contract is frozen.
+One run per harness against the current prompt, the current key and the current judge.
+Each is one agent in one session; none spawned a subagent, and that is checked from the
+harness's own artifacts rather than asserted.
 
+| harness | harness version | model | reasoning | score | tool calls | entries | trajectory | in the image | audit |
+|---|---|---|---|---|---|---|---|---|---|
+| Codex | codex-cli 0.144.1 | `gpt-5.6-sol` | xhigh | **0.0703** | **156** | 312 | `rollouts/codex.jsonl` | yes | clean |
+| Antigravity | app 1.40609.0 | `gemini-3.6-flash-high` | high | **0.0362** | **342** | 238 | `rollouts/antigravity.jsonl` | no | one benign finding |
+| Claude Code | 2.1.251, headless | `claude-opus-4-8` | default | **0.0152** | **145** | 213 | `rollouts/claude.jsonl` | yes | clean |
 
-| harness | harness version | model | reasoning | score | tool-call turns | trajectory | wall clock | audit |
-|---|---|---|---|---|---|---|---|---|
-| Codex | codex-cli 0.144.1 | gpt-5.6-sol | xhigh | **0.0173** | **72** | `rollouts/codex.jsonl` | 72.8 min | clean |
-| Claude Code | 2.1.246 | claude-opus-4-8 | xhigh | **0.0073** | **175** | `rollouts/claude.jsonl` | 107 min active | clean |
-| Antigravity | app, run in the UI | gemini-3.6-flash | high | **0.0762** | **426** | `rollouts/antigravity.jsonl` | 120.5 min | one benign finding |
+Tool-call counts are the shipped auditor's, recounted from each rollout rather than taken
+from the manifest, and they count every tool call rather than only shell commands: 135 of
+Codex's 156, 48 of Claude's 145 and 94 of Antigravity's 342 were shell.
 
-All three arms clear both gates. On the score gate they are not equally comfortable, and
-the honest summary is the weakest of them: **the strongest arm scores 0.0762 against a
-ceiling of 0.10, a margin of 0.024.** That is the risk the difficulty section below
-predicted in advance, it is being reported rather than managed, and nothing in the key or
-the tolerance rule was touched after seeing it.
+The judge's own breakdown, which is where this task's difficulty shows up:
 
-The spread between the arms is itself worth reading. A factor of ten separates 0.0073
-from 0.0762 while the label-and-order counts sit within 30 of each other (164, 183, 195
-out of 314). All three read the recipes comparably well. What separates them is entirely
-how precisely they place the boundaries.
+| arm | entries | true positives | label and order right, timing ignored | label and onset right, offset ignored |
+|---|---|---|---|---|
+| Codex | 312 | 22 | 246 | 73 |
+| Antigravity | 238 | 10 | 122 | 39 |
+| Claude | 213 | 4 | 158 | 22 |
+
+All three read the recipes far better than they place them. Codex put 246 of 314 steps in
+the right sequence position with the right label and scored 22 of them, which is the same
+shape every arm has shown since the first calibration: knowing what happened is not the
+binding constraint here, knowing when is, and now also knowing whether it was done right.
+
+Trajectory audits: six positive controls passed on each, zero network tool calls, zero
+hits on any of the three shortcut patterns, and no network command in any of the 135, 48
+and 94 shell commands. Codex and Claude are **clean**. Antigravity is **REVIEW REQUIRED**
+on one finding, which is that it read
+`.gemini/antigravity/brain/<conversation>/.system_generated/tasks/task-77.log`, its own
+harness's task log. That is the app's artifact directory, not anything belonging to this
+task, and it is the same category of finding as the previous Antigravity arm's.
+
+All three clear both gates. The strongest arm is 0.0703 against a ceiling of 0.10, a margin
+of 0.030, and the weakest of the three claims is the Antigravity row, which ran on the host
+because that harness cannot be made to execute anywhere else; the evidence for that is in
+the PR discussion and in the disclosure below.
+
+### What the error field is worth, per arm
+
+An entry has to say how its step was performed. The best a submission that has not judged
+the performances can do on that field is to answer the key's largest single class, `"none"`,
+which is 36.6 percent of it. Replacing each arm's answers with exactly that constant
+separates what the arm earned by locating steps from what it earned by diagnosing them:
+
+| arm | as submitted | error field replaced by a constant guess | of its matches: on correct steps / on diagnosed errors |
+|---|---|---|---|
+| Codex | 0.0703 | 0.0319 | 9 / 13 |
+| Antigravity | 0.0362 | 0.0362 | 9 / 1 |
+| Claude | 0.0152 | 0.0152 | 4 / 0 |
+
+Only Codex is diagnosing, and thirteen of its twenty-two scored entries are steps it
+correctly said had gone wrong. The other two are indistinguishable from a constant guess on
+that field, which is the honest reading of what this addition costs a model that does not
+attempt it. It is a requirement, not a cap: an agent that reads the performances will beat
+it, and one of the three partly did.
+
+### Two harness failures worth recording
+
+Both cost a run, both were protocol rather than model, and both are now enforced in code
+because prose did not stop either.
+
+**The first headless Claude attempt died in 36 seconds with an empty transcript.**
+`--permission-mode bypassPermissions` maps to `--dangerously-skip-permissions`, which Claude
+Code refuses to run as root, and a container runs as root. It now creates a non-root user,
+copies the credentials inside the container, and requires that user to answer a probe before
+the arm starts.
+
+**The second spawned 29 subagents, one per recording, and produced no answer at all.** It
+delegated "Transcribe video A", "Transcribe video B" and so on, then never assembled the
+results: its five writes were all helper scripts, and `output/solution.json` still held the
+empty placeholder it wrote in the first five minutes. This is the failure this file already
+warned about in prose, since the sibling Ego-Exo4D task scored 0.1791 as one subagent per
+video and 0.0029 as one agent. The prose did not prevent it. The launcher now passes
+`--disallowedTools Agent Task Monitor SendMessage ToolSearch WebFetch WebSearch`, and the
+retry used Bash, Read, Write and Edit only, which is the same shape as the retained
+interactive run. The failed transcript is kept beside the arms rather than deleted.
+
+## Superseded: the runs that answered an earlier contract
+
+## What the re-run found
+
+Not a calibration row: it answered a contract that no longer exists. It is here because it
+is why the contract changed.
+
+With the two contract bugs fixed, one Codex arm was re-run inside the frozen image and
+scored **0.1621** against the family's 0.10 ceiling: 266 entries, 47 fully correct, 213
+tool calls, one agent in one session. Six things that could have made that an artefact
+were checked and none of them was: the judge was unchanged (all three retained solutions
+regrade to their shipped values to the digit), the prompt had become harder rather than
+easier, the container ran 1.2 to 1.6 times slower than the host, the agent's own trace
+records the network as blocked, there was one thread and no subagent, and nothing
+reachable inside the container held the key. The difference was effort. The 0.0173 on
+record submitted 265 entries and got 5 right; this one submitted 266 and got 47, because
+it did the boundary search the earlier run stopped short of after 72 turns of a six-hour
+budget.
+
+So the 0.0173 was the unrepresentative measurement, and the difficulty argument this task
+rested on did not survive a serious attempt. SPEC.md section 8 is what replaced it.
 
 ### Codex, gpt-5.6-sol at xhigh, codex-cli 0.144.1
 
@@ -245,9 +319,9 @@ Measured on this key, in `provenance/ablations/run_ablations.py` and reproducibl
 | empty | 0.0 |
 | canonical recipe prior, full dish order | 0.0032 |
 | canonical recipe prior, labels that occur only | 0.0065 |
-| random, mean of 400 | 0.0001 |
+| random, mean of 400 | 0.0 |
 | random, best of 400 | 0.0032 |
-| best spam of any shape | 0.0013 |
+| best spam of any shape | 0.0006 |
 | oracle answers filed under the wrong video | 0.0 |
 
 And the three degraded-input runs the family's ablation gate asks for, all real runs of
@@ -256,19 +330,21 @@ each forced to answer, with transcripts under `provenance/ablations/measured/`:
 
 | degraded input | entries | label+order | F1 |
 |---|---|---|---|
-| no media at all | 352 | 32 | **0.0** |
-| one still per recording, no tools | 326 | 161 | **0.0031** |
-| 16 uniform frames per recording, no tools | 312 | **211** | **0.0032** |
+| no media at all | 315 | 56 | **0.0** |
+| one still per recording, no tools | 297 | 187 | **0.0033** |
+| 16 uniform frames per recording, no tools | 277 | **192** | **0.0034** |
 
 All three ran with **zero shell commands**, which the retained transcripts show. All three
 are forced to answer, because a zero from a model that declined to guess would say nothing
 about whether the degraded input was enough.
 
-The last row is worth pausing on. With no video and no way to ask for another frame, the
-model placed 211 of 314 steps correctly by label and sequence position, more than any
-calibrated agent managed with the full video and tools, and scored 0.0032. Whatever this
-task is measuring, it is not recognition of the procedure, and the tools are not
-decoration.
+The last row is worth pausing on, and it is the measurement SPEC.md section 8 rests on.
+With no video and no way to ask for another frame, the model placed 192 of 314 steps
+correctly by label and sequence position, as many as any calibrated agent has managed with
+the full video and tools, and scored 0.0034. Two thirds of the label-and-order channel is
+free to a submission that cannot seek, so that channel carries no signal. Under the
+current contract those 192 buy exactly one scored entry, because a match also needs both
+boundaries and the error tag.
 
 And two shapes of partial competence, which bracket where the 0.10 gate actually sits:
 
@@ -277,26 +353,38 @@ Carlo estimates over 1000 draws and they are printed to the precision the estima
 actually has: the third decimal moves by up to 0.002 between disjoint blocks, so there is
 no fourth digit to read. An earlier draft of this table printed four.
 
-| a hypothetical agent, Gaussian boundary noise | F1 |
-|---|---|
-| perfect labels and order, sigma = 1 s | 0.952 |
-| perfect labels and order, sigma = 2 s | 0.683 |
-| perfect labels and order, sigma = 3 s | 0.419 |
-| perfect labels and order, sigma = 5 s | 0.183 |
-| perfect labels and order, sigma = 8 s | 0.077 |
-| perfect labels and order, sigma = 10 s | 0.051 |
-| perfect labels and order, sigma = 15 s | 0.023 |
+Two curves, because an entry now has to say how its step was performed as well as when it
+happened. The left column is a hypothetical agent that gets that field right, which
+isolates boundary noise. The right column is one that answers `"none"` every time, the
+key's largest single class and the best a submission that has not judged the performances
+can do. The right column is the one a shortcut has to be measured against.
 
-Both arms land where that table predicts, and they bracket its bottom rows. Codex matched
-183 of 314 labels in the right sequence position and scored 0.0173, below the 8 s row;
-Antigravity matched 195 and scored 0.0762, which sits right at the 8 s row. Neither is
-literally an agent with perfect labels and 8 s of jitter, since both also lose labels, but
-the ordering is the point: knowing what happened is not the binding constraint here,
-knowing when is.
+| Gaussian boundary noise, perfect labels and order | error tag right | error tag guessed |
+|---|---|---|
+| sigma = 1 s | 0.947 | 0.344 |
+| sigma = 2 s | 0.681 | 0.244 |
+| sigma = 3 s | 0.418 | **0.149** |
+| sigma = 5 s | 0.183 | 0.065 |
+| sigma = 8 s | 0.077 | 0.027 |
+| sigma = 10 s | 0.051 | 0.018 |
+| sigma = 15 s | 0.023 | 0.008 |
 
-So the gate is roughly "an agent that can place both boundaries of a 27-second step to
-within about 6 seconds". Running the same routine against the sibling Ego-Exo4D key puts
-sigma = 5 s at 0.107 there against 0.183 here, so this key is about 1.7x more forgiving
-on timing alone. That is the
-single largest risk to this task passing its gate, it was not compensated for by moving
-the tolerance rule, and it is why the arms above are the deciding evidence.
+Read the right column before the left, and read it as a limitation rather than a defence.
+The error field moves the point where a non-diagnosing agent crosses 0.10 from about
+sigma = 7 s to about sigma = 3.5 s, so it is a real tightening: an agent now has to place
+both boundaries of a 27-second step to within roughly three and a half seconds to beat the
+gate without judging a single performance. It does not make the task safe. **At sigma = 3 s
+a submission that never looks at how anything was done still scores 0.149.** What the
+field buys is that the remaining route to the gate is genuinely hard timing rather than
+recognition, and that an agent which does diagnose the performances will beat it honestly.
+
+The small drop in the left column against the version of this table that shipped before
+the field existed, 0.947 where it read 0.952, is not noise; the block spread is 0.001. When
+a jittered entry drifts far enough to align against a neighbouring instance it now fails on
+that instance's tag as well as its times, so requiring the field costs a little even when
+the field is answered perfectly.
+
+Running the same routine against the sibling Ego-Exo4D key puts sigma = 5 s at 0.107 there
+against 0.183 here, so this key is about 1.7x more forgiving on timing alone. That was the
+single largest risk to this task passing its gate, it was not compensated for by moving the
+tolerance rule, and the re-run above is what it looks like when the risk lands.

@@ -1,38 +1,38 @@
 {
-  "reward": 0.0073,
+  "reward": 0.0152,
   "details": {
     "n_ground_truth": 314,
-    "n_predicted": 236,
-    "true_positives": 2,
-    "onset_only_matches": 23,
-    "label_and_order_only_matches": 164,
-    "precision": 0.0085,
-    "recall": 0.0064,
-    "f1": 0.0073,
+    "n_predicted": 213,
+    "true_positives": 4,
+    "onset_only_matches": 22,
+    "label_and_order_only_matches": 158,
+    "precision": 0.0188,
+    "recall": 0.0127,
+    "f1": 0.0152,
     "per_video": {
       "A": {
         "n_ground_truth": 16,
-        "n_predicted": 14,
+        "n_predicted": 12,
         "true_positives": 0
       },
       "B": {
         "n_ground_truth": 14,
-        "n_predicted": 14,
+        "n_predicted": 11,
         "true_positives": 0
       },
       "C": {
         "n_ground_truth": 14,
-        "n_predicted": 14,
+        "n_predicted": 12,
         "true_positives": 0
       },
       "D": {
         "n_ground_truth": 15,
-        "n_predicted": 12,
-        "true_positives": 1
+        "n_predicted": 9,
+        "true_positives": 0
       },
       "E": {
         "n_ground_truth": 15,
-        "n_predicted": 10,
+        "n_predicted": 8,
         "true_positives": 0
       },
       "F": {
@@ -42,42 +42,42 @@
       },
       "G": {
         "n_ground_truth": 16,
-        "n_predicted": 9,
+        "n_predicted": 7,
         "true_positives": 0
       },
       "H": {
         "n_ground_truth": 16,
-        "n_predicted": 10,
+        "n_predicted": 8,
         "true_positives": 0
       },
       "I": {
         "n_ground_truth": 15,
-        "n_predicted": 11,
+        "n_predicted": 13,
         "true_positives": 0
       },
       "J": {
         "n_ground_truth": 15,
-        "n_predicted": 14,
+        "n_predicted": 11,
         "true_positives": 0
       },
       "K": {
         "n_ground_truth": 15,
-        "n_predicted": 13,
+        "n_predicted": 14,
         "true_positives": 1
       },
       "L": {
         "n_ground_truth": 16,
-        "n_predicted": 12,
-        "true_positives": 0
+        "n_predicted": 14,
+        "true_positives": 1
       },
       "M": {
         "n_ground_truth": 16,
-        "n_predicted": 6,
-        "true_positives": 0
+        "n_predicted": 12,
+        "true_positives": 1
       },
       "N": {
         "n_ground_truth": 11,
-        "n_predicted": 6,
+        "n_predicted": 9,
         "true_positives": 0
       },
       "O": {
@@ -88,36 +88,36 @@
       "P": {
         "n_ground_truth": 10,
         "n_predicted": 9,
-        "true_positives": 0
+        "true_positives": 1
       },
       "Q": {
         "n_ground_truth": 19,
-        "n_predicted": 9,
+        "n_predicted": 6,
         "true_positives": 0
       },
       "R": {
         "n_ground_truth": 18,
-        "n_predicted": 14,
+        "n_predicted": 7,
         "true_positives": 0
       },
       "S": {
         "n_ground_truth": 16,
-        "n_predicted": 14,
+        "n_predicted": 6,
         "true_positives": 0
       },
       "T": {
         "n_ground_truth": 9,
-        "n_predicted": 7,
+        "n_predicted": 10,
         "true_positives": 0
       },
       "U": {
         "n_ground_truth": 12,
-        "n_predicted": 11,
+        "n_predicted": 9,
         "true_positives": 0
       },
       "V": {
         "n_ground_truth": 11,
-        "n_predicted": 10,
+        "n_predicted": 9,
         "true_positives": 0
       }
     },

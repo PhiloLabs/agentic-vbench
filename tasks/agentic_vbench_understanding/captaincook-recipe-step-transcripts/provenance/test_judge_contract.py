@@ -30,7 +30,8 @@ sys.path.insert(0, str(TASK / "steps" / "solve" / "tests"))
 import judge  # noqa: E402
 
 GT = judge.GROUND_TRUTH
-ORACLE = [{"video": L, "id": g["id"], "t_start": g["t_start"], "t_end": g["t_end"]}
+ORACLE = [{"video": L, "id": g["id"], "t_start": g["t_start"], "t_end": g["t_end"],
+           "error": g["error"][0]}
           for L, v in GT.items() for g in v]
 
 
@@ -39,10 +40,10 @@ def test_prompt_examples_cannot_score() -> None:
     txt = (TASK / "steps" / "solve" / "instruction.md").read_text()
     rows = re.findall(
         r'\{"video":\s*"([A-Z])",\s*"id":\s*(\d+),\s*"t_start":\s*([\d.]+),'
-        r'\s*"t_end":\s*([\d.]+)\}', txt)
+        r'\s*"t_end":\s*([\d.]+),\s*"error":\s*"([^"]*)"\}', txt)
     assert rows, "the prompt has no schema examples, so this test is checking nothing"
-    sub = [{"video": v, "id": int(i), "t_start": float(a), "t_end": float(b)}
-           for v, i, a, b in rows]
+    sub = [{"video": v, "id": int(i), "t_start": float(a), "t_end": float(b), "error": e}
+           for v, i, a, b, e in rows]
     r = judge.grade(sub)
     assert r["true_positives"] == 0, (
         f"the prompt's {len(sub)} schema examples score {r['true_positives']} true "
@@ -104,10 +105,51 @@ def test_equal_start_order_does_not_matter() -> None:
           f"(control: swapping two steps' times drops it to {f1})")
 
 
+def test_error_field_is_required_and_any_annotated_tag_counts() -> None:
+    """The third contract: an entry has to say how the step was performed.
+
+    Three things are checked together because each is meaningless without the others. The
+    field must be required, or a submission that ignores it would still score. Any tag the
+    release annotates for that step must count, or the rule would secretly demand one
+    particular tag out of the 59 instances that carry more than one. And a constant guess
+    must be worth roughly the base rate rather than everything, or the field would be
+    decoration.
+    """
+    perfect = judge.grade(ORACLE)
+    assert perfect["f1"] == 1.0, f"the oracle no longer scores 1.0: {perfect['f1']}"
+
+    stripped = [{k: v for k, v in e.items() if k != "error"} for e in ORACLE]
+    r = judge.grade(stripped)
+    assert r["true_positives"] == 0, (
+        f"an otherwise perfect answer with no error field scored {r['true_positives']}; "
+        f"the field is not actually required")
+
+    # every multi-tag instance answered with its LAST tag rather than its first
+    other = [{"video": L, "id": g["id"], "t_start": g["t_start"], "t_end": g["t_end"],
+              "error": g["error"][-1]}
+             for L, v in GT.items() for g in v]
+    n_multi = sum(1 for v in GT.values() for g in v if len(g["error"]) > 1)
+    assert n_multi, "no instance carries two tags, so this control checks nothing"
+    r = judge.grade(other)
+    assert r["f1"] == 1.0, (
+        f"answering {n_multi} multi-tag instances with the other annotated tag scored "
+        f"{r['f1']}; the rule is demanding one particular tag")
+
+    guess = [dict(e, error="none") for e in ORACLE]
+    r = judge.grade(guess)
+    base = sum(1 for v in GT.values() for g in v if g["error"] == ["none"]) / \
+           sum(len(v) for v in GT.values())
+    assert abs(r["f1"] - base) < 0.01, (
+        f"a constant 'none' on perfect timing scored {r['f1']}, base rate is {base:.4f}")
+    print(f"  ok  error field required; either tag of {n_multi} multi-tag instances counts; "
+          f"a constant guess scores {r['f1']} against a base rate of {base:.4f}")
+
+
 def main() -> int:
     test_prompt_examples_cannot_score()
+    test_error_field_is_required_and_any_annotated_tag_counts()
     test_equal_start_order_does_not_matter()
-    print("both contract regressions covered, both controls fired as required")
+    print("all three contract regressions covered, every control fired as required")
     return 0
 
 

@@ -66,12 +66,30 @@ The videos themselves may come in any order. Fields:
 - `id`: the step's label, an integer from the closed vocabulary below.
 - `t_start`: the second at which that step begins, in that clip.
 - `t_end`: the second at which that same step ends, in that clip.
+- `error`: how that step was performed, one of the values listed under "How the step
+  was performed" below. Use `"none"` when the step was carried out as the recipe
+  intends.
 
-An entry counts only if it names the right video and **both** of its boundaries
-land inside the tolerance of the true step. That tolerance is a quarter of the
+An entry counts only if it names the right video, reports how the step was performed,
+and **both** of its boundaries land inside the tolerance of the true step. That tolerance is a quarter of the
 step's duration, never tighter than {tmin:.0f} second and never looser than {tmax:.0f} seconds, and
 the same tolerance applies to the start and to the end. Short steps are therefore
 graded strictly at both ends, so watch each action begin and watch it stop.
+
+## How the step was performed
+
+These recordings are of people following a recipe, and they do not always follow it
+correctly. Every entry has to say how its step was performed: `"none"` if it was done
+as intended, otherwise the one label below that best describes what went wrong. A step
+can go wrong in more than one way; name one.
+
+The wording after each label is taken from how such steps were described elsewhere in
+the same annotation set, not from these videos.
+
+{error_tags}
+
+Deciding this is not the same as recognising the step. The recipe tells you what was
+supposed to happen; only the video tells you what this person actually did.
 
 ## The closed vocabulary
 
@@ -92,7 +110,8 @@ names what the person actually handles.
 - Do not look anything up online, and do not rely on any memory of these recordings
   or of the dataset they may come from. Every answer must come from watching these
   videos.
-- Use only labels from the vocabulary above.
+- Use only labels from the vocabulary above, and only the `error` values listed above.
+- An entry with no `error` field, or with a value not on that list, cannot count.
 - Report every step you find, in every video, including a step performed more than
   once.
 """
@@ -127,6 +146,9 @@ print(f"wrote {{len(SEQUENCE)}} entries")
 '''
 
 
+ERROR_EXAMPLE_TAGS = ("none", "Measurement Error", "Order Error")
+
+
 def schema_examples(inst, letters):
     """Three JSON rows that show the schema and CANNOT be correct answers.
 
@@ -147,7 +169,8 @@ def schema_examples(inst, letters):
         label = absent[(len(out) * 7) % len(absent)]
         t0 = 10.0 + 25.0 * len(out)
         out.append(json.dumps({"video": L, "id": label,
-                               "t_start": round(t0, 3), "t_end": round(t0 + 12.0, 3)}))
+                               "t_start": round(t0, 3), "t_end": round(t0 + 12.0, 3),
+                               "error": ERROR_EXAMPLE_TAGS[len(out) % len(ERROR_EXAMPLE_TAGS)]}))
     for o in out:
         e = json.loads(o)
         assert all(g["id"] != e["id"] for g in inst[e["video"]]), (
@@ -173,7 +196,18 @@ def main() -> int:
                     f"{v['duration_sec']/60:.1f} min | `t = 0` to `t = {v['duration_sec']:.1f}` |")
     first, last = letters[0], letters[-1]
     ex = schema_examples(inst, letters)
+    # The taxonomy block, built from the key so the prompt cannot name a tag the judge
+    # does not accept, nor omit one it does.
+    tag_lines = []
+    for tag in d["error_tags"]:
+        if tag == "none":
+            tag_lines.append('- `"none"` the step was carried out as the recipe intends.')
+        else:
+            ex_txt = "; ".join(d["error_tag_examples"][tag])
+            tag_lines.append(f'- `"{tag}"` for example: {ex_txt}.')
+    error_tags_block = "\n".join(tag_lines)
     prompt = PROMPT.format(
+        error_tags=error_tags_block,
         n=n, word=WORDS.get(n, str(n)), table="\n".join(rows), last=last,
         ex0=ex[0], ex1=ex[1], ex2=ex[2],
         tmin=d["tolerance_rule"]["min_sec"], tmax=d["tolerance_rule"]["max_sec"],

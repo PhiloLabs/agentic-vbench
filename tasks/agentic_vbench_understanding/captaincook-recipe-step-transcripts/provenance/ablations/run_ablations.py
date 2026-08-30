@@ -56,8 +56,14 @@ JITTER_SIGMAS = (1.0, 2.0, 3.0, 5.0, 8.0, 10.0, 15.0)
 JITTER_DRAWS = 1000
 
 
-def jitter_curve() -> list[tuple[float, float, float]]:
+def jitter_curve(guess_error: bool = False) -> list[tuple[float, float, float]]:
     """(sigma, mean F1, seed-to-seed spread) for perfect labels with noisy boundaries.
+
+    Two versions are wanted now that an entry also has to say how the step was performed.
+    With `guess_error=False` the hypothetical agent gets that field right, which isolates
+    boundary noise. With `guess_error=True` it answers the key's largest single class
+    every time, which is the best an agent that has not judged the performances can do,
+    and that is the curve a shortcut has to be measured against.
 
     This is a Monte Carlo estimate and it is reported as one. An earlier draft printed
     these to four decimals, which claimed a precision the estimate does not have: at
@@ -76,15 +82,23 @@ def jitter_curve() -> list[tuple[float, float, float]]:
                 r = random.Random(SEED + b * 1_000_003 + k)
                 sub = [{**e,
                         "t_start": max(0.0, e["t_start"] + r.gauss(0, sigma)),
-                        "t_end": e["t_end"] + r.gauss(0, sigma)} for e in base]
+                        "t_end": e["t_end"] + r.gauss(0, sigma),
+                        **({"error": GUESS} if guess_error else {})} for e in base]
                 vals.append(judge.grade(sub)["f1"])
             blocks.append(statistics.mean(vals))
         out.append((sigma, statistics.mean(blocks), max(blocks) - min(blocks)))
     return out
 
 
+# The strongest value an unwatched submission can put in the error field: the key's
+# largest single class. Named rather than inlined so the deterministic attacks below and
+# the contract test agree about what "a guess" means.
+GUESS = "none"
+
+
 def oracle() -> list[dict]:
-    return [{"video": letter, "id": g["id"], "t_start": g["t_start"], "t_end": g["t_end"]}
+    return [{"video": letter, "id": g["id"], "t_start": g["t_start"], "t_end": g["t_end"],
+             "error": g["error"][0]}
             for letter, gt in judge.GROUND_TRUTH.items() for g in gt]
 
 
@@ -99,7 +113,7 @@ def spread(order_for: dict[str, list[int]]) -> list[dict]:
         for k, label in enumerate(seq):
             t0 = round((k + 0.5) * step, 2)
             out.append({"video": letter, "id": label, "t_start": t0,
-                        "t_end": round(t0 + MEDIAN_DUR, 2)})
+                        "t_end": round(t0 + MEDIAN_DUR, 2), "error": GUESS})
     return out
 
 
@@ -114,7 +128,7 @@ def cyclic(labels_for: dict[str, list[int]], stride: float) -> list[dict]:
         while t < DURATIONS[letter]:
             for label in labels:
                 out.append({"video": letter, "id": label, "t_start": round(t, 2),
-                            "t_end": round(t + MEDIAN_DUR, 2)})
+                            "t_end": round(t + MEDIAN_DUR, 2), "error": GUESS})
             t += stride
     return out
 
@@ -140,7 +154,8 @@ def main() -> int:
         for letter, gt in judge.GROUND_TRUTH.items():
             for _ in range(len(gt)):
                 t0 = round(rng.uniform(0, DURATIONS[letter]), 2)
-                sub.append({"video": letter, "id": rng.choice(labels), "t_start": t0,
+                sub.append({"video": letter, "id": rng.choice(labels), "error": GUESS,
+                            "t_start": t0,
                             "t_end": round(t0 + MEDIAN_DUR, 2)})
         sub.sort(key=lambda e: (e["video"], e["t_start"]))
         draws.append(judge.grade(sub)["f1"])
@@ -201,6 +216,11 @@ def main() -> int:
         # not named `spread`: that is a module-level function, and binding it here
         # would make every earlier reference to it in this scope a local.
         for sigma, mean_f1, block_spread in jitter_curve():
+            print(f"    sigma = {sigma:.0f} s   F1 = {mean_f1:.3f}   "
+                  f"(spread across blocks {block_spread:.3f})")
+        print(f"\n  same, but the error field answered {GUESS!r} every time, which is the "
+              f"best\n  an agent that has not judged the performances can do:")
+        for sigma, mean_f1, block_spread in jitter_curve(guess_error=True):
             print(f"    sigma = {sigma:.0f} s   F1 = {mean_f1:.3f}   "
                   f"(spread across blocks {block_spread:.3f})")
     return 0

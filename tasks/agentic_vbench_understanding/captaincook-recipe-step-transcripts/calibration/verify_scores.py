@@ -142,7 +142,8 @@ def main() -> int:
     claim("largest five recordings' share of the key", f"{sum(shares[:5]):.1%}"[:-1], "SPEC.md")
 
     # ---- the scorer's fixed points --------------------------------------------
-    oracle = [{"video": l, **{k: g[k] for k in ("id", "t_start", "t_end")}}
+    oracle = [{"video": l, "error": g["error"][0],
+               **{k: g[k] for k in ("id", "t_start", "t_end")}}
               for l, v in gt.items() for g in v]
     assert judge.grade(oracle)["f1"] == 1.0, "the oracle no longer scores 1.0"
     assert judge.grade([])["f1"] == 0.0, "an empty submission no longer scores 0.0"
@@ -177,6 +178,21 @@ def main() -> int:
         sol_path = ROLLOUTS / f"{name}-solution.json"
         entries = json.loads(sol_path.read_text())["sequence"]
         r = judge.grade(entries)
+
+        # Staleness is decided FIRST, before anything is asserted about this arm. An arm
+        # that answered a different prompt cannot be held to the reward recorded beside
+        # it, cannot be held to the 0.10 gate, and cannot be held to the turn floor: all
+        # three would be statements about a task that no longer exists. An earlier version
+        # checked the prompt last, so the first contract change made this script die on
+        # the regrade assertion instead of reporting what was actually wrong.
+        prompt = base_prompt(man["run_dir"])
+        if hashlib.sha256(prompt.encode()).hexdigest() != man["prompt_sha256"]:
+            stale.append(name)
+            notes.append(f"  STALE   {name:<12} ran against a different prompt than the "
+                         f"one shipped now, so its {man.get('wall_sec', 0)/60:.0f}-minute "
+                         f"run says nothing about the task as it stands")
+            continue
+
         shipped = json.loads((ROLLOUTS / f"{name}-reward.json").read_text())
         assert abs(r["f1"] - shipped["reward"]) < 1e-12, (
             f"{name}: regrading the shipped solution gives {r['f1']}, but the shipped "
@@ -195,18 +211,6 @@ def main() -> int:
         claim(f"{name} tool-call turns", turns, "scores.md")
         assert turns > 50, f"{name} ran {turns} turns, at or below the family's floor of 50"
 
-        # The prompt each arm was handed must be the shipped prompt with paths moved.
-        # A mismatch here does not mean the arm was cheated; the ordinary cause is that
-        # the shipped prompt has been edited since the arm ran, which makes the arm stale
-        # rather than invalid. Either way the calibration no longer speaks for the task as
-        # it currently stands, so it is collected and reported instead of asserted, and
-        # the run still exits non-zero.
-        prompt = base_prompt(man["run_dir"])
-        if hashlib.sha256(prompt.encode()).hexdigest() != man["prompt_sha256"]:
-            stale.append(name)
-            notes.append(f"  STALE   {name:<12} {r['f1']:.4f} / {turns} turns / ran "
-                         f"against a different prompt than the one shipped now")
-            continue
         notes.append(f"  ok      {name:<12} {r['f1']:.4f} / {turns} turns / prompt is the "
                      f"shipped prompt at {man['run_dir']}")
 
@@ -236,6 +240,21 @@ def main() -> int:
         print("\n" + "\n".join("  CONTROL FAILED  " + c for c in control_failures))
         raise SystemExit("this checker cannot detect a wrong claim, so its pass means nothing")
 
+    # The arm verdict prints BEFORE any claim can end the run. Whether the three arms
+    # still speak for the shipped task is the most important thing this script knows, and
+    # an earlier version put it after the claim check, so one stale number in a document
+    # was enough to swallow it entirely.
+    print("\n".join(notes))
+    if stale:
+        print(f"\n  {len(stale)} arm(s) ran against an older prompt: {', '.join(stale)}.")
+        print("  The shipped question has changed since, so these scores do not speak")
+        print("  for the task as it now stands and must be re-measured.")
+    ran = {name for name, _ in measured if name not in stale}
+    pending = [a for a in ("codex", "claude", "antigravity") if a not in ran]
+    if pending:
+        print(f"  NOT MEASURED AGAINST THE CURRENT PROMPT: {', '.join(pending)}. This "
+              f"file cannot say the task\n  clears either gate, and does not.")
+
     if missing:
         print("\n" + "\n".join(missing))
         raise SystemExit(f"\n{len(missing)} claim(s) the artifacts do not back")
@@ -245,20 +264,7 @@ def main() -> int:
           f"{negative} was correctly not found either.")
     print(f"  key: oracle 1.0, empty 0.0, misfiled-video {misfiled:.4f}, every no-video "
           f"strategy at or under {best_spam:.4f}.")
-    print("\n".join(notes))
-
-    if stale:
-        print(f"\n  {len(stale)} arm(s) ran against an older prompt: {', '.join(stale)}.")
-        print("  The shipped question has changed since, so these scores do not speak")
-        print("  for the task as it now stands and must be re-measured.")
-
-    ran = {name for name, _ in measured if name not in stale}
-    pending = [a for a in ("codex", "claude", "antigravity") if a not in ran]
-    if pending:
-        print(f"  NOT MEASURED AGAINST THE CURRENT PROMPT: {', '.join(pending)}. This "
-              f"file cannot say the task\n  clears either gate, and does not.")
-        return 1
-    return 0
+    return 1 if pending else 0
 
 
 if __name__ == "__main__":

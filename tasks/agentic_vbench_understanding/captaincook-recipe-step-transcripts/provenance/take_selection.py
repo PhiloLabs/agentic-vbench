@@ -91,7 +91,7 @@ def main() -> int:
             continue
         if rid not in dur or dur[rid] < bg.MIN_TAKE_SEC:
             continue
-        inst = bg.transcript(rec)
+        inst = bg.transcript(rec, errs[rid])
         elig = bg.eligibility(inst, bg.canonical_order(ann, rec["activity_id"], rid))
         if elig["eligible"]:
             pool.append({"rid": rid, "dur": dur[rid], "n": len(inst),

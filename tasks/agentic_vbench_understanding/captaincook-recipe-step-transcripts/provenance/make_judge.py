@@ -93,13 +93,21 @@ def main() -> int:
     for k in sorted(d["vocabulary"], key=int):
         lines.append(f"    {int(k)}: {json.dumps(d['vocabulary'][k])},")
     lines.append("}\n")
+    lines.append("# The release's own error taxonomy, carried through from the annotations")
+    lines.append("# rather than written here, so the judge and the prompt cannot drift apart.")
+    lines.append("ERROR_TAGS = (")
+    for t in d["error_tags"]:
+        if t != "none":
+            lines.append(f"    {json.dumps(t)},")
+    lines.append(")\n")
     lines.append("# letter -> chronological ground truth, each with the tolerance for both bounds")
     lines.append("GROUND_TRUTH = {")
     for letter in sorted(inst):
         lines.append(f'    "{letter}": [')
         for i in inst[letter]:
             lines.append(f'        {{"id": {i["id"]}, "t_start": {i["t_start"]}, '
-                         f'"t_end": {i["t_end"]}, "tau": {i["tau"]}}},')
+                         f'"t_end": {i["t_end"]}, "tau": {i["tau"]}, '
+                         f'"error": {json.dumps(i["error"])}}},')
         lines.append("    ],")
     lines.append("}\n\n")
     lines.append(args.core.read_text().rstrip() + "\n")

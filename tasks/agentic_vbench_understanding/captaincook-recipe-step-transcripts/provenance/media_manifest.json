@@ -4,8 +4,10 @@
   "source_url": "https://utdallas.box.com/shared/static/y4oc1jrcb5sptrzu0sx8hw634ma9es7a.mp4",
   "source_sha256": "a8ac990f1b749a39dcccbd3e25ea84fb60583b6ab402cebc94fd8c835c947d33",
   "source_bytes": 5334430349,
-  "derivative_sha256": "25bb369f249360f2214d6f3a8cc65e221b36d6ed02b8286920ea356e8f668528",
-  "derivative_bytes": 499283885,
+  "derivative_sha256": "1de77631a7e77baa830a25ffbac43a150d1447eb41bb1574d30aaf36c2b9e7de",
+  "derivative_bytes": 711132394,
+  "width": 1920,
+  "height": 1080,
   "duration_sec": 946.446
  },
  "B": {
@@ -13,8 +15,10 @@
   "source_url": "https://utdallas.box.com/shared/static/h92swuzptguxbkhj0bqgr17nz84pzdsh.mp4",
   "source_sha256": "d43a594e32f64ddc428477543c60a784ddc390f6b08673bd4dba9527eb00e87f",
   "source_bytes": 3913885212,
-  "derivative_sha256": "8927f726e7265907d71ceb2a15fdecbd0ec64b034dc5361d025c911d81db3620",
-  "derivative_bytes": 434567628,
+  "derivative_sha256": "b725dd264d3cef39d071dfcf8626ee09de8c214dc55172a461d2b0f469be4ceb",
+  "derivative_bytes": 521821409,
+  "width": 1920,
+  "height": 1080,
   "duration_sec": 694.36
  },
  "C": {
@@ -22,8 +26,10 @@
   "source_url": "https://utdallas.box.com/shared/static/56zrxkemi0nw0m009eyff3s4l68g6emg.mp4",
   "source_sha256": "015083ceeb0c76614dfcf03809cc747c5945cde785a41676c95096df1db687df",
   "source_bytes": 4395907076,
-  "derivative_sha256": "4b290086be6701e30676259f0fceff0dca2f547f6d74ed5c413b6c152c4be0fe",
-  "derivative_bytes": 525811873,
+  "derivative_sha256": "f27e67264aca713c844bca30dcf3c62d19a843678d891b3072d8ae7a96353624",
+  "derivative_bytes": 585990860,
+  "width": 1920,
+  "height": 1080,
   "duration_sec": 779.912
  },
  "D": {

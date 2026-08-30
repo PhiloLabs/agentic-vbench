@@ -55,9 +55,9 @@ Write `/workspace/output/solution.json` in exactly this shape:
 ```json
 {
   "sequence": [
-    {"video": "A", "id": 2, "t_start": 10.0, "t_end": 22.0},
-    {"video": "A", "id": 11, "t_start": 35.0, "t_end": 47.0},
-    {"video": "V", "id": 19, "t_start": 60.0, "t_end": 72.0}
+    {"video": "A", "id": 2, "t_start": 10.0, "t_end": 22.0, "error": "none"},
+    {"video": "A", "id": 11, "t_start": 35.0, "t_end": 47.0, "error": "Measurement Error"},
+    {"video": "V", "id": 19, "t_start": 60.0, "t_end": 72.0, "error": "Order Error"}
   ]
 }
 ```
@@ -70,12 +70,38 @@ The videos themselves may come in any order. Fields:
 - `id`: the step's label, an integer from the closed vocabulary below.
 - `t_start`: the second at which that step begins, in that clip.
 - `t_end`: the second at which that same step ends, in that clip.
+- `error`: how that step was performed, one of the values listed under "How the step
+  was performed" below. Use `"none"` when the step was carried out as the recipe
+  intends.
 
-An entry counts only if it names the right video and **both** of its boundaries
-land inside the tolerance of the true step. That tolerance is a quarter of the
+An entry counts only if it names the right video, reports how the step was performed,
+and **both** of its boundaries land inside the tolerance of the true step. That tolerance is a quarter of the
 step's duration, never tighter than 1 second and never looser than 3 seconds, and
 the same tolerance applies to the start and to the end. Short steps are therefore
 graded strictly at both ends, so watch each action begin and watch it stop.
+
+## How the step was performed
+
+These recordings are of people following a recipe, and they do not always follow it
+correctly. Every entry has to say how its step was performed: `"none"` if it was done
+as intended, otherwise the one label below that best describes what went wrong. A step
+can go wrong in more than one way; name one.
+
+The wording after each label is taken from how such steps were described elsewhere in
+the same annotation set, not from these videos.
+
+- `"none"` the step was carried out as the recipe intends.
+- `"Measurement Error"` for example: Top the cup with 1 teaspoon of salsa; 1/2  tablespoon of salsa; 2 instead of 1 egg.
+- `"Missing Step"` for example: Skipped this step; Missed this step; Didn't do the step of adding a extra-virgin olive oil..
+- `"Order Error"` for example: Remove already present lettuce, place egg and then place lettuce on top of the egg; Step performed before microwaving the egg; Step performed after adding cheese to the cup.
+- `"Other"` for example: Rose above the brim; added chopped  tomato, garlic full cloves to the pan; Flipped the cake after removing the paper liner.
+- `"Preparation Error"` for example: Cut the muffin into two pieces with hand; Coat a bowl than ramekin cup with cooking spray; large cup instead of ramekin cup.
+- `"Technique Error"` for example: Cracking the egg inappropriately; pour directly; flipped top muffin.
+- `"Temperature Error"` for example: Microwave set on power level low instead of high; medium instead of high; Temperature is set to medium instead of high.
+- `"Timing Error"` for example: Microwave on high for 1 min; Microwave for 30 sec; Microwaved for 10 secs instead of 30 seconds.
+
+Deciding this is not the same as recognising the step. The recipe tells you what was
+supposed to happen; only the video tells you what this person actually did.
 
 ## The closed vocabulary
 
@@ -179,6 +205,7 @@ names what the person actually handles.
 - Do not look anything up online, and do not rely on any memory of these recordings
   or of the dataset they may come from. Every answer must come from watching these
   videos.
-- Use only labels from the vocabulary above.
+- Use only labels from the vocabulary above, and only the `error` values listed above.
+- An entry with no `error` field, or with a value not on that list, cannot count.
 - Report every step you find, in every video, including a step performed more than
   once.

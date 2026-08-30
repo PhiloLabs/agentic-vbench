@@ -20,7 +20,7 @@ RUN pip install --no-cache-dir pillow==11.1.0 numpy==2.4.3
 # each recording as a 3840x2160 HEVC file at about 45 Mbit/s. The 22 of them are
 # 92 GiB, which is not a sane thing to pull and transcode inside an image build, so
 # what is pinned here is a derivative: the same recording scaled to 1080p with the audio
-# dropped, 12.0 GiB in total. CaptainCook4D is released under the Apache License 2.0,
+# dropped, 12.3 GiB in total. CaptainCook4D is released under the Apache License 2.0,
 # which permits redistributing a derivative with attribution, and NOTICE carries that
 # attribution. Nothing is cropped, cut or reordered; only the resolution changes.
 #
@@ -32,9 +32,9 @@ RUN pip install --no-cache-dir pillow==11.1.0 numpy==2.4.3
 # Source: CaptainCook4D (arXiv:2312.14556), https://captaincook4d.github.io/captain-cook/
 # Annotations pinned by commit in provenance/data_setup/01_download_annotations.sh.
 #
-# A = 3_36     Microwave Mug Pizza      946.45 s     476 MiB
-# B = 3_46     Microwave Mug Pizza      694.36 s     414 MiB
-# C = 3_49     Microwave Mug Pizza      779.91 s     501 MiB
+# A = 3_36     Microwave Mug Pizza      946.45 s     678 MiB
+# B = 3_46     Microwave Mug Pizza      694.36 s     498 MiB
+# C = 3_49     Microwave Mug Pizza      779.91 s     559 MiB
 # D = 4_30     Ramen                    783.18 s     561 MiB
 # E = 4_36     Ramen                   1044.34 s     748 MiB
 # F = 4_40     Ramen                    652.08 s     468 MiB
@@ -55,13 +55,13 @@ RUN pip install --no-cache-dir pillow==11.1.0 numpy==2.4.3
 # U = 13_41    Butter Corn Cup          914.61 s     656 MiB
 # V = 13_44    Butter Corn Cup          766.03 s     549 MiB
 
-ARG BASE=https://huggingface.co/datasets/Maxine668/captaincook-recipe-step-transcripts/resolve/780715458c1da7f4c49f03acc3842f73fa90514a
+ARG BASE=https://huggingface.co/datasets/Maxine668/captaincook-recipe-step-transcripts/resolve/cd30776102ba9096e924ac8e1850ce08c469f092
 ARG A_URL=${BASE}/A.mp4
-ARG A_SHA256=25bb369f249360f2214d6f3a8cc65e221b36d6ed02b8286920ea356e8f668528
+ARG A_SHA256=1de77631a7e77baa830a25ffbac43a150d1447eb41bb1574d30aaf36c2b9e7de
 ARG B_URL=${BASE}/B.mp4
-ARG B_SHA256=8927f726e7265907d71ceb2a15fdecbd0ec64b034dc5361d025c911d81db3620
+ARG B_SHA256=b725dd264d3cef39d071dfcf8626ee09de8c214dc55172a461d2b0f469be4ceb
 ARG C_URL=${BASE}/C.mp4
-ARG C_SHA256=4b290086be6701e30676259f0fceff0dca2f547f6d74ed5c413b6c152c4be0fe
+ARG C_SHA256=f27e67264aca713c844bca30dcf3c62d19a843678d891b3072d8ae7a96353624
 ARG D_URL=${BASE}/D.mp4
 ARG D_SHA256=ce072ea191d7fe95d2a0638f9b57f7ed3647280bdc1aa4921869f0a83d82715d
 ARG E_URL=${BASE}/E.mp4

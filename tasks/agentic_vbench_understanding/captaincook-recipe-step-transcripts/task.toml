@@ -52,10 +52,10 @@ source = "CaptainCook4D, 22 recordings, 4K GoPro streams downscaled to 1080p, se
 build_timeout_sec = 10800.0
 cpus = 4
 memory_mb = 8192
-# The 22 baked 1080p streams are 12.0 GiB, and the bake is a stream copy of an
+# The 22 baked 1080p streams are 12.3 GiB, and the bake is a stream copy of an
 # already-transcoded file, so the source and the baked set are the same size. Measured
 # after the media package was built, not guessed.
-storage_mb = 38912
+storage_mb = 39936
 # The recordings are baked at build time and the answer is not online: keep this false.
 allow_internet = false
 

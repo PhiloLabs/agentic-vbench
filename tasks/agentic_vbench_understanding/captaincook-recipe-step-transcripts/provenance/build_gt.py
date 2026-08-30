@@ -39,6 +39,14 @@ from pathlib import Path
 # are not free parameters here. MIN_ERROR_STEPS replaces that version's
 # MIN_REPEAT_INSTANCES at the same value; see SPEC.md for why the criterion changed and
 # why the number did not.
+# The release's own error taxonomy, from error_annotations.json. Eight tags plus the
+# absence of one. This is not our vocabulary: it is read out of the annotations and
+# asserted below to be exactly what the file contains, so it cannot drift.
+ERROR_TAGS = ("Measurement Error", "Missing Step", "Order Error", "Other",
+              "Preparation Error", "Technique Error", "Temperature Error",
+              "Timing Error")
+NO_ERROR = "none"
+
 MIN_TAKE_SEC = 600.0            # the family's own floor for a single-video task
 MIN_ORDER_INVERSIONS = 2
 MIN_ERROR_STEPS = 3
@@ -74,7 +82,35 @@ def usable(step: dict) -> bool:
             and step["end_time"] > step["start_time"])
 
 
-def transcript(rec: dict) -> list[dict]:
+def error_tags(err_rec: dict) -> dict:
+    """(step_id, start_time) -> the tags the release annotates for that step.
+
+    The two files are separate and are joined on the pair, not on step_id alone: step_id
+    repeats within a recording when a step is performed twice. The join is asserted to be
+    total by the caller rather than assumed, because a silent miss here would read as
+    'this step was performed correctly'.
+    """
+    return {(s["step_id"], round(float(s["start_time"]), 3)):
+            sorted({e["tag"] for e in (s.get("errors") or [])})
+            for s in err_rec.get("step_annotations", [])}
+
+
+def performed(rec: dict) -> list[dict]:
+    """The steps that actually happened, chronological, labelled by their own text.
+
+    No error tags here: this is what canonical_order needs, and threading the error file
+    through it would only create a second place for that join to go wrong.
+    """
+    out = [{"id": s["description"].strip(), "text": s["description"].strip(),
+            "t_start": round(float(s["start_time"]), 3),
+            "t_end": round(float(s["end_time"]), 3),
+            "has_errors": bool(s.get("has_errors"))}
+           for s in rec["steps"] if usable(s)]
+    out.sort(key=lambda i: (i["t_start"], i["t_end"]))
+    return out
+
+
+def transcript(rec: dict, err_rec: dict) -> list[dict]:
     """One recording's performed steps in chronological order.
 
     The label is the step's own text, not its id. Two reasons, both measured. step_id is
@@ -83,12 +119,25 @@ def transcript(rec: dict) -> list[dict]:
     choose between two labels that read the same while the prompt withholds which dish
     the clip is. Keying on the text makes that choice not exist.
     """
-    out = [{"id": s["description"].strip(),
-            "text": s["description"].strip(),
-            "t_start": round(float(s["start_time"]), 3),
-            "t_end": round(float(s["end_time"]), 3),
-            "has_errors": bool(s.get("has_errors"))}
-           for s in rec["steps"] if usable(s)]
+    tags_of = error_tags(err_rec)
+    out = []
+    for s in rec["steps"]:
+        if not usable(s):
+            continue
+        key = (s["step_id"], round(float(s["start_time"]), 3))
+        assert key in tags_of, (
+            f"{rec['recording_id']} step {key} has no row in error_annotations.json; a "
+            f"missing join would silently read as 'performed correctly'")
+        tags = tags_of[key]
+        assert bool(tags) == bool(s.get("has_errors")), (
+            f"{rec['recording_id']} step {key}: has_errors={s.get('has_errors')} but "
+            f"error_annotations says {tags}")
+        out.append({"id": s["description"].strip(),
+                    "text": s["description"].strip(),
+                    "t_start": round(float(s["start_time"]), 3),
+                    "t_end": round(float(s["end_time"]), 3),
+                    "has_errors": bool(s.get("has_errors")),
+                    "error": tags or [NO_ERROR]})
     # `id` is still the step TEXT here; the integer label is assigned later, once the
     # vocabulary is numbered. The canonical (t_start, label) sort therefore happens at
     # emit time, not here.
@@ -104,7 +153,7 @@ def canonical_order(ann: dict, activity_id: int, held_out: str) -> list[tuple]:
     for rid, rec in ann.items():
         if rec["activity_id"] != activity_id or rid == held_out:
             continue
-        inst = transcript(rec)
+        inst = performed(rec)
         if not inst:
             continue
         span = max(i["t_end"] for i in inst) or 1.0
@@ -148,6 +197,16 @@ def main() -> int:
                 if bool(errs[rid]["is_error"]) != any(s.get("has_errors") for s in rec["steps"])]
     assert not disagree, f"has_errors disagrees with error_annotations on {disagree[:5]}"
 
+    # ERROR_TAGS is written down above so the prompt and the judge can share it, which
+    # makes it a place where our copy could drift from the release. Check it rather than
+    # trust it: the set in the file must be exactly the set in the constant.
+    seen_tags = {e["tag"] for rec in errs.values()
+                 for s in rec.get("step_annotations", []) for e in (s.get("errors") or [])}
+    assert seen_tags == set(ERROR_TAGS), (
+        f"the release's error taxonomy is not what ERROR_TAGS says\n"
+        f"  only in the file:     {sorted(seen_tags - set(ERROR_TAGS))}\n"
+        f"  only in the constant: {sorted(set(ERROR_TAGS) - seen_tags)}")
+
     excluded = conflicted_activities(ann)
     dropped = sum(1 for rec in ann.values() for s in rec["steps"] if not usable(s))
 
@@ -164,7 +223,7 @@ def main() -> int:
             continue
         if rid not in dur or dur[rid] < MIN_TAKE_SEC:           # R1
             continue
-        inst = transcript(rec)
+        inst = transcript(rec, errs[rid])
         canon = canonical_order(ann, rec["activity_id"], rid)
         elig = eligibility(inst, canon)
         if not elig["eligible"]:                                # R3
@@ -201,6 +260,8 @@ def main() -> int:
         "vocabulary": {str(v): text_of[v] for v in sorted(text_of)},
         "tolerance_rule": {"alpha": ALPHA, "min_sec": TAU_MIN, "max_sec": TAU_MAX,
                            "applies_to": ["t_start", "t_end"]},
+        "error_tags": [NO_ERROR, *ERROR_TAGS],
+        "error_tag_examples": {},
         "eligibility": {}, "canonical_order": {}, "instances": {},
         "excluded_activities": excluded,
         "dropped_unperformed_steps": dropped,
@@ -223,9 +284,32 @@ def main() -> int:
         # it to submissions, so the two sides agree by construction.
         out["instances"][letter] = sorted(
             ({"id": label_of[i["id"]], "t_start": i["t_start"], "t_end": i["t_end"],
-              "tau": round(min(TAU_MAX, max(TAU_MIN, ALPHA * (i["t_end"] - i["t_start"]))), 3)}
+              "tau": round(min(TAU_MAX, max(TAU_MIN, ALPHA * (i["t_end"] - i["t_start"]))), 3),
+              "error": i["error"]}
              for i in r["inst"]),
             key=lambda e: (e["t_start"], e["id"]))
+
+    # The prompt has to say what the eight tags mean or the field is a guessing game, and
+    # the fairest definition is the annotators' own wording. These examples are drawn ONLY
+    # from recordings outside the corpus, so a reader of the prompt learns the shape of a
+    # tag without learning anything about a scored recording. The exclusion is asserted,
+    # not intended.
+    chosen = {r["rid"] for r in sel}
+    examples: dict = {}
+    for rid, rec in sorted(errs.items(), key=lambda kv: rid_key(kv[0])):
+        if rid in chosen:
+            continue
+        for st in rec.get("step_annotations", []):
+            for e in (st.get("errors") or []):
+                tag, desc = e.get("tag"), (e.get("description") or "").strip()
+                if not tag or not desc or len(desc) > 90:
+                    continue
+                bucket = examples.setdefault(tag, [])
+                if desc not in bucket and len(bucket) < 3:
+                    bucket.append(desc)
+    assert set(examples) == set(ERROR_TAGS), \
+        f"no outside-corpus example for {sorted(set(ERROR_TAGS) - set(examples))}"
+    out["error_tag_examples"] = {t: examples[t] for t in ERROR_TAGS}
 
     # ---- refuse to emit a key that cannot be answered ----
     for letter, inst in out["instances"].items():
@@ -235,6 +319,12 @@ def main() -> int:
             f"{letter} has an instance outside its video"
         assert inst == sorted(inst, key=lambda i: (i["t_start"], i["t_end"])), \
             f"{letter} is not chronological"
+        for i in inst:
+            assert i["error"], f"{letter} has an instance with no error field"
+            assert all(t == NO_ERROR or t in ERROR_TAGS for t in i["error"]), \
+                f"{letter} has an instance tagged {i['error']}, which is not in the taxonomy"
+            assert (NO_ERROR in i["error"]) == (len(i["error"]) == 1 and i["error"][0] == NO_ERROR), \
+                f"{letter} mixes 'none' with a real tag: {i['error']}"
     args.out.write_text(json.dumps(out, indent=1, sort_keys=False) + "\n")
 
     n = sum(len(v) for v in out["instances"].values())

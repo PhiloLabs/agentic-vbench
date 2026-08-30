@@ -39,12 +39,16 @@
 # For each of the 22 videos, return the chronological transcript of the recipe steps
 # that person actually performed, one entry per performance:
 #
-#   {"sequence": [{"video": "A", "id": 11, "t_start": 32.5, "t_end": 61.2}, ...]}
+#   {"sequence": [{"video": "A", "id": 11, "t_start": 32.5, "t_end": 61.2,
+#                  "error": "Measurement Error"}, ...]}
 #
 #   video    one of "A".."V"
 #   id       an integer from the 84-label closed vocabulary printed in the prompt
 #   t_start  seconds from the start of that clip
 #   t_end    seconds from the start of that clip
+#   error    how the step was performed: "none", or one of the release's eight error
+#            tags, printed in the prompt with examples drawn from recordings OUTSIDE
+#            this corpus. Section 8 says why this field is here.
 #
 # The full prompt is steps/solve/instruction.md and is generated from the key by
 # provenance/make_task_files.py, so it cannot drift from what is graded.
@@ -102,9 +106,14 @@
 # 6. Scorer: deterministic code only.
 #
 # steps/solve/tests/judge.py, pure stdlib, no network, no model. A predicted entry is a
-# true positive only when it names the right video, its label matches, and BOTH
-# boundaries fall inside that step's own tolerance, under an order-preserving one-to-one
-# alignment within that video (an LCS-style DP). Tolerance is a quarter of the step's
+# true positive only when it names the right video, its label matches, BOTH boundaries
+# fall inside that step's own tolerance, and it reports how the step was performed, under
+# an order-preserving one-to-one alignment within that video (an LCS-style DP). The error
+# field must be one of the tags the release annotates for that step, any one of them: 59
+# of the 314 instances carry more than one, and demanding the full set would ask the agent
+# to reproduce an annotator's list rather than to notice what went wrong. A step with no
+# annotated error requires "none". An entry that omits the field, or gives a value outside
+# the taxonomy, still counts as a prediction and still costs precision; it is not dropped. Tolerance is a quarter of the step's
 # annotated duration, floored at 1 s and capped at 3 s, applied to both boundaries. The
 # reward is F1 over the totals, so misses and false positives both cost. The judge is
 # generated from the key by provenance/make_judge.py.
@@ -127,7 +136,55 @@
 # See calibration/scores.md. The family's two gates are that a strong agent scores below
 # 0.10 and that a real attempt runs past 50 tool-call turns.
 
-# 8. Anti-shortcut ablations. Target: each <= 0.15. Measured, all far below.
+# 8. Why an entry has to say how the step was performed.
+#
+# This field was added after the task had been reviewed once, and the honest account has
+# two halves. The reason is real and can be stated without reference to any score. The
+# trigger was a score.
+#
+# THE REASON. Section 9's ablation table measures the two channels this task's F1 is made
+# of, and they are not equally hard. A model handed sixteen frames per recording and no
+# tools at all places 192 of the 314 steps correctly by label and sequence position; every
+# calibrated agent, with the full video and the ability to seek, lands within a few of the
+# same number. That channel is saturated by a degenerate baseline, so it carries no
+# signal. What remains is boundary precision, and boundary precision on this corpus is
+# bought with decode budget: across the runs on record the count of correctly bounded
+# steps rises with the number of tool calls and with nothing else. A task whose score is
+# decided by how much ffmpeg an agent is willing to run is measuring persistence.
+#
+# CaptainCook4D's distinguishing annotation is the one this task was not using. The
+# release records, for every step, whether it was performed correctly and in which of
+# eight ways it went wrong, and 199 of our 314 instances carry at least one such tag. The
+# task used that only as an eligibility filter. Requiring it in the answer makes the
+# scored quantity depend on judging the performance rather than on locating it: the recipe
+# says what should have happened, and only the video says what this person did.
+#
+# THE TRIGGER. A Codex run under the previous contract, inside the frozen image, scored
+# 0.1621 against the family's 0.10 ceiling: one agent, one session, 213 tool calls, no
+# network, audited clean. Every other explanation was checked and ruled out. The judge was
+# unchanged (all three retained solutions regrade to their shipped values to the digit),
+# the prompt had become harder rather than easier, the container is 1.2 to 1.6 times
+# slower per operation than the host, and no ground truth was reachable from inside. The
+# difference was effort: the earlier run stopped after 72 turns with five sixths of its
+# budget unused. So the 0.0173 on record was the unrepresentative measurement, not the
+# 0.1621, and the difficulty argument this task rested on did not survive a serious
+# attempt.
+#
+# WHAT WAS NOT DONE. The tolerance rule was not tightened, the budget was not cut, and the
+# corpus was not re-selected. Each would have lowered the number without changing what the
+# number measures. The one-recording-per-dish corpus that open item 3 records was built
+# and tested for exactly this purpose and dropped on the evidence: it triples the
+# vocabulary but the canonical-recital saturation goes from 68 percent to 70 percent, so
+# it does not touch the defect.
+#
+# WHAT IT COSTS AN AGENT THAT DOES NOT DO IT. Answering the largest single class every
+# time gets the field right on 36.6 percent of the key, and that is the best a submission
+# that has not judged the performances can do. Applied to the 0.1621 run's own boundary
+# work, it leaves 0.069. Passing 0.10 now requires diagnosing errors, which is the point:
+# the field is a requirement, not a cap, and an agent that genuinely reads what went wrong
+# will beat it.
+#
+# 9. Anti-shortcut ablations. Target: each <= 0.15. Measured, all far below.
 #
 # Three of these are real runs of a strong model under degraded input, not simulations:
 # gpt-5.6-sol at xhigh, each in its own empty working directory so that nothing but the
@@ -137,43 +194,52 @@
 # the three ran with ZERO shell commands, which the retained transcripts show.
 #
 #   degraded input                              entries  label+order   F1
-#   no media at all, forced to answer               352           32   0.0
-#   one still per recording, no tools               326          161   0.0031
-#   16 uniform frames per recording, no tools       312          211   0.0032
+#   no media at all, forced to answer               315           56   0.0
+#   one still per recording, no tools               297          187   0.0033
+#   16 uniform frames per recording, no tools       277          192   0.0034
 #
 # All three are forced to answer. A refusal also scores 0.0, but a zero from a model that
 # declined to guess says nothing about whether the degraded input was enough, and an
 # earlier single-frame run did exactly that.
 #
-# The last row is the most informative number in this file. Handed 16 frames per
-# recording and no way to ask for more, the model matched 211 of the 314 steps by label
-# in the right sequence position, MORE than any calibrated agent managed with the full
-# video and tools, and scored 0.0032. Recognising the procedure is not what this task
-# pays for, and seeking through the video is not optional.
+# The last row is the most informative number in this file, and it is the evidence
+# section 8 rests on. Handed 16 frames per recording and no way to ask for more, the model
+# matched 192 of the 314 steps by label in the right sequence position, which is as many
+# as any calibrated agent has managed with the full video and tools, and scored 0.0034.
+# Two thirds of the label-and-order channel is available to a submission that cannot seek,
+# cannot zoom and cannot ask a question, so that channel carries no signal about the
+# thing this task is supposed to be measuring. What the 192 buys under the current
+# contract is one scored entry, because a match also needs both boundaries and the error
+# tag. That is the shape the field was added to produce.
 #
-# The deterministic constructions, recomputable with run_ablations.py:
+# The deterministic constructions, recomputable with run_ablations.py. Each answers the
+# error field with "none", the key's largest single class, because that is the best a
+# construction that has watched nothing can do; giving them the true tag would hand the
+# attack an oracle it could not have:
 #
 #   oracle, the key itself                                        1.0
 #   empty submission                                              0.0
 #   canonical recipe prior, full dish order                       0.0032
 #   canonical recipe prior, labels that occur only                0.0065
-#   random submission, mean of 400 draws                          0.0001
+#   random submission, mean of 400 draws                          0.0
 #   random submission, best of 400 draws                          0.0032
-#   spam, canonical cycle at 0.5 s stride                         0.0005
-#   spam, canonical cycle at 2 s stride                           0.0013
-#   spam, entry-cap pack of 20000 at 0.5 s stride                 0.0005
-#   spam, top-5 per-recording labels at 2 s stride (upper bound)  0.0007
+#   spam, canonical cycle at 0.5 s stride                         0.0002
+#   spam, canonical cycle at 2 s stride                           0.0005
+#   spam, entry-cap pack of 20000 at 0.5 s stride                 0.0002
+#   spam, top-5 per-recording labels at 2 s stride (upper bound)  0.0003
 #   oracle answers filed under the wrong video                    0.0
 #
 # Reciting the canonical recipe is the strategy an agent that recognises the dish would
 # reach for, and it scores 0.0032. The spam row is the standard attack on an
 # order-preserving alignment; F1 charges for every entry that does not match, so flooding
-# cannot pay, and the best spam of any kind reaches 0.0013. The top-5 row is handed the
+# cannot pay, and the best spam of any kind reaches 0.0006 once the search over strides
+# and label counts in calibration/verify_scores.py is included, which is wider than the
+# four rows above. The top-5 row is handed the
 # labels that actually occur most often in each specific recording, which a real attacker
 # could not know, so it is an upper bound rather than a strategy. Audio-only and
 # video-only do not apply: the clips carry no audio track.
 
-# 9. Input media.
+# 10. Input media.
 #
 #   count: 22 continuous head-mounted GoPro recordings, 10.0 to 19.2 minutes each
 #   total: 293.3 minutes, inside the family's 10-to-300-minute window
@@ -267,7 +333,7 @@
    labels apply to this recording.
 
    What that is worth is already measured, and it is the number this item turns on.
-   Replaying the canonical order is the ablation at the top of section 8: **0.0032**. The
+   Replaying the canonical order is the deterministic prior in section 9: **0.0032**. The
    screen supplies labels and order; the score is almost entirely boundaries, and the
    screen does not supply boundaries.
 
@@ -285,7 +351,8 @@
    of the list is at least a coarse pointer.
 
    The cost of that pointer can be looked up rather than argued. If an attacker recovered
-   every boundary from the scroll with Gaussian error, section 7's jitter curve gives the
+   every boundary from the scroll with Gaussian error, the jitter curve in
+   calibration/scores.md gives the
    score: 0.183 at sigma = 5 s, 0.077 at 8 s, 0.051 at 10 s and 0.023 at 15 s. A pointer
    would have to be good to about 5 seconds to threaten the 0.10 gate, on a cue whose own
    transitions we could not localise to better than tens of seconds. And that is an
