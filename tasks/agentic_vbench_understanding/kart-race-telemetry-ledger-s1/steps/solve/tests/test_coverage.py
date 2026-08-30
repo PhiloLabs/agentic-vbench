@@ -51,6 +51,11 @@ def main():
     part = score(oracle_races(2))
     padded = score(oracle_plus_placeholders(2))
     empty = score({"races": []})["reward"]
+    # non-finite pseudo-numbers must not be accepted as a scored value
+    nan_skid = score({"races": [{"track": r["track"], "t": round((r["t_start"] + r["t_end"]) / 2, 1),
+                                 "items_collected": r["items_collected"], "skid_time": "nan"} for r in GT]})
+    inf_items = score({"races": [{"track": r["track"], "t": round((r["t_start"] + r["t_end"]) / 2, 1),
+                                  "items_collected": float("inf"), "skid_time": r["skid_time"]} for r in GT]})
 
     checks = [
         ("full oracle == 1.0", abs(full - 1.0) < 1e-6, f"reward={full}"),
@@ -65,6 +70,10 @@ def main():
          f"reward={padded['reward']}"),
         ("placeholder-padded coverage == 2/%d" % n, abs(padded["details"]["coverage"] - 2.0 / n) < 1e-3,
          f"coverage={padded['details']['coverage']}"),
+        ("skid='nan' for all -> not credited (< 0.02)", nan_skid["reward"] < 0.02,
+         f"reward={nan_skid['reward']} cov={nan_skid['details']['coverage']}"),
+        ("items=inf for all -> not credited (< 0.02)", inf_items["reward"] < 0.02,
+         f"reward={inf_items['reward']} cov={inf_items['details']['coverage']}"),
         ("empty == 0.0", empty == 0.0, f"reward={empty}"),
     ]
     ok = True

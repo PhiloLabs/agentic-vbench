@@ -40,7 +40,7 @@ the GT is renormalised out so the oracle still reaches 1.0.
 
 Ground truth is baked verifier-side at /tests/ground_truth.json.
 """
-import argparse, json
+import argparse, json, math
 from pathlib import Path
 
 GT_PATH = Path(__file__).with_name("ground_truth.json")
@@ -61,10 +61,13 @@ DIMS = [("items_collected", "items_collected", 0.55),
 
 
 def as_num(v):
+    """Parse to a FINITE float, else None. Rejects nan/inf (and their string forms) so a
+    non-finite pseudo-number cannot pass the scored-field check or poison accuracy/tau."""
     try:
-        return float(v)
+        f = float(v)
     except (TypeError, ValueError):
         return None
+    return f if math.isfinite(f) else None
 
 
 def tau(pairs):

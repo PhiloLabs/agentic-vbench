@@ -26,21 +26,13 @@ shows as a meter and boost flames.
 
 ## How it is scored
 
-Scoring is **exact**, not just rank — you are graded against SuperTuxKart's own telemetry:
-
-    per quantity q:  score_q = clamp(rank_agreement_q, 0, 1) * accuracy_q
-      accuracy_q = mean over races of  max(0, 1 - |your value - true| / max(1, 0.30*true))
-    reward = max(0, 0.55*score_items + 0.45*score_skid)
-
-Two things must both hold: your values must be **accurate** (within ~30% of the true value per
-race — a systematic under-count is penalised, not forgiven), **and** they must rank the races
-correctly (the rank term gates guessing — a constant or random answer scores ~0). Getting the
-races in roughly the right order but with counts that are consistently too low will **not** score
-well. Accurate counting of pickups and timing of drift across a dozen races is the task.
-
-Each race you report is matched to the true race whose **video segment contains your `t`** (±15 s
-window), so you must anchor each race to the right point in the video — correct counts placed at the
-wrong time earn nothing.
+Your reported values are graded for **accuracy**: each `items_collected` and `skid_time` must be
+within about **30%** of the true value for that race (a systematic under-count is penalised, not
+forgiven — being roughly in the right order but consistently too low will not score well). Each race
+you report is matched to the true race whose **video segment contains your `t`** (a **±15 s** window),
+so anchor each race to the right point in the video — correct values placed at the wrong time earn
+nothing. Only `items_collected` and `skid_time` are scored. Accurate counting of pickups and timing
+of drift across the whole suite is the task.
 
 Because only the hero is scored and the camera is on the hero the entire race, **every scored
 event is on screen** — nothing you must measure happens off camera.
@@ -59,8 +51,8 @@ below show the SCHEMA only — replace them with your own observed values for ea
 }
 ```
 
-- `items_collected`: powerup boxes the **hero** drove through this race. **Scored (weight 0.55).**
-- `skid_time`: total **seconds** the **hero** spent drifting (yellow wheel-sparks) this race. **Scored (weight 0.45).**
+- `items_collected`: powerup boxes the **hero** drove through this race (a count). **Scored.**
+- `skid_time`: total **seconds** the **hero** spent drifting (yellow wheel-sparks) this race (a duration). **Scored.**
 - `t`: the video time in **seconds** (from the start) at which this race happens — any moment during
   the race, or its start. Your race is matched to the true race whose video segment contains this
   time (±15 s), so it need not be exact. **Required per race.**
