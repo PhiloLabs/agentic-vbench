@@ -19,9 +19,20 @@ RUN pip install --no-cache-dir \
         imageio-ffmpeg==0.5.1 \
         pillow==10.4.0
 
-# Segmentation and tracking stack, preinstalled so the agent doesn't need
-# network access mid-solve to reach for them. CPU wheels: the task declares no
-# GPU, and 800 frames fits inside the agent budget on CPU.
+# Segmentation and tracking stack. CPU wheels: the task declares no GPU, and
+# 800 frames fits inside the agent budget on CPU.
+#
+# Only the package CODE is preinstalled here, not cellpose's pretrained model
+# weights -- cellpose downloads those lazily on first use of a named model
+# (e.g. models.CellposeModel(model_type='cyto3')), which fails under this
+# task's allow_internet=false: confirmed in a real trace, urlopen raised
+# "[Errno -3] Temporary failure in name resolution". An agent can still use
+# the package for anything not requiring a pretrained download (custom
+# thresholding/segmentation code, trackastra's non-pretrained paths, etc.),
+# but cyto3/nuclei/etc. pretrained inference is not available offline as
+# shipped. Not fixed in this pass -- see PR #112 for the maintainer
+# discussion on whether to bake the weights in (which would require
+# rerunning calibration against the changed image) or leave it as-is.
 RUN pip install --no-cache-dir \
         torch==2.4.1 torchvision==0.19.1 \
         --index-url https://download.pytorch.org/whl/cpu

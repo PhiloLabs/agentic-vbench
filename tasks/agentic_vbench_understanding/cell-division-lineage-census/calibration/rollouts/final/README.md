@@ -57,7 +57,17 @@ container.
 | Antigravity (Gemini) | _no credential_ | -- | still pending, no Google/Gemini API access in this environment |
 | no_media | 0.0000 | 0 | raw API call, no image, no tools. Model **confabulated** having inspected the video and written an output file it never had access to -- notable finding, not just a low score |
 | single_frame | 0.0000 | 0 | raw API call, one still frame (frame 400) only, no tools |
-| frame_dump_no_tools | 0.0000 (no valid answer) | 0 | raw API call, 20-frame contact sheet, no tools. Model attempted to emit a fake tool-call rather than a direct answer -- produced no parseable JSON |
+| frame_dump_no_tools | 0.0000 | 0 | raw API call, **all 800 frames** as 8 contact sheets (`full_dump/sheet_00.png`..`sheet_07.png`, 100 frames each, labeled), explicitly instructed to give a direct best-effort answer with no tool calls. Completed naturally (`stop_reason: end_turn`); division F1 0.009, all 4 gates fail |
+
+Redone 2026-08-31 after review: the first `frame_dump_no_tools` pass only
+sampled 20 of 800 frames and let the model attempt a tool call it had no
+access to, producing no parseable answer and no reward artifact. This run
+fixes both -- full frame coverage, an explicit no-tools/direct-answer
+instruction, and a complete `..._request.json`/`..._response_meta.json`/
+`..._raw.txt`/`..._solution.json`/`..._reward.json` set. The `no_media` and
+`single_frame` rows above are unchanged (same responses/rewards as before),
+but now also have `..._request.json` files recording the exact request sent
+(model, max_tokens, image byte-length, full text prompt) for auditability.
 
 Both real-agent turn counts (46, 26) are below this family's usual >50 norm.
 Noting that plainly: this reflects how these two runs actually distributed
