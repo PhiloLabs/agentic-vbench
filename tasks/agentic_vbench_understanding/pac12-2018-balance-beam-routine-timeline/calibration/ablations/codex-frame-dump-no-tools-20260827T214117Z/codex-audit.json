@@ -1,0 +1,12 @@
+{
+  "completed_command_count": 0,
+  "matches": {
+    "network_command": 0,
+    "url_scheme": 0,
+    "web_tool": 0
+  },
+  "passed": true,
+  "provider_control_plane_excluded": true,
+  "schema_version": 1,
+  "scope": "agent tool calls decoded from raw Codex JSONL"
+}

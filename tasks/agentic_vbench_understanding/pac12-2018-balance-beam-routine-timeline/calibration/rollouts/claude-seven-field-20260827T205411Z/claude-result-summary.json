@@ -1,0 +1,344 @@
+{
+  "audit": {
+    "artifacts_scanned": [
+      "claude-code-opus-4.8-high.jsonl",
+      "claude-stderr.txt",
+      "claude-initial-prompt.md",
+      "claude-solution.json",
+      "claude-checkpoint.json"
+    ],
+    "checks": {
+      "api_retry_events": 0,
+      "authentication_failure_matches": 0,
+      "bash_commands_with_url_schemes": 0,
+      "credential_value_pattern_matches": 0,
+      "network_capable_bash_commands": 0,
+      "permission_denials": 0,
+      "rate_limit_event_statuses": [
+        "allowed",
+        "allowed",
+        "allowed_warning",
+        "allowed_warning"
+      ],
+      "secret_access_indicator_bash_commands": 0,
+      "server_web_fetch_requests": 0,
+      "server_web_search_requests": 0,
+      "unique_bash_commands_scanned": 24,
+      "web_tool_uses": 0
+    },
+    "created_at_utc": "2026-08-27T21:17:12.131624+00:00",
+    "method": "Parsed every native JSONL record and unique tool-use input; audited every Bash command for URL schemes, network-capable commands, and secret-access indicators; scanned non-image text plus stderr/auth evidence for credential and authentication-failure patterns.",
+    "no_prohibited_web_or_network_use": true,
+    "no_secret_access_or_exposure_detected": true,
+    "result": "pass",
+    "schema_version": 1
+  },
+  "auth_evidence": {
+    "authMethod": "claude.ai",
+    "authentication_failure_present": false,
+    "live_init_api_key_source": "none",
+    "loggedIn": true,
+    "subscriptionType": "pro"
+  },
+  "effort": "high",
+  "external_process_attempts": 1,
+  "gates": {
+    "calibration_valid": true,
+    "no_prohibited_web_or_network_use": true,
+    "no_timeout_resume_or_restart": true,
+    "real_completed_tool_calls_exceed_50": true,
+    "reward_below_0_10": true,
+    "schema_valid_solution": true
+  },
+  "harness": "claude",
+  "input_integrity": {
+    "all_protected_task_inputs_unchanged": true,
+    "checked_at_utc": "2026-08-27T21:17:12.131624+00:00",
+    "checkpoint_artifact_sha256": "c80999eb54570679ffc5341d453357b7da679678bed5957d88084f9a7cd81d15",
+    "checkpoint_preserved_byte_identical": true,
+    "checkpoint_workspace_sha256": "c80999eb54570679ffc5341d453357b7da679678bed5957d88084f9a7cd81d15",
+    "prompt_matches_run_metadata": true,
+    "protected_task_inputs": {
+      "annotation_status": {
+        "after_sha256": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+        "before_sha256": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/annotations/status.json",
+        "unchanged": true
+      },
+      "ground_truth": {
+        "after_sha256": "c4860ff91b27f036d1e6e6e8b8c98324b485db7b3d719af47fb173ba79ff5758",
+        "before_sha256": "c4860ff91b27f036d1e6e6e8b8c98324b485db7b3d719af47fb173ba79ff5758",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/steps/solve/tests/ground_truth.json",
+        "unchanged": true
+      },
+      "hash_artifacts": {
+        "after_sha256": "a02644b092ecdd8b1c0fc16d7b5269ba9d031a5dd3077bdfcf4e074bf6cb8907",
+        "before_sha256": "a02644b092ecdd8b1c0fc16d7b5269ba9d031a5dd3077bdfcf4e074bf6cb8907",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/runpack/hash_artifacts.py",
+        "unchanged": true
+      },
+      "instruction": {
+        "after_sha256": "f59124565caa6e74abbf2a9b2d74bb52851a4940bb4dd571b4f11476d6d8e146",
+        "before_sha256": "f59124565caa6e74abbf2a9b2d74bb52851a4940bb4dd571b4f11476d6d8e146",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/steps/solve/instruction.md",
+        "unchanged": true
+      },
+      "judge": {
+        "after_sha256": "52c4105dced75b354e12865135c2b0399c0f7e5c228f3f7d66b6034717384187",
+        "before_sha256": "52c4105dced75b354e12865135c2b0399c0f7e5c228f3f7d66b6034717384187",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/steps/solve/tests/judge.py",
+        "unchanged": true
+      },
+      "run_with_deadline": {
+        "after_sha256": "c048a90d326e01e47248d98a6b43ce1fb8634ca9e4b56e8b0fdaf283ae8a8f1e",
+        "before_sha256": "c048a90d326e01e47248d98a6b43ce1fb8634ca9e4b56e8b0fdaf283ae8a8f1e",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/runpack/run_with_deadline.py",
+        "unchanged": true
+      },
+      "runpack_readme": {
+        "after_sha256": "3eacc5afce750d12173611000c8047855ac5be56040662275b3533804f07f73d",
+        "before_sha256": "3eacc5afce750d12173611000c8047855ac5be56040662275b3533804f07f73d",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/runpack/README.md",
+        "unchanged": true
+      },
+      "scores": {
+        "after_sha256": "c95b7c068915dd83b2ca1b492de6e4d1c643ce33138a47ef8573d435bf74b2ac",
+        "before_sha256": "c95b7c068915dd83b2ca1b492de6e4d1c643ce33138a47ef8573d435bf74b2ac",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/scores.md",
+        "unchanged": true
+      },
+      "source_video": {
+        "after_sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb",
+        "before_sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb",
+        "path": "work/source/source.mp4",
+        "unchanged": true
+      },
+      "spec": {
+        "after_sha256": "eee72265dc071a7231b685c58ec3b1dd0c52118f52cca36fa24a028624562a94",
+        "before_sha256": "eee72265dc071a7231b685c58ec3b1dd0c52118f52cca36fa24a028624562a94",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/SPEC.md",
+        "unchanged": true
+      },
+      "stage_workspace": {
+        "after_sha256": "a35fbd0227e4755e83a94983a35660709b9a5ee3cb6de83fe59b9230453b0b4f",
+        "before_sha256": "a35fbd0227e4755e83a94983a35660709b9a5ee3cb6de83fe59b9230453b0b4f",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/runpack/stage_workspace.py",
+        "unchanged": true
+      },
+      "task_toml": {
+        "after_sha256": "ed5d760e71069027dbc3db895723e9556fa0ad7a4c0724ff087275e285c0824a",
+        "before_sha256": "ed5d760e71069027dbc3db895723e9556fa0ad7a4c0724ff087275e285c0824a",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/task.toml",
+        "unchanged": true
+      },
+      "test_judge": {
+        "after_sha256": "afad69d9cc7ee486e66eac2be5eb066955e79b047d668bf6085a14d2f509c94e",
+        "before_sha256": "afad69d9cc7ee486e66eac2be5eb066955e79b047d668bf6085a14d2f509c94e",
+        "path": "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/steps/solve/tests/test_judge.py",
+        "unchanged": true
+      }
+    },
+    "rendered_prompt_sha256": "3753cf85621065b3a42aa75f5540e3ae10121a7f708130d61142275650f5a949",
+    "schema_version": 1,
+    "solution_artifact_sha256": "ba957c5c60f6ffe046d4346f5be1f9e2aff9c57ecaa7308a3f69a6fe8dd3d369",
+    "solution_preserved_byte_identical": true,
+    "solution_workspace_sha256": "ba957c5c60f6ffe046d4346f5be1f9e2aff9c57ecaa7308a3f69a6fe8dd3d369",
+    "source_matches_manifest": true,
+    "staged_source_sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb"
+  },
+  "model": "claude-opus-4-8",
+  "native_result": {
+    "duration_api_ms": 1128860,
+    "duration_ms": 1250302,
+    "init": {
+      "api_key_source": "none",
+      "mcp_server_count": 0,
+      "model": "claude-opus-4-8",
+      "permission_mode": "dontAsk"
+    },
+    "is_error": false,
+    "num_turns": 61,
+    "permission_denials": 0,
+    "rate_limit_event_statuses": [
+      "allowed",
+      "allowed",
+      "allowed_warning",
+      "allowed_warning"
+    ],
+    "subtype": "success",
+    "usage": {
+      "cache_creation_input_tokens": 166140,
+      "cache_read_input_tokens": 4880120,
+      "input_tokens": 106,
+      "output_tokens": 70004,
+      "server_web_fetch_requests": 0,
+      "server_web_search_requests": 0
+    }
+  },
+  "preserved_outputs": {
+    "checkpoint": "claude-checkpoint.json",
+    "hash_manifest": "claude-artifacts.json",
+    "input_manifest": "claude-input-manifest.json",
+    "network_secret_audit": "claude-audit.json",
+    "raw_native_trajectory": "claude-code-opus-4.8-high.jsonl",
+    "raw_solution": "claude-solution.json",
+    "raw_stderr": "claude-stderr.txt",
+    "rendered_prompt": "claude-initial-prompt.md",
+    "result_summary": "claude-result-summary.json",
+    "reward": "claude-reward.txt",
+    "run_metadata": "claude-run.json",
+    "tool_call_count": "claude-tool-call-count.json",
+    "verifier_result": "claude-verifier-result.json"
+  },
+  "prohibited_actions": {
+    "antigravity_or_codex_launched": false,
+    "comments_posted": false,
+    "committed": false,
+    "pushed": false,
+    "scores_md_edited": false
+  },
+  "recorded_at_utc": "2026-08-27T21:17:12.131624+00:00",
+  "resumed_restarted_or_continued": false,
+  "rollout": "claude-seven-field-20260827T205411Z",
+  "run": {
+    "command_template": [
+      "claude",
+      "-p",
+      "__PROMPT__",
+      "--model",
+      "claude-opus-4-8",
+      "--effort",
+      "high",
+      "--output-format",
+      "stream-json",
+      "--verbose",
+      "--include-partial-messages",
+      "--no-session-persistence",
+      "--safe-mode",
+      "--no-chrome",
+      "--permission-mode",
+      "dontAsk",
+      "--allowedTools",
+      "Bash,Read,Write,Edit,Glob,Grep",
+      "--disallowedTools",
+      "WebFetch,WebSearch"
+    ],
+    "continued_or_resumed": false,
+    "cwd": "/private/tmp/avb-pac12-claude-seven-field-20260827T205411Z",
+    "deadline_seconds": 5400,
+    "elapsed_seconds": 1251.308,
+    "finished_at_utc": "2026-08-27T21:15:41.852338+00:00",
+    "process_returncode": 0,
+    "prompt_sha256": "3753cf85621065b3a42aa75f5540e3ae10121a7f708130d61142275650f5a949",
+    "schema_version": 1,
+    "started_at_utc": "2026-08-27T20:54:50.544196+00:00",
+    "stderr_artifact": "claude-stderr.txt",
+    "stdout_artifact": "claude-code-opus-4.8-high.jsonl",
+    "timed_out": false,
+    "wrapper_exit_code": 0
+  },
+  "schema_version": 1,
+  "solution_validation": {
+    "local_contract_checks": {
+      "all_names_nonempty_trimmed": true,
+      "all_records_exactly_seven_fields": true,
+      "all_schools_allowed": true,
+      "all_scores_formatted": true,
+      "all_timestamps_formatted": true,
+      "beam_routines_is_list": true,
+      "strictly_chronological": true,
+      "top_level_exact_key": true
+    },
+    "records": 2,
+    "schema_valid": true,
+    "schema_version": 1,
+    "solution": "claude-solution.json",
+    "validated_at_utc": "2026-08-27T21:17:12.131624+00:00",
+    "verifier_invalid_records": 0,
+    "verifier_reason": "ok"
+  },
+  "source_sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb",
+  "status": "completed_valid",
+  "terminal_reason": "completed",
+  "tool_calls": {
+    "counted_at_utc": "2026-08-27T21:17:12.131624+00:00",
+    "counting_rule": "Parse every JSONL record; deduplicate assistant tool_use blocks by tool-use ID; count a real completed tool call only when that ID has a corresponding user tool_result block. Failed results count as completed calls.",
+    "error_tool_results": 0,
+    "harness": "claude",
+    "invalid_jsonl_records": 0,
+    "jsonl_records": 2375,
+    "native_num_turns": 61,
+    "orphan_tool_results": 0,
+    "real_completed_tool_calls": 56,
+    "schema_version": 1,
+    "successful_tool_results": 56,
+    "system_subtypes": {
+      "init": 1,
+      "status": 57,
+      "task_notification": 3,
+      "task_started": 3,
+      "thinking_tokens": 570
+    },
+    "tool_names": {
+      "Bash": 24,
+      "Read": 32
+    },
+    "tool_result_blocks": 56,
+    "tool_use_blocks": 56,
+    "top_level_record_types": {
+      "assistant": 124,
+      "rate_limit_event": 4,
+      "result": 1,
+      "stream_event": 1549,
+      "system": 634,
+      "tool_progress": 3,
+      "user": 60
+    },
+    "trajectory": "claude-code-opus-4.8-high.jsonl",
+    "unique_tool_results": 56,
+    "unique_tool_uses": 56,
+    "unmatched_tool_uses": 0,
+    "visual_payloads": {
+      "base64_image_occurrences": 32,
+      "raw_trajectory_preserved_without_rewriting": true,
+      "total_base64_encoded_characters": 13026140,
+      "unique_base64_image_payloads": 32
+    }
+  },
+  "valid_strong_agent_calibration": true,
+  "verifier": {
+    "details": {
+      "diagnostics": {
+        "beam_score_exact": 2,
+        "broadly_matched_records": 2,
+        "dismount_takeoff_within_tolerance": 1,
+        "end_within_tolerance": 2,
+        "gymnast_name_exact": 2,
+        "school_exact": 2,
+        "score_time_within_tolerance": 2,
+        "start_within_tolerance": 0
+      },
+      "dismount_takeoff_tolerance_s": 0.25,
+      "end_tolerance_s": 0.25,
+      "f1": 0.0,
+      "n_ground_truth": 23,
+      "n_invalid_records": 0,
+      "n_predicted": 2,
+      "precision": 0.0,
+      "reason": "ok",
+      "recall": 0.0,
+      "score_time_tolerance_s": 1.0,
+      "start_tolerance_s": 0.25,
+      "true_positives_complete_record": 0
+    },
+    "reward": 0.0
+  },
+  "versions": {
+    "agy": "1.1.22",
+    "claude": "2.1.220 (Claude Code)",
+    "codex": "codex-cli 0.146.0-alpha.3.1",
+    "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 8.1.2 Copyright (c) 2007-2026 the FFmpeg developers",
+    "python": "Python 3.13.0"
+  }
+}

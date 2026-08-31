@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "rollout": "codex-single-frame-20260827T214117Z",
+  "run_type": "shortcut_ablation",
+  "ablation": "single_frame",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "harness": "codex",
+  "input_manifest": {
+    "annotation_status_sha256": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+    "canonical_prompt_sha256": "f59124565caa6e74abbf2a9b2d74bb52851a4940bb4dd571b4f11476d6d8e146",
+    "created_at_utc": "2026-08-27T21:41:19.743773+00:00",
+    "harness": "codex",
+    "judge_sha256": "52c4105dced75b354e12865135c2b0399c0f7e5c228f3f7d66b6034717384187",
+    "rendered_prompt_sha256": "8a8f196df49660099a132e01d59b760e02a9e5dbcadeb1c04aa179ed91a561ca",
+    "schema_version": 2,
+    "task_toml_sha256": "ed5d760e71069027dbc3db895723e9556fa0ad7a4c0724ff087275e285c0824a",
+    "workspace": "/private/tmp/avb-pac12-ablations-20260827T214117Z-single-frame",
+    "workspace_started_empty": true,
+    "prompt_localization": {
+      "from": "/workspace",
+      "to": "/private/tmp/avb-pac12-ablations-20260827T214117Z-single-frame"
+    },
+    "locked_full_source": {
+      "sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb",
+      "bytes": 1791218588,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1280,
+            "height": 720,
+            "avg_frame_rate": "30000/1001",
+            "nb_frames": "250439"
+          },
+          {
+            "index": 1,
+            "codec_name": "opus",
+            "codec_type": "audio",
+            "avg_frame_rate": "0/0",
+            "nb_frames": "417817"
+          }
+        ],
+        "format": {
+          "duration": "8356.334000"
+        }
+      }
+    },
+    "ablation": {
+      "name": "single_frame",
+      "description": "one representative frame only",
+      "implementation": {
+        "selection": "temporal midpoint of the locked source: 4178.167 seconds (8356.334 / 2)",
+        "delivered_path": "materials/source.mp4",
+        "container": "MP4",
+        "video_frames": 1,
+        "audio_streams": 0,
+        "derivation_command": "ffmpeg -hide_banner -nostdin -y -ss 4178.167 -i <locked-source> -map 0:v:0 -frames:v 1 -an -c:v libx264 -pix_fmt yuv420p -movflags +faststart <workspace>/materials/source.mp4"
+      }
+    },
+    "delivered_media": {
+      "present": true,
+      "sha256": "6d4cdf1940d15a04b0d5ab8a3d4334ce1080bbc6144ffed697ed1bc3b1e0d617",
+      "bytes": 29262,
+      "probe": {
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "index": 0,
+            "codec_name": "h264",
+            "codec_type": "video",
+            "width": 1280,
+            "height": 720,
+            "avg_frame_rate": "30000/1001",
+            "nb_read_frames": "1"
+          }
+        ],
+        "format": {
+          "duration": "0.033367"
+        }
+      }
+    },
+    "canonical_prompt_otherwise_unchanged": true,
+    "internet_allowed": false,
+    "outside_knowledge_allowed": false,
+    "resume_or_continuation_allowed": false
+  },
+  "run": {
+    "command_template": [
+      "codex",
+      "exec",
+      "--json",
+      "--ephemeral",
+      "--ignore-user-config",
+      "--skip-git-repo-check",
+      "--sandbox",
+      "workspace-write",
+      "--model",
+      "gpt-5.6-sol",
+      "--config",
+      "model_reasoning_effort=\"xhigh\"",
+      "-"
+    ],
+    "continued_or_resumed": false,
+    "cwd": "/private/tmp/avb-pac12-ablations-20260827T214117Z-single-frame",
+    "deadline_seconds": 5400,
+    "elapsed_seconds": 41.69,
+    "finished_at_utc": "2026-08-27T21:42:54.063714+00:00",
+    "process_returncode": 0,
+    "prompt_sha256": "8a8f196df49660099a132e01d59b760e02a9e5dbcadeb1c04aa179ed91a561ca",
+    "schema_version": 1,
+    "started_at_utc": "2026-08-27T21:42:12.373300+00:00",
+    "stderr_artifact": "codex-stderr.txt",
+    "stdout_artifact": "codex-gpt-5.6-sol-xhigh.jsonl",
+    "timed_out": false,
+    "wrapper_exit_code": 0
+  },
+  "verifier": {
+    "reward": 0.0,
+    "details": {
+      "reason": "ok",
+      "n_ground_truth": 23,
+      "n_predicted": 0,
+      "n_invalid_records": 0,
+      "true_positives_complete_record": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "start_tolerance_s": 0.25,
+      "end_tolerance_s": 0.25,
+      "dismount_takeoff_tolerance_s": 0.25,
+      "score_time_tolerance_s": 1.0,
+      "diagnostics": {
+        "broadly_matched_records": 0,
+        "start_within_tolerance": 0,
+        "end_within_tolerance": 0,
+        "dismount_takeoff_within_tolerance": 0,
+        "score_time_within_tolerance": 0,
+        "school_exact": 0,
+        "gymnast_name_exact": 0,
+        "beam_score_exact": 0
+      }
+    }
+  },
+  "tool_calls": {
+    "schema_version": 1,
+    "trajectory": "codex-gpt-5.6-sol-xhigh.jsonl",
+    "counting_rule": "Count each item.completed command_execution or file_change as one real completed tool-call turn; failed command executions count because the tool call completed and returned a result.",
+    "real_completed_tool_call_turns": 5,
+    "command_executions": 4,
+    "command_execution_status": {
+      "completed": 3,
+      "failed": 1
+    },
+    "file_changes": 1,
+    "agent_messages_excluded": 4,
+    "gate_note": "The >50 tool-call strong-agent gate does not apply to shortcut ablations."
+  },
+  "audit": {
+    "schema_version": 1,
+    "created_at_utc": "2026-08-27T21:47:38Z",
+    "artifacts_scanned": [
+      "codex-gpt-5.6-sol-xhigh.jsonl",
+      "codex-stderr.txt",
+      "codex-initial-prompt.md",
+      "codex-solution.json",
+      "codex-checkpoint.json"
+    ],
+    "checks": {
+      "web_tool_matches": 0,
+      "url_scheme_matches_in_completed_commands": 0,
+      "network_command_matches": 0,
+      "secret_access_indicator_matches_in_completed_commands": 0,
+      "out_of_workspace_tool_discovery_matches": 0
+    },
+    "interpretation": "System executable/library discovery is counted separately; no outside competition data is permitted.",
+    "result": "pass"
+  },
+  "gates": {
+    "reward_at_most_0_15": true,
+    "tool_call_gate_applicable": false,
+    "ablation_pass": true
+  },
+  "preserved_outputs": {
+    "rendered_prompt": "codex-initial-prompt.md",
+    "input_manifest": "codex-input-manifest.json",
+    "raw_trajectory": "codex-gpt-5.6-sol-xhigh.jsonl",
+    "raw_stderr": "codex-stderr.txt",
+    "run_metadata": "codex-run.json",
+    "checkpoint": "codex-checkpoint.json",
+    "raw_solution": "codex-solution.json"
+  }
+}

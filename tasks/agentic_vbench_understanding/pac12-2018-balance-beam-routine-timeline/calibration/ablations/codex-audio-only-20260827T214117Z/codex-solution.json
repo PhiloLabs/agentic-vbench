@@ -1,0 +1,211 @@
+{
+  "beam_routines": [
+    {
+      "start_time": "00:03:48.000",
+      "end_time": "00:04:59.000",
+      "dismount_takeoff_time": "00:04:57.900",
+      "school": "Stanford",
+      "gymnast_name": "Kaylee Cole",
+      "beam_score": "9.725",
+      "score_time": "00:08:42.450"
+    },
+    {
+      "start_time": "00:08:47.000",
+      "end_time": "00:09:56.000",
+      "dismount_takeoff_time": "00:09:54.800",
+      "school": "Stanford",
+      "gymnast_name": "Rachel Flam",
+      "beam_score": "9.075",
+      "score_time": "00:29:24.000"
+    },
+    {
+      "start_time": "00:13:56.500",
+      "end_time": "00:15:09.600",
+      "dismount_takeoff_time": "00:15:07.300",
+      "school": "Stanford",
+      "gymnast_name": "Elizabeth Price",
+      "beam_score": "9.825",
+      "score_time": "00:18:59.970"
+    },
+    {
+      "start_time": "00:19:09.000",
+      "end_time": "00:20:23.300",
+      "dismount_takeoff_time": "00:20:19.900",
+      "school": "Stanford",
+      "gymnast_name": "Lauren Navarro",
+      "beam_score": "9.775",
+      "score_time": "00:42:45.000"
+    },
+    {
+      "start_time": "00:24:05.500",
+      "end_time": "00:25:19.000",
+      "dismount_takeoff_time": "00:25:17.000",
+      "school": "Stanford",
+      "gymnast_name": "Kyla Bryant",
+      "beam_score": "9.800",
+      "score_time": "00:57:08.000"
+    },
+    {
+      "start_time": "00:29:22.000",
+      "end_time": "00:30:30.100",
+      "dismount_takeoff_time": "00:30:27.500",
+      "school": "Stanford",
+      "gymnast_name": "Taryn Fitzgerald",
+      "beam_score": "9.875",
+      "score_time": "00:32:53.000"
+    },
+    {
+      "start_time": "00:35:56.000",
+      "end_time": "00:36:58.000",
+      "dismount_takeoff_time": "00:36:55.500",
+      "school": "Arizona State",
+      "gymnast_name": "Cairo Leonard-Baker",
+      "beam_score": "9.725",
+      "score_time": "00:38:15.000"
+    },
+    {
+      "start_time": "00:40:59.000",
+      "end_time": "00:42:09.200",
+      "dismount_takeoff_time": "00:42:07.700",
+      "school": "Arizona State",
+      "gymnast_name": "Kali Udovich",
+      "beam_score": "9.775",
+      "score_time": "00:45:45.000"
+    },
+    {
+      "start_time": "00:51:00.000",
+      "end_time": "00:52:07.500",
+      "dismount_takeoff_time": "00:52:06.000",
+      "school": "Arizona State",
+      "gymnast_name": "Morgan Wilson",
+      "beam_score": "9.800",
+      "score_time": "00:55:30.000"
+    },
+    {
+      "start_time": "00:55:31.000",
+      "end_time": "00:56:59.500",
+      "dismount_takeoff_time": "00:56:58.000",
+      "school": "Arizona State",
+      "gymnast_name": "Ashley Safranski",
+      "beam_score": "9.800",
+      "score_time": "01:00:45.000"
+    },
+    {
+      "start_time": "01:01:17.000",
+      "end_time": "01:02:39.000",
+      "dismount_takeoff_time": "01:02:37.000",
+      "school": "Arizona State",
+      "gymnast_name": "Justine Callis",
+      "beam_score": "9.800",
+      "score_time": "01:05:55.000"
+    },
+    {
+      "start_time": "01:09:28.000",
+      "end_time": "01:10:52.000",
+      "dismount_takeoff_time": "01:10:50.000",
+      "school": "Oregon State",
+      "gymnast_name": "McKenna Singley",
+      "beam_score": "9.800",
+      "score_time": "01:13:05.000"
+    },
+    {
+      "start_time": "01:14:26.000",
+      "end_time": "01:15:36.700",
+      "dismount_takeoff_time": "01:15:35.500",
+      "school": "Oregon State",
+      "gymnast_name": "Alyssa Minyard",
+      "beam_score": "9.725",
+      "score_time": "01:16:09.300"
+    },
+    {
+      "start_time": "01:19:59.800",
+      "end_time": "01:21:08.300",
+      "dismount_takeoff_time": "01:21:07.000",
+      "school": "Oregon State",
+      "gymnast_name": "Kaitlyn Yanish",
+      "beam_score": "9.875",
+      "score_time": "01:24:00.000"
+    },
+    {
+      "start_time": "01:25:25.500",
+      "end_time": "01:26:17.500",
+      "dismount_takeoff_time": "01:26:16.000",
+      "school": "Oregon State",
+      "gymnast_name": "Mila Lazaro",
+      "beam_score": "9.900",
+      "score_time": "01:30:00.000"
+    },
+    {
+      "start_time": "01:30:20.600",
+      "end_time": "01:31:35.300",
+      "dismount_takeoff_time": "01:31:34.000",
+      "school": "Oregon State",
+      "gymnast_name": "Sabrina Gill",
+      "beam_score": "9.850",
+      "score_time": "01:32:10.000"
+    },
+    {
+      "start_time": "01:36:22.500",
+      "end_time": "01:37:40.000",
+      "dismount_takeoff_time": "01:37:38.500",
+      "school": "Oregon State",
+      "gymnast_name": "Destiny Davis",
+      "beam_score": "9.850",
+      "score_time": "01:41:55.000"
+    },
+    {
+      "start_time": "01:44:52.000",
+      "end_time": "01:45:45.000",
+      "dismount_takeoff_time": "01:45:43.500",
+      "school": "Arizona",
+      "gymnast_name": "Haley Hendrickson",
+      "beam_score": "9.875",
+      "score_time": "01:45:49.080"
+    },
+    {
+      "start_time": "01:49:47.000",
+      "end_time": "01:51:00.000",
+      "dismount_takeoff_time": "01:50:58.000",
+      "school": "Arizona",
+      "gymnast_name": "Maddie Leydin",
+      "beam_score": "9.850",
+      "score_time": "01:54:51.240"
+    },
+    {
+      "start_time": "01:54:54.000",
+      "end_time": "01:56:06.000",
+      "dismount_takeoff_time": "01:56:04.500",
+      "school": "Arizona",
+      "gymnast_name": "Kennedy Schneider",
+      "beam_score": "9.800",
+      "score_time": "02:00:35.000"
+    },
+    {
+      "start_time": "02:00:57.000",
+      "end_time": "02:02:08.500",
+      "dismount_takeoff_time": "02:02:07.000",
+      "school": "Arizona",
+      "gymnast_name": "Courtney Cowles",
+      "beam_score": "9.875",
+      "score_time": "02:05:45.000"
+    },
+    {
+      "start_time": "02:05:59.000",
+      "end_time": "02:07:10.000",
+      "dismount_takeoff_time": "02:07:08.000",
+      "school": "Arizona",
+      "gymnast_name": "Victoria Ortiz",
+      "beam_score": "9.775",
+      "score_time": "02:10:55.000"
+    },
+    {
+      "start_time": "02:10:50.000",
+      "end_time": "02:12:19.000",
+      "dismount_takeoff_time": "02:12:17.000",
+      "school": "Arizona",
+      "gymnast_name": "Madison Cindric",
+      "beam_score": "9.825",
+      "score_time": "02:15:25.000"
+    }
+  ]
+}

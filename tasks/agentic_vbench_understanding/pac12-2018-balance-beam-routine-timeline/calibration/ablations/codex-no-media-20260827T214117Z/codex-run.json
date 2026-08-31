@@ -1,0 +1,30 @@
+{
+  "command_template": [
+    "codex",
+    "exec",
+    "--json",
+    "--ephemeral",
+    "--ignore-user-config",
+    "--skip-git-repo-check",
+    "--sandbox",
+    "workspace-write",
+    "--model",
+    "gpt-5.6-sol",
+    "--config",
+    "model_reasoning_effort=\"xhigh\"",
+    "-"
+  ],
+  "continued_or_resumed": false,
+  "cwd": "/private/tmp/avb-pac12-ablations-20260827T214117Z-no-media",
+  "deadline_seconds": 5400,
+  "elapsed_seconds": 40.999,
+  "finished_at_utc": "2026-08-27T21:42:53.372091+00:00",
+  "process_returncode": 0,
+  "prompt_sha256": "50453d0985ea90dda27b6d23e1a04a6371c00dc6be7b99a7ef236ee186547f85",
+  "schema_version": 1,
+  "started_at_utc": "2026-08-27T21:42:12.373309+00:00",
+  "stderr_artifact": "codex-stderr.txt",
+  "stdout_artifact": "codex-gpt-5.6-sol-xhigh.jsonl",
+  "timed_out": false,
+  "wrapper_exit_code": 0
+}

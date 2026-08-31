@@ -1,0 +1,45 @@
+{
+  "counted_at_utc": "2026-08-27T21:17:12.131624+00:00",
+  "counting_rule": "Parse every JSONL record; deduplicate assistant tool_use blocks by tool-use ID; count a real completed tool call only when that ID has a corresponding user tool_result block. Failed results count as completed calls.",
+  "error_tool_results": 0,
+  "harness": "claude",
+  "invalid_jsonl_records": 0,
+  "jsonl_records": 2375,
+  "native_num_turns": 61,
+  "orphan_tool_results": 0,
+  "real_completed_tool_calls": 56,
+  "schema_version": 1,
+  "successful_tool_results": 56,
+  "system_subtypes": {
+    "init": 1,
+    "status": 57,
+    "task_notification": 3,
+    "task_started": 3,
+    "thinking_tokens": 570
+  },
+  "tool_names": {
+    "Bash": 24,
+    "Read": 32
+  },
+  "tool_result_blocks": 56,
+  "tool_use_blocks": 56,
+  "top_level_record_types": {
+    "assistant": 124,
+    "rate_limit_event": 4,
+    "result": 1,
+    "stream_event": 1549,
+    "system": 634,
+    "tool_progress": 3,
+    "user": 60
+  },
+  "trajectory": "claude-code-opus-4.8-high.jsonl",
+  "unique_tool_results": 56,
+  "unique_tool_uses": 56,
+  "unmatched_tool_uses": 0,
+  "visual_payloads": {
+    "base64_image_occurrences": 32,
+    "raw_trajectory_preserved_without_rewriting": true,
+    "total_base64_encoded_characters": 13026140,
+    "unique_base64_image_payloads": 32
+  }
+}

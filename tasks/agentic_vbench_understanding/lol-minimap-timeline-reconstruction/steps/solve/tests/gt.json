@@ -1,0 +1,784 @@
+{
+  "game": "personal CN game HN1-11101137626",
+  "schema": "(game_clock_s, type, entity, minute_gain, leader_before); type in {champion_kill,tower_kill,epic_monster_kill}",
+  "total_events": 111,
+  "events": [
+    {
+      "game_clock_s": 196.8,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 202.0,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 342.4,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Yone"
+    },
+    {
+      "game_clock_s": 348.4,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 356.7,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 380.0,
+      "minute_gain": "equal",
+      "leader_before": "blue",
+      "type": "epic_monster_kill",
+      "entity": "chemtech"
+    },
+    {
+      "game_clock_s": 413.9,
+      "minute_gain": "equal",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Yone"
+    },
+    {
+      "game_clock_s": 422.8,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 425.6,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 434.1,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Ahri"
+    },
+    {
+      "game_clock_s": 489.2,
+      "minute_gain": "equal",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Garen"
+    },
+    {
+      "game_clock_s": 499.5,
+      "minute_gain": "equal",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 583.3,
+      "minute_gain": "equal",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Yone"
+    },
+    {
+      "game_clock_s": 672.3,
+      "minute_gain": "red",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Ahri"
+    },
+    {
+      "game_clock_s": 684.3,
+      "minute_gain": "red",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Zac"
+    },
+    {
+      "game_clock_s": 730.0,
+      "minute_gain": "red",
+      "leader_before": "equal",
+      "type": "epic_monster_kill",
+      "entity": "mountain"
+    },
+    {
+      "game_clock_s": 731.0,
+      "minute_gain": "red",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Ahri"
+    },
+    {
+      "game_clock_s": 736.7,
+      "minute_gain": "red",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Thresh"
+    },
+    {
+      "game_clock_s": 745.8,
+      "minute_gain": "red",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 750.7,
+      "minute_gain": "red",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 778.2,
+      "minute_gain": "red",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Kai'Sa"
+    },
+    {
+      "game_clock_s": 794.4,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Zac"
+    },
+    {
+      "game_clock_s": 814.4,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 826.3,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "tower_kill",
+      "entity": "red_top_outer"
+    },
+    {
+      "game_clock_s": 909.0,
+      "minute_gain": "blue",
+      "leader_before": "red",
+      "type": "tower_kill",
+      "entity": "red_bot_outer"
+    },
+    {
+      "game_clock_s": 912.2,
+      "minute_gain": "blue",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Vayne"
+    },
+    {
+      "game_clock_s": 967.7,
+      "minute_gain": "equal",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Yone"
+    },
+    {
+      "game_clock_s": 969.0,
+      "minute_gain": "equal",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Garen"
+    },
+    {
+      "game_clock_s": 989.0,
+      "minute_gain": "equal",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 997.2,
+      "minute_gain": "equal",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Thresh"
+    },
+    {
+      "game_clock_s": 1017.7,
+      "minute_gain": "equal",
+      "leader_before": "red",
+      "type": "tower_kill",
+      "entity": "red_mid_outer"
+    },
+    {
+      "game_clock_s": 1060.4,
+      "minute_gain": "equal",
+      "leader_before": "red",
+      "type": "tower_kill",
+      "entity": "blue_top_outer"
+    },
+    {
+      "game_clock_s": 1068.0,
+      "minute_gain": "equal",
+      "leader_before": "red",
+      "type": "epic_monster_kill",
+      "entity": "ocean"
+    },
+    {
+      "game_clock_s": 1102.4,
+      "minute_gain": "blue",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Yone"
+    },
+    {
+      "game_clock_s": 1105.9,
+      "minute_gain": "blue",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 1112.0,
+      "minute_gain": "blue",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Sejuani"
+    },
+    {
+      "game_clock_s": 1118.8,
+      "minute_gain": "blue",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 1144.3,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "tower_kill",
+      "entity": "blue_mid_outer"
+    },
+    {
+      "game_clock_s": 1181.8,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Garen"
+    },
+    {
+      "game_clock_s": 1182.7,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "tower_kill",
+      "entity": "blue_bot_outer"
+    },
+    {
+      "game_clock_s": 1224.4,
+      "minute_gain": "equal",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 1231.5,
+      "minute_gain": "equal",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Ahri"
+    },
+    {
+      "game_clock_s": 1236.6,
+      "minute_gain": "equal",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Sejuani"
+    },
+    {
+      "game_clock_s": 1279.7,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "tower_kill",
+      "entity": "red_bot_inner"
+    },
+    {
+      "game_clock_s": 1287.0,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "epic_monster_kill",
+      "entity": "baron"
+    },
+    {
+      "game_clock_s": 1290.9,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 1307.9,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 1363.5,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Vayne"
+    },
+    {
+      "game_clock_s": 1364.3,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Sejuani"
+    },
+    {
+      "game_clock_s": 1372.3,
+      "minute_gain": "blue",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 1380.3,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 1386.5,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Yone"
+    },
+    {
+      "game_clock_s": 1388.8,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "tower_kill",
+      "entity": "blue_bot_inner"
+    },
+    {
+      "game_clock_s": 1414.0,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "epic_monster_kill",
+      "entity": "ocean"
+    },
+    {
+      "game_clock_s": 1416.5,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "tower_kill",
+      "entity": "blue_bot_inhib"
+    },
+    {
+      "game_clock_s": 1418.1,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "tower_kill",
+      "entity": "blue_mid_inner"
+    },
+    {
+      "game_clock_s": 1520.2,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Thresh"
+    },
+    {
+      "game_clock_s": 1520.2,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Yone"
+    },
+    {
+      "game_clock_s": 1523.3,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Vayne"
+    },
+    {
+      "game_clock_s": 1525.6,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 1530.3,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 1531.8,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Sejuani"
+    },
+    {
+      "game_clock_s": 1552.8,
+      "minute_gain": "blue",
+      "leader_before": "blue",
+      "type": "tower_kill",
+      "entity": "blue_mid_inhib"
+    },
+    {
+      "game_clock_s": 1565.9,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "tower_kill",
+      "entity": "blue_base_nexus"
+    },
+    {
+      "game_clock_s": 1571.6,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "tower_kill",
+      "entity": "blue_base_nexus"
+    },
+    {
+      "game_clock_s": 1578.8,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Garen"
+    },
+    {
+      "game_clock_s": 1579.3,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 1582.3,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Kai'Sa"
+    },
+    {
+      "game_clock_s": 1589.6,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Zac"
+    },
+    {
+      "game_clock_s": 1645.4,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Yone"
+    },
+    {
+      "game_clock_s": 1663.0,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Thresh"
+    },
+    {
+      "game_clock_s": 1668.8,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Ahri"
+    },
+    {
+      "game_clock_s": 1670.5,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Vayne"
+    },
+    {
+      "game_clock_s": 1677.9,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 1696.5,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Garen"
+    },
+    {
+      "game_clock_s": 1704.7,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Zac"
+    },
+    {
+      "game_clock_s": 1731.0,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "epic_monster_kill",
+      "entity": "ocean"
+    },
+    {
+      "game_clock_s": 1737.2,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Kai'Sa"
+    },
+    {
+      "game_clock_s": 1752.2,
+      "minute_gain": "equal",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Yone"
+    },
+    {
+      "game_clock_s": 1840.9,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Zac"
+    },
+    {
+      "game_clock_s": 1842.5,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 1842.6,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Thresh"
+    },
+    {
+      "game_clock_s": 1848.7,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 1850.6,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Garen"
+    },
+    {
+      "game_clock_s": 1855.1,
+      "minute_gain": "red",
+      "leader_before": "blue",
+      "type": "champion_kill",
+      "entity": "Kai'Sa"
+    },
+    {
+      "game_clock_s": 1879.8,
+      "minute_gain": "red",
+      "leader_before": "equal",
+      "type": "champion_kill",
+      "entity": "Ahri"
+    },
+    {
+      "game_clock_s": 1883.0,
+      "minute_gain": "red",
+      "leader_before": "equal",
+      "type": "epic_monster_kill",
+      "entity": "baron"
+    },
+    {
+      "game_clock_s": 2027.0,
+      "minute_gain": "blue",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Garen"
+    },
+    {
+      "game_clock_s": 2028.6,
+      "minute_gain": "blue",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 2037.3,
+      "minute_gain": "blue",
+      "leader_before": "red",
+      "type": "tower_kill",
+      "entity": "blue_top_inner"
+    },
+    {
+      "game_clock_s": 2042.0,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "epic_monster_kill",
+      "entity": "ocean"
+    },
+    {
+      "game_clock_s": 2061.6,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 2065.2,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Thresh"
+    },
+    {
+      "game_clock_s": 2089.2,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Ahri"
+    },
+    {
+      "game_clock_s": 2107.0,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Garen"
+    },
+    {
+      "game_clock_s": 2210.5,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Thresh"
+    },
+    {
+      "game_clock_s": 2218.4,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 2219.3,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Kai'Sa"
+    },
+    {
+      "game_clock_s": 2220.4,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Ahri"
+    },
+    {
+      "game_clock_s": 2234.7,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Zac"
+    },
+    {
+      "game_clock_s": 2266.9,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "tower_kill",
+      "entity": "red_mid_inner"
+    },
+    {
+      "game_clock_s": 2280.0,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "epic_monster_kill",
+      "entity": "baron"
+    },
+    {
+      "game_clock_s": 2327.5,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Neeko"
+    },
+    {
+      "game_clock_s": 2329.5,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Taliyah"
+    },
+    {
+      "game_clock_s": 2331.1,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Thresh"
+    },
+    {
+      "game_clock_s": 2331.7,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Kai'Sa"
+    },
+    {
+      "game_clock_s": 2334.4,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Ahri"
+    },
+    {
+      "game_clock_s": 2341.7,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Sejuani"
+    },
+    {
+      "game_clock_s": 2348.1,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Garen"
+    },
+    {
+      "game_clock_s": 2355.6,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "champion_kill",
+      "entity": "Zac"
+    },
+    {
+      "game_clock_s": 2363.2,
+      "minute_gain": "red",
+      "leader_before": "red",
+      "type": "tower_kill",
+      "entity": "red_mid_inhib"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "ablation": "video_only",
+  "audit": {
+    "completed_command_count": 133,
+    "match_counts": {
+      "network_command": 0,
+      "resume_command": 0,
+      "url_scheme": 0,
+      "web_tool": 0
+    },
+    "matched_commands": {
+      "network_command": [],
+      "resume_command": [],
+      "url_scheme": [],
+      "web_tool": []
+    },
+    "passed": true,
+    "provider_control_plane_excluded": true,
+    "schema_version": 1,
+    "scope": "All completed agent command_execution items decoded from the untouched Codex JSONL."
+  },
+  "gate": {
+    "maximum_reward": 0.15,
+    "measured_reward": 0.130435,
+    "reward_passed": true
+  },
+  "input": {
+    "degradation": "Full source video with every audio stream removed; no other media or task-contract change.",
+    "presented_input": {
+      "bytes": 1666338607,
+      "path": "materials/source.mp4",
+      "probe": {
+        "format": {
+          "duration": "8356.314633",
+          "size": "1666338607"
+        },
+        "programs": [],
+        "stream_groups": [],
+        "streams": [
+          {
+            "codec_name": "h264",
+            "codec_type": "video",
+            "height": 720,
+            "index": 0,
+            "width": 1280
+          }
+        ]
+      },
+      "sha256": "00012d2484039466a6b4784f8b0ee97822e54ea56e2397bb001c932cf07b1166"
+    }
+  },
+  "model": {
+    "harness_version": "codex-cli 0.146.0-alpha.3.1",
+    "name": "gpt-5.6-sol",
+    "reasoning_effort": "xhigh"
+  },
+  "published_artifacts": [
+    "public-artifacts.json",
+    "codex-initial-prompt.md",
+    "codex-gpt-5.6-sol-xhigh.jsonl",
+    "codex-input-manifest.json",
+    "codex-solution.json",
+    "codex-run.json",
+    "codex-audit.json",
+    "codex-result-summary.json"
+  ],
+  "run": {
+    "command_template": [
+      "codex",
+      "exec",
+      "--json",
+      "--ephemeral",
+      "--ignore-user-config",
+      "--skip-git-repo-check",
+      "--sandbox",
+      "workspace-write",
+      "--model",
+      "gpt-5.6-sol",
+      "--config",
+      "model_reasoning_effort=\"xhigh\"",
+      "-"
+    ],
+    "continued_or_resumed": false,
+    "cwd": "/workspace",
+    "deadline_seconds": 5400,
+    "elapsed_seconds": 1908.435,
+    "finished_at_utc": "2026-08-27T22:15:07.227118+00:00",
+    "process_returncode": 0,
+    "prompt_sha256": "aba8450917712b59c4545258a8f63be16c0455dab1dcf95655161d70322d85a3",
+    "public_metadata_path_localization": {
+      "fresh_workspace": "/workspace",
+      "note": "Only derived run-control metadata paths were localized; the raw Codex trajectory is untouched.",
+      "repository_prefix": "<repo>"
+    },
+    "schema_version": 1,
+    "started_at_utc": "2026-08-27T21:43:18.792184+00:00",
+    "stderr_artifact": "codex-stderr.txt",
+    "stdout_artifact": "codex-gpt-5.6-sol-xhigh.jsonl",
+    "timed_out": false,
+    "wrapper_exit_code": 0
+  },
+  "schema_version": 1,
+  "status": "pass",
+  "tool_calls": {
+    "completed_by_status": {
+      "completed": 135,
+      "failed": 3
+    },
+    "completed_by_type": {
+      "command_execution": 133,
+      "file_change": 5
+    },
+    "completed_tool_calls": 138,
+    "counting_rule": "Count completed Codex command_execution and file_change items. Failed command results count as completed calls; todo-list, reasoning, and agent-message items do not.",
+    "schema_version": 1
+  },
+  "usage": {
+    "cache_write_input_tokens": 0,
+    "cached_input_tokens": 13629312,
+    "input_tokens": 14393561,
+    "output_tokens": 70550,
+    "reasoning_output_tokens": 49815
+  },
+  "verifier": {
+    "details": {
+      "diagnostics": {
+        "beam_score_exact": 22,
+        "broadly_matched_records": 22,
+        "dismount_takeoff_within_tolerance": 16,
+        "end_within_tolerance": 21,
+        "gymnast_name_exact": 22,
+        "school_exact": 22,
+        "score_time_within_tolerance": 22,
+        "start_within_tolerance": 4
+      },
+      "dismount_takeoff_tolerance_s": 0.25,
+      "end_tolerance_s": 0.25,
+      "f1": 0.130435,
+      "n_ground_truth": 23,
+      "n_invalid_records": 0,
+      "n_predicted": 23,
+      "precision": 0.130435,
+      "reason": "ok",
+      "recall": 0.130435,
+      "score_time_tolerance_s": 1.0,
+      "start_tolerance_s": 0.25,
+      "true_positives_complete_record": 3
+    },
+    "reward": 0.130435
+  }
+}

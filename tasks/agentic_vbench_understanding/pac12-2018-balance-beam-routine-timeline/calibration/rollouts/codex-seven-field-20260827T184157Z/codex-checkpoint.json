@@ -1,0 +1,31 @@
+{
+  "last_fully_scanned_video_timestamp": "02:19:16.334",
+  "candidate_routine_windows": [
+    "00:03:42.400-00:04:58.200 Stanford",
+    "00:08:41.400-00:09:54.000 Stanford",
+    "00:13:55.400-00:15:07.600 Stanford",
+    "00:19:05.600-00:20:21.000 Stanford",
+    "00:24:02.600-00:25:17.400 Stanford",
+    "00:29:13.600-00:30:25.400 Stanford",
+    "00:35:54.600-00:37:09.200 Arizona State",
+    "00:40:58.800-00:42:08.400 Arizona State",
+    "00:45:57.000-00:47:07.200 Arizona State",
+    "00:50:59.600-00:51:59.600 Arizona State",
+    "00:55:49.800-00:57:02.400 Arizona State",
+    "01:01:11.400-01:02:34.600 Arizona State",
+    "01:09:42.000-01:10:53.000 Oregon State",
+    "01:14:23.800-01:15:43.000 Oregon State",
+    "01:19:56-01:21:?? Oregon State (excluded: mount not visible)",
+    "01:25:21.000-01:26:35.000 Oregon State",
+    "01:30:21.800-01:31:34.200 Oregon State",
+    "01:36:35.000-01:37:45.800 Oregon State",
+    "01:44:48.800-01:45:58.000 Arizona",
+    "01:49:59.600-01:51:06.400 Arizona",
+    "01:55:05.800-01:56:35.000 Arizona",
+    "02:00:43.000-02:02:04.000 Arizona",
+    "02:05:49.800-02:06:50.000 Arizona",
+    "02:11:08.200-02:12:16.400 Arizona"
+  ],
+  "candidates_needing_boundary_review": [],
+  "next_concrete_inspection_step": "Inspection and submission validation complete; no further video segment remains to scan."
+}

@@ -1,0 +1,31 @@
+# Raw snapshot of the reviewer-completed Google Sheet; blank cells are preserved.
+# annotator: independent human reviewer (identity redacted for public release)
+# annotation_date: 2026-08-26
+# source_sha256: 7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb
+# workflow_blind_full_video_scan: true
+# workflow_note: Reviewer received only the source video and boundary guide; the final candidate at 02:11:05 confirms the scan reached the end of the broadcast.
+candidate_id,start_time,end_time,include,exclusion_reason,notes
+1,00:03:42,00:04:58,,,
+2,00:08:41,00:09:54,,,
+3,00:13:56,00:15:07,,,
+4,00:19:10,00:20:21,,,
+5,00:24:02,00:25:19,,,
+,00:29:14,00:30:25,,,
+,00:35:55,00:37:09,,,
+,00:40:59,00:42:09,,,
+,00:45:59,00:47:07,,,
+,00:50:59,00:51:59,,,
+,00:55:50,00:57:02,,,
+,01:01:13,01:02:35,,,
+,01:09:42,01:10:53,,,
+,01:14:25,01:15:43,,,
+,01:20:00,01:21:08,,,
+,01:25:25,01:26:35,,,
+,01:30:22,01:31:34,,,
+,01:36:35,01:37:45,,,
+,01:44:49,01:45:58,,,
+,01:50:02,01:51:06,,,
+,01:55:08,01:56:35,,,
+,02:00:48,02:02:03,,,
+,02:05:53,02:06:50,,,
+,02:11:05,,,,

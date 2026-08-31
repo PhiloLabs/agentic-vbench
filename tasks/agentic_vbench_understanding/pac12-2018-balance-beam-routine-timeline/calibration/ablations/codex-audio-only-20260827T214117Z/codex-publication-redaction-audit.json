@@ -1,0 +1,67 @@
+{
+  "checks": {
+    "completed_tool_count_preserved": true,
+    "credential_signatures_absent": true,
+    "email_identifiers_absent": true,
+    "jsonl_round_trip": true,
+    "local_home_identifiers_absent": true,
+    "local_hostname_identifiers_absent": true,
+    "local_username_identifiers_absent": true,
+    "long_base64_runs_absent": true,
+    "ordered_tool_identifiers_preserved": true,
+    "record_and_item_order_preserved": true,
+    "record_count_preserved": true,
+    "source_untouched": true
+  },
+  "destination": {
+    "bytes": 3292507,
+    "path": "codex-gpt-5.6-sol-xhigh.public.jsonl",
+    "records": 740,
+    "sha256": "b1e0fefb31440f38d973c232c4af29573eae14e3972d2a2337091841f1dba205"
+  },
+  "kind": "privacy_safe_audio_ablation_jsonl_publication_derivative",
+  "preservation": {
+    "changed_scalar_values": 42,
+    "completed_tool_calls": 361,
+    "ordered_identifier_and_tool_link_stream_sha256": "23c37407cb9d55e023adb97107146f7771a32eb3476148b21f3af1a53864e7f8",
+    "ordered_identifier_and_tool_link_values": 738,
+    "ordered_record_and_item_stream_sha256": "3eb2727ee4604381e207c2281843f9b0d3dfb4cd8cfd4729302160f4be5e4c67",
+    "records_with_changes": 33
+  },
+  "replacements": {
+    "credentials": {
+      "anthropic_api_key": 0,
+      "aws_access_key": 0,
+      "bearer_token": 0,
+      "github_token": 0,
+      "jwt": 0,
+      "openai_api_key": 0,
+      "private_key": 0
+    },
+    "email_identifiers": 10,
+    "local_home_identifiers": 472,
+    "local_hostname_identifiers": 4,
+    "local_username_identifiers": 183,
+    "media_command_outputs": [
+      {
+        "item_id": "item_13",
+        "source_bytes": 159061,
+        "source_characters": 159061,
+        "source_sha256": "98c51d69c65e9c8b83f8e9d186ebe5d084ddf47e44fc645e913d1a8231a54100"
+      },
+      {
+        "item_id": "item_269",
+        "source_bytes": 64945,
+        "source_characters": 64945,
+        "source_sha256": "06af99139ed1218a2cbe141704187abbad6a6d9cca6575182d2dd1a939079f5b"
+      }
+    ]
+  },
+  "schema_version": 3,
+  "source": {
+    "bytes": 3516456,
+    "path": "codex-gpt-5.6-sol-xhigh.jsonl",
+    "records": 740,
+    "sha256": "f3a8d4bd462160c222a640527a53bf74db5a8c174ea616ef3ec090141307fb80"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "trajectory": "codex-gpt-5.6-sol-xhigh.jsonl",
+  "counting_rule": "Count each item.completed command_execution or file_change as one real completed tool-call turn; failed command executions count because the tool call completed and returned a failure result.",
+  "real_completed_tool_call_turns": 55,
+  "command_executions": 48,
+  "command_execution_status": {
+    "completed": 45,
+    "failed": 3
+  },
+  "file_changes": 7,
+  "agent_messages_excluded": 9
+}

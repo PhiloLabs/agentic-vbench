@@ -1,0 +1,5 @@
+# annotator:
+# annotation_date:
+# source_sha256:
+# blind_full_video_scan: true|false
+candidate_id,start_time,end_time,include,exclusion_reason,notes

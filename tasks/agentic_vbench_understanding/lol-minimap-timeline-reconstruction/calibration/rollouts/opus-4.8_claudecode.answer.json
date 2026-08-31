@@ -1,0 +1,606 @@
+{
+ "events": [
+  {
+   "game_clock_s": 309,
+   "type": "champion_kill",
+   "entity": "Aatrox",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 333,
+   "type": "champion_kill",
+   "entity": "Lee Sin",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 369,
+   "type": "champion_kill",
+   "entity": "Gnar",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 374,
+   "type": "champion_kill",
+   "entity": "Ahri",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 388,
+   "type": "epic_monster_kill",
+   "entity": "chemtech",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 444,
+   "type": "champion_kill",
+   "entity": "Jinx",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 445,
+   "type": "champion_kill",
+   "entity": "Viego",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 512,
+   "type": "champion_kill",
+   "entity": "Yasuo",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 513,
+   "type": "champion_kill",
+   "entity": "Thresh",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 629,
+   "type": "champion_kill",
+   "entity": "Aatrox",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 725,
+   "type": "epic_monster_kill",
+   "entity": "cloud",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 760,
+   "type": "champion_kill",
+   "entity": "Kai'Sa",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 762,
+   "type": "tower_kill",
+   "entity": "red_top_outer",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 812,
+   "type": "champion_kill",
+   "entity": "Lee Sin",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 873,
+   "type": "tower_kill",
+   "entity": "red_bot_outer",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 888,
+   "type": "champion_kill",
+   "entity": "Ahri",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 932,
+   "type": "champion_kill",
+   "entity": "Nautilus",
+   "minute_gain": "blue",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 963,
+   "type": "champion_kill",
+   "entity": "Gnar",
+   "minute_gain": "blue",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 989,
+   "type": "champion_kill",
+   "entity": "Jinx",
+   "minute_gain": "blue",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 996,
+   "type": "champion_kill",
+   "entity": "Viego",
+   "minute_gain": "blue",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 1006,
+   "type": "champion_kill",
+   "entity": "Yasuo",
+   "minute_gain": "blue",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 1012,
+   "type": "tower_kill",
+   "entity": "red_mid_outer",
+   "minute_gain": "blue",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 1053,
+   "type": "epic_monster_kill",
+   "entity": "cloud",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1055,
+   "type": "tower_kill",
+   "entity": "blue_top_outer",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1098,
+   "type": "champion_kill",
+   "entity": "Thresh",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1118,
+   "type": "champion_kill",
+   "entity": "Kai'Sa",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1119,
+   "type": "champion_kill",
+   "entity": "Nautilus",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1125,
+   "type": "tower_kill",
+   "entity": "blue_mid_outer",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1152,
+   "type": "champion_kill",
+   "entity": "Gnar",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1155,
+   "type": "champion_kill",
+   "entity": "Aatrox",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1184,
+   "type": "tower_kill",
+   "entity": "blue_bot_outer",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1228,
+   "type": "champion_kill",
+   "entity": "Viego",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1277,
+   "type": "tower_kill",
+   "entity": "red_bot_inner",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1291,
+   "type": "epic_monster_kill",
+   "entity": "baron",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1333,
+   "type": "champion_kill",
+   "entity": "Yasuo",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1341,
+   "type": "champion_kill",
+   "entity": "Lee Sin",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1361,
+   "type": "champion_kill",
+   "entity": "Ahri",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1374,
+   "type": "champion_kill",
+   "entity": "Kai'Sa",
+   "minute_gain": "equal",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1383,
+   "type": "champion_kill",
+   "entity": "Jinx",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1384,
+   "type": "tower_kill",
+   "entity": "blue_bot_inner",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1393,
+   "type": "tower_kill",
+   "entity": "blue_bot_inhib",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1409,
+   "type": "tower_kill",
+   "entity": "blue_mid_inner",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1415,
+   "type": "epic_monster_kill",
+   "entity": "cloud",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1493,
+   "type": "champion_kill",
+   "entity": "Thresh",
+   "minute_gain": "red",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1548,
+   "type": "tower_kill",
+   "entity": "blue_mid_inhib",
+   "minute_gain": "blue",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1660,
+   "type": "champion_kill",
+   "entity": "Aatrox",
+   "minute_gain": "red",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1717,
+   "type": "champion_kill",
+   "entity": "Lee Sin",
+   "minute_gain": "equal",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1718,
+   "type": "champion_kill",
+   "entity": "Nautilus",
+   "minute_gain": "equal",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1731,
+   "type": "epic_monster_kill",
+   "entity": "ocean",
+   "minute_gain": "equal",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1754,
+   "type": "champion_kill",
+   "entity": "Gnar",
+   "minute_gain": "equal",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1774,
+   "type": "champion_kill",
+   "entity": "Ahri",
+   "minute_gain": "equal",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1800,
+   "type": "champion_kill",
+   "entity": "Jinx",
+   "minute_gain": "equal",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1849,
+   "type": "champion_kill",
+   "entity": "Viego",
+   "minute_gain": "equal",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1858,
+   "type": "champion_kill",
+   "entity": "Thresh",
+   "minute_gain": "equal",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1859,
+   "type": "champion_kill",
+   "entity": "Yasuo",
+   "minute_gain": "equal",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1860,
+   "type": "champion_kill",
+   "entity": "Aatrox",
+   "minute_gain": "red",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1861,
+   "type": "champion_kill",
+   "entity": "Kai'Sa",
+   "minute_gain": "red",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1867,
+   "type": "champion_kill",
+   "entity": "Lee Sin",
+   "minute_gain": "red",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1876,
+   "type": "champion_kill",
+   "entity": "Ahri",
+   "minute_gain": "red",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1877,
+   "type": "champion_kill",
+   "entity": "Jinx",
+   "minute_gain": "red",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1880,
+   "type": "champion_kill",
+   "entity": "Thresh",
+   "minute_gain": "red",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1886,
+   "type": "champion_kill",
+   "entity": "Aatrox",
+   "minute_gain": "red",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1910,
+   "type": "champion_kill",
+   "entity": "Lee Sin",
+   "minute_gain": "red",
+   "leader_before": "blue"
+  },
+  {
+   "game_clock_s": 1938,
+   "type": "champion_kill",
+   "entity": "Ahri",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 1980,
+   "type": "champion_kill",
+   "entity": "Jinx",
+   "minute_gain": "equal",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 2020,
+   "type": "tower_kill",
+   "entity": "blue_top_inner",
+   "minute_gain": "equal",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 2074,
+   "type": "champion_kill",
+   "entity": "Nautilus",
+   "minute_gain": "equal",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 2090,
+   "type": "champion_kill",
+   "entity": "Thresh",
+   "minute_gain": "equal",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 2118,
+   "type": "champion_kill",
+   "entity": "Gnar",
+   "minute_gain": "blue",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 2133,
+   "type": "champion_kill",
+   "entity": "Viego",
+   "minute_gain": "blue",
+   "leader_before": "red"
+  },
+  {
+   "game_clock_s": 2162,
+   "type": "champion_kill",
+   "entity": "Yasuo",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2202,
+   "type": "champion_kill",
+   "entity": "Kai'Sa",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2218,
+   "type": "champion_kill",
+   "entity": "Aatrox",
+   "minute_gain": "blue",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2229,
+   "type": "champion_kill",
+   "entity": "Nautilus",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2240,
+   "type": "champion_kill",
+   "entity": "Gnar",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2257,
+   "type": "champion_kill",
+   "entity": "Lee Sin",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2263,
+   "type": "tower_kill",
+   "entity": "red_mid_inner",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2270,
+   "type": "champion_kill",
+   "entity": "Ahri",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2295,
+   "type": "champion_kill",
+   "entity": "Jinx",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2300,
+   "type": "champion_kill",
+   "entity": "Thresh",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2316,
+   "type": "champion_kill",
+   "entity": "Aatrox",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2323,
+   "type": "champion_kill",
+   "entity": "Lee Sin",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2323,
+   "type": "champion_kill",
+   "entity": "Ahri",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2324,
+   "type": "champion_kill",
+   "entity": "Viego",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2327,
+   "type": "champion_kill",
+   "entity": "Jinx",
+   "minute_gain": "red",
+   "leader_before": "equal"
+  },
+  {
+   "game_clock_s": 2355,
+   "type": "champion_kill",
+   "entity": "Yasuo",
+   "minute_gain": "blue",
+   "leader_before": "red"
+  }
+ ]
+}

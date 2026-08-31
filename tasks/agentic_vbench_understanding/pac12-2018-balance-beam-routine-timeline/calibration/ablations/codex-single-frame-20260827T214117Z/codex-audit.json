@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-08-27T21:47:38Z",
+  "artifacts_scanned": [
+    "codex-gpt-5.6-sol-xhigh.jsonl",
+    "codex-stderr.txt",
+    "codex-initial-prompt.md",
+    "codex-solution.json",
+    "codex-checkpoint.json"
+  ],
+  "checks": {
+    "web_tool_matches": 0,
+    "url_scheme_matches_in_completed_commands": 0,
+    "network_command_matches": 0,
+    "secret_access_indicator_matches_in_completed_commands": 0,
+    "out_of_workspace_tool_discovery_matches": 0
+  },
+  "interpretation": "System executable/library discovery is counted separately; no outside competition data is permitted.",
+  "result": "pass"
+}

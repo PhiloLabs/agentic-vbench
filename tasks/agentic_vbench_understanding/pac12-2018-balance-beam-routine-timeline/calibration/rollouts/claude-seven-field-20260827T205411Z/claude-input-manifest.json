@@ -1,0 +1,33 @@
+{
+  "annotation_status_sha256": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+  "canonical_prompt_sha256": "f59124565caa6e74abbf2a9b2d74bb52851a4940bb4dd571b4f11476d6d8e146",
+  "created_at_utc": "2026-08-27T20:54:38.587452+00:00",
+  "harness": "claude",
+  "judge_sha256": "52c4105dced75b354e12865135c2b0399c0f7e5c228f3f7d66b6034717384187",
+  "path_localization_only": {
+    "from": "/workspace",
+    "to": "/private/tmp/avb-pac12-claude-seven-field-20260827T205411Z"
+  },
+  "rendered_prompt_sha256": "3753cf85621065b3a42aa75f5540e3ae10121a7f708130d61142275650f5a949",
+  "schema_version": 1,
+  "source": {
+    "bytes": 1791218588,
+    "probe": {
+      "format": {
+        "duration": "8356.334000"
+      },
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "height": 720,
+          "width": 1280
+        }
+      ]
+    },
+    "sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb"
+  },
+  "task_toml_sha256": "ed5d760e71069027dbc3db895723e9556fa0ad7a4c0724ff087275e285c0824a",
+  "workspace": "/private/tmp/avb-pac12-claude-seven-field-20260827T205411Z",
+  "workspace_started_empty": true
+}

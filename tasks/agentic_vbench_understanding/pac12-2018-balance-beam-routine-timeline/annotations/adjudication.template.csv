@@ -1,0 +1,4 @@
+# adjudicator:
+# adjudication_date:
+# source_sha256:
+candidate_id,draft_start,draft_end,independent_start,independent_end,final_include,final_start,final_end,school,gymnast_name,beam_score,score_time,dismount_takeoff_time,dismount_takeoff_note,decision

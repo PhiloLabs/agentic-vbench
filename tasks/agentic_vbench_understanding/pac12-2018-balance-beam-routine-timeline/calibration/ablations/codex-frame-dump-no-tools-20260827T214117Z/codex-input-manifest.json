@@ -1,0 +1,299 @@
+{
+  "ablation": "frame_dump_no_tools",
+  "attached_media_files": 14,
+  "canonical_source": {
+    "bytes": 1791218588,
+    "path": "work/source/source.mp4",
+    "probe": {
+      "format": {
+        "duration": "8356.334000",
+        "size": "1791218588"
+      },
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "height": 720,
+          "index": 0,
+          "width": 1280
+        },
+        {
+          "codec_name": "opus",
+          "codec_type": "audio",
+          "index": 1
+        }
+      ]
+    },
+    "sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb"
+  },
+  "coverage": {
+    "attachment_count": 14,
+    "attachment_hash_of_hashes": "ffa6ad7f46710da7c994234c8a38f85032ecb7aba224f14754954a1e68fd0a9b",
+    "bundles": [
+      {
+        "attachment": "bundle-000.jpg",
+        "bytes": 1047178,
+        "end_second": 599,
+        "sample_count": 600,
+        "sha256": "426e1e68c276401c09315ee151aa072d643ec8976e49581fd9c60b9aabf7d3cb",
+        "source_sheets": [
+          "sheet-000-000000-000139.jpg",
+          "sheet-001-000140-000319.jpg",
+          "sheet-002-000320-000459.jpg",
+          "sheet-003-000500-000639.jpg",
+          "sheet-004-000640-000819.jpg",
+          "sheet-005-000820-000959.jpg"
+        ],
+        "start_second": 0
+      },
+      {
+        "attachment": "bundle-001.jpg",
+        "bytes": 1059051,
+        "end_second": 1199,
+        "sample_count": 600,
+        "sha256": "c5d548f3a1495d9bfedda99e3247fa4163529ecfb7b7b5f9424a968f874773bf",
+        "source_sheets": [
+          "sheet-006-001000-001139.jpg",
+          "sheet-007-001140-001319.jpg",
+          "sheet-008-001320-001459.jpg",
+          "sheet-009-001500-001639.jpg",
+          "sheet-010-001640-001819.jpg",
+          "sheet-011-001820-001959.jpg"
+        ],
+        "start_second": 600
+      },
+      {
+        "attachment": "bundle-002.jpg",
+        "bytes": 1080182,
+        "end_second": 1799,
+        "sample_count": 600,
+        "sha256": "e30142b5df67fb7c26f2dbebac3bd5c550ce27d4544b6564bf9dbbe5af18e46e",
+        "source_sheets": [
+          "sheet-012-002000-002139.jpg",
+          "sheet-013-002140-002319.jpg",
+          "sheet-014-002320-002459.jpg",
+          "sheet-015-002500-002639.jpg",
+          "sheet-016-002640-002819.jpg",
+          "sheet-017-002820-002959.jpg"
+        ],
+        "start_second": 1200
+      },
+      {
+        "attachment": "bundle-003.jpg",
+        "bytes": 1116366,
+        "end_second": 2399,
+        "sample_count": 600,
+        "sha256": "11a54b56c1e6b12740e933c227a2f4e4cf2d520e3ad467296196d5676cf7cca0",
+        "source_sheets": [
+          "sheet-018-003000-003139.jpg",
+          "sheet-019-003140-003319.jpg",
+          "sheet-020-003320-003459.jpg",
+          "sheet-021-003500-003639.jpg",
+          "sheet-022-003640-003819.jpg",
+          "sheet-023-003820-003959.jpg"
+        ],
+        "start_second": 1800
+      },
+      {
+        "attachment": "bundle-004.jpg",
+        "bytes": 1067184,
+        "end_second": 2999,
+        "sample_count": 600,
+        "sha256": "238cdaaf5263115282ef37f051b045c6f8a61bc91e1f8504a725a0a2c9ddd945",
+        "source_sheets": [
+          "sheet-024-004000-004139.jpg",
+          "sheet-025-004140-004319.jpg",
+          "sheet-026-004320-004459.jpg",
+          "sheet-027-004500-004639.jpg",
+          "sheet-028-004640-004819.jpg",
+          "sheet-029-004820-004959.jpg"
+        ],
+        "start_second": 2400
+      },
+      {
+        "attachment": "bundle-005.jpg",
+        "bytes": 1080711,
+        "end_second": 3599,
+        "sample_count": 600,
+        "sha256": "5242875bbb07d7fc3b2c16c2b62d3952a72f21a087abcc1f94f3e4006d77b7d5",
+        "source_sheets": [
+          "sheet-030-005000-005139.jpg",
+          "sheet-031-005140-005319.jpg",
+          "sheet-032-005320-005459.jpg",
+          "sheet-033-005500-005639.jpg",
+          "sheet-034-005640-005819.jpg",
+          "sheet-035-005820-005959.jpg"
+        ],
+        "start_second": 3000
+      },
+      {
+        "attachment": "bundle-006.jpg",
+        "bytes": 1083281,
+        "end_second": 4199,
+        "sample_count": 600,
+        "sha256": "1a118294248e1177c37f226cf7d62255afa353c83cc9522841c4bef16ddd0506",
+        "source_sheets": [
+          "sheet-036-010000-010139.jpg",
+          "sheet-037-010140-010319.jpg",
+          "sheet-038-010320-010459.jpg",
+          "sheet-039-010500-010639.jpg",
+          "sheet-040-010640-010819.jpg",
+          "sheet-041-010820-010959.jpg"
+        ],
+        "start_second": 3600
+      },
+      {
+        "attachment": "bundle-007.jpg",
+        "bytes": 1087130,
+        "end_second": 4799,
+        "sample_count": 600,
+        "sha256": "0e9416899a4c3af1769818c371bccca372176cd915b4b9fc9a5e4b4dddf84f2a",
+        "source_sheets": [
+          "sheet-042-011000-011139.jpg",
+          "sheet-043-011140-011319.jpg",
+          "sheet-044-011320-011459.jpg",
+          "sheet-045-011500-011639.jpg",
+          "sheet-046-011640-011819.jpg",
+          "sheet-047-011820-011959.jpg"
+        ],
+        "start_second": 4200
+      },
+      {
+        "attachment": "bundle-008.jpg",
+        "bytes": 1077659,
+        "end_second": 5399,
+        "sample_count": 600,
+        "sha256": "4d887d7983b58d7e9490116534899a6ab447872a3d4bb8f8712cc9b75a8d5f32",
+        "source_sheets": [
+          "sheet-048-012000-012139.jpg",
+          "sheet-049-012140-012319.jpg",
+          "sheet-050-012320-012459.jpg",
+          "sheet-051-012500-012639.jpg",
+          "sheet-052-012640-012819.jpg",
+          "sheet-053-012820-012959.jpg"
+        ],
+        "start_second": 4800
+      },
+      {
+        "attachment": "bundle-009.jpg",
+        "bytes": 1105210,
+        "end_second": 5999,
+        "sample_count": 600,
+        "sha256": "a5c29253d8b34c39d43ea6e638ad0b7308975cae2739843785f6b6f214782fdf",
+        "source_sheets": [
+          "sheet-054-013000-013139.jpg",
+          "sheet-055-013140-013319.jpg",
+          "sheet-056-013320-013459.jpg",
+          "sheet-057-013500-013639.jpg",
+          "sheet-058-013640-013819.jpg",
+          "sheet-059-013820-013959.jpg"
+        ],
+        "start_second": 5400
+      },
+      {
+        "attachment": "bundle-010.jpg",
+        "bytes": 1162952,
+        "end_second": 6599,
+        "sample_count": 600,
+        "sha256": "ff7e8d2fac22d18d15e00328f527ae099f416fb7435a6bd5c08cfcec5aef57da",
+        "source_sheets": [
+          "sheet-060-014000-014139.jpg",
+          "sheet-061-014140-014319.jpg",
+          "sheet-062-014320-014459.jpg",
+          "sheet-063-014500-014639.jpg",
+          "sheet-064-014640-014819.jpg",
+          "sheet-065-014820-014959.jpg"
+        ],
+        "start_second": 6000
+      },
+      {
+        "attachment": "bundle-011.jpg",
+        "bytes": 1090981,
+        "end_second": 7199,
+        "sample_count": 600,
+        "sha256": "3d3ead8ac3695b38ee1c01afbc8ab381e126cafbb89f20e9e5deeb1a4e697803",
+        "source_sheets": [
+          "sheet-066-015000-015139.jpg",
+          "sheet-067-015140-015319.jpg",
+          "sheet-068-015320-015459.jpg",
+          "sheet-069-015500-015639.jpg",
+          "sheet-070-015640-015819.jpg",
+          "sheet-071-015820-015959.jpg"
+        ],
+        "start_second": 6600
+      },
+      {
+        "attachment": "bundle-012.jpg",
+        "bytes": 1073028,
+        "end_second": 7799,
+        "sample_count": 600,
+        "sha256": "6bb6b867ee76212bdfdce8d31f46a8fd49bfc1770219ec60913866dc14429365",
+        "source_sheets": [
+          "sheet-072-020000-020139.jpg",
+          "sheet-073-020140-020319.jpg",
+          "sheet-074-020320-020459.jpg",
+          "sheet-075-020500-020639.jpg",
+          "sheet-076-020640-020819.jpg",
+          "sheet-077-020820-020959.jpg"
+        ],
+        "start_second": 7200
+      },
+      {
+        "attachment": "bundle-013.jpg",
+        "bytes": 1031066,
+        "end_second": 8355,
+        "sample_count": 556,
+        "sha256": "b07ca83b0a460e7cc0ae2d94ad0bfa22b7c7106a01065bbf7f3a908aa5219704",
+        "source_sheets": [
+          "sheet-078-021000-021139.jpg",
+          "sheet-079-021140-021319.jpg",
+          "sheet-080-021320-021459.jpg",
+          "sheet-081-021500-021639.jpg",
+          "sheet-082-021640-021819.jpg",
+          "sheet-083-021820-021915.jpg"
+        ],
+        "start_second": 7800
+      }
+    ],
+    "first_second": 0,
+    "last_second": 8355,
+    "original_contact_sheet_count": 84,
+    "original_contact_sheet_hash_of_hashes": "7b5f354134593626a5f9a7e742aba27125e8a8ff7c2981052d2485b011f087fb",
+    "sample_count": 8356,
+    "sample_rate_fps": 1
+  },
+  "created_at_utc": "2026-08-27T21:42:45.597364+00:00",
+  "deadline_seconds": 5400,
+  "degradation": "Exactly one timestamped sample per integer second (00:00:00 through 02:19:15), bundled into 14 attached JPEGs; no video, audio, or agent tools.",
+  "fresh_workspace": true,
+  "frozen_inputs": {
+    "annotation_status": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+    "ground_truth": "c4860ff91b27f036d1e6e6e8b8c98324b485db7b3d719af47fb173ba79ff5758",
+    "instruction": "f59124565caa6e74abbf2a9b2d74bb52851a4940bb4dd571b4f11476d6d8e146",
+    "judge": "52c4105dced75b354e12865135c2b0399c0f7e5c228f3f7d66b6034717384187",
+    "task_toml": "ed5d760e71069027dbc3db895723e9556fa0ad7a4c0724ff087275e285c0824a"
+  },
+  "model": "gpt-5.6-sol",
+  "no_resume_or_continuation": true,
+  "prompt": {
+    "adaptations": [
+      "replace video with complete attached 1-fps timestamped dump",
+      "require direct final-response JSON because tools and file writes are forbidden",
+      "replace checkpoint section with no-tool constraint"
+    ],
+    "adapted_sha256": "3e2f9a56c732d8635eef31ac593fc89a788232e548284ecdbe2000b958601571",
+    "rendered_sha256": "3e2f9a56c732d8635eef31ac593fc89a788232e548284ecdbe2000b958601571"
+  },
+  "public_packaging": {
+    "attached_images_in_public_set": false,
+    "local_source_retained": "work/local-ablations/codex-gpt-5.6-sol-xhigh-20260726/media/frame-dump-bundled-14/",
+    "reason": "The 14 derived JPEG attachments are omitted from the compact public set; complete per-bundle SHA-256, byte counts, sample ranges, source-sheet mapping, and source digest remain in this manifest."
+  },
+  "reasoning_effort": "medium",
+  "reasoning_effort_exception": "The prior successful complete-frame-dump transport required medium; 84-image and 28-image requests failed before a terminal answer. The 14-image medium transport completed with zero tool calls.",
+  "schema_version": 1,
+  "workspace": "/workspace",
+  "workspace_media_files": 0
+}

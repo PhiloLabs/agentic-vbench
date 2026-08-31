@@ -1,0 +1,33 @@
+{
+  "completed_by_tool": {
+    "list_dir": 6,
+    "manage_task": 27,
+    "run_command": 159,
+    "view_file": 141,
+    "write_to_file": 27
+  },
+  "completed_tool_calls": 360,
+  "conversation_id": "9414a42e-d86e-42d7-b41b-5555a30a56a1",
+  "counted_at_utc": "2026-08-27T20:25:39.208253+00:00",
+  "counting_rule": "Count native steps with step_type 132 and native status 3 as real completed tool calls. Status 6 context-canceled calls and status 7 invalid/pre-execution calls are excluded.",
+  "harness": "antigravity",
+  "method": "Queried the preserved native Antigravity SQLite conversation store read-only and decoded the primary protobuf tool name and JSON argument fields for every step_type 132 row.",
+  "native_step_rows": 768,
+  "not_completed_by_tool_and_status": {
+    "status_6:run_command": 7,
+    "status_7:view_file": 1,
+    "status_7:write_to_file": 2
+  },
+  "schema_version": 1,
+  "source_artifacts": [
+    "antigravity-conversation.db",
+    "antigravity-conversation.db-wal",
+    "antigravity-conversation.db-shm"
+  ],
+  "tool_requests": 370,
+  "tool_status_counts": {
+    "3": 360,
+    "6": 7,
+    "7": 3
+  }
+}

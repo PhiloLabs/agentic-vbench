@@ -1,0 +1,30 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/object-reconstruction-from-egocentric-manipulation"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "egocentric", "3d-reconstruction", "mesh", "geometry", "agentic-vbench-objects"]
+# Three egocentric clips, each showing one object grasped and rotated. Ground truth:
+# the scanned 3D reference mesh of each object. Baked at build time; not online.
+source = "egocentric tabletop manipulation clips (head-mounted RGB), scanned object reference meshes"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 8192
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# Multi-view reconstruction of three objects needs real sampling + geometry time.
+timeout_sec = 3600.0
+
+[steps.verifier]
+# Point-cloud alignment + F-score for three meshes.
+timeout_sec = 600.0

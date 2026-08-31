@@ -1,0 +1,22 @@
+{
+  "beam_routines": [
+    {
+      "start_time": "00:55:46.700",
+      "end_time": "00:57:02.467",
+      "dismount_takeoff_time": "00:57:01.800",
+      "school": "Arizona State",
+      "gymnast_name": "Ashley Szafranski",
+      "beam_score": "9.875",
+      "score_time": "01:00:59.700"
+    },
+    {
+      "start_time": "01:01:08.400",
+      "end_time": "01:02:35.000",
+      "dismount_takeoff_time": "01:02:34.500",
+      "school": "Arizona State",
+      "gymnast_name": "Justine Callis",
+      "beam_score": "9.800",
+      "score_time": "01:05:55.000"
+    }
+  ]
+}

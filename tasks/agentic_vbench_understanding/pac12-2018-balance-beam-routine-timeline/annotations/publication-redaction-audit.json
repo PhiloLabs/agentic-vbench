@@ -1,0 +1,148 @@
+{
+  "schema_version": 2,
+  "kind": "privacy_and_provenance_only_post_calibration_annotation_derivatives",
+  "created_after_calibration": true,
+  "source_originals_retained_locally": true,
+  "calibration_input_artifacts_changed": false,
+  "reviewer_display_name_occurrences_replaced": 6,
+  "artifacts": [
+    {
+      "source": {
+        "path": "reviewer-2.raw.csv",
+        "bytes": 1006,
+        "sha256": "5160d107500f85d95b74402eb63c67d6689ad5455400304857497710eda5fdec"
+      },
+      "destination": {
+        "path": "reviewer-2.public.csv",
+        "bytes": 1062,
+        "sha256": "86b3fd07764055016ebc7216ebf33e3e1d480df292fc963f8db41489371a94a7"
+      },
+      "changes": {
+        "annotator_comment_replacements": 1,
+        "data_rows_preserved": 25,
+        "data_rows_sha256": "cffa6eb8b197092729ce4a0947eac1c0c17d5b83095aadc7aac9cf3d219aeb40"
+      }
+    },
+    {
+      "source": {
+        "path": "dismount-takeoff-reviewer.raw.csv",
+        "bytes": 728,
+        "sha256": "254952ecd51962dfafa068928624e188d75264cc61f9ed7548e92301af0fcab3"
+      },
+      "destination": {
+        "path": "dismount-takeoff-reviewer.public.csv",
+        "bytes": 784,
+        "sha256": "4fcf8d5731db947ac9dcf2b9036cd7b18a9518bed518fd45127cbbb3915907aa"
+      },
+      "changes": {
+        "annotator_comment_replacements": 1,
+        "data_rows_preserved": 25,
+        "data_rows_sha256": "bd15129232f4adabbff9149814680284a49657a91bb7cd8c6fa9291b8497cc01"
+      }
+    },
+    {
+      "source": {
+        "kind": "captured_google_sheet_tsv",
+        "tool_call_title": "Copy the reviewer annotations",
+        "source_range": "A10:M34",
+        "captured_at_utc": "2026-08-27T18:17:17.487Z",
+        "bytes": 3660,
+        "sha256": "ea1c7ee6c653b9a890676fa1f1eaf18a4c796ace0ffefa77deed596b73384db6",
+        "rows": 25,
+        "columns": 13
+      },
+      "destination": {
+        "path": "reviewer-seven-field-update.public.csv",
+        "bytes": 4311,
+        "sha256": "c9c193a7bfae09625f44581f69216b57ff7e7eee0dd55e7b9010a170969993b6",
+        "rows": 25,
+        "columns": 13
+      },
+      "changes": {
+        "format_conversion": "TSV cell matrix to RFC 4180-compatible all-quoted CSV",
+        "cell_matrix_preserved": true,
+        "cell_matrix_sha256": "b2ed2979052edda5e13c429f805e9be39a86df5c5ff483a8b1393ff32fe4d6b3",
+        "blank_cells_preserved": 51,
+        "source_range_identity_fields": 0,
+        "post_adjudication_reviewer_evidence": true
+      }
+    },
+    {
+      "source": {
+        "path": "private/adjudication.pre-publication.csv",
+        "bytes": 6745,
+        "sha256": "d931fcad27b7c65ee94c0b1d1ae561d21ca151959ffc927fafb43b1ef4e40c8a"
+      },
+      "destination": {
+        "path": "adjudication.csv",
+        "bytes": 6934,
+        "sha256": "852c733ce8d8e527d11f8ddcc6406181237ee03820547043515f535fc2ddded9"
+      },
+      "changes": {
+        "metadata_header_lines_added": 3,
+        "adjudicator_role_identity_safe": true,
+        "adjudication_date_added": true,
+        "source_sha256_added": true,
+        "preexisting_header_and_data_bytes_preserved": true,
+        "preexisting_body_sha256": "d931fcad27b7c65ee94c0b1d1ae561d21ca151959ffc927fafb43b1ef4e40c8a",
+        "calibration_semantics_changed": false
+      }
+    },
+    {
+      "source": {
+        "path": "private/status.pre-publication.json",
+        "bytes": 1765,
+        "sha256": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3"
+      },
+      "destination": {
+        "path": "status.json",
+        "bytes": 3807,
+        "sha256": "b73a43657897f3d3604f65d10b22fe5053fc45a2aa0ddf522d79adc983db82c6"
+      },
+      "changes": {
+        "annotator_field_replacements": 2,
+        "active_artifacts_repointed_to_public_derivatives": 2,
+        "original_calibration_input_filenames_and_hashes_added": 3,
+        "reviewer_seven_field_provenance_added": true,
+        "required_adjudication_metadata_added": true,
+        "completion_and_adjudication_semantics_preserved": true
+      }
+    },
+    {
+      "source": {
+        "path": "private/README.pre-publication.md",
+        "bytes": 5021,
+        "sha256": "f33953269e14f6c9733dd3a9b6472ceabce56a494a77b829b82d7de18f1580e3"
+      },
+      "destination": {
+        "path": "README.md",
+        "bytes": 8043,
+        "sha256": "98fa23fa2a6d6e1a559c8c2d105a687c01bf1a5df69809f0a128940c2b6ea5be"
+      },
+      "changes": {
+        "reviewer_display_name_replacements": 2,
+        "publication_privacy_and_provenance_documentation_added": true
+      }
+    }
+  ],
+  "calibration_provenance": {
+    "original_status_sha256_preserved_in_public_status": true,
+    "original_raw_csv_sha256_values_preserved_in_public_status": true,
+    "original_adjudication_sha256_preserved_in_public_status": true,
+    "reviewer_sheet_capture_precedes_final_calibration_runs": true,
+    "publication_derivatives_created_after_all_final_agent_runs": true,
+    "task_prompt_changed": false,
+    "staged_video_changed": false,
+    "scorer_changed": false,
+    "ground_truth_changed": false,
+    "solution_changed": false,
+    "frozen_run_input_manifests_changed": false
+  },
+  "public_identity_check": {
+    "independent_annotator_name_absent": true,
+    "adjudicator_person_name_absent": true,
+    "source_sheet_identity_fields_absent": true,
+    "email_addresses_absent": true,
+    "local_home_paths_absent": true
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "annotation_status_sha256": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+  "canonical_prompt_sha256": "f59124565caa6e74abbf2a9b2d74bb52851a4940bb4dd571b4f11476d6d8e146",
+  "created_at_utc": "2026-08-27T21:41:19.743773+00:00",
+  "harness": "codex",
+  "judge_sha256": "52c4105dced75b354e12865135c2b0399c0f7e5c228f3f7d66b6034717384187",
+  "rendered_prompt_sha256": "8a8f196df49660099a132e01d59b760e02a9e5dbcadeb1c04aa179ed91a561ca",
+  "schema_version": 2,
+  "task_toml_sha256": "ed5d760e71069027dbc3db895723e9556fa0ad7a4c0724ff087275e285c0824a",
+  "workspace": "/private/tmp/avb-pac12-ablations-20260827T214117Z-single-frame",
+  "workspace_started_empty": true,
+  "prompt_localization": {
+    "from": "/workspace",
+    "to": "/private/tmp/avb-pac12-ablations-20260827T214117Z-single-frame"
+  },
+  "locked_full_source": {
+    "sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb",
+    "bytes": 1791218588,
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1280,
+          "height": 720,
+          "avg_frame_rate": "30000/1001",
+          "nb_frames": "250439"
+        },
+        {
+          "index": 1,
+          "codec_name": "opus",
+          "codec_type": "audio",
+          "avg_frame_rate": "0/0",
+          "nb_frames": "417817"
+        }
+      ],
+      "format": {
+        "duration": "8356.334000"
+      }
+    }
+  },
+  "ablation": {
+    "name": "single_frame",
+    "description": "one representative frame only",
+    "implementation": {
+      "selection": "temporal midpoint of the locked source: 4178.167 seconds (8356.334 / 2)",
+      "delivered_path": "materials/source.mp4",
+      "container": "MP4",
+      "video_frames": 1,
+      "audio_streams": 0,
+      "derivation_command": "ffmpeg -hide_banner -nostdin -y -ss 4178.167 -i <locked-source> -map 0:v:0 -frames:v 1 -an -c:v libx264 -pix_fmt yuv420p -movflags +faststart <workspace>/materials/source.mp4"
+    }
+  },
+  "delivered_media": {
+    "present": true,
+    "sha256": "6d4cdf1940d15a04b0d5ab8a3d4334ce1080bbc6144ffed697ed1bc3b1e0d617",
+    "bytes": 29262,
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "index": 0,
+          "codec_name": "h264",
+          "codec_type": "video",
+          "width": 1280,
+          "height": 720,
+          "avg_frame_rate": "30000/1001",
+          "nb_read_frames": "1"
+        }
+      ],
+      "format": {
+        "duration": "0.033367"
+      }
+    }
+  },
+  "canonical_prompt_otherwise_unchanged": true,
+  "internet_allowed": false,
+  "outside_knowledge_allowed": false,
+  "resume_or_continuation_allowed": false
+}
