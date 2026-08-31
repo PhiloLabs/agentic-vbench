@@ -1,11 +1,13 @@
 # Observability ledger
 
-Two questions, answered separately from the shipped 720p video and independently of any
+Three questions, answered separately from the shipped 720p video and independently of any
 agent output:
 
 1. **When is each point awarded?** — `flips.json` / `flips.md`, all 18 confirmed.
 2. **Can the setter be seen?** — `setter-chain.md`, with the rally-window strips in
    `witness/`.
+3. **Can each credited blocker and each blocked hitter be seen?** — `witness.md`, one
+   row per event per field, with the terminal-window strips in `witness/`.
 
 ## When each point is awarded
 
@@ -36,3 +38,8 @@ terminal attribution per event needs a sweep either side of the flip.
 (t-9, -7, -5, -3 relative to the flip), at the source's horizontal resolution. They are
 the evidence for the setter finding: that window is the wide sideline shot throughout,
 where numbers do not resolve.
+
+`witness/<event>_terminal.jpg` holds eight frames spanning the terminal window
+(t-7.0, -5.5, -4.0, -2.5, +0.8, +1.6, +2.4, +3.2), same crop and resolution. They are
+the evidence behind `witness.md`, and the window runs to both sides of the bar because
+the close-up lands before it on some events and after it on others.
