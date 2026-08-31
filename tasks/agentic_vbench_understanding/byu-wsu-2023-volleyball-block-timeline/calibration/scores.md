@@ -51,12 +51,9 @@ model transport. Egress is default-deny behind an allowlisting proxy, and that p
 log shows the run never asked for a host outside the backend. `parity/README.md` has
 the construction and the verification.
 
-The Opus row is provisional for two reasons. It was measured with an earlier harness
-that confined access to the video but not the processing of the frames that came out of
-it. And the host run it derives from was resumed after a network drop under a
-continuation prompt that restated the schema wrongly — carrying the sister task's score
-label and omitting `setter` — for 246 of its 386 turns; `rollouts/README.md` quotes it.
-Neither has been rerun. The same flaw inflated an earlier Codex figure of 0.0952 —
+The Opus row is provisional: it was measured with an earlier harness that confined
+access to the video but not the processing of the frames that came out of it, and it
+has not been rerun. The same flaw inflated an earlier Codex figure of 0.0952 —
 confining the processing brought it to 0.0426.
 
 Inside the image Codex submitted 29 events over 232 command executions and five hours,
