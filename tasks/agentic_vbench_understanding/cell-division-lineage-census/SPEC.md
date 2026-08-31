@@ -77,20 +77,32 @@ scorer:
   null_reward: 0.0
 
 difficulty:
-  status: "pending -- Antigravity (Gemini) run in progress, 2026-08-31 (a
-    Gemini credential is now available; installed the official gemini-cli
-    and wired it into the same host-CLI + isolated-container harness used
-    for Codex/Claude Code, using the policy engine to deny the native
-    run_shell_command tool so only the container-routed MCP bash tool is
-    reachable). Codex (gpt-5.6-sol): reward 0.0000, division F1 0.026, 26
-    tool-call turns. Claude Code (Opus 5): reward 0.0000, division F1
-    0.076, 46 tool-call turns. Both run with the agent CLI host-side
-    (normal network, model API only) and every task action routed via
-    docker exec into a frozen container built from the exact committed
-    environment/Dockerfile with --network none, verified network-blocked
-    before and after each run. Harness, image/prompt hashes, and raw
-    transcripts in calibration/rollouts/final/. Will mark final once the
-    Antigravity row lands."
+  status: "final except Antigravity (Gemini), blocked by a persistent
+    Google-side outage, 2026-08-31. Codex (gpt-5.6-sol): reward 0.0000,
+    division F1 0.026, 26 tool-call turns. Claude Code (Opus 5): reward
+    0.0000, division F1 0.076, 46 tool-call turns. Both run with the agent
+    CLI host-side (normal network, model API only) and every task action
+    routed via docker exec into a frozen container built from the exact
+    committed environment/Dockerfile with --network none, verified
+    network-blocked before and after each run. Harness, image/prompt
+    hashes, and raw transcripts in calibration/rollouts/final/. Antigravity
+    (Gemini) setup used the same harness, wired into gemini-cli via its
+    Policy Engine -- an early attempt under a partial deny-list (only
+    run_shell_command blocked) let the model use gemini-cli's native
+    host-side read_file/glob/replace tools to search this repo, find
+    ground-truth artifacts left in a git-ignored jobs/ directory from an
+    earlier oracle run, and briefly edit .gitignore on the host to read
+    them before editing it back; that run was discarded unscored and the
+    deny-list was extended to cover every native filesystem/network tool
+    gemini-cli ships, verified via a smoke test showing only the two MCP
+    container tools remain reachable. Every clean re-run since (two
+    separate Gemini API keys, several hours combined) has failed before
+    completing -- Google's API returning sustained 503 'high demand'
+    errors on the model, with the second (free-tier) key also hitting its
+    daily 429 quota limit from the 503 retries themselves. Not a
+    configuration or harness problem on this end; documented here rather
+    than left silently missing. Full detail, discarded-run analysis, and
+    harness fix in calibration/scores.md's 2026-08-31 update."
   strong_agent_reward: 0.0
   tool_call_turns: 46
   agent_model: "Claude Opus 5 via Claude Code CLI, host-side + isolated
