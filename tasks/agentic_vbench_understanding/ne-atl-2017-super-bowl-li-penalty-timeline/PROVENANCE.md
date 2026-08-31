@@ -85,20 +85,21 @@ carry a player jersey number, by rule/convention:
 | 3 | 2:06 | NE | illegal touching (kick) | S. Gostkowski | 3 | kicking-team touching — announced without a player number |
 | 3 | 0:04 | ATL | delay of game | M. Bosher | 5 | team foul — no player number |
 
-## Open design questions (for the PR / issue #60)
-- **Declined fouls (rows 2, 3, 8):** included because the scope rule says the referee
-  announces the number regardless of the penalty decision. That assumption is verified
-  by transcription for 0 of these 3 rows so far (see the audio-verified column above) —
-  still open until confirmed the same way the 4 accepted rows were.
-- **Event count:** 13 natural events (16 total referee-mic penalty announcements, minus
-  3 with no jersey number). Reaching the ≥20 figure from review ask #4 would require
-  adding replay reviews and/or measurements, but this game has at most 1 review and no
-  measurements (see enumeration table above), and neither carries a jersey number or an
-  audio-only component — padding with them would dilute the audio/video seam rather than
-  extend it. Recommendation: keep the ~13-event scope and address the F1 fragility
-  (review ask #4's "single lucky guess clears 0.10" concern) as a scoring-shape question
-  instead of an event-count question.
-- **Clock precision:** superseded by the observable clock rule above (per review ask #5)
-  — clocks are the official Game Book values, scorer tolerance ±5 s, 3 of 13 rows
-  spot-checked against the score bug by frame extraction; full per-row audit against the
-  rule is open.
+## Scope and scoring ruling (settled by techgenmini on issue #60)
+- **Scope:** keep the natural ~13 referee-announced player-foul events. Do not pad with
+  replay reviews or measurements — they carry no jersey number and no audio-only
+  component in this game, so adding them would dilute the audio/video seam rather than
+  extend it.
+- **Declined fouls (rows 2, 3, 8):** stay in scope only if each one's number is
+  individually confirmed audible. Verified by transcription for 0 of these 3 rows so
+  far (see the audio-verified column above) — pending, per-row, not a blanket rule
+  anymore.
+- **Scoring:** F1 replaced with F2 (β=2, recall-weighted) in `judge.py` — a single lucky
+  exact row no longer clears the 0.10 anti-shortcut gate (F1 gave 0.1429; F2 gives
+  0.0943). Regression-checked against null/one-hit/two-hit/oracle in
+  `steps/solve/tests/test_regressions.py`.
+- **Clock rule:** the observable rule above (last score-bug frame before the
+  announcement) is now the binding definition. Scorer tolerance stays ±5 s. 3 of 13 rows
+  were spot-checked against the score bug by frame extraction during initial design;
+  the full per-row observability audit against this rule — for all 13 rows, alongside
+  each row's audio timestamp/transcript and the Game Book clock — is still pending.

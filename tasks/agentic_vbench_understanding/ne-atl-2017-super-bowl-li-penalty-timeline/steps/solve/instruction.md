@@ -6,14 +6,15 @@ every **referee-announced player foul** in the game.
 
 A *referee-announced player foul* is a penalty for which the referee announces a
 specific player's jersey number over the field microphone (for example, "Holding,
-number 70, offense"). Team fouls that carry no announced jersey number — such as delay
+number [N], offense"). Team fouls that carry no announced jersey number — such as delay
 of game or illegal formation — are **not** part of this task; do not report them.
 
-For each foul, report the quarter, the game clock at the moment the foul occurred, the
-infraction type, the jersey number of the penalised player, and their team. Use any
-tools in the image (for example `ffmpeg` and `ffprobe`) to seek through, sample frames
-from, and extract audio from the video. The referee's announcement, the on-screen
-score-and-clock graphic, and the play action are your evidence.
+For each foul, report the quarter, the game clock (defined below), the infraction type,
+the jersey number of the penalised player, and their team. Use any tools in the image
+(for example `ffmpeg`/`ffprobe`, and `faster-whisper` for transcribing the referee's
+audio) to seek through, sample frames from, extract audio from, and transcribe the
+video. The referee's announcement, the on-screen score-and-clock graphic, and the play
+action are your evidence.
 
 ## What to submit
 

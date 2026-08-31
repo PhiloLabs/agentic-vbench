@@ -1,6 +1,8 @@
 # Calibration — ne-atl-2017-super-bowl-li-penalty-timeline
 
-Deterministic F1 scorer (`steps/solve/tests/judge.py`). A task clears the bar when
+Deterministic F2 (β=2, recall-weighted) scorer (`steps/solve/tests/judge.py`; switched
+from F1 per issue #60 review — F1 let one lucky exact row clear the 0.10 gate at
+0.1429, F2 does not at 0.0943). A task clears the bar when
 **every real agent scores below 0.10** and a real attempt takes **more than 50
 tool-call turns**. Oracle must be 1.0 and an empty attempt 0.
 

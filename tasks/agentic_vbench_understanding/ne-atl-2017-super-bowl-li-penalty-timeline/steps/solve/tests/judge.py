@@ -4,8 +4,10 @@
 The agent lists every referee-announced player foul with quarter, game clock, infraction
 type, penalised player's jersey number, and team. A prediction is a true positive only
 when it FULLY reconstructs the foul: same type, same jersey number, same team, same
-quarter, and a game clock within CLOCK_TOL seconds. reward = F1, so misses and
-hallucinations both hurt.
+quarter, and a game clock within CLOCK_TOL seconds. reward = F-beta with BETA=2
+(recall-weighted), so misses and hallucinations both hurt, but a single lucky true
+positive no longer clears the anti-shortcut gate the way it did under plain F1 (one
+exact row out of 13: F1 = 0.1429 > 0.10 gate, F2 = 0.0943 < 0.10 gate).
 
 Why cross-modal: the jersey number is stated only by the referee's microphone (audio),
 and the game clock is shown only in the on-screen score bug (video). The infraction type
@@ -31,6 +33,7 @@ import re
 from pathlib import Path
 
 CLOCK_TOL = 5  # seconds of game-clock tolerance
+BETA = 2  # F-beta weight: recall counted BETA^2x precision, per issue #60 review
 
 # Closed vocabulary of scored infraction types (normalised form).
 VALID_TYPES = {
@@ -129,7 +132,9 @@ def main():
     n_pred, n_gt = len(preds), len(GROUND_TRUTH)
     precision = tp / n_pred if n_pred else 0.0
     recall = tp / n_gt if n_gt else 0.0
-    f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) else 0.0
+    beta_sq = BETA * BETA
+    denom = beta_sq * precision + recall
+    f_beta = ((1 + beta_sq) * precision * recall / denom) if denom else 0.0
 
     details = {
         "reason": reason,
@@ -138,13 +143,14 @@ def main():
         "true_positives": tp,
         "precision": round(precision, 4),
         "recall": round(recall, 4),
-        "f1": round(f1, 4),
+        "beta": BETA,
+        "f_beta": round(f_beta, 4),
         "clock_tolerance_s": CLOCK_TOL,
         "ground_truth_source": "official NFL Game Book",
     }
     args.reward_json.parent.mkdir(parents=True, exist_ok=True)
-    args.reward_json.write_text(json.dumps({"reward": round(f1, 4), "details": details}, indent=2))
-    args.reward_txt.write_text(f"{round(f1, 4)}\n")
+    args.reward_json.write_text(json.dumps({"reward": round(f_beta, 4), "details": details}, indent=2))
+    args.reward_txt.write_text(f"{round(f_beta, 4)}\n")
 
 
 if __name__ == "__main__":

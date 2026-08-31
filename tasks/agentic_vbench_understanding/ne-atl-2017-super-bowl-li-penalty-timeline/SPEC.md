@@ -33,15 +33,23 @@ evidence:
 # 5. Ground truth: value, source, tier, verification.
 ground_truth:
   source: NFL official Game Book (nflgsis.com) penalty summary + roster for jersey numbers.
-  tier: machine-truth
+  tier: official-record-derived, cross-checked by a broadcast audio/video audit (per
+        issue #60 review) -- not pure machine-truth, since the number-per-row audibility
+        and clock-per-row frame audit are load-bearing, not just a records lookup.
   verification: >
     cross-checked against nflpenalties.com (13 accepted penalties, 88 yards, 16 flags).
     Four announced jersey numbers independently verified by transcribing the broadcast
     audio: #70 Matthews (Q3), #23 Alford (Q2), #34 Poole (Q2), #59 Campbell (OT PI).
+    Full 13-row observability audit (audio timestamp+transcript vs. score-bug frame vs.
+    Game Book clock) is PENDING -- see PROVENANCE.md.
 
 # 6. Scorer: deterministic code only.
 scorer:
-  metric: F1 over fouls; a TP requires type + jersey number + team + quarter, and clock within 5 s.
+  metric: F-beta (beta=2, recall-weighted) over fouls; a TP requires type + jersey number
+          + team + quarter, and clock within 5 s. Chosen over F1 per issue #60 review --
+          F1 let one lucky exact row (0.1429) clear the 0.10 anti-shortcut gate; F2 does
+          not (0.0943). Regression-checked: null=0.0, one-hit=0.0943, two-hit=0.1852,
+          oracle=1.0 (steps/solve/tests/test_regressions.py).
   oracle_reward: 1.0            # verified locally (pilot subset)
   null_reward: 0.0             # verified locally
 
