@@ -33,16 +33,27 @@ artifact of this task reachable. The exact prompt is `rollouts/instruction-as-ru
 `run-metadata.txt` beside each rollout records model, effort, schema, and the
 instruction and media hashes.
 
-| agent | model / setting | score | work | integrity |
+Both agents were run twice: once on the calibration host, and once confined to the
+shipped task image, where every action on the video happens inside a container built
+from `environment/Dockerfile` with `--network none`. **The confined runs are the ones
+that describe the task**; `parity/README.md` explains the confinement and
+`parity/environment.txt` records the image digest and tool inventory.
+
+| agent | model / setting | in the task image | on the host | integrity |
 |---|---|---|---|---|
-| Codex CLI | gpt-5.6-sol, xhigh | **0.0213** | 71 tool-call items, 29 events submitted | key 0, web 0 |
-| Claude Code | Opus 5, xhigh | **0.0** | 386 tool-call turns, 23 events submitted | key 0, web 0 |
+| Codex CLI | gpt-5.6-sol, xhigh | **0.0952** | 0.0213 | key 0, web 0 |
+| Claude Code | Opus 5, xhigh | **0.0** | 0.0 | key 0, web 0 |
 | Antigravity | — | not run | — | see `../agent-integrity/` |
 
-Both wrote their own `solution.json` and filled all three attributions on every event
-they submitted, and **neither got a single block point fully correct** — Codex managed
-one partial, Opus none. Between them they located 3 of the 18 rallies at all (matching
-set and score-after); on those three, the attributions were still wrong.
+Confined, Codex submitted 24 events, matched 11 of the 18 rally anchors, and got one
+block point **fully correct** — set 1 at 18-14, with both blockers, the stuffed hitter
+and the setter all right. Opus submitted 8 events over 384 tool-call turns and matched
+one anchor.
+
+The gap to the host figure is a gap in *finding* rallies, not in attributing them:
+anchors went 3 → 11 while fully-correct events went 0 → 1. The image's OCR and array
+tools make a scripted pass over the score bug cheap, which collapses the tedious layer
+and leaves the attribution layer where it was.
 
 ## Design note: why three attributions
 
@@ -104,6 +115,8 @@ envelope those streams were audited against.
 | codex-fresh, stderr | [`codex-fresh/stderr.txt.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/codex-fresh/stderr.txt.gz) (1 kB) | `3c45a319a3088ee3ef5839abd8cbbf69d0d3b79cfc577ef16485a761b60e522e` |
 | opus-fresh, leg 1 | [`opus-fresh/rollout.leg1.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/opus-fresh/rollout.leg1.stream-json.gz) (27.7 MB) | `711850547184b410d8cd593f179af9e16b75674250feabb22edea1ebe6c7ac35` |
 | opus-fresh, leg 2 | [`opus-fresh/rollout.leg2.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/opus-fresh/rollout.leg2.stream-json.gz) (186.7 MB) | `8e4eb6fffcac9e6f84cf2228313dfecd0b0631c10caa4f91de398ba786603e3a` |
+| parity, Codex in the task image | [`parity-codex/rollout.jsonl.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/5719e3303f366594dd471a048a69ead60e4c2bcd/byu-wsu-2023-volleyball-block-timeline/parity-codex/rollout.jsonl.gz) (45 kB) | `0d3356eb172e83e00ddf1b60a1528253dd5376366121d686b76455686faae76c` |
+| parity, Opus in the task image | [`parity-opus/rollout.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/5719e3303f366594dd471a048a69ead60e4c2bcd/byu-wsu-2023-volleyball-block-timeline/parity-opus/rollout.stream-json.gz) (197.6 MB) | `f2a40d87f866603566fa5b93daabc7cb064a863f900e75e49ec1180f2063e998` |
 | ablation, no_media | [`ablations/no_media.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/no_media.stream-json.gz) (12 kB) | `7f85d12481c326822d4614b2422ba7ebc359c8185ad79a23bcdc6741d07248c5` |
 | ablation, single_frame | [`ablations/single_frame.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/single_frame.stream-json.gz) (146 kB) | `026bdd99624662ea01185055a35be77b334419faa17b1ea4b4c07a48b38c3789` |
 | ablation, frame_dump | [`ablations/frame_dump.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/frame_dump.stream-json.gz) (6.5 MB) | `ef2b62bc88edf6665925c21f735a2c9d75cc4ee01e7e503b9ddcd66627f928e2` |
