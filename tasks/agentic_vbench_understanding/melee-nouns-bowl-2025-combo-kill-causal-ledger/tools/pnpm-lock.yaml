@@ -1,0 +1,107 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      '@slippi/slippi-js':
+        specifier: 9.1.2
+        version: 9.1.2
+
+packages:
+
+  '@shelacek/ubjson@1.1.1':
+    resolution: {integrity: sha512-2Vi46ct3IWzh8eAz9IZ0NulIRtJbGgJDppatJvufB0fHwasRSfklBoQrVrCutF24fSuRvTvZVebjtcIHOxvzWw==}
+
+  '@slippi/slippi-js@9.1.2':
+    resolution: {integrity: sha512-8IVJWqs8kQFs5PGwDjypobEKwIumwKcF0JyNzuR1/p5kt9z26a82KEGqqysCqnt2BMbwBrFTBceuMreRV8b2Rg==}
+
+  backoff@2.5.0:
+    resolution: {integrity: sha512-wC5ihrnUXmR2douXmXLCe5O3zg3GKIyvRi/hi58a/XyRxVI+3/yM0PYueQOZXPXQ9pxBislYkw+sF9b7C/RuMA==}
+    engines: {node: '>= 0.6'}
+
+  date-fns@3.6.0:
+    resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
+
+  enet@0.2.9:
+    resolution: {integrity: sha512-V3qaPJEHY1Bl9F1nEY4thQV2fKkwS+I8Xpss4/91Hyi6JHagB7Ur6bROyVp4wqO74cPbF0ptgyyYh0L0Sky4Lw==}
+
+  iconv-cp932@1.2.2:
+    resolution: {integrity: sha512-vUP4Ke0Xy3bInEjSsKtKq51KeXK7nglt9uvRVYhJrlUBlMKa2R1EBDE88HFXzm8Wp5J1w83psrISj0f+QMEt4g==}
+
+  lodash@4.18.1:
+    resolution: {integrity: sha512-dMInicTPVE8d1e5otfwmmjlxkZoUpiVLwyeTdUsi/Caj/gfzzblBcCE5sRHV/AsjuCmxWrte2TNGSYuCeCq+0Q==}
+
+  precond@0.2.3:
+    resolution: {integrity: sha512-QCYG84SgGyGzqJ/vlMsxeXd/pgL/I94ixdNFyh1PusWmTCyVfPJjZ1K1jvHtsbfnXQs2TSkEP2fR7QiMZAnKFQ==}
+    engines: {node: '>= 0.6'}
+
+  reconnect-core@1.3.0:
+    resolution: {integrity: sha512-+gLKwmyRf2tjl6bLR03DoeWELzyN6LW9Xgr3vh7NXHHwPi0JC0N2TwPyf90oUEBkCRcD+bgQ+s3HORoG3nwHDg==}
+
+  semver@7.8.5:
+    resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
+  ws@8.21.1:
+    resolution: {integrity: sha512-+0NTnW77fFN/DjQi6k/Sq/Yvk4Sgajw7urW8V+asjXnRgDs9gyGkdb7EzgfhA4goXsRIZKE28fzIXBHEzhuiWw==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
+snapshots:
+
+  '@shelacek/ubjson@1.1.1': {}
+
+  '@slippi/slippi-js@9.1.2':
+    dependencies:
+      '@shelacek/ubjson': 1.1.1
+      date-fns: 3.6.0
+      iconv-cp932: 1.2.2
+      lodash: 4.18.1
+      semver: 7.8.5
+    optionalDependencies:
+      enet: 0.2.9
+      reconnect-core: 1.3.0
+      ws: 8.21.1
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
+  backoff@2.5.0:
+    dependencies:
+      precond: 0.2.3
+    optional: true
+
+  date-fns@3.6.0: {}
+
+  enet@0.2.9:
+    optional: true
+
+  iconv-cp932@1.2.2: {}
+
+  lodash@4.18.1: {}
+
+  precond@0.2.3:
+    optional: true
+
+  reconnect-core@1.3.0:
+    dependencies:
+      backoff: 2.5.0
+    optional: true
+
+  semver@7.8.5: {}
+
+  ws@8.21.1:
+    optional: true

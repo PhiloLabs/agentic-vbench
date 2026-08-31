@@ -1,0 +1,836 @@
+{
+  "events": [
+    {
+      "game": 1,
+      "attacker": "Zain",
+      "victim_stock_before": 4,
+      "hit_count": 15,
+      "damage_band": "devastating",
+      "terminal": "kill"
+    },
+    {
+      "game": 1,
+      "attacker": "Zain",
+      "victim_stock_before": 3,
+      "hit_count": 5,
+      "damage_band": "light",
+      "terminal": "escape"
+    },
+    {
+      "game": 1,
+      "attacker": "Zain",
+      "victim_stock_before": 3,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 1,
+      "attacker": "Zain",
+      "victim_stock_before": 2,
+      "hit_count": 7,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 1,
+      "attacker": "Ferriswheel",
+      "victim_stock_before": 4,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 1,
+      "attacker": "Zain",
+      "victim_stock_before": 2,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 1,
+      "attacker": "Zain",
+      "victim_stock_before": 1,
+      "hit_count": 8,
+      "damage_band": "devastating",
+      "terminal": "reversal"
+    },
+    {
+      "game": 1,
+      "attacker": "Ferriswheel",
+      "victim_stock_before": 3,
+      "hit_count": 5,
+      "damage_band": "light",
+      "terminal": "reversal"
+    },
+    {
+      "game": 1,
+      "attacker": "Zain",
+      "victim_stock_before": 1,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 2,
+      "attacker": "Zain",
+      "victim_stock_before": 4,
+      "hit_count": 7,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 2,
+      "attacker": "Zain",
+      "victim_stock_before": 3,
+      "hit_count": 7,
+      "damage_band": "devastating",
+      "terminal": "reversal"
+    },
+    {
+      "game": 2,
+      "attacker": "Zain",
+      "victim_stock_before": 3,
+      "hit_count": 7,
+      "damage_band": "devastating",
+      "terminal": "reversal"
+    },
+    {
+      "game": 2,
+      "attacker": "Zain",
+      "victim_stock_before": 3,
+      "hit_count": 5,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 2,
+      "attacker": "Zain",
+      "victim_stock_before": 2,
+      "hit_count": 14,
+      "damage_band": "devastating",
+      "terminal": "reversal"
+    },
+    {
+      "game": 2,
+      "attacker": "Zain",
+      "victim_stock_before": 2,
+      "hit_count": 6,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 2,
+      "attacker": "Zain",
+      "victim_stock_before": 1,
+      "hit_count": 13,
+      "damage_band": "devastating",
+      "terminal": "reversal"
+    },
+    {
+      "game": 2,
+      "attacker": "Zain",
+      "victim_stock_before": 1,
+      "hit_count": 3,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 3,
+      "attacker": "Zain",
+      "victim_stock_before": 4,
+      "hit_count": 10,
+      "damage_band": "devastating",
+      "terminal": "escape"
+    },
+    {
+      "game": 3,
+      "attacker": "Zain",
+      "victim_stock_before": 4,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 3,
+      "attacker": "Ferriswheel",
+      "victim_stock_before": 4,
+      "hit_count": 11,
+      "damage_band": "devastating",
+      "terminal": "kill"
+    },
+    {
+      "game": 3,
+      "attacker": "Zain",
+      "victim_stock_before": 3,
+      "hit_count": 12,
+      "damage_band": "devastating",
+      "terminal": "kill"
+    },
+    {
+      "game": 3,
+      "attacker": "Zain",
+      "victim_stock_before": 2,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "reversal"
+    },
+    {
+      "game": 3,
+      "attacker": "Ferriswheel",
+      "victim_stock_before": 3,
+      "hit_count": 5,
+      "damage_band": "light",
+      "terminal": "reversal"
+    },
+    {
+      "game": 3,
+      "attacker": "Zain",
+      "victim_stock_before": 2,
+      "hit_count": 5,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 3,
+      "attacker": "Ferriswheel",
+      "victim_stock_before": 3,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 3,
+      "attacker": "Zain",
+      "victim_stock_before": 2,
+      "hit_count": 2,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 3,
+      "attacker": "Zain",
+      "victim_stock_before": 1,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 4,
+      "attacker": "Bard",
+      "victim_stock_before": 4,
+      "hit_count": 7,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 4,
+      "attacker": "JoJo",
+      "victim_stock_before": 4,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 4,
+      "attacker": "Bard",
+      "victim_stock_before": 4,
+      "hit_count": 2,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 4,
+      "attacker": "JoJo",
+      "victim_stock_before": 3,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "reversal"
+    },
+    {
+      "game": 4,
+      "attacker": "Bard",
+      "victim_stock_before": 3,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "escape"
+    },
+    {
+      "game": 4,
+      "attacker": "Bard",
+      "victim_stock_before": 3,
+      "hit_count": 6,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 4,
+      "attacker": "JoJo",
+      "victim_stock_before": 3,
+      "hit_count": 6,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 4,
+      "attacker": "JoJo",
+      "victim_stock_before": 3,
+      "hit_count": 3,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 4,
+      "attacker": "Bard",
+      "victim_stock_before": 3,
+      "hit_count": 2,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 4,
+      "attacker": "Bard",
+      "victim_stock_before": 2,
+      "hit_count": 13,
+      "damage_band": "devastating",
+      "terminal": "kill"
+    },
+    {
+      "game": 4,
+      "attacker": "JoJo",
+      "victim_stock_before": 2,
+      "hit_count": 6,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 4,
+      "attacker": "Bard",
+      "victim_stock_before": 1,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 4,
+      "attacker": "JoJo",
+      "victim_stock_before": 1,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 4,
+      "attacker": "JoJo",
+      "victim_stock_before": 1,
+      "hit_count": 7,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 5,
+      "attacker": "JoJo",
+      "victim_stock_before": 4,
+      "hit_count": 7,
+      "damage_band": "devastating",
+      "terminal": "kill"
+    },
+    {
+      "game": 5,
+      "attacker": "Bard",
+      "victim_stock_before": 4,
+      "hit_count": 15,
+      "damage_band": "devastating",
+      "terminal": "reversal"
+    },
+    {
+      "game": 5,
+      "attacker": "JoJo",
+      "victim_stock_before": 3,
+      "hit_count": 7,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 5,
+      "attacker": "Bard",
+      "victim_stock_before": 4,
+      "hit_count": 3,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 5,
+      "attacker": "Bard",
+      "victim_stock_before": 3,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 5,
+      "attacker": "Bard",
+      "victim_stock_before": 2,
+      "hit_count": 6,
+      "damage_band": "devastating",
+      "terminal": "reversal"
+    },
+    {
+      "game": 5,
+      "attacker": "JoJo",
+      "victim_stock_before": 2,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 5,
+      "attacker": "Bard",
+      "victim_stock_before": 2,
+      "hit_count": 2,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 5,
+      "attacker": "JoJo",
+      "victim_stock_before": 1,
+      "hit_count": 4,
+      "damage_band": "devastating",
+      "terminal": "escape"
+    },
+    {
+      "game": 5,
+      "attacker": "JoJo",
+      "victim_stock_before": 1,
+      "hit_count": 5,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 6,
+      "attacker": "Bard",
+      "victim_stock_before": 4,
+      "hit_count": 6,
+      "damage_band": "devastating",
+      "terminal": "kill"
+    },
+    {
+      "game": 6,
+      "attacker": "Bard",
+      "victim_stock_before": 3,
+      "hit_count": 12,
+      "damage_band": "devastating",
+      "terminal": "escape"
+    },
+    {
+      "game": 6,
+      "attacker": "JoJo",
+      "victim_stock_before": 3,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 6,
+      "attacker": "JoJo",
+      "victim_stock_before": 3,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 6,
+      "attacker": "JoJo",
+      "victim_stock_before": 3,
+      "hit_count": 3,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 6,
+      "attacker": "JoJo",
+      "victim_stock_before": 2,
+      "hit_count": 5,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 6,
+      "attacker": "JoJo",
+      "victim_stock_before": 2,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 6,
+      "attacker": "Bard",
+      "victim_stock_before": 2,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 6,
+      "attacker": "JoJo",
+      "victim_stock_before": 2,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 6,
+      "attacker": "Bard",
+      "victim_stock_before": 2,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 6,
+      "attacker": "JoJo",
+      "victim_stock_before": 1,
+      "hit_count": 2,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 7,
+      "attacker": "Axe",
+      "victim_stock_before": 4,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 7,
+      "attacker": "SRM13",
+      "victim_stock_before": 4,
+      "hit_count": 5,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 7,
+      "attacker": "SRM13",
+      "victim_stock_before": 3,
+      "hit_count": 3,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 7,
+      "attacker": "Axe",
+      "victim_stock_before": 4,
+      "hit_count": 2,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 7,
+      "attacker": "Axe",
+      "victim_stock_before": 3,
+      "hit_count": 6,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 7,
+      "attacker": "SRM13",
+      "victim_stock_before": 2,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 7,
+      "attacker": "Axe",
+      "victim_stock_before": 3,
+      "hit_count": 8,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 7,
+      "attacker": "Axe",
+      "victim_stock_before": 3,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 7,
+      "attacker": "SRM13",
+      "victim_stock_before": 1,
+      "hit_count": 2,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 8,
+      "attacker": "Axe",
+      "victim_stock_before": 4,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "escape"
+    },
+    {
+      "game": 8,
+      "attacker": "Axe",
+      "victim_stock_before": 4,
+      "hit_count": 2,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 8,
+      "attacker": "Axe",
+      "victim_stock_before": 3,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "escape"
+    },
+    {
+      "game": 8,
+      "attacker": "Axe",
+      "victim_stock_before": 3,
+      "hit_count": 9,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 8,
+      "attacker": "Axe",
+      "victim_stock_before": 3,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 8,
+      "attacker": "Axe",
+      "victim_stock_before": 2,
+      "hit_count": 8,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 8,
+      "attacker": "SRM13",
+      "victim_stock_before": 4,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "escape"
+    },
+    {
+      "game": 8,
+      "attacker": "SRM13",
+      "victim_stock_before": 4,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 8,
+      "attacker": "Axe",
+      "victim_stock_before": 2,
+      "hit_count": 3,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 8,
+      "attacker": "Axe",
+      "victim_stock_before": 1,
+      "hit_count": 9,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 9,
+      "attacker": "Axe",
+      "victim_stock_before": 4,
+      "hit_count": 6,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 9,
+      "attacker": "Axe",
+      "victim_stock_before": 4,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 9,
+      "attacker": "Axe",
+      "victim_stock_before": 3,
+      "hit_count": 4,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 9,
+      "attacker": "Axe",
+      "victim_stock_before": 3,
+      "hit_count": 6,
+      "damage_band": "heavy",
+      "terminal": "kill"
+    },
+    {
+      "game": 9,
+      "attacker": "Axe",
+      "victim_stock_before": 2,
+      "hit_count": 7,
+      "damage_band": "devastating",
+      "terminal": "reversal"
+    },
+    {
+      "game": 9,
+      "attacker": "Axe",
+      "victim_stock_before": 2,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 9,
+      "attacker": "SRM13",
+      "victim_stock_before": 4,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 9,
+      "attacker": "Axe",
+      "victim_stock_before": 1,
+      "hit_count": 12,
+      "damage_band": "devastating",
+      "terminal": "kill"
+    },
+    {
+      "game": 10,
+      "attacker": "SRM13",
+      "victim_stock_before": 4,
+      "hit_count": 4,
+      "damage_band": "devastating",
+      "terminal": "kill"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 4,
+      "hit_count": 13,
+      "damage_band": "heavy",
+      "terminal": "escape"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 4,
+      "hit_count": 8,
+      "damage_band": "light",
+      "terminal": "escape"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 4,
+      "hit_count": 7,
+      "damage_band": "light",
+      "terminal": "reversal"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 4,
+      "hit_count": 3,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 3,
+      "hit_count": 5,
+      "damage_band": "light",
+      "terminal": "reversal"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 3,
+      "hit_count": 5,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 10,
+      "attacker": "SRM13",
+      "victim_stock_before": 3,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 2,
+      "hit_count": 2,
+      "damage_band": "light",
+      "terminal": "kill"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 1,
+      "hit_count": 5,
+      "damage_band": "heavy",
+      "terminal": "reversal"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 1,
+      "hit_count": 6,
+      "damage_band": "light",
+      "terminal": "escape"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 1,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "reversal"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 1,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "escape"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 1,
+      "hit_count": 4,
+      "damage_band": "light",
+      "terminal": "escape"
+    },
+    {
+      "game": 10,
+      "attacker": "Axe",
+      "victim_stock_before": 1,
+      "hit_count": 1,
+      "damage_band": "light",
+      "terminal": "kill"
+    }
+  ]
+}
