@@ -1,10 +1,10 @@
-# Infrastructure Validation (2026-08-30)
+# Infrastructure Validation (2026-08-31)
 
 This record validates the current task HEAD without starting a model trial.
 
 | item | value |
 |---|---|
-| task commit | `76cf9ab870b55d59d7625551805c3f3c55b280ab` |
+| task commit | `973073d5cfec2c28a4fd951c9cac960012042063` |
 | Docker base | `python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a` |
 | built image | `agentic-vbench-melee:infra-verify-hf-20260831` |
 | task-image digest | `sha256:47c3749a206c1cd51f857e8617962c3a18c9716351c97fdcd338061a59618603` |
