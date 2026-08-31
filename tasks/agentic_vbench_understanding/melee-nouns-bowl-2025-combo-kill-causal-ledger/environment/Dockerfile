@@ -9,7 +9,7 @@ RUN npm install -g @openai/codex@0.147.0-alpha.6.5
 COPY fetch_youtube.py /usr/local/bin/fetch_youtube.py
 COPY concat.txt /baked/concat.txt
 
-ARG MATERIALS_URL=
+ARG MATERIALS_URL=https://huggingface.co/datasets/zhangsj0722/Melee-Nouns-Bowl/resolve/358a0871ba6cd5331f329dafee07564710257bd8/materials/melee-nouns-bowl-match.mp4
 ARG FERRISWHEEL_ZAIN_SHA256=4b9a6da0b6ee68488e2eb32a90fb3319d17b1f7bb1245c437d63dedfba462ec4
 ARG JOJO_BARD_SHA256=d726413360a809da8a72ec0289c9ab731b9e2b98a4dbee8562e7fe3b3bc9f7d2
 ARG AXE_SRM13_SHA256=af05250e0c2f7ff9744968a6a1df13bed8de83d6d66db72b731912ad61fe0a01

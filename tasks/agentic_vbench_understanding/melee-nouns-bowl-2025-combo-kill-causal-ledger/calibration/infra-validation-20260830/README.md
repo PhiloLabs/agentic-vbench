@@ -6,26 +6,25 @@ This record validates the current task HEAD without starting a model trial.
 |---|---|
 | task commit | `76cf9ab870b55d59d7625551805c3f3c55b280ab` |
 | Docker base | `python:3.12-slim@sha256:2c941e860699f878900b0edc2403613c234d4b32eda3cc9fa7036991a2a63c4a` |
-| built image | `agentic-vbench-melee:infra-verify-76cf9ab870b5` |
-| task-image digest | `sha256:0647f259ee83531edf22868a6a705013f687a2960a4424fe43ecfe7bea0b379d` |
+| built image | `agentic-vbench-melee:infra-verify-hf-20260831` |
+| task-image digest | `sha256:47c3749a206c1cd51f857e8617962c3a18c9716351c97fdcd338061a59618603` |
 | Docker daemon | `29.5.2 linux/arm64` (Colima) |
 | Harbor | `0.20.0` |
 
 ## Build and media check
 
-The current `environment/Dockerfile` was built successfully with the documented
-`MATERIALS_URL` override pointing at a host-controlled copy of the canonical
-media. The Dockerfile's final digest check and ffprobe check both passed. A
-no-override build was also attempted; all three YouTube requests returned HTTP
-403 before an image could be produced. This is a source-download diagnostic and
-does not change the successful image or its verified media bytes.
+The current `environment/Dockerfile` now defaults to the immutable Hugging Face
+Dataset revision `358a0871ba6cd5331f329dafee07564710257bd8`. The ordinary
+no-override build therefore downloads an evaluator-accessible artifact and runs
+the Dockerfile's final digest and ffprobe checks. The empty-override YouTube
+fallback was separately observed to return HTTP 403; it is retained only as an
+explicit fallback and is not the evaluator default.
 
-The successful build command was:
+The successful ordinary build command is:
 
 ```bash
 docker build --pull \
-  --build-arg MATERIALS_URL=http://host.docker.internal:8765/match.mp4 \
-  --tag agentic-vbench-melee:infra-verify-76cf9ab870b5 \
+  --tag agentic-vbench-melee:infra-verify-hf-20260831 \
   tasks/agentic_vbench_understanding/melee-nouns-bowl-2025-combo-kill-causal-ledger/environment
 ```
 
@@ -52,7 +51,7 @@ Harbor install-only was run against the image digest above with one trial, zero
 retries, verification disabled, and no agent/model execution:
 
 ```text
-job: melee-infra-smoke-prebuilt-20260830T214500Z
+job: melee-infra-smoke-hf-20260831T124500Z
 trials: 1
 exceptions: 0
 agent: codex 0.147.0-alpha.6.5

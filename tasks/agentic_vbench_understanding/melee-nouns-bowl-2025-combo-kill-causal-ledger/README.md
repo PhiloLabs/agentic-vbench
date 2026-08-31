@@ -36,10 +36,12 @@ failure mode of attaching machine truth from a different game with the same matc
 
 ## Media construction
 
-The Docker build downloads YouTube adaptive format `itag 298` for each source,
-checks each digest, and concatenates the three H.264 video-only streams without
-re-encoding. `MATERIALS_URL` can override this process when the exact final bytes are
-re-hosted at a stable direct URL. The agent receives only the resulting
+The Docker build defaults to a content-revision-pinned, checksum-verified copy of
+the final concatenated media on the project materials host. `MATERIALS_URL` can
+override this process when another exact final-byte copy is required. If the
+override is empty, the fallback path downloads YouTube adaptive format `itag 298`
+for each source, checks each digest, and concatenates the three H.264 video-only
+streams without re-encoding. The agent receives only the resulting
 `/workspace/materials/match.mp4`; it does not receive replay files or this README.
 
 | artifact | bytes | SHA256 |
@@ -62,12 +64,15 @@ rights.
 
 ## Durable materials plan
 
-For repeatable builds, maintainers may set `MATERIALS_URL` to a stable,
-rights-cleared host-controlled copy of the concatenated video. The Dockerfile
-verifies that copy against the pinned final SHA256. When no such hosted copy is
-available, the default path resolves and verifies the three public source streams,
-concatenates them, and applies the same final-file SHA256 check before the image is
-usable. The canonical final digest is
+For repeatable builds, the default `MATERIALS_URL` points to the immutable
+Hugging Face Dataset revision
+`358a0871ba6cd5331f329dafee07564710257bd8`:
+
+`https://huggingface.co/datasets/zhangsj0722/Melee-Nouns-Bowl/resolve/358a0871ba6cd5331f329dafee07564710257bd8/materials/melee-nouns-bowl-match.mp4`
+
+The Dockerfile verifies the downloaded object against the pinned final SHA256.
+The fallback YouTube path remains available by explicitly passing an empty
+`MATERIALS_URL`, but is not the evaluator default. The canonical final digest is
 `02f18fd7f4796800eece0400b1b1f315a36778b57b9ef4a64d1b30aa3b539749`.
 
 ## Ground truth
