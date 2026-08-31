@@ -1,0 +1,66 @@
+{
+  "artifacts": [
+    {
+      "bytes": 5759,
+      "path": "codex-initial-prompt.md",
+      "role": "initial_prompt",
+      "sha256": "4be0ccc68e1d94c733d24d9b4a4f2c80c319e8dba3a880cbc77537218c738138"
+    },
+    {
+      "bytes": 82744,
+      "path": "codex-gpt-5.6-sol-xhigh.public.jsonl",
+      "role": "textual_trajectory",
+      "sha256": "c0f41a6c4644af335c7d6bcf31ea249d35615d379b806c84cd6babadda24de69"
+    },
+    {
+      "bytes": 1166,
+      "path": "codex-input-manifest.json",
+      "role": "input_manifest",
+      "sha256": "2c3167e423023e357119f365e1117327cf58e5f732897c3679a9f77b3e6355da"
+    },
+    {
+      "bytes": 6101,
+      "path": "codex-solution.json",
+      "role": "solution",
+      "sha256": "139f0aa31575907103e1139a47cd6c006e63c087ea996a383eec39a4cb8b4709"
+    },
+    {
+      "bytes": 1345,
+      "path": "codex-checkpoint.json",
+      "role": "checkpoint",
+      "sha256": "809b1a9e92a8b4839425fe75ce882b7fbee682abeb9f13083511b5b0a5af0ab2"
+    },
+    {
+      "bytes": 840,
+      "path": "codex-run.json",
+      "role": "run_metadata",
+      "sha256": "d016394b9e01468a9e319c0b9fe708be4036cef126de327fea8c1f75d56de04d"
+    },
+    {
+      "bytes": 484,
+      "path": "codex-tool-call-count.json",
+      "role": "tool_call_count",
+      "sha256": "143b48e551152b4cf6e6c31971520982ae334d986694dec77bd6e3246d0c9f3e"
+    },
+    {
+      "bytes": 500,
+      "path": "codex-audit.json",
+      "role": "audit",
+      "sha256": "8ccda266dd17daad1113919300f24912080c42614ac0f45bd0e1f284d36cc010"
+    },
+    {
+      "bytes": 4090,
+      "path": "codex-result-summary.json",
+      "role": "result_summary",
+      "sha256": "3a2da85dfafcedd02e139f516e20b98715f4578ca8f36cdb2d0277a3d52601c2"
+    },
+    {
+      "bytes": 2128,
+      "path": "codex-publication-redaction-audit.json",
+      "role": "publication_redaction_audit",
+      "sha256": "d70854199c76c300c33ee54b71168c5ec4ee0121583d4ddfeaebbbc90f632313"
+    }
+  ],
+  "purpose": "compact_publication_bundle",
+  "schema_version": 1
+}

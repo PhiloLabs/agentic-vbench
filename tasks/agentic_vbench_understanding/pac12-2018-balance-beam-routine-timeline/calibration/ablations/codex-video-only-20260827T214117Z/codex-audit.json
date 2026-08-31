@@ -1,0 +1,19 @@
+{
+  "completed_command_count": 133,
+  "match_counts": {
+    "network_command": 0,
+    "resume_command": 0,
+    "url_scheme": 0,
+    "web_tool": 0
+  },
+  "matched_commands": {
+    "network_command": [],
+    "resume_command": [],
+    "url_scheme": [],
+    "web_tool": []
+  },
+  "passed": true,
+  "provider_control_plane_excluded": true,
+  "schema_version": 1,
+  "scope": "All completed agent command_execution items decoded from the untouched Codex JSONL."
+}

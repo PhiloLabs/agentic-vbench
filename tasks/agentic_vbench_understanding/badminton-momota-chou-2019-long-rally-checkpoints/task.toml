@@ -1,0 +1,26 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/badminton-momota-chou-2019-long-rally-checkpoints"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "sports-analytics", "badminton", "state-reconstruction", "agentic-vbench-sports"]
+source = "YouTube: 2019 Fuzhou Open men's singles final, Momota vs. Chou"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 16384
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 10800.0
+
+[steps.verifier]
+timeout_sec = 600.0

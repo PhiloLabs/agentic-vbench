@@ -1,0 +1,60 @@
+{
+  "artifacts": [
+    {
+      "bytes": 5455,
+      "path": "codex-initial-prompt.md",
+      "sha256": "3e2f9a56c732d8635eef31ac593fc89a788232e548284ecdbe2000b958601571"
+    },
+    {
+      "bytes": 5570,
+      "path": "codex-gpt-5.6-sol-medium.public.jsonl",
+      "sha256": "c81a4475d954487138eac579f8c0f92f2601d6f0c3446004e835af4e5f46a0be"
+    },
+    {
+      "bytes": 10629,
+      "path": "codex-input-manifest.json",
+      "sha256": "b1a60d7ea40a598c21d168820ba36d3e9d9ebb8ad6c7bc9e5fa7a940f1c10a85"
+    },
+    {
+      "bytes": 6101,
+      "path": "codex-solution.json",
+      "sha256": "973e1e59378007a2a682cc6feef7b93816ee15c0ab558bee263c8392c2f293bb"
+    },
+    {
+      "bytes": 3892,
+      "path": "codex-run.json",
+      "sha256": "77aaf8c09e0c07780c5e9449744345e3b71e1dc3976c37d21d6a86be0899fec3"
+    },
+    {
+      "bytes": 264,
+      "path": "codex-audit.json",
+      "sha256": "4630cd66be9996ee9d490f3179e0121952aebc6ae7b4fc9a646fcbce0cd8c967"
+    },
+    {
+      "bytes": 14094,
+      "path": "codex-result-summary.json",
+      "sha256": "e9f26f20ca67f5f39cc2aca669ab1dca27d5415653d5fcf8c53c07dc60c21f5e"
+    },
+    {
+      "bytes": 2121,
+      "path": "codex-publication-redaction-audit.json",
+      "sha256": "e6c8660d718abf49908e09fd5462977df861d469f9a7e68be89a2918d84d35dc"
+    }
+  ],
+  "created_at_utc": "2026-08-27T22:00:31.496543+00:00",
+  "local_exclude_rules": [
+    "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-frame-dump-no-tools-20260827T214117Z/*",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-frame-dump-no-tools-20260827T214117Z/public-artifacts.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-frame-dump-no-tools-20260827T214117Z/codex-initial-prompt.md",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-frame-dump-no-tools-20260827T214117Z/codex-gpt-5.6-sol-medium.public.jsonl",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-frame-dump-no-tools-20260827T214117Z/codex-input-manifest.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-frame-dump-no-tools-20260827T214117Z/codex-solution.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-frame-dump-no-tools-20260827T214117Z/codex-run.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-frame-dump-no-tools-20260827T214117Z/codex-audit.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-frame-dump-no-tools-20260827T214117Z/codex-result-summary.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-frame-dump-no-tools-20260827T214117Z/codex-publication-redaction-audit.json"
+  ],
+  "publication_scope": "Compact reviewer-facing evidence. All omitted originals remain local and recoverable except the separately documented original stderr loss.",
+  "raw_trajectory_untouched": true,
+  "schema_version": 1
+}

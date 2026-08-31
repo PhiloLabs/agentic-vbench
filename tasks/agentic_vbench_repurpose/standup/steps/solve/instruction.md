@@ -4,7 +4,7 @@ The thing we want that scroller to land on is the character: this confidently-wr
 
 The feel is deadpan, sustained, a little unsettling in how committed he is. Stay in Robert's voice end-to-end. Every word should come from him on that stage, not from someone framing the clip around him. Open on something that earns the next fifteen seconds, a line in his voice that tells the scroller what kind of person they're watching, not a "hi, I'm…" intro or a slow fade from black.
 
-Burn in English captions so a muted scroller still lands the jokes. Keep them in sync with his delivery, and keep them legible against the brick-wall set. Close on a brief Dry Bar card with his name and the set title, a second or two, not a dragged-out pad. This should feel like it IS the set, compressed, not a talking-head rewrap around two brief clips. Deliver at 1280x720 H.264, 75 seconds, stereo audio.
+Burn in English captions so a muted scroller still lands the jokes. Keep them in sync with his delivery, and keep them legible against the brick-wall set. Close on a brief Dry Bar card with his name and the set title, a second or two, not a dragged-out pad. This should feel like it IS the set, compressed, not a talking-head rewrap around two brief clips. Deliver at 1920x1080 H.264, 75 seconds, stereo audio.
 
 ## Deliverables
 

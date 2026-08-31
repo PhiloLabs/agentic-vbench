@@ -1,0 +1,250 @@
+{
+  "audit": {
+    "artifacts_scanned": [
+      "antigravity-console.txt",
+      "antigravity-stderr.txt",
+      "antigravity-native-trajectory.txt",
+      "antigravity-initial-prompt.md",
+      "antigravity-solution.json",
+      "antigravity-checkpoint.json",
+      "antigravity-conversation.db (all decoded tool names and argument payloads)"
+    ],
+    "checks": {
+      "agent_web_tool_calls": 0,
+      "credential_value_patterns_in_preserved_text": 0,
+      "email_identifier_lines_in_native_diagnostic_log": 2,
+      "file_url_arguments": 0,
+      "harness_resume_commands_in_agent_tools": 0,
+      "native_brain_visual_or_task_log_path_fields": 135,
+      "network_capable_shell_commands": 0,
+      "network_url_arguments": 0,
+      "provider_control_plane_url_lines_in_native_diagnostic_log": 392,
+      "resume_tokens_in_launch_command": 0,
+      "secret_access_commands": 0,
+      "secret_value_patterns_in_agent_tool_arguments": 0,
+      "unauthorized_outside_workspace_path_fields": 0
+    },
+    "created_at_utc": "2026-08-27T20:26:40.844259+00:00",
+    "notes": {
+      "email_identifier": "The untouched native diagnostic log contains an Antigravity authentication email identifier; no credential or secret value was detected.",
+      "native_brain_paths": "Native Antigravity visual payloads and background-task logs are stored under the run's conversation-scoped brain directory; these are harness-managed paths preserved in antigravity-native-brain.tar.",
+      "provider_control_plane": "Provider control-plane URL lines are native harness diagnostics, not agent tool calls or task-side web use."
+    },
+    "result": "pass",
+    "schema_version": 1
+  },
+  "authentication_preflight": {
+    "artifacts": [
+      "antigravity-auth-model-preflight.txt",
+      "antigravity-auth-model-preflight-stderr.txt",
+      "antigravity-required-model.txt"
+    ],
+    "required_model_listed": true,
+    "result": "pass"
+  },
+  "created_at_utc": "2026-08-27T20:30:03.498110+00:00",
+  "effort": "high",
+  "gates": {
+    "artifact_integrity_pass": true,
+    "calibration_pass": true,
+    "no_prohibited_agent_web_or_network_use": true,
+    "not_resumed_or_continued": true,
+    "not_timed_out": true,
+    "real_completed_tool_calls_exceed_50": true,
+    "reward_below_0_10": true,
+    "schema_valid_solution": true,
+    "single_fresh_launch": true
+  },
+  "harness": "antigravity",
+  "integrity": {
+    "archive_stats": {
+      "appledouble_extended_attribute_member_count": 2291,
+      "missing_source_path_count": 0,
+      "regular_file_content_mismatch_count": 0,
+      "source_path_count": 2290,
+      "source_regular_file_count": 2037,
+      "tar_member_count": 4582,
+      "unexpected_non_appledouble_path_count": 0
+    },
+    "checks": {
+      "checkpoint_copy_matches_workspace": true,
+      "input_manifest_copy_matches_workspace": true,
+      "native_brain_archive_contains_every_source_path": true,
+      "native_brain_archive_has_no_unexpected_non_appledouble_paths": true,
+      "native_brain_archive_readable": true,
+      "native_brain_archive_regular_file_bytes_match_source": true,
+      "native_conversation_db_copy_matches_source": true,
+      "one_created_conversation_in_native_trace": true,
+      "one_created_project_in_native_trace": true,
+      "one_new_conversation_database_set": true,
+      "one_new_native_brain_directory": true,
+      "pre_and_post_input_snapshot_hashes_identical": true,
+      "raw_native_trajectory_copy_matches_workspace": true,
+      "raw_solution_copy_matches_workspace": true,
+      "rendered_prompt_copy_matches_workspace": true
+    },
+    "created_at_utc": "2026-08-27T20:30:03.472756+00:00",
+    "result": "pass",
+    "schema_version": 1
+  },
+  "launch": {
+    "automatic_tool_approval": true,
+    "count": 1,
+    "inner_print_timeout": "85m",
+    "new_project": true,
+    "outer_deadline_seconds": 5400,
+    "restart_performed": false,
+    "retry_performed": false,
+    "terminal_sandbox_enabled": true
+  },
+  "model": "gemini-3.5-flash-high",
+  "native_visual_payloads": {
+    "archive": "antigravity-native-brain.tar",
+    "conversation_id": "9414a42e-d86e-42d7-b41b-5555a30a56a1",
+    "created_at_utc": "2026-08-27T20:26:40.906412+00:00",
+    "file_count": 2037,
+    "image_payload_file_count": 1745,
+    "inventory": "antigravity-native-brain-inventory.txt",
+    "schema_version": 1,
+    "uncompressed_bytes": 214459062
+  },
+  "preserved_outputs": {
+    "checkpoint": "antigravity-checkpoint.json",
+    "input_manifest": "antigravity-input-manifest.json",
+    "integrity_checks": "antigravity-integrity-checks.json",
+    "native_conversation_database": "antigravity-conversation.db",
+    "native_visual_payload_archive": "antigravity-native-brain.tar",
+    "native_visual_payload_inventory": "antigravity-native-brain-inventory.txt",
+    "network_secret_audit": "antigravity-audit.json",
+    "raw_console": "antigravity-console.txt",
+    "raw_native_trajectory": "antigravity-native-trajectory.txt",
+    "raw_solution": "antigravity-solution.json",
+    "raw_stderr": "antigravity-stderr.txt",
+    "rendered_prompt": "antigravity-initial-prompt.md",
+    "reward": "antigravity-reward.txt",
+    "run_metadata": "antigravity-run.json",
+    "sha256_manifest": "antigravity-artifacts.json",
+    "tool_call_count": "antigravity-tool-call-count.json",
+    "verifier_result": "antigravity-verifier-result.json"
+  },
+  "rollout": "antigravity-seven-field-20260827T200119Z",
+  "run": {
+    "command_template": [
+      "agy",
+      "-p",
+      "__PROMPT__",
+      "--model",
+      "gemini-3.5-flash-high",
+      "--effort",
+      "high",
+      "--mode",
+      "accept-edits",
+      "--sandbox",
+      "--dangerously-skip-permissions",
+      "--new-project",
+      "--print-timeout",
+      "85m",
+      "--log-file",
+      "/private/tmp/avb-pac12-antigravity-seven-field-20260827T200119Z/native-trajectory.txt"
+    ],
+    "continued_or_resumed": false,
+    "cwd": "/private/tmp/avb-pac12-antigravity-seven-field-20260827T200119Z",
+    "deadline_seconds": 5400,
+    "elapsed_seconds": 1286.372,
+    "finished_at_utc": "2026-08-27T20:23:06.711061+00:00",
+    "process_returncode": 0,
+    "prompt_sha256": "f3352551912cf61a25f7c13b15fc7293ccf66320e1edab74c64e98e0b0c5ee1d",
+    "schema_version": 1,
+    "started_at_utc": "2026-08-27T20:01:40.339358+00:00",
+    "stderr_artifact": "antigravity-stderr.txt",
+    "stdout_artifact": "antigravity-console.txt",
+    "timed_out": false,
+    "wrapper_exit_code": 0
+  },
+  "schema_version": 1,
+  "source_sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb",
+  "task_contract": {
+    "dismount_takeoff_tolerance_s": 0.25,
+    "end_tolerance_s": 0.25,
+    "fields": [
+      "start_time",
+      "end_time",
+      "dismount_takeoff_time",
+      "school",
+      "gymnast_name",
+      "beam_score",
+      "score_time"
+    ],
+    "fields_per_routine": 7,
+    "score_time_tolerance_s": 1.0,
+    "start_tolerance_s": 0.25
+  },
+  "tool_calls": {
+    "completed_by_tool": {
+      "list_dir": 6,
+      "manage_task": 27,
+      "run_command": 159,
+      "view_file": 141,
+      "write_to_file": 27
+    },
+    "completed_tool_calls": 360,
+    "conversation_id": "9414a42e-d86e-42d7-b41b-5555a30a56a1",
+    "counted_at_utc": "2026-08-27T20:25:39.208253+00:00",
+    "counting_rule": "Count native steps with step_type 132 and native status 3 as real completed tool calls. Status 6 context-canceled calls and status 7 invalid/pre-execution calls are excluded.",
+    "harness": "antigravity",
+    "method": "Queried the preserved native Antigravity SQLite conversation store read-only and decoded the primary protobuf tool name and JSON argument fields for every step_type 132 row.",
+    "native_step_rows": 768,
+    "not_completed_by_tool_and_status": {
+      "status_6:run_command": 7,
+      "status_7:view_file": 1,
+      "status_7:write_to_file": 2
+    },
+    "schema_version": 1,
+    "source_artifacts": [
+      "antigravity-conversation.db",
+      "antigravity-conversation.db-wal",
+      "antigravity-conversation.db-shm"
+    ],
+    "tool_requests": 370,
+    "tool_status_counts": {
+      "3": 360,
+      "6": 7,
+      "7": 3
+    }
+  },
+  "verifier": {
+    "details": {
+      "diagnostics": {
+        "beam_score_exact": 2,
+        "broadly_matched_records": 3,
+        "dismount_takeoff_within_tolerance": 2,
+        "end_within_tolerance": 1,
+        "gymnast_name_exact": 2,
+        "school_exact": 3,
+        "score_time_within_tolerance": 2,
+        "start_within_tolerance": 1
+      },
+      "dismount_takeoff_tolerance_s": 0.25,
+      "end_tolerance_s": 0.25,
+      "f1": 0.0,
+      "n_ground_truth": 23,
+      "n_invalid_records": 0,
+      "n_predicted": 3,
+      "precision": 0.0,
+      "reason": "ok",
+      "recall": 0.0,
+      "score_time_tolerance_s": 1.0,
+      "start_tolerance_s": 0.25,
+      "true_positives_complete_record": 0
+    },
+    "reward": 0.0
+  },
+  "versions": {
+    "agy": "1.1.22",
+    "claude": "2.1.220 (Claude Code)",
+    "codex": "codex-cli 0.146.0-alpha.3.1",
+    "ffmpeg": "ffmpeg version 8.1.2 Copyright (c) 2000-2026 the FFmpeg developers",
+    "ffprobe": "ffprobe version 8.1.2 Copyright (c) 2007-2026 the FFmpeg developers",
+    "python": "Python 3.13.0"
+  }
+}

@@ -4,4 +4,4 @@ Picture a viewer scrolling YouTube on a laptop with sound off, which is typical 
 
 Stay in the speakers' own voices throughout. No narrator. Every word a viewer hears should be the people who were on that stage. Burn in English captions across every word of speech so the muted-scroll viewer still gets the argument, in sync with the speaker and legible against the dark stage footage. It should feel like the keynote compressed: speakers on camera, the slides they're pointing at when the slide carries the number, the room when the room cheers. Not a repurposed cut dressed around two clips.
 
-Open on something that earns the next fifteen seconds, a striking line in a speaker's own voice, not a "hi I'm" intro. Close on a brief title card with the keynote name and conference, a second or two, not a dragged-out pad. Deliver horizontal 1280x720, MP4 with stereo audio.
+Open on something that earns the next fifteen seconds, a striking line in a speaker's own voice, not a "hi I'm" intro. Close on a brief title card with the keynote name and conference, a second or two, not a dragged-out pad. Deliver horizontal 1920x1080, MP4 with stereo audio.

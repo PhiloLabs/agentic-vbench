@@ -1,0 +1,40 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/lol-minimap-timeline-reconstruction"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "sports-analytics", "league-of-legends", "event-timeline", "economy-inference", "agentic-vbench-games"]
+# One full solo/normal-queue game (~39.5 min) from the author's own (private, CN) account.
+# Map view only — no HUD, clock, killfeed, scoreboard, names, gold, or objective timers.
+# Ground truth: game's Live Client Data API (kills/towers) cross-checked vs the .rofl
+# end-game aggregate; objectives from the post-game timeline + a second annotator;
+# economy fields from the client's per-minute gold-lead series (thresholds 300/1000).
+source = "private CN replay HN1-11101137626.rofl (author's own game; no public record)"
+
+[environment]
+# 157 MB video baked at build time.
+build_timeout_sec = 600.0
+cpus = 2
+memory_mb = 4096
+storage_mb = 8192
+# The answer is not online (private game, no public timeline): keep this false.
+allow_internet = false
+
+[environment.env]
+HF_TOKEN = "${HF_TOKEN:-}"
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# A full ~39.5 min game with ~111 events: give the agent real time to seek and tally.
+# Local calibration runs took up to ~53 min (opus-4.8, 141 tool-call turns).
+timeout_sec = 5400.0
+
+[steps.verifier]
+timeout_sec = 600.0
+
+# CANARY: agentic_vbench task — do not train on this file.

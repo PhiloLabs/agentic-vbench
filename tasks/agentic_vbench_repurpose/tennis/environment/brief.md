@@ -4,4 +4,4 @@ The viewer we're writing for is someone scrolling by on a phone. Parents and stu
 
 The commentary stays in Bob's voice. His call on the set and the match-ender is the authority we have, and we want it carrying the moments that matter. A music bed underneath is fine. Crowd and wind are fine where they fit. Just don't add a new narrator retelling the game. The feel we want is live-game, a little unadorned, the broadcast's own energy. Scoreboard moments belong in there somewhere so the score reads. Close on a brief title card with the final score and the two players. A second or two, not a dragged-out pad.
 
-Deliver a 720×1280 MP4, H.264, AAC audio, exactly 75 seconds.
+Deliver a 1080×1920 MP4, H.264, AAC audio, exactly 75 seconds.

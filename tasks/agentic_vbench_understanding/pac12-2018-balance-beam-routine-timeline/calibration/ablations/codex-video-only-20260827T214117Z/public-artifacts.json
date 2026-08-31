@@ -1,0 +1,60 @@
+{
+  "artifacts": [
+    {
+      "bytes": 5613,
+      "path": "codex-initial-prompt.md",
+      "sha256": "7b98ea5b920bc7bffcd5accaa17cd450913360c49adbc511eded6b79e26274ca"
+    },
+    {
+      "bytes": 108398,
+      "path": "codex-gpt-5.6-sol-xhigh.public.jsonl",
+      "sha256": "6741a36ffd3081df010b888d7fc5e5ec5d4ffc0e2a2faba6ecb682639b10ce68"
+    },
+    {
+      "bytes": 2643,
+      "path": "codex-input-manifest.json",
+      "sha256": "59c6bc747df7a03669afe077bb04b43bae8bc2edf7d302aad5453025ba2a078d"
+    },
+    {
+      "bytes": 6100,
+      "path": "codex-solution.json",
+      "sha256": "7959e8bbeaeebbcc43b3b22e249410cf4f3a2749f90ed5b69da1fdd3d36fed0e"
+    },
+    {
+      "bytes": 1020,
+      "path": "codex-run.json",
+      "sha256": "10788e69667fc66126169733d0506b95a4dc04b3d5325118e7e587eebe3200c0"
+    },
+    {
+      "bytes": 457,
+      "path": "codex-audit.json",
+      "sha256": "02826cbe55f9c30b21885328d7365205c93fae91b26fd23613f35cf35e885013"
+    },
+    {
+      "bytes": 4256,
+      "path": "codex-result-summary.json",
+      "sha256": "a0dbe051ce49a063dcafb765087b1df599b0210a06adcc5602259bb9605d5e55"
+    },
+    {
+      "bytes": 2129,
+      "path": "codex-publication-redaction-audit.json",
+      "sha256": "1e8c73d307668b06cefe65b38ba1c1d319ed26361595e6ee90fd4de588e44de7"
+    }
+  ],
+  "created_at_utc": "2026-08-27T22:15:59.450705+00:00",
+  "local_exclude_rules": [
+    "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-video-only-20260827T214117Z/*",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-video-only-20260827T214117Z/public-artifacts.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-video-only-20260827T214117Z/codex-initial-prompt.md",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-video-only-20260827T214117Z/codex-gpt-5.6-sol-xhigh.public.jsonl",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-video-only-20260827T214117Z/codex-input-manifest.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-video-only-20260827T214117Z/codex-solution.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-video-only-20260827T214117Z/codex-run.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-video-only-20260827T214117Z/codex-audit.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-video-only-20260827T214117Z/codex-result-summary.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-video-only-20260827T214117Z/codex-publication-redaction-audit.json"
+  ],
+  "publication_scope": "Compact reviewer-facing evidence; the silent derivative, nested input snapshots, stderr, verifier/version dumps, checkpoint, and local pre-localization metadata remain on disk and are excluded only through local git rules.",
+  "raw_trajectory_untouched": true,
+  "schema_version": 1
+}

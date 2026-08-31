@@ -1,0 +1,60 @@
+{
+  "artifacts": [
+    {
+      "bytes": 5763,
+      "path": "codex-initial-prompt.md",
+      "sha256": "50453d0985ea90dda27b6d23e1a04a6371c00dc6be7b99a7ef236ee186547f85"
+    },
+    {
+      "bytes": 8647,
+      "path": "codex-gpt-5.6-sol-xhigh.public.jsonl",
+      "sha256": "57379479b79a9854ad9bc125c13aa887de0efee3eb5cac4dce7ad7c6b59e5ee0"
+    },
+    {
+      "bytes": 2015,
+      "path": "codex-input-manifest.json",
+      "sha256": "3e5e3c98f93803f38837128c70935acf1dca3a001b45aad3855651f89ba559ea"
+    },
+    {
+      "bytes": 26,
+      "path": "codex-solution.json",
+      "sha256": "f4e6fdc7a804ea480ecc60260c9364a048c2a53ef3b40e62f534a4079c8b32f0"
+    },
+    {
+      "bytes": 839,
+      "path": "codex-run.json",
+      "sha256": "04e4b7258dcc951e43c90587ba3a3927d847f9aa3b21c66c00b5ecbb317dc5aa"
+    },
+    {
+      "bytes": 635,
+      "path": "codex-audit.json",
+      "sha256": "8022f0230a9dd52885020ce2dabde11b0d7ea8ea12b30fe822de76570320b787"
+    },
+    {
+      "bytes": 5774,
+      "path": "codex-result-summary.json",
+      "sha256": "205da9d3f5c3374e01703eeb8568b17a9dc3066c655c6f85892ab11893a547bf"
+    },
+    {
+      "bytes": 2122,
+      "path": "codex-publication-redaction-audit.json",
+      "sha256": "f0422c4f6515ca0149fc49fb61185d40697187a70970efe4e3f6d3f77d360691"
+    }
+  ],
+  "created_at_utc": "2026-08-27T22:37:37.881409+00:00",
+  "local_exclude_rules": [
+    "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-no-media-20260827T214117Z/*",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-no-media-20260827T214117Z/public-artifacts.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-no-media-20260827T214117Z/codex-initial-prompt.md",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-no-media-20260827T214117Z/codex-gpt-5.6-sol-xhigh.public.jsonl",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-no-media-20260827T214117Z/codex-input-manifest.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-no-media-20260827T214117Z/codex-solution.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-no-media-20260827T214117Z/codex-run.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-no-media-20260827T214117Z/codex-audit.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-no-media-20260827T214117Z/codex-result-summary.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-no-media-20260827T214117Z/codex-publication-redaction-audit.json"
+  ],
+  "publication_scope": "Compact reviewer-facing evidence for the no-media control. Raw trajectory, stderr, version dumps, checkpoint, local workspace inventory, and pre-run metadata remain local.",
+  "raw_trajectory_untouched": true,
+  "schema_version": 1
+}

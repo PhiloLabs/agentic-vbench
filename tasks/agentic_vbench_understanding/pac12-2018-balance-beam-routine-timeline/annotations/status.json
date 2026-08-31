@@ -1,0 +1,79 @@
+{
+  "schema_version": 7,
+  "state": "complete",
+  "publication_derivative": {
+    "privacy_and_provenance_only": true,
+    "created_after_calibration": true,
+    "source_status_artifact": "private/status.pre-publication.json",
+    "source_status_sha256": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+    "calibration_input_hashes_preserved": true,
+    "calibration_semantics_changed": false,
+    "scope": "identity redaction, publication-safe reviewer provenance, and required adjudication metadata",
+    "identity_replacement": "the independent annotator's display name is replaced with a role label"
+  },
+  "draft_review": {
+    "complete": true,
+    "provenance": "FineGym-assisted candidate discovery followed by source-video review"
+  },
+  "independent_review": {
+    "complete": true,
+    "annotator": "independent human reviewer",
+    "annotation_date": "2026-08-26",
+    "artifact": "reviewer-2.public.csv",
+    "sha256": "86b3fd07764055016ebc7216ebf33e3e1d480df292fc963f8db41489371a94a7",
+    "calibration_input_artifact": "reviewer-2.raw.csv",
+    "calibration_input_sha256": "5160d107500f85d95b74402eb63c67d6689ad5455400304857497710eda5fdec",
+    "blind_full_video_scan": true
+  },
+  "adjudication": {
+    "complete": true,
+    "adjudicator": "task author/adjudicator (identity withheld for publication)",
+    "adjudication_date": "2026-08-27",
+    "source_sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb",
+    "artifact": "adjudication.csv",
+    "sha256": "852c733ce8d8e527d11f8ddcc6406181237ee03820547043515f535fc2ddded9",
+    "calibration_input_artifact": "private/adjudication.pre-publication.csv",
+    "calibration_input_sha256": "d931fcad27b7c65ee94c0b1d1ae561d21ca151959ffc927fafb43b1ef4e40c8a",
+    "metadata_header_added_after_calibration": true,
+    "all_differences_resolved_against_video": true,
+    "school_labels_complete": true,
+    "school_labels_source": "reviewer-updated Google Sheet",
+    "gymnast_names_complete": true,
+    "beam_scores_complete": true,
+    "score_times_complete": true,
+    "name_score_and_direct_score_time_source": "reviewer-updated Google Sheet",
+    "sixth_score_method": "best-five subtotal inference verified against source frames",
+    "start_end_source_frame_snap_complete": true
+  },
+  "reviewer_seven_field_update": {
+    "complete": true,
+    "artifact": "reviewer-seven-field-update.public.csv",
+    "sha256": "c9c193a7bfae09625f44581f69216b57ff7e7eee0dd55e7b9010a170969993b6",
+    "source": "reviewer-updated Google Sheet",
+    "source_range": "A10:M34",
+    "captured_at_utc": "2026-08-27T18:17:17.487Z",
+    "source_tsv_bytes": 3660,
+    "source_tsv_sha256": "ea1c7ee6c653b9a890676fa1f1eaf18a4c796ace0ffefa77deed596b73384db6",
+    "rows": 25,
+    "columns": 13,
+    "cell_matrix_preserved": true,
+    "identity_safe": true,
+    "post_adjudication_evidence": true,
+    "publication_derivative_created_after_calibration": true
+  },
+  "dismount_takeoff_extension": {
+    "complete": true,
+    "annotator": "independent human reviewer",
+    "annotation_date": "2026-08-27",
+    "artifact": "dismount-takeoff-reviewer.public.csv",
+    "sha256": "4fcf8d5731db947ac9dcf2b9036cd7b18a9518bed518fd45127cbbb3915907aa",
+    "calibration_input_artifact": "dismount-takeoff-reviewer.raw.csv",
+    "calibration_input_sha256": "254952ecd51962dfafa068928624e188d75264cc61f9ed7548e92301af0fcab3",
+    "required_included_rows": 23,
+    "adjudicated_included_rows": 23,
+    "annotation_columns": "Google Sheet columns L-M",
+    "excluded_candidate": "R2-015",
+    "source_frame_rate": "30000/1001",
+    "boundary_rule": "first source frame after the final support foot or toe loses contact with the beam; for connected roundoff or back-handspring dismounts use the final foot rebound into airborne flight"
+  }
+}

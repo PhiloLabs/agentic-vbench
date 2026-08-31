@@ -1,0 +1,29 @@
+# annotator: independent human reviewer (identity redacted for public release)
+# annotation_date: 2026-08-27
+# source_sha256: 7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb
+# source: Google Sheet columns L-M before source-frame adjudication
+reviewer_candidate_id,reviewer_dismount_takeoff_time,reviewer_dismount_takeoff_note
+R2-001,00:04:57,
+R2-002,00:09:53,
+R2-003,00:15:07,
+R2-004,00:20:20,
+R2-005,00:25:17,
+R2-006,00:30:24,
+R2-007,00:37:08,
+R2-008,00:42:08,
+R2-009,00:47:06,
+R2-010,00:51:58,
+R2-011,00:57:01,
+R2-012,01:02:33,
+R2-013,01:10:52,
+R2-014,01:15:42,
+R2-015,N/A,Excluded routine; mount is not visible
+R2-016,01:26:34,
+R2-017,01:31:33,
+R2-018,01:37:44,
+R2-019,01:45:57,
+R2-020,01:51:06,
+R2-021,01:56:34,
+R2-022,02:02:03,
+R2-023,02:06:49,
+R2-024,02:12:15,

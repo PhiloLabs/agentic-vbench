@@ -1,0 +1,28 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/industreal-multivideo-procedure-step-ledger"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "procedural-reasoning", "state-tracking", "state-checkpoints", "multivideo", "industreal"]
+source = "4TU.ResearchData IndustReal v2, DOI 10.4121/b008dd74-020d-4ea4-a8ba-7bb60769d224.v2"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 12288
+# Installed CLI agents require network access for setup and model transport.
+# The prompt forbids external lookup, and calibration transcripts are audited.
+allow_internet = true
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 54000.0
+
+[steps.verifier]
+timeout_sec = 600.0

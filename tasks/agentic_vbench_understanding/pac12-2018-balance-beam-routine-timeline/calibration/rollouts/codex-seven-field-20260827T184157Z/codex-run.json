@@ -1,0 +1,30 @@
+{
+  "command_template": [
+    "codex",
+    "exec",
+    "--json",
+    "--ephemeral",
+    "--ignore-user-config",
+    "--skip-git-repo-check",
+    "--sandbox",
+    "workspace-write",
+    "--model",
+    "gpt-5.6-sol",
+    "--config",
+    "model_reasoning_effort=\"xhigh\"",
+    "-"
+  ],
+  "continued_or_resumed": false,
+  "cwd": "/private/tmp/avb-pac12-codex-seven-field-20260827T184157Z",
+  "deadline_seconds": 5400,
+  "elapsed_seconds": 2128.389,
+  "finished_at_utc": "2026-08-27T19:18:36.691221+00:00",
+  "process_returncode": 0,
+  "prompt_sha256": "4be0ccc68e1d94c733d24d9b4a4f2c80c319e8dba3a880cbc77537218c738138",
+  "schema_version": 1,
+  "started_at_utc": "2026-08-27T18:43:08.302192+00:00",
+  "stderr_artifact": "codex-stderr.txt",
+  "stdout_artifact": "codex-gpt-5.6-sol-xhigh.jsonl",
+  "timed_out": false,
+  "wrapper_exit_code": 0
+}

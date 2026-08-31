@@ -1,0 +1,37 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/hands-bimanual-manipulation-3d-joint-trajectory"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "egocentric", "hand-pose", "3d-reconstruction", "geometry", "agentic-vbench-hands"]
+# Three egocentric tabletop-manipulation clips. Ground truth: per-frame 3D hand-joint
+# positions from the capture rig's logged hand-tracking, expressed in each clip's RGB
+# camera frame. Only the clips and agent-facing metadata are baked at build time; the
+# ground truth ships verifier side (steps/solve/tests/, with an oracle copy in
+# steps/solve/solution/) and is never in the agent's image.
+source = "egocentric tabletop manipulation clips (head-mounted RGB), logged hand-tracking ground truth"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+# Three ~2-minute 1024x1024 clips are a few hundred MB total; give the build room.
+storage_mb = 8192
+# Clips + camera models are baked at build time and the answer is not online.
+allow_internet = false
+
+[environment.env]
+HF_TOKEN = "${HF_TOKEN:-}"
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# Reconstructing metric 3D joints across three clips needs real sampling + geometry time.
+timeout_sec = 3600.0
+
+[steps.verifier]
+timeout_sec = 600.0

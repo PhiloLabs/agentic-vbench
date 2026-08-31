@@ -1,0 +1,12121 @@
+#!/bin/bash
+# Oracle: the machine-recorded gameplay ledger (mineflayer events +
+# the bot's own placements), in play order, with the weapon per kill and
+# the video time t (seconds) of each event.
+set -euo pipefail
+mkdir -p "$(dirname "${SOLUTION_PATH:-/solution/solution.json}")"
+cat > "${SOLUTION_PATH:-/solution/solution.json}" <<'JSON'
+{
+  "events": [
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 8.0,
+      "i": 0
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 10.4,
+      "i": 1
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 13.7,
+      "i": 2
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 18.29,
+      "i": 3
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 24.59,
+      "i": 4
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 29.16,
+      "i": 5
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 33.06,
+      "i": 6
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "sword",
+      "t": 41.48,
+      "i": 7
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 88.59,
+      "i": 8
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 89.69,
+      "i": 9
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 90.78,
+      "i": 10
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 91.87,
+      "i": 11
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 93.93,
+      "i": 12
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 95.97,
+      "i": 13
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 97.06,
+      "i": 14
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 98.15,
+      "i": 15
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 100.21,
+      "i": 16
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 101.3,
+      "i": 17
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 102.39,
+      "i": 18
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 103.48,
+      "i": 19
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 104.57,
+      "i": 20
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 105.66,
+      "i": 21
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 106.75,
+      "i": 22
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 107.84,
+      "i": 23
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 108.93,
+      "i": 24
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 110.02,
+      "i": 25
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 111.12,
+      "i": 26
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 112.21,
+      "i": 27
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 113.3,
+      "i": 28
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 114.39,
+      "i": 29
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 115.48,
+      "i": 30
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 116.57,
+      "i": 31
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 117.66,
+      "i": 32
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 119.94,
+      "i": 33
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 121.03,
+      "i": 34
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 122.12,
+      "i": 35
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 123.21,
+      "i": 36
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 124.3,
+      "i": 37
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 125.4,
+      "i": 38
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 126.49,
+      "i": 39
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 127.58,
+      "i": 40
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 128.67,
+      "i": 41
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 129.77,
+      "i": 42
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 130.86,
+      "i": 43
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 131.95,
+      "i": 44
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 133.04,
+      "i": 45
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 135.33,
+      "i": 46
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 136.42,
+      "i": 47
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 137.51,
+      "i": 48
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 138.6,
+      "i": 49
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 139.69,
+      "i": 50
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 140.78,
+      "i": 51
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 141.87,
+      "i": 52
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 142.97,
+      "i": 53
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 144.06,
+      "i": 54
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 145.15,
+      "i": 55
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 146.24,
+      "i": 56
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 147.33,
+      "i": 57
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 148.42,
+      "i": 58
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 149.52,
+      "i": 59
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 150.61,
+      "i": 60
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 152.88,
+      "i": 61
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 153.97,
+      "i": 62
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 155.06,
+      "i": 63
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 156.16,
+      "i": 64
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 157.25,
+      "i": 65
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 158.34,
+      "i": 66
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 159.44,
+      "i": 67
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 160.53,
+      "i": 68
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 161.62,
+      "i": 69
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 163.9,
+      "i": 70
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 164.99,
+      "i": 71
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 166.08,
+      "i": 72
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 167.17,
+      "i": 73
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 168.27,
+      "i": 74
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 169.36,
+      "i": 75
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 170.45,
+      "i": 76
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 171.54,
+      "i": 77
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 172.63,
+      "i": 78
+    },
+    {
+      "action": "place",
+      "target": "oak_door",
+      "t": 174.69,
+      "i": 79
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 176.97,
+      "i": 80
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 178.07,
+      "i": 81
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 179.16,
+      "i": 82
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 180.25,
+      "i": 83
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 181.34,
+      "i": 84
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 182.44,
+      "i": 85
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 183.53,
+      "i": 86
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 184.62,
+      "i": 87
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 186.61,
+      "i": 88
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 187.71,
+      "i": 89
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 189.7,
+      "i": 90
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 190.79,
+      "i": 91
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 191.89,
+      "i": 92
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 192.98,
+      "i": 93
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 194.07,
+      "i": 94
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 195.16,
+      "i": 95
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 196.25,
+      "i": 96
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 197.34,
+      "i": 97
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 198.44,
+      "i": 98
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 199.53,
+      "i": 99
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 200.62,
+      "i": 100
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 202.9,
+      "i": 101
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 203.99,
+      "i": 102
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 205.08,
+      "i": 103
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 205.62,
+      "i": 104
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 206.71,
+      "i": 105
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 208.77,
+      "i": 106
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 210.77,
+      "i": 107
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 211.88,
+      "i": 108
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 212.97,
+      "i": 109
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 214.06,
+      "i": 110
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 215.16,
+      "i": 111
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 216.25,
+      "i": 112
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 217.34,
+      "i": 113
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 218.43,
+      "i": 114
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 219.52,
+      "i": 115
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 220.62,
+      "i": 116
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 221.71,
+      "i": 117
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 222.8,
+      "i": 118
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 223.89,
+      "i": 119
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 224.99,
+      "i": 120
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 226.08,
+      "i": 121
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 228.37,
+      "i": 122
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 230.35,
+      "i": 123
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 232.4,
+      "i": 124
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 234.39,
+      "i": 125
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 236.44,
+      "i": 126
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 238.43,
+      "i": 127
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 240.48,
+      "i": 128
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 242.48,
+      "i": 129
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 245.71,
+      "i": 130
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 246.81,
+      "i": 131
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 276.75,
+      "i": 132
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 277.84,
+      "i": 133
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 278.94,
+      "i": 134
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 280.03,
+      "i": 135
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 281.12,
+      "i": 136
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 282.21,
+      "i": 137
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 283.3,
+      "i": 138
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 285.34,
+      "i": 139
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 286.43,
+      "i": 140
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 287.52,
+      "i": 141
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 308.72,
+      "i": 142
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 360.53,
+      "i": 143
+    },
+    {
+      "action": "kill",
+      "target": "wolf",
+      "tool": "sword",
+      "t": 368.6,
+      "i": 144
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "bow",
+      "t": 385.81,
+      "i": 145
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 390.14,
+      "i": 146
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 394.86,
+      "i": 147
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 399.62,
+      "i": 148
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 411.31,
+      "i": 149
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 414.01,
+      "i": 150
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 417.72,
+      "i": 151
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 421.23,
+      "i": 152
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 427.13,
+      "i": 153
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 429.24,
+      "i": 154
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 491.17,
+      "i": 155
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 495.89,
+      "i": 156
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 500.65,
+      "i": 157
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 505.41,
+      "i": 158
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "sword",
+      "t": 604.29,
+      "i": 159
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "bow",
+      "t": 625.83,
+      "i": 160
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 639.29,
+      "i": 161
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 644.39,
+      "i": 162
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 649.13,
+      "i": 163
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 653.89,
+      "i": 164
+    },
+    {
+      "action": "mine",
+      "target": "jungle_log",
+      "t": 770.45,
+      "i": 165
+    },
+    {
+      "action": "mine",
+      "target": "jungle_log",
+      "t": 773.15,
+      "i": 166
+    },
+    {
+      "action": "mine",
+      "target": "jungle_log",
+      "t": 775.01,
+      "i": 167
+    },
+    {
+      "action": "mine",
+      "target": "jungle_log",
+      "t": 777.06,
+      "i": 168
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 783.52,
+      "i": 169
+    },
+    {
+      "action": "kill",
+      "target": "panda",
+      "tool": "sword",
+      "t": 837.66,
+      "i": 170
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "bow",
+      "t": 855.36,
+      "i": 171
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 869.06,
+      "i": 172
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 872.62,
+      "i": 173
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 876.49,
+      "i": 174
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 919.95,
+      "i": 175
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 921.04,
+      "i": 176
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 922.13,
+      "i": 177
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 923.22,
+      "i": 178
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 936.81,
+      "i": 179
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 939.83,
+      "i": 180
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 940.92,
+      "i": 181
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 962.9,
+      "i": 182
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 974.57,
+      "i": 183
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 975.66,
+      "i": 184
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 998.77,
+      "i": 185
+    },
+    {
+      "action": "kill",
+      "target": "polar_bear",
+      "tool": "bow",
+      "t": 1026.43,
+      "i": 186
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 1040.65,
+      "i": 187
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "sword",
+      "t": 1065.87,
+      "i": 188
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 1119.92,
+      "i": 189
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 1123.83,
+      "i": 190
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 1127.73,
+      "i": 191
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "sword",
+      "t": 1150.35,
+      "i": 192
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 1193.93,
+      "i": 193
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 1199.39,
+      "i": 194
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 1204.55,
+      "i": 195
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 1209.32,
+      "i": 196
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 1213.2,
+      "i": 197
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 1217.97,
+      "i": 198
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 1222.37,
+      "i": 199
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 1226.98,
+      "i": 200
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1230.75,
+      "i": 201
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1231.85,
+      "i": 202
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1232.94,
+      "i": 203
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 1234.03,
+      "i": 204
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1235.12,
+      "i": 205
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 1236.22,
+      "i": 206
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 1237.31,
+      "i": 207
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 1238.41,
+      "i": 208
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 1239.51,
+      "i": 209
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 1240.6,
+      "i": 210
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 1241.69,
+      "i": 211
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1242.78,
+      "i": 212
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 1243.88,
+      "i": 213
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1244.97,
+      "i": 214
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1246.06,
+      "i": 215
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1247.15,
+      "i": 216
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1248.24,
+      "i": 217
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1249.34,
+      "i": 218
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1250.43,
+      "i": 219
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1251.52,
+      "i": 220
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 1263.0,
+      "i": 221
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 1264.09,
+      "i": 222
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 1265.08,
+      "i": 223
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 1281.47,
+      "i": 224
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 1353.25,
+      "i": 225
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 1359.86,
+      "i": 226
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 1363.76,
+      "i": 227
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "sword",
+      "t": 1388.91,
+      "i": 228
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 1412.58,
+      "i": 229
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "sword",
+      "t": 1434.64,
+      "i": 230
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1456.9,
+      "i": 231
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1458.81,
+      "i": 232
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1460.66,
+      "i": 233
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1463.62,
+      "i": 234
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1465.57,
+      "i": 235
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1467.52,
+      "i": 236
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1471.57,
+      "i": 237
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1473.18,
+      "i": 238
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1475.33,
+      "i": 239
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1479.69,
+      "i": 240
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1481.85,
+      "i": 241
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 1484.35,
+      "i": 242
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1491.13,
+      "i": 243
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1492.23,
+      "i": 244
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1496.2,
+      "i": 245
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1497.29,
+      "i": 246
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1498.38,
+      "i": 247
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1500.43,
+      "i": 248
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 1501.53,
+      "i": 249
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1505.5,
+      "i": 250
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 1506.6,
+      "i": 251
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1507.69,
+      "i": 252
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1508.78,
+      "i": 253
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1509.88,
+      "i": 254
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1510.97,
+      "i": 255
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1512.06,
+      "i": 256
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1513.15,
+      "i": 257
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 1515.15,
+      "i": 258
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1516.24,
+      "i": 259
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 1517.33,
+      "i": 260
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1519.38,
+      "i": 261
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 1520.48,
+      "i": 262
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1521.57,
+      "i": 263
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1522.66,
+      "i": 264
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1523.75,
+      "i": 265
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 1524.85,
+      "i": 266
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 1525.94,
+      "i": 267
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1528.22,
+      "i": 268
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1529.31,
+      "i": 269
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1530.41,
+      "i": 270
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 1531.5,
+      "i": 271
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1532.6,
+      "i": 272
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1533.69,
+      "i": 273
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1534.78,
+      "i": 274
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1535.87,
+      "i": 275
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1536.96,
+      "i": 276
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 1538.06,
+      "i": 277
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1539.15,
+      "i": 278
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1540.24,
+      "i": 279
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1541.34,
+      "i": 280
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1543.61,
+      "i": 281
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1544.7,
+      "i": 282
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1545.8,
+      "i": 283
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 1546.89,
+      "i": 284
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1547.98,
+      "i": 285
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1549.07,
+      "i": 286
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1550.16,
+      "i": 287
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 1551.26,
+      "i": 288
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 1552.35,
+      "i": 289
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1553.44,
+      "i": 290
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 1554.54,
+      "i": 291
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1555.63,
+      "i": 292
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1556.72,
+      "i": 293
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1557.81,
+      "i": 294
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 1558.9,
+      "i": 295
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 1583.07,
+      "i": 296
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1584.16,
+      "i": 297
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1588.13,
+      "i": 298
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 1589.23,
+      "i": 299
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 1590.33,
+      "i": 300
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 1591.42,
+      "i": 301
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1592.51,
+      "i": 302
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1593.61,
+      "i": 303
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1595.88,
+      "i": 304
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1596.98,
+      "i": 305
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 1598.07,
+      "i": 306
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1599.17,
+      "i": 307
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 1600.26,
+      "i": 308
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1601.36,
+      "i": 309
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 1602.45,
+      "i": 310
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 1603.55,
+      "i": 311
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1604.64,
+      "i": 312
+    },
+    {
+      "action": "place",
+      "target": "oak_door",
+      "t": 1606.71,
+      "i": 313
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1608.98,
+      "i": 314
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1610.08,
+      "i": 315
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1611.17,
+      "i": 316
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1612.26,
+      "i": 317
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1613.36,
+      "i": 318
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1614.45,
+      "i": 319
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1615.54,
+      "i": 320
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1616.63,
+      "i": 321
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1617.72,
+      "i": 322
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1618.82,
+      "i": 323
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1619.91,
+      "i": 324
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1621.0,
+      "i": 325
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1622.1,
+      "i": 326
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1623.19,
+      "i": 327
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1624.29,
+      "i": 328
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1625.38,
+      "i": 329
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1626.47,
+      "i": 330
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1627.57,
+      "i": 331
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1628.66,
+      "i": 332
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1629.75,
+      "i": 333
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1630.84,
+      "i": 334
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1633.12,
+      "i": 335
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1634.22,
+      "i": 336
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1636.22,
+      "i": 337
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1637.31,
+      "i": 338
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1638.4,
+      "i": 339
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1639.5,
+      "i": 340
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1641.49,
+      "i": 341
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1642.58,
+      "i": 342
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1643.67,
+      "i": 343
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1644.77,
+      "i": 344
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1645.86,
+      "i": 345
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1646.95,
+      "i": 346
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1648.05,
+      "i": 347
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1649.14,
+      "i": 348
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1650.23,
+      "i": 349
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1651.33,
+      "i": 350
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1652.42,
+      "i": 351
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1653.51,
+      "i": 352
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1654.61,
+      "i": 353
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1655.7,
+      "i": 354
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 1656.79,
+      "i": 355
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1659.08,
+      "i": 356
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1661.07,
+      "i": 357
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1663.12,
+      "i": 358
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1665.11,
+      "i": 359
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1667.16,
+      "i": 360
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1669.14,
+      "i": 361
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1671.19,
+      "i": 362
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1673.18,
+      "i": 363
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1686.04,
+      "i": 364
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1735.9,
+      "i": 365
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1736.99,
+      "i": 366
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1738.08,
+      "i": 367
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1739.18,
+      "i": 368
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 1740.27,
+      "i": 369
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 1741.36,
+      "i": 370
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 1742.45,
+      "i": 371
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 1744.49,
+      "i": 372
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 1745.59,
+      "i": 373
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 1746.68,
+      "i": 374
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1747.66,
+      "i": 375
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1770.79,
+      "i": 376
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 1791.96,
+      "i": 377
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "sword",
+      "t": 1841.38,
+      "i": 378
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 1860.99,
+      "i": 379
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 1897.22,
+      "i": 380
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 1900.47,
+      "i": 381
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 1905.33,
+      "i": 382
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 1923.73,
+      "i": 383
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 1927.94,
+      "i": 384
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 1932.85,
+      "i": 385
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 1941.26,
+      "i": 386
+    },
+    {
+      "action": "kill",
+      "target": "turtle",
+      "tool": "sword",
+      "t": 1992.04,
+      "i": 387
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 2026.63,
+      "i": 388
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 2049.22,
+      "i": 389
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 2076.37,
+      "i": 390
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 2078.93,
+      "i": 391
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 2084.53,
+      "i": 392
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 2089.3,
+      "i": 393
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "sword",
+      "t": 2188.7,
+      "i": 394
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "bow",
+      "t": 2207.36,
+      "i": 395
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 2220.6,
+      "i": 396
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 2225.33,
+      "i": 397
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 2230.09,
+      "i": 398
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 2233.35,
+      "i": 399
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 2289.87,
+      "i": 400
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 2314.02,
+      "i": 401
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 2390.51,
+      "i": 402
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 2394.57,
+      "i": 403
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 2397.72,
+      "i": 404
+    },
+    {
+      "action": "kill",
+      "target": "panda",
+      "tool": "sword",
+      "t": 2420.34,
+      "i": 405
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "bow",
+      "t": 2438.04,
+      "i": 406
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 2453.77,
+      "i": 407
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 2458.58,
+      "i": 408
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 2462.47,
+      "i": 409
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 2474.01,
+      "i": 410
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 2514.66,
+      "i": 411
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 2515.76,
+      "i": 412
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 2516.85,
+      "i": 413
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 2517.95,
+      "i": 414
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 2519.99,
+      "i": 415
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 2521.09,
+      "i": 416
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 2522.18,
+      "i": 417
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 2523.27,
+      "i": 418
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 2524.36,
+      "i": 419
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 2525.46,
+      "i": 420
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 2526.55,
+      "i": 421
+    },
+    {
+      "action": "kill",
+      "target": "polar_bear",
+      "tool": "bow",
+      "t": 2552.76,
+      "i": 422
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 2574.07,
+      "i": 423
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 2633.48,
+      "i": 424
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 2637.36,
+      "i": 425
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 2642.13,
+      "i": 426
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 2719.33,
+      "i": 427
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 2724.18,
+      "i": 428
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 2740.12,
+      "i": 429
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 2743.72,
+      "i": 430
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 2767.26,
+      "i": 431
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 2771.67,
+      "i": 432
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 2775.67,
+      "i": 433
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 2780.48,
+      "i": 434
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 2793.81,
+      "i": 435
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 2794.91,
+      "i": 436
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 2796.01,
+      "i": 437
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 2806.02,
+      "i": 438
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 2807.13,
+      "i": 439
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 2808.22,
+      "i": 440
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 2818.78,
+      "i": 441
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 2819.89,
+      "i": 442
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 2820.99,
+      "i": 443
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 2831.55,
+      "i": 444
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 2832.66,
+      "i": 445
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 2833.75,
+      "i": 446
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 2844.32,
+      "i": 447
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 2845.43,
+      "i": 448
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 2846.53,
+      "i": 449
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 2857.07,
+      "i": 450
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 2858.16,
+      "i": 451
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 2859.15,
+      "i": 452
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 2860.13,
+      "i": 453
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 2861.11,
+      "i": 454
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 2862.1,
+      "i": 455
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 2900.83,
+      "i": 456
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "bow",
+      "t": 2918.53,
+      "i": 457
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 3054.02,
+      "i": 458
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 3097.44,
+      "i": 459
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 3098.53,
+      "i": 460
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 3099.62,
+      "i": 461
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 3100.72,
+      "i": 462
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 3101.81,
+      "i": 463
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 3102.91,
+      "i": 464
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 3104.0,
+      "i": 465
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 3106.06,
+      "i": 466
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 3107.16,
+      "i": 467
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 3108.25,
+      "i": 468
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 3111.27,
+      "i": 469
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 3112.37,
+      "i": 470
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 3123.32,
+      "i": 471
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 3124.42,
+      "i": 472
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 3126.47,
+      "i": 473
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 3127.56,
+      "i": 474
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 3128.65,
+      "i": 475
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 3130.71,
+      "i": 476
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 3131.8,
+      "i": 477
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 3132.89,
+      "i": 478
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 3133.99,
+      "i": 479
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 3135.08,
+      "i": 480
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 3136.17,
+      "i": 481
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 3137.27,
+      "i": 482
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3139.55,
+      "i": 483
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3140.64,
+      "i": 484
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3141.74,
+      "i": 485
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3142.83,
+      "i": 486
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3143.92,
+      "i": 487
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 3145.02,
+      "i": 488
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3146.11,
+      "i": 489
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3148.17,
+      "i": 490
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 3149.26,
+      "i": 491
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3150.35,
+      "i": 492
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3151.45,
+      "i": 493
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3152.54,
+      "i": 494
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3153.63,
+      "i": 495
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3155.91,
+      "i": 496
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3157.0,
+      "i": 497
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3158.1,
+      "i": 498
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3159.19,
+      "i": 499
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3160.29,
+      "i": 500
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 3161.38,
+      "i": 501
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3162.47,
+      "i": 502
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 3163.57,
+      "i": 503
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3164.66,
+      "i": 504
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 3165.76,
+      "i": 505
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3166.85,
+      "i": 506
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3167.95,
+      "i": 507
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3169.04,
+      "i": 508
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3170.13,
+      "i": 509
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 3171.23,
+      "i": 510
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 3173.5,
+      "i": 511
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3174.6,
+      "i": 512
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3175.69,
+      "i": 513
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3176.79,
+      "i": 514
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 3177.88,
+      "i": 515
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3178.98,
+      "i": 516
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3180.08,
+      "i": 517
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3181.17,
+      "i": 518
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 3182.26,
+      "i": 519
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3184.54,
+      "i": 520
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 3185.63,
+      "i": 521
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3186.72,
+      "i": 522
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 3187.82,
+      "i": 523
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 3188.91,
+      "i": 524
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3190.0,
+      "i": 525
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3191.1,
+      "i": 526
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 3192.19,
+      "i": 527
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 3193.28,
+      "i": 528
+    },
+    {
+      "action": "place",
+      "target": "oak_door",
+      "t": 3196.31,
+      "i": 529
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3198.59,
+      "i": 530
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3199.69,
+      "i": 531
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3201.74,
+      "i": 532
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3202.84,
+      "i": 533
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3203.93,
+      "i": 534
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3205.03,
+      "i": 535
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3207.08,
+      "i": 536
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3208.17,
+      "i": 537
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3219.84,
+      "i": 538
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3220.94,
+      "i": 539
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3222.03,
+      "i": 540
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3223.13,
+      "i": 541
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3224.22,
+      "i": 542
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3225.32,
+      "i": 543
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3226.41,
+      "i": 544
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3227.5,
+      "i": 545
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3228.6,
+      "i": 546
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3229.69,
+      "i": 547
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3230.79,
+      "i": 548
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3231.88,
+      "i": 549
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3232.97,
+      "i": 550
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3235.25,
+      "i": 551
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3236.35,
+      "i": 552
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3238.34,
+      "i": 553
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3239.44,
+      "i": 554
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3240.53,
+      "i": 555
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3241.62,
+      "i": 556
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3243.62,
+      "i": 557
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3244.71,
+      "i": 558
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3245.8,
+      "i": 559
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3246.9,
+      "i": 560
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3247.99,
+      "i": 561
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3249.09,
+      "i": 562
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3250.18,
+      "i": 563
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3251.28,
+      "i": 564
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3252.37,
+      "i": 565
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3253.46,
+      "i": 566
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3254.56,
+      "i": 567
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3255.65,
+      "i": 568
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3256.75,
+      "i": 569
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3257.84,
+      "i": 570
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 3258.93,
+      "i": 571
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3261.23,
+      "i": 572
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3263.22,
+      "i": 573
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3265.26,
+      "i": 574
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3267.26,
+      "i": 575
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3269.31,
+      "i": 576
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3271.3,
+      "i": 577
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3273.34,
+      "i": 578
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3275.34,
+      "i": 579
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3278.57,
+      "i": 580
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3279.66,
+      "i": 581
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3309.61,
+      "i": 582
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3310.71,
+      "i": 583
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3311.8,
+      "i": 584
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 3313.85,
+      "i": 585
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 3316.31,
+      "i": 586
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 3336.72,
+      "i": 587
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 3337.81,
+      "i": 588
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 3338.9,
+      "i": 589
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 3373.16,
+      "i": 590
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "sword",
+      "t": 3425.28,
+      "i": 591
+    },
+    {
+      "action": "kill",
+      "target": "wolf",
+      "tool": "sword",
+      "t": 3454.87,
+      "i": 592
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "bow",
+      "t": 3475.46,
+      "i": 593
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 3483.82,
+      "i": 594
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 3492.58,
+      "i": 595
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 3547.91,
+      "i": 596
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 3551.82,
+      "i": 597
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 3556.63,
+      "i": 598
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 3561.43,
+      "i": 599
+    },
+    {
+      "action": "kill",
+      "target": "turtle",
+      "tool": "sword",
+      "t": 3627.44,
+      "i": 600
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 3662.01,
+      "i": 601
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 3684.36,
+      "i": 602
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 3697.13,
+      "i": 603
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 3701.04,
+      "i": 604
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 3705.85,
+      "i": 605
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 3710.36,
+      "i": 606
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "sword",
+      "t": 3796.84,
+      "i": 607
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "bow",
+      "t": 3815.98,
+      "i": 608
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 3828.52,
+      "i": 609
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 3832.13,
+      "i": 610
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 3841.17,
+      "i": 611
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 3846.26,
+      "i": 612
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 3940.24,
+      "i": 613
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 3962.83,
+      "i": 614
+    },
+    {
+      "action": "mine",
+      "target": "jungle_log",
+      "t": 3985.04,
+      "i": 615
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 4025.27,
+      "i": 616
+    },
+    {
+      "action": "kill",
+      "target": "panda",
+      "tool": "sword",
+      "t": 4085.41,
+      "i": 617
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 4116.89,
+      "i": 618
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 4120.8,
+      "i": 619
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 4124.7,
+      "i": 620
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 4131.02,
+      "i": 621
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 4134.79,
+      "i": 622
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 4145.2,
+      "i": 623
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4148.75,
+      "i": 624
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4149.84,
+      "i": 625
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4150.94,
+      "i": 626
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4152.03,
+      "i": 627
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4154.08,
+      "i": 628
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4156.14,
+      "i": 629
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4157.24,
+      "i": 630
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4158.34,
+      "i": 631
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 4159.43,
+      "i": 632
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 4160.53,
+      "i": 633
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 4161.62,
+      "i": 634
+    },
+    {
+      "action": "kill",
+      "target": "polar_bear",
+      "tool": "bow",
+      "t": 4189.28,
+      "i": 635
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 4201.47,
+      "i": 636
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 4266.65,
+      "i": 637
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 4270.66,
+      "i": 638
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 4275.07,
+      "i": 639
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "bow",
+      "t": 4320.32,
+      "i": 640
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 4346.16,
+      "i": 641
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 4359.13,
+      "i": 642
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 4363.04,
+      "i": 643
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 4367.84,
+      "i": 644
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 4372.35,
+      "i": 645
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 4374.76,
+      "i": 646
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 4377.46,
+      "i": 647
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 4380.86,
+      "i": 648
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 4384.67,
+      "i": 649
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4388.59,
+      "i": 650
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4389.69,
+      "i": 651
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4390.78,
+      "i": 652
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 4392.83,
+      "i": 653
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4393.93,
+      "i": 654
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 4395.02,
+      "i": 655
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 4396.12,
+      "i": 656
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 4397.21,
+      "i": 657
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 4398.3,
+      "i": 658
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 4399.4,
+      "i": 659
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 4400.49,
+      "i": 660
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4401.59,
+      "i": 661
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 4403.64,
+      "i": 662
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4404.74,
+      "i": 663
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4405.85,
+      "i": 664
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4406.95,
+      "i": 665
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4416.96,
+      "i": 666
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4418.06,
+      "i": 667
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4419.16,
+      "i": 668
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 4430.11,
+      "i": 669
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 4431.2,
+      "i": 670
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4432.19,
+      "i": 671
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 4433.17,
+      "i": 672
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 4540.85,
+      "i": 673
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 4547.36,
+      "i": 674
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 4551.52,
+      "i": 675
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "sword",
+      "t": 4577.03,
+      "i": 676
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 4602.13,
+      "i": 677
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "sword",
+      "t": 4626.45,
+      "i": 678
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 4650.46,
+      "i": 679
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4734.36,
+      "i": 680
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4735.46,
+      "i": 681
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4736.55,
+      "i": 682
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4737.65,
+      "i": 683
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4749.34,
+      "i": 684
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4751.41,
+      "i": 685
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 4752.5,
+      "i": 686
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4753.6,
+      "i": 687
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 4765.28,
+      "i": 688
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4766.37,
+      "i": 689
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4768.43,
+      "i": 690
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4769.52,
+      "i": 691
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4770.62,
+      "i": 692
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4771.71,
+      "i": 693
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 4795.62,
+      "i": 694
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4796.71,
+      "i": 695
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 4807.43,
+      "i": 696
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 4808.53,
+      "i": 697
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 4809.62,
+      "i": 698
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4810.72,
+      "i": 699
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4811.81,
+      "i": 700
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4812.91,
+      "i": 701
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 4814.01,
+      "i": 702
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 4815.1,
+      "i": 703
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4817.39,
+      "i": 704
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4818.48,
+      "i": 705
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4819.58,
+      "i": 706
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 4820.68,
+      "i": 707
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4821.77,
+      "i": 708
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 4822.87,
+      "i": 709
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4823.96,
+      "i": 710
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4825.06,
+      "i": 711
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 4826.15,
+      "i": 712
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 4827.25,
+      "i": 713
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4828.35,
+      "i": 714
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4829.44,
+      "i": 715
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4830.54,
+      "i": 716
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4832.82,
+      "i": 717
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4833.91,
+      "i": 718
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4835.01,
+      "i": 719
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 4836.1,
+      "i": 720
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4837.2,
+      "i": 721
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 4838.29,
+      "i": 722
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4839.39,
+      "i": 723
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 4840.48,
+      "i": 724
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 4841.58,
+      "i": 725
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 4842.67,
+      "i": 726
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 4843.76,
+      "i": 727
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4844.86,
+      "i": 728
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4845.96,
+      "i": 729
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4847.05,
+      "i": 730
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 4848.15,
+      "i": 731
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 4850.43,
+      "i": 732
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 4851.52,
+      "i": 733
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4852.61,
+      "i": 734
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4853.71,
+      "i": 735
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 4854.81,
+      "i": 736
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 4855.9,
+      "i": 737
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 4857.0,
+      "i": 738
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4858.09,
+      "i": 739
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 4859.19,
+      "i": 740
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4861.47,
+      "i": 741
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 4862.56,
+      "i": 742
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 4863.66,
+      "i": 743
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 4864.75,
+      "i": 744
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 4865.85,
+      "i": 745
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4866.94,
+      "i": 746
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 4868.04,
+      "i": 747
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 4869.14,
+      "i": 748
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 4870.23,
+      "i": 749
+    },
+    {
+      "action": "place",
+      "target": "oak_door",
+      "t": 4872.29,
+      "i": 750
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4874.57,
+      "i": 751
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4875.66,
+      "i": 752
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4876.76,
+      "i": 753
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4877.85,
+      "i": 754
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4878.94,
+      "i": 755
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4880.04,
+      "i": 756
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4881.13,
+      "i": 757
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4882.23,
+      "i": 758
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4884.22,
+      "i": 759
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4885.32,
+      "i": 760
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4887.31,
+      "i": 761
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4888.41,
+      "i": 762
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4889.51,
+      "i": 763
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4890.6,
+      "i": 764
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4891.7,
+      "i": 765
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4892.79,
+      "i": 766
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4893.89,
+      "i": 767
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4894.99,
+      "i": 768
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4896.08,
+      "i": 769
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4897.18,
+      "i": 770
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4898.27,
+      "i": 771
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4900.55,
+      "i": 772
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4901.65,
+      "i": 773
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4902.74,
+      "i": 774
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4903.84,
+      "i": 775
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4904.94,
+      "i": 776
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4906.03,
+      "i": 777
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4907.13,
+      "i": 778
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4908.22,
+      "i": 779
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4929.26,
+      "i": 780
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4930.35,
+      "i": 781
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4936.26,
+      "i": 782
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4937.35,
+      "i": 783
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4938.45,
+      "i": 784
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4941.47,
+      "i": 785
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4942.57,
+      "i": 786
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4943.66,
+      "i": 787
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4944.76,
+      "i": 788
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4945.85,
+      "i": 789
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4946.94,
+      "i": 790
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 4949.0,
+      "i": 791
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4951.28,
+      "i": 792
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4953.27,
+      "i": 793
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4955.32,
+      "i": 794
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4957.37,
+      "i": 795
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4959.43,
+      "i": 796
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4961.48,
+      "i": 797
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4963.53,
+      "i": 798
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4965.59,
+      "i": 799
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4968.83,
+      "i": 800
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4969.93,
+      "i": 801
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 4999.61,
+      "i": 802
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 5000.71,
+      "i": 803
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 5001.8,
+      "i": 804
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 5002.9,
+      "i": 805
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 5004.0,
+      "i": 806
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 5005.1,
+      "i": 807
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 5006.2,
+      "i": 808
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 5008.26,
+      "i": 809
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 5009.35,
+      "i": 810
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 5010.45,
+      "i": 811
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 5032.6,
+      "i": 812
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 5056.69,
+      "i": 813
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 5057.67,
+      "i": 814
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 5058.66,
+      "i": 815
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 5105.38,
+      "i": 816
+    },
+    {
+      "action": "kill",
+      "target": "wolf",
+      "tool": "sword",
+      "t": 5124.82,
+      "i": 817
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5135.2,
+      "i": 818
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5143.11,
+      "i": 819
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5153.88,
+      "i": 820
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 5176.11,
+      "i": 821
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 5180.95,
+      "i": 822
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 5185.76,
+      "i": 823
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 5191.72,
+      "i": 824
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5199.78,
+      "i": 825
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5208.84,
+      "i": 826
+    },
+    {
+      "action": "kill",
+      "target": "turtle",
+      "tool": "sword",
+      "t": 5229.64,
+      "i": 827
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 5248.3,
+      "i": 828
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 5272.36,
+      "i": 829
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 5284.51,
+      "i": 830
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 5289.26,
+      "i": 831
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 5293.14,
+      "i": 832
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 5297.05,
+      "i": 833
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "bow",
+      "t": 5405.69,
+      "i": 834
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 5418.99,
+      "i": 835
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 5423.75,
+      "i": 836
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 5426.65,
+      "i": 837
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 5431.76,
+      "i": 838
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 5488.76,
+      "i": 839
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 5529.96,
+      "i": 840
+    },
+    {
+      "action": "mine",
+      "target": "jungle_log",
+      "t": 5580.35,
+      "i": 841
+    },
+    {
+      "action": "mine",
+      "target": "jungle_log",
+      "t": 5588.41,
+      "i": 842
+    },
+    {
+      "action": "mine",
+      "target": "jungle_log",
+      "t": 5604.0,
+      "i": 843
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 5623.2,
+      "i": 844
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 5634.22,
+      "i": 845
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 5637.07,
+      "i": 846
+    },
+    {
+      "action": "kill",
+      "target": "panda",
+      "tool": "sword",
+      "t": 5651.59,
+      "i": 847
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "bow",
+      "t": 5669.29,
+      "i": 848
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5682.09,
+      "i": 849
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5686.0,
+      "i": 850
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5689.9,
+      "i": 851
+    },
+    {
+      "action": "mine",
+      "target": "birch_log",
+      "t": 5695.32,
+      "i": 852
+    },
+    {
+      "action": "mine",
+      "target": "birch_log",
+      "t": 5697.18,
+      "i": 853
+    },
+    {
+      "action": "mine",
+      "target": "birch_log",
+      "t": 5700.14,
+      "i": 854
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 5703.96,
+      "i": 855
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 5705.05,
+      "i": 856
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 5706.15,
+      "i": 857
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 5707.24,
+      "i": 858
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 5709.29,
+      "i": 859
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 5710.39,
+      "i": 860
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 5711.49,
+      "i": 861
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 5712.59,
+      "i": 862
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 5713.69,
+      "i": 863
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 5714.79,
+      "i": 864
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 5715.88,
+      "i": 865
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 5747.3,
+      "i": 866
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5804.61,
+      "i": 867
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5808.36,
+      "i": 868
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 5813.13,
+      "i": 869
+    },
+    {
+      "action": "mine",
+      "target": "terracotta",
+      "t": 5892.09,
+      "i": 870
+    },
+    {
+      "action": "mine",
+      "target": "terracotta",
+      "t": 5896.09,
+      "i": 871
+    },
+    {
+      "action": "mine",
+      "target": "terracotta",
+      "t": 5900.85,
+      "i": 872
+    },
+    {
+      "action": "mine",
+      "target": "terracotta",
+      "t": 5905.61,
+      "i": 873
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 5909.64,
+      "i": 874
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 5910.73,
+      "i": 875
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 5911.83,
+      "i": 876
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 5912.93,
+      "i": 877
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 5914.03,
+      "i": 878
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 5915.13,
+      "i": 879
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 5916.23,
+      "i": 880
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 5917.33,
+      "i": 881
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 5918.43,
+      "i": 882
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 5919.53,
+      "i": 883
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 5920.63,
+      "i": 884
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 5921.73,
+      "i": 885
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 5922.82,
+      "i": 886
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 5923.92,
+      "i": 887
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 5925.02,
+      "i": 888
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 5926.11,
+      "i": 889
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 5927.21,
+      "i": 890
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 5928.31,
+      "i": 891
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 5929.41,
+      "i": 892
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 5931.4,
+      "i": 893
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 5932.5,
+      "i": 894
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 5934.55,
+      "i": 895
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 5935.65,
+      "i": 896
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "sword",
+      "t": 6061.85,
+      "i": 897
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 6084.43,
+      "i": 898
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "sword",
+      "t": 6098.54,
+      "i": 899
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6117.01,
+      "i": 900
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6118.41,
+      "i": 901
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6120.21,
+      "i": 902
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6122.91,
+      "i": 903
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6125.12,
+      "i": 904
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6127.62,
+      "i": 905
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6131.63,
+      "i": 906
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6133.23,
+      "i": 907
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6135.38,
+      "i": 908
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6139.74,
+      "i": 909
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6141.89,
+      "i": 910
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6144.4,
+      "i": 911
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6148.51,
+      "i": 912
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 6150.92,
+      "i": 913
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 6154.78,
+      "i": 914
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 6155.88,
+      "i": 915
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 6156.98,
+      "i": 916
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 6161.93,
+      "i": 917
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 6174.58,
+      "i": 918
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 6175.68,
+      "i": 919
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 6176.78,
+      "i": 920
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 6177.88,
+      "i": 921
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 6178.97,
+      "i": 922
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 6200.96,
+      "i": 923
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 6202.05,
+      "i": 924
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 6204.12,
+      "i": 925
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 6204.67,
+      "i": 926
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 6205.76,
+      "i": 927
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 6206.86,
+      "i": 928
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 6207.96,
+      "i": 929
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 6209.06,
+      "i": 930
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 6210.15,
+      "i": 931
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 6211.25,
+      "i": 932
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 6212.35,
+      "i": 933
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 6213.46,
+      "i": 934
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 6214.56,
+      "i": 935
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 6215.66,
+      "i": 936
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 6216.76,
+      "i": 937
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6219.05,
+      "i": 938
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6220.14,
+      "i": 939
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6221.23,
+      "i": 940
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 6222.33,
+      "i": 941
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6223.43,
+      "i": 942
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 6224.53,
+      "i": 943
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6225.63,
+      "i": 944
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6226.72,
+      "i": 945
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 6227.82,
+      "i": 946
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 6228.92,
+      "i": 947
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6230.02,
+      "i": 948
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6231.12,
+      "i": 949
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6232.22,
+      "i": 950
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6238.36,
+      "i": 951
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6239.46,
+      "i": 952
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6252.1,
+      "i": 953
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6273.13,
+      "i": 954
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 6274.23,
+      "i": 955
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6280.13,
+      "i": 956
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 6281.24,
+      "i": 957
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 6282.33,
+      "i": 958
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 6283.43,
+      "i": 959
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 6284.53,
+      "i": 960
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6285.63,
+      "i": 961
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6286.73,
+      "i": 962
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6287.83,
+      "i": 963
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 6288.93,
+      "i": 964
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 6291.22,
+      "i": 965
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 6292.32,
+      "i": 966
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6293.42,
+      "i": 967
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6294.52,
+      "i": 968
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 6295.62,
+      "i": 969
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 6296.72,
+      "i": 970
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 6297.82,
+      "i": 971
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6301.81,
+      "i": 972
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 6302.9,
+      "i": 973
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6305.18,
+      "i": 974
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 6306.28,
+      "i": 975
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 6307.38,
+      "i": 976
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 6308.48,
+      "i": 977
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 6309.58,
+      "i": 978
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6310.68,
+      "i": 979
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 6311.78,
+      "i": 980
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 6312.87,
+      "i": 981
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 6313.97,
+      "i": 982
+    },
+    {
+      "action": "place",
+      "target": "oak_door",
+      "t": 6316.04,
+      "i": 983
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6318.32,
+      "i": 984
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6319.42,
+      "i": 985
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6320.52,
+      "i": 986
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6321.62,
+      "i": 987
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6322.72,
+      "i": 988
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6323.81,
+      "i": 989
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6324.91,
+      "i": 990
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6326.01,
+      "i": 991
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6328.01,
+      "i": 992
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6329.11,
+      "i": 993
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6331.17,
+      "i": 994
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6333.23,
+      "i": 995
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6334.33,
+      "i": 996
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6356.32,
+      "i": 997
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6357.42,
+      "i": 998
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6381.34,
+      "i": 999
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6382.45,
+      "i": 1000
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6383.55,
+      "i": 1001
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6384.65,
+      "i": 1002
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6386.94,
+      "i": 1003
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6388.04,
+      "i": 1004
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6389.14,
+      "i": 1005
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6390.24,
+      "i": 1006
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6391.34,
+      "i": 1007
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6392.43,
+      "i": 1008
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6393.53,
+      "i": 1009
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6394.63,
+      "i": 1010
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6400.53,
+      "i": 1011
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6401.63,
+      "i": 1012
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6402.73,
+      "i": 1013
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6403.82,
+      "i": 1014
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6404.93,
+      "i": 1015
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6406.02,
+      "i": 1016
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6407.12,
+      "i": 1017
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6408.22,
+      "i": 1018
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6409.32,
+      "i": 1019
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6410.42,
+      "i": 1020
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6411.52,
+      "i": 1021
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6413.58,
+      "i": 1022
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6414.68,
+      "i": 1023
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6416.96,
+      "i": 1024
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6418.96,
+      "i": 1025
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6421.01,
+      "i": 1026
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6426.91,
+      "i": 1027
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6428.96,
+      "i": 1028
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6434.86,
+      "i": 1029
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6436.91,
+      "i": 1030
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6438.97,
+      "i": 1031
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6442.22,
+      "i": 1032
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6443.32,
+      "i": 1033
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6473.26,
+      "i": 1034
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6474.36,
+      "i": 1035
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6475.46,
+      "i": 1036
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 6476.55,
+      "i": 1037
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 6477.65,
+      "i": 1038
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 6478.75,
+      "i": 1039
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 6479.85,
+      "i": 1040
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 6481.89,
+      "i": 1041
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 6482.99,
+      "i": 1042
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 6484.09,
+      "i": 1043
+    },
+    {
+      "action": "place",
+      "target": "acacia_stairs",
+      "t": 6581.23,
+      "i": 1044
+    },
+    {
+      "action": "place",
+      "target": "acacia_planks",
+      "t": 6602.41,
+      "i": 1045
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 6665.06,
+      "i": 1046
+    },
+    {
+      "action": "kill",
+      "target": "wolf",
+      "tool": "sword",
+      "t": 6688.38,
+      "i": 1047
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "bow",
+      "t": 6708.96,
+      "i": 1048
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 6713.46,
+      "i": 1049
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 6718.37,
+      "i": 1050
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 6722.38,
+      "i": 1051
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 6734.96,
+      "i": 1052
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 6738.41,
+      "i": 1053
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 6742.92,
+      "i": 1054
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 6747.69,
+      "i": 1055
+    },
+    {
+      "action": "kill",
+      "target": "turtle",
+      "tool": "sword",
+      "t": 6813.73,
+      "i": 1056
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 6848.32,
+      "i": 1057
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 6870.68,
+      "i": 1058
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 6883.5,
+      "i": 1059
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 6888.31,
+      "i": 1060
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 6893.07,
+      "i": 1061
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 6897.63,
+      "i": 1062
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "bow",
+      "t": 7005.13,
+      "i": 1063
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 7017.86,
+      "i": 1064
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 7021.57,
+      "i": 1065
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 7027.54,
+      "i": 1066
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 7030.8,
+      "i": 1067
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 7111.1,
+      "i": 1068
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 7136.21,
+      "i": 1069
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "bow",
+      "t": 7261.91,
+      "i": 1070
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 7274.71,
+      "i": 1071
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 7279.53,
+      "i": 1072
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 7284.28,
+      "i": 1073
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7327.78,
+      "i": 1074
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7328.87,
+      "i": 1075
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7330.93,
+      "i": 1076
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7332.02,
+      "i": 1077
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7333.12,
+      "i": 1078
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7334.22,
+      "i": 1079
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7335.32,
+      "i": 1080
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7336.43,
+      "i": 1081
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 7338.48,
+      "i": 1082
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 7340.53,
+      "i": 1083
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 7341.63,
+      "i": 1084
+    },
+    {
+      "action": "kill",
+      "target": "polar_bear",
+      "tool": "bow",
+      "t": 7369.29,
+      "i": 1085
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 7383.4,
+      "i": 1086
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 7449.64,
+      "i": 1087
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 7461.37,
+      "i": 1088
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 7466.13,
+      "i": 1089
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 7521.34,
+      "i": 1090
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 7524.94,
+      "i": 1091
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 7529.65,
+      "i": 1092
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 7534.36,
+      "i": 1093
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 7539.68,
+      "i": 1094
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 7543.13,
+      "i": 1095
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 7546.99,
+      "i": 1096
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 7557.15,
+      "i": 1097
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7560.99,
+      "i": 1098
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7562.09,
+      "i": 1099
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7563.18,
+      "i": 1100
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 7564.29,
+      "i": 1101
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7565.39,
+      "i": 1102
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 7566.49,
+      "i": 1103
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 7567.59,
+      "i": 1104
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 7568.69,
+      "i": 1105
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 7569.79,
+      "i": 1106
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 7570.89,
+      "i": 1107
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 7571.99,
+      "i": 1108
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7573.09,
+      "i": 1109
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 7574.19,
+      "i": 1110
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7575.29,
+      "i": 1111
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7576.39,
+      "i": 1112
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7577.48,
+      "i": 1113
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7578.58,
+      "i": 1114
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7579.68,
+      "i": 1115
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7580.78,
+      "i": 1116
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7582.83,
+      "i": 1117
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 7583.93,
+      "i": 1118
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 7585.99,
+      "i": 1119
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 7587.09,
+      "i": 1120
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "sword",
+      "t": 7716.67,
+      "i": 1121
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7783.06,
+      "i": 1122
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7784.16,
+      "i": 1123
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7785.25,
+      "i": 1124
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7786.35,
+      "i": 1125
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7788.41,
+      "i": 1126
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7790.46,
+      "i": 1127
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 7791.56,
+      "i": 1128
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7792.66,
+      "i": 1129
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 7794.73,
+      "i": 1130
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7795.83,
+      "i": 1131
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7796.93,
+      "i": 1132
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7798.02,
+      "i": 1133
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7799.12,
+      "i": 1134
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7800.22,
+      "i": 1135
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7801.32,
+      "i": 1136
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 7802.42,
+      "i": 1137
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7803.52,
+      "i": 1138
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 7804.62,
+      "i": 1139
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 7805.72,
+      "i": 1140
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 7806.81,
+      "i": 1141
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7807.92,
+      "i": 1142
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7809.01,
+      "i": 1143
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7810.11,
+      "i": 1144
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 7811.21,
+      "i": 1145
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 7812.31,
+      "i": 1146
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7814.59,
+      "i": 1147
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7815.69,
+      "i": 1148
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7816.79,
+      "i": 1149
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 7817.9,
+      "i": 1150
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7819.0,
+      "i": 1151
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 7820.09,
+      "i": 1152
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7821.19,
+      "i": 1153
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7822.3,
+      "i": 1154
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 7823.4,
+      "i": 1155
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 7824.49,
+      "i": 1156
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7825.6,
+      "i": 1157
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7826.69,
+      "i": 1158
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7827.8,
+      "i": 1159
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7830.08,
+      "i": 1160
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7831.18,
+      "i": 1161
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7832.28,
+      "i": 1162
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 7833.38,
+      "i": 1163
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7834.48,
+      "i": 1164
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 7835.58,
+      "i": 1165
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7836.68,
+      "i": 1166
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 7837.77,
+      "i": 1167
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 7838.88,
+      "i": 1168
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 7839.97,
+      "i": 1169
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 7841.07,
+      "i": 1170
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7842.17,
+      "i": 1171
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7843.27,
+      "i": 1172
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7844.37,
+      "i": 1173
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 7845.47,
+      "i": 1174
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 7847.75,
+      "i": 1175
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 7848.85,
+      "i": 1176
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7849.94,
+      "i": 1177
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7851.05,
+      "i": 1178
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 7852.15,
+      "i": 1179
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 7853.25,
+      "i": 1180
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 7854.36,
+      "i": 1181
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7855.46,
+      "i": 1182
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 7856.56,
+      "i": 1183
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7858.84,
+      "i": 1184
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 7859.94,
+      "i": 1185
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 7861.04,
+      "i": 1186
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 7862.14,
+      "i": 1187
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 7863.24,
+      "i": 1188
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7864.34,
+      "i": 1189
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 7865.44,
+      "i": 1190
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7866.54,
+      "i": 1191
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 7867.63,
+      "i": 1192
+    },
+    {
+      "action": "place",
+      "target": "oak_door",
+      "t": 7869.7,
+      "i": 1193
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7872.0,
+      "i": 1194
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7873.1,
+      "i": 1195
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7874.19,
+      "i": 1196
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7875.29,
+      "i": 1197
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7876.39,
+      "i": 1198
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7877.49,
+      "i": 1199
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7878.59,
+      "i": 1200
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7879.69,
+      "i": 1201
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7881.69,
+      "i": 1202
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7882.79,
+      "i": 1203
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7884.79,
+      "i": 1204
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7885.89,
+      "i": 1205
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7886.99,
+      "i": 1206
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7888.09,
+      "i": 1207
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7889.19,
+      "i": 1208
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7890.29,
+      "i": 1209
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7891.39,
+      "i": 1210
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7892.49,
+      "i": 1211
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7893.59,
+      "i": 1212
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7894.69,
+      "i": 1213
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7895.79,
+      "i": 1214
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7898.07,
+      "i": 1215
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7899.17,
+      "i": 1216
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7900.27,
+      "i": 1217
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7900.82,
+      "i": 1218
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7901.92,
+      "i": 1219
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7904.95,
+      "i": 1220
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7906.05,
+      "i": 1221
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7907.14,
+      "i": 1222
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7928.17,
+      "i": 1223
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7929.26,
+      "i": 1224
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7935.17,
+      "i": 1225
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7936.27,
+      "i": 1226
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7937.37,
+      "i": 1227
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7939.43,
+      "i": 1228
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7940.54,
+      "i": 1229
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7941.64,
+      "i": 1230
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7942.74,
+      "i": 1231
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7943.84,
+      "i": 1232
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7944.95,
+      "i": 1233
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 7946.05,
+      "i": 1234
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7948.33,
+      "i": 1235
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7950.32,
+      "i": 1236
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7952.38,
+      "i": 1237
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7954.37,
+      "i": 1238
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7956.42,
+      "i": 1239
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7958.42,
+      "i": 1240
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7960.47,
+      "i": 1241
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7962.47,
+      "i": 1242
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7965.71,
+      "i": 1243
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 7966.81,
+      "i": 1244
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 8015.45,
+      "i": 1245
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 8016.55,
+      "i": 1246
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 8018.62,
+      "i": 1247
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 8021.09,
+      "i": 1248
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 8041.51,
+      "i": 1249
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 8042.61,
+      "i": 1250
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 8043.71,
+      "i": 1251
+    },
+    {
+      "action": "place",
+      "target": "oak_stairs",
+      "t": 8067.08,
+      "i": 1252
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 8068.06,
+      "i": 1253
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 8069.04,
+      "i": 1254
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 8069.48,
+      "i": 1255
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 8108.41,
+      "i": 1256
+    },
+    {
+      "action": "kill",
+      "target": "wolf",
+      "tool": "sword",
+      "t": 8115.23,
+      "i": 1257
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "bow",
+      "t": 8132.49,
+      "i": 1258
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 8144.37,
+      "i": 1259
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 8148.42,
+      "i": 1260
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 8152.28,
+      "i": 1261
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 8166.35,
+      "i": 1262
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 8171.11,
+      "i": 1263
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 8175.0,
+      "i": 1264
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 8178.88,
+      "i": 1265
+    },
+    {
+      "action": "kill",
+      "target": "turtle",
+      "tool": "sword",
+      "t": 8244.9,
+      "i": 1266
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 8279.49,
+      "i": 1267
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 8301.72,
+      "i": 1268
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 8315.38,
+      "i": 1269
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 8319.44,
+      "i": 1270
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 8323.35,
+      "i": 1271
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 8328.15,
+      "i": 1272
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "sword",
+      "t": 8430.81,
+      "i": 1273
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "bow",
+      "t": 8449.48,
+      "i": 1274
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 8462.73,
+      "i": 1275
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 8467.48,
+      "i": 1276
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 8470.93,
+      "i": 1277
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 8474.39,
+      "i": 1278
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 8532.59,
+      "i": 1279
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 8556.39,
+      "i": 1280
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 8581.96,
+      "i": 1281
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 8637.93,
+      "i": 1282
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "bow",
+      "t": 8697.23,
+      "i": 1283
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 8710.64,
+      "i": 1284
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 8715.0,
+      "i": 1285
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 8725.06,
+      "i": 1286
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 8768.52,
+      "i": 1287
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 8769.62,
+      "i": 1288
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 8771.67,
+      "i": 1289
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 8772.77,
+      "i": 1290
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 8773.87,
+      "i": 1291
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 8774.96,
+      "i": 1292
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 8776.06,
+      "i": 1293
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 8777.17,
+      "i": 1294
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 8779.22,
+      "i": 1295
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 8781.27,
+      "i": 1296
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 8782.37,
+      "i": 1297
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 8831.78,
+      "i": 1298
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "sword",
+      "t": 8855.95,
+      "i": 1299
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 8908.94,
+      "i": 1300
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 8913.0,
+      "i": 1301
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 8923.66,
+      "i": 1302
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "sword",
+      "t": 8950.63,
+      "i": 1303
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "bow",
+      "t": 8968.81,
+      "i": 1304
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 9005.78,
+      "i": 1305
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 9008.49,
+      "i": 1306
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 9011.29,
+      "i": 1307
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 9014.34,
+      "i": 1308
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 9021.05,
+      "i": 1309
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 9025.96,
+      "i": 1310
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 9029.96,
+      "i": 1311
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 9033.47,
+      "i": 1312
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9037.39,
+      "i": 1313
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9038.49,
+      "i": 1314
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9039.6,
+      "i": 1315
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 9040.7,
+      "i": 1316
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9041.8,
+      "i": 1317
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 9042.9,
+      "i": 1318
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 9044.0,
+      "i": 1319
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 9045.1,
+      "i": 1320
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 9046.2,
+      "i": 1321
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 9047.3,
+      "i": 1322
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 9048.4,
+      "i": 1323
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9049.5,
+      "i": 1324
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 9050.6,
+      "i": 1325
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9051.69,
+      "i": 1326
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9052.8,
+      "i": 1327
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9053.9,
+      "i": 1328
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9055.0,
+      "i": 1329
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9056.09,
+      "i": 1330
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9057.19,
+      "i": 1331
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9059.19,
+      "i": 1332
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 9060.28,
+      "i": 1333
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 9062.34,
+      "i": 1334
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 9063.44,
+      "i": 1335
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 9127.68,
+      "i": 1336
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 9129.79,
+      "i": 1337
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 9132.92,
+      "i": 1338
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 9139.41,
+      "i": 1339
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 9143.62,
+      "i": 1340
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 9147.28,
+      "i": 1341
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 9152.03,
+      "i": 1342
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "sword",
+      "t": 9179.36,
+      "i": 1343
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 9201.96,
+      "i": 1344
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "sword",
+      "t": 9224.91,
+      "i": 1345
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 9242.71,
+      "i": 1346
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 9244.48,
+      "i": 1347
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 9246.2,
+      "i": 1348
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 9262.72,
+      "i": 1349
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 9278.34,
+      "i": 1350
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9326.61,
+      "i": 1351
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9327.71,
+      "i": 1352
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9328.81,
+      "i": 1353
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9329.91,
+      "i": 1354
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9331.01,
+      "i": 1355
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9332.11,
+      "i": 1356
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 9333.21,
+      "i": 1357
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9334.3,
+      "i": 1358
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 9335.41,
+      "i": 1359
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9337.46,
+      "i": 1360
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9339.51,
+      "i": 1361
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9344.88,
+      "i": 1362
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9345.98,
+      "i": 1363
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9348.03,
+      "i": 1364
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9352.98,
+      "i": 1365
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 9355.03,
+      "i": 1366
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9356.13,
+      "i": 1367
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 9358.18,
+      "i": 1368
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9359.28,
+      "i": 1369
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 9360.38,
+      "i": 1370
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9361.49,
+      "i": 1371
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9362.59,
+      "i": 1372
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9363.69,
+      "i": 1373
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 9364.79,
+      "i": 1374
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 9365.89,
+      "i": 1375
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9368.17,
+      "i": 1376
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9369.27,
+      "i": 1377
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9370.37,
+      "i": 1378
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 9371.47,
+      "i": 1379
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9372.57,
+      "i": 1380
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9373.67,
+      "i": 1381
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9374.77,
+      "i": 1382
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9375.87,
+      "i": 1383
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9376.97,
+      "i": 1384
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 9378.07,
+      "i": 1385
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9379.18,
+      "i": 1386
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9380.28,
+      "i": 1387
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9381.38,
+      "i": 1388
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9383.67,
+      "i": 1389
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9384.76,
+      "i": 1390
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9385.86,
+      "i": 1391
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 9387.93,
+      "i": 1392
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9389.02,
+      "i": 1393
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9390.12,
+      "i": 1394
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9391.23,
+      "i": 1395
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 9392.32,
+      "i": 1396
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 9393.42,
+      "i": 1397
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9394.52,
+      "i": 1398
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 9395.62,
+      "i": 1399
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9396.72,
+      "i": 1400
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9397.82,
+      "i": 1401
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9398.92,
+      "i": 1402
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 9400.02,
+      "i": 1403
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9406.16,
+      "i": 1404
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 9407.26,
+      "i": 1405
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9408.36,
+      "i": 1406
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9409.46,
+      "i": 1407
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 9410.56,
+      "i": 1408
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 9411.66,
+      "i": 1409
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 9412.77,
+      "i": 1410
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9413.87,
+      "i": 1411
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9414.97,
+      "i": 1412
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9417.24,
+      "i": 1413
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9418.34,
+      "i": 1414
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 9419.44,
+      "i": 1415
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9420.54,
+      "i": 1416
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 9421.64,
+      "i": 1417
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9422.74,
+      "i": 1418
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 9423.85,
+      "i": 1419
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 9424.95,
+      "i": 1420
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9426.05,
+      "i": 1421
+    },
+    {
+      "action": "place",
+      "target": "oak_door",
+      "t": 9428.11,
+      "i": 1422
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9431.36,
+      "i": 1423
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9432.46,
+      "i": 1424
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9433.56,
+      "i": 1425
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9434.66,
+      "i": 1426
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9435.76,
+      "i": 1427
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9436.86,
+      "i": 1428
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9437.96,
+      "i": 1429
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9439.06,
+      "i": 1430
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9440.16,
+      "i": 1431
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9441.26,
+      "i": 1432
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9442.37,
+      "i": 1433
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9463.16,
+      "i": 1434
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9464.26,
+      "i": 1435
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9465.36,
+      "i": 1436
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9466.47,
+      "i": 1437
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9467.57,
+      "i": 1438
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9468.67,
+      "i": 1439
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9469.77,
+      "i": 1440
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9470.87,
+      "i": 1441
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9471.97,
+      "i": 1442
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9474.26,
+      "i": 1443
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9475.36,
+      "i": 1444
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9476.46,
+      "i": 1445
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9477.0,
+      "i": 1446
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9478.1,
+      "i": 1447
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9481.12,
+      "i": 1448
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9482.23,
+      "i": 1449
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9483.33,
+      "i": 1450
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9484.43,
+      "i": 1451
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9485.53,
+      "i": 1452
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9487.6,
+      "i": 1453
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9493.51,
+      "i": 1454
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9494.6,
+      "i": 1455
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9495.7,
+      "i": 1456
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9498.73,
+      "i": 1457
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9499.83,
+      "i": 1458
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9500.93,
+      "i": 1459
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9502.03,
+      "i": 1460
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9503.13,
+      "i": 1461
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9504.23,
+      "i": 1462
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9506.28,
+      "i": 1463
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9508.57,
+      "i": 1464
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9510.57,
+      "i": 1465
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9512.62,
+      "i": 1466
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9514.62,
+      "i": 1467
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9516.67,
+      "i": 1468
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9518.67,
+      "i": 1469
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9520.72,
+      "i": 1470
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9522.71,
+      "i": 1471
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9525.94,
+      "i": 1472
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9527.05,
+      "i": 1473
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9556.99,
+      "i": 1474
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9558.09,
+      "i": 1475
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9559.19,
+      "i": 1476
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9560.28,
+      "i": 1477
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 9561.38,
+      "i": 1478
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 9562.48,
+      "i": 1479
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 9563.58,
+      "i": 1480
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 9565.62,
+      "i": 1481
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 9566.72,
+      "i": 1482
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 9567.81,
+      "i": 1483
+    },
+    {
+      "action": "place",
+      "target": "spruce_stairs",
+      "t": 9569.77,
+      "i": 1484
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9570.77,
+      "i": 1485
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 9571.75,
+      "i": 1486
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 9677.88,
+      "i": 1487
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 9680.04,
+      "i": 1488
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 9683.49,
+      "i": 1489
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 9696.41,
+      "i": 1490
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 9699.27,
+      "i": 1491
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 9702.97,
+      "i": 1492
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 9707.43,
+      "i": 1493
+    },
+    {
+      "action": "kill",
+      "target": "turtle",
+      "tool": "sword",
+      "t": 9767.14,
+      "i": 1494
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 9826.72,
+      "i": 1495
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 9830.63,
+      "i": 1496
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 9835.44,
+      "i": 1497
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 9840.19,
+      "i": 1498
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "sword",
+      "t": 9937.18,
+      "i": 1499
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "bow",
+      "t": 9956.81,
+      "i": 1500
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 9970.05,
+      "i": 1501
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 9975.21,
+      "i": 1502
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 9978.67,
+      "i": 1503
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 9981.82,
+      "i": 1504
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 10041.03,
+      "i": 1505
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 10090.28,
+      "i": 1506
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 10144.02,
+      "i": 1507
+    },
+    {
+      "action": "kill",
+      "target": "panda",
+      "tool": "sword",
+      "t": 10206.43,
+      "i": 1508
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "bow",
+      "t": 10226.06,
+      "i": 1509
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 10239.77,
+      "i": 1510
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 10243.68,
+      "i": 1511
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 10247.58,
+      "i": 1512
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 10253.45,
+      "i": 1513
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 10256.66,
+      "i": 1514
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 10259.66,
+      "i": 1515
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10263.34,
+      "i": 1516
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10264.44,
+      "i": 1517
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10265.53,
+      "i": 1518
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10266.64,
+      "i": 1519
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10268.69,
+      "i": 1520
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10269.79,
+      "i": 1521
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10270.89,
+      "i": 1522
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10271.98,
+      "i": 1523
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 10273.08,
+      "i": 1524
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 10274.18,
+      "i": 1525
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 10275.28,
+      "i": 1526
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 10329.02,
+      "i": 1527
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "sword",
+      "t": 10353.17,
+      "i": 1528
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 10405.44,
+      "i": 1529
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 10408.5,
+      "i": 1530
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 10412.4,
+      "i": 1531
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "bow",
+      "t": 10455.64,
+      "i": 1532
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 10491.22,
+      "i": 1533
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 10495.62,
+      "i": 1534
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 10500.48,
+      "i": 1535
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 10505.05,
+      "i": 1536
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 10509.0,
+      "i": 1537
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 10513.41,
+      "i": 1538
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 10518.17,
+      "i": 1539
+    },
+    {
+      "action": "mine",
+      "target": "terracotta",
+      "t": 10530.59,
+      "i": 1540
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10534.58,
+      "i": 1541
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10535.68,
+      "i": 1542
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10536.79,
+      "i": 1543
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 10537.89,
+      "i": 1544
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10538.99,
+      "i": 1545
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 10540.09,
+      "i": 1546
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 10541.19,
+      "i": 1547
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 10542.29,
+      "i": 1548
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 10543.39,
+      "i": 1549
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 10544.49,
+      "i": 1550
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 10545.59,
+      "i": 1551
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10546.69,
+      "i": 1552
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 10547.8,
+      "i": 1553
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10548.9,
+      "i": 1554
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10550.0,
+      "i": 1555
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10551.1,
+      "i": 1556
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10552.21,
+      "i": 1557
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10553.31,
+      "i": 1558
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10554.41,
+      "i": 1559
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10556.41,
+      "i": 1560
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 10557.5,
+      "i": 1561
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 10559.56,
+      "i": 1562
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 10560.66,
+      "i": 1563
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 10640.9,
+      "i": 1564
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 10643.6,
+      "i": 1565
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 10647.06,
+      "i": 1566
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 10664.07,
+      "i": 1567
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10689.5,
+      "i": 1568
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10690.6,
+      "i": 1569
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10691.69,
+      "i": 1570
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10692.8,
+      "i": 1571
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10697.75,
+      "i": 1572
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10700.77,
+      "i": 1573
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 10702.83,
+      "i": 1574
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10703.94,
+      "i": 1575
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 10705.04,
+      "i": 1576
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10706.14,
+      "i": 1577
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10707.24,
+      "i": 1578
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10708.35,
+      "i": 1579
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10709.45,
+      "i": 1580
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10710.55,
+      "i": 1581
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10711.65,
+      "i": 1582
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 10712.75,
+      "i": 1583
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10713.85,
+      "i": 1584
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 10714.95,
+      "i": 1585
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10716.06,
+      "i": 1586
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 10717.16,
+      "i": 1587
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10718.26,
+      "i": 1588
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10719.36,
+      "i": 1589
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10720.47,
+      "i": 1590
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 10721.57,
+      "i": 1591
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 10722.67,
+      "i": 1592
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10724.95,
+      "i": 1593
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10726.06,
+      "i": 1594
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10727.15,
+      "i": 1595
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10728.25,
+      "i": 1596
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10729.36,
+      "i": 1597
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 10730.46,
+      "i": 1598
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10731.56,
+      "i": 1599
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10732.66,
+      "i": 1600
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 10733.77,
+      "i": 1601
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10734.86,
+      "i": 1602
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10735.97,
+      "i": 1603
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10737.07,
+      "i": 1604
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10738.17,
+      "i": 1605
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10740.46,
+      "i": 1606
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10741.56,
+      "i": 1607
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10742.66,
+      "i": 1608
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10743.76,
+      "i": 1609
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10744.86,
+      "i": 1610
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 10745.96,
+      "i": 1611
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10747.06,
+      "i": 1612
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 10748.16,
+      "i": 1613
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10749.26,
+      "i": 1614
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 10750.36,
+      "i": 1615
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10751.46,
+      "i": 1616
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10752.56,
+      "i": 1617
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10753.66,
+      "i": 1618
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10754.77,
+      "i": 1619
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 10755.87,
+      "i": 1620
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 10758.15,
+      "i": 1621
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10759.25,
+      "i": 1622
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10760.35,
+      "i": 1623
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10761.45,
+      "i": 1624
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 10762.55,
+      "i": 1625
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10763.65,
+      "i": 1626
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10764.75,
+      "i": 1627
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10765.85,
+      "i": 1628
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 10766.96,
+      "i": 1629
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10769.24,
+      "i": 1630
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 10770.34,
+      "i": 1631
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10771.44,
+      "i": 1632
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 10772.55,
+      "i": 1633
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 10773.64,
+      "i": 1634
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10774.74,
+      "i": 1635
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10775.84,
+      "i": 1636
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 10776.94,
+      "i": 1637
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 10778.04,
+      "i": 1638
+    },
+    {
+      "action": "place",
+      "target": "oak_door",
+      "t": 10780.11,
+      "i": 1639
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10782.4,
+      "i": 1640
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10783.5,
+      "i": 1641
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10784.6,
+      "i": 1642
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10785.69,
+      "i": 1643
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10786.79,
+      "i": 1644
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10787.9,
+      "i": 1645
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10789.0,
+      "i": 1646
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10790.09,
+      "i": 1647
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10792.09,
+      "i": 1648
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10793.19,
+      "i": 1649
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10795.19,
+      "i": 1650
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10796.29,
+      "i": 1651
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10797.4,
+      "i": 1652
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10798.5,
+      "i": 1653
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10799.6,
+      "i": 1654
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10800.7,
+      "i": 1655
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10801.8,
+      "i": 1656
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10802.91,
+      "i": 1657
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10804.01,
+      "i": 1658
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10805.11,
+      "i": 1659
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10806.21,
+      "i": 1660
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10808.49,
+      "i": 1661
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10809.59,
+      "i": 1662
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10810.69,
+      "i": 1663
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10811.8,
+      "i": 1664
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10812.9,
+      "i": 1665
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10814.0,
+      "i": 1666
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10815.1,
+      "i": 1667
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10816.2,
+      "i": 1668
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10837.25,
+      "i": 1669
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10838.35,
+      "i": 1670
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10844.26,
+      "i": 1671
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10845.36,
+      "i": 1672
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10846.46,
+      "i": 1673
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10849.48,
+      "i": 1674
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10850.58,
+      "i": 1675
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10851.68,
+      "i": 1676
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10852.78,
+      "i": 1677
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10853.89,
+      "i": 1678
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10854.99,
+      "i": 1679
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10857.05,
+      "i": 1680
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10859.33,
+      "i": 1681
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10861.33,
+      "i": 1682
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10863.38,
+      "i": 1683
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10865.45,
+      "i": 1684
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10867.5,
+      "i": 1685
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10869.5,
+      "i": 1686
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10871.56,
+      "i": 1687
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10873.61,
+      "i": 1688
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10876.85,
+      "i": 1689
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10877.95,
+      "i": 1690
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10915.33,
+      "i": 1691
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10916.43,
+      "i": 1692
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10917.53,
+      "i": 1693
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10919.59,
+      "i": 1694
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 10922.06,
+      "i": 1695
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 10942.48,
+      "i": 1696
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 10943.58,
+      "i": 1697
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 10944.68,
+      "i": 1698
+    },
+    {
+      "action": "place",
+      "target": "birch_stairs",
+      "t": 10968.06,
+      "i": 1699
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10969.05,
+      "i": 1700
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 10970.03,
+      "i": 1701
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 11017.84,
+      "i": 1702
+    },
+    {
+      "action": "kill",
+      "target": "wolf",
+      "tool": "sword",
+      "t": 11031.98,
+      "i": 1703
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "bow",
+      "t": 11051.6,
+      "i": 1704
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 11055.25,
+      "i": 1705
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 11060.02,
+      "i": 1706
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 11063.56,
+      "i": 1707
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 11076.13,
+      "i": 1708
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 11080.95,
+      "i": 1709
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 11085.71,
+      "i": 1710
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 11090.56,
+      "i": 1711
+    },
+    {
+      "action": "kill",
+      "target": "turtle",
+      "tool": "sword",
+      "t": 11156.63,
+      "i": 1712
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 11191.21,
+      "i": 1713
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 11213.45,
+      "i": 1714
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 11227.16,
+      "i": 1715
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 11231.71,
+      "i": 1716
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 11235.67,
+      "i": 1717
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 11240.43,
+      "i": 1718
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "bow",
+      "t": 11348.6,
+      "i": 1719
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 11362.27,
+      "i": 1720
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 11367.03,
+      "i": 1721
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 11371.79,
+      "i": 1722
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 11378.6,
+      "i": 1723
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 11438.71,
+      "i": 1724
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 11462.48,
+      "i": 1725
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 11488.07,
+      "i": 1726
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 11546.45,
+      "i": 1727
+    },
+    {
+      "action": "kill",
+      "target": "panda",
+      "tool": "sword",
+      "t": 11609.37,
+      "i": 1728
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "bow",
+      "t": 11629.97,
+      "i": 1729
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 11642.77,
+      "i": 1730
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 11646.67,
+      "i": 1731
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 11649.93,
+      "i": 1732
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 11693.4,
+      "i": 1733
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 11694.51,
+      "i": 1734
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 11696.57,
+      "i": 1735
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 11697.67,
+      "i": 1736
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 11698.77,
+      "i": 1737
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 11699.87,
+      "i": 1738
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 11700.97,
+      "i": 1739
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 11702.07,
+      "i": 1740
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 11704.13,
+      "i": 1741
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 11706.19,
+      "i": 1742
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 11707.29,
+      "i": 1743
+    },
+    {
+      "action": "kill",
+      "target": "polar_bear",
+      "tool": "bow",
+      "t": 11734.95,
+      "i": 1744
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 11741.72,
+      "i": 1745
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 11808.79,
+      "i": 1746
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 11813.19,
+      "i": 1747
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 11817.15,
+      "i": 1748
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 11898.73,
+      "i": 1749
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 11902.64,
+      "i": 1750
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 11909.15,
+      "i": 1751
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 11913.6,
+      "i": 1752
+    },
+    {
+      "action": "mine",
+      "target": "terracotta",
+      "t": 11917.26,
+      "i": 1753
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 11921.32,
+      "i": 1754
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 11924.12,
+      "i": 1755
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 11928.38,
+      "i": 1756
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 11932.21,
+      "i": 1757
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 11957.09,
+      "i": 1758
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 11958.19,
+      "i": 1759
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 11968.75,
+      "i": 1760
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 11969.87,
+      "i": 1761
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 11970.97,
+      "i": 1762
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 11981.54,
+      "i": 1763
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 11982.65,
+      "i": 1764
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 11983.75,
+      "i": 1765
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 11994.32,
+      "i": 1766
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 11995.44,
+      "i": 1767
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 11996.54,
+      "i": 1768
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 12007.1,
+      "i": 1769
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 12008.22,
+      "i": 1770
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 12009.32,
+      "i": 1771
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 12019.88,
+      "i": 1772
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 12064.3,
+      "i": 1773
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 12065.28,
+      "i": 1774
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 12066.28,
+      "i": 1775
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 12068.24,
+      "i": 1776
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 12069.23,
+      "i": 1777
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 12172.83,
+      "i": 1778
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 12180.66,
+      "i": 1779
+    },
+    {
+      "action": "mine",
+      "target": "oak_leaves",
+      "t": 12191.06,
+      "i": 1780
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "sword",
+      "t": 12219.84,
+      "i": 1781
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 12247.11,
+      "i": 1782
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "sword",
+      "t": 12258.13,
+      "i": 1783
+    },
+    {
+      "action": "mine",
+      "target": "oak_log",
+      "t": 12277.53,
+      "i": 1784
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 12361.45,
+      "i": 1785
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 12403.39,
+      "i": 1786
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 12404.49,
+      "i": 1787
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 12417.15,
+      "i": 1788
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 12440.1,
+      "i": 1789
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 12449.87,
+      "i": 1790
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 12450.97,
+      "i": 1791
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 12453.04,
+      "i": 1792
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 12457.99,
+      "i": 1793
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 12472.81,
+      "i": 1794
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 12473.91,
+      "i": 1795
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 12476.93,
+      "i": 1796
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 12478.03,
+      "i": 1797
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 12479.13,
+      "i": 1798
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 12481.2,
+      "i": 1799
+    },
+    {
+      "action": "place",
+      "target": "stone",
+      "t": 12482.3,
+      "i": 1800
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 12484.36,
+      "i": 1801
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 12526.28,
+      "i": 1802
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 12527.38,
+      "i": 1803
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12529.67,
+      "i": 1804
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12530.77,
+      "i": 1805
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12531.88,
+      "i": 1806
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 12532.98,
+      "i": 1807
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12534.08,
+      "i": 1808
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 12535.18,
+      "i": 1809
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12536.28,
+      "i": 1810
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12537.39,
+      "i": 1811
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 12538.49,
+      "i": 1812
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 12539.59,
+      "i": 1813
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12540.69,
+      "i": 1814
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12541.79,
+      "i": 1815
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12542.89,
+      "i": 1816
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12546.14,
+      "i": 1817
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12547.24,
+      "i": 1818
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12548.34,
+      "i": 1819
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 12549.44,
+      "i": 1820
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12550.54,
+      "i": 1821
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 12551.64,
+      "i": 1822
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12556.6,
+      "i": 1823
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 12557.7,
+      "i": 1824
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 12558.8,
+      "i": 1825
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 12559.9,
+      "i": 1826
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 12561.0,
+      "i": 1827
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12562.1,
+      "i": 1828
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12564.17,
+      "i": 1829
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12565.28,
+      "i": 1830
+    },
+    {
+      "action": "place",
+      "target": "oak_log",
+      "t": 12566.38,
+      "i": 1831
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 12568.67,
+      "i": 1832
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 12569.76,
+      "i": 1833
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12570.86,
+      "i": 1834
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12571.97,
+      "i": 1835
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 12573.07,
+      "i": 1836
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 12574.17,
+      "i": 1837
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 12575.27,
+      "i": 1838
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12576.38,
+      "i": 1839
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 12577.47,
+      "i": 1840
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12580.71,
+      "i": 1841
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 12581.81,
+      "i": 1842
+    },
+    {
+      "action": "place",
+      "target": "birch_planks",
+      "t": 12582.91,
+      "i": 1843
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 12614.54,
+      "i": 1844
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12615.64,
+      "i": 1845
+    },
+    {
+      "action": "place",
+      "target": "oak_planks",
+      "t": 12647.25,
+      "i": 1846
+    },
+    {
+      "action": "place",
+      "target": "spruce_planks",
+      "t": 12648.35,
+      "i": 1847
+    },
+    {
+      "action": "place",
+      "target": "oak_door",
+      "t": 12650.41,
+      "i": 1848
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12652.7,
+      "i": 1849
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12654.78,
+      "i": 1850
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12656.84,
+      "i": 1851
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12658.91,
+      "i": 1852
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12660.01,
+      "i": 1853
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12673.62,
+      "i": 1854
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12674.73,
+      "i": 1855
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12675.83,
+      "i": 1856
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12677.89,
+      "i": 1857
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12678.99,
+      "i": 1858
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12680.09,
+      "i": 1859
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12681.19,
+      "i": 1860
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12682.3,
+      "i": 1861
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12683.4,
+      "i": 1862
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12685.47,
+      "i": 1863
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12686.57,
+      "i": 1864
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12687.67,
+      "i": 1865
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12688.77,
+      "i": 1866
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12689.87,
+      "i": 1867
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12690.97,
+      "i": 1868
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12692.08,
+      "i": 1869
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12695.29,
+      "i": 1870
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12696.39,
+      "i": 1871
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12697.49,
+      "i": 1872
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12698.59,
+      "i": 1873
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12699.7,
+      "i": 1874
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12700.8,
+      "i": 1875
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12701.9,
+      "i": 1876
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12703.0,
+      "i": 1877
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12704.1,
+      "i": 1878
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12705.2,
+      "i": 1879
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12706.3,
+      "i": 1880
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12707.4,
+      "i": 1881
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12708.5,
+      "i": 1882
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12710.57,
+      "i": 1883
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12711.68,
+      "i": 1884
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12712.78,
+      "i": 1885
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12713.88,
+      "i": 1886
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12714.99,
+      "i": 1887
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12716.09,
+      "i": 1888
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12717.2,
+      "i": 1889
+    },
+    {
+      "action": "place",
+      "target": "jungle_stairs",
+      "t": 12718.3,
+      "i": 1890
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12720.58,
+      "i": 1891
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12722.58,
+      "i": 1892
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12724.63,
+      "i": 1893
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12726.63,
+      "i": 1894
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12728.69,
+      "i": 1895
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12730.68,
+      "i": 1896
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12732.74,
+      "i": 1897
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12734.73,
+      "i": 1898
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12737.97,
+      "i": 1899
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12772.47,
+      "i": 1900
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12773.58,
+      "i": 1901
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12775.64,
+      "i": 1902
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12780.58,
+      "i": 1903
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 12781.69,
+      "i": 1904
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 12783.74,
+      "i": 1905
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 12784.84,
+      "i": 1906
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 12805.24,
+      "i": 1907
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 12806.34,
+      "i": 1908
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 12807.44,
+      "i": 1909
+    },
+    {
+      "action": "place",
+      "target": "jungle_planks",
+      "t": 13015.57,
+      "i": 1910
+    },
+    {
+      "action": "kill",
+      "target": "wolf",
+      "tool": "sword",
+      "t": 13086.46,
+      "i": 1911
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "bow",
+      "t": 13092.76,
+      "i": 1912
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 13096.26,
+      "i": 1913
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 13100.16,
+      "i": 1914
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 13105.97,
+      "i": 1915
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 13120.92,
+      "i": 1916
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 13124.18,
+      "i": 1917
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 13128.95,
+      "i": 1918
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 13133.7,
+      "i": 1919
+    },
+    {
+      "action": "kill",
+      "target": "turtle",
+      "tool": "sword",
+      "t": 13197.5,
+      "i": 1920
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 13232.07,
+      "i": 1921
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 13254.43,
+      "i": 1922
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 13268.15,
+      "i": 1923
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 13276.72,
+      "i": 1924
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 13279.88,
+      "i": 1925
+    },
+    {
+      "action": "mine",
+      "target": "sand",
+      "t": 13283.58,
+      "i": 1926
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 13416.66,
+      "i": 1927
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 13421.43,
+      "i": 1928
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 13426.18,
+      "i": 1929
+    },
+    {
+      "action": "mine",
+      "target": "snow",
+      "t": 13432.99,
+      "i": 1930
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "bow",
+      "t": 13491.68,
+      "i": 1931
+    },
+    {
+      "action": "kill",
+      "target": "pig",
+      "tool": "sword",
+      "t": 13518.31,
+      "i": 1932
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 13542.13,
+      "i": 1933
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "bow",
+      "t": 13649.28,
+      "i": 1934
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 13662.09,
+      "i": 1935
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 13665.99,
+      "i": 1936
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 13669.9,
+      "i": 1937
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 13713.41,
+      "i": 1938
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 13714.52,
+      "i": 1939
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 13716.57,
+      "i": 1940
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 13717.67,
+      "i": 1941
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 13718.77,
+      "i": 1942
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 13719.88,
+      "i": 1943
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 13720.98,
+      "i": 1944
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 13722.08,
+      "i": 1945
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 13724.14,
+      "i": 1946
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 13726.19,
+      "i": 1947
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 13727.29,
+      "i": 1948
+    },
+    {
+      "action": "kill",
+      "target": "polar_bear",
+      "tool": "bow",
+      "t": 13753.99,
+      "i": 1949
+    },
+    {
+      "action": "kill",
+      "target": "chicken",
+      "tool": "sword",
+      "t": 13801.41,
+      "i": 1950
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 13854.53,
+      "i": 1951
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 13858.58,
+      "i": 1952
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 13864.04,
+      "i": 1953
+    },
+    {
+      "action": "kill",
+      "target": "cow",
+      "tool": "sword",
+      "t": 13871.39,
+      "i": 1954
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "bow",
+      "t": 13890.53,
+      "i": 1955
+    },
+    {
+      "action": "kill",
+      "target": "mooshroom",
+      "tool": "sword",
+      "t": 13916.01,
+      "i": 1956
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 13927.8,
+      "i": 1957
+    },
+    {
+      "action": "mine",
+      "target": "red_sand",
+      "t": 13936.52,
+      "i": 1958
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 13978.85,
+      "i": 1959
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 13980.95,
+      "i": 1960
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 13989.07,
+      "i": 1961
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 13991.12,
+      "i": 1962
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 13994.97,
+      "i": 1963
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 14065.3,
+      "i": 1964
+    },
+    {
+      "action": "place",
+      "target": "diorite",
+      "t": 14066.41,
+      "i": 1965
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 14067.51,
+      "i": 1966
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 14078.08,
+      "i": 1967
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 14079.19,
+      "i": 1968
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 14080.3,
+      "i": 1969
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 14090.87,
+      "i": 1970
+    },
+    {
+      "action": "place",
+      "target": "cobblestone",
+      "t": 14091.98,
+      "i": 1971
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 14093.09,
+      "i": 1972
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 14103.66,
+      "i": 1973
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 14104.77,
+      "i": 1974
+    },
+    {
+      "action": "place",
+      "target": "stone_bricks",
+      "t": 14105.88,
+      "i": 1975
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 14116.42,
+      "i": 1976
+    },
+    {
+      "action": "place",
+      "target": "oak_fence",
+      "t": 14117.53,
+      "i": 1977
+    },
+    {
+      "action": "place",
+      "target": "andesite",
+      "t": 14193.53,
+      "i": 1978
+    },
+    {
+      "action": "place",
+      "target": "glass",
+      "t": 14194.53,
+      "i": 1979
+    },
+    {
+      "action": "place",
+      "target": "granite",
+      "t": 14195.52,
+      "i": 1980
+    },
+    {
+      "action": "kill",
+      "target": "sheep",
+      "tool": "bow",
+      "t": 14275.1,
+      "i": 1981
+    },
+    {
+      "action": "mine",
+      "target": "stone",
+      "t": 14279.13,
+      "i": 1982
+    },
+    {
+      "action": "mine",
+      "target": "grass_block",
+      "t": 14280.74,
+      "i": 1983
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 14281.83,
+      "i": 1984
+    },
+    {
+      "action": "mine",
+      "target": "coal_ore",
+      "t": 14283.2,
+      "i": 1985
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 14284.41,
+      "i": 1986
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 14285.63,
+      "i": 1987
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 14286.73,
+      "i": 1988
+    },
+    {
+      "action": "mine",
+      "target": "iron_ore",
+      "t": 14293.1,
+      "i": 1989
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 14294.31,
+      "i": 1990
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 14295.52,
+      "i": 1991
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 14296.63,
+      "i": 1992
+    },
+    {
+      "action": "mine",
+      "target": "orange_terracotta",
+      "t": 14303.0,
+      "i": 1993
+    },
+    {
+      "action": "place",
+      "target": "torch",
+      "t": 14304.1,
+      "i": 1994
+    }
+  ]
+}
+JSON

@@ -1,0 +1,33 @@
+{
+  "command_template": [
+    "agy",
+    "-p",
+    "__PROMPT__",
+    "--model",
+    "gemini-3.5-flash-high",
+    "--effort",
+    "high",
+    "--mode",
+    "accept-edits",
+    "--sandbox",
+    "--dangerously-skip-permissions",
+    "--new-project",
+    "--print-timeout",
+    "85m",
+    "--log-file",
+    "/private/tmp/avb-pac12-antigravity-seven-field-20260827T200119Z/native-trajectory.txt"
+  ],
+  "continued_or_resumed": false,
+  "cwd": "/private/tmp/avb-pac12-antigravity-seven-field-20260827T200119Z",
+  "deadline_seconds": 5400,
+  "elapsed_seconds": 1286.372,
+  "finished_at_utc": "2026-08-27T20:23:06.711061+00:00",
+  "process_returncode": 0,
+  "prompt_sha256": "f3352551912cf61a25f7c13b15fc7293ccf66320e1edab74c64e98e0b0c5ee1d",
+  "schema_version": 1,
+  "started_at_utc": "2026-08-27T20:01:40.339358+00:00",
+  "stderr_artifact": "antigravity-stderr.txt",
+  "stdout_artifact": "antigravity-console.txt",
+  "timed_out": false,
+  "wrapper_exit_code": 0
+}

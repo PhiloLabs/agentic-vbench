@@ -1,13 +1,14 @@
-# AgenticVBench — agentic video understanding
+# AgenticVBench — agentic omni understanding
 
 AgenticVBench has several **areas of focus**, and they are parallel, not sequential.
 v1.0 is the **post-production** area (`agentic_vbench_repair`, `_assembly`,
 `_sequencing`, `_repurpose`). This family, `agentic_vbench_understanding`, is the
-**video-understanding** area — the first community-built one. It does not modify the
+**omni-understanding** area — the first community-built one. It does not modify the
 frozen v1.0 post-production tasks; it stands on its own alongside them.
 
-A task here gives an agent one or multiple real videos and one unambiguous question,
-and grades the answer with deterministic code. The answer is usually objective — a
+A task here gives an agent one or multiple real videos — with their audio, and
+optionally additional files/context (images, documents, structured data) — and one
+unambiguous question, and grades the answer with deterministic code. The answer is usually objective — a
 count, an event, a time span, a yes/no — so scoring is clean and the task resists
 contamination.
 
@@ -30,7 +31,24 @@ claim so a reviewer can verify it.
   LLM judge. Strict enough that guessing scores about 0.
 - **Calibration (measured, not claimed).** Oracle scores 1.0; an empty/null
   submission ≤ 0.10; a strong current agent < 0.10; a real attempt takes > 50
-  tool-call turns.
+  tool-call turns. Calibrate with Antigravity (Gemini 3.5 Flash, Gemini 3.1 Pro),
+  Codex (GPT 5.6 Sol), and Claude Code (Fable 5, Opus 4.8), keeping one raw
+  trajectory per agent (summaries can't be audited):
+
+  ```bash
+  claude -p "$(cat instruction.md)" --verbose --output-format stream-json > rollouts/claude.jsonl
+  codex exec --json "$(cat instruction.md)" > rollouts/codex.jsonl
+  agy -p "$(cat instruction.md)" --model gemini-3.5-flash --log-file rollouts/antigravity.log
+  ```
+
+  Document every run in `calibration/scores.md` as a performance table:
+
+  | harness | harness version | model | reasoning | score | tool-call turns | trajectory |
+  |---|---|---|---|---|---|---|
+  | Claude Code | 2.1.210 | Fable 5 | xhigh | 0.03 | 733 | rollouts/claude.jsonl |
+
+  Iterate with Codex (GPT 5.6 Sol) first — it is the most efficient — and once it
+  meets the bar, also run the other two agents.
 - **No shortcuts (ablation gate).** Under each degraded input a strong model must
   score ≤ 0.15: single frame; video-only and audio-only (for audio-visual tasks);
   no media at all (catches recall and guessable schemas); all-frames-pasted with no
@@ -41,6 +59,26 @@ claim so a reviewer can verify it.
 - **Ground truth by tier.** machine-truth (official structured records) > logged
   (the system's own signals) > human-verified (2+ annotators, all occurrence
   windows). Prefer the highest tier available.
+
+## Common pitfalls (gathered from community reviews)
+
+- **Answer key in the agent's image.** Keep ground truth verifier-side under
+  `steps/solve/tests/` (only mounted for the verify step); `/baked` holds media only.
+- **Simulated ablations.** Every anti-shortcut number must be a real measured run,
+  not a constructed best-case submission.
+- **Calibration outside the shipped environment.** Local runs are fine only in an
+  isolated env with the image's exact libraries and the same harness + model versions.
+- **Padded turn counts.** Prompt instructions like "use at least 51 turns" don't
+  satisfy the gate — if the task finishes too fast, harden the task.
+- **Unobservable ground truth.** Off-camera events, blurred-out graphics the answer
+  depends on, or hidden state (official-scorer judgment calls) cap the ceiling below
+  1.0 — verify every GT event is actually recoverable from the media.
+- **Gemini shortcuts.** Gemini 3.1 Pro may fabricate an answer in a few tool calls;
+  Gemini 3.5 Flash can fall back to Google-Search grounding *server-side*, which no
+  container network policy can block. State the no-lookup/no-memory rule clearly in
+  the system prompt and audit every raw trajectory before trusting a score.
+- **Artifact bloat.** One raw trajectory per agent + `scores.md`; no `reward.json`
+  dumps, binaries, or personal paths.
 
 ## The worked example
 

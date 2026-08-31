@@ -4,4 +4,4 @@ The piece should open with something that makes a stranger lean in. Not a title,
 
 Bring in a fresh narrator: a voice that can carry warmth in the first half and cool restraint by the close, reading from a script you write yourself. Let one narrator carry the whole piece; the film's intimacy collapses if the voice shifts on us. Music is welcome where it helps, but never in a way that flattens what the faces are doing. End on a brief title card, a second or two, not a multi-second pad, that lets the viewer know the film is called *Pick Up* and is on Omeleto.
 
-Deliver at 1280×720, 24 fps, H.264 MP4 with AAC audio, exactly sixty seconds.
+Deliver at 1920×1080, 24 fps, H.264 MP4 with AAC audio, exactly sixty seconds.

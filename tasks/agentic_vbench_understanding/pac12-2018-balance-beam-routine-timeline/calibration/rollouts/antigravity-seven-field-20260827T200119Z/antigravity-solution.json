@@ -1,0 +1,31 @@
+{
+  "beam_routines": [
+    {
+      "start_time": "00:50:58.600",
+      "end_time": "00:52:00.200",
+      "dismount_takeoff_time": "00:51:58.900",
+      "school": "Arizona State",
+      "gymnast_name": "Justine Callis",
+      "beam_score": "9.800",
+      "score_time": "01:05:55.100"
+    },
+    {
+      "start_time": "01:36:34.900",
+      "end_time": "01:37:50.100",
+      "dismount_takeoff_time": "01:37:49.900",
+      "school": "Oregon State",
+      "gymnast_name": "Destinee Davis",
+      "beam_score": "9.875",
+      "score_time": "01:41:58.100"
+    },
+    {
+      "start_time": "02:11:04.700",
+      "end_time": "02:12:16.500",
+      "dismount_takeoff_time": "02:12:15.800",
+      "school": "Arizona",
+      "gymnast_name": "Madison Cindric",
+      "beam_score": "9.850",
+      "score_time": "02:15:12.300"
+    }
+  ]
+}

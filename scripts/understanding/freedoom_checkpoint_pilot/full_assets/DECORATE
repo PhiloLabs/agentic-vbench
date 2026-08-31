@@ -1,0 +1,284 @@
+actor AVBlueKey : CustomInventory
+{
+    Inventory.PickupSound ""
+    Inventory.PickupMessage ""
+    +INVENTORY.ALWAYSPICKUP
+    States
+    {
+    Spawn:
+        BKEY A -1
+        Stop
+    Pickup:
+        TNT1 A 0 A_GiveInventory("BlueCard", 1)
+        TNT1 A 0 ACS_NamedExecuteAlways("AVKey", 0, 1)
+        Stop
+    }
+}
+
+actor AVYellowKey : AVBlueKey
+{
+    States
+    {
+    Spawn:
+        YKEY A -1
+        Stop
+    Pickup:
+        TNT1 A 0 A_GiveInventory("YellowCard", 1)
+        TNT1 A 0 ACS_NamedExecuteAlways("AVKey", 0, 2)
+        Stop
+    }
+}
+
+actor AVRedKey : AVBlueKey
+{
+    States
+    {
+    Spawn:
+        RKEY A -1
+        Stop
+    Pickup:
+        TNT1 A 0 A_GiveInventory("RedCard", 1)
+        TNT1 A 0 ACS_NamedExecuteAlways("AVKey", 0, 3)
+        Stop
+    }
+}
+
+actor AVShotgun : CustomInventory
+{
+    Inventory.PickupSound ""
+    Inventory.PickupMessage ""
+    +INVENTORY.ALWAYSPICKUP
+    States
+    {
+    Spawn:
+        SHOT A -1
+        Stop
+    Pickup:
+        TNT1 A 0 A_GiveInventory("Shotgun", 1)
+        TNT1 A 0 A_SelectWeapon("Shotgun")
+        TNT1 A 0 ACS_NamedExecuteAlways("AVWeapon", 0, 2)
+        Stop
+    }
+}
+
+actor AVChaingun : AVShotgun
+{
+    States
+    {
+    Spawn:
+        MGUN A -1
+        Stop
+    Pickup:
+        TNT1 A 0 A_GiveInventory("Chaingun", 1)
+        TNT1 A 0 A_SelectWeapon("Chaingun")
+        TNT1 A 0 ACS_NamedExecuteAlways("AVWeapon", 0, 3)
+        Stop
+    }
+}
+
+actor AVRocketLauncher : AVShotgun
+{
+    States
+    {
+    Spawn:
+        LAUN A -1
+        Stop
+    Pickup:
+        TNT1 A 0 A_GiveInventory("RocketLauncher", 1)
+        TNT1 A 0 A_SelectWeapon("RocketLauncher")
+        TNT1 A 0 ACS_NamedExecuteAlways("AVWeapon", 0, 4)
+        Stop
+    }
+}
+
+actor AVPlasmaRifle : AVShotgun
+{
+    States
+    {
+    Spawn:
+        PLAS A -1
+        Stop
+    Pickup:
+        TNT1 A 0 A_GiveInventory("PlasmaRifle", 1)
+        TNT1 A 0 A_SelectWeapon("PlasmaRifle")
+        TNT1 A 0 ACS_NamedExecuteAlways("AVWeapon", 0, 5)
+        Stop
+    }
+}
+
+actor AVAmberSwitch : SwitchableDecoration
+{
+    Radius 24
+    Height 56
+    +SOLID
+    +USESPECIAL
+    Activation THINGSPEC_Activate
+    States
+    {
+    Spawn:
+        SAMA A -1
+        Stop
+    Active:
+        SAMA B 0 ACS_NamedExecuteAlways("AVSwitch", 0, 1)
+        SAMA B -1
+        Stop
+    }
+}
+
+actor AVCyanSwitch : AVAmberSwitch
+{
+    States
+    {
+    Spawn:
+        SCYA A -1
+        Stop
+    Active:
+        SCYA B 0 ACS_NamedExecuteAlways("AVSwitch", 0, 2)
+        SCYA B -1
+        Stop
+    }
+}
+
+actor AVVioletSwitch : AVAmberSwitch
+{
+    States
+    {
+    Spawn:
+        SVIO A -1
+        Stop
+    Active:
+        SVIO B 0 ACS_NamedExecuteAlways("AVSwitch", 0, 3)
+        SVIO B -1
+        Stop
+    }
+}
+
+actor AVWhiteSwitch : AVAmberSwitch
+{
+    States
+    {
+    Spawn:
+        SWHI A -1
+        Stop
+    Active:
+        SWHI B 0 ACS_NamedExecuteAlways("AVSwitch", 0, 4)
+        SWHI B -1
+        Stop
+    }
+}
+
+actor AVCheckpointAlpha : CustomInventory
+{
+    Inventory.PickupSound ""
+    Inventory.PickupMessage ""
+    +INVENTORY.ALWAYSPICKUP
+    States
+    {
+    Spawn:
+        CPAL A -1
+        Stop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteAlways("AVCheckpoint", 0, 1)
+        Stop
+    }
+}
+
+actor AVCheckpointBeta : AVCheckpointAlpha
+{
+    States
+    {
+    Spawn:
+        CPBE A -1
+        Stop
+    Pickup:
+        TNT1 A 0 ACS_NamedExecuteAlways("AVCheckpoint", 0, 2)
+        Stop
+    }
+}
+
+actor AVBlueDoor : SwitchableDecoration
+{
+    Radius 36
+    Height 72
+    +SOLID
+    +USESPECIAL
+    Activation THINGSPEC_Activate
+    States
+    {
+    Spawn:
+        DBLU A -1
+        Stop
+    Active:
+        TNT1 A 0 A_JumpIf(
+            ACS_NamedExecuteWithResult("AVDoor", 1, 1, 201),
+            "Open"
+        )
+        Goto Spawn
+    Open:
+        DBLU A 3
+        DBLU B 3
+        TNT1 A -1
+        Stop
+    }
+}
+
+actor AVYellowDoor : AVBlueDoor
+{
+    States
+    {
+    Spawn:
+        DYEL A -1
+        Stop
+    Active:
+        TNT1 A 0 A_JumpIf(
+            ACS_NamedExecuteWithResult("AVDoor", 2, 2, 202),
+            "Open"
+        )
+        Goto Spawn
+    Open:
+        DYEL A 3
+        DYEL B 3
+        TNT1 A -1
+        Stop
+    }
+}
+
+actor AVRedDoor : AVBlueDoor
+{
+    States
+    {
+    Spawn:
+        DRED A -1
+        Stop
+    Active:
+        TNT1 A 0 A_JumpIf(
+            ACS_NamedExecuteWithResult("AVDoor", 3, 4, 203),
+            "Open"
+        )
+        Goto Spawn
+    Open:
+        DRED A 3
+        DRED B 3
+        TNT1 A -1
+        Stop
+    }
+}
+
+actor AVEpisodeExit : SwitchableDecoration
+{
+    Radius 28
+    Height 64
+    +SOLID
+    +USESPECIAL
+    Activation THINGSPEC_Activate
+    States
+    {
+    Spawn:
+        EXPT A -1
+        Stop
+    Active:
+        EXPT B 0 ACS_NamedExecuteAlways("AVExit", 0)
+        EXPT B -1
+        Stop
+    }
+}

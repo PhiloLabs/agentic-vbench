@@ -66,6 +66,24 @@ def _score_max(item: dict, passed: bool) -> tuple[int, int]:
     return (w if passed else 0), 0
 
 
+def _violation_framing(item: dict) -> str:
+    if item["weight"] >= 0 or item.get("narrative_essential"):
+        return ""
+    return (
+        "# Violation semantics\n"
+        "This is a negative-weight violation item. Return pass=true if and only if "
+        "the described violation is actually present and should trigger the penalty. "
+        "Return pass=false when the violation is absent. If the evidence is ambiguous, "
+        "return pass=false and decline to fire the penalty.\n\n"
+    )
+
+
+def _require_json_bool(value: object, field: str = "pass") -> bool:
+    if not isinstance(value, bool):
+        raise ValueError(f"{field} must be a JSON boolean")
+    return value
+
+
 def load_rubric_and_context(workspace: Path) -> tuple[dict, str]:
     rubric = json.loads((workspace / "rubric.json").read_text())
     if REPURPOSE_ONLY:
@@ -1097,6 +1115,7 @@ def judge_item_gemini_audio(item: dict, repurpose_path: str) -> dict:
         prompt += f"# Why this item exists\n{why_hint}\n\n"
     if check_hint:
         prompt += f"# How to judge\n{check_hint}\n\n"
+    prompt += _violation_framing(item)
     prompt += (
         "Listen to the full audio track. Return one JSON object — and describe "
         "what you literally hear BEFORE deciding the pass/fail:\n"
@@ -1135,7 +1154,7 @@ def judge_item_gemini_audio(item: dict, repurpose_path: str) -> dict:
             if m:
                 try:
                     j = json.loads(m.group(0))
-                    passed = bool(j.get("pass", False))
+                    passed = _require_json_bool(j.get("pass"))
                     sc, mx = _score_max(item, passed)
                     return {
                         "pass": passed,
@@ -1146,7 +1165,7 @@ def judge_item_gemini_audio(item: dict, repurpose_path: str) -> dict:
                         "judge_used": "gemini-audio",
                         "raw": text,
                     }
-                except json.JSONDecodeError:
+                except (json.JSONDecodeError, ValueError):
                     pass
             # Tolerant parse: look for truncated response `"pass": true/false`
             pass_match = re.search(r'"pass"\s*:\s*(true|false)', text_clean, re.IGNORECASE)
@@ -1289,7 +1308,7 @@ def judge_item_gemini_video(item: dict, repurpose_path: str) -> dict:
             if m:
                 try:
                     j = json.loads(m.group(0))
-                    passed = bool(j.get("pass", False))
+                    passed = _require_json_bool(j.get("pass"))
                     sc, mx = _score_max(item, passed)
                     return {
                         "pass": passed,
@@ -1301,7 +1320,7 @@ def judge_item_gemini_video(item: dict, repurpose_path: str) -> dict:
                         "judge_used": "gemini-video",
                         "raw": text,
                     }
-                except json.JSONDecodeError:
+                except (json.JSONDecodeError, ValueError):
                     pass
             pass_match = re.search(r'"pass"\s*:\s*(true|false)', text_clean, re.IGNORECASE)
             if pass_match:
@@ -1369,7 +1388,7 @@ def judge_item(client, evidence: list[dict], item: dict) -> dict:
             m = re.search(r"\{[^{}]*\}", text, re.DOTALL)
             if m:
                 j = json.loads(m.group(0))
-                passed = bool(j.get("pass", False))
+                passed = _require_json_bool(j.get("pass"))
                 sc, mx = _score_max(item, passed)
                 return {"pass": passed,
                         "score": sc,

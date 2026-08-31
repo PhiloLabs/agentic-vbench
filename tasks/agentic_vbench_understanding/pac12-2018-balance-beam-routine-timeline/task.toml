@@ -1,0 +1,31 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/pac12-2018-balance-beam-routine-timeline"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "sports", "gymnastics", "event-localization", "fine-grained-action-localization", "team-identification", "entity-identification", "score-reading", "temporal-grounding"]
+# Full 2018 Pac-12 women's gymnastics Session 1 broadcast.
+source = "youtube:0LtLS9wROrk"
+
+[environment]
+build_timeout_sec = 3600.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 16384
+# The source is baked into the image. Agent network access is unnecessary and
+# the task prompt also forbids lookup or outside knowledge.
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# One total wall-clock deadline. Calibration runs must not be continued or
+# resumed after this process exits.
+timeout_sec = 5400.0
+
+[steps.verifier]
+timeout_sec = 600.0

@@ -1,0 +1,790 @@
+{
+  "api_match_url_template": "https://api.opendota.com/api/matches/{match_id}",
+  "matches": [
+    {
+      "dire_team_id": 2163,
+      "duration": 3398,
+      "game": 5,
+      "match_id": 8730786393,
+      "players": [
+        {
+          "canonical_player": "watson",
+          "hero_id": 48,
+          "hero_key": "npc_dota_hero_luna",
+          "kills_log": [
+            {
+              "time": 524,
+              "victim_hero": "npc_dota_hero_tidehunter"
+            },
+            {
+              "time": 624,
+              "victim_hero": "npc_dota_hero_tidehunter"
+            },
+            {
+              "time": 714,
+              "victim_hero": "npc_dota_hero_warlock"
+            },
+            {
+              "time": 1097,
+              "victim_hero": "npc_dota_hero_void_spirit"
+            },
+            {
+              "time": 1205,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 1372,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 1848,
+              "victim_hero": "npc_dota_hero_tidehunter"
+            },
+            {
+              "time": 2580,
+              "victim_hero": "npc_dota_hero_nevermore"
+            }
+          ],
+          "player_slot": 0
+        },
+        {
+          "canonical_player": "CHIRA_JUNIOR",
+          "hero_id": 74,
+          "hero_key": "npc_dota_hero_invoker",
+          "kills_log": [
+            {
+              "time": -30,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 480,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 638,
+              "victim_hero": "npc_dota_hero_void_spirit"
+            },
+            {
+              "time": 1380,
+              "victim_hero": "npc_dota_hero_tidehunter"
+            },
+            {
+              "time": 1380,
+              "victim_hero": "npc_dota_hero_warlock"
+            },
+            {
+              "time": 1993,
+              "victim_hero": "npc_dota_hero_tidehunter"
+            },
+            {
+              "time": 2227,
+              "victim_hero": "npc_dota_hero_tidehunter"
+            },
+            {
+              "time": 2583,
+              "victim_hero": "npc_dota_hero_warlock"
+            },
+            {
+              "time": 2696,
+              "victim_hero": "npc_dota_hero_void_spirit"
+            },
+            {
+              "time": 3003,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 3297,
+              "victim_hero": "npc_dota_hero_nevermore"
+            },
+            {
+              "time": 3302,
+              "victim_hero": "npc_dota_hero_tidehunter"
+            },
+            {
+              "time": 3397,
+              "victim_hero": "npc_dota_hero_nevermore"
+            }
+          ],
+          "player_slot": 1
+        },
+        {
+          "canonical_player": "DM",
+          "hero_id": 99,
+          "hero_key": "npc_dota_hero_bristleback",
+          "kills_log": [
+            {
+              "time": 69,
+              "victim_hero": "npc_dota_hero_warlock"
+            },
+            {
+              "time": 326,
+              "victim_hero": "npc_dota_hero_nevermore"
+            },
+            {
+              "time": 701,
+              "victim_hero": "npc_dota_hero_void_spirit"
+            },
+            {
+              "time": 1847,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 1859,
+              "victim_hero": "npc_dota_hero_warlock"
+            },
+            {
+              "time": 2703,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 3023,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 3383,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 3396,
+              "victim_hero": "npc_dota_hero_tidehunter"
+            },
+            {
+              "time": 3397,
+              "victim_hero": "npc_dota_hero_void_spirit"
+            }
+          ],
+          "player_slot": 2
+        },
+        {
+          "canonical_player": "Malady",
+          "hero_id": 64,
+          "hero_key": "npc_dota_hero_jakiro",
+          "kills_log": [
+            {
+              "time": 316,
+              "victim_hero": "npc_dota_hero_warlock"
+            },
+            {
+              "time": 2221,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 2584,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 2702,
+              "victim_hero": "npc_dota_hero_nevermore"
+            }
+          ],
+          "player_slot": 3
+        },
+        {
+          "canonical_player": "Saksa",
+          "hero_id": 79,
+          "hero_key": "npc_dota_hero_shadow_demon",
+          "kills_log": [
+            {
+              "time": 694,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 1063,
+              "victim_hero": "npc_dota_hero_tidehunter"
+            },
+            {
+              "time": 1444,
+              "victim_hero": "npc_dota_hero_tiny"
+            },
+            {
+              "time": 1446,
+              "victim_hero": "npc_dota_hero_nevermore"
+            },
+            {
+              "time": 2401,
+              "victim_hero": "npc_dota_hero_void_spirit"
+            },
+            {
+              "time": 3374,
+              "victim_hero": "npc_dota_hero_void_spirit"
+            }
+          ],
+          "player_slot": 4
+        },
+        {
+          "canonical_player": "tOfu",
+          "hero_id": 37,
+          "hero_key": "npc_dota_hero_warlock",
+          "kills_log": [
+            {
+              "time": 1989,
+              "victim_hero": "npc_dota_hero_luna"
+            }
+          ],
+          "player_slot": 128
+        },
+        {
+          "canonical_player": "Ace",
+          "hero_id": 29,
+          "hero_key": "npc_dota_hero_tidehunter",
+          "kills_log": [
+            {
+              "time": 1975,
+              "victim_hero": "npc_dota_hero_bristleback"
+            }
+          ],
+          "player_slot": 129
+        },
+        {
+          "canonical_player": "Nisha",
+          "hero_id": 126,
+          "hero_key": "npc_dota_hero_void_spirit",
+          "kills_log": [
+            {
+              "time": 480,
+              "victim_hero": "npc_dota_hero_shadow_demon"
+            },
+            {
+              "time": 619,
+              "victim_hero": "npc_dota_hero_jakiro"
+            },
+            {
+              "time": 1224,
+              "victim_hero": "npc_dota_hero_bristleback"
+            },
+            {
+              "time": 1844,
+              "victim_hero": "npc_dota_hero_shadow_demon"
+            },
+            {
+              "time": 1998,
+              "victim_hero": "npc_dota_hero_invoker"
+            },
+            {
+              "time": 2230,
+              "victim_hero": "npc_dota_hero_jakiro"
+            },
+            {
+              "time": 2231,
+              "victim_hero": "npc_dota_hero_invoker"
+            },
+            {
+              "time": 2705,
+              "victim_hero": "npc_dota_hero_invoker"
+            },
+            {
+              "time": 3030,
+              "victim_hero": "npc_dota_hero_bristleback"
+            }
+          ],
+          "player_slot": 130
+        },
+        {
+          "canonical_player": "Boxi",
+          "hero_id": 19,
+          "hero_key": "npc_dota_hero_tiny",
+          "kills_log": [
+            {
+              "time": 251,
+              "victim_hero": "npc_dota_hero_jakiro"
+            },
+            {
+              "time": 1197,
+              "victim_hero": "npc_dota_hero_invoker"
+            },
+            {
+              "time": 1434,
+              "victim_hero": "npc_dota_hero_bristleback"
+            },
+            {
+              "time": 1973,
+              "victim_hero": "npc_dota_hero_shadow_demon"
+            }
+          ],
+          "player_slot": 131
+        },
+        {
+          "canonical_player": "m1CKe",
+          "hero_id": 11,
+          "hero_key": "npc_dota_hero_nevermore",
+          "kills_log": [
+            {
+              "time": 317,
+              "victim_hero": "npc_dota_hero_shadow_demon"
+            },
+            {
+              "time": 1230,
+              "victim_hero": "npc_dota_hero_jakiro"
+            },
+            {
+              "time": 1377,
+              "victim_hero": "npc_dota_hero_jakiro"
+            },
+            {
+              "time": 2402,
+              "victim_hero": "npc_dota_hero_invoker"
+            },
+            {
+              "time": 3024,
+              "victim_hero": "npc_dota_hero_jakiro"
+            },
+            {
+              "time": 3385,
+              "victim_hero": "npc_dota_hero_shadow_demon"
+            },
+            {
+              "time": 3387,
+              "victim_hero": "npc_dota_hero_luna"
+            }
+          ],
+          "player_slot": 132
+        }
+      ],
+      "radiant_team_id": 9823272,
+      "series_id": 1074881,
+      "teamfights": [
+        {
+          "deaths": 3,
+          "last_death": 326,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 93,
+                  "y": 160
+                }
+              ],
+              "player_index": 4
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 90,
+                  "y": 163
+                }
+              ],
+              "player_index": 5
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 98,
+                  "y": 148
+                }
+              ],
+              "player_index": 9
+            }
+          ],
+          "source_index": 0,
+          "start": 301
+        },
+        {
+          "deaths": 3,
+          "last_death": 638,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 140,
+                  "y": 91
+                }
+              ],
+              "player_index": 3
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 137,
+                  "y": 89
+                }
+              ],
+              "player_index": 6
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 138,
+                  "y": 102
+                }
+              ],
+              "player_index": 7
+            }
+          ],
+          "source_index": 1,
+          "start": 604
+        },
+        {
+          "deaths": 3,
+          "last_death": 714,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 139,
+                  "y": 132
+                }
+              ],
+              "player_index": 5
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 122,
+                  "y": 125
+                }
+              ],
+              "player_index": 7
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 116,
+                  "y": 122
+                }
+              ],
+              "player_index": 8
+            }
+          ],
+          "source_index": 2,
+          "start": 679
+        },
+        {
+          "deaths": 4,
+          "last_death": 1380,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 140,
+                  "y": 86
+                }
+              ],
+              "player_index": 3
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 149,
+                  "y": 86
+                }
+              ],
+              "player_index": 5
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 147,
+                  "y": 85
+                }
+              ],
+              "player_index": 6
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 144,
+                  "y": 81
+                }
+              ],
+              "player_index": 8
+            }
+          ],
+          "source_index": 3,
+          "start": 1357
+        },
+        {
+          "deaths": 3,
+          "last_death": 1446,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 95,
+                  "y": 131
+                }
+              ],
+              "player_index": 2
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 87,
+                  "y": 135
+                }
+              ],
+              "player_index": 8
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 92,
+                  "y": 140
+                }
+              ],
+              "player_index": 9
+            }
+          ],
+          "source_index": 4,
+          "start": 1419
+        },
+        {
+          "deaths": 4,
+          "last_death": 1859,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 180,
+                  "y": 67
+                }
+              ],
+              "player_index": 4
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 175,
+                  "y": 84
+                }
+              ],
+              "player_index": 5
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 174,
+                  "y": 66
+                }
+              ],
+              "player_index": 6
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 172,
+                  "y": 71
+                }
+              ],
+              "player_index": 8
+            }
+          ],
+          "source_index": 5,
+          "start": 1829
+        },
+        {
+          "deaths": 5,
+          "last_death": 1998,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 177,
+                  "y": 118
+                }
+              ],
+              "player_index": 0
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 158,
+                  "y": 126
+                }
+              ],
+              "player_index": 1
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 172,
+                  "y": 123
+                }
+              ],
+              "player_index": 2
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 172,
+                  "y": 123
+                }
+              ],
+              "player_index": 4
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 171,
+                  "y": 114
+                }
+              ],
+              "player_index": 6
+            }
+          ],
+          "source_index": 6,
+          "start": 1958
+        },
+        {
+          "deaths": 4,
+          "last_death": 2231,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 104,
+                  "y": 110
+                }
+              ],
+              "player_index": 1
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 108,
+                  "y": 107
+                }
+              ],
+              "player_index": 3
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 117,
+                  "y": 109
+                }
+              ],
+              "player_index": 6
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 117,
+                  "y": 113
+                }
+              ],
+              "player_index": 8
+            }
+          ],
+          "source_index": 7,
+          "start": 2206
+        },
+        {
+          "deaths": 3,
+          "last_death": 2584,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 149,
+                  "y": 95
+                }
+              ],
+              "player_index": 5
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 147,
+                  "y": 90
+                }
+              ],
+              "player_index": 8
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 143,
+                  "y": 94
+                }
+              ],
+              "player_index": 9
+            }
+          ],
+          "source_index": 8,
+          "start": 2565
+        },
+        {
+          "deaths": 4,
+          "last_death": 2705,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 145,
+                  "y": 165
+                }
+              ],
+              "player_index": 1
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 152,
+                  "y": 170
+                }
+              ],
+              "player_index": 7
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 158,
+                  "y": 167
+                }
+              ],
+              "player_index": 8
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 149,
+                  "y": 167
+                }
+              ],
+              "player_index": 9
+            }
+          ],
+          "source_index": 9,
+          "start": 2681
+        },
+        {
+          "deaths": 3,
+          "last_death": 3030,
+          "players": [
+            {
+              "death_positions": [
+                {
+                  "x": 160,
+                  "y": 169
+                }
+              ],
+              "player_index": 2
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 152,
+                  "y": 175
+                }
+              ],
+              "player_index": 3
+            },
+            {
+              "death_positions": [
+                {
+                  "x": 162,
+                  "y": 178
+                }
+              ],
+              "player_index": 8
+            }
+          ],
+          "source_index": 10,
+          "start": 3008
+        }
+      ]
+    }
+  ],
+  "series_id": 1074881,
+  "source": "OpenDota automated Valve replay parsing"
+}

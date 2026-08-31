@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-08-27T22:54:52.114913+00:00",
+  "artifacts": [
+    {
+      "path": "codex-initial-prompt.md",
+      "bytes": 5771,
+      "sha256": "91c89cb1ca9d259f1a72baff53d56b11f245656873bdfb5a2acbb8f333b3094f"
+    },
+    {
+      "path": "codex-gpt-5.6-sol-xhigh.public.jsonl",
+      "bytes": 3292507,
+      "sha256": "b1e0fefb31440f38d973c232c4af29573eae14e3972d2a2337091841f1dba205"
+    },
+    {
+      "path": "codex-input-manifest.json",
+      "bytes": 2602,
+      "sha256": "9e1941d2e0411c1189d4430115a68b53846e08935735f287db68cac73e4f7a7f"
+    },
+    {
+      "path": "codex-solution.json",
+      "bytes": 6097,
+      "sha256": "cb0aa16b4420004f133ddf2a57868e1de4d67c8fbbea5b9eefde0306d0c57d4f"
+    },
+    {
+      "path": "codex-run.json",
+      "bytes": 843,
+      "sha256": "980675f7a22e79fc7ce66a02b33cc5d9835184aef42a2ff087da5f45cdc12d5c"
+    },
+    {
+      "path": "codex-audit.json",
+      "bytes": 1084,
+      "sha256": "56bf331c731159513a6aa0801c4cce8e0c09f672ad265c9d6f586c69fe146103"
+    },
+    {
+      "path": "codex-result-summary.json",
+      "bytes": 5532,
+      "sha256": "9b15a2f0bde4b64408c852226b17974908ca2efc9d4558bd3daf9cb630eca4af"
+    },
+    {
+      "path": "codex-publication-redaction-audit.json",
+      "bytes": 2213,
+      "sha256": "7ef77c4d5dfdd22dd9e293c54b0c179c18dafd594ef8dcc7a5ef54c1edc50d69"
+    }
+  ],
+  "local_exclude_rules": [
+    "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-audio-only-20260827T214117Z/*",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-audio-only-20260827T214117Z/public-artifacts.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-audio-only-20260827T214117Z/codex-initial-prompt.md",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-audio-only-20260827T214117Z/codex-gpt-5.6-sol-xhigh.public.jsonl",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-audio-only-20260827T214117Z/codex-input-manifest.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-audio-only-20260827T214117Z/codex-solution.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-audio-only-20260827T214117Z/codex-run.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-audio-only-20260827T214117Z/codex-audit.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-audio-only-20260827T214117Z/codex-result-summary.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-audio-only-20260827T214117Z/codex-publication-redaction-audit.json"
+  ],
+  "publication_scope": "Compact reviewer-facing evidence for the audio-only control. Raw trajectory, stderr, version dumps, checkpoint, verifier intermediates, local workspace inventory, and pre-run metadata remain local.",
+  "raw_trajectory_untouched": true
+}

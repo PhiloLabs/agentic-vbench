@@ -1,0 +1,66 @@
+{
+  "artifacts": [
+    {
+      "bytes": 5763,
+      "path": "claude-initial-prompt.md",
+      "role": "initial_prompt",
+      "sha256": "3753cf85621065b3a42aa75f5540e3ae10121a7f708130d61142275650f5a949"
+    },
+    {
+      "bytes": 1156295,
+      "path": "claude-code-opus-4.8-high.public.jsonl",
+      "role": "textual_trajectory",
+      "sha256": "3bf3ba5ef7c99c1b635f7605eb2f168bd4720e0bd01f4d89ba3d354aa179b7a7"
+    },
+    {
+      "bytes": 1169,
+      "path": "claude-input-manifest.json",
+      "role": "input_manifest",
+      "sha256": "3d98bf3a59522f2ca96a319b7a8c0e37f04eea3aa0120f88a205d2787d0345c6"
+    },
+    {
+      "bytes": 565,
+      "path": "claude-solution.json",
+      "role": "solution",
+      "sha256": "ba957c5c60f6ffe046d4346f5be1f9e2aff9c57ecaa7308a3f69a6fe8dd3d369"
+    },
+    {
+      "bytes": 1887,
+      "path": "claude-checkpoint.json",
+      "role": "checkpoint",
+      "sha256": "c80999eb54570679ffc5341d453357b7da679678bed5957d88084f9a7cd81d15"
+    },
+    {
+      "bytes": 1012,
+      "path": "claude-run.json",
+      "role": "run_metadata",
+      "sha256": "7884213c1b757d91147707cd6e70884f6d2825ca0e13b5fd7fe2b7f40ecbf44d"
+    },
+    {
+      "bytes": 1320,
+      "path": "claude-tool-call-count.json",
+      "role": "tool_call_count",
+      "sha256": "b4419d0c512e7d35687192a1c7d46da85f9bff19edf69d013af97a3fa45f3c6e"
+    },
+    {
+      "bytes": 1203,
+      "path": "claude-audit.json",
+      "role": "audit",
+      "sha256": "3e2654f7141b901b4b486039e8b36c8ca670d0a1614c1ee07343147c730a6527"
+    },
+    {
+      "bytes": 13581,
+      "path": "claude-result-summary.json",
+      "role": "result_summary",
+      "sha256": "d6d99e1235528573020636902c668dc360b1c8b3f096f79e2da8adff7c4f3c6d"
+    },
+    {
+      "bytes": 2163,
+      "path": "claude-publication-redaction-audit.json",
+      "role": "publication_redaction_audit",
+      "sha256": "5772ade1c36920786e673743627b2a586db8b531750d0bbcdd222494c7010944"
+    }
+  ],
+  "purpose": "compact_publication_bundle",
+  "schema_version": 1
+}

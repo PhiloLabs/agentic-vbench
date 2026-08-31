@@ -1,0 +1,49 @@
+{
+  "dataset": {
+    "name": "Multiview Extended Video with Activities (MEVA)",
+    "creators": [
+      "Kitware Inc.",
+      "Intelligence Advanced Research Projects Activity (IARPA)"
+    ],
+    "homepage": "https://mevadata.org/",
+    "readme": "https://mevadata.org/resources/README-meva-kf1-data.html",
+    "license": "CC BY 4.0",
+    "license_url": "https://mevadata.org/resources/MEVA-data-license.txt"
+  },
+  "sources": [
+    {
+      "role": "object_handling",
+      "url": "https://mevadata-public-01.s3.amazonaws.com/drops-123-r13/2018-03-09/10/2018-03-09.10-15-00.10-20-00.school.G299.r13.avi",
+      "sha256": "9f25ee3c5a4f582fe3287e7b1727450f33f3ef9c557eba2cd7dc5a9519ee6ab7"
+    },
+    {
+      "role": "vehicle_access",
+      "url": "https://mevadata-public-01.s3.amazonaws.com/drops-123-r13/2018-03-11/16/2018-03-11.16-10-01.16-15-01.school.G339.r13.avi",
+      "sha256": "3f4978d593a61a42dc735283a75d99a3d21e569e1e83ac18c7b20e39f4496bc7"
+    }
+  ],
+  "annotation_repository": {
+    "url": "https://gitlab.kitware.com/meva/meva-data-repo.git",
+    "commit": "421841a75577b697c314e952e585aecbb1b99e17"
+  },
+  "adaptation": {
+    "description": "Each source was split into five exact 1,800-frame segments at 30 fps. Segments were interleaved source A, source B, concatenated, and encoded as a silent 18,000-frame H.264 1080p artifact lasting exactly 600 seconds.",
+    "media_url": "https://huggingface.co/datasets/Jordan8717/agentic-vbench-meva-activity-ledgers/resolve/c3c7b0dc1d8cba7834564350b90d0c96b4178d46/meva_activity_montage.mp4",
+    "media_sha256": "2d51338a954cb726037116b9b9715ef8dccb7c242753a0e709a03c266fbce344",
+    "roster_url": "https://huggingface.co/datasets/Jordan8717/agentic-vbench-meva-activity-ledgers/resolve/c3c7b0dc1d8cba7834564350b90d0c96b4178d46/meva_roster.tar.gz",
+    "roster_sha256": "1b2d92993f8509c71688ae6721b76a50a3dc82a419dce222ef80b84fb3de1487"
+  },
+  "ground_truth": {
+    "sha256": "9566e49b6f89ffcb5f10f2a05d7176260d47e4c04589682269ebaea78a339231",
+    "target_count": 10,
+    "event_assignment_count": 29,
+    "linkage_rule": {
+      "minimum_shared_frames": 20,
+      "minimum_median_iou": 0.9,
+      "minimum_q10_iou": 0.8,
+      "exclude_components_touching_near_miss": true,
+      "iou_box_convention": "Half-open pixel boxes: width=x2-x1 and height=y2-y1.",
+      "q10_quantile_method": "Nearest observed rank: sorted_ious[round(0.1*(n-1))]."
+    }
+  }
+}

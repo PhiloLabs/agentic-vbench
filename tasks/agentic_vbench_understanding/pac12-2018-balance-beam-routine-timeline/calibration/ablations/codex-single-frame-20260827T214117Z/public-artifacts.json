@@ -1,0 +1,60 @@
+{
+  "artifacts": [
+    {
+      "bytes": 5779,
+      "path": "codex-initial-prompt.md",
+      "sha256": "8a8f196df49660099a132e01d59b760e02a9e5dbcadeb1c04aa179ed91a561ca"
+    },
+    {
+      "bytes": 16828,
+      "path": "codex-gpt-5.6-sol-xhigh.public.jsonl",
+      "sha256": "1b055ae80f5377620fba5b482031fd53260ad543d277ab77ae21bdcaa5b51c85"
+    },
+    {
+      "bytes": 2772,
+      "path": "codex-input-manifest.json",
+      "sha256": "184b1e708cfe73eed92607c57f9df33a8696b8fc10d4724dd8cc09cc279cb148"
+    },
+    {
+      "bytes": 26,
+      "path": "codex-solution.json",
+      "sha256": "f4e6fdc7a804ea480ecc60260c9364a048c2a53ef3b40e62f534a4079c8b32f0"
+    },
+    {
+      "bytes": 842,
+      "path": "codex-run.json",
+      "sha256": "9c77bd0c749d444e0485611d368d478ef2172a4d17de620a46871bcf8e78cfc2"
+    },
+    {
+      "bytes": 635,
+      "path": "codex-audit.json",
+      "sha256": "8022f0230a9dd52885020ce2dabde11b0d7ea8ea12b30fe822de76570320b787"
+    },
+    {
+      "bytes": 6586,
+      "path": "codex-result-summary.json",
+      "sha256": "2aa3ae4e4ab9c85cf87dd5b8126406d63ae775ee01ef0401255860ae3fe1658d"
+    },
+    {
+      "bytes": 2124,
+      "path": "codex-publication-redaction-audit.json",
+      "sha256": "fe7862e812586f89f7a222208cf2167934a567ddd80d8948f17f779f507504aa"
+    }
+  ],
+  "created_at_utc": "2026-08-27T22:37:37.883672+00:00",
+  "local_exclude_rules": [
+    "tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-single-frame-20260827T214117Z/*",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-single-frame-20260827T214117Z/public-artifacts.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-single-frame-20260827T214117Z/codex-initial-prompt.md",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-single-frame-20260827T214117Z/codex-gpt-5.6-sol-xhigh.public.jsonl",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-single-frame-20260827T214117Z/codex-input-manifest.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-single-frame-20260827T214117Z/codex-solution.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-single-frame-20260827T214117Z/codex-run.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-single-frame-20260827T214117Z/codex-audit.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-single-frame-20260827T214117Z/codex-result-summary.json",
+    "!tasks/agentic_vbench_understanding/pac12-2018-balance-beam-routine-timeline/calibration/ablations/codex-single-frame-20260827T214117Z/codex-publication-redaction-audit.json"
+  ],
+  "publication_scope": "Compact reviewer-facing evidence for the single-frame control. The staged frame and all raw diagnostics remain local; the trajectory publication derivative removes only local identity strings.",
+  "raw_trajectory_untouched": true,
+  "schema_version": 1
+}

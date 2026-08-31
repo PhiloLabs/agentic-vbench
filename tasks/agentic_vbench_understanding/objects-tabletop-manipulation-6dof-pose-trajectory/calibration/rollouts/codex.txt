@@ -1,0 +1,725 @@
+Reading additional input from stdin...
+OpenAI Codex v0.144.1
+--------
+workdir: /workspace
+model: gpt-5.5
+provider: openai
+approval: never
+sandbox: danger-full-access
+reasoning effort: medium
+reasoning summaries: none
+session id: 019f4b98-cb37-7071-a635-6392b9ec0aeb
+--------
+user
+# Object 6DoF Pose Trajectory From Egocentric Clips
+
+You are given three egocentric (head-mounted, first-person) video clips of a person
+manipulating small tabletop objects:
+
+- `/workspace/materials/clip_01.mp4`
+- `/workspace/materials/clip_02.mp4`
+- `/workspace/materials/clip_03.mp4`
+
+In each clip one **target object** is designated. For a set of query frames in each
+clip, reconstruct the **6DoF pose of that target object** — its position and
+orientation — expressed **in that clip's RGB camera coordinate frame, in metres**.
+
+You are also given, in `/workspace/materials/`:
+
+- `objects.json` — the target object's name for each clip id (`clip_01`, `clip_02`,
+  `clip_03`).
+- `cameras.json` — the RGB camera model for each clip (projection model, intrinsics,
+  and the camera pose on the device), keyed by clip id.
+- `queries.json` — for each clip id, the list of 0-based integer frame indices you must
+  answer for.
+
+## What a pose means here
+
+The target object has a fixed canonical object frame (the frame its 3D model is defined
+in). Its 6DoF pose in a given video frame is the rigid transform `T_camera_object` that
+maps a point `p_obj` in the object frame to the camera frame:
+
+```
+p_camera = R * p_obj + t
+```
+
+- `t = [tx, ty, tz]` is the object origin in the camera frame, in metres
+  (camera convention: +Z forward along the optical axis, +X right, +Y down).
+- `R` is the rotation, which you report as a unit quaternion `q = [w, x, y, z]`.
+
+The object's canonical frame is the one used by its 3D model; you do not need the model
+to answer — recover a consistent rigid pose per frame such that the object's rigid
+structure, projected through the given camera model, matches what the clip shows.
+
+## What to submit
+
+Write `/workspace/output/solution.json` in exactly this shape:
+
+```json
+{
+  "clips": {
+    "clip_01": [
+      {"frame": 210, "t_xyz_m": [0.05, -0.02, 0.44], "q_wxyz": [0.98, 0.01, -0.17, 0.02]},
+      {"frame": 655, "t_xyz_m": ["..."], "q_wxyz": ["..."]}
+    ],
+    "clip_02": [{"frame": 88, "t_xyz_m": ["..."], "q_wxyz": ["..."]}],
+    "clip_03": [{"frame": 51, "t_xyz_m": ["..."], "q_wxyz": ["..."]}]
+  }
+}
+```
+
+- One entry per query frame listed in `queries.json`, under its clip id.
+- `frame`: the 0-based frame index (must match a frame in `queries.json`).
+- `t_xyz_m`: object origin in the camera frame, metres.
+- `q_wxyz`: unit quaternion (w first) for the object's orientation in the camera frame.
+
+## Rules
+
+- Stay inside this working directory. Do not read, write, or search outside it.
+- Do not look anything up online and do not rely on memory; measure the object from the
+  clips. Use any tools in the image (for example `ffmpeg`/`ffprobe`) to seek and sample.
+- Answer only the query frames in `queries.json`, and only the target object named in
+  `objects.json` for that clip.
+
+
+You are running headless in this directory. Do the task now, using shell tools (ffmpeg/ffprobe/python) to sample and measure the clips. Write your deliverable to the output/ path specified above.
+
+IMPORTANT: You must produce a COMPLETE deliverable covering EVERY query before you finish. Do not get stuck perfecting one frame. Strategy: first write a full best-effort answer for all queries (a rough estimate for each), then iterate to improve it if time allows. A complete rough answer is far better than a perfect answer for only a few queries. Re-write the output file each time you improve it. Finish by confirming the output file exists and covers all queries.
+codex
+I’ll inspect the provided metadata and video properties first, then extract the requested frames into a local working folder so I can make a complete first-pass pose file before refining.
+exec
+/bin/bash -lc "sed -n '1,220p' materials/objects.json" in /workspace
+ succeeded in 0ms:
+{
+  "clip_01": "birdhouse_toy",
+  "clip_02": "vase",
+  "clip_03": "potato_masher"
+}
+exec
+/bin/bash -lc "sed -n '1,260p' materials/queries.json" in /workspace
+ succeeded in 0ms:
+{
+  "clip_01": [
+    148,
+    392,
+    667,
+    911,
+    1216,
+    1465,
+    1830,
+    2073,
+    2317,
+    2564,
+    3009,
+    3445
+  ],
+  "clip_02": [
+    187,
+    493,
+    800,
+    1106,
+    1412,
+    1718,
+    2025,
+    2331,
+    2637,
+    2943,
+    3250,
+    3556
+  ],
+  "clip_03": [
+    179,
+    473,
+    766,
+    1060,
+    1354,
+    1647,
+    1941,
+    2234,
+    2528,
+    2822,
+    3115,
+    3409
+  ]
+}
+exec
+/bin/bash -lc "sed -n '1,260p' materials/cameras.json" in /workspace
+ succeeded in 0ms:
+{
+  "clip_01": {
+    "T_Device_Camera": {
+      "quaternion_wxyz": [
+        0.942926126637201,
+        0.32848931636255524,
+        0.04265964217267979,
+        0.03413566566401642
+      ],
+      "translation_xyz": [
+        -0.004742530837081767,
+        -0.013817606742492073,
+        -0.00442082933321188
+      ]
+    },
+    "imageHeight": 1408,
+    "imageWidth": 1408,
+    "label": "camera-rgb",
+    "maxSolidAngle": 1.0,
+    "projectionModelType": "CameraModelType.a camera model",
+    "projectionParams": [
+      609.639892578125,
+      707.0669555664062,
+      702.5150146484375,
+      0.3933126628398895,
+      -0.3779503107070923,
+      -0.12329158931970596,
+      1.4956623315811157,
+      -1.9114782810211182,
+      0.6986479759216309,
+      -0.00017027842113748193,
+      -6.80394732626155e-05,
+      -0.0007740191067568958,
+      -9.143262104771566e-06,
+      -0.0002482135023456067,
+      -1.1342512152623385e-05
+    ],
+    "serialNumber": "0450577b730310624401100000000000",
+    "stream_id": "214-1"
+  },
+  "clip_02": {
+    "T_Device_Camera": {
+      "quaternion_wxyz": [
+        0.9430452797777733,
+        0.32890576486838013,
+        0.03803390845274769,
+        0.03224934003999668
+      ],
+      "translation_xyz": [
+        -0.0034948894116172175,
+        -0.01289775665853633,
+        -0.0028632362332893244
+      ]
+    },
+    "imageHeight": 1408,
+    "imageWidth": 1408,
+    "label": "camera-rgb",
+    "maxSolidAngle": 1.0,
+    "projectionModelType": "CameraModelType.a camera model",
+    "projectionParams": [
+      609.278564453125,
+      706.708251953125,
+      704.3917846679688,
+      0.38646018505096436,
+      -0.38445383310317993,
+      -0.12151284515857697,
+      1.5574527978897095,
+      -1.9888371229171753,
+      0.7246229648590088,
+      -0.0007645597797818482,
+      0.00015166828234214336,
+      0.0017742140917107463,
+      -0.0006868729833513498,
+      -0.0008896609069779515,
+      2.3918779334053397e-05
+    ],
+    "serialNumber": "0450577b730410834401100000000000",
+    "stream_id": "214-1"
+  },
+  "clip_03": {
+    "T_Device_Camera": {
+      "quaternion_wxyz": [
+        0.9426494756841799,
+        0.33025869346075803,
+        0.03695418387116024,
+        0.031233790681734652
+      ],
+      "translation_xyz": [
+        -0.00460068903548543,
+        -0.01287276308349193,
+        -0.0032356886177045937
+      ]
+    },
+    "imageHeight": 1408,
+    "imageWidth": 1408,
+    "label": "camera-rgb",
+    "maxSolidAngle": 1.0,
+    "projectionModelType": "CameraModelType.a camera model",
+    "projectionParams": [
+      608.9542236328125,
+      705.601318359375,
+      704.7898559570312,
+      0.3868226408958435,
+      -0.3831563889980316,
+      -0.12244554609060287,
+      1.555163860321045,
+      -1.9893070459365845,
+      0.726833701133728,
+      -0.0005624426412396133,
+      0.0003961613110732287,
+      0.0006559279863722622,
+      -0.00014526478480547667,
+      -0.0008875112398527563,
+      -0.000347779830917716
+    ],
+    "serialNumber": "0450577b730410834401100000000000",
+    "stream_id": "214-1"
+  }
+}
+exec
+/bin/bash -lc 'pwd && rg --files materials output || true' in /workspace
+ succeeded in 0ms:
+/workspace
+materials/clip_03.mp4
+materials/objects.json
+materials/cameras.json
+materials/queries.json
+materials/clip_02.mp4
+materials/clip_01.mp4
+
+codex
+The query set is 36 total frames, 12 per clip. I’m checking frame rate and extracting just those frames now; the target objects are `birdhouse_toy`, `vase`, and `potato_masher`.
+exec
+/bin/bash -lc 'ffprobe -v error -select_streams v:0 -show_entries stream=width,height,avg_frame_rate,r_frame_rate,nb_frames,duration -of json materials/clip_03.mp4' in /workspace
+ succeeded in 0ms:
+{
+    "programs": [
+
+    ],
+    "stream_groups": [
+
+    ],
+    "streams": [
+        {
+            "width": 1408,
+            "height": 1408,
+            "r_frame_rate": "30/1",
+            "avg_frame_rate": "30/1",
+            "duration": "119.666667",
+            "nb_frames": "3590"
+        }
+    ]
+}
+
+exec
+/bin/bash -lc 'ffprobe -v error -select_streams v:0 -show_entries stream=width,height,avg_frame_rate,r_frame_rate,nb_frames,duration -of json materials/clip_02.mp4' in /workspace
+exec
+/bin/bash -lc 'ffprobe -v error -select_streams v:0 -show_entries stream=width,height,avg_frame_rate,r_frame_rate,nb_frames,duration -of json materials/clip_01.mp4' in /workspace
+ succeeded in 0ms:
+{
+    "programs": [
+
+    ],
+    "stream_groups": [
+
+    ],
+    "streams": [
+        {
+            "width": 1408,
+            "height": 1408,
+            "r_frame_rate": "30/1",
+            "avg_frame_rate": "30/1",
+            "duration": "124.833008",
+            "nb_frames": "3745"
+        }
+    ]
+}
+
+ succeeded in 0ms:
+{
+    "programs": [
+
+    ],
+    "stream_groups": [
+
+    ],
+    "streams": [
+        {
+            "width": 1408,
+            "height": 1408,
+            "r_frame_rate": "30/1",
+            "avg_frame_rate": "30/1",
+            "duration": "130.266667",
+            "nb_frames": "3908"
+        }
+    ]
+}
+
+codex
+All clips are 1408x1408 at 30 fps, so frame-index seeking is straightforward. I’m creating lossless-ish stills and contact sheets for quick visual pose estimation.
+exec
+/bin/bash -lc "mkdir -p work/frames work/contact output && python3 - <<'PY'
+import json, subprocess, pathlib
+q=json.load(open('materials/queries.json'))
+out=pathlib.Path('work/frames')
+for clip, frames in q.items():
+    for f in frames:
+        dst=out/f'{clip}_{f:04d}.jpg'
+        if dst.exists(): continue
+        cmd=['ffmpeg','-v','error','-i',f'materials/{clip}.mp4','-vf',f\"select='eq(n,{f})'\",'-vsync','0','-frames:v','1','-q:v','2',str(dst)]
+        subprocess.run(cmd, check=True)
+PY
+python3 - <<'PY'
+from PIL import Image, ImageDraw
+import json, pathlib, math
+q=json.load(open('materials/queries.json'))
+for clip, frames in q.items():
+    thumbs=[]
+    for f in frames:
+        im=Image.open(f'work/frames/{clip}_{f:04d}.jpg').resize((352,352))
+        d=ImageDraw.Draw(im); d.rectangle((0,0,120,26), fill=(255,255,255)); d.text((5,5), str(f), fill=(0,0,0))
+        thumbs.append(im)
+    sheet=Image.new('RGB',(4*352,3*352),(30,30,30))
+    for i,im in enumerate(thumbs): sheet.paste(im,((i%4)*352,(i//4)*352))
+    sheet.save(f'work/contact/{clip}.jpg', quality=95)
+PY
+ls -l work/contact work/frames | sed -n '1,80p'" in /workspace
+codex
+The extraction is still running because it is seeking individual high-resolution frames. I’ll wait for it to finish, then inspect the contact sheets directly.
+ succeeded in 66527ms:
+work/contact:
+total 1484
+-rw-rw-r-- 1 xiatao xiatao 476778 Jul 10 06:37 clip_01.jpg
+-rw-rw-r-- 1 xiatao xiatao 511942 Jul 10 06:37 clip_02.jpg
+-rw-rw-r-- 1 xiatao xiatao 527765 Jul 10 06:37 clip_03.jpg
+
+work/frames:
+total 6748
+-rw-rw-r-- 1 xiatao xiatao 221898 Jul 10 06:36 clip_01_0148.jpg
+-rw-rw-r-- 1 xiatao xiatao 200935 Jul 10 06:36 clip_01_0392.jpg
+-rw-rw-r-- 1 xiatao xiatao 168891 Jul 10 06:36 clip_01_0667.jpg
+-rw-rw-r-- 1 xiatao xiatao 203158 Jul 10 06:36 clip_01_0911.jpg
+-rw-rw-r-- 1 xiatao xiatao 154103 Jul 10 06:36 clip_01_1216.jpg
+-rw-rw-r-- 1 xiatao xiatao 179245 Jul 10 06:36 clip_01_1465.jpg
+-rw-rw-r-- 1 xiatao xiatao 180737 Jul 10 06:36 clip_01_1830.jpg
+-rw-rw-r-- 1 xiatao xiatao 210678 Jul 10 06:36 clip_01_2073.jpg
+-rw-rw-r-- 1 xiatao xiatao 178793 Jul 10 06:36 clip_01_2317.jpg
+-rw-rw-r-- 1 xiatao xiatao 173842 Jul 10 06:36 clip_01_2564.jpg
+-rw-rw-r-- 1 xiatao xiatao 132630 Jul 10 06:36 clip_01_3009.jpg
+-rw-rw-r-- 1 xiatao xiatao 166600 Jul 10 06:36 clip_01_3445.jpg
+-rw-rw-r-- 1 xiatao xiatao 177850 Jul 10 06:36 clip_02_0187.jpg
+-rw-rw-r-- 1 xiatao xiatao 187437 Jul 10 06:36 clip_02_0493.jpg
+-rw-rw-r-- 1 xiatao xiatao 164583 Jul 10 06:36 clip_02_0800.jpg
+-rw-rw-r-- 1 xiatao xiatao 182102 Jul 10 06:36 clip_02_1106.jpg
+-rw-rw-r-- 1 xiatao xiatao 176379 Jul 10 06:36 clip_02_1412.jpg
+-rw-rw-r-- 1 xiatao xiatao 169099 Jul 10 06:36 clip_02_1718.jpg
+-rw-rw-r-- 1 xiatao xiatao 180522 Jul 10 06:36 clip_02_2025.jpg
+-rw-rw-r-- 1 xiatao xiatao 181827 Jul 10 06:36 clip_02_2331.jpg
+-rw-rw-r-- 1 xiatao xiatao 179734 Jul 10 06:36 clip_02_2637.jpg
+-rw-rw-r-- 1 xiatao xiatao 246056 Jul 10 06:36 clip_02_2943.jpg
+-rw-rw-r-- 1 xiatao xiatao 172104 Jul 10 06:36 clip_02_3250.jpg
+-rw-rw-r-- 1 xiatao xiatao 186204 Jul 10 06:36 clip_02_3556.jpg
+-rw-rw-r-- 1 xiatao xiatao 214263 Jul 10 06:36 clip_03_0179.jpg
+-rw-rw-r-- 1 xiatao xiatao 206938 Jul 10 06:36 clip_03_0473.jpg
+-rw-rw-r-- 1 xiatao xiatao 225974 Jul 10 06:36 clip_03_0766.jpg
+-rw-rw-r-- 1 xiatao xiatao 182026 Jul 10 06:36 clip_03_1060.jpg
+-rw-rw-r-- 1 xiatao xiatao 227799 Jul 10 06:36 clip_03_1354.jpg
+-rw-rw-r-- 1 xiatao xiatao 171251 Jul 10 06:36 clip_03_1647.jpg
+-rw-rw-r-- 1 xiatao xiatao 190253 Jul 10 06:36 clip_03_1941.jpg
+-rw-rw-r-- 1 xiatao xiatao 210260 Jul 10 06:36 clip_03_2234.jpg
+-rw-rw-r-- 1 xiatao xiatao 216281 Jul 10 06:37 clip_03_2528.jpg
+-rw-rw-r-- 1 xiatao xiatao 198616 Jul 10 06:37 clip_03_2822.jpg
+-rw-rw-r-- 1 xiatao xiatao 188911 Jul 10 06:37 clip_03_3115.jpg
+-rw-rw-r-- 1 xiatao xiatao 216966 Jul 10 06:37 clip_03_3409.jpg
+
+codex
+Still seeking through the clips. Once the first full pass is extracted, I’ll avoid re-seeking unless I need local crops around a specific frame.
+codex
+The frame set and contact sheets are ready. I’m inspecting the sheets first to get a complete pose trajectory for every query, then I’ll spot-check individual full-resolution frames.
+codex
+The target identities are visually clear: the birdhouse toy in clip 01, the tall white pitcher/vase in clip 02, and the black-handled potato masher in clip 03. I’m going to write a complete first-pass `solution.json` using image-centroid rays and apparent-size depth estimates, then refine the most ambiguous frames.
+codex
+A few query frames have the target partly out of frame or not visible because the wearer is looking elsewhere. For those I’m keeping the trajectory continuous using the last/next visible tabletop or hand-held pose instead of leaving gaps, since the deliverable requires every query.
+codex
+I’m treating the reported translation as the object-frame origin near the visual center of the rigid object. For elongated objects like the potato masher, that means the midpoint between handle and head rather than just the visible disk.
+codex
+I’m writing the first complete answer now. The numeric poses are rough visual reconstructions: depth from apparent object scale, lateral position from the calibrated principal point/focal scale, and orientation from the dominant visible object axes.
+exec
+/bin/bash -lc "python3 - <<'PY'
+import json, math, os
+
+def qmul(a,b):
+    aw,ax,ay,az=a; bw,bx,by,bz=b
+    return [aw*bw-ax*bx-ay*by-az*bz,
+            aw*bx+ax*bw+ay*bz-az*by,
+            aw*by-ax*bz+ay*bw+az*bx,
+            aw*bz+ax*by-ay*bx+az*bw]
+
+def axis_q(axis, deg):
+    x,y,z=axis; n=math.sqrt(x*x+y*y+z*z); x,y,z=x/n,y/n,z/n
+    a=math.radians(deg)/2
+    return [math.cos(a), x*math.sin(a), y*math.sin(a), z*math.sin(a)]
+
+def q_euler(rx=0, ry=0, rz=0):
+    q=[1,0,0,0]
+    for axis,deg in [((1,0,0),rx),((0,1,0),ry),((0,0,1),rz)]:
+        q=qmul(q, axis_q(axis,deg))
+    n=math.sqrt(sum(v*v for v in q))
+    return [round(v/n,6) for v in q]
+
+# translations are visual estimates of object origins in the RGB camera frame (m)
+# q uses wxyz and is kept smooth/consistent within each clip.
+data={
+ 'clip_01': [
+  (148,  [0.39,-0.25,1.05], q_euler(-8, 18, -3)),
+  (392,  [0.29,-0.18,0.75], q_euler(-6, 23, -4)),
+  (667,  [0.86,-0.24,0.95], q_euler(-5, 28, -2)),
+  (911,  [0.45,-0.25,0.64], q_euler(-12, -38, 10)),
+  (1216, [-0.58,0.47,1.03], q_euler(4, 55, -22)),
+  (1465, [0.09,0.13,0.50], q_euler(-18, -15, 8)),
+  (1830, [0.02,0.11,0.30], q_euler(18, -26, -8)),
+  (2073, [0.42,-0.11,0.76], q_euler(-8, -30, 5)),
+  (2317, [0.66,0.20,0.88], q_euler(2, -22, 5)),
+  (2564, [-0.02,0.30,0.62], q_euler(5, 8, -35)),
+  (3009, [0.02,0.60,1.06], q_euler(4, 12, -10)),
+  (3445, [-0.03,0.55,1.15], q_euler(2, 18, -12)),
+ ],
+ 'clip_02': [
+  (187,  [-0.16,-0.12,0.78], q_euler(-7, -8, 2)),
+  (493,  [-0.27,-0.09,0.66], q_euler(-5, -15, -5)),
+  (800,  [-0.22,-0.11,0.61], q_euler(-12, -28, -2)),
+  (1106, [-0.25,-0.14,0.72], q_euler(-6, -12, 0)),
+  (1412, [-0.28,-0.17,0.68], q_euler(-5, -10, -3)),
+  (1718, [-0.22,-0.12,0.63], q_euler(-3, -12, -2)),
+  (2025, [-0.19,-0.02,0.80], q_euler(-2, 4, 1)),
+  (2331, [-0.07,-0.01,0.47], q_euler(-15, -42, 9)),
+  (2637, [0.35,0.08,0.72], q_euler(-5, 24, 4)),
+  (2943, [0.45,-0.16,0.66], q_euler(-6, 18, 2)),
+  (3250, [0.12,-0.15,0.78], q_euler(-3, 6, 1)),
+  (3556, [0.15,0.18,0.86], q_euler(0, 8, 1)),
+ ],
+ 'clip_03': [
+  (179,  [-0.38,-0.09,0.82], q_euler(58, 8, -28)),
+  (473,  [-0.06,-0.02,0.46], q_euler(75, -8, 3)),
+  (766,  [0.07,0.08,0.36], q_euler(68, -18, -38)),
+  (1060, [0.55,-0.04,0.58], q_euler(80, 22, -72)),
+  (1354, [-0.65,0.08,0.75], q_euler(85, -30, 18)),
+  (1647, [0.02,0.03,0.45], q_euler(70, 7, 52)),
+  (1941, [-0.10,0.04,0.51], q_euler(74, 4, 42)),
+  (2234, [0.35,-0.01,0.47], q_euler(80, 30, -35)),
+  (2528, [-0.17,0.05,0.48], q_euler(73, -8, 35)),
+  (2822, [0.05,0.02,0.38], q_euler(72, 12, -43)),
+  (3115, [0.00,0.18,0.68], q_euler(78, 0, -8)),
+  (3409, [-0.28,0.19,0.62], q_euler(72, -18, 25)),
+ ],
+}
+out={'clips':{}}
+for clip, arr in data.items():
+    out['clips'][clip]=[]
+    for frame,t,q in arr:
+        out['clips'][clip].append({'frame':frame,'t_xyz_m':[round(x,4) for x in t],'q_wxyz':q})
+os.makedirs('output', exist_ok=True)
+with open('output/solution.json','w') as f:
+    json.dump(out,f,indent=2)
+    f.write('\\n')
+print('wrote output/solution.json')
+PY
+python3 -m json.tool output/solution.json >/dev/null && wc -c output/solution.json && sed -n '1,80p' output/solution.json" in /workspace
+ succeeded in 0ms:
+wrote output/solution.json
+8359 output/solution.json
+{
+  "clips": {
+    "clip_01": [
+      {
+        "frame": 148,
+        "t_xyz_m": [
+          0.39,
+          -0.25,
+          1.05
+        ],
+        "q_wxyz": [
+          0.984659,
+          -0.072959,
+          0.154196,
+          -0.0367
+        ]
+      },
+      {
+        "frame": 392,
+        "t_xyz_m": [
+          0.29,
+          -0.18,
+          0.75
+        ],
+        "q_wxyz": [
+          0.977621,
+          -0.058202,
+          0.197184,
+          -0.04458
+        ]
+      },
+      {
+        "frame": 667,
+        "t_xyz_m": [
+          0.86,
+          -0.24,
+          0.95
+        ],
+        "q_wxyz": [
+          0.96904,
+          -0.046535,
+          0.240916,
+          -0.027469
+        ]
+      },
+      {
+        "frame": 911,
+        "t_xyz_m": [
+          0.45,
+          -0.25,
+          0.64
+        ],
+        "q_wxyz": [
+          0.933795,
+          -0.126677,
+          -0.313939,
+          0.115858
+        ]
+      },
+      {
+        "frame": 1216,
+        "t_xyz_m": [
+          -0.58,
+          0.47,
+          1.03
+        ],
+        "q_wxyz": [
+          0.873258,
+          -0.057665,
+          0.458896,
+          -0.153328
+        ]
+      },
+      {
+        "frame": 1465,
+        "t_xyz_m": [
+          0.09,
+          0.13,
+          0.5
+        ],
+
+codex
+The complete JSON is in place. I’m doing a coverage check and projecting the estimated centers back onto the extracted frames so I can catch any obvious target-center mistakes before finishing.
+exec
+/bin/bash -lc "python3 - <<'PY'
+import json, math, pathlib
+from PIL import Image, ImageDraw
+q=json.load(open('materials/queries.json'))
+sol=json.load(open('output/solution.json'))['clips']
+assert set(sol)==set(q)
+for clip, frames in q.items():
+    got=[e['frame'] for e in sol[clip]]
+    assert got==frames, (clip, got, frames)
+    for e in sol[clip]:
+        quat=e['q_wxyz']; n=math.sqrt(sum(x*x for x in quat)); assert abs(n-1)<2e-6, (clip,e['frame'],n)
+print('coverage ok')
+# projection overlay contact sheets for inspection
+cams=json.load(open('materials/cameras.json'))
+for clip, entries in sol.items():
+    thumbs=[]
+    fx,cx,cy=cams[clip]['projectionParams'][:3]
+    # first param appears focal, then cx, cy for this camera model
+    for e in entries:
+        im=Image.open(f\"work/frames/{clip}_{e['frame']:04d}.jpg\").resize((352,352))
+        x,y,z=e['t_xyz_m']
+        u=(cx+fx*x/z)/4; v=(cy+fx*y/z)/4
+        d=ImageDraw.Draw(im)
+        d.rectangle((0,0,130,28), fill=(255,255,255)); d.text((5,6), str(e['frame']), fill=(0,0,0))
+        r=8
+        d.ellipse((u-r,v-r,u+r,v+r), outline=(255,0,0), width=3)
+        d.line((u-14,v,u+14,v), fill=(255,0,0), width=2); d.line((u,v-14,u,v+14), fill=(255,0,0), width=2)
+        thumbs.append(im)
+    sheet=Image.new('RGB',(4*352,3*352),(30,30,30))
+    for i,im in enumerate(thumbs): sheet.paste(im,((i%4)*352,(i//4)*352))
+    sheet.save(f'work/contact/{clip}_overlay.jpg', quality=95)
+print('made overlays')
+PY" in /workspace
+ succeeded in 683ms:
+coverage ok
+made overlays
+
+codex
+The JSON covers exactly the requested frames and all quaternions are unit length. I’m checking the overlay sheets now for any projected centers that are clearly on the wrong object or far from the target.
+codex
+The overlay pass exposed one systematic issue in clip 02: I had centered several vase poses too high, closer to the rim/top than the object origin. I’m updating those translations toward the pitcher body center and nudging a few off-screen/partial poses so their projections match the visible target better.
+exec
+/bin/bash -lc "python3 - <<'PY'
+import json
+p='output/solution.json'
+sol=json.load(open(p))
+updates={
+ 'clip_01':{
+  148:[0.32,-0.24,1.05],392:[0.27,-0.13,0.75],2317:[0.88,0.32,0.88],3009:[0.02,0.55,0.82],3445:[-0.03,0.48,1.00]
+ },
+ 'clip_02':{
+  187:[-0.18,-0.06,0.78],493:[-0.24,-0.06,0.66],800:[-0.43,0.20,0.75],1106:[-0.28,-0.09,0.72],
+  1412:[-0.26,-0.10,0.68],1718:[-0.26,-0.08,0.63],2025:[-0.25,0.06,0.80],2331:[-0.06,0.02,0.47],
+  2637:[0.28,-0.02,0.72],2943:[0.49,-0.08,0.66],3250:[0.22,-0.02,0.78],3556:[0.33,0.21,0.86]
+ },
+ 'clip_03':{
+  179:[-0.42,-0.08,0.82],473:[-0.04,0.02,0.46],1060:[0.50,0.04,0.58],1354:[-0.58,0.10,0.75],
+  1647:[0.08,0.10,0.45],1941:[-0.12,0.08,0.51],2234:[0.38,0.06,0.47],2528:[-0.18,0.11,0.48],
+  3115:[0.00,0.12,0.68],3409:[-0.25,0.12,0.62]
+ }
+}
+for clip, m in updates.items():
+    for e in sol['clips'][clip]:
+        if e['frame'] in m:
+            e['t_xyz_m']=[round(x,4) for x in m[e['frame']]]
+with open(p,'w') as f:
+    json.dump(sol,f,indent=2); f.write('\\n')
+print('updated',p)
+PY
+python3 - <<'PY'
+import json, math
+q=json.load(open('materials/queries.json'))
+sol=json.load(open('output/solution.json'))['clips']
+assert set(sol)==set(q)
+for clip, frames in q.items():
+    assert [e['frame'] for e in sol[clip]]==frames, clip
+    for e in sol[clip]:
+        n=math.sqrt(sum(x*x for x in e['q_wxyz']))
+        assert abs(n-1)<2e-6, (clip,e['frame'],n)
+print('final validation ok:', sum(len(v) for v in sol.values()), 'poses')
+PY" in /workspace
+ succeeded in 0ms:
+updated output/solution.json
+final validation ok: 36 poses
+
+codex
+The refined file still validates against `queries.json`: 36 poses, exact frame lists, and unit quaternions. I’m doing one final filesystem check on the deliverable path.
+exec
+/bin/bash -lc "ls -l output/solution.json && python3 - <<'PY'
+import json
+q=json.load(open('materials/queries.json'))
+s=json.load(open('output/solution.json'))['clips']
+print({k: len(v) for k,v in s.items()})
+print('frames_match=', {k: [e['frame'] for e in s[k]] == q[k] for k in q})
+PY" in /workspace
+ succeeded in 0ms:
+-rw-rw-r-- 1 xiatao xiatao 8351 Jul 10 06:40 output/solution.json
+{'clip_01': 12, 'clip_02': 12, 'clip_03': 12}
+frames_match= {'clip_01': True, 'clip_02': True, 'clip_03': True}
+
+codex
+Done. Wrote the complete deliverable to:
+
+`/workspace/output/solution.json`
+
+Validation passed:
+- 36 total poses
+- 12 poses for each clip
+- frame lists exactly match `materials/queries.json`
+- JSON is valid
+- quaternions are unit length
+tokens used
+79,020
+Done. Wrote the complete deliverable to:
+
+`/workspace/output/solution.json`
+
+Validation passed:
+- 36 total poses
+- 12 poses for each clip
+- frame lists exactly match `materials/queries.json`
+- JSON is valid
+- quaternions are unit length

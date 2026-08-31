@@ -1,0 +1,199 @@
+{
+  "ledgers": [
+    {
+      "reference_id": "reference_001",
+      "events": [
+        {
+          "activity_type": "person_carries_heavy_object",
+          "start_time_s": 386.033,
+          "end_time_s": 393.767
+        },
+        {
+          "activity_type": "person_carries_heavy_object",
+          "start_time_s": 392.8,
+          "end_time_s": 398.767
+        },
+        {
+          "activity_type": "person_picks_up_object",
+          "start_time_s": 392.9,
+          "end_time_s": 393.767
+        },
+        {
+          "activity_type": "person_puts_down_object",
+          "start_time_s": 397.567,
+          "end_time_s": 398.2
+        }
+      ]
+    },
+    {
+      "reference_id": "reference_002",
+      "events": [
+        {
+          "activity_type": "person_carries_heavy_object",
+          "start_time_s": 1.933,
+          "end_time_s": 11.6
+        },
+        {
+          "activity_type": "person_picks_up_object",
+          "start_time_s": 2.1,
+          "end_time_s": 2.8
+        },
+        {
+          "activity_type": "person_puts_down_object",
+          "start_time_s": 10.033,
+          "end_time_s": 10.7
+        }
+      ]
+    },
+    {
+      "reference_id": "reference_003",
+      "events": [
+        {
+          "activity_type": "person_opens_vehicle_door",
+          "start_time_s": 309.633,
+          "end_time_s": 312.2
+        },
+        {
+          "activity_type": "person_enters_vehicle",
+          "start_time_s": 309.633,
+          "end_time_s": 316.067
+        },
+        {
+          "activity_type": "person_closes_vehicle_door",
+          "start_time_s": 314.067,
+          "end_time_s": 316.067
+        }
+      ]
+    },
+    {
+      "reference_id": "reference_004",
+      "events": [
+        {
+          "activity_type": "person_carries_heavy_object",
+          "start_time_s": 492.3,
+          "end_time_s": 495.433
+        },
+        {
+          "activity_type": "person_picks_up_object",
+          "start_time_s": 492.9,
+          "end_time_s": 493.667
+        },
+        {
+          "activity_type": "person_puts_down_object",
+          "start_time_s": 494.7,
+          "end_time_s": 495.333
+        }
+      ]
+    },
+    {
+      "reference_id": "reference_005",
+      "events": [
+        {
+          "activity_type": "person_picks_up_object",
+          "start_time_s": 147.4,
+          "end_time_s": 148.1
+        },
+        {
+          "activity_type": "person_carries_heavy_object",
+          "start_time_s": 147.4,
+          "end_time_s": 163.867
+        },
+        {
+          "activity_type": "person_puts_down_object",
+          "start_time_s": 162.433,
+          "end_time_s": 163.1
+        }
+      ]
+    },
+    {
+      "reference_id": "reference_006",
+      "events": [
+        {
+          "activity_type": "person_enters_vehicle",
+          "start_time_s": 465.267,
+          "end_time_s": 473.2
+        },
+        {
+          "activity_type": "person_closes_vehicle_door",
+          "start_time_s": 470.967,
+          "end_time_s": 473.2
+        }
+      ]
+    },
+    {
+      "reference_id": "reference_007",
+      "events": [
+        {
+          "activity_type": "person_picks_up_object",
+          "start_time_s": 286.433,
+          "end_time_s": 287.233
+        },
+        {
+          "activity_type": "person_carries_heavy_object",
+          "start_time_s": 286.433,
+          "end_time_s": 291.4
+        },
+        {
+          "activity_type": "person_puts_down_object",
+          "start_time_s": 290.333,
+          "end_time_s": 291.0
+        }
+      ]
+    },
+    {
+      "reference_id": "reference_008",
+      "events": [
+        {
+          "activity_type": "person_picks_up_object",
+          "start_time_s": 531.433,
+          "end_time_s": 532.2
+        },
+        {
+          "activity_type": "person_carries_heavy_object",
+          "start_time_s": 531.433,
+          "end_time_s": 533.967
+        },
+        {
+          "activity_type": "person_puts_down_object",
+          "start_time_s": 533.233,
+          "end_time_s": 533.967
+        }
+      ]
+    },
+    {
+      "reference_id": "reference_009",
+      "events": [
+        {
+          "activity_type": "person_picks_up_object",
+          "start_time_s": 251.067,
+          "end_time_s": 251.867
+        },
+        {
+          "activity_type": "person_carries_heavy_object",
+          "start_time_s": 251.067,
+          "end_time_s": 261.067
+        },
+        {
+          "activity_type": "person_puts_down_object",
+          "start_time_s": 260.067,
+          "end_time_s": 261.067
+        }
+      ]
+    },
+    {
+      "reference_id": "reference_010",
+      "events": [
+        {
+          "activity_type": "person_picks_up_object",
+          "start_time_s": 126.0,
+          "end_time_s": 127.2
+        },
+        {
+          "activity_type": "person_carries_heavy_object",
+          "start_time_s": 126.0,
+          "end_time_s": 138.3
+        }
+      ]
+    }
+  ]
+}

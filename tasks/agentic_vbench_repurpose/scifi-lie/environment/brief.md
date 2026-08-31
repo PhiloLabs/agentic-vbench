@@ -6,4 +6,4 @@ A single narrator carries the repurposed cut end-to-end. One voice, warm but car
 
 End on a brief title-and-channel card, a second or two, not a multi-second pad, leaving the viewer with the title in their head and the channel they came from.
 
-Deliver as 1280×720 H.264 MP4 at 24 fps with stereo audio, exactly 60 seconds long.
+Deliver as 1920×1080 H.264 MP4 at 24 fps with stereo audio, exactly 60 seconds long.

@@ -1,0 +1,4 @@
+{"type":"thread.started","thread_id":"019fe040-8c43-7c33-994a-94337c74207f"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"agent_message","text":"{\"episodes\":[{\"episode_id\":\"episode_01\",\"events\":[]},{\"episode_id\":\"episode_02\",\"events\":[]},{\"episode_id\":\"episode_03\",\"events\":[]},{\"episode_id\":\"episode_04\",\"events\":[]},{\"episode_id\":\"episode_05\",\"events\":[]},{\"episode_id\":\"episode_06\",\"events\":[]}]}"}}
+{"type":"turn.completed","usage":{"input_tokens":18283,"cached_input_tokens":6912,"cache_write_input_tokens":0,"output_tokens":136,"reasoning_output_tokens":65}}

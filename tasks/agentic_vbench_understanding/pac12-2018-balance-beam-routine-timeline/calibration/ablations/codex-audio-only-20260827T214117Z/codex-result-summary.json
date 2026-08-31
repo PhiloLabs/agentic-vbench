@@ -1,0 +1,153 @@
+{
+  "schema_version": 2,
+  "rollout": "codex-audio-only-20260827T214117Z",
+  "run_type": "shortcut_ablation",
+  "ablation": "audio_only",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "harness": "codex",
+  "versions": {
+    "codex": "codex-cli 0.146.0-alpha.3.1",
+    "python": "Python 3.13.0",
+    "ffmpeg": "ffmpeg version 8.1.2",
+    "ffprobe": "ffprobe version 8.1.2"
+  },
+  "input_manifest": {
+    "schema_version": 2,
+    "created_at_utc": "2026-08-27T21:41:21.983048+00:00",
+    "annotation_status_sha256": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+    "canonical_prompt_sha256": "f59124565caa6e74abbf2a9b2d74bb52851a4940bb4dd571b4f11476d6d8e146",
+    "rendered_prompt_sha256": "91c89cb1ca9d259f1a72baff53d56b11f245656873bdfb5a2acbb8f333b3094f",
+    "judge_sha256": "52c4105dced75b354e12865135c2b0399c0f7e5c228f3f7d66b6034717384187",
+    "task_toml_sha256": "ed5d760e71069027dbc3db895723e9556fa0ad7a4c0724ff087275e285c0824a",
+    "delivered_media": {
+      "sha256": "18076f173450eded3922d17d496e53c5c681b9454c407ad7cbd2e31e656b3be6",
+      "bytes": 120910499,
+      "duration_seconds": 8356.334,
+      "audio_streams": 1,
+      "video_streams": 0,
+      "audio_codec": "opus",
+      "timeline_preserved": true
+    },
+    "canonical_prompt_otherwise_unchanged": true,
+    "internet_allowed": false,
+    "outside_knowledge_allowed": false,
+    "resume_or_continuation_allowed": false
+  },
+  "annotation_privacy_linkage": {
+    "frozen_input_status_sha256": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+    "private_prepublication_status_sha256": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+    "frozen_input_matches_private_prepublication_status": true,
+    "current_public_status_sha256": "b73a43657897f3d3604f65d10b22fe5053fc45a2aa0ddf522d79adc983db82c6",
+    "publication_audit": "annotations/publication-redaction-audit.json",
+    "privacy_and_provenance_only_change": true,
+    "task_contract_changed": false
+  },
+  "run": {
+    "command_template": [
+      "codex",
+      "exec",
+      "--json",
+      "--ephemeral",
+      "--ignore-user-config",
+      "--skip-git-repo-check",
+      "--sandbox",
+      "workspace-write",
+      "--model",
+      "gpt-5.6-sol",
+      "--config",
+      "model_reasoning_effort=\"xhigh\"",
+      "-"
+    ],
+    "continued_or_resumed": false,
+    "deadline_seconds": 5400,
+    "elapsed_seconds": 4155.995,
+    "started_at_utc": "2026-08-27T21:42:12.373300+00:00",
+    "finished_at_utc": "2026-08-27T22:51:28.368328+00:00",
+    "process_returncode": 0,
+    "wrapper_exit_code": 0,
+    "timed_out": false,
+    "prompt_sha256": "91c89cb1ca9d259f1a72baff53d56b11f245656873bdfb5a2acbb8f333b3094f"
+  },
+  "verifier": {
+    "reward": 0.0,
+    "details": {
+      "reason": "ok",
+      "n_ground_truth": 23,
+      "n_predicted": 23,
+      "n_invalid_records": 0,
+      "true_positives_complete_record": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "start_tolerance_s": 0.25,
+      "end_tolerance_s": 0.25,
+      "dismount_takeoff_tolerance_s": 0.25,
+      "score_time_tolerance_s": 1.0,
+      "diagnostics": {
+        "broadly_matched_records": 22,
+        "start_within_tolerance": 0,
+        "end_within_tolerance": 0,
+        "dismount_takeoff_within_tolerance": 1,
+        "score_time_within_tolerance": 2,
+        "school_exact": 22,
+        "gymnast_name_exact": 14,
+        "beam_score_exact": 7
+      }
+    }
+  },
+  "tool_calls": {
+    "counting_rule": "Count each item.completed command_execution or file_change as one real completed tool-call turn; failed command executions count because the tool call completed and returned a result.",
+    "real_completed_tool_call_turns": 361,
+    "command_executions": 289,
+    "command_execution_status": {
+      "completed": 246,
+      "failed": 43
+    },
+    "file_changes": 72,
+    "agent_messages_excluded": 13,
+    "gate_note": "The >50 tool-call strong-agent gate does not apply to shortcut ablations."
+  },
+  "offline_audit": {
+    "web_tool_matches": 0,
+    "url_scheme_matches_in_completed_commands": 0,
+    "network_command_matches": 0,
+    "secret_access_indicator_matches_in_completed_commands": 0,
+    "local_system_discovery_completed_commands": 202,
+    "competition_term_matches_in_home_tree_discovery_commands": 0,
+    "post_exit_process_cleanup_verified": true,
+    "result": "pass"
+  },
+  "publication": {
+    "raw_trajectory": {
+      "retained_locally": true,
+      "untouched": true,
+      "records": 740,
+      "sha256": "f3a8d4bd462160c222a640527a53bf74db5a8c174ea616ef3ec090141307fb80"
+    },
+    "published_trajectory": {
+      "path": "codex-gpt-5.6-sol-xhigh.public.jsonl",
+      "records": 740,
+      "sha256": "b1e0fefb31440f38d973c232c4af29573eae14e3972d2a2337091841f1dba205"
+    },
+    "media_command_outputs_redacted": 2,
+    "record_order_and_tool_identifiers_preserved": true,
+    "completed_tool_count_preserved": true,
+    "privacy_scan_passed": true
+  },
+  "gates": {
+    "reward_at_most_0_15": true,
+    "tool_call_gate_applicable": false,
+    "ablation_pass": true
+  },
+  "preserved_outputs": {
+    "rendered_prompt": "codex-initial-prompt.md",
+    "input_manifest": "codex-input-manifest.json",
+    "published_trajectory": "codex-gpt-5.6-sol-xhigh.public.jsonl",
+    "run_metadata": "codex-run.json",
+    "raw_solution": "codex-solution.json",
+    "local_raw_trajectory": "codex-gpt-5.6-sol-xhigh.jsonl",
+    "local_stderr": "codex-stderr.txt",
+    "local_checkpoint": "codex-checkpoint.json"
+  }
+}

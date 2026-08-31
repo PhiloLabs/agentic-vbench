@@ -6,4 +6,4 @@ Let one narrator carry the piece end to end. Calm and soft through the setup, a 
 
 The cut should feel like a short film in itself, not a trailer. A small handful of the source's own key lines, used surgically, will do more than wall-to-wall voice-over. Close on a moment that tells the viewer what genre they're really in, and hold on a quiet title card for a beat at the end (a second or two, not a multi-second pad). The piece should leave the viewer with a small, uneasy smile.
 
-Deliver as a 1280×720 MP4, H.264 video with AAC audio, exactly sixty seconds long.
+Deliver as a 1920×1080 MP4, H.264 video with AAC audio, exactly sixty seconds long.

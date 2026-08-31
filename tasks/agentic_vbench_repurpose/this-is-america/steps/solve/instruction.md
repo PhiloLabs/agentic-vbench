@@ -2,7 +2,7 @@
 
 You're cutting a **75-second repurpose** of *This Is America* by **Childish Gambino**
 (dir. Hiro Murai, 2018) for **Instagram Reels**. Deliverable is **vertical
-720×1280**, target **75 s** (acceptable window 73 – 77 s).
+1080×1920**, target **75 s** (acceptable window 73 – 77 s).
 
 The audience is the Reels feed: people who know the video and people who've
 never seen it. The repurposed cut has to land for both the cult fan and the cold
@@ -39,7 +39,7 @@ wrong against this song.
 Reframe to vertical without cropping Glover's head out of frame whenever he's
 on screen.
 
-**Tech specs.** MP4, H.264 or HEVC, 720×1280 vertical, ≥ 24 fps, AAC stereo at
+**Tech specs.** MP4, H.264 or HEVC, 1080×1920 vertical, ≥ 24 fps, AAC stereo at
 44.1 or 48 kHz, ≥ 1 Mbps video bitrate.
 
 ## Deliverables

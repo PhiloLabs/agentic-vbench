@@ -1,0 +1,22 @@
+{
+  "last_scanned_timestamp": "02:19:16.334",
+  "candidate_routine_windows": [
+    {
+      "gymnast_name": "Justine Callis",
+      "school": "Arizona State",
+      "window": ["00:50:58.600", "00:52:00.200"]
+    },
+    {
+      "gymnast_name": "Destinee Davis",
+      "school": "Oregon State",
+      "window": ["01:36:34.900", "01:37:50.100"]
+    },
+    {
+      "gymnast_name": "Madison Cindric",
+      "school": "Arizona",
+      "window": ["02:11:04.700", "02:12:16.500"]
+    }
+  ],
+  "needs_boundary_review": [],
+  "next_concrete_inspection_step": "None. All routine boundaries and score times have been verified with subsecond precision. Solution written to output/solution.json."
+}

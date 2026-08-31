@@ -1,0 +1,32 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/objects-tabletop-manipulation-6dof-pose-trajectory"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "egocentric", "6dof-pose", "object-tracking", "geometry", "agentic-vbench-objects"]
+# Three egocentric tabletop-manipulation clips, one designated moving object each.
+# Ground truth: per-frame 6DoF object pose from the capture rig's logged object
+# tracking, expressed in each clip's RGB camera frame. Baked at build time; not online.
+source = "egocentric tabletop manipulation clips (head-mounted RGB), logged object-pose ground truth"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 8192
+allow_internet = false
+
+[environment.env]
+HF_TOKEN = "${HF_TOKEN:-}"
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 3600.0
+
+[steps.verifier]
+timeout_sec = 600.0

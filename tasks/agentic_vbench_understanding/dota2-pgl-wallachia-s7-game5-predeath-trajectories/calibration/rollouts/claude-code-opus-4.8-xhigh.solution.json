@@ -1,0 +1,355 @@
+{
+  "events": [
+    {
+      "game": 5,
+      "clock": "5:16",
+      "victim": "tOfu",
+      "killer": "Malady",
+      "cell_10s_before": "C11",
+      "cell_5s_before": "C12",
+      "death_cell": "C12"
+    },
+    {
+      "game": 5,
+      "clock": "5:17",
+      "victim": "Saksa",
+      "killer": "m1CKe",
+      "cell_10s_before": "D11",
+      "cell_5s_before": "D11",
+      "death_cell": "D11"
+    },
+    {
+      "game": 5,
+      "clock": "5:26",
+      "victim": "m1CKe",
+      "killer": "DM",
+      "cell_10s_before": "E12",
+      "cell_5s_before": "E11",
+      "death_cell": "E10"
+    },
+    {
+      "game": 5,
+      "clock": "10:20",
+      "victim": "Malady",
+      "killer": "Nisha",
+      "cell_10s_before": "E7",
+      "cell_5s_before": "E6",
+      "death_cell": "E5"
+    },
+    {
+      "game": 5,
+      "clock": "10:25",
+      "victim": "Ace",
+      "killer": "watson",
+      "cell_10s_before": "D7",
+      "cell_5s_before": "E7",
+      "death_cell": "F7"
+    },
+    {
+      "game": 5,
+      "clock": "10:37",
+      "victim": "Nisha",
+      "killer": "CHIRA_JUNIOR",
+      "cell_10s_before": "G7",
+      "cell_5s_before": "G7",
+      "death_cell": "H6"
+    },
+    {
+      "game": 5,
+      "clock": "11:34",
+      "victim": "Boxi",
+      "killer": "Saksa",
+      "cell_10s_before": "F7",
+      "cell_5s_before": "E7",
+      "death_cell": "F8"
+    },
+    {
+      "game": 5,
+      "clock": "11:40",
+      "victim": "Nisha",
+      "killer": "DM",
+      "cell_10s_before": "F7",
+      "cell_5s_before": "F7",
+      "death_cell": "G8"
+    },
+    {
+      "game": 5,
+      "clock": "11:54",
+      "victim": "tOfu",
+      "killer": "watson",
+      "cell_10s_before": "I8",
+      "cell_5s_before": "I7",
+      "death_cell": "H7"
+    },
+    {
+      "game": 5,
+      "clock": "22:51",
+      "victim": "Boxi",
+      "killer": "watson",
+      "cell_10s_before": "H3",
+      "cell_5s_before": "H4",
+      "death_cell": "H2"
+    },
+    {
+      "game": 5,
+      "clock": "22:57",
+      "victim": "Malady",
+      "killer": "m1CKe",
+      "cell_10s_before": "I5",
+      "cell_5s_before": "I4",
+      "death_cell": "I3"
+    },
+    {
+      "game": 5,
+      "clock": "22:59",
+      "victim": "Ace",
+      "killer": "CHIRA_JUNIOR",
+      "cell_10s_before": "H4",
+      "cell_5s_before": "I3",
+      "death_cell": "H5"
+    },
+    {
+      "game": 5,
+      "clock": "23:00",
+      "victim": "tOfu",
+      "killer": "CHIRA_JUNIOR",
+      "cell_10s_before": "H4",
+      "cell_5s_before": "I3",
+      "death_cell": "H3"
+    },
+    {
+      "game": 5,
+      "clock": "23:54",
+      "victim": "DM",
+      "killer": "Boxi",
+      "cell_10s_before": "D8",
+      "cell_5s_before": "D8",
+      "death_cell": "F6"
+    },
+    {
+      "game": 5,
+      "clock": "24:03",
+      "victim": "Boxi",
+      "killer": "Saksa",
+      "cell_10s_before": "F5",
+      "cell_5s_before": "D8",
+      "death_cell": "C8"
+    },
+    {
+      "game": 5,
+      "clock": "24:05",
+      "victim": "m1CKe",
+      "killer": "Saksa",
+      "cell_10s_before": "H9",
+      "cell_5s_before": "G9",
+      "death_cell": "G10"
+    },
+    {
+      "game": 5,
+      "clock": "30:44",
+      "victim": "Saksa",
+      "killer": "Nisha",
+      "cell_10s_before": "M4",
+      "cell_5s_before": "M3",
+      "death_cell": "L3"
+    },
+    {
+      "game": 5,
+      "clock": "30:47",
+      "victim": "Boxi",
+      "killer": "DM",
+      "cell_10s_before": "M3",
+      "cell_5s_before": "M2",
+      "death_cell": "L2"
+    },
+    {
+      "game": 5,
+      "clock": "30:48",
+      "victim": "Ace",
+      "killer": "watson",
+      "cell_10s_before": "M3",
+      "cell_5s_before": "M3",
+      "death_cell": "M2"
+    },
+    {
+      "game": 5,
+      "clock": "30:59",
+      "victim": "tOfu",
+      "killer": "DM",
+      "cell_10s_before": "L3",
+      "cell_5s_before": "L4",
+      "death_cell": "L3"
+    },
+    {
+      "game": 5,
+      "clock": "32:53",
+      "victim": "Saksa",
+      "killer": "Boxi",
+      "cell_10s_before": "I8",
+      "cell_5s_before": "J7",
+      "death_cell": "K7"
+    },
+    {
+      "game": 5,
+      "clock": "32:55",
+      "victim": "DM",
+      "killer": "Ace",
+      "cell_10s_before": "I7",
+      "cell_5s_before": "L7",
+      "death_cell": "L7"
+    },
+    {
+      "game": 5,
+      "clock": "33:08",
+      "victim": "watson",
+      "killer": "tOfu",
+      "cell_10s_before": "L7",
+      "cell_5s_before": "M7",
+      "death_cell": "L7"
+    },
+    {
+      "game": 5,
+      "clock": "33:13",
+      "victim": "Ace",
+      "killer": "CHIRA_JUNIOR",
+      "cell_10s_before": "M8",
+      "cell_5s_before": "L8",
+      "death_cell": "K6"
+    },
+    {
+      "game": 5,
+      "clock": "33:18",
+      "victim": "CHIRA_JUNIOR",
+      "killer": "Nisha",
+      "cell_10s_before": "G7",
+      "cell_5s_before": "K7",
+      "death_cell": "M6"
+    },
+    {
+      "game": 5,
+      "clock": "37:01",
+      "victim": "Boxi",
+      "killer": "Malady",
+      "cell_10s_before": "G6",
+      "cell_5s_before": "F6",
+      "death_cell": "F6"
+    },
+    {
+      "game": 5,
+      "clock": "37:07",
+      "victim": "Ace",
+      "killer": "CHIRA_JUNIOR",
+      "cell_10s_before": "G6",
+      "cell_5s_before": "G6",
+      "death_cell": "G6"
+    },
+    {
+      "game": 5,
+      "clock": "37:10",
+      "victim": "Malady",
+      "killer": "Nisha",
+      "cell_10s_before": "F6",
+      "cell_5s_before": "F6",
+      "death_cell": "F6"
+    },
+    {
+      "game": 5,
+      "clock": "37:11",
+      "victim": "CHIRA_JUNIOR",
+      "killer": "Nisha",
+      "cell_10s_before": "F5",
+      "cell_5s_before": "G5",
+      "death_cell": "G5"
+    },
+    {
+      "game": 5,
+      "clock": "43:00",
+      "victim": "m1CKe",
+      "killer": "watson",
+      "cell_10s_before": "H3",
+      "cell_5s_before": "H3",
+      "death_cell": "H4"
+    },
+    {
+      "game": 5,
+      "clock": "43:03",
+      "victim": "tOfu",
+      "killer": "CHIRA_JUNIOR",
+      "cell_10s_before": "H3",
+      "cell_5s_before": "H4",
+      "death_cell": "I4"
+    },
+    {
+      "game": 5,
+      "clock": "43:04",
+      "victim": "Boxi",
+      "killer": "Malady",
+      "cell_10s_before": "H3",
+      "cell_5s_before": "H4",
+      "death_cell": "I4"
+    },
+    {
+      "game": 5,
+      "clock": "44:56",
+      "victim": "Nisha",
+      "killer": "CHIRA_JUNIOR",
+      "cell_10s_before": "J11",
+      "cell_5s_before": "J12",
+      "death_cell": "J12"
+    },
+    {
+      "game": 5,
+      "clock": "45:02",
+      "victim": "m1CKe",
+      "killer": "Malady",
+      "cell_10s_before": "J12",
+      "cell_5s_before": "I12",
+      "death_cell": "I11"
+    },
+    {
+      "game": 5,
+      "clock": "45:03",
+      "victim": "Boxi",
+      "killer": "DM",
+      "cell_10s_before": "L11",
+      "cell_5s_before": "L11",
+      "death_cell": "K11"
+    },
+    {
+      "game": 5,
+      "clock": "45:05",
+      "victim": "CHIRA_JUNIOR",
+      "killer": "Nisha",
+      "cell_10s_before": "H12",
+      "cell_5s_before": "J11",
+      "death_cell": "J12"
+    },
+    {
+      "game": 5,
+      "clock": "50:22",
+      "victim": "Boxi",
+      "killer": "DM",
+      "cell_10s_before": "K13",
+      "cell_5s_before": "J13",
+      "death_cell": "J12"
+    },
+    {
+      "game": 5,
+      "clock": "50:24",
+      "victim": "Malady",
+      "killer": "m1CKe",
+      "cell_10s_before": "I13",
+      "cell_5s_before": "I13",
+      "death_cell": "I12"
+    },
+    {
+      "game": 5,
+      "clock": "50:30",
+      "victim": "DM",
+      "killer": "Nisha",
+      "cell_10s_before": "I13",
+      "cell_5s_before": "I13",
+      "death_cell": "I12"
+    }
+  ]
+}

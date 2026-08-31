@@ -1,0 +1,66 @@
+{
+  "artifacts": [
+    {
+      "bytes": 5783,
+      "path": "antigravity-initial-prompt.md",
+      "role": "initial_prompt",
+      "sha256": "f3352551912cf61a25f7c13b15fc7293ccf66320e1edab74c64e98e0b0c5ee1d"
+    },
+    {
+      "bytes": 1305666,
+      "path": "antigravity-gemini-3.5-flash-high.public.jsonl",
+      "role": "textual_trajectory",
+      "sha256": "8d5d0bed8afb7a060cfac944815b25c3a78487759f5a902fc9b87713e69b91b6"
+    },
+    {
+      "bytes": 1184,
+      "path": "antigravity-input-manifest.json",
+      "role": "input_manifest",
+      "sha256": "c5b9544b75b42b92b526cc79807b8a82dd9ef95a5c088b4c5c65f76da4ca62cd"
+    },
+    {
+      "bytes": 823,
+      "path": "antigravity-solution.json",
+      "role": "solution",
+      "sha256": "a99d5e5257ed4755e1eca16bf4eddb4ea8dd6b512479ecd1094e5335d5f008a0"
+    },
+    {
+      "bytes": 684,
+      "path": "antigravity-checkpoint.json",
+      "role": "checkpoint",
+      "sha256": "3f31c6c4b1896df1f330b056cc3da5f4c9a694b3c85485d2e9d8c3cdbd36b446"
+    },
+    {
+      "bytes": 958,
+      "path": "antigravity-run.json",
+      "role": "run_metadata",
+      "sha256": "ca4127e2b36f6debc66666a511ca947adacd17e59cc1b16eb7aa54393f28ab32"
+    },
+    {
+      "bytes": 1127,
+      "path": "antigravity-tool-call-count.json",
+      "role": "tool_call_count",
+      "sha256": "e3fa7a4c294194212ed343e495da500837a6836d117dae544b862f1ac8d1207b"
+    },
+    {
+      "bytes": 1592,
+      "path": "antigravity-audit.json",
+      "role": "audit",
+      "sha256": "1e03a6e0f92e0c4807e4b07300287e51a70496371cfdcf75f516c39e6072ddd0"
+    },
+    {
+      "bytes": 9200,
+      "path": "antigravity-result-summary.json",
+      "role": "result_summary",
+      "sha256": "f0a1421808d2ca0c172bc054a8c4d9fe3854531842b5a0a6f35a79bf77a5a9d4"
+    },
+    {
+      "bytes": 6827,
+      "path": "antigravity-publication-redaction-audit.json",
+      "role": "publication_redaction_audit",
+      "sha256": "49d039591a6bea5c5abdd591ad57cc7b56c7e293244882e641734defc210b4cd"
+    }
+  ],
+  "purpose": "compact_publication_bundle",
+  "schema_version": 1
+}

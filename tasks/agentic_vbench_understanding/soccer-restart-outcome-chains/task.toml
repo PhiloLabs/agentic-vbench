@@ -1,0 +1,35 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/soccer-restart-outcome-chains"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "sports-analytics", "soccer", "event-timeline", "agentic-vbench-understanding"]
+# Full 90-minute broadcast, both halves concatenated. Bundesliga 2016-17, Mainz 05 vs
+# Borussia Dortmund (1-1). Ground truth: SoccerNet-v2 published multi-annotator
+# Labels-v2.json (free, no NDA), transformed mechanically by build_gt.py.
+source = "SoccerNet-v2 germany_bundesliga/2016-2017 Mainz 05 - Borussia Dortmund (Labels-v2.json)"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+# A full ~90-min broadcast re-encoded to 720p is a few GB; give the build and trial room.
+storage_mb = 16384
+# The clip is baked at build time and the answer is not online: keep this false.
+allow_internet = false
+
+[environment.env]
+HF_TOKEN = "${HF_TOKEN:-}"
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# A full match is long: give the agent real time to sample and tally 80+ restarts.
+timeout_sec = 3600.0
+
+[steps.verifier]
+timeout_sec = 600.0

@@ -6,7 +6,7 @@ The reel should feel like the fight did. Harhoff on the front foot from the firs
 
 Open on something that earns the next fifteen seconds. A punch landing in the broadcast's own voice, not a channel logo or a sponsor card. Close on a brief title card with the final result. The two boxers and the winner by unanimous decision. A second or two, not a dragged-out pad.
 
-Deliver as a 720×1280 vertical MP4, 75 seconds, with the broadcast's native audio and any music bed mixed underneath.
+Deliver as a 1080×1920 vertical MP4, 75 seconds, with the broadcast's native audio and any music bed mixed underneath.
 
 ## Deliverables
 

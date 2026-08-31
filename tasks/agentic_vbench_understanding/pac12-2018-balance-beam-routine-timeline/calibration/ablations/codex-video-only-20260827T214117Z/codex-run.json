@@ -1,0 +1,35 @@
+{
+  "command_template": [
+    "codex",
+    "exec",
+    "--json",
+    "--ephemeral",
+    "--ignore-user-config",
+    "--skip-git-repo-check",
+    "--sandbox",
+    "workspace-write",
+    "--model",
+    "gpt-5.6-sol",
+    "--config",
+    "model_reasoning_effort=\"xhigh\"",
+    "-"
+  ],
+  "continued_or_resumed": false,
+  "cwd": "/workspace",
+  "deadline_seconds": 5400,
+  "elapsed_seconds": 1908.435,
+  "finished_at_utc": "2026-08-27T22:15:07.227118+00:00",
+  "process_returncode": 0,
+  "prompt_sha256": "aba8450917712b59c4545258a8f63be16c0455dab1dcf95655161d70322d85a3",
+  "public_metadata_path_localization": {
+    "fresh_workspace": "/workspace",
+    "note": "Only derived run-control metadata paths were localized; the raw Codex trajectory is untouched.",
+    "repository_prefix": "<repo>"
+  },
+  "schema_version": 1,
+  "started_at_utc": "2026-08-27T21:43:18.792184+00:00",
+  "stderr_artifact": "codex-stderr.txt",
+  "stdout_artifact": "codex-gpt-5.6-sol-xhigh.jsonl",
+  "timed_out": false,
+  "wrapper_exit_code": 0
+}

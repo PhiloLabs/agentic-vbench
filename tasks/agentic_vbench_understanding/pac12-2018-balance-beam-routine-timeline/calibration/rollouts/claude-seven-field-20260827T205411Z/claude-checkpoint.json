@@ -1,0 +1,12 @@
+{
+  "last_scanned": "02:19:00 (whole file overview)",
+  "structure": "2018 Pac-12 Gym Champ Session 1. Beam rotations: R1 Stanford ~0:03-0:40, R2 Arizona State ~0:44-1:03, R3 Oregon State ~1:24-1:40, R4 Arizona ~1:48-2:12. Final standings jumbotron ~2:15:15.",
+  "beam_subtotals_from_standings_0215": {"Oregon State": 49.200, "Arizona State": 49.075, "Stanford": 48.975, "Arizona": 49.225},
+  "arizona_state_beam_lineup_order_and_scores": {"1 Cairo Leonard-Baker": 9.750, "2 Heather Udowitch": 9.800, "3 Anne Kuhm": 9.850, "4 Morgan Wilson": 9.750, "5 Ashley Szafranski": 9.875, "6 Justine Callis": "9.800 (inferred: 49.075-49.025+9.750)"},
+  "oregon_state_beam_partial": {"McKenna Singley": 9.850, "Alyssa Minyard": 9.825, "Kaitlyn Yanish": 9.800, "Maela Lazaro": "?", "Sabrina Gill": "?", "Destinee Davis": "6th inferred"},
+  "arizona_beam_partial_from_overview": {"Haylie Hendrickson": 9.850, "Maddi Leydin": 9.800, "Kennady Schneider": 9.800, "Courtney Cowles": 9.850, "Victoria Ortiz": "?", "Madison Cindric": "?"},
+  "completed_output_routines": ["ASU Szafranski (0:55:46.7-0:57:02.5)", "ASU Callis (1:01:08.4-1:02:35.0)"],
+  "need_boundary_review": ["ASU CLB/Udowitch/Kuhm/Wilson (routines ~0:45-0:55)", "all OSU routines ~1:24-1:40", "all Arizona routines ~1:48-2:12", "all Stanford routines ~0:03-0:40", "Stanford beam lineup box not yet located"],
+  "next_step": "Locate remaining rotations' routine boundaries with fps=8-15 windows (mount+dismount) and read each school's beam lineup box for names/scores; use overview montages M_* and mont_* as maps. Note: accurate ffmpeg -ss seeks match real time; the coarse 30s overview labels drift ~+10-25s.",
+  "notes": "Boundary method: python3 work/mont.py START DUR FPS NAME COLS SIZE builds labeled montage. Dismount/landing are unambiguous; mounts harder. Score appears in left lineup box on return to apparatus, not as popup."
+}

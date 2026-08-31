@@ -1,0 +1,34 @@
+{
+  "artifacts_scanned": [
+    "claude-code-opus-4.8-high.jsonl",
+    "claude-stderr.txt",
+    "claude-initial-prompt.md",
+    "claude-solution.json",
+    "claude-checkpoint.json"
+  ],
+  "checks": {
+    "api_retry_events": 0,
+    "authentication_failure_matches": 0,
+    "bash_commands_with_url_schemes": 0,
+    "credential_value_pattern_matches": 0,
+    "network_capable_bash_commands": 0,
+    "permission_denials": 0,
+    "rate_limit_event_statuses": [
+      "allowed",
+      "allowed",
+      "allowed_warning",
+      "allowed_warning"
+    ],
+    "secret_access_indicator_bash_commands": 0,
+    "server_web_fetch_requests": 0,
+    "server_web_search_requests": 0,
+    "unique_bash_commands_scanned": 24,
+    "web_tool_uses": 0
+  },
+  "created_at_utc": "2026-08-27T21:17:12.131624+00:00",
+  "method": "Parsed every native JSONL record and unique tool-use input; audited every Bash command for URL schemes, network-capable commands, and secret-access indicators; scanned non-image text plus stderr/auth evidence for credential and authentication-failure patterns.",
+  "no_prohibited_web_or_network_use": true,
+  "no_secret_access_or_exposure_detected": true,
+  "result": "pass",
+  "schema_version": 1
+}

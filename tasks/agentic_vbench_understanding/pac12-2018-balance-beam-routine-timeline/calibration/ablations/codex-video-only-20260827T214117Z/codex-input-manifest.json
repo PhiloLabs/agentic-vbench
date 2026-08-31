@@ -1,0 +1,82 @@
+{
+  "ablation": "video_only",
+  "canonical_source": {
+    "bytes": 1791218588,
+    "path": "work/source/source.mp4",
+    "probe": {
+      "format": {
+        "duration": "8356.334000",
+        "size": "1791218588"
+      },
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "height": 720,
+          "index": 0,
+          "width": 1280
+        },
+        {
+          "codec_name": "opus",
+          "codec_type": "audio",
+          "index": 1
+        }
+      ]
+    },
+    "sha256": "7dfc9e139254cc9480948af734988bdebc796c89c6e5d439055a248c251130cb"
+  },
+  "created_at_utc": "2026-08-27T21:42:45.597364+00:00",
+  "deadline_seconds": 5400,
+  "degradation": "Full source video with every audio stream removed; no other media or task-contract change.",
+  "fresh_workspace": true,
+  "frozen_inputs": {
+    "annotation_status": "e77e5ee7615efa685fa63c0009a205e37c264b2b92bd21e80c9474a6b05e57a3",
+    "ground_truth": "c4860ff91b27f036d1e6e6e8b8c98324b485db7b3d719af47fb173ba79ff5758",
+    "instruction": "f59124565caa6e74abbf2a9b2d74bb52851a4940bb4dd571b4f11476d6d8e146",
+    "judge": "52c4105dced75b354e12865135c2b0399c0f7e5c228f3f7d66b6034717384187",
+    "task_toml": "ed5d760e71069027dbc3db895723e9556fa0ad7a4c0724ff087275e285c0824a"
+  },
+  "model": "gpt-5.6-sol",
+  "no_resume_or_continuation": true,
+  "presented_input": {
+    "bytes": 1666338607,
+    "path": "materials/source.mp4",
+    "probe": {
+      "format": {
+        "duration": "8356.314633",
+        "size": "1666338607"
+      },
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "codec_name": "h264",
+          "codec_type": "video",
+          "height": 720,
+          "index": 0,
+          "width": 1280
+        }
+      ]
+    },
+    "sha256": "00012d2484039466a6b4784f8b0ee97822e54ea56e2397bb001c932cf07b1166"
+  },
+  "prompt": {
+    "adaptations": [
+      "declare audio removal",
+      "refer to silent video as source of truth",
+      "localize /workspace paths only"
+    ],
+    "canonical_adapted_sha256": "7b98ea5b920bc7bffcd5accaa17cd450913360c49adbc511eded6b79e26274ca",
+    "rendered_sha256": "aba8450917712b59c4545258a8f63be16c0455dab1dcf95655161d70322d85a3"
+  },
+  "public_packaging": {
+    "derived_video_in_public_set": false,
+    "local_input_retained": "/workspace/materials/source.mp4",
+    "reason": "The 1.6 GB silent derivative is omitted; exact digest, byte count, stream probe, and canonical-source digest are pinned in this manifest."
+  },
+  "reasoning_effort": "xhigh",
+  "schema_version": 1,
+  "workspace": "/workspace"
+}

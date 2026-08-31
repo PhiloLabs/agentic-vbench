@@ -4,7 +4,7 @@ What we want the reel to do is leave a viewer with the take of the night. Not a 
 
 Stay in Kimmel's voice all the way through. Every word a viewer hears should be him on the show, his stand-up, the clips he's reacting to, the Lindell parody. No new narrator summarizing the bits over top. Burn in English captions across every second of speech so a viewer with sound off still lands the joke. Keep them tight to what's being said and legible against the skyline backdrop and the news graphics. Most of the runtime should be Kimmel on camera at his desk. Lean on the news clips and Lindell footage where they earn their place, but it should read as a Kimmel reel, not a compilation.
 
-Open on something with snap, a hard line, not "thanks for watching." Close on a punchline that lands. A one-second end card with show and episode is fine; don't let it pad. Deliver as 1280x720 H.264 MP4, eighty seconds long.
+Open on something with snap, a hard line, not "thanks for watching." Close on a punchline that lands. A one-second end card with show and episode is fine; don't let it pad. Deliver as 1920x1080 H.264 MP4, eighty seconds long.
 
 ## Deliverables
 

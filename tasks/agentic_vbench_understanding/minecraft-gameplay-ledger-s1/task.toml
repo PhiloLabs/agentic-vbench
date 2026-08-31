@@ -1,0 +1,31 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/minecraft-gameplay-ledger-s1"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "game-analysis", "minecraft", "embodied", "first-person", "event-timeline", "long-horizon", "synthetic-ground-truth", "agentic-vbench-understanding"]
+# 238-min FIRST-PERSON gameplay in a generated world (mineflayer bot: 8 biomes x9 laps,
+# mine/place/kill with sword and bow, 27 structures built on camera, a staircase mine).
+# GT = the bot's own action events (mine/place/kill + weapon) with each event's video time t,
+# machine-exact. Scored by order-preserving LCS within a +/-10s window. Reconstruct what a
+# player/embodied agent did from first-person footage.
+source = "synthetic: Paper 1.16.5 generated world + mineflayer generator/bot_play8.js (first-person render, HUD composited from the bot's held-item timeline)"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 8192
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 3600.0
+
+[steps.verifier]
+timeout_sec = 600.0

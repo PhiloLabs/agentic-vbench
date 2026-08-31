@@ -1,0 +1,80 @@
+{
+  "retrieved_utc": "2026-07-16",
+  "official_sources": {
+    "speaker_list": {
+      "url": "https://www.europarl.europa.eu/plenary/en/previousDebate/pdf.html?internalEPId=2017076952270&sessionDay=2026-05-20",
+      "sha256": "eb811ce411f73fb09442c3c7cc2d874993a1006cb28d1c3e8f9011093338101b",
+      "pages": 3,
+      "parsed_records": 170
+    },
+    "debate_details": {
+      "url": "https://www.europarl.europa.eu/plenary/en/debate-details.html?date=20260520&detailBy=date",
+      "sha256": "54361bba619db5fc59aa300c22865a9fd568264e5c5f1a3ec981d72cc89c99e3",
+      "cross_checked_records": 170
+    },
+    "player_state": {
+      "url": "https://control.eup.glcloud.eu/content-manager/content-page/20260520-0900-PLENARY",
+      "sha256": "0378473f655922135f5d39b5f4b7b04eb6dc3271eeccb1349af03cbe33179b7b",
+      "session_start_utc": "2026-05-20T07:00:15Z",
+      "debate_start_utc": "2026-05-20T07:59:32Z",
+      "official_clock_delta_seconds": 3557,
+      "hls_preseek_seconds": 3564.25,
+      "measured_segment_compensation_seconds": 7.25,
+      "subsegment_alignment_pad_seconds": 0.5
+    },
+    "hls_master": {
+      "url": "https://vod.media.eup.glcloud.eu/i/2026/05/20/20260520-0900-PLENARY/20260520-0900-PLENARY_,360p,720p,540p,1080p,.mp4/master.m3u8",
+      "sha256": "923db10b55136b18419f7a697772258b5855b6d64bbae09c4ea43a7cf7ca260b"
+    },
+    "mep_directory": {
+      "url": "https://data.europarl.europa.eu/api/v2/meps?format=application%2Fld%2Bjson&offset=0&limit=10000"
+    }
+  },
+  "ground_truth_build": {
+    "debate_start_clock": "09:59:32",
+    "debate_end_clock": "12:07:14",
+    "selection_rule": {
+      "exclude_role": "Vice-President",
+      "minimum_official_duration_s": 30
+    },
+    "anonymization_seed": 20260715,
+    "official_records": 170,
+    "selected_turns": 86,
+    "selected_speakers": 79,
+    "roster_speakers": 742,
+    "distractors": 663,
+    "language_source": "official per-unit original-language speech URL suffix",
+    "excerpt_source": "English meaning-level semantic cards derived from complete official per-unit intervention DOCX transcripts",
+    "excerpt_seed": 20260717,
+    "gt_sha256": "d6132575d114be9d3a23884c781b98a2af6b472797e980421ce3578a629bbb73",
+    "excerpts_sha256": "4137bc63db3590aefd27df8d3e8ff0285c95f8af8d1c13a630065525d24d74f1",
+    "constructor": "build_ground_truth.py"
+  },
+  "published_materials": {
+    "repository": "https://huggingface.co/datasets/Jordan8717/agentic-vbench-europarl",
+    "video_revision": "52c28b43c496e842f12cb2b31e08bd14208b87d8",
+    "roster_revision": "adc020288555054866734b29e431795a9ad6b32a",
+    "video_sha256": "fef8b986d03d35d2d61b2ed8104f130dbc125f95cfee8704cee121cc5a2f4e8e",
+    "roster_sha256": "f8ad7ab83278a2112c2ceab8e13accd373005ef53ef5388588727baa99eef0ea",
+    "credit": "\u00a9 European Union, 2026 \u2014 Source: European Parliament"
+  },
+  "language_tool": {
+    "model": "speechbrain/lang-id-voxlingua107-ecapa",
+    "revision": "0253049ae131d6a4be1c4f0d8b0ff483a0f8c8e9",
+    "license": "Apache-2.0",
+    "task_language_codes": 21,
+    "qualification_turns": 86,
+    "qualification_correct": 82,
+    "qualification_accuracy": 0.953488
+  },
+  "transcription_tool": {
+    "package": "openai-whisper",
+    "package_version": "20250625",
+    "model": "base",
+    "model_sha256": "ed3a0b6b1c0edf879ad9b11b1af5a0e6ab5db9205f891f668f8b0e6c6326e34e",
+    "modes": [
+      "transcribe",
+      "translate_to_english"
+    ]
+  }
+}

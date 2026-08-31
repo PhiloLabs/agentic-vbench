@@ -1,0 +1,166 @@
+{
+  "events": [
+    {
+      "game": 5,
+      "clock": "05:24",
+      "victim": "Boxi",
+      "killer": "watson",
+      "cell_10s_before": "E8",
+      "cell_5s_before": "E8",
+      "death_cell": "F8"
+    },
+    {
+      "game": 5,
+      "clock": "05:27",
+      "victim": "Saksa",
+      "killer": "m1CKe",
+      "cell_10s_before": "F8",
+      "cell_5s_before": "H8",
+      "death_cell": "H8"
+    },
+    {
+      "game": 5,
+      "clock": "05:35",
+      "victim": "m1CKe",
+      "killer": "DM",
+      "cell_10s_before": "H8",
+      "cell_5s_before": "H8",
+      "death_cell": "H8"
+    },
+    {
+      "game": 5,
+      "clock": "20:46",
+      "victim": "CHIRA_JUNIOR",
+      "killer": "tOfu",
+      "cell_10s_before": "H8",
+      "cell_5s_before": "I8",
+      "death_cell": "J8"
+    },
+    {
+      "game": 5,
+      "clock": "20:59",
+      "victim": "Malady",
+      "killer": "tOfu",
+      "cell_10s_before": "I8",
+      "cell_5s_before": "J8",
+      "death_cell": "J6"
+    },
+    {
+      "game": 5,
+      "clock": "21:00",
+      "victim": "Saksa",
+      "killer": "tOfu",
+      "cell_10s_before": "I8",
+      "cell_5s_before": "J8",
+      "death_cell": "J6"
+    },
+    {
+      "game": 5,
+      "clock": "31:00",
+      "victim": "Saksa",
+      "killer": "tOfu",
+      "cell_10s_before": "H8",
+      "cell_5s_before": "H8",
+      "death_cell": "H6"
+    },
+    {
+      "game": 5,
+      "clock": "31:02",
+      "victim": "tOfu",
+      "killer": "watson",
+      "cell_10s_before": "H8",
+      "cell_5s_before": "H6",
+      "death_cell": "I6"
+    },
+    {
+      "game": 5,
+      "clock": "31:09",
+      "victim": "Boxi",
+      "killer": "watson",
+      "cell_10s_before": "H6",
+      "cell_5s_before": "I6",
+      "death_cell": "I6"
+    },
+    {
+      "game": 5,
+      "clock": "33:11",
+      "victim": "Saksa",
+      "killer": "tOfu",
+      "cell_10s_before": "H8",
+      "cell_5s_before": "H8",
+      "death_cell": "H8"
+    },
+    {
+      "game": 5,
+      "clock": "33:19",
+      "victim": "watson",
+      "killer": "tOfu",
+      "cell_10s_before": "H8",
+      "cell_5s_before": "H8",
+      "death_cell": "H6"
+    },
+    {
+      "game": 5,
+      "clock": "33:27",
+      "victim": "tOfu",
+      "killer": "watson",
+      "cell_10s_before": "H8",
+      "cell_5s_before": "H6",
+      "death_cell": "I6"
+    },
+    {
+      "game": 5,
+      "clock": "33:36",
+      "victim": "CHIRA_JUNIOR",
+      "killer": "tOfu",
+      "cell_10s_before": "H6",
+      "cell_5s_before": "I6",
+      "death_cell": "I6"
+    },
+    {
+      "game": 5,
+      "clock": "33:48",
+      "victim": "tOfu",
+      "killer": "watson",
+      "cell_10s_before": "I6",
+      "cell_5s_before": "I6",
+      "death_cell": "J6"
+    },
+    {
+      "game": 5,
+      "clock": "34:00",
+      "victim": "Saksa",
+      "killer": "tOfu",
+      "cell_10s_before": "I6",
+      "cell_5s_before": "J6",
+      "death_cell": "J4"
+    },
+    {
+      "game": 5,
+      "clock": "34:15",
+      "victim": "watson",
+      "killer": "tOfu",
+      "cell_10s_before": "J6",
+      "cell_5s_before": "J4",
+      "death_cell": "K4"
+    },
+    {
+      "game": 5,
+      "clock": "34:20",
+      "victim": "Saksa",
+      "killer": "Ace",
+      "cell_10s_before": "J4",
+      "cell_5s_before": "K4",
+      "death_cell": "K4"
+    },
+    {
+      "game": 5,
+      "clock": "34:30",
+      "victim": "tOfu",
+      "killer": "watson",
+      "cell_10s_before": "K4",
+      "cell_5s_before": "K4",
+      "death_cell": "L4"
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+  "binary_handling": {
+    "database_contains_media_references_not_inline_media_bodies": true,
+    "media_bodies_replaced": 85,
+    "media_body_source": "untouched antigravity-native-brain.tar members referenced by database media metadata",
+    "media_placeholders_include_sha256_and_bytes": true,
+    "provider_signature_bodies_replaced": 370,
+    "provider_signature_placeholders_include_sha256_and_bytes": true,
+    "unique_media_bodies": 85
+  },
+  "destination": {
+    "bytes": 1305666,
+    "lines": 768,
+    "path": "antigravity-gemini-3.5-flash-high.public.jsonl",
+    "sha256": "8d5d0bed8afb7a060cfac944815b25c3a78487759f5a902fc9b87713e69b91b6"
+  },
+  "extraction": {
+    "db_index_range": [
+      0,
+      767
+    ],
+    "db_indices_contiguous_and_preserved": true,
+    "db_rows": 768,
+    "protobuf_field_map": {
+      "101.field114.field1": "system message",
+      "132.field140.field2.field1": "tool textual result",
+      "132.field140.field2.field4": "media reference",
+      "132.field148": "background-task launch metadata",
+      "132.field31.field2": "invalid pre-execution error",
+      "132.field5.field4": "tool id, name, arguments, and provider signature",
+      "14.field19.field2": "user message",
+      "15.field20.field1": "assistant message",
+      "15.field20.field6": "model message id",
+      "15.field20.field7": "ordered tool request",
+      "23.field30.field5": "checkpoint summary"
+    },
+    "published_event_counts": {
+      "assistant_message": 371,
+      "context_checkpoint": 3,
+      "system_message": 23,
+      "tool_result": 370,
+      "user_message": 1
+    },
+    "source_step_type_status_counts": {
+      "type_101_status_3": 23,
+      "type_132_status_3": 360,
+      "type_132_status_6": 7,
+      "type_132_status_7": 3,
+      "type_14_status_3": 1,
+      "type_15_status_3": 371,
+      "type_23_status_3": 3
+    }
+  },
+  "kind": "database_derived_public_agent_tool_trajectory",
+  "preservation": {
+    "background_final_database_results_retained_separately": true,
+    "background_task_launches_reconstructed_from_field148": 23,
+    "database_rows_emitted_one_to_one": 768,
+    "model_message_ids": 371,
+    "native_rendered_transcript_validation": {
+      "assistant_content_exact_matches": 371,
+      "bytes": 899095,
+      "db_step_indices_match_in_order": true,
+      "event_types_match": 765,
+      "excluded_invalid_pre_execution_db_indices": [
+        44,
+        453,
+        760
+      ],
+      "lines": 765,
+      "member": "9414a42e-d86e-42d7-b41b-5555a30a56a1/.system_generated/logs/transcript_full.jsonl",
+      "ordered_tool_name_and_arguments_matches": 370,
+      "other_primary_content_contained_matches": 394,
+      "sha256": "850303db503e3573df8f56bf578e77302362a0d8efa546369a0904c41a0b5487",
+      "tool_result_status_matches": 367
+    },
+    "ordered_db_step_index_stream_sha256": "1278adf6d23060899df6625ebbe8dc700d9e8219cdba6b93a78db79fb6dfd131",
+    "ordered_model_message_id_stream_sha256": "8e31ac146124aa75de8de5857e7317d6fbcffdf8902f23521ff5fda7ee42a7db",
+    "published_redacted_tool_stream_sha256": "9d23f43f575c0ebdb9df8c63f12a747aac7d5d76685d8612f1b34b3d5b113a56",
+    "published_request_result_id_name_arguments_order_exact": true,
+    "repeated_ids_disambiguated_by_request_and_result_step_indices": true,
+    "repeated_tool_call_ids_are_source_data": {
+      "call_255608": [
+        {
+          "request_step_index": 308,
+          "result_step_index": 309
+        },
+        {
+          "request_step_index": 452,
+          "result_step_index": 453
+        }
+      ],
+      "call_269045": [
+        {
+          "request_step_index": 498,
+          "result_step_index": 499
+        },
+        {
+          "request_step_index": 566,
+          "result_step_index": 567
+        }
+      ]
+    },
+    "request_result_id_name_arguments_order_exact": true,
+    "request_result_provider_signatures_exact": true,
+    "source_tool_stream_sha256": "a298cd0d73debe97b9f6b35d0c420e0a7acc7f604384f650d549b09e27b7c6c5",
+    "tool_requests": 370,
+    "tool_results_including_running_and_invalid": 370,
+    "unique_model_message_ids": 371,
+    "unique_tool_call_ids": 368
+  },
+  "privacy": {
+    "checks": {
+      "email_identifiers_absent": true,
+      "embedded_data_uri_or_base64_marker_absent": true,
+      "local_home_identifiers_absent": true,
+      "local_username_identifiers_absent": true
+    },
+    "replacements": {
+      "email_identifiers": 4,
+      "local_home_identifiers": 702,
+      "local_username_identifiers": 5
+    }
+  },
+  "schema_version": 2,
+  "source": {
+    "brain_archive": {
+      "bytes": 220870144,
+      "path": "antigravity-native-brain.tar",
+      "sha256": "58a5a8ccabe42ba1294db285cb36045054c1ad7a8675e2afad66ef041213e03c",
+      "uses": [
+        "hash media bodies referenced by the database without publishing them",
+        "validate database-derived semantics against the native rendered transcript"
+      ]
+    },
+    "database": {
+      "bytes": 16113664,
+      "path": "antigravity-conversation.db",
+      "sha256": "5fceb6e4fb44fcf9daa996958f40ec5093ae759366d7d6d0d7f0bfa0241b8735",
+      "sqlite_access": "URI mode=ro&immutable=1 with PRAGMA query_only=ON",
+      "table": "steps"
+    },
+    "extractor": {
+      "bytes": 32932,
+      "path": "calibration/runpack/extract_antigravity_public_trajectory.py",
+      "sha256": "60ff083a5ead30d5a1dce7ef726ff551e99a106f5d88b9df65df7f0d21e2c3dd"
+    },
+    "files_unchanged_during_extraction": true,
+    "post_extraction": {
+      "antigravity-conversation.db": {
+        "bytes": 16113664,
+        "sha256": "5fceb6e4fb44fcf9daa996958f40ec5093ae759366d7d6d0d7f0bfa0241b8735"
+      },
+      "antigravity-conversation.db-shm": {
+        "bytes": 32768,
+        "sha256": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb"
+      },
+      "antigravity-conversation.db-wal": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "antigravity-native-brain.tar": {
+        "bytes": 220870144,
+        "sha256": "58a5a8ccabe42ba1294db285cb36045054c1ad7a8675e2afad66ef041213e03c"
+      }
+    },
+    "pre_extraction": {
+      "antigravity-conversation.db": {
+        "bytes": 16113664,
+        "sha256": "5fceb6e4fb44fcf9daa996958f40ec5093ae759366d7d6d0d7f0bfa0241b8735"
+      },
+      "antigravity-conversation.db-shm": {
+        "bytes": 32768,
+        "sha256": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb"
+      },
+      "antigravity-conversation.db-wal": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "antigravity-native-brain.tar": {
+        "bytes": 220870144,
+        "sha256": "58a5a8ccabe42ba1294db285cb36045054c1ad7a8675e2afad66ef041213e03c"
+      }
+    }
+  },
+  "source_untouched": true
+}

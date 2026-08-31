@@ -1,0 +1,72 @@
+{
+  "checks": {
+    "credential_signature_occurrences": {
+      "api_key": 0,
+      "aws_access_key": 0,
+      "bearer_token": 0,
+      "github_token": 0,
+      "private_key": 0
+    },
+    "email_identifiers_absent": true,
+    "encoded_media_signature_occurrences": {
+      "/9j/": 0,
+      "R0lGOD": 0,
+      "UklGR": 0,
+      "data:image/": 0,
+      "iVBOR": 0
+    },
+    "local_home_identifiers_absent": true,
+    "local_username_identifiers_absent": true,
+    "source_untouched": true
+  },
+  "destination": {
+    "bytes": 1156295,
+    "path": "claude-code-opus-4.8-high.public.jsonl",
+    "records": 2375,
+    "sha256": "3bf3ba5ef7c99c1b635f7605eb2f168bd4720e0bd01f4d89ba3d354aa179b7a7"
+  },
+  "kind": "privacy_safe_jsonl_publication_derivative",
+  "preservation": {
+    "changed_scalar_values": 68,
+    "identity_scalar_values": 4,
+    "image_scalar_values": 64,
+    "json_structure_preserved": true,
+    "ordered_identifier_and_tool_link_stream_sha256": "a3837a5ab3c2b7d4d524467ca8be569c4d79bf65475befc4f9fbc466c8994416",
+    "ordered_identifier_and_tool_link_values": 5111,
+    "ordered_record_type_stream_sha256": "52fd8e50c0de3b918d6c314d1ec3e7dd2847dbba381f7267166f06b94efd5927",
+    "record_order_preserved": true,
+    "records_with_changes": 34,
+    "signature_stream_sha256": "44d4e5f8f88eb805f56cc88adc0bbb5d1948bda859233258f5a3004499594b11",
+    "signature_strings_preserved": 123
+  },
+  "replacements": {
+    "email_identifiers": 0,
+    "image_payloads": {
+      "base64_characters": 26052280,
+      "by_field": {
+        "image_source_data": 32,
+        "tool_use_result_file_base64": 32
+      },
+      "by_kind": {
+        "gif": 0,
+        "jpeg": 64,
+        "png": 0,
+        "webp": 0
+      },
+      "decoded_bytes": 19539158,
+      "enabled": true,
+      "occurrences": 64,
+      "unique_sha256": 32
+    },
+    "local_home_identifiers": 0,
+    "local_identity_tokens_discovered": 1,
+    "local_username_identifiers": 12
+  },
+  "schema_version": 2,
+  "source": {
+    "bytes": 27200113,
+    "path": "claude-code-opus-4.8-high.jsonl",
+    "records": 2375,
+    "sha256": "ed77c665eaf1d8fdcc75de77f2da2622a5748b0e1dc2cd3f7be283d619726fa9"
+  }
+}
