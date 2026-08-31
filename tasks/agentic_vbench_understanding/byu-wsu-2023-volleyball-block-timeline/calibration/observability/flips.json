@@ -1,0 +1,267 @@
+[
+ {
+  "set": 1,
+  "score_after": "18-14",
+  "type": "block",
+  "players": [
+   "Whitney McEwan-Llarenas",
+   "Elyse Stowell"
+  ],
+  "blocked": "Katy Ryan",
+  "setter": "Argentina Ung",
+  "t_score_after": 1218.0,
+  "verified_bug": "18-14",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 1,
+  "score_after": "18-17",
+  "type": "block",
+  "players": [
+   "Argentina Ung",
+   "Magda Jehlarova"
+  ],
+  "blocked": "Elyse Stowell",
+  "setter": "Whitney Bower",
+  "t_score_after": 1422.0,
+  "verified_bug": "18-17",
+  "matches": true,
+  "method": "scan of the gap between neighbours"
+ },
+ {
+  "set": 2,
+  "score_after": "9-6",
+  "type": "block",
+  "players": [
+   "Kate Prior",
+   "Mia Lee"
+  ],
+  "blocked": "Iman Isanovic",
+  "setter": "Argentina Ung",
+  "t_score_after": 2287.0,
+  "verified_bug": "9-6",
+  "matches": true,
+  "method": "scan of the gap between neighbours"
+ },
+ {
+  "set": 2,
+  "score_after": "10-10",
+  "type": "block",
+  "players": [
+   "Pia Timmer",
+   "Lana Radakovic"
+  ],
+  "blocked": "Kate Prior",
+  "setter": "Whitney Bower",
+  "t_score_after": 2463.0,
+  "verified_bug": "10-10",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 2,
+  "score_after": "10-11",
+  "type": "block",
+  "players": [
+   "Katy Ryan",
+   "Lana Radakovic"
+  ],
+  "blocked": "Elyse Stowell",
+  "setter": "Whitney Bower",
+  "t_score_after": 2502.0,
+  "verified_bug": "10-11",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 3,
+  "score_after": "6-7",
+  "type": "block",
+  "players": [
+   "Lana Radakovic"
+  ],
+  "blocked": "Erin Livingston",
+  "setter": "Whitney Bower",
+  "t_score_after": 3816.0,
+  "verified_bug": "6-7",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 3,
+  "score_after": "11-15",
+  "type": "block",
+  "players": [
+   "Magda Jehlarova"
+  ],
+  "blocked": "Mia Lee",
+  "setter": "Whitney Bower",
+  "t_score_after": 4436.0,
+  "verified_bug": "11-15",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 3,
+  "score_after": "12-18",
+  "type": "block",
+  "players": [
+   "Iman Isanovic",
+   "Magda Jehlarova"
+  ],
+  "blocked": "Kate Prior",
+  "setter": "Whitney Bower",
+  "t_score_after": 4559.0,
+  "verified_bug": "12-18",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 3,
+  "score_after": "14-18",
+  "type": "block",
+  "players": [
+   "Whitney Bower",
+   "Whitney McEwan-Llarenas"
+  ],
+  "blocked": "Iman Isanovic",
+  "setter": "Argentina Ung",
+  "t_score_after": 4660.0,
+  "verified_bug": "14-18",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 3,
+  "score_after": "18-22",
+  "type": "block",
+  "players": [
+   "Katy Ryan",
+   "Lana Radakovic"
+  ],
+  "blocked": "Erin Livingston",
+  "setter": "Whitney Bower",
+  "t_score_after": 4902.0,
+  "verified_bug": "18-22",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 4,
+  "score_after": "2-0",
+  "type": "block",
+  "players": [
+   "Whitney McEwan-Llarenas",
+   "Erin Livingston"
+  ],
+  "blocked": "Iman Isanovic",
+  "setter": "Karly Basham",
+  "t_score_after": 5250,
+  "verified_bug": "2-0",
+  "matches": true,
+  "method": "forward scan of the gap"
+ },
+ {
+  "set": 4,
+  "score_after": "6-6",
+  "type": "block",
+  "players": [
+   "Kate Prior"
+  ],
+  "blocked": "Pia Timmer",
+  "setter": "Karly Basham",
+  "t_score_after": 5526.0,
+  "verified_bug": "6-6",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 4,
+  "score_after": "6-9",
+  "type": "block",
+  "players": [
+   "Magda Jehlarova"
+  ],
+  "blocked": "Mia Lee",
+  "setter": "Whitney Bower",
+  "t_score_after": 5620.0,
+  "verified_bug": "6-9",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 4,
+  "score_after": "11-18",
+  "type": "block",
+  "players": [
+   "Katy Ryan",
+   "Magda Jehlarova"
+  ],
+  "blocked": "Erin Livingston",
+  "setter": "Whitney Bower",
+  "t_score_after": 6135.0,
+  "verified_bug": "11-18",
+  "matches": true,
+  "method": "scan of the gap between neighbours"
+ },
+ {
+  "set": 4,
+  "score_after": "16-23",
+  "type": "block",
+  "players": [
+   "Eden Bower",
+   "Whitney McEwan-Llarenas"
+  ],
+  "blocked": "Magda Jehlarova",
+  "setter": "Argentina Ung",
+  "t_score_after": 6446.0,
+  "verified_bug": "16-23",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 4,
+  "score_after": "17-23",
+  "type": "block",
+  "players": [
+   "Eden Bower"
+  ],
+  "blocked": "Magda Jehlarova",
+  "setter": "Argentina Ung",
+  "t_score_after": 6484.0,
+  "verified_bug": "17-23",
+  "matches": true,
+  "method": "scan of the gap between neighbours"
+ },
+ {
+  "set": 4,
+  "score_after": "18-23",
+  "type": "block",
+  "players": [
+   "Kate Prior",
+   "Whitney McEwan-Llarenas"
+  ],
+  "blocked": "Iman Isanovic",
+  "setter": "Karly Basham",
+  "t_score_after": 6514.0,
+  "verified_bug": "18-23",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ },
+ {
+  "set": 4,
+  "score_after": "19-25",
+  "type": "block",
+  "players": [
+   "Argentina Ung",
+   "Lana Radakovic"
+  ],
+  "blocked": "Eden Bower",
+  "setter": "Whitney Bower",
+  "t_score_after": 6615.0,
+  "verified_bug": "19-25",
+  "matches": true,
+  "method": "back-scan from a coarse hit"
+ }
+]
