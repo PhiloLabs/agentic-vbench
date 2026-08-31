@@ -18,12 +18,21 @@ is NOT scored; see the DIMS note below for why.)
 
 ## Scoring — EXACT, not just rank
 
-    per dimension d:  score_d = clamp(tau_d, 0, 1) * accuracy_d
-      tau_d      = signed normalised Kendall correlation over the races (the guess GATE:
-                   concordant-minus-discordant / pairs, so a constant or random answer -> ~0)
-      accuracy_d = mean over races of  max(0, 1 - |pred - gt| / tol),  tol = max(1, 0.30*gt)
-                   (you must be within ~30% of the true value, not merely rank the races right)
+    each predicted race is matched to a GT race by an OPTIMAL (assignment-safe) bipartite matching
+    on its reported time t — a prediction whose t is CONTAINED in a GT segment [t_start, t_end] is
+    preferred, else one within +/-15 s is eligible (see match_races). Then, per dimension d:
+      score_d    = clamp(tau_d, 0, 1) * accuracy_d
+      tau_d      = signed normalised Kendall correlation over the matched pairs that carry d (the
+                   guess GATE: concordant-minus-discordant / pairs, so a constant/random answer -> ~0)
+      accuracy_d = ( sum over matched pairs carrying d of max(0, 1 - |pred-gt| / tol) ) / N_GT_RACES,
+                   tol = max(1, 0.30*gt)   -- the divisor is the TOTAL GT race count, so COVERAGE is
+                   folded PER dimension: a GT race with no matched prediction, or a matched prediction
+                   that omits field d (or gives a non-finite value), contributes 0 to dimension d.
     reward = max(0, sum_d w_d * score_d) / sum_d w_d      (over dims that vary in the GT)
+
+Per-dimension coverage means an items-only answer earns its honest items credit while skid_time
+scores 0 — and padding a dummy skid_time (or a non-finite one) can neither raise nor erase the other
+field's credit. A partial answer still cannot reach 1.0 (a correct 2-of-12 answer scores ~2/12).
 
 This scores the agent against STK's **full-precision** telemetry, not a coarse ranking of it.
 Ranking alone is too forgiving: an agent that systematically under-counts (e.g. sees 8 of 20
@@ -91,15 +100,120 @@ def tau(pairs):
     return (con - dis) / total, total
 
 
-def accuracy(pairs):
-    """Mean per-race accuracy: within tol = max(1, 0.30*gt) scores toward 1, decaying to 0."""
-    if not pairs:
+def accuracy(pairs, n_total):
+    """Coverage-folded per-race accuracy for ONE dimension: sum of per-race accuracy (within
+    tol = max(1, 0.30*gt) → 1, decaying to 0) over the matched pairs that carry this dimension's
+    value, divided by the TOTAL number of GT races. A GT race with no matched prediction — or a
+    matched prediction that omits THIS field — contributes 0, so coverage is applied per dimension:
+    an omitted field scores zero for its own dimension without erasing honest credit for another."""
+    if n_total <= 0:
         return 0.0
     s = 0.0
     for g, p in pairs:
         tol = max(1.0, 0.30 * g)
         s += max(0.0, 1.0 - abs(p - g) / tol)
-    return s / len(pairs)
+    return s / n_total
+
+
+def race_t(r):
+    """The predicted video time for a race row: `t`, else `t_start`/`time`. None if unusable."""
+    return as_num(r.get("t", r.get("t_start", r.get("time")))) if isinstance(r, dict) else None
+
+
+def _hungarian(cost):
+    """Min-cost perfect matching on a square cost matrix (Kuhn–Munkres, O(n^3)). Pure stdlib.
+    Returns row->col assignment as a list `a` with `a[i] = j`."""
+    n = len(cost)
+    INF = float("inf")
+    u = [0.0] * (n + 1)
+    v = [0.0] * (n + 1)
+    p = [0] * (n + 1)
+    way = [0] * (n + 1)
+    for i in range(1, n + 1):
+        p[0] = i
+        j0 = 0
+        minv = [INF] * (n + 1)
+        used = [False] * (n + 1)
+        while True:
+            used[j0] = True
+            i0 = p[j0]
+            delta = INF
+            j1 = -1
+            for j in range(1, n + 1):
+                if not used[j]:
+                    cur = cost[i0 - 1][j - 1] - u[i0] - v[j]
+                    if cur < minv[j]:
+                        minv[j] = cur
+                        way[j] = j0
+                    if minv[j] < delta:
+                        delta = minv[j]
+                        j1 = j
+            for j in range(0, n + 1):
+                if used[j]:
+                    u[p[j]] += delta
+                    v[j] -= delta
+                else:
+                    minv[j] -= delta
+            j0 = j1
+            if p[j0] == 0:
+                break
+        while True:
+            j1 = way[j0]
+            p[j0] = p[j1]
+            j0 = j1
+            if j0 == 0:
+                break
+    a = [-1] * n
+    for j in range(1, n + 1):
+        if p[j] > 0:
+            a[p[j] - 1] = j - 1
+    return a
+
+
+def match_races(gt_races, pred_races, tol):
+    """Assignment-safe race matching. Each predicted race is matched to at most one GT race, and
+    vice versa, by an optimal (min-cost, max-cardinality) bipartite assignment — NOT greedy — so
+    overlapping tolerance windows can no longer strand a race. A prediction whose reported time is
+    *contained* in a GT race's [t_start, t_end] segment is preferred (cost by distance to the
+    segment midpoint); a prediction merely within ±tol of a segment is eligible but always costs
+    more than any true containment; anything else is ineligible. Returns `matched[gi] = pi | None`.
+
+    Containment-first is what lets an exact answer that reports every race at its own `t_start`
+    (permitted by the prompt) score 1.0: t_start ∈ [t_start, t_end], so every race is contained in
+    its own segment and the optimal assignment recovers all of them, even though adjacent ±tol
+    windows overlap."""
+    ng, npd = len(gt_races), len(pred_races)
+    if ng == 0 or npd == 0:
+        return [None] * ng
+    K = max(ng, npd)
+    BIG = 1.0e6  # >> any real edge cost * K, so more eligible matches always beats lower cost
+    cost = [[0.0] * K for _ in range(K)]      # padding rows/cols cost 0 (ineligible)
+    elig = [[False] * K for _ in range(K)]
+    for gi, g in enumerate(gt_races):
+        ts, te = g.get("t_start"), g.get("t_end")
+        if ts is None or te is None:
+            continue
+        mid = (ts + te) / 2.0
+        width = te - ts
+        for pi, p in enumerate(pred_races):
+            pt = race_t(p)
+            if pt is None:
+                continue
+            if ts <= pt <= te:
+                c = abs(pt - mid)                        # contained: preferred
+            elif ts - tol <= pt <= te + tol:
+                c = abs(pt - mid) + width + tol          # tolerance: strictly worse than any containment
+            else:
+                continue                                 # ineligible
+            cost[gi][pi] = c - BIG                       # reward each eligible match by -BIG
+            elig[gi][pi] = True
+    assign = _hungarian(cost)
+    matched = [None] * ng
+    for gi in range(ng):
+        pj = assign[gi]
+        if 0 <= pj < npd and elig[gi][pj]:
+            matched[gi] = pj
+    return matched
 
 
 def main():
@@ -116,79 +230,66 @@ def main():
         sol = json.loads(a.solution.read_text())
         pred_races = sol.get("races", [])
         if not isinstance(pred_races, list):
-            raise ValueError("races is not a list")
+            # Normalize malformed `races` (null, dict, scalar, ...) to an empty list so the judge
+            # scores 0 rather than crashing on a downstream len()/iteration.
+            reason = "races was not a list; normalized to []"
+            pred_races = []
     except Exception as exc:  # noqa: BLE001
         reason = f"unreadable solution.json: {exc}"
+        pred_races = []
 
-    # Time-windowed race matching: each GT race is paired with the predicted race whose reported
-    # video time `t` falls within its [t_start, t_end] window (+/-15 s slack), one-to-one, nearest
-    # first. This anchors each count-vector to the correct video SEGMENT instead of assuming the
-    # agent listed races in order — a right-count / wrong-time (or wrong-race) entry earns nothing.
+    # Assignment-safe, containment-first race matching (see match_races): each predicted race is
+    # anchored to the GT race whose video segment [t_start, t_end] contains its reported time t
+    # (preferred), or that it falls within ±TOL of, by an OPTIMAL bipartite assignment. This
+    # anchors each count-vector to the correct video SEGMENT — a right-count / wrong-time entry
+    # earns nothing — and, unlike the old greedy pass, does not strand a race when adjacent ±TOL
+    # windows overlap (e.g. an exact answer reporting every race at its t_start now scores 1.0).
     TOL = 15.0
-    def race_t(r):
-        return as_num(r.get("t", r.get("t_start", r.get("time")))) if isinstance(r, dict) else None
-    def has_all_scores(r):
-        # A race counts as matched only if it carries a numeric value for EVERY scored dimension.
-        # A time-matched {track, t} placeholder (no items_collected / skid_time) is not a real answer
-        # and must earn no coverage — otherwise a few real races padded with in-window placeholders
-        # would reach coverage 1.0 and score as if complete.
-        return isinstance(r, dict) and all(as_num(r.get(pf)) is not None for _, pf, _ in DIMS)
-    used, matched = set(), []
-    for g in gt_races:
-        ts, te = g.get("t_start"), g.get("t_end")
-        best, bestd = None, None
-        if ts is not None and te is not None:
-            mid = (ts + te) / 2.0
-            for i, p in enumerate(pred_races):
-                if i in used or not has_all_scores(p):
-                    continue
-                pt = race_t(p)
-                if pt is not None and ts - TOL <= pt <= te + TOL:
-                    d = abs(pt - mid)
-                    if bestd is None or d < bestd:
-                        bestd, best = d, i
-        matched.append((g, pred_races[best] if best is not None else None))
-        if best is not None:
-            used.add(best)
-    n_matched = sum(1 for _, p in matched if isinstance(p, dict))
+    matched = match_races(gt_races, pred_races, TOL)  # matched[gi] = pred index | None
+    n_matched = sum(1 for pi in matched if pi is not None)
+    NG = len(gt_races)
 
     dims, num, wsum = {}, 0.0, 0.0
     for gt_field, pred_field, w in DIMS:
-        pairs = []
-        for g, p in matched:
+        pairs, cov_d = [], 0
+        for gi, pi in enumerate(matched):
+            if pi is None:
+                continue
+            g, p = gt_races[gi], pred_races[pi]
             if not isinstance(p, dict):
                 continue
             pv = as_num(p.get(pred_field))
             if pv is not None and gt_field in g:
                 pairs.append((float(g[gt_field]), pv))
+                cov_d += 1
         gt_has_spread = tau([(x, x) for x in (r[gt_field] for r in gt_races if gt_field in r)])[1] > 0
         t, npairs = tau(pairs)
-        acc = accuracy(pairs)
+        # PER-DIMENSION COVERAGE. accuracy() divides by the TOTAL GT race count, so a GT race with no
+        # matched prediction OR a matched prediction that omits this field contributes 0 to this
+        # dimension. There is no separate global coverage factor and no all-fields gate: an
+        # items-only answer earns its honest items credit while skid_time scores 0, and padding a
+        # dummy skid_time cannot raise (nor a missing one erase) the other field's credit. A partial
+        # answer still cannot reach 1.0 (a correct 2-of-12 answer scores ~2/12 per dimension).
+        acc = accuracy(pairs, NG)
         ds = max(0.0, t) * acc
-        dims[gt_field] = {"tau": round(t, 4), "accuracy": round(acc, 4),
-                          "score": round(ds, 4), "n_pairs": npairs, "gt_varies": gt_has_spread}
+        dims[gt_field] = {"tau": round(t, 4), "accuracy": round(acc, 4), "score": round(ds, 4),
+                          "n_pairs": npairs, "coverage": round(cov_d / NG, 4) if NG else 0.0,
+                          "gt_varies": gt_has_spread}
         if gt_has_spread:
             num += w * ds
             wsum += w
-    base = max(0.0, num / wsum) if wsum else 0.0
-    # COVERAGE. A GT race with no matched prediction (omitted, or a prediction timed into the wrong
-    # segment) must contribute ZERO — otherwise a correct answer covering only k of n races would
-    # score as if complete (e.g. a 2-of-12 oracle would reach 1.0). Scale the reward by the fraction
-    # of GT races that got a matched prediction, so a partial answer cannot reach 1.0 while the full
-    # oracle (every race matched) still does. tau/accuracy are computed over the matched pairs; this
-    # factor puts the omitted races back into the denominator.
-    coverage = n_matched / len(gt_races) if gt_races else 0.0
-    reward = base * coverage
+    reward = max(0.0, num / wsum) if wsum else 0.0
 
-    det = {"reason": reason, "hero": gt.get("hero"), "n_races": len(gt_races),
-           "n_predicted_races": len(pred_races), "n_time_matched": n_matched, "coverage": round(coverage, 4),
-           "reward_before_coverage": round(base, 4), "time_tol_s": TOL,
+    det = {"reason": reason, "hero": gt.get("hero"), "n_races": NG,
+           "n_predicted_races": len(pred_races), "n_time_matched": n_matched,
+           "coverage": round(n_matched / NG, 4) if NG else 0.0, "time_tol_s": TOL,
            "dims": dims, "weights": {f: w for f, _, w in DIMS},
-           "note": "each predicted race is matched to the GT race whose video window contains its t "
-                   "(+/-15 s); reward = coverage * (sum_d w*clamp(tau,0,1)*accuracy)/(sum_d w over "
-                   "varying fields), coverage = matched_races / total_races (omitted races score 0); "
-                   "tau gates guessing to ~0, accuracy (within ~30% of the machine-exact "
-                   "value) requires accurate counts/durations at the right time, oracle = 1.0"}
+           "note": "each predicted race is matched to the GT race whose video segment contains its t "
+                   "(preferred) or that it falls within +/-15 s of, by an optimal (assignment-safe) "
+                   "bipartite matching; reward = (sum_d w*clamp(tau,0,1)*accuracy_d)/(sum_d w over "
+                   "varying fields), where accuracy_d averages per-race within-~30% accuracy over ALL "
+                   "GT races (coverage folded PER dimension: an omitted race or field scores 0 for "
+                   "that dimension). tau gates guessing to ~0; oracle = 1.0"}
     a.reward_json.parent.mkdir(parents=True, exist_ok=True)
     a.reward_json.write_text(json.dumps({"reward": round(reward, 4), "details": det}, indent=2))
     a.reward_txt.write_text(f"{round(reward, 4)}\n")
