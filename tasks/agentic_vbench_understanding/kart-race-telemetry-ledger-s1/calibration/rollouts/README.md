@@ -1,12 +1,18 @@
-# Calibration trajectories — POL-1 raw archives (image-parity)
+# Calibration trajectories — POL-1 raw archives (host-run; clean image pilot pending)
 
-The **audit record** for each strong-agent row in `../scores.md` is the agent's **full raw session
-transcript** — every tool call, tool output, turn, and frame kept intact. Only credentials and
-local-path prefixes were redacted (`sanitize_raw.py`: masks API keys / tokens / `Bearer` / private
-keys, and maps `/home/<user>` and the SSD working dir → `/workspace`; a FORBID re-scan aborts on any
-residual secret **or** local path/username). Each row was produced under the **shipped image's tool
-surface** (stdlib-only `python3` — no `numpy`/`opencv`/`PIL`/`scipy`, as in `python:3.12-slim` — plus
-`ffmpeg`/`ffprobe`) with the **final agent prompt**. All three are pinned to one immutable revision
+**Status.** These are **host-run** transcripts, NOT the finalized-image calibration: they were
+produced in a local sandbox that intended a stdlib-only profile but did **not** fully enforce it
+(host packages leaked via PYTHONPATH, CLI versions differed, and the prompt carried an uncommitted
+"Practical notes" suffix). The task now documents + pins its tool profile (numpy/Pillow/opencv in
+`environment/Dockerfile`), and a single clean gate-setting pilot on the finalized image is being run
+by a maintainer (PR #106); it replaces these. They remain useful as indicative host-run evidence
+(all < 0.10).
+
+The **audit record** for each row is the agent's **full raw session transcript** — every tool call,
+tool output, turn, and frame kept intact. Only credentials and local-path prefixes were redacted
+(`sanitize_raw.py`: masks API keys / tokens / `Bearer` / private keys, and maps `/home/<user>` and
+the SSD working dir → `/workspace`; a FORBID re-scan aborts on any residual secret **or** local
+path/username). These stdlib-sandbox rows are pinned to one immutable revision
 `b49ffb9b8d83405dba6ab8dee30126bd1d53f196`, with whole-file SHA256 (verified byte-identical from that
 revision):
 
@@ -29,4 +35,5 @@ produced the reward above) are alongside the raw archives at the same revision, 
 `.../resolve/b49ffb9b8d83405dba6ab8dee30126bd1d53f196/kart-race-telemetry-ledger-s1/calibration/`.
 
 The earlier host-tool runs (Codex n=3, Gemini 0.0885, etc.) remain on HF at their prior revisions for
-history, but the shipped calibration is the image-parity lineup above.
+history. The shipped calibration will be the maintainer's clean image pilot (PR #106), which replaces
+the host-run lineup above.

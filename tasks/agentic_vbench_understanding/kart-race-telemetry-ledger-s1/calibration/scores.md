@@ -14,50 +14,58 @@ game-seconds — see the timebase note). `spinouts` is **no longer scored** (kep
 camera locked to the hero kart `tux`, 55.1 min, race.mp4 sha `4b4cee91…`, 1280×720, no audio, HUD
 powerup slot masked.
 
-## Strong-agent calibration lineup (image-parity)
+## Tool profile (documented)
 
-Every row is a fresh run under the **shipped task image's tool surface** — a stdlib-only `python3`
-(no `numpy`/`opencv`/`PIL`/`scipy`, exactly as in `python:3.12-slim`) plus `ffmpeg`/`ffprobe` and
-coreutils — driven by the **final agent prompt** (no scoring formula, weights, or telemetry-GT
-source). It replaces an earlier lineup that let the agents call host-only `opencv`/`numpy` (absent
-from the image); removing those tools lowers every score and *widens* the margin under the family's
-<0.10 bar. The audit record for each row is the agent's **full raw session transcript** (every tool
-call, output, turn, and frame; only secrets + local paths redacted → `/workspace`), hosted immutably
-on HF and pinned by revision with whole-file SHA256 in `rollouts/README.md`. Reward/solution dumps
-are alongside on HF.
+The task ships the standard CV/array stack **pinned in `environment/Dockerfile`** — `numpy==2.1.3`,
+`Pillow==11.0.0`, `opencv-python-headless==4.10.0.84` — alongside `ffmpeg`/`ffprobe` and the Python
+stdlib, with no solve-time network (`task.toml` `allow_internet=false`). These are normal CV tools an
+agent is expected to have (cf. #45/#46/#47/#85); the difficulty is off-HUD counting/timing over a
+55-min video, not tool withholding. **This is the profile the gate-setting calibration must run
+under.**
 
-| harness (version) | model | reasoning | reward | tool-call turns | trajectory |
-|---|---|---|---|---|---|
-| Codex CLI (0.145.0) | gpt-5.6-sol | xhigh | **0.0101** | ~163 | image-parity raw archive (`rollouts/README.md`) |
-| Claude Code CLI (2.1.241) | claude-opus-4-8 | extended thinking | **0.0436** | 104 | image-parity raw archive (`rollouts/README.md`) |
-| Gemini CLI (0.57.0) | gemini-3.5-flash | default | **0.0082** | 189 | image-parity raw archive (`rollouts/README.md`) |
+## Strong-agent calibration lineup (host-run — clean image pilot PENDING)
 
-All measured on the shipped video (sha `4b4cee91…`) + shipped 2-dim scorer, in the image-parity
-sandbox. Strong-agent **max 0.0436 (< 0.10)** — now **Claude Opus 4.8**. Gemini, the opencv-era max
-(0.0885), collapses to **0.0082** once it can no longer colour-threshold frames with opencv,
-confirming that number was tool-inflated. Per-dim accuracies stay low for every agent (items
-0.01–0.22, skid 0.00–0.06): none can count masked-HUD pickups or time cumulative drift to within 30%
-off raw frames + model vision. Rollout dumps (solution.json + reward.json) on HF, pinned to the
-immutable revision (not mutable `main`; trajectory SHA256s in `rollouts/README.md`):
-<https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/b49ffb9b8d83405dba6ab8dee30126bd1d53f196/kart-race-telemetry-ledger-s1/calibration>
+Status: the numbers below are **host-run** (on our compute node; Docker is unavailable there and the
+local sandbox did **not** fully enforce the documented profile — host packages leaked via PYTHONPATH,
+CLI versions differed, and the prompt carried an uncommitted "Practical notes" suffix). They are
+**indicative, not the finalized-image calibration**, and are all well under the family's <0.10 bar. A
+single clean gate-setting pilot on the finalized image (pinned profile above, exact committed prompt,
+`allow_internet=false`) is being run by a maintainer on a Docker/Harbor executor (see PR #106); this
+table is replaced by that result.
+
+| host-run variant | Codex gpt-5.6-sol (xhigh) | Claude Opus 4.8 | Gemini 3.5-flash |
+|---|---|---|---|
+| **with CV tools** (matches the pinned profile; earlier 3-field prompt, re-scored 2-dim) | 0.030 / 0.000 / 0.052 | 0.045 | **0.0885** |
+| **stdlib-only sandbox** (final 2-field prompt; CV tools withheld) | 0.0101 | 0.0436 | 0.0082 |
+
+Both variants sit under 0.10; the with-CV-tools Gemini row (0.0885) is the historical gate-setter and
+the tightest to the bar. The audit record for each stdlib-sandbox run is the agent's **full raw
+session transcript** (every tool call, output, turn, frame; only secrets + local paths redacted →
+`/workspace`), on HF pinned by revision + whole-file SHA256 in `rollouts/README.md`
+(`resolve/b49ffb9b8d83405dba6ab8dee30126bd1d53f196/`). The earlier with-CV-tools archives remain at
+their prior revisions. Per-dim accuracies stay low across the board (items 0.01–0.22, skid 0.00–0.06):
+no agent counts masked-HUD pickups or times cumulative drift to within 30%.
 
 ## Results & ablations (shipped 2-dim scorer)
 
 | submission | reward | notes |
 |---|---|---|
-| oracle | **1.0000** | harness path (`solve.sh` → `judge.py`); items & skid both tau 1.0, acc 1.0 |
+| oracle (mid-window t) | **1.0000** | harness path (`solve.sh` → `judge.py`); items & skid both tau 1.0, acc 1.0 |
+| oracle reporting every race at its `t_start` | **1.0000** | permitted by the prompt; assignment-safe matching prefers true segment containment (was 0.0111 under greedy) |
+| correct items-only (skid omitted) | 0.5500 | per-dimension coverage: honest items credit; a dummy `skid_time:0` neither raises nor erases it |
 | correct counts, wrong times | 0.0000 | right values at shuffled video times — the ±15 s window rejects |
 | blind guess (random) | ~0.027 | seed-dependent (0.007–0.03); the tau gate collapses guessing |
 | single frame | 0.0000 | one frame → no per-race differentiation → constant → tau 0 |
 | no media / OCR-only | 0.009 / 0.0 | no scored quantity is on-screen text (HUD masked, off-HUD) |
 | constant counts | 0.0000 | all races equal → predicted ties → 0 |
+| `races: null` / malformed | 0.0000 | normalized to `[]` (no crash) |
 | empty | 0.0000 | |
 
-Per-dim on the image-parity runs: **items** accuracy 0.01–0.22 (agents mis-count pickups under the
-masked HUD — under-counting off raw frames, or over-counting when they guess high, so rarely within
-30%); **skid** accuracy 0.00–0.06 (none can sum cumulative drift to within 30% over a 55-min video
-without opencv). Both defeat the agent; the oracle is 1.0 and a within-30% agent would score far
-higher.
+All rows above are backed by `steps/solve/tests/test_coverage.py` (15 checks) and the family
+`check_task.py` gate. Per-dim on the host-run agents: **items** accuracy 0.01–0.22 (agents mis-count
+pickups under the masked HUD — under-counting, or over-counting when they guess high, so rarely within
+30%); **skid** accuracy 0.00–0.06 (none sum cumulative drift to within 30% over a 55-min video). Both
+defeat the agent; the oracle is 1.0 and a within-30% agent would score far higher.
 
 ## skid_time timebase (correctness)
 
@@ -75,6 +83,7 @@ gran_paradiso 1.87, sandtrack 1.23, olivermath 1.18, cocoa_temple 1.75, scotland
 hero-scope + rank agreement 0.407 → + HUD powerup mask 0.345 → + exact-count metric (accuracy, not
 rank) → + time-anchored (races matched by video time ±15 s) → + skid rescaled to video-seconds
 (timebase fix) → + **drop spinouts** (too countable — with spinouts scored 0.073/0.103/0.186,
-breaking the bar) → items+skid. Under the host-tool lineup this settled at Codex mean 0.027 / Gemini
-max 0.0885; re-run in the **image-parity sandbox** (opencv/numpy removed, as in the shipped image)
-the whole lineup drops — **max 0.0436 (Claude)**, Codex 0.0101, Gemini 0.0082. See `SPEC.md`.
+breaking the bar) → items+skid. Host-run under the pinned CV-tool profile this settled at Codex mean
+0.027 / Gemini max **0.0885** (< 0.10); the stdlib-only cross-check (CV tools withheld) is lower still
+(max 0.0436). The authoritative gate-setting number awaits the clean image pilot (see the lineup
+section and PR #106). See `SPEC.md`.

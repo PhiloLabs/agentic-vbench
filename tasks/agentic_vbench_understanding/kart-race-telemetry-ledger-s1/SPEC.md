@@ -34,17 +34,23 @@ ground_truth:
                 harness path (solve.sh -> judge.py) on both scored quantities.
 
 scorer:
-  metric: "EXACT + TIME-ANCHORED. Each predicted race is matched to the GT race whose video window
-           [t_start,t_end] contains its reported time t (+/-15 s) — a count-vector at the wrong video
-           segment earns nothing (not a bare rank permutation). Per quantity q: score_q =
-           clamp(tau_q,0,1) * accuracy_q, where accuracy_q = mean over matched races of
-           max(0, 1 - |pred-gt| / max(1, 0.30*gt)) and tau_q is the signed Kendall correlation (the
-           guess gate). reward = COVERAGE * sum_q w_q*score_q, renormalised over quantities that vary
-           in the GT, where coverage = matched_races / total_races: a GT race with no matched
-           prediction (omitted, or timed into the wrong segment) contributes ZERO, so a partial answer
-           cannot reach 1.0 (a correct 2-of-12 answer scores ~0.17) while the full oracle (all races
-           matched) stays 1.0. Weights: items_collected 0.55, skid_time 0.45. Regression-tested in
-           steps/solve/tests/test_coverage.py."
+  metric: "EXACT + TIME-ANCHORED. Each predicted race is matched to a GT race by an OPTIMAL
+           (assignment-safe, min-cost max-cardinality) bipartite matching on its reported time t: a
+           prediction whose t is CONTAINED in a GT segment [t_start,t_end] is preferred, else one
+           within +/-15 s is eligible — a count-vector at the wrong video segment earns nothing.
+           (Containment-first + optimal assignment means an exact answer reporting every race at its
+           permitted t_start scores 1.0, where the old greedy pass stranded a race at 0.0111.) Per
+           quantity q: score_q = clamp(tau_q,0,1) * accuracy_q, where accuracy_q = ( sum over matched
+           pairs carrying q of max(0, 1 - |pred-gt| / max(1, 0.30*gt)) ) / TOTAL_GT_RACES and tau_q is
+           the signed Kendall correlation (the guess gate). reward = sum_q w_q*score_q renormalised
+           over quantities that vary in the GT. COVERAGE is folded PER dimension via that denominator:
+           a GT race with no matched prediction, or a matched prediction that omits quantity q (or
+           gives a non-finite value), contributes 0 to q only — so an items-only answer earns its
+           honest items credit while skid scores 0, a dummy field cannot inflate, and a partial answer
+           still cannot reach 1.0 (a correct 2-of-12 answer scores ~0.17) while the full oracle stays
+           1.0. Malformed races (null/non-list) normalize to [] (score 0, no crash). Weights:
+           items_collected 0.55, skid_time 0.45. Regression-tested in steps/solve/tests/test_coverage.py
+           (15 checks)."
   # WHY exact, not rank. Rank agreement alone is too forgiving: an agent that systematically
   # UNDER-counts (Codex sees ~half the powerups) still ranks the races roughly right and scored ~0.35.
   # Scoring against STK's full-precision telemetry (within ~30% per race) removes that free credit.
@@ -83,17 +89,21 @@ scorer:
 #    + sum the drifts to within 30%). spinouts (banana/bomb dizzy-stars) is NOT scored: it is legible
 #    enough to be countable by a strong agent, so it is not a difficulty lever; it stays as context.
 
-difficulty: {strong_agent_reward: 0.0436, agent_model: claude-opus-4-8}  # 2-dim; IMAGE-PARITY lineup max, < 0.10
-# MEETS the family's <0.10 strong-agent bar with margin. IMAGE-PARITY lineup — each agent re-run under
-# the shipped image's tool surface (stdlib-only python3, NO numpy/opencv/PIL/scipy, as in
-# python:3.12-slim; plus ffmpeg) with the FINAL agent prompt, on the shipped video + shipped scorer:
-#   Claude Code (Opus 4.8):        0.0436  (n=1) — LINEUP MAX, still < 0.10
-#   Codex gpt-5.6-sol (xhigh):     0.0101  (n=1)
-#   Gemini CLI (gemini-3.5-flash): 0.0082  (n=1) — was the opencv-era max (0.0885); collapses without
-#     opencv colour-thresholding, confirming that number was host-tool-inflated. (Gemini CLI, not the
-#     Antigravity IDE, which cannot run headless here; model is the reviewer's named 3.5-flash.)
-# Per-dim (image-parity): items accuracy 0.01-0.22, skid accuracy 0.00-0.06 — no agent counts
-# masked-HUD pickups or times cumulative drift to within 30% off raw frames + model vision.
+difficulty: {strong_agent_reward: 0.0885, agent_model: gemini-3.5-flash}  # host-run (CV-tool profile); clean image pilot PENDING
+# TOOL PROFILE (documented, pinned in environment/Dockerfile): numpy==2.1.3, Pillow==11.0.0,
+# opencv-python-headless==4.10.0.84 + ffmpeg + stdlib; allow_internet=false. Normal CV tools the agent
+# is expected to have; difficulty is off-HUD counting/timing over 55 min, not tool withholding.
+# CALIBRATION STATUS: the numbers below are HOST-RUN and INDICATIVE (Docker unavailable on our node;
+# the local sandbox did not fully enforce the profile). A single clean gate-setting pilot on the
+# finalized image (pinned profile, exact committed prompt, allow_internet=false) is being run by a
+# maintainer on a Docker/Harbor executor (PR #106); it replaces these. All host-run values < 0.10:
+#   host-run WITH the CV-tool profile (earlier 3-field prompt, re-scored 2-dim):
+#     Gemini 3.5-flash: 0.0885 (gate-setter, tightest to bar) | Claude Opus 4.8: 0.045 |
+#     Codex gpt-5.6-sol (xhigh): 0.030 / 0.000 / 0.052
+#   stdlib-only cross-check (final 2-field prompt, CV tools withheld):
+#     Claude 0.0436 | Codex 0.0101 | Gemini 0.0082
+# Per-dim: items accuracy 0.01-0.22, skid accuracy 0.00-0.06 — no agent counts masked-HUD pickups or
+# times cumulative drift to within 30%.
 # HISTORY of the hardening (all measured, Codex xhigh):
 #   v2 hero-scope, rank agreement, 3 counts:              0.407
 #   + HUD powerup mask (identification-hardness):         0.345
@@ -101,8 +111,9 @@ difficulty: {strong_agent_reward: 0.0436, agent_model: claude-opus-4-8}  # 2-dim
 #   + time-anchored (races matched by video time +/-15 s)
 #   + skid_time rescaled to VIDEO seconds (timebase fix)
 #   + DROP spinouts (too countable; broke the bar) -> items+skid
-#   + IMAGE-PARITY re-calibration (remove host-only opencv/numpy) -> whole lineup falls, max 0.0436
-# Trajectories (full raw transcripts) + solution/reward dumps pinned at HF revision
+#   + scorer fixes (assignment-safe t_start matching; races=null -> 0; per-dimension coverage)
+#   + document + pin the CV-tool profile; clean image gate-setting pilot pending
+# stdlib-sandbox trajectories + dumps pinned at HF revision
 # b49ffb9b8d83405dba6ab8dee30126bd1d53f196 (see calibration/rollouts/README.md).
 # FAIR + LEARNABLE: oracle = 1.0, blind-guess ~0.027; a within-30% agent scores far higher. Difficulty
 # is ACCURATE pickup-counting under a masked HUD + a drift DURATION over a 55-min video, not a hack.
