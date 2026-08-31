@@ -1,8 +1,10 @@
 # Calibration — baddies-smp-pigs-can-fly-command-ledger
 
 Deterministic event-level F1 (`steps/solve/tests/judge.py`) against the frozen 21-row
-ground truth. Measured 2026-08-01 on the shipped 228-min bake, with the offline
-`transcribe` tool present in every sandbox exactly as the image ships it.
+ground truth. The first three rows were measured 2026-08-01 on the shipped 228-min bake,
+with the offline `transcribe` tool present in every sandbox exactly as the image ships
+it. The Antigravity row was added 2026-08-26 as a host run with its own caveats — see
+"The Antigravity row" below.
 
 **Verdict: this task does NOT clear the family's difficulty bar.** The strongest agent
 scores 0.1875 against a `< 0.10` gate. The long-horizon gate and every ablation gate
@@ -24,14 +26,53 @@ records a fix that was tried and did not work.
 | Claude Code | 2.1.220 | Opus 5 | xhigh | **0.1875** | 115 | `rollouts/opus5-full.jsonl` |
 | Claude Code | 2.1.220 | Opus 4.8 | default | **0.1379** | 51 | `rollouts/opus48-full.jsonl` |
 | Codex CLI | 0.145.0 | GPT-5.6 Sol | xhigh | **0.0741** | 112 | `rollouts/codex-full.jsonl` |
+| Antigravity CLI | 1.1.21 | Gemini 3.5 Flash | high | **0.0** | 98 | `rollouts/antigravity-full.jsonl` |
 
-Difficulty gate (`< 0.10`): **fails** for Opus 5 and Opus 4.8; passes for Codex.
-Long-horizon gate (`> 50` turns): passes for all three.
+Difficulty gate (`< 0.10`): **fails** for Opus 5 and Opus 4.8; passes for Codex and
+Antigravity. Long-horizon gate (`> 50` turns): passes for all four.
 
-Antigravity (Gemini 3.5 Flash / 3.1 Pro) was NOT run — no API access on the machine
-that produced these numbers. Opus 4.8 stands in as the third model, so the panel covers
-two harnesses rather than the three the family names. That is a real gap, not a
-substitution the family sanctioned.
+### The Antigravity row — how it was run, and what 0.0 means here
+
+Measured 2026-08-26, and it carries caveats the other three do not; they are recorded
+in full rather than smoothed over.
+
+**Not the shipped container.** The `antigravity-cli` agent authenticates only through
+interactive Google OAuth (the Antigravity subscription); agy 1.1.21 ignores
+`GEMINI_API_KEY` and opens a browser login, which cannot complete headlessly inside
+Harbor's sandbox. So this row was produced by the family's documented host command
+(`agy -p "$(cat instruction.md)" --model …`, README lines 39–41) on the macOS host
+where agy holds its OAuth session — not by `harbor run`. The 228-min bake and the
+offline `transcribe` tool (same faster-whisper 1.2.1 / `base.en` model) were staged
+under a user-writable workspace; the instruction's `/workspace/…` paths were remapped
+to it because the macOS root volume is read-only and cannot host `/workspace`.
+Functionally identical work; the environment differs from the shipped Linux image, so
+this row is less directly comparable to the other three than they are to each other.
+
+**Gemini 3.5 Flash (high); 3.1 Pro also attempted.** Three 3.1 Pro runs were tried
+first; each exhausted the subscription's quota in ~18–40 min, before analysis began.
+Flash is cheaper per token and was expected to fit; it did not clear it either.
+
+**What the agent did, and why 0.0.** Over 98 tool-call turns the Flash run genuinely
+worked the problem — it launched a background chunked transcription of the whole
+session and then spent the remainder of its turns polling for the chunks to finish
+(`sleep 60 && cat transcribe_log.txt`, `ps auxww | grep python`). It never reached the
+analysis phase, and the run terminated on a subscription-quota cap at ~28 min with no
+`solution.json` written. An empty submission scores 0.0 — identical to the empty
+anchor. This was reproducible: across all five host runs (3× 3.1 Pro, 2× 3.5 Flash) the
+agent stalled in transcription orchestration and produced no ledger. Transcription is
+not the wall (the tool runs at ~12× real time, ~19 min for the full session); the wall
+is that agy spends its budget waiting on a background job instead of transcribing
+foreground and analysing, which the two harnesses that scored above 0 did not do.
+
+**Integrity audit** (`scripts/understanding/audit_trajectory.py` on
+`rollouts/antigravity-full.jsonl`): **no web grounding, no lookup/search tool calls, no
+server-side grounding metadata, and no access to any answer-key path** — 98 tool-call
+turns, all clean.
+
+**Honest caveat.** This row did not run in the shipped container and was quota-
+terminated before the 1-hour cap. In every attempt the agent was still transcribing
+with no analysis started, so 0.0 is the measured outcome but not a clean full-budget
+completion. It clears the difficulty gate; it is weaker evidence than the other three.
 
 ## Ablations, Codex GPT-5.6 Sol xhigh (gate: `<= 0.15`)
 

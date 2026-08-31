@@ -11,6 +11,11 @@ counts live in `../scores.md`; this directory is the raw evidence behind them.
 | `opus5-full.jsonl` | Claude Code 2.1.220 | Opus 5, xhigh |
 | `opus48-full.jsonl` | Claude Code 2.1.220 | Opus 4.8, default |
 | `codex-full.jsonl` | Codex CLI 0.145.0 | GPT-5.6 Sol, xhigh |
+| `antigravity-full.jsonl` | Antigravity CLI 1.1.21 | Gemini 3.5 Flash, high |
+
+`antigravity-full.jsonl` is a host run, not a `harbor run` — see `../scores.md` §"The
+Antigravity row" for why (agy authenticates only via interactive OAuth and cannot run
+headless in the sandbox) and for its caveats (quota-terminated, empty submission → 0.0).
 
 ## Ablations (all Codex CLI 0.145.0, GPT-5.6 Sol xhigh)
 
@@ -26,7 +31,11 @@ counts live in `../scores.md`; this directory is the raw evidence behind them.
 
 Claude Code transcripts are `--output-format stream-json`; count tool calls as
 `message.content[].type == "tool_use"`. Codex transcripts are `codex exec --json`;
-count `item.type == "command_execution"`.
+count `item.type == "command_execution"`. Antigravity transcripts are agy
+`--output-format stream-json`; count the distinct `step_update` events that carry a
+`tool_name` (dedupe by `step_index`, since one tool call emits an ACTIVE and a DONE
+record). `scripts/understanding/audit_trajectory.py` counts all three formats and runs
+the answer-key / web-grounding audit.
 
 Both formats echo the full prompt in the conversation history every turn. Because that
 prompt contains a prohibition list naming the answer-key files ("never open

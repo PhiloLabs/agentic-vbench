@@ -176,9 +176,270 @@ def score(preds: list, ground_truth: list) -> dict:
     }
 
 
-def load_ground_truth(path: Path) -> list:
-    data = json.loads(path.read_text())
-    gt = data["commands"] if isinstance(data, dict) else data
+# The frozen 21-row command ledger — the answer key. It lives here in tests/ (the
+# verifier-only mount) and is NEVER shipped into the agent's image. Inlined rather
+# than kept as a loose ground_truth.json dump, matching the family layout; the oracle
+# in ../solution/solve.sh must stay byte-identical in content or it stops scoring 1.0.
+# Per-row frame citations are in ground_truth_provenance.json.
+GROUND_TRUTH = [
+    {
+        'command_time_s': 872.0,
+        'speaker': 'unknown',
+        'target': 'nio',
+        'action': 'glide',
+        'object': 'boat',
+        'executor': 'nio',
+        'outcome': 'partial',
+        'execution_start_s': 925.0,
+        'evidence_start_s': 918.0,
+        'evidence_end_s': 935.0,
+    },
+    {
+        'command_time_s': 940.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'stand',
+        'object': 'hill',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 976,
+        'evidence_start_s': 968,
+        'evidence_end_s': 1004,
+    },
+    {
+        'command_time_s': 1262.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'retry',
+        'object': 'flight',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 1282,
+        'evidence_start_s': 1282,
+        'evidence_end_s': 1352,
+    },
+    {
+        'command_time_s': 1405.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'bring',
+        'object': 'pig',
+        'executor': 'thatdeath',
+        'outcome': 'completed',
+        'execution_start_s': 1512.0,
+        'evidence_start_s': 1506.0,
+        'evidence_end_s': 1524.0,
+    },
+    {
+        'command_time_s': 1466.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'remove',
+        'object': 'door',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 1500.0,
+        'evidence_start_s': 1496.0,
+        'evidence_end_s': 1520.0,
+    },
+    {
+        'command_time_s': 2106.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'push',
+        'object': 'boat',
+        'executor': 'nio',
+        'outcome': 'partial',
+        'execution_start_s': 2178.0,
+        'evidence_start_s': 2170.0,
+        'evidence_end_s': 2240.0,
+    },
+    {
+        'command_time_s': 2230.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'place',
+        'object': 'block',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 2250.0,
+        'evidence_start_s': 2246.0,
+        'evidence_end_s': 2276.0,
+    },
+    {
+        'command_time_s': 2356.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'break',
+        'object': 'wall',
+        'executor': 'nio',
+        'outcome': 'partial',
+        'execution_start_s': 2376.0,
+        'evidence_start_s': 2370.0,
+        'evidence_end_s': 2400.0,
+    },
+    {
+        'command_time_s': 4826.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'get',
+        'object': 'vines',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 4867,
+        'evidence_start_s': 4864,
+        'evidence_end_s': 4872,
+    },
+    {
+        'command_time_s': 5745.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'put',
+        'object': 'light',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 6294,
+        'evidence_start_s': 6294,
+        'evidence_end_s': 6317,
+    },
+    {
+        'command_time_s': 6958.0,
+        'speaker': 'nio',
+        'target': 'thatdeath',
+        'action': 'fetch',
+        'object': 'fish',
+        'executor': 'thatdeath',
+        'outcome': 'completed',
+        'execution_start_s': 7690,
+        'evidence_start_s': 7690,
+        'evidence_end_s': 7775,
+    },
+    {
+        'command_time_s': 7142.0,
+        'speaker': 'nio',
+        'target': 'thatdeath',
+        'action': 'collect',
+        'object': 'fish',
+        'executor': 'thatdeath',
+        'outcome': 'completed',
+        'execution_start_s': 7275,
+        'evidence_start_s': 7275,
+        'evidence_end_s': 7795,
+    },
+    {
+        'command_time_s': 7372.0,
+        'speaker': 'nio',
+        'target': 'thatdeath',
+        'action': 'splash',
+        'object': 'potion',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 7847,
+        'evidence_start_s': 7847,
+        'evidence_end_s': 7857,
+    },
+    {
+        'command_time_s': 7722.0,
+        'speaker': 'nio',
+        'target': 'thatdeath',
+        'action': 'throw',
+        'object': 'fish',
+        'executor': 'thatdeath',
+        'outcome': 'completed',
+        'execution_start_s': 7742,
+        'evidence_start_s': 7742,
+        'evidence_end_s': 7774,
+    },
+    {
+        'command_time_s': 8834.0,
+        'speaker': 'nio',
+        'target': 'thatdeath',
+        'action': 'eat',
+        'object': 'bread',
+        'executor': 'thatdeath',
+        'outcome': 'completed',
+        'execution_start_s': 8994.9,
+        'evidence_start_s': 8994.9,
+        'evidence_end_s': 8995.5,
+    },
+    {
+        'command_time_s': 10787.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'hang',
+        'object': 'banner',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 11056,
+        'evidence_start_s': 11056,
+        'evidence_end_s': 11250,
+    },
+    {
+        'command_time_s': 11414.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'place',
+        'object': 'spyglass',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 11902.4,
+        'evidence_start_s': 11788,
+        'evidence_end_s': 11906,
+    },
+    {
+        'command_time_s': 11728.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'craft',
+        'object': 'spyglass',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 11790,
+        'evidence_start_s': 11788,
+        'evidence_end_s': 11816,
+    },
+    {
+        'command_time_s': 11949.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'get',
+        'object': 'eggs',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 12355,
+        'evidence_start_s': 12342,
+        'evidence_end_s': 12360,
+    },
+    {
+        'command_time_s': 12892.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'fill',
+        'object': 'empty_item_frames',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 13018,
+        'evidence_start_s': 13014,
+        'evidence_end_s': 13046,
+    },
+    {
+        'command_time_s': 13125.0,
+        'speaker': 'thatdeath',
+        'target': 'nio',
+        'action': 'craft',
+        'object': 'brush',
+        'executor': 'nio',
+        'outcome': 'completed',
+        'execution_start_s': 13223,
+        'evidence_start_s': 13214,
+        'evidence_end_s': 13226,
+    },
+]
+
+
+def load_ground_truth() -> list:
+    """Validate and return the inline GROUND_TRUTH."""
+    gt = GROUND_TRUTH
     for e in gt:
         if norm(e["outcome"]) not in {norm(x) for x in OUTCOMES}:
             raise ValueError(f"ground-truth outcome not in {OUTCOMES}: {e}")
@@ -202,13 +463,11 @@ def read_solution(path: Path) -> tuple[list, str]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--solution", required=True, type=Path)
-    ap.add_argument("--ground-truth", required=True, type=Path,
-                    help="verifier-side ground_truth.json (never in the agent image)")
     ap.add_argument("--reward-json", required=True, type=Path)
     ap.add_argument("--reward-txt", required=True, type=Path)
     args = ap.parse_args()
 
-    ground_truth = load_ground_truth(args.ground_truth)
+    ground_truth = load_ground_truth()
     preds, reason = read_solution(args.solution)
     out = score(preds, ground_truth)
     out["details"]["reason"] = reason

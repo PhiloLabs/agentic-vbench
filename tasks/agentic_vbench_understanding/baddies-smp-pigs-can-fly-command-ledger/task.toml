@@ -36,8 +36,11 @@ HF_TOKEN = "${HF_TOKEN:-}"
 name = "solve"
 
 [steps.agent]
-# Nearly four hours of video to transcribe in chunks and sample frames across.
-timeout_sec = 7200.0
+# 1-hour agent budget (the family's calibration budget; SPEC.md §7 and the
+# calibration table are measured against 3600 s). Nearly four hours of video to
+# transcribe in chunks and sample frames across — but the offline `transcribe` tool
+# runs at ~12x real time (~19 min for the full session), leaving room to analyse.
+timeout_sec = 3600.0
 
 [steps.verifier]
 timeout_sec = 600.0
