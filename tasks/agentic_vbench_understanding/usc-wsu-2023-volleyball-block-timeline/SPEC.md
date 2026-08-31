@@ -61,18 +61,19 @@ scorer:
   null_reward: 0.0 (measured; empty list)
 
 difficulty:
-  strong_agent_reward: measured inside the shipped task image, where every action on
-    the video runs in a container built from environment/Dockerfile with no network —
-    Codex CLI (gpt-5.6-sol, xhigh) 0.0789; Claude Code (Opus 5, xhigh) 0.0. Neither got
-    a single block point fully correct: Codex matched 5 rally anchors and earned 3
-    partials out of 15 submitted events, Opus submitted none. The same agents on the
-    calibration host scored 0.0185 and 0.0; see calibration/parity/. A Fable 5 run reached 210
-    tool-call turns before that model's credit pool ran out; it is archived unscored,
-    and resuming it with Opus 5 was tested and also scored 0.0, so it is not completed
-    under another model's name.
-  tool_call_turns: in the task image, Codex 194 command executions and Opus 242
-    tool-call turns; on the host, 158 completed items and 270 turns (all far above the
-    50 floor)
+  strong_agent_reward: measured with the agent itself running inside the shipped task
+    image, egress default-deny behind an allowlisting proxy — Codex CLI (gpt-5.6-sol,
+    xhigh) 0.0. It submitted 16 events, matched 2 of 23 rally anchors and got no block
+    point fully or partially correct. Claude Code (Opus 5, xhigh) 0.0, provisional:
+    measured under an earlier harness that confined the video but not the processing of
+    the frames from it, and not rerun. That flaw inflated an earlier Codex figure of
+    0.0789. The same agents on the calibration host scored 0.0185 and 0.0; see
+    calibration/parity/. A Fable 5 run reached 210 tool-call turns before that model's
+    credit pool ran out; it is archived unscored, and resuming it with Opus 5 was tested
+    and also scored 0.0, so it is not completed under another model's name.
+  tool_call_turns: inside the task image, Codex 153 command executions over three hours;
+    under the earlier harness, Codex 194 and Opus 242; on the host, 158 completed items
+    and 270 turns (all far above the 50 floor)
   agent_model: Codex CLI, Claude Code (Opus 5); Antigravity not run — on the sister
     BYU match its Gemini backends reconstruct the game from the public rally log
     unless three isolation vectors are applied at once

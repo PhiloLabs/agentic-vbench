@@ -1,61 +1,69 @@
 # Calibration inside the shipped task environment
 
-The runs in `../rollouts/` were executed on the calibration host, where the agents
-reached for Tesseract, ImageMagick, NumPy and Pillow. The task image ships its own tool
-set, so a number measured on the host does not necessarily describe what an agent can
-do inside the task. These runs remove that gap: every action on the video happens
-inside a container built from `environment/Dockerfile`.
+A number measured on the calibration host does not describe what an agent can do inside
+the task, because the host carries tools the image does not ship. These runs close that
+gap. There are two generations of them and only the second one closes it properly.
 
-## How the confinement works
+## What the agent actually gets
 
-It is structural rather than instructed. The workspace the agent sees holds **no video
-at all** — the broadcast exists only inside the container, at the path the task's own
-`workdir/setup.sh` puts it. The only route to it is a three-line wrapper:
+**The agent runs inside the task image.** Not a wrapper around it — the CLI itself
+executes in a container built from `environment/Dockerfile`, so every command it issues
+uses that image's tools and there is no host tool surface at all. The prompt is
+therefore the shipped instruction verbatim: `instruction-as-run-v2.md` hashes to the
+same SHA256 as `steps/solve/instruction.md`, because inside the environment the video
+sits where `workdir/setup.sh` puts it and nothing has to be explained about how to
+reach it.
 
-```sh
-#!/bin/sh
-exec docker exec -w /workspace/work avb-parity-<task> sh -lc "$*"
-```
+**Egress is default-deny.** The container's `OUTPUT` policy is DROP; the one hole is an
+allowlisting CONNECT proxy that accepts the CLI's backend and refuses every other host
+by name. A direct connection that skips the proxy is dropped by iptables — verified:
+`stats.ncaa.org` refused by the proxy and logged, a raw connection to `1.1.1.1:443`
+times out, the backend connects. That is what makes `allow_internet = false` true for
+task actions.
 
-The container runs with `--network none`, so no task action can reach the network,
-which is what `allow_internet = false` means here. Its `/workspace/work` is a bind
-mount of the host workspace, so frames the agent extracts inside appear on the host for
-it to look at. `environment.txt` records what that environment was:
+`environment-v2.txt` records the harness image digest, the task image under it, the
+agent version, the egress rule and the tool inventory as the agent sees it.
+`egress-v2.log` is the network evidence: every host the run asked for, allowed or not.
 
-```
-image digest: sha256:58ed2ce8cbd8a220b9d2c6249bac619955d95de611a4097e35a12834332e1aa2
-container network: none
-media inside the image: 13ccbabb…d08ba9e   (matches the pin)
-ffmpeg, ffprobe, tesseract, convert, python3 + numpy 2.1.3, Pillow 11.0.0
-```
-
-`instruction-as-run.md` is the exact prompt: the shipped instruction plus one section
-explaining the wrapper.
-
-## Results
+## Result
 
 | agent | model / effort | reward | events | full | partial | rally anchors |
 |---|---|---|---|---|---|---|
-| Codex CLI | gpt-5.6-sol, xhigh | **0.0789** | 15 | 0 | 3 | 5 |
-| Claude Code | Opus 5, xhigh | **0.0** | 0 | 0 | 0 | 0 |
+| Codex CLI | gpt-5.6-sol, xhigh | **0.0** | 16 | 0 | 0 | 2 / 23 |
 
-Codex reported fewer events than on the host (15 against 31) and was right more often
-about the rally, which is where the higher number comes from — precision 0.10 against
-0.017. It still got no block point fully correct.
+153 command executions over three hours and ten minutes. It reached 16 events and got
+none of them fully or partially right: two land on a real block point's set and score,
+and both name the wrong players.
 
-Opus submitted an empty list and wrote `opus.agent-notes.md` explaining why, which is
-worth reading in full. In 242 tool-call turns it rebuilt **196 of the match's 200
-points** from the score bug, including two overturned calls, and anchored 168 rallies
-to a camera cut within 0.5–3.5 s of the ball landing. Then it stopped, because deciding
-*how* each rally ended needs the ball:
+**Egress log: 994 connections to the model backend, zero refusals.** The agent never
+once asked for a host outside it — not a grep over a transcript, but the record of a
+proxy that would have refused.
 
-> the ball is ~8–14 px and often motion-blurred […] at 0.1 s sampling the ball is
-> readable, but each such sheet covers only ~1.2 s, so it needs an anchor tighter than
-> the ±3.5 s I can derive […] The broadcast shows no replays.
+## The earlier rows, and why they are superseded
 
-It also records, usefully for the observability question, that blocker and hitter
-jersey numbers **are** readable from the live wide shot at 4× upscale. What defeats it
-is classifying the rally ending, not identifying the players.
+`codex.solution.json` / `opus.solution.json` (0.0789 and 0.0) came from a harness that
+confined access to the video but not the processing of what came out of it: frames
+landed on a bind mount and were then worked on with **host** Python, NumPy, Pillow and
+OCR. The confinement claim made for them was wrong, and the review caught it.
 
-Native traces for both runs are published with the other streams; `../scores.md` lists
-the URLs and SHA256s.
+Confining the processing removes the Codex figure entirely:
+
+| | first generation | corrected |
+|---|---|---|
+| reward | 0.0789 | **0.0** |
+| events | 15 | 16 |
+| fully correct | 0 | 0 |
+| partials | 3 | 0 |
+| rally anchors | 5 / 23 | 2 / 23 |
+
+The gap is the score-bug scan: host tooling made a batch OCR pass over a two-hour
+broadcast cheap, and inside the image the same work costs more, so far fewer rallies
+get anchored and the three partials go with them. The corrected figure is the one that
+describes the task.
+
+`opus.agent-notes.md` is kept from the first generation because what it records is
+about the video rather than the harness: in 242 tool-call turns Opus rebuilt 196 of the
+match's 200 points from the score bug, anchored 168 rallies to a camera cut, and then
+declined to guess how each rally ended, because the ball is 8-14 px and motion-blurred
+and the broadcast carries no replays. That row is marked provisional and has not been
+rerun under the corrected harness.

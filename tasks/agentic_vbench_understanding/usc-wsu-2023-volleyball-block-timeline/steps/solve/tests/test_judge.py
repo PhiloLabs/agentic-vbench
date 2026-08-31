@@ -103,6 +103,7 @@ check("duplicate prediction consumes one GT slot", d["full_matches"] == 1 and d[
 print("== published calibration rewards still reproduce ==")
 CALIB = HERE.parents[2] / "calibration"
 PUBLISHED = {
+    "parity/codex-v2.solution.json": 0.0,
     "rollouts/codex-fresh.solution.json": 0.0185,
     "rollouts/opus-fresh.solution.json": 0.0,
     "rollouts/hybrid-fable-then-opus.solution.json": 0.0,
