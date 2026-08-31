@@ -70,16 +70,18 @@ scorer:
   null_reward: 0.0 (measured; empty list)
 
 difficulty:
-  strong_agent_reward: measured inside the shipped task image, where every action on
-    the video runs in a container built from environment/Dockerfile with no network —
-    Codex CLI (gpt-5.6-sol, xhigh) 0.0952; Claude Code (Opus 5, xhigh) 0.0. Codex
-    matched 11 of the 18 rally anchors from 24 submitted events and got one block point
-    fully correct (set 1 at 18-14: both blockers, the hitter and the setter); Opus
-    submitted 8 and matched one anchor. The same agents on the calibration host scored
-    0.0213 and 0.0; see calibration/parity/.
-  tool_call_turns: in the task image, Opus 384 tool-call turns (231 Read, 152 Bash);
-    on the host, Codex 71 completed items and Opus 386 turns (all far above the 50
-    floor)
+  strong_agent_reward: Codex CLI (gpt-5.6-sol, xhigh) 0.0426, measured with the agent
+    itself running inside the shipped task image — every command it issues uses that
+    image's tools, egress is default-deny behind an allowlisting proxy, and the proxy
+    log records 1365 model connections and no other host. It submitted 29 events,
+    matched 9 of the 18 rally anchors, and got one block point fully correct (set 1 at
+    18-14: both blockers, the hitter and the setter), the only fully-correct event on
+    either task. Claude Code (Opus 5, xhigh) 0.0, provisional: measured with an earlier
+    harness that confined the video but not the processing of extracted frames, and not
+    yet rerun. On the calibration host the two scored 0.0213 and 0.0. See
+    calibration/parity/.
+  tool_call_turns: inside the image, Codex 232 command executions over five hours; on
+    the host, Codex 71 completed items and Opus 386 turns (all far above the 50 floor)
   agent_model: Codex CLI, Claude Code (Opus 5); Antigravity not run — its Gemini
     backends ground against the public rally log unless three isolation vectors are
     applied at once (evidence in calibration/agent-integrity/)

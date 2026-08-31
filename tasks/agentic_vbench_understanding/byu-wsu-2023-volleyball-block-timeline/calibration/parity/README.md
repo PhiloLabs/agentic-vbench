@@ -1,46 +1,60 @@
 # Calibration inside the shipped task environment
 
-The runs in `../rollouts/` were executed on the calibration host, where the agents
-reached for Tesseract, ImageMagick, NumPy and Pillow. The task image ships its own tool
-set, so a number measured on the host does not necessarily describe what an agent can
-do inside the task. These runs remove that gap: every action on the video happens
-inside a container built from `environment/Dockerfile`.
+A number measured on the calibration host does not describe what an agent can do inside
+the task, because the host carries tools the image does not ship. These runs close that
+gap. There are two generations of them and only the second one closes it properly.
 
-## How the confinement works
+## What the agent actually gets
 
-It is structural rather than instructed. The workspace the agent sees holds **no video
-at all** — the broadcast exists only inside the container, at the path the task's own
-`workdir/setup.sh` puts it. The only route to it is a three-line wrapper:
+**The agent runs inside the task image.** Not a wrapper around it — the CLI itself
+executes in a container built from `environment/Dockerfile`, so every command it issues
+uses that image's tools and there is no host tool surface at all. The prompt is
+therefore the shipped instruction verbatim: inside the environment the video sits where
+`workdir/setup.sh` puts it, and nothing has to be explained about how to reach it.
 
-```sh
-#!/bin/sh
-exec docker exec -w /workspace/work avb-parity-<task> sh -lc "$*"
-```
+**Egress is default-deny.** The container's `OUTPUT` policy is DROP; the one hole is an
+allowlisting CONNECT proxy that accepts the CLI's backend and refuses every other host
+by name. A direct connection that skips the proxy is dropped by iptables — verified:
+`stats.ncaa.org` refused, a raw connection to `1.1.1.1:443` times out, the backend
+connects. That is what makes `allow_internet = false` true for task actions.
 
-The container runs with `--network none`, so no task action can reach the network,
-which is what `allow_internet = false` means here. Its `/workspace/work` is a bind
-mount of the host workspace, so frames the agent extracts inside appear on the host for
-it to look at. `environment.txt` records what that environment was, and
-`instruction-as-run.md` is the exact prompt: the shipped instruction plus one section
-explaining the wrapper.
+`environment-v2.txt` records the harness image digest, the task image under it, the
+agent version, the egress rule and the tool inventory as the agent sees it.
+`egress-v2.log` is the network evidence: every host the run asked for, allowed or not.
 
-## Results
+## Result
 
 | agent | model / effort | reward | events | full | partial | rally anchors |
 |---|---|---|---|---|---|---|
-| Codex CLI | gpt-5.6-sol, xhigh | **0.0952** | 24 | 1 | 2 | 11 / 18 |
-| Claude Code | Opus 5, xhigh | **0.0** | 8 | 0 | 0 | 1 / 18 |
+| Codex CLI | gpt-5.6-sol, xhigh | **0.0426** | 29 | 1 | 0 | 9 / 18 |
 
-Both are under the ~0.10 bar, Codex only just. It is also the first run on either task
-to get a block point **fully correct** — set 1 at 18-14, with both credited blockers
-(McEwan-Llarenas, Stowell), the stuffed hitter (Ryan) and the setter (Ung) all right.
+232 command executions over five hours. It still got one block point fully correct.
 
-The jump from the host figure (0.0213) is worth understanding, because it is not a
-jump in attribution. Rally anchors found went from 3 to 11 while fully-correct events
-went from 0 to 1: what the added tools bought is a **scripted pass over the score bug**
-— OCR plus template matching across a two-hour broadcast — which makes finding the
-rallies cheap. That is the tedious layer, not the hard one. The attribution layer moved
-by one event.
+**Egress log: 1365 connections to the model backend, zero refusals.** The agent never
+once asked for a host outside it — not a grep over a transcript, but the record of a
+proxy that would have refused.
 
-Opus took 384 tool-call turns (231 Read, 152 Bash) and submitted 8 events, matching
-one rally anchor and no attribution.
+## The earlier rows, and why they are superseded
+
+`codex.solution.json` / `opus.solution.json` (0.0952 and 0.0) came from a harness that
+confined access to the video but not the processing of what came out of it: frames
+landed on a bind mount and were then worked on with **host** Python, NumPy, Pillow and
+OCR. The confinement claim made for them was wrong, and the review caught it.
+
+Confining the processing halves the Codex figure:
+
+| | first generation | corrected |
+|---|---|---|
+| reward | 0.0952 | **0.0426** |
+| events | 24 | 29 |
+| fully correct | 1 | 1 |
+| rally anchors | 11 / 18 | 9 / 18 |
+
+The gap is the score-bug scan: host tooling made a batch OCR pass over a two-hour
+broadcast cheap, and inside the image the same work costs more, so fewer rallies get
+found and precision falls. The corrected figure is the one that describes the task.
+
+Two harness failures preceded the corrected run and neither produced a result:
+a login shell reset `PATH` so the CLI was never found, and a read timeout left on the
+proxy's upstream socket tore down the model stream after 30 s of quiet mid-generation.
+Both are fixed; the second is why `create_connection`'s timeout is cleared explicitly.

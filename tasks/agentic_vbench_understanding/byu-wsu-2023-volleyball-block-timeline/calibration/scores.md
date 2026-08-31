@@ -41,19 +41,32 @@ that describe the task**; `parity/README.md` explains the confinement and
 
 | agent | model / setting | in the task image | on the host | integrity |
 |---|---|---|---|---|
-| Codex CLI | gpt-5.6-sol, xhigh | **0.0952** | 0.0213 | key 0, web 0 |
-| Claude Code | Opus 5, xhigh | **0.0** | 0.0 | key 0, web 0 |
+| Codex CLI | gpt-5.6-sol, xhigh | **0.0426** | 0.0213 | 1365 model calls, 0 other hosts |
+| Claude Code | Opus 5, xhigh | 0.0 *(provisional)* | 0.0 | key 0, web 0 |
 | Antigravity | — | not run | — | see `../agent-integrity/` |
 
-Confined, Codex submitted 24 events, matched 11 of the 18 rally anchors, and got one
-block point **fully correct** — set 1 at 18-14, with both blockers, the stuffed hitter
-and the setter all right. Opus submitted 8 events over 384 tool-call turns and matched
-one anchor.
+The Codex row is measured with **the agent itself running inside the task image**, so
+every command it issues uses that image's tools and the host contributes nothing but
+model transport. Egress is default-deny behind an allowlisting proxy, and that proxy's
+log shows the run never asked for a host outside the backend. `parity/README.md` has
+the construction and the verification.
 
-The gap to the host figure is a gap in *finding* rallies, not in attributing them:
-anchors went 3 → 11 while fully-correct events went 0 → 1. The image's OCR and array
-tools make a scripted pass over the score bug cheap, which collapses the tedious layer
-and leaves the attribution layer where it was.
+The Opus row is provisional: it was measured with an earlier harness that confined
+access to the video but not the processing of the frames that came out of it, and it
+has not been rerun. The same flaw inflated an earlier Codex figure of 0.0952 —
+confining the processing brought it to 0.0426.
+
+Inside the image Codex submitted 29 events over 232 command executions and five hours,
+matched 9 of the 18 rally anchors, and got one block point **fully correct** — set 1 at
+18-14, with both blockers, the stuffed hitter and the setter all right. That single
+event is the only fully-correct one on either task, and it survives every version of
+the harness.
+
+Finding the rallies is what the environment changes. Given host tooling a batch pass
+over the score bug is cheap and 11 anchors fall out; inside the image the same work
+costs more and 9 do. Attribution does not move — one event either way. Tooling helps
+with the tedious layer, which is why the field the task leans on is the one no camera
+angle hands over.
 
 ## Design note: why three attributions
 
@@ -115,7 +128,9 @@ envelope those streams were audited against.
 | codex-fresh, stderr | [`codex-fresh/stderr.txt.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/codex-fresh/stderr.txt.gz) (1 kB) | `3c45a319a3088ee3ef5839abd8cbbf69d0d3b79cfc577ef16485a761b60e522e` |
 | opus-fresh, leg 1 | [`opus-fresh/rollout.leg1.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/opus-fresh/rollout.leg1.stream-json.gz) (27.7 MB) | `711850547184b410d8cd593f179af9e16b75674250feabb22edea1ebe6c7ac35` |
 | opus-fresh, leg 2 | [`opus-fresh/rollout.leg2.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/opus-fresh/rollout.leg2.stream-json.gz) (186.7 MB) | `8e4eb6fffcac9e6f84cf2228313dfecd0b0631c10caa4f91de398ba786603e3a` |
-| parity, Codex in the task image | [`parity-codex/rollout.jsonl.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/5719e3303f366594dd471a048a69ead60e4c2bcd/byu-wsu-2023-volleyball-block-timeline/parity-codex/rollout.jsonl.gz) (45 kB) | `0d3356eb172e83e00ddf1b60a1528253dd5376366121d686b76455686faae76c` |
+| parity, Codex inside the task image | [`parity-v2-codex/rollout.jsonl.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/ad70da550bf9b3dedd42face538268319779d751/byu-wsu-2023-volleyball-block-timeline/parity-v2-codex/rollout.jsonl.gz) (50 kB) | `9509046a03a34b7c1a1581e4c2de73cbe19d75cde200beeab236651e4bfa31d7` |
+| parity, that run's egress log | [`parity-v2-codex/egress.log`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/ad70da550bf9b3dedd42face538268319779d751/byu-wsu-2023-volleyball-block-timeline/parity-v2-codex/egress.log) (72 kB) | `8ee79d1f31f5dcef70d67d9a4b678cd50ca473dcec4cbd6ac1c8485c06abf6b8` |
+| parity, Codex in the task image (superseded) | [`parity-codex/rollout.jsonl.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/5719e3303f366594dd471a048a69ead60e4c2bcd/byu-wsu-2023-volleyball-block-timeline/parity-codex/rollout.jsonl.gz) (45 kB) | `0d3356eb172e83e00ddf1b60a1528253dd5376366121d686b76455686faae76c` |
 | parity, Opus in the task image | [`parity-opus/rollout.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/5719e3303f366594dd471a048a69ead60e4c2bcd/byu-wsu-2023-volleyball-block-timeline/parity-opus/rollout.stream-json.gz) (197.6 MB) | `f2a40d87f866603566fa5b93daabc7cb064a863f900e75e49ec1180f2063e998` |
 | ablation, no_media | [`ablations/no_media.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/no_media.stream-json.gz) (12 kB) | `7f85d12481c326822d4614b2422ba7ebc359c8185ad79a23bcdc6741d07248c5` |
 | ablation, single_frame | [`ablations/single_frame.stream-json.gz`](https://huggingface.co/datasets/gavinlaw/agentic-vbench-calibration-trajectories/resolve/2b90b57ba72e521de8bc0ed24c1d0470dafc5f95/byu-wsu-2023-volleyball-block-timeline/ablations/single_frame.stream-json.gz) (146 kB) | `026bdd99624662ea01185055a35be77b334419faa17b1ea4b4c07a48b38c3789` |
