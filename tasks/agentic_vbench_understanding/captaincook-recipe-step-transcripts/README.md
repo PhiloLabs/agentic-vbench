@@ -34,6 +34,8 @@ provenance/verify_key.py             re-derives the key WITHOUT build_gt and com
 provenance/test_oracle_integration.py  RUNS the shipped oracle, grades what it wrote
 provenance/audit_error_observability.py  the checkable half of the observability audit
 provenance/observability/            per-tag evidence that the error field is visible
+environment/frozen.json              base digest, image id, and the 22 baked hashes
+environment/verify_frozen.py         checks a built image against that record
 provenance/make_judge.py             step-derived.json -> judge.py
 provenance/make_task_files.py        step-derived.json -> prompt, task.toml, oracle
 provenance/make_dockerfile.py        step-derived.json + media manifest -> Dockerfile

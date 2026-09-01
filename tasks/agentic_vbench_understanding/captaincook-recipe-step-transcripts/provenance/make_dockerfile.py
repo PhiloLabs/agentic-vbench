@@ -18,7 +18,14 @@ import argparse
 import json
 from pathlib import Path
 
-HEAD = '''FROM python:3.12-slim
+# The base is pinned by digest, not by tag. `python:3.12-slim` moves, and a task image
+# rebuilt a month from now against a moved tag is a different environment than the one the
+# calibration ran in, with nothing in the file recording that it changed. This digest is
+# the base the shipped image was actually built on, checked layer for layer against it.
+BASE_IMAGE = ("python:3.12-slim@sha256:"
+              "09f7da3bc104798d0afb40bc08d23ab2da20a76130cec1f2ef170848f5d85217")
+
+HEAD = '''FROM ''' + BASE_IMAGE + '''
 
 RUN apt-get update && apt-get install -y --no-install-recommends \\
         ffmpeg curl ca-certificates \\
