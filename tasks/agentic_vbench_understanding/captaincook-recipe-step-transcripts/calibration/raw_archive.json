@@ -1,0 +1,32 @@
+{
+ "what": "The native raw transcripts of the three calibration arms, as each harness wrote them, before ship_rollout.py elides image blobs and rewrites paths.",
+ "url": "https://github.com/Y-Yiqing/agentic-vbench/releases/download/raw-calibration-2026-09-01/captaincook-raw-calibration-2026-09-01.tar.gz",
+ "release": "https://github.com/Y-Yiqing/agentic-vbench/releases/tag/raw-calibration-2026-09-01",
+ "revision": "raw-calibration-2026-09-01",
+ "corresponds_to_commit": "d8ee14a",
+ "bytes": 104304992,
+ "sha256": "82110af9d8c609509fbb12f791af6a7db1171b081949e89c8d012c6ba8a56526",
+ "verified": "downloaded from the published URL and re-hashed; the asset is byte-identical to the file whose digest is recorded here",
+ "redaction": "home-directory prefixes and credential shapes only. Every rule was proven to fire on a canary line carrying its target before the run, so a rule that matched nothing could not report a clean archive. An independent sweep over the finished archive caught 6 of 6 canaries and found zero credential-shaped pairs. Nothing in these three transcripts actually required redacting.",
+ "not_redacted": "commands, tool results, turn structure, failures, the host and container boundary, and every frame the agents looked at. The 396 image blobs are carried through in full, which is the difference between this archive and the rollouts committed to the repository.",
+ "contents": {
+  "codex": {
+   "lines": 421,
+   "bytes": 28577537,
+   "sha256": "5f92903cbb3f03d0b8f86efab9ba2a95aeb9e95223dd66f3c992ecd82085a835",
+   "image_blobs_retained": 153
+  },
+  "claude": {
+   "lines": 1587,
+   "bytes": 112959033,
+   "sha256": "2d80929de6bc1590e8562da90acd14bb35fe92c77ca27defbec3bba568197200",
+   "image_blobs_retained": 243
+  },
+  "antigravity": {
+   "lines": 408,
+   "bytes": 307304,
+   "sha256": "880fa4d05ddea8c2396ba3eccf4ea2014d264e8fbd21a9675f641a16c2a6ee0b",
+   "image_blobs_retained": 0
+  }
+ }
+}

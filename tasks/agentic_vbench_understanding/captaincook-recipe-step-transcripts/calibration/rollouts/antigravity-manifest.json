@@ -1,0 +1,59 @@
+{
+ "arm": "antigravity",
+ "model": "google/gemini-3.6-flash",
+ "reasoning_effort": "high",
+ "harness_version": "Harbor 0.21.0 / Antigravity CLI 1.1.22, run inside the task image",
+ "harness_agent": "calibration.harbor_agents:AntigravityCliWithEffort",
+ "harness_note": "Harbor's stock antigravity-cli adapter with two flags it does not pass, added through Harbor's own module:ClassName agent path; see calibration/harbor_agents.py and calibration/antigravity_in_image.md.",
+ "image": "cc4d:pinned",
+ "image_id": "sha256:de299ec54d95daf029b1f026d0e87d5ec7e158ebb4689baf2588fc029bd0b4ab",
+ "one_session_whole_corpus": true,
+ "videos": 22,
+ "budget_sec": 21600.0,
+ "budget_source": "task.toml steps.agent.timeout_sec",
+ "print_timeout": "6h",
+ "argv": [
+  "agy",
+  "--dangerously-skip-permissions",
+  "--model",
+  "gemini-3.6-flash",
+  "--print-timeout",
+  "6h",
+  "--effort",
+  "high",
+  "--prompt=<the shipped prompt>"
+ ],
+ "prompt_via": "argv",
+ "prompt_sha256": "07101b3dccd16becb93d59587a120fc34a4f931613bbcdcdf7a496b999bc58b0",
+ "ran_inside_the_task_image": true,
+ "egress": {
+  "environment_phase": [
+   "antigravity.google",
+   "antigravity-cli-auto-updater-974169037036.us-central1.run.app",
+   "storage.googleapis.com"
+  ],
+  "agent_phase": [
+   "daily-cloudcode-pa.googleapis.com",
+   "cloudcode-pa.googleapis.com",
+   "generativelanguage.googleapis.com",
+   "oauth2.googleapis.com",
+   "accounts.google.com",
+   "www.googleapis.com",
+   "lh3.googleusercontent.com",
+   "antigravity.google"
+  ],
+  "policy": "task.toml allow_internet=false, with Harbor phase overrides on the command line"
+ },
+ "cpus": 4,
+ "memory_mb": 16384,
+ "resources_source": "task.toml [environment]",
+ "trajectory": "antigravity.jsonl",
+ "wall_sec": 1879.5,
+ "exit_code": 0,
+ "budget_bound": false,
+ "solution_written": true,
+ "solution_entries": 244,
+ "solution_sha256": "0df6ab5f7cb776dbd281f24986c217a0edfef4f1c79a122817a41e60dbc48868",
+ "run_dir": "/workspace",
+ "materials": "/workspace/materials"
+}

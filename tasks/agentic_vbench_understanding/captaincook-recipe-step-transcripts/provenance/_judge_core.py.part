@@ -1,0 +1,212 @@
+def _norm(entry):
+    """Normalize one predicted entry to {"video", "id", "t_start", "t_end"} or None."""
+    if not isinstance(entry, dict):
+        return None
+    video = entry.get("video", entry.get("clip", entry.get("take")))
+    label = entry.get("id", entry.get("label", entry.get("step_id")))
+    onset = entry.get("t_start", entry.get("t", entry.get("start", entry.get("onset"))))
+    offset = entry.get("t_end", entry.get("end", entry.get("offset")))
+    err = entry.get("error", entry.get("error_tag", entry.get("err")))
+    try:
+        video = str(video).strip().upper()
+        label = int(label)
+        onset = float(onset)
+        offset = float(offset)
+    except (TypeError, ValueError):
+        return None
+    if video not in GROUND_TRUTH:
+        return None
+    if not offset > onset:
+        # A step occupies an interval. The two boundaries are tested against the key
+        # independently, so a zero-length or reversed entry can otherwise satisfy both at
+        # once: on a row shorter than 2 s the tolerance is wider than half the row, and a
+        # single instant placed at its midpoint lands inside both windows. Six of the
+        # key's 314 rows are short enough for that. Rejecting here rather than in _match
+        # costs the entry its precision, the same treatment every other malformed entry
+        # gets, instead of silently discarding the claim.
+        return None
+    return {"video": video, "id": label, "t_start": onset, "t_end": offset,
+            "error": _norm_error(err)}
+
+
+# The release's own taxonomy, keyed by a squashed form so that case and inner spacing do
+# not decide a match. An unrecognised or absent value normalizes to None, which no ground
+# truth entry carries, so the entry still counts as a prediction and still costs
+# precision. Dropping it instead would let a submission that omits the field be graded as
+# though it had made fewer claims.
+#
+# The empty string is not in this table on purpose. Saying nothing is not the same claim
+# as saying the step was carried out as intended, and 115 of the key's 314 instances
+# carry "none", so mapping "" onto it would hand more than a third of the error field to
+# a submission that never judged how anything was performed. The prompt states the rule
+# this enforces: an entry with no error value, or one not on the list, cannot count.
+_ERROR_CANON = {"".join(t.lower().split()): t for t in ERROR_TAGS}
+_ERROR_CANON["none"] = "none"
+
+
+def _norm_error(value):
+    if value is None:
+        return None
+    if isinstance(value, (list, tuple)):
+        value = value[0] if len(value) == 1 else None
+        if value is None:
+            return None
+    if not isinstance(value, str):
+        return None
+    return _ERROR_CANON.get("".join(value.lower().split()))
+
+
+def _max_monotonic(preds, gt, matcher):
+    """Largest order-preserving one-to-one matching within one video (LCS-style
+    DP). Predictions are consumed in the order given, so ordering errors are
+    penalized; the ground truth is chronological."""
+    n, m = len(preds), len(gt)
+    if n == 0 or m == 0:
+        return 0
+    prev = [0] * (m + 1)
+    for i in range(1, n + 1):
+        cur = [0] * (m + 1)
+        p = preds[i - 1]
+        for j in range(1, m + 1):
+            best = cur[j - 1] if cur[j - 1] > prev[j] else prev[j]
+            if matcher(p, gt[j - 1]):
+                cand = prev[j - 1] + 1
+                if cand > best:
+                    best = cand
+            cur[j] = best
+        prev = cur
+    return prev[m]
+
+
+def _error_ok(p, g):
+    """The reported error must be one the release annotates for this step.
+
+    Any one of them, not all of them: 59 of the key's instances carry more than one tag,
+    and requiring the full set would ask the agent to reproduce an annotator's list rather
+    than to notice what went wrong. Naming one the annotator also named is the claim being
+    scored. A step with no annotated error requires "none".
+    """
+    return p["error"] is not None and p["error"] in g["error"]
+
+
+def _match(p, g):
+    return (
+        p["id"] == g["id"]
+        and abs(p["t_start"] - g["t_start"]) <= g["tau"]
+        and abs(p["t_end"] - g["t_end"]) <= g["tau"]
+        and _error_ok(p, g)
+    )
+
+
+def _match_without_error(p, g):
+    # diagnostic: label, order and both boundaries right, error tag ignored. The gap
+    # between this and the reward is what the error field costs a given submission.
+    return (
+        p["id"] == g["id"]
+        and abs(p["t_start"] - g["t_start"]) <= g["tau"]
+        and abs(p["t_end"] - g["t_end"]) <= g["tau"]
+    )
+
+
+def _match_onset_only(p, g):
+    # diagnostic: right label, onset pinned, offset ignored
+    return p["id"] == g["id"] and abs(p["t_start"] - g["t_start"]) <= g["tau"]
+
+
+def _match_label_only(p, g):
+    # diagnostic: right label in the right place in the sequence, timing ignored
+    return p["id"] == g["id"]
+
+
+def grade(entries):
+    """Score a list of predicted entries. Returns the details dict."""
+    truncated = len(entries) > MAX_ENTRIES
+    preds = [_norm(e) for e in entries[:MAX_ENTRIES]]
+    unusable = sum(1 for p in preds if p is None)
+
+    by_video = {letter: [] for letter in GROUND_TRUTH}
+    for p in preds:
+        if p is not None:
+            by_video[p["video"]].append(p)
+
+    # Canonical order within each video: by onset, ties broken by label id. The alignment
+    # below is order-preserving, so without this the key's own arbitrary order among steps
+    # that start at the same second becomes a hidden requirement: video U has two steps
+    # that both start at 455.647, and submitting them the other way round dropped a
+    # perfect oracle to 0.9968. The prompt states this same rule, so an agent can produce
+    # the canonical order itself, and applying it here means it does not have to. For a
+    # submission that already follows the prompt's "order by the moment the step begins",
+    # this is a no-op.
+    for letter in by_video:
+        by_video[letter].sort(key=lambda e: (e["t_start"], e["id"]))
+
+    per_video = {}
+    tp = tp_onset = tp_label = 0
+    for letter, gt in GROUND_TRUTH.items():
+        got = by_video[letter]
+        hits = _max_monotonic(got, gt, _match)
+        tp += hits
+        tp_onset += _max_monotonic(got, gt, _match_onset_only)
+        tp_label += _max_monotonic(got, gt, _match_label_only)
+        per_video[letter] = {
+            "n_ground_truth": len(gt),
+            "n_predicted": len(got),
+            "true_positives": hits,
+        }
+
+    n_pred = len(preds)
+    n_gt = sum(len(v) for v in GROUND_TRUTH.values())
+    precision = tp / n_pred if n_pred else 0.0
+    recall = tp / n_gt if n_gt else 0.0
+    f1 = (2 * precision * recall / (precision + recall)) if (precision + recall) else 0.0
+    return {
+        "n_ground_truth": n_gt,
+        "n_predicted": n_pred,
+        "true_positives": tp,
+        "onset_only_matches": tp_onset,
+        "label_and_order_only_matches": tp_label,
+        "precision": round(precision, 4),
+        "recall": round(recall, 4),
+        "f1": round(f1, 4),
+        "per_video": per_video,
+        "unusable_entries": unusable,
+        "truncated_to_max_entries": truncated,
+    }
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--solution", required=True, type=Path)
+    ap.add_argument("--reward-json", required=True, type=Path)
+    ap.add_argument("--reward-txt", required=True, type=Path)
+    args = ap.parse_args()
+
+    reason = "ok"
+    raw = []
+    try:
+        sol = json.loads(args.solution.read_text())
+        raw = sol.get("sequence", sol.get("instances", sol.get("keysteps", [])))
+        if not isinstance(raw, list):
+            raise ValueError("sequence is not a list")
+    except Exception as exc:  # noqa: BLE001 - a malformed submission scores 0
+        reason, raw = f"unreadable solution.json: {exc}", []
+
+    details = grade(raw)
+    details["reason"] = reason
+    reward = details["f1"]
+
+    args.reward_json.parent.mkdir(parents=True, exist_ok=True)
+    # Harbor parses this file as VerifierResult.rewards, which is dict[str, float | int].
+    # A nested "details" object under the same roof makes it a second reward whose value
+    # is a dict, and the whole trial ends in a pydantic ValidationError after the agent
+    # has already run. So the file stays a flat mapping of name to number, and the
+    # breakdown goes next to it where nothing tries to read it as a score.
+    args.reward_json.write_text(json.dumps({"reward": reward}, indent=2) + "\n")
+    (args.reward_json.parent / "details.json").write_text(
+        json.dumps(details, indent=2) + "\n")
+    args.reward_txt.parent.mkdir(parents=True, exist_ok=True)
+    args.reward_txt.write_text(f"{reward}\n")
+
+
+if __name__ == "__main__":
+    main()
