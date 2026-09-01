@@ -44,16 +44,15 @@ ground_truth:
     transform, or annotation file aborts the run instead of silently
     grading against the wrong numbers."
   exceptions_accepted_by_reviewer:
-    - "Transformed-derivative source: the delivered video is a privately
-      warped derivative of the public OSF source (independent, freshly
-      seeded spatial + time warps), not the literal public file this
-      family's curl+checksum convention expects. The transform parameters
-      are committed in steps/solve/tests/lineage_truth.py, which is public
-      once this merges -- the security boundary is that this path is not
-      mounted into the agent's environment during solving plus
-      allow_internet=false, not secrecy of the seed values. Reviewed and
-      accepted in github.com/PhiloLabs/agentic-vbench/issues/91 and PR #112
-      -- see those threads for the anti-lookup rationale and measured
+    - "Transformed-derivative source: the delivered video is a warped
+      derivative of the public OSF source (independent spatial + time
+      warps), not the literal public file this family's curl+checksum
+      convention expects. The transform parameters are verifier-side
+      (steps/solve/tests/lineage_truth.py) and unavailable to the agent at
+      runtime -- not mounted into the solve environment, and
+      allow_internet=false blocks retrieving them any other way. Reviewed
+      and accepted in github.com/PhiloLabs/agentic-vbench/issues/91 and PR
+      #112 -- see those threads for the anti-lookup rationale and measured
       naive-attack scores."
     - "Short video: 3.92 minutes, below the family's 10-300 minute norm.
       Accepted given 800 distinct, individually-graded observations (257
@@ -77,32 +76,36 @@ scorer:
   null_reward: 0.0
 
 difficulty:
-  status: "final except Antigravity (Gemini), blocked by a persistent
-    Google-side outage, 2026-08-31. Codex (gpt-5.6-sol): reward 0.0000,
-    division F1 0.026, 26 tool-call turns. Claude Code (Opus 5): reward
-    0.0000, division F1 0.076, 46 tool-call turns. Both run with the agent
-    CLI host-side (normal network, model API only) and every task action
+  status: "final, 2026-09-01. Codex (gpt-5.6-sol): reward 0.0000, division
+    F1 0.026, 26 tool-call turns. Claude Code (Opus 5): reward 0.0000,
+    division F1 0.076, 46 tool-call turns. Both run with the agent CLI
+    host-side (normal network, model API only) and every task action
     routed via docker exec into a frozen container built from the exact
     committed environment/Dockerfile with --network none, verified
     network-blocked before and after each run. Harness, image/prompt
-    hashes, and raw transcripts in calibration/rollouts/final/. Antigravity
-    (Gemini) setup used the same harness, wired into gemini-cli via its
-    Policy Engine -- an early attempt under a partial deny-list (only
-    run_shell_command blocked) let the model use gemini-cli's native
-    host-side read_file/glob/replace tools to search this repo, find
-    ground-truth artifacts left in a git-ignored jobs/ directory from an
-    earlier oracle run, and briefly edit .gitignore on the host to read
-    them before editing it back; that run was discarded unscored and the
-    deny-list was extended to cover every native filesystem/network tool
-    gemini-cli ships, verified via a smoke test showing only the two MCP
-    container tools remain reachable. Every clean re-run since (two
-    separate Gemini API keys, several hours combined) has failed before
-    completing -- Google's API returning sustained 503 'high demand'
-    errors on the model, with the second (free-tier) key also hitting its
-    daily 429 quota limit from the 503 retries themselves. Not a
-    configuration or harness problem on this end; documented here rather
-    than left silently missing. Full detail, discarded-run analysis, and
-    harness fix in calibration/scores.md's 2026-08-31 update."
+    hashes, and raw transcripts in calibration/rollouts/final/.
+
+    Antigravity (Gemini): reviewer-granted scoped waiver. Extending the
+    same harness to gemini-cli surfaced a real methodology gap -- an early
+    Policy Engine configuration only denied gemini-cli's shell tool, and
+    one trial run used its native, host-side filesystem tools to read
+    ground-truth artifacts left in a git-ignored local directory from an
+    earlier, unrelated oracle-verification run; that run was discarded
+    unscored and the deny-list was extended to cover every native tool
+    gemini-cli ships, verified via a smoke test. Every clean re-run
+    attempted after that fix -- two separate API keys, several hours
+    combined -- failed on sustained Google-side 503/429 errors before
+    completing, confirmed unrelated to the harness. The reviewer
+    independently reproduced the same 503 capacity failure and supplied a
+    supplemental native Antigravity run (gemini-3.7-flash-high, 170
+    tool-call turns, reward 0.0000, division F1 0.0877), satisfying both
+    the <0.10 difficulty gate and the family's >50 long-horizon check. Per
+    the reviewer, this is a scoped waiver based on the documented external
+    service failures plus that supplemental evidence, not a general
+    calibration exemption. Full retry history, the discarded-run analysis,
+    and the harness fix are in calibration/scores.md's 2026-08-31/09-01
+    updates; how this row is recorded is in
+    calibration/rollouts/final/README.md."
   strong_agent_reward: 0.0
   tool_call_turns: 46
   agent_model: "Claude Opus 5 via Claude Code CLI, host-side + isolated

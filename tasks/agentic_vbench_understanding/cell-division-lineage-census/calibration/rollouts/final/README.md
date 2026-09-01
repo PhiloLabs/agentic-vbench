@@ -54,7 +54,7 @@ container.
 |---|---|---|---|
 | Claude Code (Opus 5) | 0.0000 | 46 | division F1 0.0755; all 4 gates fail |
 | Codex CLI (gpt-5.6-sol) | 0.0000 | 26 | division F1 0.0261; all 4 gates fail |
-| Antigravity (Gemini) | _no credential_ | -- | still pending, no Google/Gemini API access in this environment |
+| Antigravity (Gemini), reviewer-supplied, scoped waiver | 0.0000 | 170 | division F1 0.0877; see note below |
 | no_media | 0.0000 | 0 | raw API call, no image, no tools. Model **confabulated** having inspected the video and written an output file it never had access to -- notable finding, not just a low score |
 | single_frame | 0.0000 | 0 | raw API call, one still frame (frame 400) only, no tools |
 | frame_dump_no_tools | 0.0000 | 0 | raw API call, **all 800 frames** as 8 contact sheets (`full_dump/sheet_00.png`..`sheet_07.png`, 100 frames each, labeled), explicitly instructed to give a direct best-effort answer with no tool calls. Completed naturally (`stop_reason: end_turn`); division F1 0.009, all 4 gates fail |
@@ -79,3 +79,30 @@ naturally (agent-reported done, not hitting `--max-turns`).
 Full artifacts: gzipped native transcripts (`claude-code-final.jsonl.gz`,
 `codex-final.jsonl.gz`), submitted answers and reward.json for every row
 above, and the harness script itself (`container_mcp.py`).
+
+## Antigravity (Gemini): reviewer-granted scoped waiver
+
+Extending this harness to `gemini-cli` (Policy Engine denying its shell tool
+so only the MCP `bash`/`read_image` tools should be reachable) surfaced a
+real gap: an early policy only denied the shell tool, and one trial run used
+`gemini-cli`'s native, host-side filesystem tools to read ground-truth
+artifacts left in a git-ignored local directory from an earlier, unrelated
+oracle-verification run. That run was discarded unscored; the deny-list was
+extended to cover every native tool `gemini-cli` ships, verified via a smoke
+test showing only the two MCP tools remain in the model's tool list.
+
+Every clean re-run attempted after that fix -- two separate Gemini API keys,
+several hours combined -- failed on sustained Google-side `503`/`429` errors
+before completing, with network isolation and tool restriction reverified
+working immediately before each attempt. The reviewer independently
+reproduced the same `503` capacity failure and supplied a supplemental
+native Antigravity run (`gemini-3.7-flash-high`, 170 tool-call turns, no
+validation errors, reward 0.0000, division F1 0.0877) that satisfies both
+the `<0.10` difficulty gate and the family's `>50` long-horizon check. Per
+the reviewer this is a scoped waiver -- based on the documented external
+service failures plus that supplemental evidence -- not a canonical
+exact-image calibration row (the rebuilt image digest differed from this
+directory's historical digest, and Antigravity did not fully suppress its
+native control-plane/subagent facilities) and not a general exemption from
+calibration policy. Full narrative in `calibration/scores.md`'s
+2026-08-31/09-01 updates.
