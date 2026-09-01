@@ -87,8 +87,8 @@ correctly. Every entry has to say how its step was performed: `"none"` if it was
 as intended, otherwise the one label below that best describes what went wrong. A step
 can go wrong in more than one way; name one.
 
-The wording after each label is taken from how such steps were described elsewhere in
-the same annotation set, not from these videos.
+The wording after each label is an invented illustration of that kind of mistake, set in
+a dish these recordings do not contain. It is not taken from any annotation of them.
 
 - `"none"` the step was carried out as the recipe intends.
 - `"Measurement Error"` for example: two ladles of stock go into the pan where the recipe asks for one.

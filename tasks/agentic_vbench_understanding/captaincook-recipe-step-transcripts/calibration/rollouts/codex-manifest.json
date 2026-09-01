@@ -56,5 +56,6 @@
  "materials": "/workspace/materials",
  "solution_sha256": "996613a5948091e377432d6374d1e01369631e51917cef53b917d5f394776ae4",
  "trajectory": "codex.jsonl",
- "prompt_via": "stdin"
+ "prompt_via": "stdin",
+ "harness_version_source": "the pinned installer and, for claude, the claude_code_version the trajectory itself carries"
 }

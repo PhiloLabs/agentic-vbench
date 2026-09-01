@@ -178,7 +178,6 @@ def main() -> int:
     image_id = sh("docker", "image", "inspect", args.image, "--format", "{{.Id}}").stdout.strip()
     budget = run_arm.budget_sec()
     api_ip = resolve(arm["api_host"])
-    version = run_arm.harness_version(arm["version_cmd"])
 
     args.run_dir.mkdir(parents=True, exist_ok=True)
     prompt = run_arm.make_prompts.base_prompt("/workspace")
@@ -225,6 +224,13 @@ def main() -> int:
                 f"{(node.stderr or node.stdout).strip()[-800:]}")
             cli = dexec(cid, arm["install"], check=False)
             where = dexec(cid, f"command -v {arm['bin']}", check=False)
+            # The version is read from the container, not from this machine. Reading it
+            # from the host recorded the host's CLI in the manifest of a run that used the
+            # pinned one, and the two differed: 2.1.129 against the 2.1.251 the trajectory
+            # itself carries. A manifest that names a version the run did not use is worse
+            # than one that names none.
+            version = " ".join(dexec(cid, f"{arm['bin']} --version",
+                                     check=False).stdout.split()) or "unknown"
             assert where.returncode == 0 and where.stdout.strip(), (
                 f"{arm['bin']} is not on PATH after install (exit {cli.returncode}):\n"
                 f"{(cli.stderr or cli.stdout).strip()[-800:]}")
@@ -282,6 +288,7 @@ def main() -> int:
     manifest = {
         "arm": args.arm, "model": arm["model"], "reasoning_effort": arm["effort"],
         "harness_version": f"{version}, run inside the task image",
+        "harness_version_source": "the CLI inside the container, after install",
         "image": args.image, "image_id": image_id,
         "one_session_whole_corpus": True, "videos": run_arm.n_videos(),
         "budget_sec": budget, "budget_source": "task.toml steps.agent.timeout_sec",

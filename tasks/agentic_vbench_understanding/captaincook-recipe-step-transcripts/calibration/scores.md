@@ -132,8 +132,29 @@ errors", and listed the six dishes with the recordings they belong to. The promp
 that out in as many words: do not rely on any memory of these recordings or of the dataset
 they may come from. So the run leaned on prior knowledge for part of what it reported.
 
-It is reported here rather than set aside, and the reason is that the finding cuts the
-safe way. With that advantage the arm still placed the fewest steps of the three, 120
+The auditor's other Antigravity number is not a finding. It reports 149 absolute paths
+outside `/workspace`, and all 149 are under `/root/.gemini/antigravity-cli/`: the CLI's own
+brain directory, its scratch directory where it wrote the frame-extraction scripts and
+contact sheets it built for itself, and its logs. That is the agent doing its own
+bookkeeping in a directory the container has no task equivalent of, so `HARNESS_SCRATCH`
+now names those prefixes and the auditor lists them separately instead of counting them
+against the run. Widening that list is the one edit to the auditor that makes it report
+less, so the prefixes are named rather than matched loosely, and the residual is zero for
+all three arms.
+
+Two records differ from what the runs produced, and both are corrected rather than
+explained away. `claude-manifest.json` recorded 2.1.129, the version of the CLI on the
+host, while the run used the pinned 2.1.251 that its own trajectory carries as
+`claude_code_version`; `run_in_image.py` read the version from this machine instead of from
+the container and now reads it from the container. And the prompt and SPEC described the
+tag examples as drawn from the annotation set; they are synthetic, and both now say so. The
+three retained ablation prompts still carry the older sentence, because they are the record
+of the question those runs were actually asked and rewriting them would make the record
+false; regenerating one today differs from the retained copy in that sentence and nothing
+else.
+
+The model-knowledge finding is reported here rather than set aside, and the reason is that
+it cuts the safe way. With that advantage the arm still placed the fewest steps of the three, 120
 against 181 and 173, and scored 0.0108. Knowing which six dishes are in the corpus does
 not tell an agent when each step happened or whether it was done correctly, which is what
 the score is made of. The number is more conservative for the finding, not less.

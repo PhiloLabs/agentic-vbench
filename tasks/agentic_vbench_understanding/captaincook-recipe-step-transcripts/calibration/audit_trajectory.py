@@ -42,7 +42,18 @@ NETWORK_TOOLS = {"WebSearch", "WebFetch"}
 # agent's own background commands in its own tasks/ directory, and the agent reads its own
 # output back from there. Those files hold nothing but what that agent just printed. The
 # container has no such directory. Anything else outside the run directory is reported.
-HARNESS_SCRATCH = re.compile(r"^/private/tmp/claude-[^/]+/[^/]+/[^/]+/tasks/[\w-]+\.output$")
+# Paths that belong to the agent's own harness rather than to this task. Two shapes, and
+# both are named rather than pattern-matched loosely, because widening this list is the one
+# edit here that makes the audit report LESS. The first is the Claude Code harness's task
+# output on the host. The second is where the Antigravity CLI keeps its session state
+# inside the container: its brain directory, its scratch directory, its logs and its own
+# binary. An agent writing there is doing its own bookkeeping, and the container has no
+# equivalent of a task directory at those paths.
+HARNESS_SCRATCH = re.compile(
+    r"^/private/tmp/claude-[^/]+/[^/]+/[^/]+/tasks/[\w-]+\.output$"
+    r"|^/root/\.gemini/antigravity-cli/"
+    r"|^/root/\.agy/"
+    r"|^/root/\.local/bin/agy$")
 PATH_KEYS = ("file_path", "path", "notebook_path")
 # Row types no reader claimed. Filled by blocks(), read by the controls in main().
 UNROUTED: collections.Counter = collections.Counter()
@@ -296,8 +307,12 @@ def main() -> int:
     for q in outside[:20]:
         print(f"    {q}")
     if harness:
-        print(f"  ({len(harness)} more are the harness's own background-command stdout, "
-              f"which the container has no equivalent of)")
+        print(f"  ({len(harness)} more are the agent harness's own runtime state, listed "
+              f"below rather than counted against the run)")
+        for q in harness[:8]:
+            print(f"      {q}")
+        if len(harness) > 8:
+            print(f"      ... and {len(harness) - 8} more under the same prefixes")
     if hits:
         print("\nSHORTCUT PATTERNS FOUND:")
         for label, found in hits.items():

@@ -47,8 +47,13 @@
 #   t_start  seconds from the start of that clip
 #   t_end    seconds from the start of that clip
 #   error    how the step was performed: "none", or one of the release's eight error
-#            tags, printed in the prompt with examples drawn from recordings OUTSIDE
-#            this corpus. Section 8 says why this field is here.
+#            tags. The prompt illustrates each tag with an INVENTED one-line example set
+#            in a dish CaptainCook4D does not contain; build_gt asserts that none of them
+#            reproduces, is reproduced by, or shares a four-word run with any of the 8274
+#            descriptions the release ships. An earlier draft of this file said the
+#            examples were drawn from recordings outside the corpus, which was true of an
+#            earlier version and is not true of this one. Section 8 says why the field is
+#            here.
 #
 # The full prompt is steps/solve/instruction.md and is generated from the key by
 # provenance/make_task_files.py, so it cannot drift from what is graded.

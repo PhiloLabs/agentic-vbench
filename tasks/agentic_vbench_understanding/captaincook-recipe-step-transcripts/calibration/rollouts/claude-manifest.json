@@ -2,7 +2,7 @@
  "arm": "claude",
  "model": "claude-opus-4-8",
  "reasoning_effort": "default",
- "harness_version": "2.1.129 (Claude Code), run inside the task image",
+ "harness_version": "2.1.251 (Claude Code), run inside the task image",
  "image": "cc4d:pinned",
  "image_id": "sha256:de299ec54d95daf029b1f026d0e87d5ec7e158ebb4689baf2588fc029bd0b4ab",
  "one_session_whole_corpus": true,
@@ -56,5 +56,6 @@
  "materials": "/workspace/materials",
  "solution_sha256": "b008e27ff3c823fa204e4717d829682e4e5937c9cb6308871c5a8a5eff9f4997",
  "trajectory": "claude.jsonl",
- "prompt_via": "stdin"
+ "prompt_via": "stdin",
+ "harness_version_source": "the pinned installer and, for claude, the claude_code_version the trajectory itself carries"
 }

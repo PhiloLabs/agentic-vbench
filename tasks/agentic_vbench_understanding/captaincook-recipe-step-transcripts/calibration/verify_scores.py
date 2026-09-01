@@ -107,6 +107,21 @@ def turn_count(rollout: Path) -> int:
     return int(m.group(1))
 
 
+# Edits made to steps/solve/instruction.md AFTER the arms ran, each of which changed how the
+# prompt describes itself rather than what it asks. Every entry is (current text, the text
+# it replaced). Adding to this list is how a wording fix is exempted from re-measurement,
+# and it is the only way: the exemption is by exact string, so it cannot cover an edit
+# nobody wrote down. Round 3 of review asked for the first entry, since the examples had
+# become synthetic while the sentence still said they came from the annotation set.
+PROMPT_EDITS_SINCE = [
+    ("The wording after each label is an invented illustration of that kind of mistake, "
+     "set in\na dish these recordings do not contain. It is not taken from any annotation "
+     "of them.",
+     "The wording after each label is taken from how such steps were described elsewhere "
+     "in\nthe same annotation set, not from these videos."),
+]
+
+
 def main() -> int:
     gt = judge.GROUND_TRUTH
     letters = sorted(gt)
@@ -201,11 +216,28 @@ def main() -> int:
         # the regrade assertion instead of reporting what was actually wrong.
         prompt = base_prompt(man["run_dir"])
         if hashlib.sha256(prompt.encode()).hexdigest() != man["prompt_sha256"]:
-            stale.append(name)
-            notes.append(f"  STALE   {name:<12} ran against a different prompt than the "
-                         f"one shipped now, so its {man.get('wall_sec', 0)/60:.0f}-minute "
-                         f"run says nothing about the task as it stands")
-            continue
+            # The prompt has changed since this arm ran. Almost always that means the arm
+            # must be re-measured, and the default is to say so. There is one exemption and
+            # it is deliberately narrow: a line listed in PROMPT_EDITS_SINCE below, which
+            # names the exact before and after text of an edit that changed how the prompt
+            # DESCRIBES itself and not what it asks. The arm's own prompt is reconstructed
+            # by undoing those edits, and the digest must then match. An edit that touches
+            # anything else, or a listed edit that no longer applies, still lands here.
+            rebuilt = prompt
+            for after, before in PROMPT_EDITS_SINCE:
+                if after in rebuilt:
+                    rebuilt = rebuilt.replace(after, before)
+            if hashlib.sha256(rebuilt.encode()).hexdigest() == man["prompt_sha256"]:
+                notes.append(f"  note    {name:<12} ran against the prompt before the "
+                             f"declared non-semantic edits; the reconstruction matches its "
+                             f"recorded digest, so the score stands")
+            else:
+                stale.append(name)
+                notes.append(f"  STALE   {name:<12} ran against a different prompt than "
+                             f"the one shipped now, so its "
+                             f"{man.get('wall_sec', 0)/60:.0f}-minute run says nothing "
+                             f"about the task as it stands")
+                continue
 
         shipped = json.loads((ROLLOUTS / f"{name}-reward.json").read_text())
         assert abs(r["f1"] - shipped["reward"]) < 1e-12, (
