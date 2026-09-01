@@ -31,6 +31,9 @@ provenance/data_setup/02_...sh       build the 1080p media package
 provenance/build_gt.py               annotations -> step-derived.json, with the guards
 provenance/take_selection.py         states R1-R5, re-derives the pool, asserts agreement
 provenance/verify_key.py             re-derives the key WITHOUT build_gt and compares
+provenance/test_oracle_integration.py  RUNS the shipped oracle, grades what it wrote
+provenance/audit_error_observability.py  the checkable half of the observability audit
+provenance/observability/            per-tag evidence that the error field is visible
 provenance/make_judge.py             step-derived.json -> judge.py
 provenance/make_task_files.py        step-derived.json -> prompt, task.toml, oracle
 provenance/make_dockerfile.py        step-derived.json + media manifest -> Dockerfile
@@ -54,12 +57,26 @@ python3 provenance/make_task_files.py --derived provenance/step-derived.json \
     --media provenance/media_manifest.json --root .
 python3 provenance/take_selection.py --cc4d ./cc4d --derived provenance/step-derived.json
 python3 provenance/verify_key.py --cc4d ./cc4d --task .
+python3 provenance/test_oracle_integration.py
+python3 provenance/audit_error_observability.py --cc4d ./cc4d
 ```
 
 `make_judge.py` runs twice on purpose: the judge's docstring quotes the ablation numbers,
 and the ablations need a judge to run against. `run_ablations.py` refuses to run against a
 judge built from an older key, because that happened once during development and the
 numbers it produced looked entirely plausible.
+
+`test_oracle_integration.py` runs the oracle that ships in the image, `solve.sh`, and
+grades the `solution.json` that run writes. It exists because review round 2 found the
+shipped oracle scoring 0.0 while every check that claimed to grade "the oracle" was
+grading an error-aware one it had built out of the key in memory. Reading the SEQUENCE
+literal back out of the script would have repeated that mistake one level down, so the
+script is executed, either natively where `/workspace` is writable or inside a container,
+and a run that cannot happen fails rather than passes. Its control strips the error field
+from a copy of the same script and requires that copy to fall short of 1.0.
+
+`audit_error_observability.py` recomputes the structural half of the error-field
+observability audit; the half that needs eyes is in `provenance/observability/`.
 
 `verify_key.py` is the independent check. build_gt.py writes the key and make_judge.py
 copies it, so a bug in that code is invisible to both; verify_key.py re-reads the raw
@@ -170,6 +187,10 @@ committed manifest present makes the script check each digest against it. Hostin
   three strong agents, one noticed the tablet in its first frame and never returned to
   it, and none tried to read it. We did not blur it, because that would be editing the
   source. SPEC.md open item 6 has the full statement, the discarded detectors included.
+  The error field, added later, was audited against this same screen and does not
+  appear on it: `provenance/observability/` reads the tablet at native resolution in
+  two kitchens and finds the step texts and a highlight, no error wording, and none of
+  the 352 released step descriptions is phrased as an error instruction.
 - **The key is more forgiving on timing than the Ego-Exo4D version.** Steps here run 27
   seconds at the median against 7 there, so 82 percent of instances are graded at the
   3-second cap. With perfect labels and perfect ordering, Gaussian boundary noise of

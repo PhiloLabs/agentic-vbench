@@ -286,7 +286,13 @@ timeout_sec = 900.0
 """
     (args.root / "task.toml").write_text(toml)
 
-    seq = [{"video": L, "id": i["id"], "t_start": i["t_start"], "t_end": i["t_end"]}
+    # The oracle has to satisfy the contract the prompt states, error field included, or
+    # it is not an oracle. A step the release annotates with several tags is emitted with
+    # the first of them: the judge accepts any one the annotators named, so the choice
+    # among them is free, and picking one keeps the oracle a plain answer rather than a
+    # demonstration of the matcher.
+    seq = [{"video": L, "id": i["id"], "t_start": i["t_start"], "t_end": i["t_end"],
+            "error": i["error"][0]}
            for L in letters for i in inst[L]]
     body = "\n".join("  " + json.dumps(e) + "," for e in seq)
     p = args.root / "steps" / "solve" / "solution" / "solve.sh"

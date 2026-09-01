@@ -331,44 +331,28 @@
  ],
  "error_tag_examples": {
   "Measurement Error": [
-   "Top the cup with 1 teaspoon of salsa",
-   "1/2  tablespoon of salsa",
-   "2 instead of 1 egg"
+   "two ladles of stock go into the pan where the recipe asks for one"
   ],
   "Missing Step": [
-   "Skipped this step",
-   "Missed this step",
-   "Didn't do the step of adding a extra-virgin olive oil."
+   "the barley is never rinsed and goes straight into the simmering pan"
   ],
   "Order Error": [
-   "Remove already present lettuce, place egg and then place lettuce on top of the egg",
-   "Step performed before microwaving the egg",
-   "Step performed after adding cheese to the cup"
+   "the stock is poured in before the lentils rather than after them"
   ],
   "Other": [
-   "Rose above the brim",
-   "added chopped  tomato, garlic full cloves to the pan",
-   "Flipped the cake after removing the paper liner"
+   "the pan boils over and its rim is wiped down partway through"
   ],
   "Preparation Error": [
-   "Cut the muffin into two pieces with hand",
-   "Coat a bowl than ramekin cup with cooking spray",
-   "large cup instead of ramekin cup"
+   "a shallow frying pan stands in for the deep stockpot the recipe names"
   ],
   "Technique Error": [
-   "Cracking the egg inappropriately",
-   "pour directly",
-   "flipped top muffin"
+   "the roux is beaten flat with a fork rather than folded with a spatula"
   ],
   "Temperature Error": [
-   "Microwave set on power level low instead of high",
-   "medium instead of high",
-   "Temperature is set to medium instead of high"
+   "the burner is left on its lowest setting when a high flame is called for"
   ],
   "Timing Error": [
-   "Microwave on high for 1 min",
-   "Microwave for 30 sec",
-   "Microwaved for 10 secs instead of 30 seconds"
+   "the barley is left to simmer four minutes instead of the stated ten"
   ]
  },
  "eligibility": {

@@ -26,8 +26,8 @@ executions: 199 of the 314 steps are annotated by the dataset as performed with 
 error, and the recordings depart from the order induced by the other recordings of the
 same recipe 77 times. Every step also needs a span, not just a name. Reciting the
 canonical order of each recipe, derived from the other recordings of that recipe,
-scores TBD on the real key; 400 random submissions average TBD
-and the best of them reaches TBD. Only watching what these particular people
+scores 0.0032 on the real key; 400 random submissions average 0.0
+and the best of them reaches 0.0032. Only watching what these particular people
 did, in which order, and where, converts into score. All of it is reproduced by
 ../../../provenance/ablations/run_ablations.py.
 
@@ -525,6 +525,15 @@ def _norm(entry):
         return None
     if video not in GROUND_TRUTH:
         return None
+    if not offset > onset:
+        # A step occupies an interval. The two boundaries are tested against the key
+        # independently, so a zero-length or reversed entry can otherwise satisfy both at
+        # once: on a row shorter than 2 s the tolerance is wider than half the row, and a
+        # single instant placed at its midpoint lands inside both windows. Six of the
+        # key's 314 rows are short enough for that. Rejecting here rather than in _match
+        # costs the entry its precision, the same treatment every other malformed entry
+        # gets, instead of silently discarding the claim.
+        return None
     return {"video": video, "id": label, "t_start": onset, "t_end": offset,
             "error": _norm_error(err)}
 
@@ -534,9 +543,14 @@ def _norm(entry):
 # truth entry carries, so the entry still counts as a prediction and still costs
 # precision. Dropping it instead would let a submission that omits the field be graded as
 # though it had made fewer claims.
+#
+# The empty string is not in this table on purpose. Saying nothing is not the same claim
+# as saying the step was carried out as intended, and 115 of the key's 314 instances
+# carry "none", so mapping "" onto it would hand more than a third of the error field to
+# a submission that never judged how anything was performed. The prompt states the rule
+# this enforces: an entry with no error value, or one not on the list, cannot count.
 _ERROR_CANON = {"".join(t.lower().split()): t for t in ERROR_TAGS}
 _ERROR_CANON["none"] = "none"
-_ERROR_CANON[""] = "none"
 
 
 def _norm_error(value):

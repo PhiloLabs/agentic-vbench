@@ -10,6 +10,12 @@ build_gt, and compares. It also re-reads the prompt the agent sees and checks th
 vocabulary it prints is exactly the vocabulary the judge grades against, since a prompt
 that offers a label the judge does not know is a trap the agent cannot see.
 
+The key carries two claims per instance and both are rebuilt here. What the step was and
+when it happened come from complete_step_annotations.json. How it was performed comes
+from error_annotations.json, a separate file joined on (step_id, start_time); the join is
+asserted to be total, because a lookup that quietly returns nothing would read as "this
+step was performed correctly" and would be indistinguishable from a step that really was.
+
 Every check is stated as an equality over the whole object rather than a spot check, and
 the script asserts up front that it actually loaded the recordings it is about to verify,
 so a lookup that quietly returns nothing fails instead of passing.
@@ -22,6 +28,8 @@ import re
 import sys
 from pathlib import Path
 
+NO_ERROR = "none"
+
 
 def main() -> int:
     ap = argparse.ArgumentParser()
@@ -30,6 +38,10 @@ def main() -> int:
     args = ap.parse_args()
 
     ann = json.loads((args.cc4d / "complete_step_annotations.json").read_text())
+    err = {r["recording_id"]: r for r in
+           json.loads((args.cc4d / "error_annotations.json").read_text())}
+    assert set(ann) == set(err), \
+        "the step file and the error file disagree on which recordings exist"
     derived = json.loads((args.task / "provenance" / "step-derived.json").read_text())
     sys.path.insert(0, str((args.task / "steps" / "solve" / "tests").resolve()))
     import judge  # noqa: E402
@@ -43,8 +55,24 @@ def main() -> int:
     assert len(text_to_id) == len(derived["vocabulary"]), "two labels share a text"
 
     rebuilt = {}
+    joined = 0
     for v in vids:
         rec = ann[v["recording_id"]]
+        # How each step was performed, read out of the other file. Keyed on the pair and
+        # not on step_id alone, because step_id repeats within a recording when a step is
+        # performed twice.
+        tags_of = {}
+        for s in err[v["recording_id"]].get("step_annotations", []):
+            if float(s["start_time"]) < 0:
+                continue        # a step the release marks as not performed; the file
+                                # carries several of these per recording and they collide
+                                # on the join key, so they are dropped before it is built
+            key = (s["step_id"], round(float(s["start_time"]), 3))
+            assert key not in tags_of, \
+                f"{v['recording_id']}: two error rows share the key {key}"
+            tags_of[key] = sorted({e["tag"] for e in (s.get("errors") or [])})
+        assert tags_of, f"{v['recording_id']} has no rows in error_annotations.json"
+
         rows = [s for s in rec["steps"]
                 if s["start_time"] >= 0 and s["end_time"] > s["start_time"]]
         rows.sort(key=lambda s: (round(float(s["start_time"]), 3),
@@ -52,15 +80,39 @@ def main() -> int:
         out = []
         for s in rows:
             t0, t1 = round(float(s["start_time"]), 3), round(float(s["end_time"]), 3)
+            key = (s["step_id"], t0)
+            assert key in tags_of, (
+                f"{v['recording_id']} step {key} has no row in error_annotations.json; "
+                f"defaulting it to '{NO_ERROR}' would be indistinguishable from a step "
+                f"that was really performed correctly")
+            joined += 1
             out.append({"id": text_to_id[s["description"].strip()],
                         "t_start": t0, "t_end": t1,
-                        "tau": round(min(3.0, max(1.0, 0.25 * (t1 - t0))), 3)})
+                        "tau": round(min(3.0, max(1.0, 0.25 * (t1 - t0))), 3),
+                        "error": tags_of[key] or [NO_ERROR]})
         rebuilt[v["letter"]] = out
 
     assert rebuilt == judge.GROUND_TRUTH, "the judge's key is not what the annotations say"
     n = sum(len(x) for x in rebuilt.values())
+    assert joined == n, f"joined {joined} rows but emitted {n}"
+    n_err = sum(1 for x in rebuilt.values() for i in x if i["error"] != [NO_ERROR])
     print(f"key: {len(rebuilt)} recordings, {n} instances, re-derived from the raw "
           f"annotations and equal to judge.GROUND_TRUTH")
+    print(f"error field: all {n} instances joined to error_annotations.json, "
+          f"{n_err} carry at least one tag and {n - n_err} carry '{NO_ERROR}'")
+
+    # The taxonomy is the release's, not ours. Read the tag universe out of the whole
+    # error file and require the judge to grade exactly it, so a tag that exists in the
+    # data but is missing from the judge, or the reverse, fails here.
+    universe = {e["tag"] for r in err.values()
+                for s in r.get("step_annotations", []) for e in (s.get("errors") or [])}
+    assert universe, "no error tags found in error_annotations.json"
+    assert universe == set(judge.ERROR_TAGS), (
+        "the judge's taxonomy is not the release's\n"
+        f"  only in the file:  {sorted(universe - set(judge.ERROR_TAGS))}\n"
+        f"  only in the judge: {sorted(set(judge.ERROR_TAGS) - universe)}")
+    print(f"taxonomy: the judge grades exactly the {len(universe)} tags the release "
+          f"annotates, re-read from error_annotations.json")
 
     prompt = (args.task / "steps" / "solve" / "instruction.md").read_text()
     offered = {int(m.group(1)): m.group(2).strip()
@@ -69,6 +121,14 @@ def main() -> int:
         "the prompt's vocabulary is not the judge's: "
         f"{len(offered)} offered, {len(judge.VOCABULARY)} graded")
     print(f"vocabulary: the prompt offers exactly the {len(offered)} labels the judge grades")
+
+    offered_tags = set(re.findall(r'^- `"([^"]+)"`', prompt, flags=re.M))
+    assert offered_tags == universe | {NO_ERROR}, (
+        "the prompt's error values are not the ones the judge accepts\n"
+        f"  only in the prompt: {sorted(offered_tags - (universe | {NO_ERROR}))}\n"
+        f"  only in the judge:  {sorted((universe | {NO_ERROR}) - offered_tags)}")
+    print(f"error values: the prompt offers exactly the {len(offered_tags)} values the "
+          f"judge accepts, '{NO_ERROR}' included")
 
     listed = {m.group(1): float(m.group(2)) for m in re.finditer(
         r"^\| `([A-Z])` \| `[^`]+` \| [\d.]+ min \| `t = 0` to `t = ([\d.]+)` \|$",

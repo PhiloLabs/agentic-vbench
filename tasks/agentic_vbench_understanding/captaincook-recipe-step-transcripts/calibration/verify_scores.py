@@ -148,6 +148,20 @@ def main() -> int:
     assert judge.grade(oracle)["f1"] == 1.0, "the oracle no longer scores 1.0"
     assert judge.grade([])["f1"] == 0.0, "an empty submission no longer scores 0.0"
 
+    # The line above grades an oracle this file just built out of the key, which tests the
+    # scorer and not the artifact that ships. Those came apart once: solve.sh was
+    # generated before the error field existed and kept scoring 1.0 here while the file
+    # the image actually runs scored 0.0. So grade the shipped bytes as well, and fail if
+    # nothing was read out of them rather than reporting a clean parse of nothing.
+    solve = (TASK / "steps" / "solve" / "solution" / "solve.sh").read_text()
+    m = re.search(r"SEQUENCE = \[(.*?)\n\]", solve, re.S)
+    assert m, "solve.sh has no SEQUENCE literal to grade"
+    shipped = json.loads("[" + m.group(1).rstrip().rstrip(",") + "]")
+    assert len(shipped) == len(oracle), (
+        f"solve.sh carries {len(shipped)} entries, the key has {len(oracle)}")
+    assert judge.grade(shipped)["f1"] == 1.0, \
+        "the oracle file that ships in the image does not score 1.0"
+
     # ---- the deterministic ablations ------------------------------------------
     spec = importlib.util.spec_from_file_location(
         "abl", TASK / "provenance" / "ablations" / "run_ablations.py")

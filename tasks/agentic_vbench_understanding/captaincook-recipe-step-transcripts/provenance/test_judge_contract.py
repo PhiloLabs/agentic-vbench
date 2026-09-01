@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression tests for the two task-contract bugs found in review of PR #115.
+"""Regression tests for the task-contract bugs found in review of PR #115.
 
     python3 provenance/test_judge_contract.py
 
@@ -11,6 +11,16 @@ inferred from watching the video, silently changed the score.
   2. The judge's alignment is order-preserving, so the key's arbitrary order among steps
      that share an onset was a hidden requirement. Swapping U's two 455.647-second rows
      dropped a perfect oracle to 0.9968.
+
+The second review round added two more of the same shape, both in what an entry is allowed
+to say rather than in what the key holds:
+
+  3. An empty or whitespace-only error value normalized to "none", so a submission that
+     never judged how anything was performed collected the field on all 115 instances the
+     release annotates as correct. On otherwise perfect timing that was worth 0.3662.
+  4. The two interval boundaries are tested against the key independently, so on a row
+     shorter than two seconds a single instant at its midpoint satisfied both. Six of the
+     key's 314 rows are short enough.
 
 Each test carries a control that must FAIL, because a test that cannot fail is not
 evidence: an assertion that only ever sees the good case would pass just as happily on a
@@ -145,11 +155,69 @@ def test_error_field_is_required_and_any_annotated_tag_counts() -> None:
           f"a constant guess scores {r['f1']} against a base rate of {base:.4f}")
 
 
+def test_empty_error_value_is_not_a_claim_of_correctness() -> None:
+    """Saying nothing about how a step went is not the same as saying it went right."""
+    n_none = sum(1 for v in GT.values() for g in v if g["error"] == ["none"])
+    assert n_none, "the key annotates no correct steps, so this test cannot fail"
+
+    for blank in ("", "   ", "\t\n"):
+        r = judge.grade([dict(e, error=blank) for e in ORACLE])
+        assert r["true_positives"] == 0, (
+            f"an oracle with error={blank!r} scored {r['true_positives']} true positives; "
+            f"the {n_none} instances annotated 'none' are being handed out")
+        # The entry still has to cost precision. Dropping it instead would grade the
+        # submission as though it had made fewer claims than it did.
+        assert r["n_predicted"] == len(ORACLE), (
+            f"error={blank!r} removed entries from the denominator: "
+            f"{r['n_predicted']} of {len(ORACLE)} counted")
+
+    # Control: the same submission with the literal string the prompt does offer must
+    # still collect exactly those instances, or the test above would pass on a judge that
+    # had simply stopped scoring the field at all.
+    r = judge.grade([dict(e, error="none") for e in ORACLE])
+    assert r["true_positives"] == n_none, (
+        f"the control scored {r['true_positives']} where the key has {n_none} 'none' "
+        f"instances, so the blank cases prove nothing")
+    print(f"  ok  blank error values score 0 and still cost precision, while the literal "
+          f"\"none\" still collects all {n_none}")
+
+
+def test_an_instant_is_not_an_interval() -> None:
+    """A zero-length or reversed span cannot satisfy both boundaries of a short row."""
+    short = [(L, g) for L, v in GT.items() for g in v
+             if (g["t_end"] - g["t_start"]) / 2.0 <= g["tau"]]
+    assert short, "no row is short enough for this attack, so the test cannot fail"
+
+    # Control first: on exactly those rows, a point at the midpoint DOES land inside both
+    # tolerance windows. If this ever stops being true the test below is vacuous.
+    for L, g in short:
+        mid = (g["t_start"] + g["t_end"]) / 2.0
+        assert abs(mid - g["t_start"]) <= g["tau"] and abs(mid - g["t_end"]) <= g["tau"], \
+            f"{L} {g['id']}: the midpoint is not inside both windows, control broken"
+
+    for name, warp in (("zero-length", lambda e: dict(e, t_end=e["t_start"])),
+                       ("midpoint",
+                        lambda e: dict(e, t_start=(e["t_start"] + e["t_end"]) / 2.0,
+                                       t_end=(e["t_start"] + e["t_end"]) / 2.0)),
+                       ("reversed",
+                        lambda e: dict(e, t_start=e["t_end"], t_end=e["t_start"]))):
+        r = judge.grade([warp(e) for e in ORACLE])
+        assert r["true_positives"] == 0, \
+            f"a {name} oracle scored {r['true_positives']} true positives"
+        assert r["unusable_entries"] == len(ORACLE), \
+            f"a {name} oracle left {len(ORACLE) - r['unusable_entries']} entries usable"
+    print(f"  ok  zero-length, collapsed and reversed spans are rejected on all "
+          f"{len(ORACLE)} entries, including the {len(short)} rows short enough to "
+          f"have been won by an instant")
+
+
 def main() -> int:
     test_prompt_examples_cannot_score()
     test_error_field_is_required_and_any_annotated_tag_counts()
+    test_empty_error_value_is_not_a_claim_of_correctness()
+    test_an_instant_is_not_an_interval()
     test_equal_start_order_does_not_matter()
-    print("all three contract regressions covered, every control fired as required")
+    print("all five contract regressions covered, every control fired as required")
     return 0
 
 

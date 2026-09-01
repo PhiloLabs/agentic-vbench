@@ -91,14 +91,14 @@ The wording after each label is taken from how such steps were described elsewhe
 the same annotation set, not from these videos.
 
 - `"none"` the step was carried out as the recipe intends.
-- `"Measurement Error"` for example: Top the cup with 1 teaspoon of salsa; 1/2  tablespoon of salsa; 2 instead of 1 egg.
-- `"Missing Step"` for example: Skipped this step; Missed this step; Didn't do the step of adding a extra-virgin olive oil..
-- `"Order Error"` for example: Remove already present lettuce, place egg and then place lettuce on top of the egg; Step performed before microwaving the egg; Step performed after adding cheese to the cup.
-- `"Other"` for example: Rose above the brim; added chopped  tomato, garlic full cloves to the pan; Flipped the cake after removing the paper liner.
-- `"Preparation Error"` for example: Cut the muffin into two pieces with hand; Coat a bowl than ramekin cup with cooking spray; large cup instead of ramekin cup.
-- `"Technique Error"` for example: Cracking the egg inappropriately; pour directly; flipped top muffin.
-- `"Temperature Error"` for example: Microwave set on power level low instead of high; medium instead of high; Temperature is set to medium instead of high.
-- `"Timing Error"` for example: Microwave on high for 1 min; Microwave for 30 sec; Microwaved for 10 secs instead of 30 seconds.
+- `"Measurement Error"` for example: two ladles of stock go into the pan where the recipe asks for one.
+- `"Missing Step"` for example: the barley is never rinsed and goes straight into the simmering pan.
+- `"Order Error"` for example: the stock is poured in before the lentils rather than after them.
+- `"Other"` for example: the pan boils over and its rim is wiped down partway through.
+- `"Preparation Error"` for example: a shallow frying pan stands in for the deep stockpot the recipe names.
+- `"Technique Error"` for example: the roux is beaten flat with a fork rather than folded with a spatula.
+- `"Temperature Error"` for example: the burner is left on its lowest setting when a high flame is called for.
+- `"Timing Error"` for example: the barley is left to simmer four minutes instead of the stated ten.
 
 Deciding this is not the same as recognising the step. The recipe tells you what was
 supposed to happen; only the video tells you what this person actually did.

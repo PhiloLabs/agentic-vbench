@@ -30,6 +30,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import re
 import statistics
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -46,6 +47,23 @@ ERROR_TAGS = ("Measurement Error", "Missing Step", "Order Error", "Other",
               "Preparation Error", "Technique Error", "Temperature Error",
               "Timing Error")
 NO_ERROR = "none"
+
+# What each tag means, for the prompt. The family requires task examples to be synthetic,
+# so these are written here rather than quoted from the release: an example lifted from an
+# annotator's own wording is a row of the source corpus reprinted in the prompt, even when
+# the row belongs to a recording outside the selected corpus. They are set in a dish that
+# CaptainCook4D does not contain, and build_gt asserts below that none of them reproduces
+# any annotation the release ships.
+SYNTHETIC_TAG_EXAMPLES = {
+    "Measurement Error":  "two ladles of stock go into the pan where the recipe asks for one",
+    "Missing Step":       "the barley is never rinsed and goes straight into the simmering pan",
+    "Order Error":        "the stock is poured in before the lentils rather than after them",
+    "Other":              "the pan boils over and its rim is wiped down partway through",
+    "Preparation Error":  "a shallow frying pan stands in for the deep stockpot the recipe names",
+    "Technique Error":    "the roux is beaten flat with a fork rather than folded with a spatula",
+    "Temperature Error":  "the burner is left on its lowest setting when a high flame is called for",
+    "Timing Error":       "the barley is left to simmer four minutes instead of the stated ten",
+}
 
 MIN_TAKE_SEC = 600.0            # the family's own floor for a single-video task
 MIN_ORDER_INVERSIONS = 2
@@ -289,27 +307,46 @@ def main() -> int:
              for i in r["inst"]),
             key=lambda e: (e["t_start"], e["id"]))
 
-    # The prompt has to say what the eight tags mean or the field is a guessing game, and
-    # the fairest definition is the annotators' own wording. These examples are drawn ONLY
-    # from recordings outside the corpus, so a reader of the prompt learns the shape of a
-    # tag without learning anything about a scored recording. The exclusion is asserted,
-    # not intended.
-    chosen = {r["rid"] for r in sel}
-    examples: dict = {}
-    for rid, rec in sorted(errs.items(), key=lambda kv: rid_key(kv[0])):
-        if rid in chosen:
-            continue
+    # The prompt has to say what the eight tags mean or the field is a guessing game. The
+    # examples are written by hand, not quoted from the release, and the guarantee that
+    # they cannot reproduce an annotation is asserted here rather than intended: no
+    # example may contain, or be contained by, any description the release ships, and none
+    # may share a four-word run with one. The comparison is against EVERY recording, not
+    # only the 22 in the corpus.
+    assert set(SYNTHETIC_TAG_EXAMPLES) == set(ERROR_TAGS), \
+        f"no synthetic example for {sorted(set(ERROR_TAGS) - set(SYNTHETIC_TAG_EXAMPLES))}"
+
+    def words(t: str) -> list[str]:
+        return re.findall(r"[a-z0-9]+", t.lower())
+
+    def shingles(t: str, k: int = 4) -> set:
+        w = words(t)
+        return {tuple(w[i:i + k]) for i in range(len(w) - k + 1)}
+
+    released = []
+    for rec in errs.values():
         for st in rec.get("step_annotations", []):
+            if st.get("description"):
+                released.append(st["description"])
             for e in (st.get("errors") or []):
-                tag, desc = e.get("tag"), (e.get("description") or "").strip()
-                if not tag or not desc or len(desc) > 90:
-                    continue
-                bucket = examples.setdefault(tag, [])
-                if desc not in bucket and len(bucket) < 3:
-                    bucket.append(desc)
-    assert set(examples) == set(ERROR_TAGS), \
-        f"no outside-corpus example for {sorted(set(ERROR_TAGS) - set(examples))}"
-    out["error_tag_examples"] = {t: examples[t] for t in ERROR_TAGS}
+                if e.get("description"):
+                    released.append(e["description"])
+    assert released, "read no descriptions out of error_annotations.json to compare against"
+    released_norm = [" ".join(words(d)) for d in released]
+    released_shingles = set().union(*(shingles(d) for d in released))
+
+    for tag, ex in SYNTHETIC_TAG_EXAMPLES.items():
+        n = " ".join(words(ex))
+        assert n, f"{tag}: the example is empty"
+        hit = next((d for d in released_norm if n in d or d in n), None)
+        assert hit is None, f"{tag}: the example reproduces a released description: {hit!r}"
+        shared = shingles(ex) & released_shingles
+        assert not shared, (
+            f"{tag}: the example shares a four-word run with a released description: "
+            f"{sorted(' '.join(x) for x in shared)}")
+    print(f"  examples: {len(SYNTHETIC_TAG_EXAMPLES)} synthetic, checked against "
+          f"{len(released)} released descriptions for reuse and shared 4-grams")
+    out["error_tag_examples"] = {t: [SYNTHETIC_TAG_EXAMPLES[t]] for t in ERROR_TAGS}
 
     # ---- refuse to emit a key that cannot be answered ----
     for letter, inst in out["instances"].items():
