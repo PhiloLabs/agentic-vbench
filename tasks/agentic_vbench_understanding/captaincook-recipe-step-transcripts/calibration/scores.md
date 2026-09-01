@@ -4,6 +4,21 @@ The family asks two things of a task before it is worth merging: a strong agent 
 **below 0.10**, and a real attempt runs past **50 tool-call turns**. Both are measured
 here, on the shipped key, with the shipped judge.
 
+## The raw archive
+
+The rollouts committed under `calibration/rollouts/` are sanitized: image blobs are elided
+and paths are rewritten to their in-image form. The unsanitized transcripts, with every
+frame the agents looked at, are published as an immutable release asset and recorded with
+their digests in `calibration/raw_archive.json`:
+
+    https://github.com/Y-Yiqing/agentic-vbench/releases/tag/raw-calibration-2026-09-01
+    104,304,992 bytes, sha256 82110af9d8c609509fbb12f791af6a7db1171b081949e89c8d012c6ba8a56526
+
+It was downloaded from that URL and re-hashed to confirm the published asset is the file
+whose digest is recorded. Redaction covers home-directory prefixes and credential shapes
+and nothing else; every rule was proven to fire on a canary before the run, and nothing in
+these three transcripts actually required redacting.
+
 ## How the arms are run
 
 Two of the three arms run through `calibration/run_arm.py`, which pins the protocol below.
