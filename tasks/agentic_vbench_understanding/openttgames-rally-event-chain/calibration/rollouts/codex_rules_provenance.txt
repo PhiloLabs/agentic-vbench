@@ -1,0 +1,13 @@
+run: codex gpt-5.6-sol canonical (minimal shared rules), started 2026-08-30T21:51:34Z
+rules_file_sha256:      779eec2712ffb67bb81c46cad9b4edde354e300fb90ceb4040b67a266e0256e6
+container_rules_sha256: 779eec2712ffb67bb81c46cad9b4edde354e300fb90ceb4040b67a266e0256e6
+task_commit_recorded:   cd7dc0885bdd57759e204c60686a3810b2e3c501
+supersedes: rollouts/historical_codex_oldrules (8-29, pre-finalization rules)
+            rollouts/historical_codex_efficiencyrules (8-30, efficiency section; 31 turns < 50)
+frozen_contract_identical_to: 1b7cbd5e1473a07405ad481c6179f98b2aca70f0
+  identical: steps/solve/instruction.md
+  identical: steps/solve/tests/judge.py
+  identical: steps/solve/tests/reference.json
+  identical: steps/solve/solution/reference.json
+  identical: environment/Dockerfile
+  identical: task.toml

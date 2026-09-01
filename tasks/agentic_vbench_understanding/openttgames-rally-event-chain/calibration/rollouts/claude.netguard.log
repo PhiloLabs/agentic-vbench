@@ -1,0 +1,36 @@
+=== net_guard claude-pre @ 2026-08-30T23:19:01Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 63
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for claude-pre
+=== net_guard claude-post @ 2026-08-31T00:28:18Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for claude-post
+=== net_guard claude-seg2-pre @ 2026-08-31T04:02:22Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for claude-seg2-pre
+=== net_guard claude-seg2-post @ 2026-08-31T04:34:03Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for claude-seg2-post

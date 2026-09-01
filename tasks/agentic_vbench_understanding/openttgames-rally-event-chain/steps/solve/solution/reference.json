@@ -1,0 +1,3748 @@
+{
+  "source": "Extended OpenTTGames annotations",
+  "video": {
+    "filename": "game_2.mp4",
+    "fps": 120.0,
+    "width": 1920,
+    "height": 1080,
+    "duration_sec": 1435.0,
+    "frame_count": 172200
+  },
+  "valid_rallies": 92,
+  "excluded_rallies": 1,
+  "rallies": [
+    {
+      "rally_id": 1,
+      "serve_frame": 874,
+      "serve_time_sec": 7.283,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 874,
+          "time_sec": 7.283,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 967,
+          "time_sec": 8.058,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 1041,
+          "time_sec": 8.675,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 1110,
+          "time_sec": 9.25,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 1155,
+      "ending_time_sec": 9.625,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 2,
+      "serve_frame": 2098,
+      "serve_time_sec": 17.483,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 2098,
+          "time_sec": 17.483,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 2159,
+          "time_sec": 17.992,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 2214,
+          "time_sec": 18.45,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 2240,
+      "ending_time_sec": 18.667,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 3,
+      "serve_frame": 3449,
+      "serve_time_sec": 28.742,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 3449,
+          "time_sec": 28.742,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 3519,
+          "time_sec": 29.325,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 3577,
+      "ending_time_sec": 29.808,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 4,
+      "serve_frame": 4868,
+      "serve_time_sec": 40.567,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 4868,
+          "time_sec": 40.567,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 4965,
+          "time_sec": 41.375,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 5051,
+          "time_sec": 42.092,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 5143,
+          "time_sec": 42.858,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 5232,
+          "time_sec": 43.6,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 5462,
+          "time_sec": 45.517,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "smash"
+        },
+        {
+          "frame": 5638,
+          "time_sec": 46.983,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 5791,
+          "time_sec": 48.258,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "lob"
+        },
+        {
+          "frame": 5906,
+          "time_sec": 49.217,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 5969,
+          "time_sec": 49.742,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 6040,
+          "time_sec": 50.333,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "flick"
+        },
+        {
+          "frame": 6121,
+          "time_sec": 51.008,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 6218,
+          "time_sec": 51.817,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "flick"
+        },
+        {
+          "frame": 6280,
+          "time_sec": 52.333,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 6372,
+      "ending_time_sec": 53.1,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 5,
+      "serve_frame": 7603,
+      "serve_time_sec": 63.358,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 7603,
+          "time_sec": 63.358,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 7683,
+          "time_sec": 64.025,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 7764,
+          "time_sec": 64.7,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "flick"
+        }
+      ],
+      "ending_frame": 7804,
+      "ending_time_sec": 65.033,
+      "ending": "right_winner"
+    },
+    {
+      "rally_id": 6,
+      "serve_frame": 9071,
+      "serve_time_sec": 75.592,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 9071,
+          "time_sec": 75.592,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 9172,
+          "time_sec": 76.433,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 9283,
+          "time_sec": 77.358,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 9393,
+          "time_sec": 78.275,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 9484,
+          "time_sec": 79.033,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "flick"
+        },
+        {
+          "frame": 9564,
+          "time_sec": 79.7,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 9641,
+          "time_sec": 80.342,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 9709,
+          "time_sec": 80.908,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 9853,
+          "time_sec": 82.108,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 9892,
+      "ending_time_sec": 82.433,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 7,
+      "serve_frame": 11347,
+      "serve_time_sec": 94.558,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 11347,
+          "time_sec": 94.558,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 11444,
+          "time_sec": 95.367,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        }
+      ],
+      "ending_frame": 11468,
+      "ending_time_sec": 95.567,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 8,
+      "serve_frame": 12155,
+      "serve_time_sec": 101.292,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 12155,
+          "time_sec": 101.292,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 12236,
+          "time_sec": 101.967,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 12292,
+          "time_sec": 102.433,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 12325,
+      "ending_time_sec": 102.708,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 9,
+      "serve_frame": 16179,
+      "serve_time_sec": 134.825,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 16179,
+          "time_sec": 134.825,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 16243,
+          "time_sec": 135.358,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 16323,
+          "time_sec": 136.025,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 16431,
+      "ending_time_sec": 136.925,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 10,
+      "serve_frame": 17556,
+      "serve_time_sec": 146.3,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 17556,
+          "time_sec": 146.3,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 17652,
+          "time_sec": 147.1,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 17749,
+          "time_sec": 147.908,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 17811,
+          "time_sec": 148.425,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 17872,
+          "time_sec": 148.933,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 17910,
+          "time_sec": 149.25,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 18203,
+          "time_sec": 151.692,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "smash"
+        }
+      ],
+      "ending_frame": 18224,
+      "ending_time_sec": 151.867,
+      "ending": "right_winner"
+    },
+    {
+      "rally_id": 11,
+      "serve_frame": 19518,
+      "serve_time_sec": 162.65,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 19518,
+          "time_sec": 162.65,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 19604,
+          "time_sec": 163.367,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 19707,
+          "time_sec": 164.225,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 19735,
+      "ending_time_sec": 164.458,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 12,
+      "serve_frame": 21675,
+      "serve_time_sec": 180.625,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 21675,
+          "time_sec": 180.625,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 21761,
+          "time_sec": 181.342,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 21828,
+          "time_sec": 181.9,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 21912,
+          "time_sec": 182.6,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 21962,
+      "ending_time_sec": 183.017,
+      "ending": "left_winner"
+    },
+    {
+      "rally_id": 13,
+      "serve_frame": 23419,
+      "serve_time_sec": 195.158,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 23419,
+          "time_sec": 195.158,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 23520,
+          "time_sec": 196.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "lob"
+        }
+      ],
+      "ending_frame": 23710,
+      "ending_time_sec": 197.583,
+      "ending": "left_winner"
+    },
+    {
+      "rally_id": 14,
+      "serve_frame": 24267,
+      "serve_time_sec": 202.225,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 24267,
+          "time_sec": 202.225,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 24351,
+          "time_sec": 202.925,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        }
+      ],
+      "ending_frame": 24377,
+      "ending_time_sec": 203.142,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 15,
+      "serve_frame": 24948,
+      "serve_time_sec": 207.9,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 24948,
+          "time_sec": 207.9,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 25041,
+          "time_sec": 208.675,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 25116,
+          "time_sec": 209.3,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 25156,
+      "ending_time_sec": 209.633,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 16,
+      "serve_frame": 26255,
+      "serve_time_sec": 218.792,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 26255,
+          "time_sec": 218.792,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 26358,
+          "time_sec": 219.65,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 26492,
+      "ending_time_sec": 220.767,
+      "ending": "right_winner"
+    },
+    {
+      "rally_id": 17,
+      "serve_frame": 26899,
+      "serve_time_sec": 224.158,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 26899,
+          "time_sec": 224.158,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 26965,
+          "time_sec": 224.708,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 27000,
+      "ending_time_sec": 225.0,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 18,
+      "serve_frame": 28333,
+      "serve_time_sec": 236.108,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 28333,
+          "time_sec": 236.108,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 28429,
+          "time_sec": 236.908,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 28530,
+          "time_sec": 237.75,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 28607,
+          "time_sec": 238.392,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 28685,
+          "time_sec": 239.042,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 28748,
+          "time_sec": 239.567,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 28780,
+      "ending_time_sec": 239.833,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 19,
+      "serve_frame": 33142,
+      "serve_time_sec": 276.183,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 33142,
+          "time_sec": 276.183,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 33228,
+          "time_sec": 276.9,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 33287,
+          "time_sec": 277.392,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 33377,
+          "time_sec": 278.142,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 33475,
+          "time_sec": 278.958,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 33525,
+          "time_sec": 279.375,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        }
+      ],
+      "ending_frame": 33560,
+      "ending_time_sec": 279.667,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 20,
+      "serve_frame": 34509,
+      "serve_time_sec": 287.575,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 34509,
+          "time_sec": 287.575,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 34596,
+          "time_sec": 288.3,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 34659,
+          "time_sec": 288.825,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 34695,
+      "ending_time_sec": 289.125,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 21,
+      "serve_frame": 35874,
+      "serve_time_sec": 298.95,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 35874,
+          "time_sec": 298.95,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 35980,
+          "time_sec": 299.833,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 36039,
+          "time_sec": 300.325,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 36104,
+          "time_sec": 300.867,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 36241,
+          "time_sec": 302.008,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 36367,
+      "ending_time_sec": 303.058,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 22,
+      "serve_frame": 37543,
+      "serve_time_sec": 312.858,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 37543,
+          "time_sec": 312.858,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 37608,
+          "time_sec": 313.4,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 37667,
+          "time_sec": 313.892,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 37712,
+          "time_sec": 314.267,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        }
+      ],
+      "ending_frame": 37737,
+      "ending_time_sec": 314.475,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 23,
+      "serve_frame": 38795,
+      "serve_time_sec": 323.292,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 38795,
+          "time_sec": 323.292,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 38867,
+          "time_sec": 323.892,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 38894,
+      "ending_time_sec": 324.117,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 24,
+      "serve_frame": 39836,
+      "serve_time_sec": 331.967,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 39836,
+          "time_sec": 331.967,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_frame": 39864,
+      "ending_time_sec": 332.2,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 25,
+      "serve_frame": 41148,
+      "serve_time_sec": 342.9,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 41148,
+          "time_sec": 342.9,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 41212,
+          "time_sec": 343.433,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 41261,
+          "time_sec": 343.842,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "flick"
+        }
+      ],
+      "ending_frame": 41291,
+      "ending_time_sec": 344.092,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 26,
+      "serve_frame": 42325,
+      "serve_time_sec": 352.708,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 42325,
+          "time_sec": 352.708,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 42402,
+          "time_sec": 353.35,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 42488,
+          "time_sec": 354.067,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 42571,
+          "time_sec": 354.758,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 42631,
+          "time_sec": 355.258,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 42737,
+          "time_sec": 356.142,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 42913,
+          "time_sec": 357.608,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 43017,
+          "time_sec": 358.475,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 43129,
+          "time_sec": 359.408,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 43291,
+          "time_sec": 360.758,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 43320,
+      "ending_time_sec": 361.0,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 27,
+      "serve_frame": 44541,
+      "serve_time_sec": 371.175,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 44541,
+          "time_sec": 371.175,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 44633,
+          "time_sec": 371.942,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 44696,
+          "time_sec": 372.467,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 44767,
+          "time_sec": 373.058,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 44822,
+          "time_sec": 373.517,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 44858,
+          "time_sec": 373.817,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        }
+      ],
+      "ending_frame": 44906,
+      "ending_time_sec": 374.217,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 28,
+      "serve_frame": 46189,
+      "serve_time_sec": 384.908,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 46189,
+          "time_sec": 384.908,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 46261,
+          "time_sec": 385.508,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 46322,
+          "time_sec": 386.017,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 46374,
+      "ending_time_sec": 386.45,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 29,
+      "serve_frame": 47586,
+      "serve_time_sec": 396.55,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 47586,
+          "time_sec": 396.55,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 47674,
+          "time_sec": 397.283,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 47761,
+          "time_sec": 398.008,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 47809,
+      "ending_time_sec": 398.408,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 30,
+      "serve_frame": 48873,
+      "serve_time_sec": 407.275,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 48873,
+          "time_sec": 407.275,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 48971,
+          "time_sec": 408.092,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "chop"
+        }
+      ],
+      "ending_frame": 49001,
+      "ending_time_sec": 408.342,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 31,
+      "serve_frame": 50824,
+      "serve_time_sec": 423.533,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 50824,
+          "time_sec": 423.533,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 50916,
+          "time_sec": 424.3,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 51016,
+          "time_sec": 425.133,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 51017,
+      "ending_time_sec": 425.142,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 32,
+      "serve_frame": 51972,
+      "serve_time_sec": 433.1,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 51972,
+          "time_sec": 433.1,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 52056,
+          "time_sec": 433.8,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "flick"
+        },
+        {
+          "frame": 52196,
+          "time_sec": 434.967,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "flick"
+        },
+        {
+          "frame": 52242,
+          "time_sec": 435.35,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        }
+      ],
+      "ending_frame": 52306,
+      "ending_time_sec": 435.883,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 33,
+      "serve_frame": 53346,
+      "serve_time_sec": 444.55,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 53346,
+          "time_sec": 444.55,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 53449,
+          "time_sec": 445.408,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 53541,
+          "time_sec": 446.175,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 53596,
+          "time_sec": 446.633,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 53681,
+          "time_sec": 447.342,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 53721,
+          "time_sec": 447.675,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        }
+      ],
+      "ending_frame": 53787,
+      "ending_time_sec": 448.225,
+      "ending": "right_miss_on_own_side"
+    },
+    {
+      "rally_id": 34,
+      "serve_frame": 54749,
+      "serve_time_sec": 456.242,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 54749,
+          "time_sec": 456.242,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 54828,
+          "time_sec": 456.9,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 54903,
+          "time_sec": 457.525,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 54991,
+          "time_sec": 458.258,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 55045,
+          "time_sec": 458.708,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 55112,
+          "time_sec": 459.267,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 55175,
+          "time_sec": 459.792,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 55314,
+          "time_sec": 460.95,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 55350,
+          "time_sec": 461.25,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "lob"
+        }
+      ],
+      "ending_frame": 55413,
+      "ending_time_sec": 461.775,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 35,
+      "serve_frame": 56927,
+      "serve_time_sec": 474.392,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 56927,
+          "time_sec": 474.392,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 57021,
+          "time_sec": 475.175,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        }
+      ],
+      "ending_frame": 57130,
+      "ending_time_sec": 476.083,
+      "ending": "right_not_hitting_ball"
+    },
+    {
+      "rally_id": 36,
+      "serve_frame": 58555,
+      "serve_time_sec": 487.958,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 58555,
+          "time_sec": 487.958,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 58611,
+          "time_sec": 488.425,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 58654,
+      "ending_time_sec": 488.783,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 37,
+      "serve_frame": 60912,
+      "serve_time_sec": 507.6,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 60912,
+          "time_sec": 507.6,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 60998,
+          "time_sec": 508.317,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 61064,
+          "time_sec": 508.867,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 61126,
+          "time_sec": 509.383,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        }
+      ],
+      "ending_frame": 61170,
+      "ending_time_sec": 509.75,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 38,
+      "serve_frame": 66514,
+      "serve_time_sec": 554.283,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 66514,
+          "time_sec": 554.283,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 66610,
+          "time_sec": 555.083,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 66673,
+          "time_sec": 555.608,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 66752,
+          "time_sec": 556.267,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 66890,
+      "ending_time_sec": 557.417,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 39,
+      "serve_frame": 67814,
+      "serve_time_sec": 565.117,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 67814,
+          "time_sec": 565.117,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 67929,
+          "time_sec": 566.075,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 68001,
+          "time_sec": 566.675,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 68012,
+      "ending_time_sec": 566.767,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 40,
+      "serve_frame": 69079,
+      "serve_time_sec": 575.658,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 69079,
+          "time_sec": 575.658,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 69173,
+          "time_sec": 576.442,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 69250,
+          "time_sec": 577.083,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 69316,
+          "time_sec": 577.633,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 69408,
+          "time_sec": 578.4,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 69442,
+      "ending_time_sec": 578.683,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 41,
+      "serve_frame": 70443,
+      "serve_time_sec": 587.025,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 70443,
+          "time_sec": 587.025,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 70531,
+          "time_sec": 587.758,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 70633,
+          "time_sec": 588.608,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 70733,
+          "time_sec": 589.442,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 70825,
+          "time_sec": 590.208,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 70993,
+          "time_sec": 591.608,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 71134,
+          "time_sec": 592.783,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 71278,
+          "time_sec": 593.983,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 71331,
+      "ending_time_sec": 594.425,
+      "ending": "left_winner"
+    },
+    {
+      "rally_id": 42,
+      "serve_frame": 72691,
+      "serve_time_sec": 605.758,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 72691,
+          "time_sec": 605.758,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 72777,
+          "time_sec": 606.475,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 72848,
+          "time_sec": 607.067,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 72936,
+          "time_sec": 607.8,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 72999,
+          "time_sec": 608.325,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 73056,
+          "time_sec": 608.8,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 73096,
+      "ending_time_sec": 609.133,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 43,
+      "serve_frame": 74172,
+      "serve_time_sec": 618.1,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 74172,
+          "time_sec": 618.1,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 74274,
+          "time_sec": 618.95,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 74319,
+          "time_sec": 619.325,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 74343,
+      "ending_time_sec": 619.525,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 44,
+      "serve_frame": 76088,
+      "serve_time_sec": 634.067,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 76088,
+          "time_sec": 634.067,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 76167,
+          "time_sec": 634.725,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 76230,
+          "time_sec": 635.25,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        }
+      ],
+      "ending_frame": 76387,
+      "ending_time_sec": 636.558,
+      "ending": "right_winner"
+    },
+    {
+      "rally_id": 45,
+      "serve_frame": 78135,
+      "serve_time_sec": 651.125,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 78135,
+          "time_sec": 651.125,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 78220,
+          "time_sec": 651.833,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 78304,
+          "time_sec": 652.533,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 78368,
+          "time_sec": 653.067,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 78465,
+          "time_sec": 653.875,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 78603,
+          "time_sec": 655.025,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 78711,
+          "time_sec": 655.925,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 78755,
+          "time_sec": 656.292,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "block"
+        }
+      ],
+      "ending_frame": 78820,
+      "ending_time_sec": 656.833,
+      "ending": "left_winner"
+    },
+    {
+      "rally_id": 46,
+      "serve_frame": 80440,
+      "serve_time_sec": 670.333,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 80440,
+          "time_sec": 670.333,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 80501,
+          "time_sec": 670.842,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 80562,
+          "time_sec": 671.35,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 80588,
+      "ending_time_sec": 671.567,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 47,
+      "serve_frame": 82171,
+      "serve_time_sec": 684.758,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 82171,
+          "time_sec": 684.758,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 82238,
+          "time_sec": 685.317,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 82312,
+          "time_sec": 685.933,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 82372,
+          "time_sec": 686.433,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 82489,
+          "time_sec": 687.408,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 82611,
+          "time_sec": 688.425,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 82641,
+      "ending_time_sec": 688.675,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 48,
+      "serve_frame": 83836,
+      "serve_time_sec": 698.633,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 83836,
+          "time_sec": 698.633,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 83907,
+          "time_sec": 699.225,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 83936,
+      "ending_time_sec": 699.467,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 49,
+      "serve_frame": 84696,
+      "serve_time_sec": 705.8,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 84696,
+          "time_sec": 705.8,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 84793,
+          "time_sec": 706.608,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 84890,
+          "time_sec": 707.417,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 84946,
+      "ending_time_sec": 707.883,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 50,
+      "serve_frame": 86319,
+      "serve_time_sec": 719.325,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 86319,
+          "time_sec": 719.325,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 86431,
+          "time_sec": 720.258,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 86447,
+      "ending_time_sec": 720.392,
+      "ending": "left_not_hitting_ball"
+    },
+    {
+      "rally_id": 51,
+      "serve_frame": 87647,
+      "serve_time_sec": 730.392,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 87647,
+          "time_sec": 730.392,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 87755,
+          "time_sec": 731.292,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 87834,
+          "time_sec": 731.95,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 87910,
+          "time_sec": 732.583,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 87949,
+      "ending_time_sec": 732.908,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 52,
+      "serve_frame": 89004,
+      "serve_time_sec": 741.7,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 89004,
+          "time_sec": 741.7,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 89097,
+          "time_sec": 742.475,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 89202,
+          "time_sec": 743.35,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 89257,
+          "time_sec": 743.808,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 89326,
+          "time_sec": 744.383,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 89443,
+      "ending_time_sec": 745.358,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 53,
+      "serve_frame": 90467,
+      "serve_time_sec": 753.892,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 90467,
+          "time_sec": 753.892,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 90564,
+          "time_sec": 754.7,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        }
+      ],
+      "ending_frame": 90642,
+      "ending_time_sec": 755.35,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 54,
+      "serve_frame": 91612,
+      "serve_time_sec": 763.433,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 91612,
+          "time_sec": 763.433,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 91683,
+          "time_sec": 764.025,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 91754,
+          "time_sec": 764.617,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        }
+      ],
+      "ending_frame": 91776,
+      "ending_time_sec": 764.8,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 55,
+      "serve_frame": 92546,
+      "serve_time_sec": 771.217,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 92546,
+          "time_sec": 771.217,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 92652,
+          "time_sec": 772.1,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 92752,
+      "ending_time_sec": 772.933,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 56,
+      "serve_frame": 97727,
+      "serve_time_sec": 814.392,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 97727,
+          "time_sec": 814.392,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 97811,
+          "time_sec": 815.092,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 97848,
+          "time_sec": 815.4,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 97950,
+          "time_sec": 816.25,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 97988,
+          "time_sec": 816.567,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 98065,
+          "time_sec": 817.208,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 98110,
+          "time_sec": 817.583,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 98199,
+          "time_sec": 818.325,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 98238,
+          "time_sec": 818.65,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 98282,
+      "ending_time_sec": 819.017,
+      "ending": "right_winner"
+    },
+    {
+      "rally_id": 57,
+      "serve_frame": 99386,
+      "serve_time_sec": 828.217,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 99386,
+          "time_sec": 828.217,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 99481,
+          "time_sec": 829.008,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 99567,
+          "time_sec": 829.725,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 99619,
+          "time_sec": 830.158,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 99701,
+          "time_sec": 830.842,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 99720,
+      "ending_time_sec": 831.0,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 58,
+      "serve_frame": 101049,
+      "serve_time_sec": 842.075,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 101049,
+          "time_sec": 842.075,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 101137,
+          "time_sec": 842.808,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 101213,
+          "time_sec": 843.442,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 101255,
+          "time_sec": 843.792,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 101333,
+          "time_sec": 844.442,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 101372,
+          "time_sec": 844.767,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 101432,
+          "time_sec": 845.267,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 101441,
+      "ending_time_sec": 845.342,
+      "ending": "left_miss_on_own_side"
+    },
+    {
+      "rally_id": 59,
+      "serve_frame": 102368,
+      "serve_time_sec": 853.067,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 102368,
+          "time_sec": 853.067,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 102454,
+          "time_sec": 853.783,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 102553,
+          "time_sec": 854.608,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 102579,
+      "ending_time_sec": 854.825,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 60,
+      "serve_frame": 104187,
+      "serve_time_sec": 868.225,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 104187,
+          "time_sec": 868.225,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 104255,
+          "time_sec": 868.792,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 104304,
+      "ending_time_sec": 869.2,
+      "ending": "left_miss_on_own_side"
+    },
+    {
+      "rally_id": 61,
+      "serve_frame": 105226,
+      "serve_time_sec": 876.883,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 105226,
+          "time_sec": 876.883,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 105315,
+          "time_sec": 877.625,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 105395,
+          "time_sec": 878.292,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 105421,
+      "ending_time_sec": 878.508,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 62,
+      "serve_frame": 107036,
+      "serve_time_sec": 891.967,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 107036,
+          "time_sec": 891.967,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 107127,
+          "time_sec": 892.725,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 107213,
+          "time_sec": 893.442,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 107281,
+          "time_sec": 894.008,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 107317,
+      "ending_time_sec": 894.308,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 63,
+      "serve_frame": 108557,
+      "serve_time_sec": 904.642,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 108557,
+          "time_sec": 904.642,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 108619,
+          "time_sec": 905.158,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 108692,
+          "time_sec": 905.767,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 108736,
+          "time_sec": 906.133,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 108808,
+          "time_sec": 906.733,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "flick"
+        },
+        {
+          "frame": 108856,
+          "time_sec": 907.133,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 108941,
+          "time_sec": 907.842,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 108997,
+          "time_sec": 908.308,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 109089,
+          "time_sec": 909.075,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 109130,
+          "time_sec": 909.417,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        }
+      ],
+      "ending_frame": 109184,
+      "ending_time_sec": 909.867,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 64,
+      "serve_frame": 110664,
+      "serve_time_sec": 922.2,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 110664,
+          "time_sec": 922.2,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 110757,
+          "time_sec": 922.975,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        }
+      ],
+      "ending_frame": 110842,
+      "ending_time_sec": 923.683,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 65,
+      "serve_frame": 111464,
+      "serve_time_sec": 928.867,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 111464,
+          "time_sec": 928.867,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 111567,
+          "time_sec": 929.725,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 111649,
+          "time_sec": 930.408,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 111706,
+          "time_sec": 930.883,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 111791,
+          "time_sec": 931.592,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 111853,
+          "time_sec": 932.108,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 111929,
+          "time_sec": 932.742,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 112042,
+          "time_sec": 933.683,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 112132,
+          "time_sec": 934.433,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "flick"
+        },
+        {
+          "frame": 112263,
+          "time_sec": 935.525,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 112337,
+          "time_sec": 936.142,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 112404,
+          "time_sec": 936.7,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 112541,
+          "time_sec": 937.842,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "lob"
+        },
+        {
+          "frame": 112668,
+          "time_sec": 938.9,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "chop"
+        },
+        {
+          "frame": 112740,
+          "time_sec": 939.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 112815,
+          "time_sec": 940.125,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 112875,
+      "ending_time_sec": 940.625,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 66,
+      "serve_frame": 114820,
+      "serve_time_sec": 956.833,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 114820,
+          "time_sec": 956.833,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 114951,
+          "time_sec": 957.925,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 115023,
+      "ending_time_sec": 958.525,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 67,
+      "serve_frame": 116115,
+      "serve_time_sec": 967.625,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 116115,
+          "time_sec": 967.625,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 116329,
+          "time_sec": 969.408,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 116580,
+          "time_sec": 971.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "smash"
+        }
+      ],
+      "ending_frame": 116611,
+      "ending_time_sec": 971.758,
+      "ending": "left_winner"
+    },
+    {
+      "rally_id": 68,
+      "serve_frame": 118608,
+      "serve_time_sec": 988.4,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 118608,
+          "time_sec": 988.4,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 118703,
+          "time_sec": 989.192,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 118806,
+          "time_sec": 990.05,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 118862,
+          "time_sec": 990.517,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 118948,
+          "time_sec": 991.233,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 119091,
+          "time_sec": 992.425,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "flick"
+        }
+      ],
+      "ending_frame": 119217,
+      "ending_time_sec": 993.475,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 69,
+      "serve_frame": 120769,
+      "serve_time_sec": 1006.408,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 120769,
+          "time_sec": 1006.408,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_frame": 120890,
+      "ending_time_sec": 1007.417,
+      "ending": "right_double_bounce"
+    },
+    {
+      "rally_id": 70,
+      "serve_frame": 121704,
+      "serve_time_sec": 1014.2,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 121704,
+          "time_sec": 1014.2,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 121767,
+          "time_sec": 1014.725,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 121810,
+          "time_sec": 1015.083,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 121863,
+          "time_sec": 1015.525,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 121904,
+          "time_sec": 1015.867,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 121969,
+          "time_sec": 1016.408,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 122018,
+          "time_sec": 1016.817,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 122039,
+      "ending_time_sec": 1016.992,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 71,
+      "serve_frame": 123623,
+      "serve_time_sec": 1030.192,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 123623,
+          "time_sec": 1030.192,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 123730,
+          "time_sec": 1031.083,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        }
+      ],
+      "ending_frame": 123839,
+      "ending_time_sec": 1031.992,
+      "ending": "right_double_bounce"
+    },
+    {
+      "rally_id": 72,
+      "serve_frame": 125025,
+      "serve_time_sec": 1041.875,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 125025,
+          "time_sec": 1041.875,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 125124,
+          "time_sec": 1042.7,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 125199,
+          "time_sec": 1043.325,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 125226,
+      "ending_time_sec": 1043.55,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 73,
+      "serve_frame": 126958,
+      "serve_time_sec": 1057.983,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 126958,
+          "time_sec": 1057.983,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 127070,
+          "time_sec": 1058.917,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "flick"
+        }
+      ],
+      "ending_frame": 127124,
+      "ending_time_sec": 1059.367,
+      "ending": "left_winner"
+    },
+    {
+      "rally_id": 74,
+      "serve_frame": 128028,
+      "serve_time_sec": 1066.9,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 128028,
+          "time_sec": 1066.9,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 128121,
+          "time_sec": 1067.675,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 128200,
+          "time_sec": 1068.333,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 128289,
+          "time_sec": 1069.075,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 128311,
+      "ending_time_sec": 1069.258,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 75,
+      "serve_frame": 129674,
+      "serve_time_sec": 1080.617,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 129674,
+          "time_sec": 1080.617,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 129758,
+          "time_sec": 1081.317,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 129776,
+      "ending_time_sec": 1081.467,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 76,
+      "serve_frame": 131543,
+      "serve_time_sec": 1096.192,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 131543,
+          "time_sec": 1096.192,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 131608,
+          "time_sec": 1096.733,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "frame": 131689,
+          "time_sec": 1097.408,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 131749,
+          "time_sec": 1097.908,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 131790,
+          "time_sec": 1098.25,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 131862,
+          "time_sec": 1098.85,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 131919,
+      "ending_time_sec": 1099.325,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 77,
+      "serve_frame": 133282,
+      "serve_time_sec": 1110.683,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 133282,
+          "time_sec": 1110.683,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 133383,
+          "time_sec": 1111.525,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "frame": 133476,
+          "time_sec": 1112.3,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 133494,
+      "ending_time_sec": 1112.45,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 78,
+      "serve_frame": 138217,
+      "serve_time_sec": 1151.808,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 138217,
+          "time_sec": 1151.808,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 138295,
+          "time_sec": 1152.458,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        }
+      ],
+      "ending_frame": 138332,
+      "ending_time_sec": 1152.767,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 79,
+      "serve_frame": 139170,
+      "serve_time_sec": 1159.75,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 139170,
+          "time_sec": 1159.75,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 139245,
+          "time_sec": 1160.375,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 139294,
+      "ending_time_sec": 1160.783,
+      "ending": "left_out"
+    },
+    {
+      "rally_id": 80,
+      "serve_frame": 140303,
+      "serve_time_sec": 1169.192,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 140303,
+          "time_sec": 1169.192,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 140398,
+          "time_sec": 1169.983,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 140484,
+          "time_sec": 1170.7,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 140544,
+          "time_sec": 1171.2,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 140634,
+          "time_sec": 1171.95,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 140720,
+          "time_sec": 1172.667,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 140782,
+          "time_sec": 1173.183,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "flick"
+        },
+        {
+          "frame": 140931,
+          "time_sec": 1174.425,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 140992,
+          "time_sec": 1174.933,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 141046,
+      "ending_time_sec": 1175.383,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 81,
+      "serve_frame": 142365,
+      "serve_time_sec": 1186.375,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 142365,
+          "time_sec": 1186.375,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 142459,
+          "time_sec": 1187.158,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        }
+      ],
+      "ending_frame": 142520,
+      "ending_time_sec": 1187.667,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 82,
+      "serve_frame": 143691,
+      "serve_time_sec": 1197.425,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 143691,
+          "time_sec": 1197.425,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 143785,
+          "time_sec": 1198.208,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 143839,
+          "time_sec": 1198.658,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 143884,
+          "time_sec": 1199.033,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 143999,
+          "time_sec": 1199.992,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 144080,
+          "time_sec": 1200.667,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 144140,
+          "time_sec": 1201.167,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 144276,
+          "time_sec": 1202.3,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "smash"
+        },
+        {
+          "frame": 144315,
+          "time_sec": 1202.625,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 144343,
+      "ending_time_sec": 1202.858,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 83,
+      "serve_frame": 145764,
+      "serve_time_sec": 1214.7,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 145764,
+          "time_sec": 1214.7,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 145853,
+          "time_sec": 1215.442,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 145939,
+          "time_sec": 1216.158,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 145965,
+      "ending_time_sec": 1216.375,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 84,
+      "serve_frame": 148231,
+      "serve_time_sec": 1235.258,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 148231,
+          "time_sec": 1235.258,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 148332,
+          "time_sec": 1236.1,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 148393,
+          "time_sec": 1236.608,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 148419,
+      "ending_time_sec": 1236.825,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 85,
+      "serve_frame": 149296,
+      "serve_time_sec": 1244.133,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 149296,
+          "time_sec": 1244.133,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 149386,
+          "time_sec": 1244.883,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 149482,
+          "time_sec": 1245.683,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 149502,
+      "ending_time_sec": 1245.85,
+      "ending": "left_net"
+    },
+    {
+      "rally_id": 86,
+      "serve_frame": 151618,
+      "serve_time_sec": 1263.483,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 151618,
+          "time_sec": 1263.483,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 151688,
+          "time_sec": 1264.067,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 151794,
+          "time_sec": 1264.95,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 151830,
+      "ending_time_sec": 1265.25,
+      "ending": "left_winner"
+    },
+    {
+      "rally_id": 87,
+      "serve_frame": 153262,
+      "serve_time_sec": 1277.183,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 153262,
+          "time_sec": 1277.183,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 153359,
+          "time_sec": 1277.992,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 153382,
+      "ending_time_sec": 1278.183,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 88,
+      "serve_frame": 154244,
+      "serve_time_sec": 1285.367,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 154244,
+          "time_sec": 1285.367,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 154350,
+          "time_sec": 1286.25,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 154440,
+          "time_sec": 1287.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 154479,
+      "ending_time_sec": 1287.325,
+      "ending": "right_out"
+    },
+    {
+      "rally_id": 89,
+      "serve_frame": 156079,
+      "serve_time_sec": 1300.658,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 156079,
+          "time_sec": 1300.658,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 156156,
+          "time_sec": 1301.3,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 156208,
+          "time_sec": 1301.733,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 156313,
+          "time_sec": 1302.608,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 156362,
+          "time_sec": 1303.017,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 156407,
+      "ending_time_sec": 1303.392,
+      "ending": "right_winner"
+    },
+    {
+      "rally_id": 90,
+      "serve_frame": 158010,
+      "serve_time_sec": 1316.75,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 158010,
+          "time_sec": 1316.75,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 158118,
+          "time_sec": 1317.65,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 158183,
+          "time_sec": 1318.192,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 158256,
+          "time_sec": 1318.8,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 158306,
+          "time_sec": 1319.217,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 158356,
+          "time_sec": 1319.633,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 158396,
+          "time_sec": 1319.967,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "frame": 158452,
+          "time_sec": 1320.433,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "frame": 158506,
+          "time_sec": 1320.883,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 158555,
+      "ending_time_sec": 1321.292,
+      "ending": "left_winner"
+    },
+    {
+      "rally_id": 91,
+      "serve_frame": 160239,
+      "serve_time_sec": 1335.325,
+      "server": "left",
+      "strokes": [
+        {
+          "frame": 160239,
+          "time_sec": 1335.325,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 160322,
+          "time_sec": 1336.017,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 160341,
+      "ending_time_sec": 1336.175,
+      "ending": "right_net"
+    },
+    {
+      "rally_id": 92,
+      "serve_frame": 161615,
+      "serve_time_sec": 1346.792,
+      "server": "right",
+      "strokes": [
+        {
+          "frame": 161615,
+          "time_sec": 1346.792,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "frame": 161705,
+          "time_sec": 1347.542,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 161775,
+          "time_sec": 1348.125,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "frame": 161882,
+          "time_sec": 1349.017,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_frame": 161914,
+      "ending_time_sec": 1349.283,
+      "ending": "left_winner"
+    }
+  ],
+  "excluded": [
+    {
+      "rally_id": 8,
+      "kind": "video-gap",
+      "kept_through_frame": 12325,
+      "kept_through_time_sec": 102.708,
+      "excluded_strokes": 12,
+      "excluded_from_frame": 13429,
+      "excluded_to_frame": 14690,
+      "reason": "second point in the same serve-defined window; its serve is visible but the racket-ball contact frame is not resolvable in the source video"
+    }
+  ]
+}

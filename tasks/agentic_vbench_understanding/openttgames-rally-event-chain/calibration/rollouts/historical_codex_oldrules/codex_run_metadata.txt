@@ -1,0 +1,7 @@
+harness:        Codex CLI
+harness version: codex-cli 0.147.0
+model:          gpt-5.6-sol
+reasoning:      high
+task commit:    1b7cbd5e1473a07405ad481c6179f98b2aca70f0
+image:          agentic-vbench-openttgames
+started:        2026-08-30T00:52:53Z

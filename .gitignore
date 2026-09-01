@@ -86,3 +86,23 @@ release-assets/**/*.mp4
 tasks/agentic_vbench_understanding/*/environment/*.mp4
 # Understanding family: local calibration materials (not committed; media lives on HF).
 tasks/agentic_vbench_understanding/*/environment/local_materials/
+
+# Calibration working artifacts: failed-attempt archives, periodic workspace
+# snapshots, and the salvaged workdir of a run that was stopped before it produced
+# an answer. Kept locally as evidence but far too large for the repo (1.3 GB,
+# 8.6 GB and 195 MB respectively); the accepted runs' trajectories are committed
+# instead. Nothing under these paths carries a score.
+tasks/agentic_vbench_understanding/*/calibration/rollouts/aborted/
+tasks/agentic_vbench_understanding/*/calibration/rollouts/snapshots/
+tasks/agentic_vbench_understanding/*/calibration/rollouts/claude_stopped_workdir/
+tasks/agentic_vbench_understanding/*/calibration/rollouts/claude_stopped_tmp/
+tasks/agentic_vbench_understanding/*/calibration/rollouts/claude_stopped_output/
+tasks/agentic_vbench_understanding/*/calibration/rollouts/claude_oauth_workdir/
+tasks/agentic_vbench_understanding/*/calibration/ablations/superseded/
+
+# ...but the per-run egress-guard logs are evidence, not runtime noise: they are
+# the only artifact backing the "isolation verified before and after every scored
+# run" claim in scores.md. 36 KB total, so they ship. Console logs stay ignored --
+# they carry host absolute paths.
+!tasks/agentic_vbench_understanding/*/calibration/rollouts/*.netguard.log
+!tasks/agentic_vbench_understanding/*/calibration/ablations/*.netguard.log

@@ -1,0 +1,21 @@
+ablation:        frame-dump-notools (literal no-tools condition)
+harness:         Claude Code CLI, stream-json image input, all tools disallowed
+harness version: 2.1.251 (Claude Code)
+model:           claude-opus-4-8
+presentation:    30 contact sheets, 7x7 grid, 1568x882 each, 224x126 per tile,
+                 covering all 1435 frames of a 1 fps sample with no frame omitted
+sheet manifest:  ablation_frame-dump-notools_sheets.sha256
+tools:           none -- Bash/Read/Write/Edit/Glob/Grep/Task/WebFetch/WebSearch all disallowed
+task commit:     afe9997b87cdedc67c64876a941389da43a01403
+image:           sha256:db657366f70748b8a6d674a04982123e7a69ea85a130fe775b7465854dbabf92
+rules file:      not loaded -- the request runs from /tmp, which has no CLAUDE.md,
+                 so the shared rules file is not in this run's context at all. The
+                 model sees the 30 images, instruction.md and the ablation note, and
+                 nothing else. The repository rules file
+                 (sha256 779eec2712ffb67bb81c46cad9b4edde354e300fb90ceb4040b67a266e0256e6)
+                 is unmodified and unused here.
+override:        in the ablation prompt text only; no rules file was edited
+note:            this block replaces an earlier line that recorded the repository
+                 rules digest as though the run had operated under it, which was
+                 wrong; the run itself is unchanged.
+started:         2026-09-01T01:38:29Z

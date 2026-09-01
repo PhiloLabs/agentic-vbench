@@ -1,0 +1,28 @@
+{
+  "reward": 0.0,
+  "predicted_rallies": 0,
+  "reference_rallies": 92,
+  "matched_rallies": 0,
+  "rally_discovery": {
+    "f1": 0.0
+  },
+  "stroke_timing": {
+    "matched": 0,
+    "predicted": 0,
+    "reference": 387,
+    "f1": 0.0
+  },
+  "stroke_semantics": {
+    "player": 0.0,
+    "hand": 0.0,
+    "stroke": 0.0
+  },
+  "stroke_semantic_joint": 0.0,
+  "rally_endings": {
+    "label_accuracy": 0.0,
+    "timing_accuracy": 0.0,
+    "joint_accuracy": 0.0
+  },
+  "matched_details": [],
+  "reason": "ok"
+}

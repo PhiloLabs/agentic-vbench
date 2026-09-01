@@ -1,0 +1,18 @@
+=== net_guard ablation-no-media-pre @ 2026-08-30T21:04:04Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 63
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-pre
+=== net_guard ablation-no-media-post @ 2026-08-30T21:05:31Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-post

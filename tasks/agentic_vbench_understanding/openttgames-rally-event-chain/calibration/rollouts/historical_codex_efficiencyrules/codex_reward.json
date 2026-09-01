@@ -1,0 +1,257 @@
+{
+  "reward": 2e-05,
+  "predicted_rallies": 89,
+  "reference_rallies": 92,
+  "matched_rallies": 19,
+  "rally_discovery": {
+    "f1": 0.209945
+  },
+  "stroke_timing": {
+    "matched": 7,
+    "predicted": 89,
+    "reference": 387,
+    "f1": 0.029412
+  },
+  "stroke_semantics": {
+    "player": 0.021008,
+    "hand": 0.029412,
+    "stroke": 0.021008
+  },
+  "stroke_semantic_joint": 0.021008,
+  "rally_endings": {
+    "label_accuracy": 0.157895,
+    "timing_accuracy": 0.736842,
+    "joint_accuracy": 0.157895
+  },
+  "matched_details": [
+    {
+      "prediction_index": 70,
+      "reference_rally_id": 73,
+      "reference_start_s": 1057.983,
+      "start_delta_s": 0.017,
+      "predicted_strokes": 1,
+      "reference_strokes": 2,
+      "matched_strokes": 1,
+      "ending_label_ok": false,
+      "ending_time_ok": false,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 49,
+      "reference_rally_id": 51,
+      "reference_start_s": 730.392,
+      "start_delta_s": 0.108,
+      "predicted_strokes": 1,
+      "reference_strokes": 4,
+      "matched_strokes": 1,
+      "ending_label_ok": false,
+      "ending_time_ok": false,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 40,
+      "reference_rally_id": 42,
+      "reference_start_s": 605.758,
+      "start_delta_s": 0.258,
+      "predicted_strokes": 1,
+      "reference_strokes": 6,
+      "matched_strokes": 1,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 45,
+      "reference_rally_id": 47,
+      "reference_start_s": 684.758,
+      "start_delta_s": 0.258,
+      "predicted_strokes": 1,
+      "reference_strokes": 6,
+      "matched_strokes": 1,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 55,
+      "reference_rally_id": 57,
+      "reference_start_s": 828.217,
+      "start_delta_s": 0.283,
+      "predicted_strokes": 1,
+      "reference_strokes": 5,
+      "matched_strokes": 1,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 85,
+      "reference_rally_id": 88,
+      "reference_start_s": 1285.367,
+      "start_delta_s": 0.367,
+      "predicted_strokes": 1,
+      "reference_strokes": 3,
+      "matched_strokes": 0,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 15,
+      "reference_rally_id": 16,
+      "reference_start_s": 218.792,
+      "start_delta_s": 0.408,
+      "predicted_strokes": 1,
+      "reference_strokes": 2,
+      "matched_strokes": 0,
+      "ending_label_ok": false,
+      "ending_time_ok": false,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 67,
+      "reference_rally_id": 69,
+      "reference_start_s": 1006.408,
+      "start_delta_s": 0.408,
+      "predicted_strokes": 1,
+      "reference_strokes": 1,
+      "matched_strokes": 0,
+      "ending_label_ok": false,
+      "ending_time_ok": false,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 56,
+      "reference_rally_id": 58,
+      "reference_start_s": 842.075,
+      "start_delta_s": 0.425,
+      "predicted_strokes": 1,
+      "reference_strokes": 7,
+      "matched_strokes": 1,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 0,
+      "reference_rally_id": 1,
+      "reference_start_s": 7.283,
+      "start_delta_s": 0.483,
+      "predicted_strokes": 1,
+      "reference_strokes": 4,
+      "matched_strokes": 0,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 1,
+      "reference_rally_id": 2,
+      "reference_start_s": 17.483,
+      "start_delta_s": 0.683,
+      "predicted_strokes": 1,
+      "reference_strokes": 3,
+      "matched_strokes": 0,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 72,
+      "reference_rally_id": 76,
+      "reference_start_s": 1096.192,
+      "start_delta_s": 0.692,
+      "predicted_strokes": 1,
+      "reference_strokes": 6,
+      "matched_strokes": 0,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 10,
+      "reference_rally_id": 10,
+      "reference_start_s": 146.3,
+      "start_delta_s": 0.7,
+      "predicted_strokes": 1,
+      "reference_strokes": 7,
+      "matched_strokes": 1,
+      "ending_label_ok": true,
+      "ending_time_ok": true,
+      "ending_joint_ok": true
+    },
+    {
+      "prediction_index": 2,
+      "reference_rally_id": 3,
+      "reference_start_s": 28.742,
+      "start_delta_s": 0.742,
+      "predicted_strokes": 1,
+      "reference_strokes": 2,
+      "matched_strokes": 0,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 31,
+      "reference_rally_id": 34,
+      "reference_start_s": 456.242,
+      "start_delta_s": 0.742,
+      "predicted_strokes": 1,
+      "reference_strokes": 9,
+      "matched_strokes": 0,
+      "ending_label_ok": false,
+      "ending_time_ok": false,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 4,
+      "reference_rally_id": 5,
+      "reference_start_s": 63.358,
+      "start_delta_s": 0.758,
+      "predicted_strokes": 1,
+      "reference_strokes": 3,
+      "matched_strokes": 0,
+      "ending_label_ok": true,
+      "ending_time_ok": true,
+      "ending_joint_ok": true
+    },
+    {
+      "prediction_index": 65,
+      "reference_rally_id": 67,
+      "reference_start_s": 967.625,
+      "start_delta_s": 0.875,
+      "predicted_strokes": 1,
+      "reference_strokes": 3,
+      "matched_strokes": 0,
+      "ending_label_ok": true,
+      "ending_time_ok": true,
+      "ending_joint_ok": true
+    },
+    {
+      "prediction_index": 59,
+      "reference_rally_id": 61,
+      "reference_start_s": 876.883,
+      "start_delta_s": 0.883,
+      "predicted_strokes": 1,
+      "reference_strokes": 3,
+      "matched_strokes": 0,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    },
+    {
+      "prediction_index": 60,
+      "reference_rally_id": 62,
+      "reference_start_s": 891.967,
+      "start_delta_s": 0.967,
+      "predicted_strokes": 1,
+      "reference_strokes": 4,
+      "matched_strokes": 0,
+      "ending_label_ok": false,
+      "ending_time_ok": true,
+      "ending_joint_ok": false
+    }
+  ],
+  "reason": "ok"
+}

@@ -1,0 +1,44 @@
+{
+  "dataset": "Extended OpenTTGames annotations",
+  "video": {
+    "filename": "game_2.mp4",
+    "url": "https://lab.osai.ai/datasets/openttgames/data/game_2.mp4",
+    "sha256": "330ac07730bae6d899dbbbd00ad43500c583e6af6ea6dd261565bc77811eba66",
+    "size_bytes": 10833064677,
+    "width": 1920,
+    "height": 1080,
+    "fps": 120,
+    "frame_count": 172200,
+    "duration_sec": 1435.0
+  },
+  "annotation": {
+    "filename": "game_2.json",
+    "source_repo_path": "data/raw/game_data/train/game_2.json",
+    "sha256": "7466f1f8c46316406ae224a17491354eac89f9cc2de858633b6f893573db4fe7",
+    "description": "Frame-level table-tennis event annotations for OpenTTGames game_2",
+    "source_repo": "https://github.com/moamal01/table_tennis_data.git",
+    "source_commit": "36471a76b969a0340df59258a813bf8214e68e7c",
+    "license": "CC BY-NC-SA 4.0",
+    "license_file": "LICENSE"
+  },
+  "ground_truth_derivation": {
+    "rally_window_rule": "Each serve defines the start of a candidate rally window extending until the next serve.",
+    "ending_dedup_rule": "Adjacent identical ending labels within 2 frames are deduplicated.",
+    "valid_rally_rule": "Keep rally windows with exactly one explicit ending after deduplication; six windows with no source terminal use a bounded video-audit terminal, and one window is truncated at an audited cut frame because it spans two points.",
+    "source_terminal_exception_ids": [
+      13,
+      16,
+      18,
+      24,
+      55,
+      73
+    ],
+    "video_gap_truncation_ids": [
+      8
+    ],
+    "silently_excluded_serve_windows": 0,
+    "final_valid_rallies": 92,
+    "final_benchmark_strokes": 387,
+    "final_excluded_strokes": 12
+  }
+}

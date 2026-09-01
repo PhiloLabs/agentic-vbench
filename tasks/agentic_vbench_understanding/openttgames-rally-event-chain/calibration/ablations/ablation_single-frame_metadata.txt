@@ -1,0 +1,10 @@
+ablation:        single-frame
+harness:         Codex CLI
+harness version: codex-cli 0.147.0
+model:           gpt-5.6-sol
+reasoning:       high
+web_search:      false
+gate:            avb-netgate-abl
+task commit:     cd7dc0885bdd57759e204c60686a3810b2e3c501
+rules sha256:    3171bb1d847654a4076ba0d615eabec23fc62a290ccfc49c2935fb8fbdebd669
+started:         2026-08-30T21:08:39Z

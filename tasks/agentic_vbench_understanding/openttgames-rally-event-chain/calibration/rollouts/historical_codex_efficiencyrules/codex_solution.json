@@ -1,0 +1,1161 @@
+{
+  "rallies": [
+    {
+      "serve_time_sec": 6.8,
+      "strokes": [
+        {
+          "time_sec": 6.8,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 10.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 16.8,
+      "strokes": [
+        {
+          "time_sec": 16.8,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 18.8,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 28.0,
+      "strokes": [
+        {
+          "time_sec": 28.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 30.2,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 42.0,
+      "strokes": [
+        {
+          "time_sec": 42.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 51.8,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 62.6,
+      "strokes": [
+        {
+          "time_sec": 62.6,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 65.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 71.6,
+      "strokes": [
+        {
+          "time_sec": 71.6,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 81.5,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 90.4,
+      "strokes": [
+        {
+          "time_sec": 90.4,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 94.5,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 99.0,
+      "strokes": [
+        {
+          "time_sec": 99.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 102.8,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 110.8,
+      "strokes": [
+        {
+          "time_sec": 110.8,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 121.5,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 131.2,
+      "strokes": [
+        {
+          "time_sec": 131.2,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 135.8,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 147.0,
+      "strokes": [
+        {
+          "time_sec": 147.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 151.8,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 159.4,
+      "strokes": [
+        {
+          "time_sec": 159.4,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 163.8,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 178.7,
+      "strokes": [
+        {
+          "time_sec": 178.7,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 182.8,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 191.8,
+      "strokes": [
+        {
+          "time_sec": 191.8,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 196.2,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 206.4,
+      "strokes": [
+        {
+          "time_sec": 206.4,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 209.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 219.2,
+      "strokes": [
+        {
+          "time_sec": 219.2,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 224.8,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 233.5,
+      "strokes": [
+        {
+          "time_sec": 233.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 240.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 275.0,
+      "strokes": [
+        {
+          "time_sec": 275.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 283.5,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 286.0,
+      "strokes": [
+        {
+          "time_sec": 286.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 289.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 296.6,
+      "strokes": [
+        {
+          "time_sec": 296.6,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 302.8,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 310.0,
+      "strokes": [
+        {
+          "time_sec": 310.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 314.8,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 318.0,
+      "strokes": [
+        {
+          "time_sec": 318.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 323.8,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 328.8,
+      "strokes": [
+        {
+          "time_sec": 328.8,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 332.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 339.4,
+      "strokes": [
+        {
+          "time_sec": 339.4,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 343.8,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 349.8,
+      "strokes": [
+        {
+          "time_sec": 349.8,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 359.5,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 369.3,
+      "strokes": [
+        {
+          "time_sec": 369.3,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 373.8,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 382.0,
+      "strokes": [
+        {
+          "time_sec": 382.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 386.8,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 393.5,
+      "strokes": [
+        {
+          "time_sec": 393.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 397.8,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 405.0,
+      "strokes": [
+        {
+          "time_sec": 405.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 408.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 414.0,
+      "strokes": [
+        {
+          "time_sec": 414.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 424.8,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 432.0,
+      "strokes": [
+        {
+          "time_sec": 432.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 435.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 455.5,
+      "strokes": [
+        {
+          "time_sec": 455.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 459.5,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 463.6,
+      "strokes": [
+        {
+          "time_sec": 463.6,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 464.3,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 472.5,
+      "strokes": [
+        {
+          "time_sec": 472.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 476.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 485.5,
+      "strokes": [
+        {
+          "time_sec": 485.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 489.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 505.5,
+      "strokes": [
+        {
+          "time_sec": 505.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 509.5,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 555.5,
+      "strokes": [
+        {
+          "time_sec": 555.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 558.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 563.5,
+      "strokes": [
+        {
+          "time_sec": 563.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 566.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 571.5,
+      "strokes": [
+        {
+          "time_sec": 571.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 574.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 583.0,
+      "strokes": [
+        {
+          "time_sec": 583.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 593.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 605.5,
+      "strokes": [
+        {
+          "time_sec": 605.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 609.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 616.0,
+      "strokes": [
+        {
+          "time_sec": 616.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 619.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 630.5,
+      "strokes": [
+        {
+          "time_sec": 630.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 635.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 648.5,
+      "strokes": [
+        {
+          "time_sec": 648.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 656.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 668.5,
+      "strokes": [
+        {
+          "time_sec": 668.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 672.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 684.5,
+      "strokes": [
+        {
+          "time_sec": 684.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 688.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 696.5,
+      "strokes": [
+        {
+          "time_sec": 696.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 700.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 704.5,
+      "strokes": [
+        {
+          "time_sec": 704.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 707.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 716.5,
+      "strokes": [
+        {
+          "time_sec": 716.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 720.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 730.5,
+      "strokes": [
+        {
+          "time_sec": 730.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 734.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 743.5,
+      "strokes": [
+        {
+          "time_sec": 743.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 747.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 752.5,
+      "strokes": [
+        {
+          "time_sec": 752.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 755.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 762.0,
+      "strokes": [
+        {
+          "time_sec": 762.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 765.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 769.5,
+      "strokes": [
+        {
+          "time_sec": 769.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 772.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 816.0,
+      "strokes": [
+        {
+          "time_sec": 816.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 819.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 828.5,
+      "strokes": [
+        {
+          "time_sec": 828.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 832.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 842.5,
+      "strokes": [
+        {
+          "time_sec": 842.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 846.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 852.0,
+      "strokes": [
+        {
+          "time_sec": 852.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 855.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 865.5,
+      "strokes": [
+        {
+          "time_sec": 865.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 869.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 876.0,
+      "strokes": [
+        {
+          "time_sec": 876.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 879.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 891.0,
+      "strokes": [
+        {
+          "time_sec": 891.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 895.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 906.5,
+      "strokes": [
+        {
+          "time_sec": 906.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 910.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 919.5,
+      "strokes": [
+        {
+          "time_sec": 919.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 923.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 930.0,
+      "strokes": [
+        {
+          "time_sec": 930.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 940.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 947.5,
+      "strokes": [
+        {
+          "time_sec": 947.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 958.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 968.5,
+      "strokes": [
+        {
+          "time_sec": 968.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 972.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 986.0,
+      "strokes": [
+        {
+          "time_sec": 986.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 992.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 1006.0,
+      "strokes": [
+        {
+          "time_sec": 1006.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1016.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1028.5,
+      "strokes": [
+        {
+          "time_sec": 1028.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1032.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 1039.5,
+      "strokes": [
+        {
+          "time_sec": 1039.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1043.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 1058.0,
+      "strokes": [
+        {
+          "time_sec": 1058.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1068.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 1079.5,
+      "strokes": [
+        {
+          "time_sec": 1079.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1083.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 1095.5,
+      "strokes": [
+        {
+          "time_sec": 1095.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1099.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1103.0,
+      "strokes": [
+        {
+          "time_sec": 1103.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1111.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 1156.5,
+      "strokes": [
+        {
+          "time_sec": 1156.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1160.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 1171.5,
+      "strokes": [
+        {
+          "time_sec": 1171.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1175.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1183.5,
+      "strokes": [
+        {
+          "time_sec": 1183.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1187.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1199.0,
+      "strokes": [
+        {
+          "time_sec": 1199.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1203.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 1212.5,
+      "strokes": [
+        {
+          "time_sec": 1212.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1216.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1231.0,
+      "strokes": [
+        {
+          "time_sec": 1231.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1236.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 1242.5,
+      "strokes": [
+        {
+          "time_sec": 1242.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1245.0,
+      "ending": "right_winner"
+    },
+    {
+      "serve_time_sec": 1248.5,
+      "strokes": [
+        {
+          "time_sec": 1248.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1250.5,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1253.0,
+      "strokes": [
+        {
+          "time_sec": 1253.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1254.8,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1261.5,
+      "strokes": [
+        {
+          "time_sec": 1261.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1265.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1274.5,
+      "strokes": [
+        {
+          "time_sec": 1274.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1278.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1285.0,
+      "strokes": [
+        {
+          "time_sec": 1285.0,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1288.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1310.0,
+      "strokes": [
+        {
+          "time_sec": 1310.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1320.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1332.5,
+      "strokes": [
+        {
+          "time_sec": 1332.5,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1336.0,
+      "ending": "left_winner"
+    },
+    {
+      "serve_time_sec": 1345.5,
+      "strokes": [
+        {
+          "time_sec": 1345.5,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        }
+      ],
+      "ending_time_sec": 1349.0,
+      "ending": "left_winner"
+    }
+  ]
+}

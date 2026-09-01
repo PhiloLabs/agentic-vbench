@@ -1,0 +1,69 @@
+{
+  "annotation_sha256": "7466f1f8c46316406ae224a17491354eac89f9cc2de858633b6f893573db4fe7",
+  "total_annotation_events": 1575,
+  "total_serves": 92,
+  "valid_rallies": 92,
+  "excluded_rallies": 1,
+  "excluded_rally_ids": [
+    8
+  ],
+  "video_gap_truncation_ids": [
+    8
+  ],
+  "video_gap_truncations": {
+    "8": {
+      "keep_through_frame": 12325,
+      "ending_frame": 12325,
+      "ending": "left_net",
+      "keep_through_time_sec": 102.708,
+      "ending_time_sec": 102.708
+    }
+  },
+  "video_gap_excluded_strokes": 12,
+  "source_terminal_exception_ids": [
+    13,
+    16,
+    18,
+    24,
+    55,
+    73
+  ],
+  "source_terminal_exceptions": {
+    "13": {
+      "frame": 23710,
+      "ending": "left_winner",
+      "ending_time_sec": 197.583
+    },
+    "16": {
+      "frame": 26492,
+      "ending": "right_winner",
+      "ending_time_sec": 220.767
+    },
+    "18": {
+      "frame": 28780,
+      "ending": "left_net",
+      "ending_time_sec": 239.833
+    },
+    "24": {
+      "frame": 39864,
+      "ending": "right_net",
+      "ending_time_sec": 332.2
+    },
+    "55": {
+      "frame": 92752,
+      "ending": "right_net",
+      "ending_time_sec": 772.933
+    },
+    "73": {
+      "frame": 127124,
+      "ending": "left_winner",
+      "ending_time_sec": 1059.367
+    }
+  },
+  "benchmark_strokes": 387,
+  "dedup_rule": {
+    "type": "adjacent identical ending labels",
+    "max_gap_frames": 2
+  },
+  "ground_truth_construction_rule": "Use the single deduplicated source ending within each serve-defined rally window; for the six explicitly listed source-terminal gaps, use the bounded video-audit terminal; for the listed video-gap truncation, keep only the events up to the audited cut frame and record the remainder as excluded."
+}

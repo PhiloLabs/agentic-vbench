@@ -1,0 +1,11 @@
+harness:         Claude Code CLI
+harness version: 2.1.251 (Claude Code)
+model:           claude-opus-4-8
+segment:         2 of one logical run (resumed with --continue)
+session file:    40ddfba8-6703-4fd8-bf91-6c39f778d500.jsonl ( lines carried over)
+workdir carried: 187 files
+auth:            subscription OAuth (no API key staged)
+task commit:     cd7dc0885bdd57759e204c60686a3810b2e3c501
+image:           agentic-vbench-openttgames
+rules sha256:    779eec2712ffb67bb81c46cad9b4edde354e300fb90ceb4040b67a266e0256e6
+started:         2026-08-31T04:02:56Z

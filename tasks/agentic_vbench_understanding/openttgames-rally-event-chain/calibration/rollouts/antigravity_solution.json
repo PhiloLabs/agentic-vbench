@@ -1,0 +1,348 @@
+{
+  "rallies": [
+    {
+      "serve_time_sec": 71.13,
+      "strokes": [
+        {
+          "time_sec": 71.13,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "time_sec": 71.87,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 72.4,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 73.0,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 73.6,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 74.2,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 74.8,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 75.4,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 76.0,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "time_sec": 76.4,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "time_sec": 77.0,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "time_sec": 77.33,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "block"
+        }
+      ],
+      "ending_time_sec": 77.53,
+      "ending": "left_out"
+    },
+    {
+      "serve_time_sec": 89.27,
+      "strokes": [
+        {
+          "time_sec": 89.27,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "time_sec": 89.93,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 90.67,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 91.27,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "time_sec": 91.8,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "time_sec": 92.2,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "time_sec": 92.53,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "time_sec": 92.87,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "time_sec": 93.33,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "block"
+        },
+        {
+          "time_sec": 93.8,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_time_sec": 94.07,
+      "ending": "left_out"
+    },
+    {
+      "serve_time_sec": 123.6,
+      "strokes": [
+        {
+          "time_sec": 123.6,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "time_sec": 124.6,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 125.13,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 125.73,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "time_sec": 126.13,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_time_sec": 126.47,
+      "ending": "right_out"
+    },
+    {
+      "serve_time_sec": 150.8,
+      "strokes": [
+        {
+          "time_sec": 150.8,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "time_sec": 151.73,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 152.47,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 153.27,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 153.93,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 154.53,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        }
+      ],
+      "ending_time_sec": 155.0,
+      "ending": "left_out"
+    },
+    {
+      "serve_time_sec": 188.13,
+      "strokes": [
+        {
+          "time_sec": 188.13,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "time_sec": 188.8,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 189.6,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 190.27,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "loop"
+        },
+        {
+          "time_sec": 190.73,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        },
+        {
+          "time_sec": 191.2,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        },
+        {
+          "time_sec": 191.6,
+          "player": "right",
+          "hand": "forehand",
+          "stroke": "block"
+        }
+      ],
+      "ending_time_sec": 191.8,
+      "ending": "left_out"
+    },
+    {
+      "serve_time_sec": 207.27,
+      "strokes": [
+        {
+          "time_sec": 207.27,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "serve"
+        },
+        {
+          "time_sec": 208.13,
+          "player": "left",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 208.67,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_time_sec": 209.0,
+      "ending": "left_out"
+    },
+    {
+      "serve_time_sec": 230.73,
+      "strokes": [
+        {
+          "time_sec": 230.73,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "time_sec": 232.07,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "push"
+        },
+        {
+          "time_sec": 232.73,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_time_sec": 233.13,
+      "ending": "left_out"
+    },
+    {
+      "serve_time_sec": 253.27,
+      "strokes": [
+        {
+          "time_sec": 253.27,
+          "player": "left",
+          "hand": "forehand",
+          "stroke": "serve"
+        },
+        {
+          "time_sec": 254.4,
+          "player": "right",
+          "hand": "backhand",
+          "stroke": "loop"
+        }
+      ],
+      "ending_time_sec": 254.8,
+      "ending": "right_out"
+    }
+  ]
+}

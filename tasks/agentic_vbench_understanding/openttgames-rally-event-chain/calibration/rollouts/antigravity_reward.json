@@ -1,0 +1,41 @@
+{
+  "reward": 0.0,
+  "predicted_rallies": 8,
+  "reference_rallies": 92,
+  "matched_rallies": 1,
+  "rally_discovery": {
+    "f1": 0.02
+  },
+  "stroke_timing": {
+    "matched": 2,
+    "predicted": 48,
+    "reference": 387,
+    "f1": 0.009195
+  },
+  "stroke_semantics": {
+    "player": 0.009195,
+    "hand": 0.004598,
+    "stroke": 0.0
+  },
+  "stroke_semantic_joint": 0.0,
+  "rally_endings": {
+    "label_accuracy": 1.0,
+    "timing_accuracy": 1.0,
+    "joint_accuracy": 1.0
+  },
+  "matched_details": [
+    {
+      "prediction_index": 5,
+      "reference_rally_id": 15,
+      "reference_start_s": 207.9,
+      "start_delta_s": 0.63,
+      "predicted_strokes": 3,
+      "reference_strokes": 3,
+      "matched_strokes": 2,
+      "ending_label_ok": true,
+      "ending_time_ok": true,
+      "ending_joint_ok": true
+    }
+  ],
+  "reason": "ok"
+}

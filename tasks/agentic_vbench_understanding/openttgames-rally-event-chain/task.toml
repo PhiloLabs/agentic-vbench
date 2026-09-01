@@ -1,0 +1,33 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/openttgames-rally-event-chain"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = [
+  "video-understanding",
+  "sports-analytics",
+  "table-tennis",
+  "event-chain-reconstruction",
+  "temporal-reasoning",
+  "agentic-vbench-sports"
+]
+source = "Extended OpenTTGames game_2"
+
+[environment]
+build_timeout_sec = 3600.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 32768
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 10800.0
+
+[steps.verifier]
+timeout_sec = 600.0

@@ -1,0 +1,90 @@
+=== net_guard ablation-no-media-forced-pre @ 2026-08-30T21:59:10Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-forced-pre
+=== net_guard ablation-no-media-forced-post @ 2026-08-30T22:00:44Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-forced-post
+=== net_guard ablation-no-media-forced-pre @ 2026-09-01T01:18:29Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 20
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-forced-pre
+=== net_guard ablation-no-media-forced-post @ 2026-09-01T01:20:06Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-forced-post
+=== net_guard ablation-no-media-forced-pre @ 2026-09-01T01:21:33Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-forced-pre
+=== net_guard ablation-no-media-forced-post @ 2026-09-01T01:22:59Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-forced-post
+=== net_guard ablation-no-media-forced-pre @ 2026-09-01T01:25:26Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-forced-pre
+=== net_guard ablation-no-media-forced-post @ 2026-09-01T01:26:57Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-forced-post
+=== net_guard ablation-no-media-forced-pre @ 2026-09-01T01:28:38Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-forced-pre
+=== net_guard ablation-no-media-forced-post @ 2026-09-01T01:32:14Z ===
+netgate policy: Chain OUTPUT (policy DROP)
+netgate ACCEPT rules: 19
+  BLOCKED ok   https://github.com
+  BLOCKED ok   https://raw.githubusercontent.com
+  BLOCKED ok   https://lab.osai.ai
+  BLOCKED ok   https://www.google.com
+  REACHABLE ok https://api.openai.com/v1/models -> 401
+net_guard PASSED for ablation-no-media-forced-post

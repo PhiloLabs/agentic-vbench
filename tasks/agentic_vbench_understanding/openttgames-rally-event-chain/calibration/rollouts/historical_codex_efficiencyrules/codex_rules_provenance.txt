@@ -1,0 +1,12 @@
+run: codex gpt-5.6-sol canonical rerun (finalized shared rules), started 2026-08-30T21:07:23Z
+rules_file_sha256:      3171bb1d847654a4076ba0d615eabec23fc62a290ccfc49c2935fb8fbdebd669
+container_rules_sha256: 3171bb1d847654a4076ba0d615eabec23fc62a290ccfc49c2935fb8fbdebd669
+task_commit_recorded:   cd7dc0885bdd57759e204c60686a3810b2e3c501
+supersedes:             rollouts/historical_codex_oldrules (run of 2026-08-29, earlier rules)
+frozen_contract_identical_to: 1b7cbd5e1473a07405ad481c6179f98b2aca70f0
+  identical: steps/solve/instruction.md
+  identical: steps/solve/tests/judge.py
+  identical: steps/solve/tests/reference.json
+  identical: steps/solve/solution/reference.json
+  identical: environment/Dockerfile
+  identical: task.toml
