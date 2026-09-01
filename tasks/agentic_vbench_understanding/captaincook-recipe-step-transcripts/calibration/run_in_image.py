@@ -291,6 +291,8 @@ def main() -> int:
         "argv": ["docker", "exec", "-u", "agent", "<container>", "sh", "-lc", arm["cli"]],
         "create_argv": create[:-3] + ["<image>", "sleep", "infinity"],
         "prompt_sha256": digest, "ran_inside_the_task_image": True,
+        "run_dir": "/workspace", "materials": "/workspace/materials",
+        "trajectory": arm["trajectory"],
         "egress_check": egress,
         "preflight_answered": True,
         "wall_sec": round(wall, 1), "exit_code": run.returncode,

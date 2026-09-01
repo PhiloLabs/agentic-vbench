@@ -1,0 +1,132 @@
+{
+  "n_ground_truth": 314,
+  "n_predicted": 271,
+  "true_positives": 0,
+  "onset_only_matches": 24,
+  "label_and_order_only_matches": 176,
+  "precision": 0.0,
+  "recall": 0.0,
+  "f1": 0.0,
+  "per_video": {
+    "A": {
+      "n_ground_truth": 16,
+      "n_predicted": 12,
+      "true_positives": 0
+    },
+    "B": {
+      "n_ground_truth": 14,
+      "n_predicted": 13,
+      "true_positives": 0
+    },
+    "C": {
+      "n_ground_truth": 14,
+      "n_predicted": 13,
+      "true_positives": 0
+    },
+    "D": {
+      "n_ground_truth": 15,
+      "n_predicted": 14,
+      "true_positives": 0
+    },
+    "E": {
+      "n_ground_truth": 15,
+      "n_predicted": 11,
+      "true_positives": 0
+    },
+    "F": {
+      "n_ground_truth": 14,
+      "n_predicted": 13,
+      "true_positives": 0
+    },
+    "G": {
+      "n_ground_truth": 16,
+      "n_predicted": 14,
+      "true_positives": 0
+    },
+    "H": {
+      "n_ground_truth": 16,
+      "n_predicted": 12,
+      "true_positives": 0
+    },
+    "I": {
+      "n_ground_truth": 15,
+      "n_predicted": 14,
+      "true_positives": 0
+    },
+    "J": {
+      "n_ground_truth": 15,
+      "n_predicted": 16,
+      "true_positives": 0
+    },
+    "K": {
+      "n_ground_truth": 15,
+      "n_predicted": 10,
+      "true_positives": 0
+    },
+    "L": {
+      "n_ground_truth": 16,
+      "n_predicted": 13,
+      "true_positives": 0
+    },
+    "M": {
+      "n_ground_truth": 16,
+      "n_predicted": 7,
+      "true_positives": 0
+    },
+    "N": {
+      "n_ground_truth": 11,
+      "n_predicted": 8,
+      "true_positives": 0
+    },
+    "O": {
+      "n_ground_truth": 11,
+      "n_predicted": 9,
+      "true_positives": 0
+    },
+    "P": {
+      "n_ground_truth": 10,
+      "n_predicted": 11,
+      "true_positives": 0
+    },
+    "Q": {
+      "n_ground_truth": 19,
+      "n_predicted": 11,
+      "true_positives": 0
+    },
+    "R": {
+      "n_ground_truth": 18,
+      "n_predicted": 16,
+      "true_positives": 0
+    },
+    "S": {
+      "n_ground_truth": 16,
+      "n_predicted": 15,
+      "true_positives": 0
+    },
+    "T": {
+      "n_ground_truth": 9,
+      "n_predicted": 13,
+      "true_positives": 0
+    },
+    "U": {
+      "n_ground_truth": 12,
+      "n_predicted": 14,
+      "true_positives": 0
+    },
+    "V": {
+      "n_ground_truth": 11,
+      "n_predicted": 12,
+      "true_positives": 0
+    }
+  },
+  "unusable_entries": 0,
+  "truncated_to_max_entries": false,
+  "ran_at": "2026-09-01T15:26:53+00:00",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "mode": "frame_dump",
+  "prompt_sha256": "647894e3d132ae179f7291e5e5cf9b35ee65448db5dcb672433f6cf0c6c98e73",
+  "shipped_prompt_sha256": "07101b3dccd16becb93d59587a120fc34a4f931613bbcdcdf7a496b999bc58b0",
+  "images": 22,
+  "shell_calls": 0
+}

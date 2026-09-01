@@ -143,11 +143,11 @@
 # trigger was a score.
 #
 # THE REASON. Section 9's ablation table measures the two channels this task's F1 is made
-# of, and they are not equally hard. A model handed sixteen frames per recording and no
-# tools at all places 192 of the 314 steps correctly by label and sequence position; every
-# calibrated agent, with the full video and the ability to seek, lands within a few of the
-# same number. That channel is saturated by a degenerate baseline, so it carries no
-# signal. What remains is boundary precision, and boundary precision on this corpus is
+# of, and they are not equally hard. A model handed ONE still per recording and no tools
+# at all places 198 of the 314 steps correctly by label and sequence position, which is
+# more than any calibrated agent managed with the whole video and the ability to seek,
+# where the best was 181. That channel is saturated by a degenerate baseline, so it
+# carries almost no signal. What remains is boundary precision, and boundary precision on this corpus is
 # bought with decode budget: across the runs on record the count of correctly bounded
 # steps rises with the number of tool calls and with nothing else. A task whose score is
 # decided by how much ffmpeg an agent is willing to run is measuring persistence.
@@ -194,22 +194,22 @@
 # the three ran with ZERO shell commands, which the retained transcripts show.
 #
 #   degraded input                              entries  label+order   F1
-#   no media at all, forced to answer               315           56   0.0
-#   one still per recording, no tools               297          187   0.0033
-#   16 uniform frames per recording, no tools       277          192   0.0034
+#   no media at all, forced to answer               321           41   0.0
+#   one still per recording, no tools               310          198   0.0032
+#   16 uniform frames per recording, no tools       271          176   0.0
 #
 # All three are forced to answer. A refusal also scores 0.0, but a zero from a model that
 # declined to guess says nothing about whether the degraded input was enough, and an
 # earlier single-frame run did exactly that.
 #
-# The last row is the most informative number in this file, and it is the evidence
-# section 8 rests on. Handed 16 frames per recording and no way to ask for more, the model
-# matched 192 of the 314 steps by label in the right sequence position, which is as many
-# as any calibrated agent has managed with the full video and tools, and scored 0.0034.
-# Two thirds of the label-and-order channel is available to a submission that cannot seek,
-# cannot zoom and cannot ask a question, so that channel carries no signal about the
-# thing this task is supposed to be measuring. What the 192 buys under the current
-# contract is one scored entry, because a match also needs both boundaries and the error
+# The middle row is the most informative number in this file, and it is the evidence
+# section 8 rests on. Handed ONE still per recording and no way to ask for more, the model
+# matched 198 of the 314 steps by label in the right sequence position, which is MORE than
+# any calibrated agent managed with the whole video and tools, where the best was 181, and
+# scored 0.0032. Nearly two thirds of the label-and-order channel is available to a
+# submission that cannot seek, cannot zoom and cannot ask a question, so that channel
+# carries almost no signal about the thing this task is supposed to be measuring. What the
+# 198 buys under the current contract is one scored entry, because a match needs the error
 # tag. That is the shape the field was added to produce.
 #
 # The deterministic constructions, recomputable with run_ablations.py. Each answers the

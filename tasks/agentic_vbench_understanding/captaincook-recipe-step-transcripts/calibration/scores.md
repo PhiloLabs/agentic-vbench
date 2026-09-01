@@ -78,39 +78,53 @@ harness's own artifacts rather than asserted.
 
 | harness | harness version | model | reasoning | score | tool calls | entries | trajectory | in the image | audit |
 |---|---|---|---|---|---|---|---|---|---|
-| Codex | codex-cli 0.144.1 | `gpt-5.6-sol` | xhigh | **0.0703** | **156** | 312 | `rollouts/codex.jsonl` | yes | clean |
-| Antigravity | app 1.40609.0 | `gemini-3.6-flash-high` | high | **0.0362** | **342** | 238 | `rollouts/antigravity.jsonl` | no | one benign finding |
-| Claude Code | 2.1.251, headless | `claude-opus-4-8` | default | **0.0152** | **145** | 213 | `rollouts/claude.jsonl` | yes | clean |
+| Codex | codex-cli 0.144.1 | `gpt-5.6-sol` | xhigh | **0.0274** | **203** | 270 | `rollouts/codex.jsonl` | yes | clean |
+| Antigravity | Harbor 0.21.0 / Antigravity CLI 1.1.22 | `gemini-3.6-flash` | high | **0.0108** | **201** | 244 | `rollouts/antigravity.jsonl` | yes | review required |
+| Claude Code | 2.1.251, headless | `claude-opus-4-8` | default | **0.0073** | **143** | 236 | `rollouts/claude.jsonl` | yes | clean |
+
+All three ran in the frozen image `sha256:de299ec5`, at the four CPUs and 16384 MiB
+`task.toml` declares, with egress verified in both directions before each: the model API
+answered and a host with no business being reachable did not.
 
 Tool-call counts are the shipped auditor's, recounted from each rollout rather than taken
-from the manifest, and they count every tool call rather than only shell commands: 135 of
-Codex's 156, 48 of Claude's 145 and 94 of Antigravity's 342 were shell.
+from the manifest, and they count every tool call rather than only shell commands: 175 of
+Codex's 203, 33 of Claude's 143, and Antigravity's 201 are planner and generic steps
+rather than shell.
 
 The judge's own breakdown, which is where this task's difficulty shows up:
 
 | arm | entries | true positives | label and order right, timing ignored | label and onset right, offset ignored |
 |---|---|---|---|---|
-| Codex | 312 | 22 | 246 | 73 |
-| Antigravity | 238 | 10 | 122 | 39 |
-| Claude | 213 | 4 | 158 | 22 |
+| Codex | 270 | 8 | 181 | 34 |
+| Antigravity | 244 | 3 | 120 | 24 |
+| Claude | 236 | 2 | 173 | 26 |
 
-All three read the recipes far better than they place them. Codex put 246 of 314 steps in
-the right sequence position with the right label and scored 22 of them, which is the same
+All three read the recipes far better than they place them. Codex put 181 of 314 steps in
+the right sequence position with the right label and scored 8 of them, which is the same
 shape every arm has shown since the first calibration: knowing what happened is not the
 binding constraint here, knowing when is, and now also knowing whether it was done right.
+The single-frame ablation below is what makes that concrete: with one still per recording
+and no tools it placed 198, more than any of these three managed with the whole video.
 
-Trajectory audits: six positive controls passed on each, zero network tool calls, zero
-hits on any of the three shortcut patterns, and no network command in any of the 135, 48
-and 94 shell commands. Codex and Claude are **clean**. Antigravity is **REVIEW REQUIRED**
-on one finding, which is that it read
-`.gemini/antigravity/brain/<conversation>/.system_generated/tasks/task-77.log`, its own
-harness's task log. That is the app's artifact directory, not anything belonging to this
-task, and it is the same category of finding as the previous Antigravity arm's.
+Trajectory audits: six positive controls passed on each, and zero network tool calls.
+Codex and Claude are **clean**, with no shortcut pattern hit and no network command among
+the 175 and 33 shell commands they ran.
 
-All three clear both gates. The strongest arm is 0.0703 against a ceiling of 0.10, a margin
-of 0.030, and the weakest of the three claims is the Antigravity row, which ran on the host
-because that harness cannot be made to execute anywhere else; the evidence for that is in
-the PR discussion and in the disclosure below.
+**Antigravity is REVIEW REQUIRED, and this one is not a path finding.** It wrote a section
+headed "Model Knowledge" into its own checkpoint notes, beginning "The videos are
+egocentric recordings of recipe execution from CaptainCook with intentional procedural
+errors", and listed the six dishes with the recordings they belong to. The prompt rules
+that out in as many words: do not rely on any memory of these recordings or of the dataset
+they may come from. So the run leaned on prior knowledge for part of what it reported.
+
+It is reported here rather than set aside, and the reason is that the finding cuts the
+safe way. With that advantage the arm still placed the fewest steps of the three, 120
+against 181 and 173, and scored 0.0108. Knowing which six dishes are in the corpus does
+not tell an agent when each step happened or whether it was done correctly, which is what
+the score is made of. The number is more conservative for the finding, not less.
+
+All three clear both gates. The strongest arm is 0.0274 against a ceiling of 0.10, a
+margin of 0.073, and every arm now runs inside the task image, Antigravity included.
 
 ### What the error field is worth, per arm
 
@@ -121,15 +135,16 @@ separates what the arm earned by locating steps from what it earned by diagnosin
 
 | arm | as submitted | error field replaced by a constant guess | of its matches: on correct steps / on diagnosed errors |
 |---|---|---|---|
-| Codex | 0.0703 | 0.0319 | 9 / 13 |
-| Antigravity | 0.0362 | 0.0362 | 9 / 1 |
-| Claude | 0.0152 | 0.0152 | 4 / 0 |
+| Codex | 0.0274 | 0.0103 | 3 / 5 |
+| Antigravity | 0.0108 | 0.0108 | 3 / 0 |
+| Claude | 0.0073 | 0.0073 | 2 / 0 |
 
-Only Codex is diagnosing, and thirteen of its twenty-two scored entries are steps it
-correctly said had gone wrong. The other two are indistinguishable from a constant guess on
-that field, which is the honest reading of what this addition costs a model that does not
-attempt it. It is a requirement, not a cap: an agent that reads the performances will beat
-it, and one of the three partly did.
+Only Codex is diagnosing, and five of its eight scored entries are steps it correctly said
+had gone wrong; replacing its error field with the constant costs it two thirds of its
+score. The other two are indistinguishable from a constant guess on that field, which is
+the honest reading of what this addition costs a model that does not attempt it. It is a
+requirement, not a cap: an agent that reads the performances will beat it, and one of the
+three partly does.
 
 ### Two harness failures worth recording
 
@@ -368,21 +383,26 @@ each forced to answer, with transcripts under `provenance/ablations/measured/`:
 
 | degraded input | entries | label+order | F1 |
 |---|---|---|---|
-| no media at all | 315 | 56 | **0.0** |
-| one still per recording, no tools | 297 | 187 | **0.0033** |
-| 16 uniform frames per recording, no tools | 277 | **192** | **0.0034** |
+| no media at all | 321 | 41 | **0.0** |
+| one still per recording, no tools | 310 | **198** | **0.0032** |
+| 16 uniform frames per recording, no tools | 271 | 176 | **0.0** |
 
 All three ran with **zero shell commands**, which the retained transcripts show. All three
 are forced to answer, because a zero from a model that declined to guess would say nothing
 about whether the degraded input was enough.
 
-The last row is worth pausing on, and it is the measurement SPEC.md section 8 rests on.
-With no video and no way to ask for another frame, the model placed 192 of 314 steps
-correctly by label and sequence position, as many as any calibrated agent has managed with
-the full video and tools, and scored 0.0034. Two thirds of the label-and-order channel is
-free to a submission that cannot seek, so that channel carries no signal. Under the
-current contract those 192 buy exactly one scored entry, because a match also needs both
-boundaries and the error tag.
+The middle row is worth pausing on, and it is the measurement SPEC.md section 8 rests on.
+With one still per recording, no video and no way to ask for another frame, the model
+placed 198 of 314 steps correctly by label and sequence position. That is more than any
+calibrated agent managed with the whole video and tools, where the best was 181, and it
+scored 0.0032. Nearly two thirds of the label-and-order channel is free to a submission
+that cannot seek at all, so that channel carries almost no signal. Under the current
+contract those 198 buy one scored entry, because a match also needs both boundaries and
+the error tag.
+
+Sixteen frames scored lower than one, at 0.0 against 0.0032, and placed fewer steps, 176
+against 198. Not a contradiction: neither run can seek, so neither can find a boundary,
+and both land at the floor. What separates 0.0032 from 0.0 there is one entry.
 
 And two shapes of partial competence, which bracket where the 0.10 gate actually sits:
 
