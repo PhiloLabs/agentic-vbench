@@ -6,8 +6,11 @@ here, on the shipped key, with the shipped judge.
 
 ## How the arms are run
 
-`calibration/run_arm.py` pins the protocol so that the three arms are comparable and so
-that no arm is accidentally helped or starved:
+Two of the three arms run through `calibration/run_arm.py`, which pins the protocol below.
+Antigravity runs through Harbor, which owns the container for that arm; the protocol it
+holds is the same, and `calibration/antigravity_in_image.md` records the command and what
+had to be added to make it work. Either way the arms are comparable, and neither is
+accidentally helped or starved:
 
 - **one agent, one session, all 22 recordings.** Not one agent per recording. An earlier
   version of the sibling Ego-Exo4D task was calibrated with one subagent per video, each
@@ -18,7 +21,15 @@ that no arm is accidentally helped or starved:
   is not chosen in the calibration script.
 - **arms do not run concurrently.** An exclusive lock plus a process-table scan, and the
   scan carries a positive control: if it cannot see any agent process at all it errors
-  rather than reporting all-clear.
+  rather than reporting all-clear. The scan's Antigravity pattern was rechecked against a
+  live Harbor arm after that arm moved off the `gemini` CLI, because a pattern that no
+  longer matches reports an idle machine while a run is in flight.
+- **the container gets the memory the task declares.** `task.toml` asks for 8192 MiB, and
+  the first Harbor attempt died at 32 minutes with exit 137, the OOM kill, because the
+  Docker daemon had only 8.2 GB in total for an 8 GB container plus its own overhead. It
+  had still written a partial 89-entry answer scoring 0.0298. That number is not in this
+  file and is not a result: a starved agent scores lower, and lower is the direction that
+  would make this task look like it passes.
 - **every run writes `manifest.json`**: model, reasoning effort, harness version, budget,
   argv, prompt sha256, wall clock, exit code.
 - **the prompt is the shipped prompt.** `calibration/make_prompts.py` asserts that

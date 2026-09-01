@@ -10,16 +10,17 @@ stop keeping the harness in memory and keep it in a file: one agent, one session
 twenty-two recordings in that session, the budget the task itself grants, no second arm
 running alongside, and a manifest written next to the trajectory stating exactly what ran.
 
-For this task only the codex arm actually ran through this script. Claude Code and
-Antigravity were driven by hand, because the Antigravity app has no headless entry point
-and the claude CLI on this machine was not authenticated. Every property below was then
-held by artifact instead, and calibration/scores.md names the artifact for each. The two
-hand-driven ARMS entries below are therefore the intent; the manifests beside the
-rollouts are the record of what ran.
+Antigravity no longer belongs here. Review round 2 asked for the installed-agent path
+inside the task image, and that path exists: Harbor drives the `agy` CLI in the container
+through its own `antigravity-cli` adapter. Harbor owns the container, the egress control,
+the credential seeding and the artifact collection for that arm, so re-implementing any of
+it here would be a second place for it to drift. The exact command, the two flags Harbor
+does not pass on its own, and why the version had to be pinned are in
+calibration/harbor_agents.py and calibration/antigravity_in_image.md. The earlier
+`gemini`-CLI entry is gone; it drove the wrong artifact.
 
-    python3 calibration/run_arm.py --arm claude      --run-dir /abs/run
-    python3 calibration/run_arm.py --arm codex       --run-dir /abs/run
-    python3 calibration/run_arm.py --arm antigravity --run-dir /abs/run
+    python3 calibration/run_arm.py --arm claude --run-dir /abs/run
+    python3 calibration/run_arm.py --arm codex  --run-dir /abs/run
 
 Add --dry-run to build the run directory, resolve the harness version and print the exact
 command without spending anything.
@@ -117,24 +118,6 @@ ARMS = {
             "--cd", str(run),
         ],
     },
-    "antigravity": {
-        "bin": "gemini",
-        # What the app arm was actually calibrated with, so this file and
-        # rollouts/antigravity-manifest.json name the same model. The family README names
-        # Gemini 3.5 Flash and 3.1 Pro; 3.6 Flash is newer, and using a stronger model is
-        # the conservative direction for a ceiling gate.
-        "model": "gemini-3.6-flash",
-        "effort": "high",
-        "trajectory": "antigravity.jsonl",
-        "version_cmd": ["gemini", "--version"],
-        "prompt_via": "argv",
-        "argv": lambda a, run: [
-            "gemini",
-            "-m", a["model"],
-            "--yolo", "--skip-trust",
-            "--output-format", "stream-json",
-        ],
-    },
 }
 
 # Patterns that identify another arm already running. codex exec and gemini are
@@ -144,7 +127,10 @@ ARMS = {
 # over a stream-json *input* channel with a permission-prompt tool, and an arm never does.
 OTHER_ARM = [
     ("codex", re.compile(r"(^|/)codex\s+exec\b(?=.*--json)")),
-    ("antigravity", re.compile(r"(^|/)gemini\b.*--output-format\s+stream-json")),
+    # Antigravity runs under Harbor now, so what is visible on this host is the harbor
+    # process that owns the container, not agy. Matching `gemini` would have found
+    # nothing and reported the machine idle while an arm was mid-run.
+    ("antigravity", re.compile(r"(^|/)harbor\b.*antigravity-cli")),
 ]
 CLAUDE_ANY = re.compile(r"(^|/)claude\b")
 CLAUDE_ARM = re.compile(r"(^|/)claude\b(?=.*--output-format\s+stream-json)"
