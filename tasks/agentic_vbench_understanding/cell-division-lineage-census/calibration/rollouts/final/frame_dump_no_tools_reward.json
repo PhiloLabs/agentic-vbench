@@ -1,0 +1,15 @@
+{
+ "division_f1": 0.0089086859688196,
+ "founder_l1": 1.8585365853658538,
+ "gates_passed": {
+  "founder_l1": false,
+  "generation_accuracy": true,
+  "outcome_l1": false,
+  "window_l1": false
+ },
+ "generation_accuracy": 1.0,
+ "outcome_l1": 0.7302631578947368,
+ "reward": 0.0,
+ "validation_errors": [],
+ "window_l1": 0.7665369649805448
+}

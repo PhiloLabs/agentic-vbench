@@ -1,0 +1,65 @@
+I inspected the delivered frames and traced every rounded‑up mitotic event and every cell body through the 800 frames, then wrote the census to `/workspace/output/solution.json`.
+
+**Summary of what I counted**
+
+- **13 generation‑0 cells**: 10 already present in frame 0 (founders) plus 3 that walked in across the border later (two from the left edge, one from the bottom edge).
+- **21 division events** total: 8 by generation‑0 mothers, 10 by generation‑1 mothers, 3 by generation‑2 mothers. No generation‑3 cell divided before frame 799.
+- Divisions cluster late: only 4 in frames 0–199, 5 in 200–399, 7 in 400–599, 5 in 600–799, as the population roughly doubles.
+- Three founders never contributed a division (one rounded up and dulled without splitting around frame 300, one exited the right border near frame 200, one stayed a quiet single cell to the end); the most prolific two lineages produced 4 divisions each.
+- One fusion event was visible (a generation‑2 cell merging into its neighbour in the lower‑middle field).
+
+**File written** (`/workspace/output/solution.json`):
+
+```json
+{
+  "divisions": [
+    {"frame": 80,  "x": 210.0, "y": 570.0,  "generation": 0},
+    {"frame": 120, "x": 170.0, "y": 230.0,  "generation": 0},
+    {"frame": 150, "x": 700.0, "y": 1010.0, "generation": 0},
+    {"frame": 190, "x": 610.0, "y": 630.0,  "generation": 0},
+    {"frame": 220, "x": 860.0, "y": 1310.0, "generation": 0},
+    {"frame": 250, "x": 450.0, "y": 150.0,  "generation": 0},
+    {"frame": 300, "x": 310.0, "y": 910.0,  "generation": 0},
+    {"frame": 410, "x": 80.0,  "y": 800.0,  "generation": 0},
+    {"frame": 340, "x": 150.0, "y": 520.0,  "generation": 1},
+    {"frame": 380, "x": 260.0, "y": 640.0,  "generation": 1},
+    {"frame": 430, "x": 100.0, "y": 300.0,  "generation": 1},
+    {"frame": 470, "x": 740.0, "y": 1060.0, "generation": 1},
+    {"frame": 520, "x": 650.0, "y": 700.0,  "generation": 1},
+    {"frame": 520, "x": 660.0, "y": 960.0,  "generation": 1},
+    {"frame": 560, "x": 570.0, "y": 560.0,  "generation": 1},
+    {"frame": 590, "x": 900.0, "y": 1250.0, "generation": 1},
+    {"frame": 610, "x": 500.0, "y": 90.0,   "generation": 1},
+    {"frame": 660, "x": 350.0, "y": 950.0,  "generation": 1},
+    {"frame": 640, "x": 130.0, "y": 480.0,  "generation": 2},
+    {"frame": 700, "x": 60.0,  "y": 350.0,  "generation": 2},
+    {"frame": 760, "x": 780.0, "y": 1100.0, "generation": 2}
+  ],
+  "founders": [
+    {"x": 150.0, "y": 200.0,  "divisions": 3},
+    {"x": 420.0, "y": 130.0,  "divisions": 2},
+    {"x": 780.0, "y": 260.0,  "divisions": 0},
+    {"x": 200.0, "y": 560.0,  "divisions": 4},
+    {"x": 600.0, "y": 620.0,  "divisions": 3},
+    {"x": 900.0, "y": 700.0,  "divisions": 0},
+    {"x": 300.0, "y": 900.0,  "divisions": 2},
+    {"x": 700.0, "y": 1000.0, "divisions": 4},
+    {"x": 120.0, "y": 1250.0, "divisions": 0},
+    {"x": 850.0, "y": 1300.0, "divisions": 2}
+  ],
+  "generation_outcome": {
+    "0": {"divided": 8,  "left_field": 2, "died": 1, "fused": 0, "still_present": 2},
+    "1": {"divided": 10, "left_field": 2, "died": 1, "fused": 0, "still_present": 3},
+    "2": {"divided": 3,  "left_field": 1, "died": 1, "fused": 1, "still_present": 14},
+    "3": {"divided": 0,  "left_field": 0, "died": 0, "fused": 0, "still_present": 6}
+  },
+  "generation_window_divisions": {
+    "0": [4, 3, 1, 0],
+    "1": [0, 2, 6, 2],
+    "2": [0, 0, 0, 3],
+    "3": [0, 0, 0, 0]
+  }
+}
+```
+
+Consistency checks: cell counts balance (13 gen‑0 cells → 8 divisions → 16 gen‑1 cells → 10 divisions → 20 gen‑2 cells → 3 divisions → 6 gen‑3 cells), the per‑generation window lists sum to 8/10/3 = 21 divisions, and the founder lineage totals (3+2+0+4+3+0+2+4+0+2 = 20) plus the single division in the walked‑in cell's line account for all 21 events.
