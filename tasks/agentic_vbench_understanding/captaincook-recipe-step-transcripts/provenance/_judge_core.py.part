@@ -196,7 +196,14 @@ def main():
     reward = details["f1"]
 
     args.reward_json.parent.mkdir(parents=True, exist_ok=True)
-    args.reward_json.write_text(json.dumps({"reward": reward, "details": details}, indent=2) + "\n")
+    # Harbor parses this file as VerifierResult.rewards, which is dict[str, float | int].
+    # A nested "details" object under the same roof makes it a second reward whose value
+    # is a dict, and the whole trial ends in a pydantic ValidationError after the agent
+    # has already run. So the file stays a flat mapping of name to number, and the
+    # breakdown goes next to it where nothing tries to read it as a score.
+    args.reward_json.write_text(json.dumps({"reward": reward}, indent=2) + "\n")
+    (args.reward_json.parent / "details.json").write_text(
+        json.dumps(details, indent=2) + "\n")
     args.reward_txt.parent.mkdir(parents=True, exist_ok=True)
     args.reward_txt.write_text(f"{reward}\n")
 

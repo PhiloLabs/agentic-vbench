@@ -30,8 +30,19 @@ that way. This subclass declares the flag so it can be set from the command line
 in the record; the value passed is the task's own `steps.agent.timeout_sec`, not a number
 chosen here.
 
-Everything else is stock 0.21.0: the install command, the credential handling, the
-trajectory capture, the egress control. What this changes is two strings.
+There is a third thing, and it is not a flag. The adapter copies the raw trajectory out
+of `~/.agy/antigravity-cli/tmp/session-*.jsonl`, which is where agy 1.1.8 kept it. agy
+1.1.22 writes it to
+
+    ~/.gemini/antigravity-cli/brain/<session>/.system_generated/logs/transcript_full.jsonl
+
+so the copy finds nothing and the run ends with a score and no auditable trajectory. The
+family's rule is that a summary cannot be audited, and the turn-count gate is counted off
+that file, so a missing one is not a cosmetic loss. This subclass copies it from where agy
+1.1.22 actually writes it, and says so loudly if there is nothing there.
+
+Everything else is stock 0.21.0: the install command, the credential handling, the egress
+control. What this changes is two flags and one path.
 """
 from __future__ import annotations
 
@@ -54,6 +65,50 @@ class AntigravityCliWithEffort(AntigravityCli):
     @staticmethod
     def name() -> str:
         return "antigravity-cli"
+
+    # Where agy 1.1.22 keeps the run's own step-by-step record. Found by running the CLI
+    # in a container and looking, not by reading, because the adapter's own path is from
+    # an older CLI and reading it would have reproduced the same mistake.
+    _TRANSCRIPT = ("$HOME/.gemini/antigravity-cli/brain/*/.system_generated/logs/"
+                   "transcript_full.jsonl")
+
+    async def run(self, instruction, environment, context):  # type: ignore[override]
+        failed = False
+        try:
+            await super().run(instruction, environment, context)
+        except Exception:
+            failed = True
+            raise
+        finally:
+            copied = await self._capture_transcript(environment)
+            if not copied and not failed:
+                raise RuntimeError(
+                    "the agent finished but no transcript was captured from "
+                    f"{self._TRANSCRIPT}; the run cannot be audited and its turn count "
+                    "cannot be counted, so it is not a result")
+
+    async def _capture_transcript(self, environment) -> bool:
+        """Copy agy's own record to /logs/agent. Returns whether anything was copied."""
+        dest = "/logs/agent/antigravity-cli.trajectory.jsonl"
+        try:
+            await self.exec_as_agent(
+                environment,
+                command=(
+                    f'src=$(ls -t {self._TRANSCRIPT} 2>/dev/null | head -n1); '
+                    f'if [ -n "$src" ]; then cp "$src" {dest}; fi'
+                ),
+            )
+            check = await self.exec_as_agent(
+                environment,
+                command=f'test -s {dest} && wc -l < {dest} || echo 0',
+            )
+        except Exception:
+            return False
+        text = getattr(check, "stdout", "") or ""
+        try:
+            return int(text.strip().splitlines()[-1]) > 0
+        except (ValueError, IndexError):
+            return False
 
     def build_cli_flags(self) -> str:
         flags = super().build_cli_flags()

@@ -257,7 +257,25 @@ source = "CaptainCook4D, {n} recordings, 4K GoPro streams downscaled to 1080p, s
 [environment]
 build_timeout_sec = 10800.0
 cpus = 4
-memory_mb = 8192
+# 16384, not the family's default 8192, and the reason is measured rather than preferred.
+# This corpus is the heaviest in the family: storage_mb below is 39936 against 24576 for
+# the next largest and 8192 for the smallest, because it carries 22 recordings and 293
+# minutes. Memory was the one declaration that did not scale with it; 13 of the family's
+# 14 tasks write 8192 whatever their corpus, and the only task that deviates deviates
+# downward alongside the smallest corpus.
+#
+# Under 8192 the Antigravity calibration arm was killed by the OOM killer twice, at 32 and
+# 36 minutes, with agy itself holding 7.28 GiB read out of /proc; the one attempt that
+# finished did so in 20.5 minutes, before its own session had grown that far. So the
+# default was not merely tight here, it was deciding which runs finished.
+#
+# The direction matters for a ceiling gate. Headroom can only help an agent, so raising
+# this cannot be tuning that makes the task look like it passes; a starved agent scores
+# lower, and lower is the direction that would. What it does to any single run is not
+# claimed here: the one before-and-after pair available went the other way, 0.0306 under
+# 8192 against 0.0108 under 16384, which says the run-to-run spread on this arm is wider
+# than the change and not that the change hurt.
+memory_mb = 16384
 # The {n} baked 1080p streams are {baked_mb/1024:.1f} GiB, and the bake is a stream copy of an
 # already-transcoded file, so the source and the baked set are the same size. Measured
 # after the media package was built, not guessed.

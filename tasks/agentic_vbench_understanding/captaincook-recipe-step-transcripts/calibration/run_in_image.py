@@ -36,12 +36,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
+import re
 import shutil
 import socket
 import subprocess
 import sys
 import time
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
@@ -54,9 +56,11 @@ TASK = HERE.parent
 # in force and the run is not comparable to the others.
 ARMS = {
     "codex": {
+        "bin": "codex",
         "api_host": "chatgpt.com",
         "cred_src": Path.home() / ".codex" / "auth.json",
         "cred_dst": "/home/agent/.codex/auth.json",
+        "install": "npm install -g @openai/codex@0.144.1 >/dev/null 2>&1",
         "trajectory": "codex.jsonl",
         "model": "gpt-5.6-sol",
         "effort": "xhigh",
@@ -71,9 +75,19 @@ ARMS = {
         ),
     },
     "claude": {
+        "bin": "claude",
         "api_host": "api.anthropic.com",
-        "cred_src": Path.home() / ".claude",
-        "cred_dst": "/home/agent/.claude",
+        # The credential file, not ~/.claude. That directory is every project transcript,
+        # every cache and every history file this machine has, 4.5 GiB of them, and
+        # copying it would put all of it inside a container an agent then runs in and into
+        # the raw archive afterwards. Claude Code keeps its credential in the macOS
+        # Keychain, so on this machine the file has to be produced once out of band, the
+        # same way the Antigravity token was: sign in inside a keyring-less container,
+        # which writes .credentials.json in plaintext, and point CLAUDE_CRED_FILE at it.
+        "cred_src": Path(os.environ.get("CLAUDE_CRED_FILE",
+                                        str(Path.home() / ".claude-cred" / ".credentials.json"))),
+        "cred_dst": "/home/agent/.claude/.credentials.json",
+        "install": "npm install -g @anthropic-ai/claude-code@2.1.251 >/dev/null 2>&1",
         "trajectory": "claude.jsonl",
         "model": "claude-opus-4-8",
         "effort": "default",
@@ -96,6 +110,15 @@ DENIED_HOST = "example.com"
 
 def sh(*args: str, check: bool = True, **kw) -> subprocess.CompletedProcess:
     return subprocess.run(list(args), capture_output=True, text=True, check=check, **kw)
+
+
+def declared_resources() -> tuple[int, int]:
+    """cpus and memory_mb, out of task.toml. Not defaults: the file is the contract."""
+    text = (TASK / "task.toml").read_text()
+    cpus = re.search(r"^cpus\s*=\s*(\d+)", text, re.M)
+    mem = re.search(r"^memory_mb\s*=\s*(\d+)", text, re.M)
+    assert cpus and mem, "task.toml declares no cpus or memory_mb to run the arm under"
+    return int(cpus.group(1)), int(mem.group(1))
 
 
 def resolve(host: str) -> str:
@@ -138,7 +161,20 @@ def main() -> int:
     args = ap.parse_args()
     arm = ARMS[args.arm]
 
-    assert arm["cred_src"].exists(), f"no credential at {arm['cred_src']}"
+    assert arm["cred_src"].exists(), (
+        f"no credential at {arm['cred_src']}. For the claude arm, produce one with a "
+        f"one-time sign-in in a container and point CLAUDE_CRED_FILE at the resulting "
+        f".credentials.json; see calibration/scores.md.")
+    # A credential is a file of a few kilobytes. Anything larger is a home directory that
+    # was named by mistake, and copying one into the container would hand the agent every
+    # transcript on this machine and put them in the archive. This guard exists because
+    # that mistake was made here once.
+    size = sum(f.stat().st_size for f in
+               ([arm["cred_src"]] if arm["cred_src"].is_file()
+                else arm["cred_src"].rglob("*")) if f.is_file())
+    assert size <= 1_000_000, (
+        f"{arm['cred_src']} is {size/1e6:.1f} MB, which is not a credential. Point this "
+        f"at the credential file itself.")
     image_id = sh("docker", "image", "inspect", args.image, "--format", "{{.Id}}").stdout.strip()
     budget = run_arm.budget_sec()
     api_ip = resolve(arm["api_host"])
@@ -152,10 +188,20 @@ def main() -> int:
     import hashlib
     digest = hashlib.sha256(prompt.encode()).hexdigest()
 
-    # DNS is pointed at nothing and the one host the CLI needs is pinned by address, so
-    # the container can reach the model API and nothing else it might look something up on.
+    # The container gets exactly what task.toml declares, read from the file rather than
+    # chosen here. Harbor applies those limits to its own arm; without them these two would
+    # run against the whole daemon and the three arms would not be comparable. Memory in
+    # particular is load-bearing: the Antigravity arm was OOM-killed twice under the old
+    # declaration, so an arm running unconstrained beside it would be a different task.
+    cpus, memory_mb = declared_resources()
+    # The container starts with working DNS because the CLI has to be installed into it,
+    # exactly as Harbor installs agy into its own. Egress is taken away afterwards and
+    # before the agent runs: resolution is pointed at nothing and the one host the CLI
+    # needs is pinned by address, so it can reach the model API and nothing else it might
+    # look something up on. Doing it in that order rather than recreating the container
+    # keeps the agent in the same filesystem the install produced.
     create = ["docker", "run", "-d", "--platform", "linux/arm64",
-              "--dns", "127.0.0.1", "--add-host", f"{arm['api_host']}:{api_ip}",
+              "--cpus", str(cpus), "--memory", f"{memory_mb}m",
               args.image, "sleep", "infinity"]
     if args.dry_run:
         print("would create:", " ".join(create))
@@ -168,15 +214,43 @@ def main() -> int:
         assert not busy, f"another arm is running: {busy}"
         cid = sh(*create).stdout.strip()
         try:
+            # The CLI goes in first, before 13.9 GiB of media is copied into the
+            # container's writable layer. Installing after that once failed with a bare
+            # apt exit 100 that said nothing about why, and a setup step that fails
+            # opaquely is worse than one that fails early.
+            node = dexec(cid, "apt-get update -qq && DEBIAN_FRONTEND=noninteractive "
+                              "apt-get install -y -qq nodejs npm", check=False)
+            assert node.returncode == 0, (
+                f"could not install node in the container (exit {node.returncode}):\n"
+                f"{(node.stderr or node.stdout).strip()[-800:]}")
+            cli = dexec(cid, arm["install"], check=False)
+            where = dexec(cid, f"command -v {arm['bin']}", check=False)
+            assert where.returncode == 0 and where.stdout.strip(), (
+                f"{arm['bin']} is not on PATH after install (exit {cli.returncode}):\n"
+                f"{(cli.stderr or cli.stdout).strip()[-800:]}")
+
             dexec(cid, "id -u agent >/dev/null 2>&1 || useradd -m -s /bin/bash agent")
-            dexec(cid, "mkdir -p /workspace/materials /workspace/output /workspace/work && "
-                       "cp /baked/*.mp4 /workspace/materials/ && "
-                       "chown -R agent /workspace")
+            # The shipped setup script, run rather than reimplemented. Harbor runs it for
+            # its own arm, and a hand-written copy of it here would be a second thing to
+            # keep in step: it also writes the materials listing the verifier collects and
+            # asserts the count itself. The same reasoning the oracle check rests on.
+            setup = TASK / "steps" / "solve" / "workdir" / "setup.sh"
+            assert setup.is_file(), f"no setup script at {setup}"
+            sh("docker", "cp", str(setup), f"{cid}:/tmp/setup.sh")
+            dexec(cid, "mkdir -p /logs/artifacts && bash /tmp/setup.sh")
+            dexec(cid, "chown -R agent /workspace /logs")
             n = int(dexec(cid, "ls /workspace/materials/*.mp4 | wc -l").stdout.strip())
             assert n == run_arm.n_videos(), f"staged {n} recordings, expected {run_arm.n_videos()}"
             sh("docker", "cp", str(args.run_dir / "instruction.md"), f"{cid}:/workspace/instruction.md")
+            # docker cp will not create the parent, and a credential that lands nowhere
+            # fails the arm much later, inside the CLI, as an auth error.
+            parent = str(PurePosixPath(arm["cred_dst"]).parent)
+            dexec(cid, f"mkdir -p {parent} && chown -R agent {parent}")
             sh("docker", "cp", str(arm["cred_src"]), f"{cid}:{arm['cred_dst']}")
             dexec(cid, f"chown -R agent {arm['cred_dst']}")
+            # Now take the network away, keeping only the model API.
+            dexec(cid, f"printf 'nameserver 127.0.0.1\\n' > /etc/resolv.conf && "
+                       f"printf '%s %s\\n' {api_ip} {arm['api_host']} >> /etc/hosts")
             egress = egress_check(cid, arm["api_host"])
             pre = dexec(cid, arm["preflight"], user="agent", check=False)
             if pre.returncode != 0 or "OK" not in (pre.stdout or ""):
@@ -211,6 +285,9 @@ def main() -> int:
         "image": args.image, "image_id": image_id,
         "one_session_whole_corpus": True, "videos": run_arm.n_videos(),
         "budget_sec": budget, "budget_source": "task.toml steps.agent.timeout_sec",
+        "cpus": cpus, "memory_mb": memory_mb, "resources_source": "task.toml [environment]",
+        "cli_install": arm["install"],
+        "egress_restricted_after_install": True,
         "argv": ["docker", "exec", "-u", "agent", "<container>", "sh", "-lc", arm["cli"]],
         "create_argv": create[:-3] + ["<image>", "sleep", "infinity"],
         "prompt_sha256": digest, "ran_inside_the_task_image": True,

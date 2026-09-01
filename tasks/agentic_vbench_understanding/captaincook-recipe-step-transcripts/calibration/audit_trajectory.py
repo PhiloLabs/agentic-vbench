@@ -238,6 +238,13 @@ def main() -> int:
     key = json.loads((Path(__file__).resolve().parent.parent
                       / "provenance" / "step-derived.json").read_text())
     last = sorted(v["letter"] for v in key["videos"])[-1]
+    # --run-dir is the directory the run happened in, which for an in-image arm is the
+    # container's /workspace and not wherever the rollout file was copied to afterwards.
+    # Pointing this at the host copy makes both this control and the out-of-bounds path
+    # check meaningless, and the control is what catches that: it fails rather than
+    # reporting a clean audit of a run it could not see. Loosening the pattern instead
+    # was tried and reverted, because a control that is easier to satisfy is a control
+    # that catches less.
     saw_media = (f"{run_dir}/materials" in text
                  or bool(re.search(rf"(^|[^\w/])materials/[A-{last}]\.mp4", text, re.M)))
     # The dataset-name pattern is the one check that silently becomes a no-op when this

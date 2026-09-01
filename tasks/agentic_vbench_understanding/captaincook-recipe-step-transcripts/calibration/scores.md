@@ -24,12 +24,39 @@ accidentally helped or starved:
   rather than reporting all-clear. The scan's Antigravity pattern was rechecked against a
   live Harbor arm after that arm moved off the `gemini` CLI, because a pattern that no
   longer matches reports an idle machine while a run is in flight.
-- **the container gets the memory the task declares.** `task.toml` asks for 8192 MiB, and
-  the first Harbor attempt died at 32 minutes with exit 137, the OOM kill, because the
-  Docker daemon had only 8.2 GB in total for an 8 GB container plus its own overhead. It
-  had still written a partial 89-entry answer scoring 0.0298. That number is not in this
-  file and is not a result: a starved agent scores lower, and lower is the direction that
-  would make this task look like it passes.
+- **the container gets the memory the task declares, and the task now declares more.**
+  Three Antigravity attempts were needed to establish this, and all three are stated here
+  rather than only the one that counts.
+
+  | attempt | outcome | trajectory | reported |
+  |---|---|---|---|
+  | 1 | OOM kill at 32 min, exit 137 | none | no |
+  | 2 | finished in 20.5 min, F1 0.0306 | none | no |
+  | 3 | OOM kill at 36 min, exit 137 | 479 lines | no |
+
+  Attempt 1 was the environment's fault: the Docker daemon had 8.2 GB in total for an
+  8 GB container plus its own overhead. Attempt 2 finished, and is still not reported,
+  because Harbor's adapter copies agy's session file from the path agy 1.1.8 used and
+  1.1.22 writes it elsewhere, so the run left a score and no auditable record. The family's
+  rule is that a summary cannot be audited and the turn-count gate is counted off that
+  file, so a run without one is not a result whatever it scored. Attempt 3 had the
+  trajectory fix and was killed anyway, with agy itself holding 7.28 GiB read out of
+  `/proc`.
+
+  That is when the declaration was looked at rather than the runs. This corpus is the
+  heaviest in the family, `storage_mb` 39936 against 24576 for the next largest, and
+  memory was the one declaration that had not scaled with it: 13 of the family's 14 tasks
+  write 8192 whatever their corpus. It is now 16384, and the reasoning sits next to the
+  number in `task.toml`.
+
+  Headroom can only help an agent, so raising this cannot be the kind of tuning that
+  makes a task look like it passes; a starved agent scores lower, and lower is the
+  direction that would. The number that needed defending was the old one. What the change
+  did to any single run is not claimed: the only before-and-after pair available went the
+  other way, 0.0306 under 8192 against 0.0108 under 16384, which says the run-to-run
+  spread on this arm is wider than the change rather than that the change hurt. The three
+  scores this file reports were all re-measured under the new declaration rather than
+  carried over.
 - **every run writes `manifest.json`**: model, reasoning effort, harness version, budget,
   argv, prompt sha256, wall clock, exit code.
 - **the prompt is the shipped prompt.** `calibration/make_prompts.py` asserts that
