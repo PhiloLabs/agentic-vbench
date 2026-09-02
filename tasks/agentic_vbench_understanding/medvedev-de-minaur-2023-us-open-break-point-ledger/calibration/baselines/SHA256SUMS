@@ -1,0 +1,12 @@
+220268eaac01857c7adc5edfe3a3cc12c50345f536ffd0e53508a0de2e12a0be  ./README.md
+ddc477d21c86e487a2bee62c3d8c38969e488521b2598343cfa075c991da4477  ./anchors/empty/reward.json
+51ff0d2f0d3a5d61edec31785532ea0d570f8c348d58b15b94ff9c2ca6e926a4  ./anchors/empty/reward.txt
+b6ae460eea1851e6336584db2783b9a2b04db44836108d5f7cdc1046474945bd  ./anchors/empty/solution.json
+0e8406a84caf37a253fe78136e2c64f1652a3d13d6b2d062e7faedba313be3d6  ./anchors/manifest.json
+ef1abc7c9f68b21ce4fa83ebc13c4ddc648d1d1607f665ebfeae3f72a224d759  ./anchors/oracle/reward.json
+5717e7c840171019a4eeab5b79a7f894a4986eaff93d04ec5b12c9a189f594bf  ./anchors/oracle/reward.txt
+9472b91277c3032cd5b8546a39c8da655d305d2a6df620ed002816a6b7f3c6f7  ./anchors/oracle/solution.json
+905f2e22dc9815fc55d4f1512b0428208f05ed687ce1dede10d0d0a5b371c304  ./score-result-prior-v4-exact/hierarchical-verifier-details.json
+e6dacfe2e58591f0465d6e8ee3d54dbd096634e10d4271d33a4c9711c2a1bf9b  ./score-result-prior-v4-exact/manifest.json
+5dd39c174dd7f9eb08d9da9687846cf8dba8a24f3ec85039a19a4e4574838858  ./score-result-prior-v4-exact/reward.json
+adb9d8681f2ea2b79c2274b71ccfa79cd8915c3afa29465da2feec88c70eebc3  ./score-result-prior-v4-exact/solution.json

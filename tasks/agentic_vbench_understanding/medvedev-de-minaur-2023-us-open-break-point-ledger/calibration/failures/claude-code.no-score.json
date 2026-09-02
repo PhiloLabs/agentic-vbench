@@ -1,0 +1,18 @@
+{
+  "schema_version": "agentic-vbench-calibration-no-score-v1",
+  "harness": "Claude Code",
+  "harness_version": "2.1.209",
+  "requested_models": [
+    "Fable 5",
+    "Opus 4.8"
+  ],
+  "reasoning": null,
+  "status": "NO_SCORE",
+  "inference_started": false,
+  "trajectory_valid": false,
+  "score": null,
+  "turns": null,
+  "failure_stage": "authentication",
+  "reason_code": "client_not_authenticated",
+  "raw_committed": false
+}

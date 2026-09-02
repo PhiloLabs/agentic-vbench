@@ -1,0 +1,14 @@
+{
+  "schema_version": "avb-deterministic-baseline-v2",
+  "baseline": "score_result_plus_global_modal_priors_v1",
+  "external_media_used": false,
+  "oracle_granted_fields": {
+    "identity_fields": "copied exactly from the reference",
+    "outcome": "copied exactly from the reference"
+  },
+  "video_dependent_policy": "one fixed global modal guess per field",
+  "current_scorer_version": "hierarchical-bottleneck-v1",
+  "current_reward": 0.1833,
+  "generation_time_exact_reward": 0.0,
+  "status": "diagnostic_only_above_0.15_not_a_passing_ablation"
+}

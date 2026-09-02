@@ -1,0 +1,34 @@
+ablation=scoreboard_only
+source_validation=passed
+transform=boundary_template_two_box_temporal_gate_v2
+filter=crop=386:52:70:600,per-tier-right-boundary-template,two-scorebox-gate,min-base-run=60,temporal-erosion=15-per-side,safe-widths=312|336|362|386,pad=1280:720:70:600:color=black
+absence_behavior=exact_black
+encoding=libx264_qp_0_lossless
+decoded_core_lossless_sha256=verified
+all_frame_bbox_containment=verified
+leak_detector=reference_free_fixed_geometry_luma_chroma_and_two_box_checks
+preflight=passed
+expected_canonical_image_id=sha256:f592cda4dfc09ca25ae3a19d7e65d17248fb01059f061368eecf14ae1ae9cb28
+expected_harness_image_id=sha256:390fb56051fafb49b5b4b797cb15704469294f816255994e9ee0fd21fe2da06b
+source_sha256=d61bee17596a28dbc8f8b607e4fc0dd6542885dbe9cdad18e1953e89363b0860
+source_bytes=685013111
+source_duration_seconds=7152.578767
+source_frames=214363
+output_duration_seconds=7152.578767
+4c6012cfe5cc4756d76d64a151ce813888dc2a9026129e618483de8c683ffc76  /workspace/materials/match.mp4
+media_bytes=107305402
+codec_name=h264
+width=1280
+height=720
+avg_frame_rate=30000/1001
+nb_frames=214363
+duration=7152.578767
+size=107305402
+audio_streams=0
+agent_visible_artifacts=input-manifest.txt|materials-listing.txt
+sensitive_preflight_artifacts_removed=passed
+workspace_only_input_media=passed
+Python 3.12.14
+ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers
+codex-cli 0.149.1
+ripgrep 14.1.1
