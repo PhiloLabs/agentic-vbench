@@ -1,0 +1,163 @@
+{
+  "video": "flight.mp4",
+  "sha256": "a696502dc07cad2ac6e403027e3003f38c9508e527d6f37df2f6bb3b88eeab51",
+  "bytes": 323443645,
+  "probe": {
+    "programs": [],
+    "streams": [
+      {
+        "index": 0,
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1280,
+        "height": 720,
+        "r_frame_rate": "15/1"
+      },
+      {
+        "index": 1,
+        "codec_name": "aac",
+        "codec_type": "audio",
+        "r_frame_rate": "0/0"
+      }
+    ],
+    "format": {
+      "duration": "3600.046440"
+    }
+  },
+  "clearance_count": 65,
+  "status_counts": {
+    "complied": 45,
+    "complied_late": 5,
+    "superseded": 5,
+    "incomplete": 5,
+    "violated": 5
+  },
+  "overshoot_counts": {
+    "none": 55,
+    "large": 5,
+    "small": 5
+  },
+  "segments": [
+    {
+      "segment_id": "flight_01",
+      "offset_s": 0.0,
+      "duration_s": 720.0,
+      "video_sha256": "dfe19edc72ba302535fa1ed8b5675b6f0328236f79475b27d1c17c5520b71ee3",
+      "validation_metrics": {
+        "telemetry_samples": 7566,
+        "telemetry_rate_hz": 10.507552525265377,
+        "telemetry_max_gap_s": 0.4000000000000057,
+        "telemetry_last_time_s": 719.9583329999999,
+        "maximum_control_latency_s": 0.003478458049926303,
+        "maximum_heading_indicator_error_deg": 0.005447000000003754,
+        "maximum_airspeed_indicator_error_kt": 0.0,
+        "controller_trace_p99_heading_error_deg": 0.4018080000000168,
+        "controller_trace_p99_altitude_error_ft": 1.0179349999998522,
+        "controller_trace_p99_airspeed_error_kt": 0.1982590000000073
+      },
+      "clearance_count": 13,
+      "config_sha256": "6ef5cf99b666b86b77208e48c23fabfd599a7ecd9cbf6d96e44a5c94d1fdf756",
+      "alignment_sha256": "c0065ac5936817be01f01a86b22537651449a74d076d427969d43e0440532d23"
+    },
+    {
+      "segment_id": "flight_02",
+      "offset_s": 720.0,
+      "duration_s": 720.0,
+      "video_sha256": "1e908a61335855566cd7b7001b1c93de00185afa9c4febab2909e029113461d2",
+      "validation_metrics": {
+        "telemetry_samples": 7562,
+        "telemetry_rate_hz": 10.501875096533984,
+        "telemetry_max_gap_s": 0.3416670000000295,
+        "telemetry_last_time_s": 719.96666633,
+        "maximum_control_latency_s": 0.0025124716553364124,
+        "maximum_heading_indicator_error_deg": 0.0023390000000063083,
+        "maximum_airspeed_indicator_error_kt": 0.0,
+        "controller_trace_p99_heading_error_deg": 0.4011400000000549,
+        "controller_trace_p99_altitude_error_ft": 1.0115639999999075,
+        "controller_trace_p99_airspeed_error_kt": 0.19972699999999577
+      },
+      "clearance_count": 13,
+      "config_sha256": "82c16cfff3458ceca4fdcf673df1444e412c19f24587b3b46d114e5c0efe3191",
+      "alignment_sha256": "35f4c9e84803ff2a70f5e8fb1f8646978893a73f7af6142804f5009c93ab0b42"
+    },
+    {
+      "segment_id": "flight_03",
+      "offset_s": 1440.0,
+      "duration_s": 720.0,
+      "video_sha256": "ebf83e17e718eb520ded614c02c5b8d103368f1dd88ba3247c207bf754652a2e",
+      "validation_metrics": {
+        "telemetry_samples": 6949,
+        "telemetry_rate_hz": 9.650446788879528,
+        "telemetry_max_gap_s": 0.33333299999992505,
+        "telemetry_last_time_s": 719.9666663300001,
+        "maximum_control_latency_s": 0.0023900226757405107,
+        "maximum_heading_indicator_error_deg": 0.0005540000000223699,
+        "maximum_airspeed_indicator_error_kt": 0.0,
+        "controller_trace_p99_heading_error_deg": 0.10036700000000565,
+        "controller_trace_p99_altitude_error_ft": 0.9932609999996203,
+        "controller_trace_p99_airspeed_error_kt": 0.050183000000004085
+      },
+      "clearance_count": 13,
+      "config_sha256": "e022c30bc1f430b4d18e567d44c84950b6a766e042f1c61bf6915bf8615d08b4",
+      "alignment_sha256": "60f176cfe8a1cc6479919b8fa2d7d4630eda3976a390f07470a4ada3dd8ddf42"
+    },
+    {
+      "segment_id": "flight_04",
+      "offset_s": 2160.0,
+      "duration_s": 720.0,
+      "video_sha256": "3b6108914ec88b62bde7e9119f7dcf55ca454b9ded0842157939d4bab0f6d53f",
+      "validation_metrics": {
+        "telemetry_samples": 6438,
+        "telemetry_rate_hz": 8.940484737582114,
+        "telemetry_max_gap_s": 0.341666000000032,
+        "telemetry_last_time_s": 719.9833329999999,
+        "maximum_control_latency_s": 0.0021473922902472964,
+        "maximum_heading_indicator_error_deg": 0.0002579999999738902,
+        "maximum_airspeed_indicator_error_kt": 0.0,
+        "controller_trace_p99_heading_error_deg": 0.4063150000000064,
+        "controller_trace_p99_altitude_error_ft": 1.974913000000015,
+        "controller_trace_p99_airspeed_error_kt": 0.19987700000000075
+      },
+      "clearance_count": 13,
+      "config_sha256": "2ad8e6be4cc90ae1f3855db097ea2027639abeadff6ba14f83eca75e5fd1b002",
+      "alignment_sha256": "0953d126b3db4dd0fdc78bc75dfdf08c859e55a561ea7427a1404ef2f770cfc2"
+    },
+    {
+      "segment_id": "flight_05",
+      "offset_s": 2880.0,
+      "duration_s": 720.0,
+      "video_sha256": "44277d97f979da082acc07aafff069189da13a0a849562f254814a4407dcbd95",
+      "validation_metrics": {
+        "telemetry_samples": 6054,
+        "telemetry_rate_hz": 8.408988295766331,
+        "telemetry_max_gap_s": 0.3583340000000135,
+        "telemetry_last_time_s": 719.94166667,
+        "maximum_control_latency_s": 0.002866213151918373,
+        "maximum_heading_indicator_error_deg": 0.0002570000000332584,
+        "maximum_airspeed_indicator_error_kt": 0.0,
+        "controller_trace_p99_heading_error_deg": 0.4002310000000193,
+        "controller_trace_p99_altitude_error_ft": 1.0082549999997354,
+        "controller_trace_p99_airspeed_error_kt": 0.050851999999991904
+      },
+      "clearance_count": 13,
+      "config_sha256": "cbed732638beb416268268ce0aa63558d78f49e6d6edac948d71d617860ab628",
+      "alignment_sha256": "e0db277f4090a85e60fa6ac3cdab714e109855a05ab582e1205fd58d445682a3"
+    }
+  ],
+  "generator_files": {
+    "build_full_dataset.py": "870085bff5eaecb8b5d0cbb928e8caab718957666ec48c09b1056488a3b7544e",
+    "run_pilot.py": "29a07a1a2c92a1a5d75c1b5b8d6f401811a7d7181bcc0512709d7f7bb8f15566",
+    "pilot_lib.py": "8bd632a681d500a07ba3e4fc89f0256bc792f37960e084082e1f17a6510e30ce",
+    "telemetry_protocol.xml": "9bcebf1c0531e34075d564238acff2623b9b386fa6f786be18a37498828ab1ea",
+    "derive_ground_truth.py": "d271754fbfdb5ddddeef0388d077ba7d8ba8aa86c36e9390d3e8c3f6010be696",
+    "validate_run.py": "d1cc0a7da10ae27f48ef22e34a11edf654e9a46072d6b76af2c35d1db87e321e",
+    "build_release.py": "350c5bfb949ee1c00c4957f46fdcdb063b405a25749feb7e99a40b261b7d36ff"
+  },
+  "generation_environment": {
+    "flightgear_package_version": "1:2020.3.18+dfsg-1.1",
+    "ffmpeg_version": "ffmpeg version 6.1.1-3ubuntu5+esm10 Copyright (c) 2000-2023 the FFmpeg developers",
+    "espeak_ng_version": "eSpeak NG text-to-speech: 1.51  Data at: /usr/lib/x86_64-linux-gnu/espeak-ng-data",
+    "espeak_ng_package_version": "1.51+dfsg-12build1",
+    "espeak_ng_binary_sha256": "34191438b1e0f8f5aac5d4fdc5df574762b6fbb3c7a219a8c6f14feceb1bd076"
+  }
+}
