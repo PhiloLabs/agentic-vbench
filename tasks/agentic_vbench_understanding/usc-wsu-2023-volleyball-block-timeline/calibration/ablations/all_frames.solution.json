@@ -1,0 +1,14 @@
+{
+  "events": [
+    {"set": 1, "score_after": "8-7",   "type": "block", "players": ["Magda Jehlarova", "Argentina Ung"], "blocked": "Kalyah Williams"},
+    {"set": 1, "score_after": "21-14", "type": "block", "players": ["Mia Tuaniga"], "blocked": "Iman Isanovic"},
+    {"set": 2, "score_after": "16-10", "type": "block", "players": ["Rylie McGinest", "Mia Tuaniga"], "blocked": "Iman Isanovic"},
+    {"set": 2, "score_after": "19-13", "type": "block", "players": ["Gala Trubint"], "blocked": "Karly Basham"},
+    {"set": 3, "score_after": "11-14", "type": "block", "players": ["Magda Jehlarova", "Weronika Wojdyla"], "blocked": "Skylar Fields"},
+    {"set": 3, "score_after": "16-23", "type": "block", "players": ["Argentina Ung"], "blocked": "Lindsey Miller"},
+    {"set": 4, "score_after": "6-4",   "type": "block", "players": ["Iman Isanovic", "Magda Jehlarova"], "blocked": "Skylar Fields"},
+    {"set": 4, "score_after": "27-25", "type": "block", "players": ["Argentina Ung", "Weronika Wojdyla"], "blocked": "Skylar Fields"},
+    {"set": 5, "score_after": "5-11",  "type": "block", "players": ["Magda Jehlarova"], "blocked": "Kalyah Williams"},
+    {"set": 5, "score_after": "11-15", "type": "block", "players": ["Iman Isanovic", "Argentina Ung"], "blocked": "Skylar Fields"}
+  ]
+}

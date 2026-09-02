@@ -1,0 +1,16 @@
+{
+  "reward": 0.0,
+  "details": {
+    "reason": "ok",
+    "n_ground_truth": 23,
+    "n_predicted": 15,
+    "full_matches": 0,
+    "partial_matches": 0,
+    "credit": 0.0,
+    "set_score_type_only_matches": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "partial_credit": 0.5
+  }
+}

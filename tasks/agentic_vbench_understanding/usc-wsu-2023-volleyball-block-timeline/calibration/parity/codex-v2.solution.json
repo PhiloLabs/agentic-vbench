@@ -1,0 +1,20 @@
+{
+  "events": [
+    {"set": 1, "score_after": "2-2", "type": "block", "players": ["Iman Isanovic"], "blocked": "Skylar Fields"},
+    {"set": 1, "score_after": "8-7", "type": "block", "players": ["Katy Ryan"], "blocked": "Tyrah Ariail"},
+    {"set": 1, "score_after": "11-10", "type": "block", "players": ["Kalyah Williams", "Lindsey Miller"], "blocked": "Magda Jehlarova"},
+    {"set": 1, "score_after": "22-14", "type": "block", "players": ["London Wijay", "Tyrah Ariail"], "blocked": "Katy Ryan"},
+    {"set": 2, "score_after": "6-6", "type": "block", "players": ["Katy Ryan", "Lana Radakovic"], "blocked": "Tyrah Ariail"},
+    {"set": 2, "score_after": "21-15", "type": "block", "players": ["Iman Isanovic", "Magda Jehlarova"], "blocked": "London Wijay"},
+    {"set": 3, "score_after": "1-4", "type": "block", "players": ["Iman Isanovic", "Magda Jehlarova"], "blocked": "London Wijay"},
+    {"set": 4, "score_after": "15-15", "type": "block", "players": ["Katy Ryan"], "blocked": "Skylar Fields"},
+    {"set": 4, "score_after": "16-17", "type": "block", "players": ["Lana Radakovic", "Pia Timmer"], "blocked": "London Wijay"},
+    {"set": 4, "score_after": "19-18", "type": "block", "players": ["Tyrah Ariail"], "blocked": "Magda Jehlarova"},
+    {"set": 4, "score_after": "21-22", "type": "block", "players": ["Iman Isanovic", "Argentina Ung"], "blocked": "Lindsey Miller"},
+    {"set": 4, "score_after": "22-24", "type": "block", "players": ["Magda Jehlarova", "Argentina Ung"], "blocked": "Lindsey Miller"},
+    {"set": 5, "score_after": "0-2", "type": "block", "players": ["Katy Ryan", "Magda Jehlarova"], "blocked": "Kalyah Williams"},
+    {"set": 5, "score_after": "1-2", "type": "block", "players": ["Kalyah Williams", "Lindsey Miller"], "blocked": "Pia Timmer"},
+    {"set": 5, "score_after": "3-5", "type": "block", "players": ["Iman Isanovic"], "blocked": "Skylar Fields"},
+    {"set": 5, "score_after": "3-7", "type": "block", "players": ["Magda Jehlarova"], "blocked": "Lindsey Miller"}
+  ]
+}

@@ -1,0 +1,7 @@
+Claude Code (Opus 5, xhigh) — USC/WSU block timeline
+assistant turns with tool calls: 270
+  Read: 140
+  Bash: 129
+  ToolSearch: 1
+Counted from the session transcript: assistant messages carrying at least one
+tool_use block.

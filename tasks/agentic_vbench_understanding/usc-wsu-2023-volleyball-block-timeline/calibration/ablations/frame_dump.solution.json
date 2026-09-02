@@ -1,0 +1,30 @@
+{
+  "events": [
+    {"set": 1, "score_after": "11-10", "type": "block", "players": ["Logann Golden"], "blocked": "Skylar Fields"},
+    {"set": 1, "score_after": "15-11", "type": "block", "players": ["Megan Verbiest", "Mia Tuaniga"], "blocked": "Iman Isanovic"},
+    {"set": 1, "score_after": "20-14", "type": "block", "players": ["Megan Verbiest"], "blocked": "Katy Ryan"},
+    {"set": 1, "score_after": "22-15", "type": "block", "players": ["Mia Tuaniga"], "blocked": "Shea Rubright"},
+
+    {"set": 2, "score_after": "8-7",   "type": "block", "players": ["Logann Golden"], "blocked": "Kalyah Williams"},
+    {"set": 2, "score_after": "11-7",  "type": "block", "players": ["Megan Verbiest", "Skylar Fields"], "blocked": "Iman Isanovic"},
+    {"set": 2, "score_after": "16-10", "type": "block", "players": ["Mia Tuaniga"], "blocked": "Katy Ryan"},
+    {"set": 2, "score_after": "24-15", "type": "block", "players": ["Megan Verbiest"], "blocked": "Iman Isanovic"},
+
+    {"set": 3, "score_after": "2-7",   "type": "block", "players": ["Logann Golden", "Magda Jehlarova"], "blocked": "Skylar Fields"},
+    {"set": 3, "score_after": "8-13",  "type": "block", "players": ["Magda Jehlarova"], "blocked": "Kalyah Williams"},
+    {"set": 3, "score_after": "13-16", "type": "block", "players": ["Megan Verbiest"], "blocked": "Iman Isanovic"},
+    {"set": 3, "score_after": "15-21", "type": "block", "players": ["Lana Radakovic"], "blocked": "Lindsey Miller"},
+    {"set": 3, "score_after": "16-25", "type": "block", "players": ["Magda Jehlarova", "Logann Golden"], "blocked": "Skylar Fields"},
+
+    {"set": 4, "score_after": "5-3",   "type": "block", "players": ["Megan Verbiest"], "blocked": "Iman Isanovic"},
+    {"set": 4, "score_after": "13-9",  "type": "block", "players": ["Mia Tuaniga"], "blocked": "Katy Ryan"},
+    {"set": 4, "score_after": "15-15", "type": "block", "players": ["Logann Golden"], "blocked": "Skylar Fields"},
+    {"set": 4, "score_after": "19-19", "type": "block", "players": ["Magda Jehlarova", "Iman Isanovic"], "blocked": "Kalyah Williams"},
+    {"set": 4, "score_after": "25-27", "type": "block", "players": ["Logann Golden"], "blocked": "Skylar Fields"},
+
+    {"set": 5, "score_after": "5-10",  "type": "block", "players": ["Magda Jehlarova"], "blocked": "Skylar Fields"},
+    {"set": 5, "score_after": "8-13",  "type": "block", "players": ["Logann Golden", "Lana Radakovic"], "blocked": "Kalyah Williams"},
+    {"set": 5, "score_after": "10-14", "type": "block", "players": ["Logann Golden"], "blocked": "Lindsey Miller"},
+    {"set": 5, "score_after": "15-10", "type": "block", "players": ["Magda Jehlarova", "Logann Golden"], "blocked": "Skylar Fields"}
+  ]
+}

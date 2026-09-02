@@ -1,0 +1,11 @@
+image: avb-usc-parity:latest
+image digest: sha256:58ed2ce8cbd8a220b9d2c6249bac619955d95de611a4097e35a12834332e1aa2
+container network: none
+media inside the image: 13ccbabbdd9540da851099d138bef3c8eafe6de9426c3681593edba32d08ba9e
+tool inventory:
+  ffmpeg: /usr/bin/ffmpeg
+  ffprobe: /usr/bin/ffprobe
+  tesseract: /usr/bin/tesseract
+  convert: /usr/bin/convert
+  curl: /usr/bin/curl
+  python3: /usr/local/bin/python3
