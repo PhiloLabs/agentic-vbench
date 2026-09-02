@@ -36,10 +36,13 @@ ground_truth:
 scorer:
   metric: "EXACT + TIME-ANCHORED. Each predicted race is matched to a GT race by an OPTIMAL
            (assignment-safe, min-cost max-cardinality) bipartite matching on its reported time t: a
-           prediction whose t is CONTAINED in a GT segment [t_start,t_end] is preferred, else one
+           prediction whose t is CONTAINED in a GT segment [t_start,t_end) is preferred, else one
            within +/-15 s is eligible — a count-vector at the wrong video segment earns nothing.
-           (Containment-first + optimal assignment means an exact answer reporting every race at its
-           permitted t_start scores 1.0, where the old greedy pass stranded a race at 0.0111.) Per
+           (Segments are half-open, so a shared boundary t_end==next t_start belongs to the later race
+           — the final race keeps its right end; the matrix is bounded to O(n_gt^2) regardless of how
+           many rows are submitted. Containment-first + optimal assignment means an exact answer
+           reporting every race, whole or partial, at its permitted t_start scores correctly, where
+           the old greedy/closed-interval pass stranded a race at 0.0111 / 0.0.) Per
            quantity q: score_q = clamp(tau_q,0,1) * accuracy_q, where accuracy_q = ( sum over matched
            pairs carrying q of max(0, 1 - |pred-gt| / max(1, 0.30*gt)) ) / TOTAL_GT_RACES and tau_q is
            the signed Kendall correlation (the guess gate). reward = sum_q w_q*score_q renormalised

@@ -1,7 +1,9 @@
 #!/bin/bash
 # Oracle: hero (tux) per-race counts + skid_time (VIDEO seconds), each tagged with its video time t.
 set -euo pipefail
-OUT="${SOLUTION_PATH:-/solution/solution.json}"
+# Write where the verifier reads it (tests/test.sh: judge.py --solution /workspace/output/solution.json)
+# and where the agent prompt tells the agent to write. SOLUTION_PATH overrides only for local tests.
+OUT="${SOLUTION_PATH:-/workspace/output/solution.json}"
 mkdir -p "$(dirname "$OUT")"
 cat > "$OUT" <<'JSON'
 {

@@ -17,11 +17,13 @@ Covers the coverage model and the reviewer-reported scorer bugs:
 
 Run: `python3 test_coverage.py` (exit 0 = pass).
 """
-import json, subprocess, sys, tempfile
+import json, os, re, subprocess, sys, tempfile, time
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 JUDGE = HERE / "judge.py"
+TEST_SH = HERE / "test.sh"                       # the verifier: reads /workspace/output/solution.json
+SOLVE_SH = HERE.parent / "solution" / "solve.sh"  # the oracle
 GT = json.loads((HERE / "ground_truth.json").read_text())["races"]
 N = len(GT)
 W_ITEMS, W_SKID = 0.55, 0.45  # must match judge.DIMS
@@ -71,6 +73,38 @@ def field_value(field, value):
     return {"races": [row(r) for r in GT]}
 
 
+def subset(idxs, times="mid"):
+    """A partial answer: exactly the GT races at `idxs`, with correct values, placed at each race's
+    mid-window or its permitted t_start."""
+    t_of = (lambda r: _mid(r)) if times == "mid" else (lambda r: r["t_start"])
+    return {"races": [{"track": GT[i]["track"], "t": t_of(GT[i]),
+                       "items_collected": GT[i]["items_collected"], "skid_time": GT[i]["skid_time"]} for i in idxs]}
+
+
+def solve_sh_default_path():
+    """The default OUT path baked into solve.sh (SOLUTION_PATH fallback)."""
+    m = re.search(r"SOLUTION_PATH:-([^}]+)\}", SOLVE_SH.read_text())
+    return m.group(1).strip() if m else None
+
+
+def verifier_read_path():
+    """The --solution path the verifier (test.sh) reads."""
+    m = re.search(r"--solution\s+(\S+)", TEST_SH.read_text())
+    return m.group(1).strip() if m else None
+
+
+def oracle_via_solve_sh():
+    """End-to-end: run solve.sh (writing to a temp SOLUTION_PATH), score its output through judge.py."""
+    with tempfile.TemporaryDirectory() as d:
+        out = Path(d) / "out" / "solution.json"
+        env = dict(os.environ, SOLUTION_PATH=str(out))
+        subprocess.run(["bash", str(SOLVE_SH)], env=env, check=True, capture_output=True)
+        rj, rt = Path(d) / "r.json", Path(d) / "r.txt"
+        subprocess.run([sys.executable, str(JUDGE), "--solution", str(out),
+                        "--reward-json", str(rj), "--reward-txt", str(rt)], check=True, capture_output=True)
+        return json.loads(rj.read_text())["reward"]
+
+
 def main():
     full = score(oracle("mid"))
     tstart = score(oracle("tstart"))
@@ -87,6 +121,24 @@ def main():
     null_races = score({"races": None})
     malformed = score({"races": {"oops": 1}})
     empty = score({"races": []})
+
+    # partial t_start (contiguous shared boundaries): an exact partial answer at t_start must land on
+    # the SAME races as the mid-window answer, not shift backward onto the preceding race.
+    part_tstart = score(subset([3, 4], "tstart"))
+    part_mid = score(subset([3, 4], "mid"))
+    part3_tstart = score(subset([3, 4, 5], "tstart"))
+    part3_mid = score(subset([3, 4, 5], "mid"))
+
+    # matcher must stay bounded under a flood of junk prediction rows.
+    real = subset(list(range(N)))["races"]
+    junk = [{"track": "x", "t": 100000 + i, "items_collected": i, "skid_time": i} for i in range(2000)]
+    t0 = time.time()
+    flood = score({"races": real + junk})
+    flood_dt = time.time() - t0
+
+    # end-to-end oracle path: solve.sh writes where the verifier reads, and that output scores 1.0.
+    def_path, ver_path = solve_sh_default_path(), verifier_read_path()
+    oracle_e2e = oracle_via_solve_sh()
 
     def dim(res, field, key):
         return res["details"]["dims"][field][key]
@@ -121,6 +173,19 @@ def main():
         ("races=null -> 0 (no crash)", null_races["reward"] == 0.0, f"{null_races['reward']}"),
         ("races={...} malformed -> 0 (no crash)", malformed["reward"] == 0.0, f"{malformed['reward']}"),
         ("empty == 0.0", empty["reward"] == 0.0, f"{empty['reward']}"),
+        # partial t_start must not shift backward across shared boundaries (half-open segments)
+        ("partial rows 4-5 at t_start > 0 (was 0.0)", part_tstart["reward"] > 0.05, f"{part_tstart['reward']}"),
+        ("partial rows 4-5 at t_start == mid placement", abs(part_tstart["reward"] - part_mid["reward"]) < 1e-9,
+         f"tstart={part_tstart['reward']} mid={part_mid['reward']}"),
+        ("partial rows 4-6 at t_start == mid placement", abs(part3_tstart["reward"] - part3_mid["reward"]) < 1e-9,
+         f"tstart={part3_tstart['reward']} mid={part3_mid['reward']}"),
+        # bounded matcher: a flood of junk rows must not change the score or blow the timeout
+        ("12 real + 2000 junk rows -> 1.0", abs(flood["reward"] - 1.0) < 1e-6, f"{flood['reward']}"),
+        ("matcher bounded under flood (< 10 s)", flood_dt < 10.0, f"{flood_dt:.2f}s"),
+        # end-to-end oracle path: solve.sh writes where the verifier reads, and it scores 1.0
+        ("solve.sh default path == verifier read path", def_path == ver_path and def_path is not None,
+         f"solve={def_path} verifier={ver_path}"),
+        ("oracle via solve.sh output == 1.0", abs(oracle_e2e - 1.0) < 1e-6, f"{oracle_e2e}"),
     ]
     ok = True
     for name, passed, detail in checks:

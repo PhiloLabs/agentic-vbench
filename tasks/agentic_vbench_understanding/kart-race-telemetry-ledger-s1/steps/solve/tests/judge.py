@@ -19,8 +19,9 @@ is NOT scored; see the DIMS note below for why.)
 ## Scoring — EXACT, not just rank
 
     each predicted race is matched to a GT race by an OPTIMAL (assignment-safe) bipartite matching
-    on its reported time t — a prediction whose t is CONTAINED in a GT segment [t_start, t_end] is
-    preferred, else one within +/-15 s is eligible (see match_races). Then, per dimension d:
+    on its reported time t — a prediction whose t is CONTAINED in a GT segment [t_start, t_end) is
+    preferred (half-open, so a shared boundary belongs to the later race; the final race keeps its
+    right end), else one within +/-15 s is eligible (see match_races). Then, per dimension d:
       score_d    = clamp(tau_d, 0, 1) * accuracy_d
       tau_d      = signed normalised Kendall correlation over the matched pairs that carry d (the
                    guess GATE: concordant-minus-discordant / pairs, so a constant/random answer -> ~0)
@@ -170,49 +171,83 @@ def _hungarian(cost):
     return a
 
 
-def match_races(gt_races, pred_races, tol):
-    """Assignment-safe race matching. Each predicted race is matched to at most one GT race, and
-    vice versa, by an optimal (min-cost, max-cardinality) bipartite assignment — NOT greedy — so
-    overlapping tolerance windows can no longer strand a race. A prediction whose reported time is
-    *contained* in a GT race's [t_start, t_end] segment is preferred (cost by distance to the
-    segment midpoint); a prediction merely within ±tol of a segment is eligible but always costs
-    more than any true containment; anything else is ineligible. Returns `matched[gi] = pi | None`.
+# Bound on how many predicted rows are scanned. A legitimate answer has one row per race (~12);
+# anything past this is junk and cannot help, so scanning it only risks a timeout. (The MATRIX is
+# bounded separately, below, so this is defence-in-depth, not the primary bound.)
+MAX_PRED_SCAN = 10000
 
-    Containment-first is what lets an exact answer that reports every race at its own `t_start`
-    (permitted by the prompt) score 1.0: t_start ∈ [t_start, t_end], so every race is contained in
-    its own segment and the optimal assignment recovers all of them, even though adjacent ±tol
-    windows overlap."""
-    ng, npd = len(gt_races), len(pred_races)
-    if ng == 0 or npd == 0:
+
+def match_races(gt_races, pred_races, tol):
+    """Assignment-safe, BOUNDED race matching. Each predicted race is matched to at most one GT race
+    (and vice versa) by an optimal min-cost, max-cardinality bipartite assignment — NOT greedy — so
+    overlapping tolerance windows can no longer strand a race. Returns `matched[gi] = pi | None`.
+
+    Segment membership is HALF-OPEN, [t_start, t_end), except the final race (largest t_end) which is
+    closed [t_start, t_end]. GT races are contiguous (each t_end == the next t_start), so a closed
+    interval would make a shared boundary belong to BOTH the earlier race (at its t_end) and the later
+    (at its t_start); the global assignment could then pull a partial `t_start` submission backward
+    onto the wrong race (exact rows 4-5 at their starts scored 0.0). Half-open makes a shared boundary
+    belong to the LATER segment, so a race reported at its own t_start is contained in its own segment
+    only. A prediction contained in a segment is preferred (cost = distance to the segment midpoint);
+    one merely within ±tol is eligible but always costs more than any containment; else ineligible.
+
+    BOUNDED: the Hungarian matrix is O(n_gt^2) regardless of how many rows are submitted. Only each GT
+    race's `n_gt` nearest eligible predictions can ever be used (in any assignment a race needs at most
+    n_gt candidates, since there are only n_gt races), so the candidate columns are capped at that
+    union; the per-row scan is additionally capped at MAX_PRED_SCAN. This keeps a pathological
+    thousand-row submission from blowing the O(K^3) matcher past the verifier timeout."""
+    ng = len(gt_races)
+    if ng == 0 or not pred_races:
         return [None] * ng
-    K = max(ng, npd)
-    BIG = 1.0e6  # >> any real edge cost * K, so more eligible matches always beats lower cost
-    cost = [[0.0] * K for _ in range(K)]      # padding rows/cols cost 0 (ineligible)
-    elig = [[False] * K for _ in range(K)]
-    for gi, g in enumerate(gt_races):
+    preds = pred_races[:MAX_PRED_SCAN]            # cap the scan (defence-in-depth)
+    te_vals = [g.get("t_end") for g in gt_races if g.get("t_end") is not None]
+    te_max = max(te_vals) if te_vals else None
+
+    # Per GT race: its eligible predictions, keeping only the n_gt cheapest (bounds the matrix).
+    per_race, cand = [], set()
+    for g in gt_races:
         ts, te = g.get("t_start"), g.get("t_end")
-        if ts is None or te is None:
-            continue
-        mid = (ts + te) / 2.0
-        width = te - ts
-        for pi, p in enumerate(pred_races):
-            pt = race_t(p)
-            if pt is None:
-                continue
-            if ts <= pt <= te:
-                c = abs(pt - mid)                        # contained: preferred
-            elif ts - tol <= pt <= te + tol:
-                c = abs(pt - mid) + width + tol          # tolerance: strictly worse than any containment
-            else:
-                continue                                 # ineligible
-            cost[gi][pi] = c - BIG                       # reward each eligible match by -BIG
-            elig[gi][pi] = True
+        elig = []
+        if ts is not None and te is not None:
+            mid = (ts + te) / 2.0
+            width = te - ts
+            is_last = te_max is not None and te >= te_max
+            for pi, p in enumerate(preds):
+                pt = race_t(p)
+                if pt is None:
+                    continue
+                if ts <= pt < te or (is_last and pt == te):
+                    c = abs(pt - mid)                       # contained (half-open): preferred
+                elif ts - tol <= pt <= te + tol:
+                    c = abs(pt - mid) + width + tol         # tolerance: worse than any containment
+                else:
+                    continue                                # ineligible
+                elig.append((c, pi))
+            elig.sort()
+            elig = elig[:ng]
+        per_race.append(elig)
+        cand.update(pi for _, pi in elig)
+    cand = sorted(cand)
+    if not cand:
+        return [None] * ng
+
+    col = {pi: j for j, pi in enumerate(cand)}
+    nc = len(cand)
+    K = max(ng, nc)                               # <= n_gt + n_gt^2, independent of len(pred_races)
+    BIG = 1.0e6                                   # >> any real edge cost * K: more matches beats lower cost
+    cost = [[0.0] * K for _ in range(K)]          # padding rows/cols cost 0 (ineligible)
+    elig_mat = [[False] * K for _ in range(K)]
+    for gi, rows in enumerate(per_race):
+        for c, pi in rows:
+            j = col[pi]
+            cost[gi][j] = c - BIG
+            elig_mat[gi][j] = True
     assign = _hungarian(cost)
     matched = [None] * ng
     for gi in range(ng):
-        pj = assign[gi]
-        if 0 <= pj < npd and elig[gi][pj]:
-            matched[gi] = pj
+        j = assign[gi]
+        if 0 <= j < nc and elig_mat[gi][j]:
+            matched[gi] = cand[j]
     return matched
 
 
