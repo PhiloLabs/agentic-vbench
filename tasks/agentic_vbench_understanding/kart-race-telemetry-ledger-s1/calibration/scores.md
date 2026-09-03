@@ -1,14 +1,21 @@
 # Calibration — kart-race-telemetry-ledger-s1
 
-**Scorer (as shipped).** TIME-ANCHORED + EXACT, **two** scored quantities. Each predicted race is
-matched to the GT race whose video window `[t_start,t_end]` contains its reported `t` (±15 s); then
-per quantity `score_q = clamp(tau_q,0,1) · accuracy_q`, `accuracy_q = mean max(0, 1 − |pred−gt| /
-max(1, 0.30·gt))`, renormalised over quantities that vary, then scaled by **coverage =
-matched_races / total_races** so an omitted (or mis-timed) race contributes zero — a partial answer
-cannot reach 1.0 (a correct 2-of-12 answer scores ~0.17), the full oracle stays 1.0 (regression test
-`steps/solve/tests/test_coverage.py`). Scored: **items_collected (0.55)** and
-**skid_time / drift-seconds (0.45)**. `skid_time` is in VIDEO seconds (rescaled from telemetry
-game-seconds — see the timebase note). `spinouts` is **no longer scored** (kept as context).
+**Scorer (as shipped).** TIME-ANCHORED + EXACT. Each predicted race is matched to a GT race by an
+**optimal (assignment-safe, min-cost max-cardinality) bipartite matching** on its reported `t` — a
+prediction whose `t` is contained in a GT segment is preferred, else one within **±15 s** is
+eligible. Segments are **half-open** `[t_start,t_end)` (the final race keeps its right end), so a
+shared boundary `t_end == next t_start` belongs to the **later** race; the matcher's matrix is
+**bounded to O(n_gt²)** regardless of how many rows are submitted. Then per quantity
+`score_q = clamp(tau_q,0,1) · accuracy_q`, where
+`accuracy_q = (Σ over matched pairs carrying q of max(0, 1 − |pred−gt| / max(1, 0.30·gt))) / N_GT_RACES`
+and `reward = Σ_q w_q·score_q` renormalised over quantities that vary in the GT. **Coverage is folded
+per dimension** via that denominator: a GT race with no matched prediction — or a matched prediction
+that omits quantity `q`, or gives a non-finite value — contributes 0 to `q` only. So an items-only
+answer earns its honest items credit while the other field scores 0, a dummy field can neither
+inflate nor erase another field's credit, and a partial answer still cannot reach 1.0 (a correct
+2-of-12 answer scores ~0.17) while the full oracle stays 1.0. Malformed `races` (null/non-list)
+normalize to `[]` (score 0, no crash). Regression-tested in `steps/solve/tests/test_coverage.py`.
+`spinouts` is **not scored** (kept as unscored context).
 
 **Media.** SuperTuxKart profile-mode GT — 12 races × 10 karts × 4 laps on SuperTux (hardest) AI,
 camera locked to the hero kart `tux`, 55.1 min, race.mp4 sha `4b4cee91…`, 1280×720, no audio, HUD
@@ -61,7 +68,7 @@ no agent counts masked-HUD pickups or times cumulative drift to within 30%.
 | `races: null` / malformed | 0.0000 | normalized to `[]` (no crash) |
 | empty | 0.0000 | |
 
-All rows above are backed by `steps/solve/tests/test_coverage.py` (15 checks) and the family
+All rows above are backed by `steps/solve/tests/test_coverage.py` (22 checks) and the family
 `check_task.py` gate. Per-dim on the host-run agents: **items** accuracy 0.01–0.22 (agents mis-count
 pickups under the masked HUD — under-counting, or over-counting when they guess high, so rarely within
 30%); **skid** accuracy 0.00–0.06 (none sum cumulative drift to within 30% over a 55-min video). Both

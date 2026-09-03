@@ -10,7 +10,8 @@ the hero is scored, so every scored event is on-camera — nothing caps the orac
    is MASKED, so the pickup is counted from the visible drive-through, not read off a counter.
 2. **spinouts** (= bananas + explosions) — UNSCORED context (observable but too countable to score) — the dizzy-stars spin-out: `hit_spinout_720p.png`,
    `zoom_spinout_stars.png`. A banana hit and a bomb hit produce the SAME spin-out and are NOT
-   reliably distinguishable at 720p, so only their sum (the visible spin-out event) is scored.
+   reliably distinguishable at 720p; the spin-out is UNSCORED context (it is too countable to be a
+   difficulty lever), so only its visible occurrence is described here, not scored.
 3. **skid_time** (drift seconds) — drifting has a DISTINCT tell: bright **yellow sparks spray from
    BOTH rear wheels** while the kart skids through a turn (`drift_720p.png`, `zoom_drift_sparks.png`),
    and they VANISH the instant the kart runs straight (`zoom_no_drift_straight.png` — same kart,

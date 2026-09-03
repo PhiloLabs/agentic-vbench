@@ -58,7 +58,7 @@ This is a generator, not a clip: tracks × karts × difficulty × laps × field 
 unlimited space of distinct, machine-labeled races. Edit the `SPECS` list in `run_suite.sh` to mint
 new instances or hold out unseen (track, kart-set) combinations. More races/laps lower a strong
 agent's score (recall of accurate counts drops); the shipped suite is **12 tracks × 10 karts × 4
-laps** on SuperTux (53.4 min).
+laps** on SuperTux (55.1 min).
 
 ## Verifier
 

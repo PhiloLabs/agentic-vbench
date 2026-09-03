@@ -53,7 +53,7 @@ scorer:
            still cannot reach 1.0 (a correct 2-of-12 answer scores ~0.17) while the full oracle stays
            1.0. Malformed races (null/non-list) normalize to [] (score 0, no crash). Weights:
            items_collected 0.55, skid_time 0.45. Regression-tested in steps/solve/tests/test_coverage.py
-           (15 checks)."
+           (22 checks)."
   # WHY exact, not rank. Rank agreement alone is too forgiving: an agent that systematically
   # UNDER-counts (Codex sees ~half the powerups) still ranks the races roughly right and scored ~0.35.
   # Scoring against STK's full-precision telemetry (within ~30% per race) removes that free credit.
