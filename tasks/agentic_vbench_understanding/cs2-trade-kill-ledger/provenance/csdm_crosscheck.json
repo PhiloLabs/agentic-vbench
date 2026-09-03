@@ -1,0 +1,183 @@
+{
+  "note": "Independent cross-validation of GT provenance: the same demo parsed by CS Demo Manager (CSDM 4.x, on the render machine) vs demoparser2==0.41.4 (build_gt.py). Rounds 1-2, all 16 kills, compared on (tick, t, round, killer, victim): exact agreement. CSDM's tradeKill marks the avenging kill; build_gt's was_traded marks the avenged kill - the two views map 1:1 (3 trades in range). Labels anonymized to P1..P10 in both.",
+  "n_compared": 16,
+  "n_mismatches": 0,
+  "csdm_export": [
+    {
+      "round": 1,
+      "tick": 2797,
+      "t_video": 21.19,
+      "killer": "P7",
+      "victim": "P2",
+      "weapon": "Glock-18",
+      "headshot": true,
+      "tradeKill": false,
+      "tradeDeath": false
+    },
+    {
+      "round": 1,
+      "tick": 3343,
+      "t_video": 29.72,
+      "killer": "P5",
+      "victim": "P9",
+      "weapon": "USP-S",
+      "headshot": true,
+      "tradeKill": false,
+      "tradeDeath": true
+    },
+    {
+      "round": 1,
+      "tick": 3485,
+      "t_video": 31.94,
+      "killer": "P7",
+      "victim": "P5",
+      "weapon": "Glock-18",
+      "headshot": false,
+      "tradeKill": true,
+      "tradeDeath": false
+    },
+    {
+      "round": 1,
+      "tick": 3516,
+      "t_video": 32.42,
+      "killer": "P4",
+      "victim": "P6",
+      "weapon": "USP-S",
+      "headshot": true,
+      "tradeKill": false,
+      "tradeDeath": false
+    },
+    {
+      "round": 1,
+      "tick": 3952,
+      "t_video": 39.23,
+      "killer": "P8",
+      "victim": "P4",
+      "weapon": "Glock-18",
+      "headshot": false,
+      "tradeKill": false,
+      "tradeDeath": false
+    },
+    {
+      "round": 1,
+      "tick": 4757,
+      "t_video": 51.81,
+      "killer": "P3",
+      "victim": "P8",
+      "weapon": "USP-S",
+      "headshot": true,
+      "tradeKill": false,
+      "tradeDeath": true
+    },
+    {
+      "round": 1,
+      "tick": 4765,
+      "t_video": 51.94,
+      "killer": "P7",
+      "victim": "P1",
+      "weapon": "Glock-18",
+      "headshot": false,
+      "tradeKill": false,
+      "tradeDeath": false
+    },
+    {
+      "round": 1,
+      "tick": 4903,
+      "t_video": 54.09,
+      "killer": "P10",
+      "victim": "P3",
+      "weapon": "Glock-18",
+      "headshot": true,
+      "tradeKill": true,
+      "tradeDeath": false
+    },
+    {
+      "round": 2,
+      "tick": 7407,
+      "t_video": 93.22,
+      "killer": "P5",
+      "victim": "P7",
+      "weapon": "Desert Eagle",
+      "headshot": true,
+      "tradeKill": false,
+      "tradeDeath": false
+    },
+    {
+      "round": 2,
+      "tick": 7762,
+      "t_video": 98.77,
+      "killer": "P2",
+      "victim": "P6",
+      "weapon": "Desert Eagle",
+      "headshot": true,
+      "tradeKill": false,
+      "tradeDeath": false
+    },
+    {
+      "round": 2,
+      "tick": 7912,
+      "t_video": 101.11,
+      "killer": "P3",
+      "victim": "P9",
+      "weapon": "PP-Bizon",
+      "headshot": false,
+      "tradeKill": false,
+      "tradeDeath": false
+    },
+    {
+      "round": 2,
+      "tick": 7931,
+      "t_video": 101.41,
+      "killer": "P2",
+      "victim": "P10",
+      "weapon": "Desert Eagle",
+      "headshot": true,
+      "tradeKill": false,
+      "tradeDeath": false
+    },
+    {
+      "round": 2,
+      "tick": 9601,
+      "t_video": 127.5,
+      "killer": "P8",
+      "victim": "P4",
+      "weapon": "MAC-10",
+      "headshot": true,
+      "tradeKill": false,
+      "tradeDeath": false
+    },
+    {
+      "round": 2,
+      "tick": 9678,
+      "t_video": 128.7,
+      "killer": "P8",
+      "victim": "P5",
+      "weapon": "MAC-10",
+      "headshot": false,
+      "tradeKill": false,
+      "tradeDeath": false
+    },
+    {
+      "round": 2,
+      "tick": 10632,
+      "t_video": 143.61,
+      "killer": "P8",
+      "victim": "P2",
+      "weapon": "MAC-10",
+      "headshot": true,
+      "tradeKill": false,
+      "tradeDeath": true
+    },
+    {
+      "round": 2,
+      "tick": 10790,
+      "t_video": 146.08,
+      "killer": "P3",
+      "victim": "P8",
+      "weapon": "PP-Bizon",
+      "headshot": false,
+      "tradeKill": true,
+      "tradeDeath": false
+    }
+  ]
+}
