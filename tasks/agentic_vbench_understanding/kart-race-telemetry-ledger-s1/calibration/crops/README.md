@@ -23,13 +23,20 @@ the hero is scored, so every scored event is on-camera — nothing caps the orac
 `contested_startgrid_cluster_720p.png` / `pack_cluster_720p.png` — karts clustered around the hero
 at the start with item boxes still distinguishable (review point #73.2).
 
-**Provenance — REGENERATION REQUIRED before merge (measured 2026-09-04).** These frames are native
-1280x720, but they are NOT from the current render. Measured on the five full-frame crops, the
-blacked-out HUD rectangle in them is x 512..767, y 0..131. The render that shipped before this fix
-used x 505..814, y 5..144, and the rectangle the geometry actually requires (generator/hud_mask.py)
-is x 470..819, y 5..149. So the mask box drifted across three renders while it was hand-fitted,
-which is what the derivation plus generator/verify_mask_box.py now prevents. The crops still show
-what they are cited for -- the item box, the dizzy-stars spin-out, and the yellow drift sparks are
-rendered identically -- but any frame here that includes the top-centre HUD misrepresents the
-shipped mask, so these need re-cutting from the current race.mp4 (they are reviewer evidence only;
-no agent-facing file references them).
+**Provenance.** All frames are native 1280x720, cut from the shipped `race.mp4`
+(sha256 `ee7d966e…`) at these video timestamps:
+
+| file | video time | source race |
+| --- | --- | --- |
+| `drift_720p.png`, `zoom_drift_sparks.png` | 637.17 s | cornfield_crossing |
+| `zoom_no_drift_straight.png` | 648.17 s | cornfield_crossing — the same kart 11 s later, sparks gone |
+| `spinout_and_itembox_720p.png`, `zoom_item_box.png`, `zoom_spinout_stars.png` | 58.00 s | hacienda |
+| `hit_spinout_720p.png` | 921.47 s | lighthouse |
+| `contested_startgrid_cluster_720p.png` | 1062.30 s | gran_paradiso_island |
+| `pack_cluster_720p.png` | 24.00 s | hacienda |
+
+Every full-frame crop was checked to carry the mask rectangle that `generator/hud_mask.py` requires
+(x 470..819, y 5..149, within the 3 px the lossy re-encode allows), so these frames show the same
+HUD the agent sees. An earlier set was cut from a superseded render whose hand-fitted mask box was
+x 512..767, y 0..131; that box matched neither the render it shipped with nor the derived one, which
+is what `generator/verify_mask_box.py` now prevents.
