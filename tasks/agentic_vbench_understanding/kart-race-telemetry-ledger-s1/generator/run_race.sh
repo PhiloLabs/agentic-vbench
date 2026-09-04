@@ -38,7 +38,8 @@ else
 fi
 : "${DISPNUM:?no free X display in 77..99}"
 DISP=":$DISPNUM"
-W=1280; H=720
+W=${W:-1280}; H=${H:-720}   # run_suite.sh exports these so the HUD mask is
+                            # derived from the SAME size that is rendered
 mkdir -p "$OUT"
 
 FF=${FFMPEG:-$(/usr/bin/python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())" 2>/dev/null || echo ffmpeg)}

@@ -29,6 +29,28 @@ Notes learned the hard way:
 - Profile mode works with graphics on as well, so the *recorded* run can be its own GT —
   no cross-run determinism assumption needed.
 
+## The HUD mask is verified by its box, not by hunting sprites (2026-09-04)
+
+The first mask box was hand-fitted from a comment that mis-stated the sprite geometry, and it was
+35 px too narrow on the left. `hud_mask.py` now derives the rectangle from STK's own drawing code
+and self-tests it: at 1280x720 a single local player gives scale 1.6, so icons are 102 px tall at
+y 32..134, and because the row is centred it is widest at `MAX_POWERUPS = 5`, spanning x 488..794.
+The old box started at x=505, so with five items held a 17 px strip of the leftmost icon stayed
+visible — enough to signal both that an item was held and, from the shifted layout, how many.
+
+The obvious check — look for the sprites in the rendered video — does not work, and this was
+measured rather than assumed. A held sprite is static while the scenery moves, so a burst of
+consecutive frames separates it in principle; in practice STK powerup icons are mostly transparent
+(`icon-bubblegum.png` is 22% opaque, mean alpha 0.28), so only a sprite's opaque core is static,
+and the surviving signal does not separate from ordinary scenery. Sweeping the static-row and
+texture thresholds over 40 scenery bursts plus a held-out set of 40: every setting sensitive enough
+to catch a 17 px sliver also fired on 3–6 scenery bursts, and every setting that silenced scenery
+also missed the sliver. Detecting the black box instead is unambiguous — it is found in 24/24
+sampled frames, to the pixel — so `verify_mask_box.py` measures the shipped rectangle and compares
+it to the derived one, and is checked in both directions (it must report the unmasked concat as
+unmasked). Frames that are black all over, the transitions between races, are why presence needs
+an agreement threshold rather than a single hit.
+
 ## Rendering path
 
 Xvfb + `LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe` (swrast present on this node),

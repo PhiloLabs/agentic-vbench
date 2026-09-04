@@ -50,10 +50,17 @@ for d in race_dirs:
         "items_collected": row["items_collected"],
         "spinouts": row["bananas_hit"] + row["times_exploded"],   # banana + bomb hits look identical,
                                                                   # so their sum is kept as UNSCORED context (spinouts is not scored)
-        # skid_time is rescaled from telemetry GAME seconds into VIDEO seconds below (see the window
-        # loop): the software-GL capture runs below realtime, so an agent timing drift off the video
-        # must be scored on the video clock.
-        "_skid_game": round(row["skid_time"], 2),
+        # SCORED drift total, already in VIDEO seconds: the patched build integrates the real skid
+        # state in WALL-CLOCK time, and the suite is captured by x11grab at a constant wall-clock
+        # frame rate, so this needs NO game->video rescaling. The old per-race factor was not even
+        # the right factor for this quantity: on hacienda the clip ran 1.224x longer than game time
+        # while the drift's own wall/game ratio was 1.152, and across the suite the two disagree by
+        # up to 0.241 (cocoa_temple 1.927 vs 1.686), so one factor mis-scaled what it meant to fix.
+        "skid_time": round(row["actual_skid_wall"], 2),
+        # context (unscored) - the three other drift readings, kept so the choice is auditable
+        "skid_actual_game": round(row["actual_skid_time"], 2),
+        "skid_input_game": round(row["skid_time"], 2),      # STK's stock stat: skid INPUT held
+        "skid_showgfx_game": round(row["showgfx_skid_time"], 2),
         "_game_dur": round(max(k["time"] for k in gt["karts"]), 3),  # race length, GAME seconds
         # context (unscored): kept for reference / calibration
         "bananas_hit": row["bananas_hit"],
@@ -73,16 +80,13 @@ for r, d in zip(races, race_dirs):
     r["t_start"] = round(_t, 2)
     r["t_end"] = round(_t + cd, 2)
     _t += cd
-    # Rescale drift-time from telemetry GAME seconds into VIDEO seconds. Under software-GL the capture
-    # runs below realtime by a per-race factor (heavy tracks slow llvmpipe more), so a race of length
-    # _game_dur game-seconds spans cd video-seconds. The agent times the yellow drift-sparks in VIDEO
-    # seconds off the video, so the scored GT must be on the same clock, else an honest measurement is
-    # graded against a different clock. factor = video_clip_duration / game_race_duration.
-    factor = (cd / r["_game_dur"]) if r["_game_dur"] else 1.0
-    r["speed_factor"] = round(factor, 3)
-    r["skid_time"] = round(r["_skid_game"] * factor, 2)   # VIDEO-second drift total (scored)
-    r["skid_time_game"] = r["_skid_game"]                 # raw telemetry drift (context, unscored)
-    del r["_skid_game"], r["_game_dur"]
+    # No drift rescaling: skid_time already arrives in wall-clock (== video) seconds. The overall
+    # render slowdown is still recorded per race for reference only.
+    r["render_speed_factor"] = round((cd / r["_game_dur"]) if r["_game_dur"] else 1.0, 3)
+    del r["_game_dur"]
+    # Sanity: a drift total can never exceed the clip it happened in.
+    if r["skid_time"] > cd:
+        sys.exit(f"{r['track']}: skid_time {r['skid_time']}s exceeds clip duration {cd}s")
 
 if len(hero_set) != 1:
     sys.exit(f"hero must be constant across the suite for a clean cross-race ranking, got {hero_set}")

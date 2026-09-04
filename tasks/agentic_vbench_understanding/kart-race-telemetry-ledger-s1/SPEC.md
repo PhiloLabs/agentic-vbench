@@ -27,8 +27,8 @@ ground_truth:
           STK prints exact per-kart telemetry (bonus_count, banana_count, explosion_count, skid_time,
           ...). The camera follows the hero because the generator makes it the player kart (--kart=tux
           --ai=<rest>), so the recorded run is its own ground truth AND the scored kart is on screen
-          the whole race. skid_time is RESCALED from telemetry game-seconds into VIDEO seconds (see
-          SKID TIMEBASE below and generator/build_ground_truth.py).
+          the whole race. skid_time is MEASURED on the video's clock by a patched STK (see SKID
+          TIMEBASE below, generator/README.md and generator/stk-actual-skid.patch); it is not rescaled.
   tier: machine-truth
   verification: oracle solution.json = the hero's telemetry rows; judge.py scores it 1.0 through the
                 harness path (solve.sh -> judge.py) on both scored quantities.
@@ -65,24 +65,32 @@ scorer:
   # agent — it undercounts pickups ~half and cannot time drift to within 30%.
   oracle_reward: 1.0
   null_reward: 0.0
-  measured_ablations:            # on the shipped 12-race ground truth, current 2-dim scorer
-    correct_counts_wrong_times: 0.0    # right counts at shuffled video times -> the time window rejects
-    blind_guess: 0.027           # random solutions (seed-dependent, ~0.007-0.03); the tau gate collapses guessing
-    single_frame: 0.0            # one frame -> no per-race differentiation -> constant -> tau 0
-    no_media: 0.009              # prompt + schema only; nothing to differentiate races
+  measured_ablations:            # RE-MEASURED 2026-09-04 on the current 12-race ground truth
+    correct_counts_wrong_times: 0.0075 # right counts at shuffled video times -> the time window rejects
+                                       # nearly all of them (a shuffle can land one race by chance)
+    blind_guess: 0.0173         # random values in the GT's own ranges at correct times, mean of 20
+                                # seeds (range 0.0000-0.0468); the tau gate collapses guessing
+    single_frame: 0.0           # one frame -> no per-race differentiation -> constant answer -> tau 0
+                                # (measured as a constant answer at the median of each field)
+    no_media: PENDING           # needs an agent run on the current media; the previous instance
+                                # measured 0.009 and does not transfer (see CALIBRATION STATUS)
     ocr_only: 0.0                # NO scored quantity is on-screen text (HUD masked, off-HUD) -> guess
     constant_counts: 0.0         # every race identical -> predicted ties -> 0
     empty: 0.0
 
-# SKID TIMEBASE (correctness). The software-GL capture runs BELOW realtime, and by a per-race factor
-# (heavy tracks slow llvmpipe more), so a race of G game-seconds spans V > G video-seconds. Telemetry
-# skid_time is in GAME seconds; the agent times drift off the VIDEO in VIDEO seconds. So the GT is
-# rescaled per race: skid_time_video = skid_time_game * (video_clip_duration / game_race_duration).
-# Measured per-race speed factors V/G (published so the map is auditable):
-#   hacienda 1.13  snowmountain 1.31  cornfield_crossing 1.56  lighthouse 1.47  gran_paradiso 1.87
-#   sandtrack 1.23  olivermath 1.18  cocoa_temple 1.75  scotland 1.28  fortmagma 1.31
-#   ravenbridge 1.47  stk_enterprise 1.13   (mean 1.39). GT keeps skid_time_game + speed_factor per
-# race for reference. Oracle = 1.0 on the rescaled values.
+# SKID TIMEBASE (correctness). The agent times drift off the VIDEO, so the GT has to be on the
+# video's clock. Two things separate STK's stock statistic from that clock, and both are now fixed at
+# the source instead of by rescaling:
+#   1. Stock skid_time counts the time the skid INPUT was held, not the time the kart actually
+#      drifted; on this suite it runs 1.136x-1.378x above the real drift, per race.
+#   2. Telemetry is in GAME seconds, and software-GL capture runs below realtime.
+# The patched STK (generator/stk-actual-skid.patch) integrates the REAL skid state in WALL-CLOCK
+# seconds, and x11grab records at a constant wall-clock rate, so the scored value is already in video
+# seconds. Rescaling could not have produced it: per-race render factors run 1.128-1.927 while each
+# race's own drift wall/game ratio runs 1.033-1.765, and the two disagree by as much as 0.241
+# (cocoa_temple, 1.927 vs 1.686) -- a single factor mis-scales the quantity it is meant to fix.
+# GT carries skid_actual_game, skid_input_game, skid_showgfx_game and render_speed_factor per race as
+# unscored context, so the choice is auditable. Oracle = 1.0 on the measured values.
 
 # OBSERVABILITY — both scored quantities are visible on the hero (crops in calibration/crops/):
 #  * items_collected — the hero drives THROUGH a question-mark box (visible; HUD confirmation masked).
@@ -96,7 +104,14 @@ difficulty: {strong_agent_reward: 0.0885, agent_model: gemini-3.5-flash}  # host
 # TOOL PROFILE (documented, pinned in environment/Dockerfile): numpy==2.1.3, Pillow==11.0.0,
 # opencv-python-headless==4.10.0.84 + ffmpeg + stdlib; allow_internet=false. Normal CV tools the agent
 # is expected to have; difficulty is off-HUD counting/timing over 55 min, not tool withholding.
-# CALIBRATION STATUS: the numbers below are HOST-RUN and INDICATIVE (Docker unavailable on our node;
+# CALIBRATION STATUS -- VOID as of 2026-09-04. Every agent number below (and difficulty:
+# strong_agent_reward above) was measured on the PREVIOUS media instance, before the drift timebase
+# was fixed at the source and before the HUD mask box was corrected. STK profile mode is not
+# reproducible run-to-run, so the current suite is a NEW instance and these do not transfer: they
+# are kept only as the record of how the design was hardened. The gate-setting pilot has to be re-run
+# on the current media before this task can merge. Scorer-only ablations (which need no agent) are
+# re-measured against the current ground truth and are marked as such.
+# The numbers below were HOST-RUN and INDICATIVE (Docker unavailable on our node;
 # the local sandbox did not fully enforce the profile). A single clean gate-setting pilot on the
 # finalized image (pinned profile, exact committed prompt, allow_internet=false) is being run by a
 # maintainer on a Docker/Harbor executor (PR #106); it replaces these. All host-run values < 0.10:
@@ -112,7 +127,7 @@ difficulty: {strong_agent_reward: 0.0885, agent_model: gemini-3.5-flash}  # host
 #   + HUD powerup mask (identification-hardness):         0.345
 #   + EXACT-count metric (accuracy within 30%, not rank): items term 0.46 -> 0.10
 #   + time-anchored (races matched by video time +/-15 s)
-#   + skid_time rescaled to VIDEO seconds (timebase fix)
+#   + skid_time MEASURED in video seconds by a patched STK (timebase fix; replaced the rescale)
 #   + DROP spinouts (too countable; broke the bar) -> items+skid
 #   + scorer fixes (assignment-safe t_start matching; races=null -> 0; per-dimension coverage)
 #   + document + pin the CV-tool profile; clean image gate-setting pilot pending

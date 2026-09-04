@@ -1,5 +1,17 @@
 # Calibration — kart-race-telemetry-ledger-s1
 
+> **VOID as of 2026-09-04 — every agent score on this page was measured on the previous media
+> instance.** Two defects were fixed at the source since: the drift timebase (a patched STK now
+> measures real drift in wall-clock seconds, replacing a rescale of a skid-INPUT statistic) and the
+> HUD mask box (hand-fitted 35 px too narrow on the left, so five held items left a 17 px sliver of
+> the leftmost icon visible). Both changes require a fresh render, and STK profile mode is not
+> reproducible run-to-run, so the current suite is a NEW instance: the strong-agent figure and the
+> agent ablations here do not transfer and the gate-setting pilot must be re-run before merge.
+> What HAS been re-measured on the current ground truth, because it needs no agent: oracle 1.0000,
+> blind_guess 0.0173 (mean of 20 seeds, 0.0000–0.0468), correct_counts_wrong_times 0.0075,
+> constant/single-frame 0.0000, empty 0.0000. The scorer itself is unchanged and its 22 regression
+> checks pass against the new ground truth.
+
 **Scorer (as shipped).** TIME-ANCHORED + EXACT. Each predicted race is matched to a GT race by an
 **optimal (assignment-safe, min-cost max-cardinality) bipartite matching** on its reported `t` — a
 prediction whose `t` is contained in a GT segment is preferred, else one within **±15 s** is

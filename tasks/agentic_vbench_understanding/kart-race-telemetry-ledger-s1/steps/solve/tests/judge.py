@@ -61,8 +61,9 @@ DIMS = [("items_collected", "items_collected", 0.55),
 # defeat it: it undercounts pickups by ~half and cannot time drift to within 30%):
 #  * items_collected — the hero drives through a question-mark box (HUD powerup slot masked, no
 #    on-screen count), so pickups must be caught from the video.
-#  * skid_time — total DRIFT SECONDS in VIDEO time (the GT is rescaled from telemetry game-seconds to
-#    the video clock; see generator/build_ground_truth.py). Drift's tell is bright YELLOW sparks from
+#  * skid_time — total DRIFT SECONDS in VIDEO time (the GT is MEASURED on that clock: a patched STK
+#    integrates the real skid state in wall-clock seconds, which is what the capture records, so
+#    nothing is rescaled; see generator/README.md). Drift's tell is bright YELLOW sparks from
 #    BOTH rear wheels while skidding (calibration/crops/drift_720p.png), absent when running straight,
 #    so it is witnessable and its duration scorable (hard: time + sum the drifts to within 30%).
 # spinouts is NOT scored: the dizzy-stars spin-out is legible enough that a strong agent counts it

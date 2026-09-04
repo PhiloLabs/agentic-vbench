@@ -13,13 +13,15 @@ run_suite.sh OUTDIR                                   # render the 12-race suite
   └─ run_race.sh OUTDIR TRACK LAPS "kart1,..,kartK" DIFF HERO   # one race, camera on HERO
        └─ SuperTuxKart --profile-laps --kart=HERO --ai=<rest>   # Xvfb + software GL + ffmpeg x11grab
   └─ parse_profile.py  stk_stdout.log gt.json --expect K        # profile table -> per-race GT
-  └─ (concat -> race_suite.mp4; the shipped race.mp4 masks the top-center HUD powerup slot)
+  └─ (concat -> race_suite.mp4; hud_mask.py derives the mask box, drawbox writes race.mp4,
+      audit_hud_mask.py then proves the indicator is gone from the file that ships)
   └─ build_ground_truth.py OUTDIR ground_truth.json             # hero-scoped GT (items+skid scored; spinouts context)
 ```
 
 ## Requirements
 
-- SuperTuxKart 1.5 (prebuilt Linux binary; set `STK` in `run_race.sh`).
+- SuperTuxKart 1.5, **patched** for the actual-skid columns (see *Actual-skid
+  instrumentation* below); point `STK` at a directory holding a `run_game.sh` that execs it.
 - `Xvfb`, software-GL Mesa (`LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe`), and an `ffmpeg`
   with `x11grab` + `libx264` (this repo uses the `imageio-ffmpeg` build for encoding and the system
   `ffprobe`). The generator itself is stdlib Python 3.
@@ -34,6 +36,49 @@ Two off-HUD, machine-exact SCORED quantities of the **hero** kart, per race (plu
 
 `build_ground_truth.py` emits the two scored fields (plus context incl. spinouts) and refuses to ship a suite
 where any scored field has no spread across races.
+
+## Actual-skid instrumentation
+
+The scored `skid_time` comes from a **patched** SuperTuxKart, not the stock build. Stock profile
+mode prints one skid figure, and `KartWithStats::update` accumulates it whenever the skid INPUT is
+held (`if(getControls().getSkidControl()) m_skidding_time += dt;`) — including while the kart is too
+slow or airborne to actually drift. Measured on this suite it overstates visible drift by
+1.136x–1.378x per race, so an agent timing the yellow sparks off the video cannot reproduce it at
+any sane tolerance.
+
+`generator/stk-actual-skid.patch` applies to upstream `supertuxkart/stk-code` commit `1fb491f` and
+adds three readings taken from the skid STATE MACHINE — the same state that drives the sparks, the
+tyre marks and the skid sound:
+
+| column | clock | meaning |
+| --- | --- | --- |
+| `actual_skid_wall` | wall-clock, i.e. recorded video | `SKID_ACCUMULATE_*` duration — **this is the scored `skid_time`** |
+| `actual_skid_time` | game | the same state in game seconds (unscored context) |
+| `showgfx_skid_time` | game | the post-skid `SKID_SHOW_GFX_*` glow, where the emitter drops to its minimum rate (unscored context) |
+
+It also titles the `off_track_count` column, which stock prints in the data rows but omits from the
+header, so header and rows now line up (`parse_profile.py` no longer drops a column by hand).
+
+Scoring the wall-clock integral is what removes the game→video rescaling the earlier revision
+applied. The suite is captured by `ffmpeg x11grab` at a constant wall-clock frame rate, so
+wall-clock seconds *are* video seconds. The old rescale used `clip_duration / game_duration`, which
+is not that ratio: on hacienda the clip ran 1.224x longer than game time while the drift's own
+wall/game ratio was 1.152, and across the suite the two disagree by as much as 0.241
+(cocoa_temple, 1.927 vs 1.686).
+
+Build:
+
+```
+git clone https://github.com/supertuxkart/stk-code && cd stk-code
+git checkout 1fb491f
+git apply .../generator/stk-actual-skid.patch
+cmake -B build_gfx -DCMAKE_BUILD_TYPE=Release && cmake --build build_gfx -j
+```
+
+Assets come from the 1.5 binary release (`SUPERTUXKART_DATADIR`, `SUPERTUXKART_ASSETS_DIR`). Give
+each race a writable `HOME`/`XDG_CONFIG_HOME`, or parallel races race on config writes. A fresh
+config is also what keeps the HUD mask valid: it leaves the powerup indicator at its default centre
+position and default 64 px icon size, which is what `hud_mask.py` derives the box from.
 
 ## Design notes (learned the hard way — see NOTES.md)
 

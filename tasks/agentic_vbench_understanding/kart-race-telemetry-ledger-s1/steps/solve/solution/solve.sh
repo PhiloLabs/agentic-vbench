@@ -10,87 +10,87 @@ cat > "$OUT" <<'JSON'
   "races": [
     {
       "track": "hacienda",
-      "t": 113.3,
-      "items_collected": 17,
-      "spinouts": 3,
-      "skid_time": 85.3
+      "t": 119.4,
+      "items_collected": 5,
+      "spinouts": 5,
+      "skid_time": 64.83
     },
     {
       "track": "snowmountain",
-      "t": 345.1,
+      "t": 358.5,
       "items_collected": 14,
-      "spinouts": 2,
-      "skid_time": 74.87
+      "spinouts": 5,
+      "skid_time": 56.65
     },
     {
       "track": "cornfield_crossing",
-      "t": 632.7,
-      "items_collected": 6,
-      "spinouts": 10,
-      "skid_time": 62.62
+      "t": 654.8,
+      "items_collected": 4,
+      "spinouts": 9,
+      "skid_time": 45.66
     },
     {
       "track": "lighthouse",
-      "t": 906.9,
-      "items_collected": 13,
+      "t": 931.5,
+      "items_collected": 11,
       "spinouts": 1,
-      "skid_time": 96.52
+      "skid_time": 78.62
     },
     {
       "track": "gran_paradiso_island",
-      "t": 1221.8,
-      "items_collected": 22,
-      "spinouts": 1,
-      "skid_time": 171.05
+      "t": 1237.0,
+      "items_collected": 13,
+      "spinouts": 4,
+      "skid_time": 145.58
     },
     {
       "track": "sandtrack",
-      "t": 1559.5,
-      "items_collected": 8,
+      "t": 1556.0,
+      "items_collected": 14,
       "spinouts": 2,
-      "skid_time": 29.34
+      "skid_time": 15.85
     },
     {
       "track": "olivermath",
-      "t": 1749.9,
-      "items_collected": 10,
-      "spinouts": 1,
-      "skid_time": 37.04
+      "t": 1734.6,
+      "items_collected": 6,
+      "spinouts": 4,
+      "skid_time": 25.18
     },
     {
       "track": "cocoa_temple",
-      "t": 1992.7,
-      "items_collected": 15,
-      "spinouts": 4,
-      "skid_time": 81.95
+      "t": 1996.3,
+      "items_collected": 13,
+      "spinouts": 0,
+      "skid_time": 53.91
     },
     {
       "track": "scotland",
-      "t": 2297.0,
-      "items_collected": 13,
-      "spinouts": 0,
-      "skid_time": 117.07
+      "t": 2327.2,
+      "items_collected": 12,
+      "spinouts": 3,
+      "skid_time": 89.95
     },
     {
       "track": "fortmagma",
-      "t": 2548.3,
+      "t": 2591.2,
       "items_collected": 16,
-      "spinouts": 5,
-      "skid_time": 94.56
+      "spinouts": 4,
+      "skid_time": 64.78
     },
     {
       "track": "ravenbridge_mansion",
-      "t": 2844.5,
-      "items_collected": 4,
-      "spinouts": 0,
-      "skid_time": 45.14
+      "t": 2898.6,
+      "items_collected": 7,
+      "spinouts": 1,
+      "skid_time": 45.88
     },
     {
       "track": "stk_enterprise",
-      "t": 3158.1,
-      "items_collected": 28,
-      "spinouts": 2,
-      "skid_time": 36.94
+      "t": 3224.8,
+      "items_collected": 25,
+      "spinouts": 4,
+      "skid_time": 31.07
     }
   ]
 }

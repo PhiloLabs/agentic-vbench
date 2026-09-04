@@ -20,6 +20,7 @@ HERE=$(dirname "$(readlink -f "$0")")
 FFX=${FFMPEG:-$(/usr/bin/python3 -c "import imageio_ffmpeg;print(imageio_ffmpeg.get_ffmpeg_exe())" 2>/dev/null || echo ffmpeg)}
 export FFPROBE=${FFPROBE:-$(command -v ffprobe || echo /pkg/ffmpeg/4.2.2/bin/ffprobe)}
 export FFMPEG=$FFX
+export W=${W:-1280} H=${H:-720}   # render size; the HUD mask is derived from it
 
 SPECS=(
   "hacienda:tux,gnu,adiumy,amanda,beastie,kiki,konqi,nolok,puffy,wilber"
@@ -58,6 +59,33 @@ done
 
 "$FFX" -v error -f concat -safe 0 -i "$OUT/concat.txt" -c:v libx264 -crf 23 -preset veryfast \
        -pix_fmt yuv420p -r 15 "$OUT/race_suite.mp4" -y
+
+# HUD POWERUP MASK (this is the step that produces the SHIPPED media).
+# STK draws the powerup indicator at the TOP-CENTRE of the viewport, one sprite per held item.
+# The box is DERIVED from STK's own drawing code at this render size rather than hard-coded: see
+# generator/hud_mask.py, which carries the derivation and a self-test. The row is centred, so it
+# grows outward as the held-item count rises and is widest at MAX_POWERUPS=5; a box fitted to a
+# narrower row clips the widest one and leaves a visible sliver of the leftmost sprite.
+# Every other HUD element is left untouched: ranking column (top-left), timer + lap (top-right),
+# minimap (bottom-left), nitro gauge + position (bottom-right).
+# Masking the slot is what makes items_collected an OFF-HUD quantity: without it the indicator
+# shows the held item type AND count, i.e. a visible per-pickup event the prompt says is absent.
+/usr/bin/python3 "$HERE/hud_mask.py" --selftest
+eval "$(/usr/bin/python3 "$HERE/hud_mask.py" --width "$W" --height "$H" --shell)"
+"$FFX" -v error -i "$OUT/race_suite.mp4" \
+       -vf "drawbox=x=${MASK_X}:y=${MASK_Y}:w=${MASK_W}:h=${MASK_H}:color=black@1.0:t=fill" \
+       -c:v libx264 -crf 23 -preset veryfast -pix_fmt yuv420p -r 15 -an \
+       "$OUT/race.mp4" -y
+test -s "$OUT/race.mp4" || { echo "HUD mask pass produced no video — aborting"; exit 9; }
+
+# Check the mask on the FILE THAT SHIPS: measure the black rectangle actually present and require
+# it to equal the rectangle hud_mask.py derives. Both directions are checked, so the check is known
+# to fire rather than merely to pass. Spotting the sprites themselves would be the more direct test
+# and was tried; an alpha-blended sprite sliver is not separable from ordinary scenery at any usable
+# threshold (measured -- see NOTES.md), so the box placement is what gets verified.
+/usr/bin/python3 "$HERE/verify_mask_box.py" "$OUT/race_suite.mp4" --width "$W" --height "$H" --expect-absent
+/usr/bin/python3 "$HERE/verify_mask_box.py" "$OUT/race.mp4"       --width "$W" --height "$H"
+echo "MASKED_MEDIA $OUT/race.mp4 sha256=$(sha256sum "$OUT/race.mp4" | cut -d" " -f1)"
 SDUR=$("$FFPROBE" -v error -show_entries format=duration -of csv=p=0 "$OUT/race_suite.mp4")
 awk -v d="$SDUR" 'BEGIN{exit !(d>600)}' || echo "WARNING: suite is ${SDUR}s, under the 10-minute minimum"
 

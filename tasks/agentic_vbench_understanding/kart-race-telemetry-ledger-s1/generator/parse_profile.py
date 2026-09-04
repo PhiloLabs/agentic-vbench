@@ -45,7 +45,15 @@ if header is None:
 
 KEEP = {"start_position": int, "end_position": int, "time": float, "top_speed": float,
         "skid_time": float, "rescue_count": int, "bonus_count": int, "banana_count": int,
-        "explosion_count": int, "small_nitro_count": int, "large_nitro_count": int}
+        "explosion_count": int, "small_nitro_count": int, "large_nitro_count": int,
+        # Instrumented columns (patched STK, see generator/README.md "Actual-skid instrumentation").
+        # skid_time above is STK's stock statistic and accumulates while the skid INPUT is held
+        # (KartWithStats::update: `if(getControls().getSkidControl()) m_skidding_time += dt;`), which
+        # over-states real drift by ~1.4x. The three below come from the skid STATE MACHINE:
+        #   actual_skid_time  - SKID_ACCUMULATE_* duration, GAME seconds
+        #   actual_skid_wall  - same, WALL-CLOCK seconds == recorded-VIDEO seconds (this is scored)
+        #   showgfx_skid_time - post-skid SKID_SHOW_GFX_* "bonus available" glow, GAME seconds
+        "actual_skid_time": float, "actual_skid_wall": float, "showgfx_skid_time": float}
 
 karts = []
 for line in lines:
@@ -60,7 +68,7 @@ for line in lines:
         continue
     if len(f) > 1 and not f[1].lstrip("-").replace(".", "").isdigit():
         f = [f[0]] + f[2:]            # drop the AI-controller token
-    # rows carry one more column than the header (an untitled off-track counter)
+    # header and row are aligned in the patched build (off_track_count is now titled)
     if len(f) < len(header) or not f[1].isdigit():
         continue
     row = dict(zip(header, f))
