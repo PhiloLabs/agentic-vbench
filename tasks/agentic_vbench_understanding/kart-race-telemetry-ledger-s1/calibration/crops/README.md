@@ -23,4 +23,13 @@ the hero is scored, so every scored event is on-camera — nothing caps the orac
 `contested_startgrid_cluster_720p.png` / `pack_cluster_720p.png` — karts clustered around the hero
 at the start with item boxes still distinguishable (review point #73.2).
 
-All frames are native 1280x720 from the shipped race.mp4.
+**Provenance — REGENERATION REQUIRED before merge (measured 2026-09-04).** These frames are native
+1280x720, but they are NOT from the current render. Measured on the five full-frame crops, the
+blacked-out HUD rectangle in them is x 512..767, y 0..131. The render that shipped before this fix
+used x 505..814, y 5..144, and the rectangle the geometry actually requires (generator/hud_mask.py)
+is x 470..819, y 5..149. So the mask box drifted across three renders while it was hand-fitted,
+which is what the derivation plus generator/verify_mask_box.py now prevents. The crops still show
+what they are cited for -- the item box, the dizzy-stars spin-out, and the yellow drift sparks are
+rendered identically -- but any frame here that includes the top-centre HUD misrepresents the
+shipped mask, so these need re-cutting from the current race.mp4 (they are reviewer evidence only;
+no agent-facing file references them).

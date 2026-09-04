@@ -144,6 +144,10 @@ anti_shortcut:
 
 input:
   url: https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/39f1b933102acb3e52348752eb736b31c4c9d50b/kart-race-telemetry-ledger-s1/race.mp4
+  # REPIN PENDING: the revision above is the PREVIOUS render. The current media is
+  # sha256 ee7d966e2f47f63c01d347b8994324bb1f1e645d27084bc562c69cb4cf8dafc8
+  # (1647690764 bytes, 1280x720, 50600 frames, 3373.334 s). environment/Dockerfile already
+  # pins that checksum, so a build fails loudly until this url is repinned after upload.
   sha256: 4b4cee91675cf7b9699e645dc490343026a7022a2de008b7e1397c69ee59eb42
   length_min: 55.1
   resolution: 720

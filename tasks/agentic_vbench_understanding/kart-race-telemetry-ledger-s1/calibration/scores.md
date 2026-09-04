@@ -86,16 +86,23 @@ pickups under the masked HUD — under-counting, or over-counting when they gues
 30%); **skid** accuracy 0.00–0.06 (none sum cumulative drift to within 30% over a 55-min video). Both
 defeat the agent; the oracle is 1.0 and a within-30% agent would score far higher.
 
-## skid_time timebase (correctness)
+## skid_time timebase (correctness) — SUPERSEDED 2026-09-04
 
-The software-GL capture runs **below realtime**, by a per-race factor (heavy tracks slow llvmpipe
-more), so a race of G game-seconds spans V > G video-seconds. Telemetry `skid_time` is in game
-seconds; the agent times drift off the **video** in video seconds. The GT is therefore rescaled per
-race — `skid_time_video = skid_time_game · (video_clip_duration / game_race_duration)` — in
-`generator/build_ground_truth.py`, and each race keeps `skid_time_game` + `speed_factor` for audit.
-Measured speed factors (V/G): hacienda 1.13, snowmountain 1.31, cornfield 1.56, lighthouse 1.47,
-gran_paradiso 1.87, sandtrack 1.23, olivermath 1.18, cocoa_temple 1.75, scotland 1.28, fortmagma
-1.31, ravenbridge 1.47, stk_enterprise 1.13 (mean 1.39). Oracle = 1.0 on the rescaled values.
+**How it works now.** A patched SuperTuxKart integrates the kart's real skid state in **wall-clock**
+seconds, and the capture records at a constant wall-clock rate, so the scored `skid_time` is already
+in video seconds and nothing is rescaled. The GT keeps `skid_actual_game`, `skid_input_game`,
+`skid_showgfx_game` and `render_speed_factor` per race as unscored context. See SPEC.md "SKID
+TIMEBASE" and generator/README.md "Actual-skid instrumentation".
+
+**What this replaced, and why.** The previous revision took STK's stock statistic — which counts the
+time the skid INPUT was held, 1.136x–1.378x above the real drift on the current suite — and rescaled
+it by the race's render factor, `skid_time_game · (video_clip_duration / game_race_duration)`. That
+factor is not the drift's own factor: on the current suite the render factors run 1.128–1.927 while
+each race's drift wall/game ratio runs 1.033–1.765, disagreeing by up to 0.241 (cocoa_temple, 1.927
+vs 1.686). The render factors measured on the PREVIOUS instance were: hacienda 1.13, snowmountain
+1.31, cornfield 1.56, lighthouse 1.47, gran_paradiso 1.87, sandtrack 1.23, olivermath 1.18,
+cocoa_temple 1.75, scotland 1.28, fortmagma 1.31, ravenbridge 1.47, stk_enterprise 1.13 (mean 1.39).
+The fields `skid_time_game` and `speed_factor` no longer exist.
 
 ## Provenance / hardening (all measured, Codex xhigh)
 
