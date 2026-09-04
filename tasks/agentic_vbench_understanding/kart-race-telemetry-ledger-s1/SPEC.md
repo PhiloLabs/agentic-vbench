@@ -12,7 +12,7 @@ cognitive_level: understanding
 # The camera is a chase-cam locked to one hero kart (tux) for the whole suite. For each of twelve
 # races the agent reconstructs TWO off-HUD quantities for the hero — how many powerup boxes it drove
 # through, and how many seconds it spent drifting — neither shown as a number, and the powerup HUD
-# slot is masked. Accurate fine-grained counting + a duration over a ~55-min horizon. The ranking
+# slot is masked. Accurate fine-grained counting + a duration over a ~56-min horizon. The ranking
 # column and minimap are navigation aids (position/timing), never answers.
 
 modalities_required:
@@ -103,7 +103,7 @@ scorer:
 difficulty: {strong_agent_reward: 0.0885, agent_model: gemini-3.5-flash}  # host-run (CV-tool profile); clean image pilot PENDING
 # TOOL PROFILE (documented, pinned in environment/Dockerfile): numpy==2.1.3, Pillow==11.0.0,
 # opencv-python-headless==4.10.0.84 + ffmpeg + stdlib; allow_internet=false. Normal CV tools the agent
-# is expected to have; difficulty is off-HUD counting/timing over 55 min, not tool withholding.
+# is expected to have; difficulty is off-HUD counting/timing over 56 min, not tool withholding.
 # CALIBRATION STATUS -- VOID as of 2026-09-04. Every agent number below (and difficulty:
 # strong_agent_reward above) was measured on the PREVIOUS media instance, before the drift timebase
 # was fixed at the source and before the HUD mask box was corrected. STK profile mode is not
@@ -143,13 +143,12 @@ anti_shortcut:
   frame_dump_no_tools:  # a 55-min video at 1 fps is >3000 frames, past any context window
 
 input:
-  url: https://huggingface.co/datasets/explcre/agenticvbench-understanding-materials/resolve/39f1b933102acb3e52348752eb736b31c4c9d50b/kart-race-telemetry-ledger-s1/race.mp4
-  # REPIN PENDING: the revision above is the PREVIOUS render. The current media is
-  # sha256 ee7d966e2f47f63c01d347b8994324bb1f1e645d27084bc562c69cb4cf8dafc8
-  # (1647690764 bytes, 1280x720, 50600 frames, 3373.334 s). environment/Dockerfile already
-  # pins that checksum, so a build fails loudly until this url is repinned after upload.
-  sha256: 4b4cee91675cf7b9699e645dc490343026a7022a2de008b7e1397c69ee59eb42
-  length_min: 55.1
+  url: https://huggingface.co/datasets/ryan-superman/agenticvbench-understanding-materials/resolve/fc1245d184355a96f0389e5718c8994f859d44f3/kart-race-telemetry-ledger-s1/race.mp4
+  # Hosted under ryan-superman: the explcre account's public storage quota is exhausted. The
+  # previous render remains reachable at its own explcre revision, so earlier calibration runs
+  # that pinned it are unaffected. 1647690764 bytes, 50600 frames, 3373.334 s.
+  sha256: ee7d966e2f47f63c01d347b8994324bb1f1e645d27084bc562c69cb4cf8dafc8
+  length_min: 56.2
   resolution: 720
   contents: 12 races (hacienda, snowmountain, cornfield_crossing, lighthouse, gran_paradiso_island,
             sandtrack, olivermath, cocoa_temple, scotland, fortmagma, ravenbridge_mansion,

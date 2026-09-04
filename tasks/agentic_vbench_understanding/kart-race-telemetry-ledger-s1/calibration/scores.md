@@ -30,8 +30,8 @@ normalize to `[]` (score 0, no crash). Regression-tested in `steps/solve/tests/t
 `spinouts` is **not scored** (kept as unscored context).
 
 **Media.** SuperTuxKart profile-mode GT — 12 races × 10 karts × 4 laps on SuperTux (hardest) AI,
-camera locked to the hero kart `tux`, 55.1 min, race.mp4 sha `4b4cee91…`, 1280×720, no audio, HUD
-powerup slot masked.
+camera locked to the hero kart `tux`, 56.2 min, race.mp4 sha `ee7d966e…`, 1280×720, no audio, HUD
+powerup slot masked with the box derived in `generator/hud_mask.py`.
 
 ## Tool profile (documented)
 

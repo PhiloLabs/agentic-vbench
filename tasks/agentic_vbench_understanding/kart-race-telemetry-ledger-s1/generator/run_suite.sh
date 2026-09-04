@@ -3,7 +3,7 @@
 # hero-scoped ground truth.
 #
 # The camera follows a single HERO kart (tux) in every race (run_race.sh passes --kart=tux), so
-# every scored count is on camera. TWELVE 4-lap races on twelve tracks: long enough (~55 min) that
+# every scored count is on camera. TWELVE 4-lap races on twelve tracks: long enough (~56 min) that
 # an agent cannot rely on watching a fraction, and each race yields high pickup/explosion/banana
 # counts that must be tallied precisely, then ranked across the suite. Two off-HUD quantities are
 # scored (items_collected + skid_time; spinouts/positions are unscored context).
