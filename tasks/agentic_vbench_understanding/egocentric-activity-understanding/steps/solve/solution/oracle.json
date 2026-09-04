@@ -795,20 +795,20 @@
       "end_frame": 10088
     },
     {
-      "verb": "take",
-      "nouns": [
-        "orange_juice_container"
-      ],
-      "start_frame": 10150,
-      "end_frame": 10171
-    },
-    {
       "verb": "put",
       "nouns": [
         "cup"
       ],
       "start_frame": 10150,
       "end_frame": 10177
+    },
+    {
+      "verb": "take",
+      "nouns": [
+        "orange_juice_container"
+      ],
+      "start_frame": 10150,
+      "end_frame": 10171
     },
     {
       "verb": "open",

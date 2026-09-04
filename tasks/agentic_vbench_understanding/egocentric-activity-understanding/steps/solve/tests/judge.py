@@ -4,9 +4,9 @@
 The agent must list every annotated action in a 17-minute egocentric cooking video as
 (verb, nouns, start_frame, end_frame). A predicted action is a true positive only when
 it fully reconstructs the action: the same verb, the same noun set, and BOTH frame
-boundaries within TOLERANCE_FRAMES of the annotated boundaries, under an
-order-preserving one-to-one alignment. reward = F1, so misses and false positives both
-cost. The two extra `*_matches` counters are diagnostics only and never touch reward.
+boundaries within TOLERANCE_FRAMES of the annotated boundaries, under a one-to-one
+alignment. reward = F1, so misses and false positives both cost. The two extra
+`*_matches` counters are diagnostics only and never touch reward.
 """
 import argparse
 import json
@@ -15,10 +15,6 @@ import os
 import stat
 from pathlib import Path
 
-# 12 frames = 0.50 s at the annotation's 24 Hz. The median annotated action is 35
-# frames long, so this is a bit under half an action-length of slack on each boundary.
-# At this width no two annotated actions sharing a verb and noun set are mutually
-# confusable, so the one-to-one alignment stays well defined.
 TOLERANCE_FRAMES = 12
 MAX_PREDICTED_ACTIONS = 2000
 MAX_SOLUTION_BYTES = 2_000_000
@@ -126,25 +122,33 @@ def matches_verb_only(prediction, truth):
     return prediction["verb"] == truth["verb"] and localized(prediction, truth)
 
 
-def monotonic_true_positives(predictions, ground_truth, matcher):
-    """Largest order-preserving one-to-one alignment (LCS-style DP). Predictions are
-    consumed in the order submitted and the key is chronological, so an out-of-order
-    ledger loses matches."""
-    columns = len(ground_truth) + 1
-    previous = [0] * columns
-    for prediction in predictions:
-        current = [0]
-        for index in range(1, columns):
-            best = max(previous[index], current[index - 1])
-            if matcher(prediction, ground_truth[index - 1]):
-                best = max(best, previous[index - 1] + 1)
-            current.append(best)
-        previous = current
-    return previous[-1]
+def maximum_true_positives(predictions, ground_truth, matcher):
+    """Maximum-cardinality one-to-one matching over all compatible action pairs."""
+    edges = [
+        [index for index, truth in enumerate(ground_truth) if matcher(prediction, truth)]
+        for prediction in predictions
+    ]
+    truth_matches = [-1] * len(ground_truth)
+
+    def augment(prediction_index, visited):
+        for truth_index in edges[prediction_index]:
+            if visited[truth_index]:
+                continue
+            visited[truth_index] = True
+            previous_prediction = truth_matches[truth_index]
+            if previous_prediction == -1 or augment(previous_prediction, visited):
+                truth_matches[truth_index] = prediction_index
+                return True
+        return False
+
+    return sum(
+        augment(index, [False] * len(ground_truth))
+        for index in range(len(predictions))
+    )
 
 
 def score(predictions, ground_truth, predicted_count):
-    true_positives = monotonic_true_positives(predictions, ground_truth, matches)
+    true_positives = maximum_true_positives(predictions, ground_truth, matches)
     precision = true_positives / predicted_count if predicted_count else 0.0
     recall = true_positives / len(ground_truth) if ground_truth else 0.0
     reward = (
@@ -163,10 +167,10 @@ def score(predictions, ground_truth, predicted_count):
         "f1": round(reward, 6),
         "frame_tolerance": TOLERANCE_FRAMES,
         # Diagnostics: how far the ledger got without the full tuple. Not scored.
-        "verb_and_boundary_matches": monotonic_true_positives(
+        "verb_and_boundary_matches": maximum_true_positives(
             predictions, ground_truth, matches_verb_only
         ),
-        "boundary_only_matches": monotonic_true_positives(
+        "boundary_only_matches": maximum_true_positives(
             predictions, ground_truth, localized
         ),
     }

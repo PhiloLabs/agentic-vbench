@@ -31,11 +31,6 @@ wearer's hands, described as a verb plus the objects it acts on.
   different things at once (opening a drawer while already holding a carton). Report
   each one separately.
 
-Both `start_frame` and `end_frame` must be within **12 frames (0.5 seconds)** error
-range of the ground truth boundary to be considered correct, so label each action
-carefully rather than estimating. Sampling one frame every half second is not enough
-to pin a boundary this tightly; step frame by frame around each transition.
-
 ## Vocabulary
 
 Use `verb` exactly as spelled in `vocabulary.json`. The 15 verbs are:
@@ -59,8 +54,10 @@ Notes on how the vocabulary is applied:
   destination: pouring oil from its container into the skillet is
   `pour` with `oil, oil_container, skillet`; moving egg around the skillet with the
   spatula is `move around` with `egg, skillet, plastic_spatula`.
-- `egg` covers egg in any form — a whole egg in the shell and the cooking egg mass in
-  the pan are both `egg`. `egg_mixture` is the beaten egg before it goes in the pan,
+- The published labels use both `egg` and `eggs`; this task merges both labels into
+  `egg`, reducing the published 36 nouns to the 35 listed above. `egg` covers egg in any
+  form — a whole egg in the shell and the cooking egg mass in the pan are both `egg`.
+  `egg_mixture` is the beaten egg before it goes in the pan,
   `egg_shells` are the discarded shells, and `egg_container` is the carton; those three
   stay separate from `egg`.
 - A `*_container` is the packaging an ingredient comes in. `fridge`, `freezer`,
@@ -87,7 +84,10 @@ Requirements:
 - `start_frame`, `end_frame`: integer frame numbers, where the **first frame of the
   video is frame 0** and frame `n` is at time `n / 24` seconds. Both must be in
   `[0, 25691]` and `start_frame` must be less than `end_frame`.
-- Entries must be ordered by non-decreasing `start_frame`.
+- Entries must be ordered by non-decreasing `start_frame`. When entries share a start
+  frame, order them by `verb` alphabetically, then by the lexicographic order of their
+  alphabetically sorted noun lists, then by `end_frame`. Noun order within an entry is
+  still ignored for scoring.
 
 Use `ffmpeg` and `ffprobe` (both installed) to seek through and sample the video. To
 extract exactly frame `n`, select on the frame index rather than by timestamp, for

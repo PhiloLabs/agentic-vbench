@@ -43,6 +43,7 @@ LINE = re.compile(r"^<(?P<verb>[^>]+)><(?P<nouns>[^>]+)>\s*\((?P<start>\d+)-(?P<
 EXPECTED_ACTIONS = 172
 EXPECTED_VERBS = 15
 EXPECTED_NOUNS = 35
+RAW_LABEL_SHA256 = "6e834f814507f8fe384562f4c960023d0032b0c935a076c1385bd9a12974a8a6"
 
 # TRANSFORM 1 of 2 — noun aliasing.
 #
@@ -107,10 +108,8 @@ def sort_key(action):
     line 2 at 3728, line 3 at 24212. Across its 46 verb blocks the start frame goes
     backwards 9 times.
 
-    The judge aligns predictions to the key with an order-preserving LCS, which is only
-    meaningful if the key is in time order, so the file is sorted here. (Submitting the
-    oracle in reverse scores 0.0058 rather than 1.0 — the ordering is load-bearing, not
-    cosmetic.)
+    The file is sorted here so the oracle follows the same chronological output contract
+    as submissions.
 
     Sorting on start_frame alone is not enough. Two actions share frame 10150:
 
@@ -119,15 +118,14 @@ def sort_key(action):
 
     Their relative order would otherwise depend on the input file's line order, so a
     reordering of the source would silently produce a different gt.json. Adding
-    end_frame, verb and nouns makes the sort total: no two actions in the key compare
-    equal, and the build is byte-reproducible. end_frame alone resolves today's single
-    tie; verb and nouns are the backstop for a future identical-span pair.
+    verb, nouns and end_frame makes the sort total: no two actions in the key compare
+    equal, and the build is byte-reproducible.
     """
     return (
         action["start_frame"],
-        action["end_frame"],
         action["verb"],
         tuple(action["nouns"]),
+        action["end_frame"],
     )
 
 
@@ -148,22 +146,41 @@ def dump(path, document):
 def verify_oracle(judge, oracle):
     with tempfile.TemporaryDirectory() as scratch:
         scratch = Path(scratch)
-        reward_json = scratch / "reward.json"
-        reward_txt = scratch / "reward.txt"
-        subprocess.run(
-            [
-                sys.executable,
-                str(judge),
-                "--solution",
-                str(oracle),
-                "--reward-json",
-                str(reward_json),
-                "--reward-txt",
-                str(reward_txt),
-            ],
-            check=True,
+        def grade(solution, name):
+            reward_json = scratch / f"{name}.reward.json"
+            reward_txt = scratch / f"{name}.reward.txt"
+            subprocess.run(
+                [
+                    sys.executable,
+                    str(judge),
+                    "--solution",
+                    str(solution),
+                    "--reward-json",
+                    str(reward_json),
+                    "--reward-txt",
+                    str(reward_txt),
+                ],
+                check=True,
+            )
+            return json.loads(reward_json.read_text())
+
+        reward = grade(oracle, "oracle")
+        tied = json.loads(oracle.read_text())
+        actions = tied["actions"]
+        tie_index = next(
+            index
+            for index in range(len(actions) - 1)
+            if actions[index]["start_frame"] == actions[index + 1]["start_frame"]
         )
-        return json.loads(reward_json.read_text())
+        actions[tie_index], actions[tie_index + 1] = (
+            actions[tie_index + 1],
+            actions[tie_index],
+        )
+        swapped = scratch / "equal-start-swapped.json"
+        swapped.write_text(json.dumps(tied) + "\n")
+        if grade(swapped, "equal-start-swapped")["reward"] != 1.0:
+            raise ValueError("equal-start row order changed the oracle reward")
+        return reward
 
 
 def main():
@@ -172,7 +189,11 @@ def main():
     args = parser.parse_args()
 
     tests = args.task_dir / "steps" / "solve" / "tests"
-    actions = sorted(parse_labels(tests / "Ahmad_American.txt"), key=sort_key)
+    labels = tests / "Ahmad_American.txt"
+    raw_label_sha256 = hashlib.sha256(labels.read_bytes()).hexdigest()
+    if raw_label_sha256 != RAW_LABEL_SHA256:
+        raise ValueError(f"raw label sha256 mismatch: {raw_label_sha256}")
+    actions = sorted(parse_labels(labels), key=sort_key)
     vocabulary = build_vocabulary(actions)
 
     if len(actions) != EXPECTED_ACTIONS:
@@ -197,6 +218,7 @@ def main():
             "actions": len(actions),
             "verbs": len(vocabulary["verbs"]),
             "nouns": len(vocabulary["nouns"]),
+            "raw_label_sha256": raw_label_sha256,
             "first_frame": actions[0]["start_frame"],
             "last_frame": actions[-1]["end_frame"],
             "gt_sha256": gt_sha,

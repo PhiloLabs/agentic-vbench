@@ -27,7 +27,11 @@
     "baked_as": "/baked/session.mkv, byte-for-byte, never re-encoded or remuxed"
   },
   "annotation": {
+    "official_archive": "GTEA_Gaze_Plus_labels_cleaned.zip",
+    "official_archive_version": "2015-01-22",
+    "archive_member": "labels_cleaned/Ahmad_American.txt",
     "file": "steps/solve/tests/Ahmad_American.txt",
+    "raw_label_sha256": "6e834f814507f8fe384562f4c960023d0032b0c935a076c1385bd9a12974a8a6",
     "readme": "steps/solve/tests/labels_readme.txt",
     "format": "<verb><noun1,noun2,...> (start_frame-end_frame)",
     "annotation_rate_hz": 24,
@@ -56,11 +60,11 @@
     "nouns": 35,
     "first_action_start_frame": 1042,
     "last_action_end_frame": 24905,
-    "sort_key": "(start_frame, end_frame, verb, nouns)",
+    "sort_key": "(start_frame, verb, nouns, end_frame)",
     "noun_normalization": "sorted, with NOUN_ALIASES applied (eggs -> egg); compared as a set by the judge. egg_container, egg_mixture and egg_shells stay distinct nouns.",
-    "gt_sha256": "9882ca7102abae525d8aebadca4248fd2ef3ad65cb215609a2db054376fd8e7b",
+    "gt_sha256": "c49e30674cc362f1280edacffa5ee8c8d95832d1c792fde20d99556c4c54d109",
     "vocabulary_sha256": "862be7fbb71634eb65026464e39ad0c6f3836ddd7dc28fcb1103f9d8c29e0faa",
-    "oracle_sha256": "9882ca7102abae525d8aebadca4248fd2ef3ad65cb215609a2db054376fd8e7b",
+    "oracle_sha256": "c49e30674cc362f1280edacffa5ee8c8d95832d1c792fde20d99556c4c54d109",
     "oracle_reward": 1.0,
     "noun_aliases": {
       "eggs": "egg"
@@ -68,9 +72,8 @@
   },
   "scorer": {
     "file": "steps/solve/tests/judge.py",
-    "metric": "order-preserving one-to-one 4-field F1",
+    "metric": "maximum-cardinality one-to-one 4-field F1",
     "frame_tolerance": 12,
-    "tolerance_seconds": 0.5,
-    "ambiguity_check": "at a 12-frame tolerance no two annotated actions sharing a verb and noun set are mutually confusable (checked at 6/8/12/16/24)"
+    "tolerance_seconds": 0.5
   }
 }
