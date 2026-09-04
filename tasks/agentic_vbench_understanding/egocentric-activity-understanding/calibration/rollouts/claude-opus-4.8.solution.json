@@ -1,0 +1,587 @@
+{
+  "actions": [
+    {
+      "verb": "turn on",
+      "nouns": [
+        "burner"
+      ],
+      "start_frame": 978,
+      "end_frame": 1020
+    },
+    {
+      "verb": "turn on",
+      "nouns": [
+        "burner"
+      ],
+      "start_frame": 1030,
+      "end_frame": 1080
+    },
+    {
+      "verb": "pour",
+      "nouns": [
+        "oil",
+        "oil_container",
+        "skillet"
+      ],
+      "start_frame": 1242,
+      "end_frame": 1310
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "fridge"
+      ],
+      "start_frame": 1428,
+      "end_frame": 1454
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "fridge_drawer"
+      ],
+      "start_frame": 1550,
+      "end_frame": 1584
+    },
+    {
+      "verb": "take",
+      "nouns": [
+        "orange_juice",
+        "orange_juice_container"
+      ],
+      "start_frame": 2300,
+      "end_frame": 2348
+    },
+    {
+      "verb": "close",
+      "nouns": [
+        "fridge"
+      ],
+      "start_frame": 2470,
+      "end_frame": 2492
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "egg_container"
+      ],
+      "start_frame": 2576,
+      "end_frame": 2600
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 2666,
+      "end_frame": 2716
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 2726,
+      "end_frame": 2752
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 2756,
+      "end_frame": 2780
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 2784,
+      "end_frame": 2802
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 2912,
+      "end_frame": 2936
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 2938,
+      "end_frame": 2956
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 2958,
+      "end_frame": 2976
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 2978,
+      "end_frame": 2994
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 2996,
+      "end_frame": 3012
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 3014,
+      "end_frame": 3030
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 3040,
+      "end_frame": 3056
+    },
+    {
+      "verb": "crack",
+      "nouns": [
+        "egg",
+        "bowl"
+      ],
+      "start_frame": 3058,
+      "end_frame": 3072
+    },
+    {
+      "verb": "put",
+      "nouns": [
+        "egg_shells",
+        "trash"
+      ],
+      "start_frame": 3196,
+      "end_frame": 3214
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "milk_container"
+      ],
+      "start_frame": 3334,
+      "end_frame": 3350
+    },
+    {
+      "verb": "pour",
+      "nouns": [
+        "milk",
+        "milk_container",
+        "bowl"
+      ],
+      "start_frame": 3352,
+      "end_frame": 3406
+    },
+    {
+      "verb": "take",
+      "nouns": [
+        "salt_container"
+      ],
+      "start_frame": 3688,
+      "end_frame": 3704
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "salt_container"
+      ],
+      "start_frame": 3704,
+      "end_frame": 3740
+    },
+    {
+      "verb": "pour",
+      "nouns": [
+        "salt",
+        "salt_container",
+        "bowl"
+      ],
+      "start_frame": 3744,
+      "end_frame": 3802
+    },
+    {
+      "verb": "mix",
+      "nouns": [
+        "egg_mixture",
+        "bowl",
+        "fork"
+      ],
+      "start_frame": 3984,
+      "end_frame": 4998
+    },
+    {
+      "verb": "pour",
+      "nouns": [
+        "milk",
+        "milk_container",
+        "bowl"
+      ],
+      "start_frame": 5012,
+      "end_frame": 5046
+    },
+    {
+      "verb": "mix",
+      "nouns": [
+        "egg_mixture",
+        "bowl",
+        "fork"
+      ],
+      "start_frame": 5054,
+      "end_frame": 5846
+    },
+    {
+      "verb": "pour",
+      "nouns": [
+        "egg_mixture",
+        "bowl",
+        "skillet"
+      ],
+      "start_frame": 5946,
+      "end_frame": 6070
+    },
+    {
+      "verb": "put",
+      "nouns": [
+        "bowl",
+        "skillet"
+      ],
+      "start_frame": 6072,
+      "end_frame": 6114
+    },
+    {
+      "verb": "take",
+      "nouns": [
+        "bowl",
+        "skillet"
+      ],
+      "start_frame": 6272,
+      "end_frame": 6290
+    },
+    {
+      "verb": "put",
+      "nouns": [
+        "bowl"
+      ],
+      "start_frame": 6296,
+      "end_frame": 6316
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "fridge"
+      ],
+      "start_frame": 6414,
+      "end_frame": 6436
+    },
+    {
+      "verb": "take",
+      "nouns": [
+        "bagel",
+        "bagel_container"
+      ],
+      "start_frame": 6588,
+      "end_frame": 6640
+    },
+    {
+      "verb": "take",
+      "nouns": [
+        "cheese",
+        "cheese_container"
+      ],
+      "start_frame": 6906,
+      "end_frame": 6962
+    },
+    {
+      "verb": "close",
+      "nouns": [
+        "fridge"
+      ],
+      "start_frame": 6972,
+      "end_frame": 7002
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "bagel_container"
+      ],
+      "start_frame": 7056,
+      "end_frame": 7104
+    },
+    {
+      "verb": "take",
+      "nouns": [
+        "bagel",
+        "bagel_container"
+      ],
+      "start_frame": 7140,
+      "end_frame": 7178
+    },
+    {
+      "verb": "put",
+      "nouns": [
+        "bagel",
+        "plate"
+      ],
+      "start_frame": 7182,
+      "end_frame": 7208
+    },
+    {
+      "verb": "cut",
+      "nouns": [
+        "bagel",
+        "knife"
+      ],
+      "start_frame": 7250,
+      "end_frame": 7330
+    },
+    {
+      "verb": "move around",
+      "nouns": [
+        "egg",
+        "skillet",
+        "plastic_spatula"
+      ],
+      "start_frame": 7452,
+      "end_frame": 7640
+    },
+    {
+      "verb": "turn off",
+      "nouns": [
+        "burner"
+      ],
+      "start_frame": 7690,
+      "end_frame": 7716
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "cheese_container"
+      ],
+      "start_frame": 7838,
+      "end_frame": 7902
+    },
+    {
+      "verb": "spread",
+      "nouns": [
+        "cheese",
+        "bagel",
+        "knife"
+      ],
+      "start_frame": 7908,
+      "end_frame": 8258
+    },
+    {
+      "verb": "spread",
+      "nouns": [
+        "cheese",
+        "bagel",
+        "knife"
+      ],
+      "start_frame": 8392,
+      "end_frame": 8620
+    },
+    {
+      "verb": "spread",
+      "nouns": [
+        "cheese",
+        "bagel",
+        "knife"
+      ],
+      "start_frame": 8624,
+      "end_frame": 8880
+    },
+    {
+      "verb": "spread",
+      "nouns": [
+        "cheese",
+        "bagel",
+        "knife"
+      ],
+      "start_frame": 8884,
+      "end_frame": 9150
+    },
+    {
+      "verb": "move around",
+      "nouns": [
+        "egg",
+        "skillet",
+        "plastic_spatula"
+      ],
+      "start_frame": 9300,
+      "end_frame": 9534
+    },
+    {
+      "verb": "turn off",
+      "nouns": [
+        "burner"
+      ],
+      "start_frame": 9540,
+      "end_frame": 9576
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "fridge"
+      ],
+      "start_frame": 9690,
+      "end_frame": 9710
+    },
+    {
+      "verb": "take",
+      "nouns": [
+        "orange_juice",
+        "orange_juice_container"
+      ],
+      "start_frame": 9740,
+      "end_frame": 9762
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "cabinet"
+      ],
+      "start_frame": 9884,
+      "end_frame": 9906
+    },
+    {
+      "verb": "take",
+      "nouns": [
+        "cup"
+      ],
+      "start_frame": 9948,
+      "end_frame": 9996
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "orange_juice_container"
+      ],
+      "start_frame": 10156,
+      "end_frame": 10190
+    },
+    {
+      "verb": "pour",
+      "nouns": [
+        "orange_juice",
+        "orange_juice_container",
+        "cup"
+      ],
+      "start_frame": 10196,
+      "end_frame": 10330
+    },
+    {
+      "verb": "close",
+      "nouns": [
+        "cheese_container"
+      ],
+      "start_frame": 10450,
+      "end_frame": 10488
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "fridge"
+      ],
+      "start_frame": 10576,
+      "end_frame": 10600
+    },
+    {
+      "verb": "put",
+      "nouns": [
+        "cheese",
+        "cheese_container"
+      ],
+      "start_frame": 10616,
+      "end_frame": 10660
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "fridge"
+      ],
+      "start_frame": 10858,
+      "end_frame": 10884
+    },
+    {
+      "verb": "put",
+      "nouns": [
+        "orange_juice",
+        "orange_juice_container"
+      ],
+      "start_frame": 10904,
+      "end_frame": 10980
+    },
+    {
+      "verb": "open",
+      "nouns": [
+        "fridge"
+      ],
+      "start_frame": 11150,
+      "end_frame": 11182
+    },
+    {
+      "verb": "put",
+      "nouns": [
+        "milk",
+        "milk_container"
+      ],
+      "start_frame": 11192,
+      "end_frame": 11312
+    },
+    {
+      "verb": "close",
+      "nouns": [
+        "fridge"
+      ],
+      "start_frame": 11314,
+      "end_frame": 11342
+    },
+    {
+      "verb": "move around",
+      "nouns": [
+        "egg",
+        "skillet",
+        "plastic_spatula"
+      ],
+      "start_frame": 11418,
+      "end_frame": 11626
+    },
+    {
+      "verb": "turn off",
+      "nouns": [
+        "burner"
+      ],
+      "start_frame": 11736,
+      "end_frame": 11766
+    }
+  ]
+}
