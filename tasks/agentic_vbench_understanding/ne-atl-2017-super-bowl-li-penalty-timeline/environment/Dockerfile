@@ -12,10 +12,26 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # trial has the same deterministic transcription tool regardless of allow_internet.
 RUN pip install --no-cache-dir faster-whisper==1.2.1
 
-# Pre-download and cache the model at build time so transcription works fully offline
-# at trial time too. small.en balances accuracy on short spoken numbers against a
+# Pre-download and cache the model at build time, pinned to an exact HF commit rather
+# than "small.en" -> whatever "main" resolves to -- the same reproducibility bar as the
+# video's SHA256 pin below. small.en balances accuracy on short spoken numbers against a
 # CPU-only, no-torch runtime (ctranslate2 backend).
-RUN python3 -c "from faster_whisper import WhisperModel; WhisperModel('small.en', device='cpu', compute_type='int8')"
+#
+# Cached twice while still online: once at the pinned commit (verifies the pin resolves,
+# fails the build if it ever doesn't), and once with no revision arg, which is how an
+# agent will naturally call WhisperModel('small.en', ...) and defaults to resolving
+# "main". Without the second call, HF_HUB_OFFLINE below breaks that plain call: it looks
+# for a local "main" ref, finds only the hash-keyed entry, and errors instead of falling
+# back to it (verified locally).
+ARG WHISPER_MODEL_REVISION=d1d751a5f8271d482d14ca55d9e2deeebbae577f
+RUN python3 -c "from faster_whisper import WhisperModel; WhisperModel('small.en', device='cpu', compute_type='int8', revision='${WHISPER_MODEL_REVISION}')" \
+ && python3 -c "from faster_whisper import WhisperModel; WhisperModel('small.en', device='cpu', compute_type='int8')"
+
+# Force every later load -- build or trial, however the agent invokes it -- onto that
+# pinned local cache with no network resolution. Without this, allow_internet=true means
+# a runtime call could still re-resolve "main" over the network, reopening the same
+# drift the pin above closes.
+ENV HF_HUB_OFFLINE=1
 
 # Bake the full-game broadcast at build time, the same way the v1.0 families do, with a
 # pinned URL and a SHA256 verified at build. The file is a pre-existing archive.org
