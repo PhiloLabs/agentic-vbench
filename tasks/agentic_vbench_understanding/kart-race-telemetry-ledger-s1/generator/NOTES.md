@@ -51,6 +51,36 @@ it to the derived one, and is checked in both directions (it must report the unm
 unmasked). Frames that are black all over, the transitions between races, are why presence needs
 an agreement threshold rather than a single hit.
 
+## The drift episode log agrees with the scored total; aligning it to the video is unfinished (2026-09-06)
+
+The patch emits one `skidep <kart> <start> <end>` line per drift episode, in wall-clock seconds since
+`KartWithStats::reset()`. Two things follow, and only the first is settled.
+
+**Settled: the timeline and the scored number are one integral.** For hacienda, the 107 logged
+episodes sum to 64.83 s, which is exactly the race's scored `skid_time` of 64.83 s. So the per-episode
+timeline is not a separate estimate that might disagree with the total; it is the same accumulation,
+reported per episode.
+
+**Not settled: where those episodes land in the video.** The timestamps are relative to `reset()`,
+which runs before the track intro and the Ready/Set/Go countdown, so the offset from the start of a
+race's clip to `reset()` is not known from the log. The HUD race timer reads 00:00.100 at video
+18.20 s in the hacienda clip and shows nothing at 17.60 s, which pins the GO moment but not `reset()`,
+and the timer counts GAME seconds while the episodes are in wall-clock, so the two clocks cannot be
+equated by a constant.
+
+Sampling video 163.0-172.5 s at 0.5 s steps around the longest logged episode (5.465 s) did not
+resolve it: a bright warm plume appears at 163.0-164.5 s and clear yellow wheel sparks at
+169.5-171.0 s, and at 0.5 s sampling either could be made to fit an offset in the plausible range.
+The confound to respect is that the nitro/zipper exhaust is also bright and warm-coloured, so a naive
+"look for bright yellow near the kart" detector would mix boost with drift, which is the same trap
+that made sprite detection unusable above.
+
+To finish this, pin the offset from a single unambiguous event rather than from a window: find the
+first frame after GO showing wheel sparks, set `reset_video = that time - 11.823` (the first logged
+episode), then PREDICT several later episodes and check them. Until that is done, the evidence for
+`skid_time` is the source argument (the scored state is the one that drives the spark emitter, the
+tyre marks and the skid sound) plus the sum identity above, not a frame-level match.
+
 ## Rendering path
 
 Xvfb + `LIBGL_ALWAYS_SOFTWARE=1 GALLIUM_DRIVER=llvmpipe` (swrast present on this node),
