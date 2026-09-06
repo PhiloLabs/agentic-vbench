@@ -21,6 +21,7 @@ asked or by whom.
 """
 import argparse
 import json
+import math
 import re
 from pathlib import Path
 
@@ -33,12 +34,12 @@ IOU_MIN = 0.5      # min temporal IoU between predicted and true evidence window
 # model, which is exactly the leak the deferred framing removes.
 OUTCOMES = {"completed", "partial", "corrected"}
 
-# Scored fields. `speaker` and `target` are asked for in the prompt and reported in the
-# diagnostics, but they are NOT scored: pinning which voice is speaking means
-# recognising voices, which no annotator of this footage can do reliably, so grading on
-# them would measure ground-truth noise rather than the agent's reading of the video.
-# What IS scored is what the video settles: what was asked, who carried it out, when,
-# how it turned out, and where the evidence is.
+# Scored fields. `speaker` and `target` are OPTIONAL, informational fields: the prompt
+# says so, and they are reported in the diagnostics but NOT scored. Pinning which voice
+# is speaking means recognising voices, which no annotator of this footage can do
+# reliably, so grading on them would measure ground-truth noise rather than the agent's
+# reading of the video. What IS scored is what the video settles: what was asked, who
+# carried it out, when, how it turned out, and where the evidence is.
 SCORED_FIELDS = ("action", "object", "executor", "outcome")
 REPORTED_FIELDS = ("speaker", "target") + SCORED_FIELDS
 
@@ -49,10 +50,16 @@ def norm(s: str) -> str:
 
 
 def to_float(v) -> float | None:
+    """Parse a timestamp; anything that is not a finite number is rejected (None).
+
+    NaN would otherwise slip through every tolerance check, because a comparison
+    involving NaN is always False and the checks are written as "reject if outside
+    tolerance" — a ledger with every timestamp set to JSON NaN scored 1.0."""
     try:
-        return float(v)
+        f = float(v)
     except (TypeError, ValueError):
         return None
+    return f if math.isfinite(f) else None
 
 
 def iou(a_start: float, a_end: float, b_start: float, b_end: float) -> float:

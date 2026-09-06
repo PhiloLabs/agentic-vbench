@@ -1,4 +1,6 @@
-FROM python:3.12-slim
+# Pinned by digest: the `3.12-slim` tag is mutable and would let the base image drift
+# under a calibration that is supposed to be reproducible.
+FROM python:3.12-slim@sha256:2fe5997d249a808b8eeea52c58a1dbffbba28754dc11699ef5c029f2d818ce79
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         ffmpeg curl ca-certificates \
@@ -14,14 +16,25 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # agent is told it exists; running it, aligning its timestamps, and cross-referencing
 # the video is part of the work. faster-whisper is CPU-only (no torch) and the model is
 # baked, so this stays fully offline with allow_internet=false.
-RUN pip install --no-cache-dir faster-whisper==1.2.1
+# ctranslate2 is the inference engine underneath faster-whisper and is only bounded
+# `<5,>=4.0` by it; pin it too, or the transcripts drift with whatever pip resolves.
+RUN pip install --no-cache-dir faster-whisper==1.2.1 ctranslate2==4.8.1
 ARG ASR_REPO=Systran/faster-whisper-base.en
+# Pinned to an immutable revision, not `main`, and every file is sha256-checked: the
+# ASR output is the task's core input, so a silently updated model would make the
+# calibration numbers unreproducible. Hashes computed from the files at this revision.
+ARG ASR_REV=3d3d5dee26484f91867d81cb899cfcf72b96be6c
 RUN mkdir -p /baked/asr \
  && for f in model.bin config.json tokenizer.json vocabulary.txt; do \
       curl --fail --silent --show-error --location --retry 5 --retry-delay 3 \
-        "https://huggingface.co/${ASR_REPO}/resolve/main/$f" -o "/baked/asr/$f" || exit 1; \
+        "https://huggingface.co/${ASR_REPO}/resolve/${ASR_REV}/$f" -o "/baked/asr/$f" || exit 1; \
     done \
- && test -s /baked/asr/model.bin
+ && printf '%s  %s\n' \
+      2a166925539a16005f14ff328359f9b9adb9dc4fb631bb3b227526862e93e2ef /baked/asr/model.bin \
+      f3bc3821e9fc76a27bae538e11ae5b677dcdd352b4600429ce7951d398569aeb /baked/asr/config.json \
+      929c5252409436dce1b38a75d1abbcb5e132d170d8e324e4e04ed915fa2d22df /baked/asr/tokenizer.json \
+      ff77588746d3a2595d32ab5b69ffd7b95ce2441ac57533cb66fc3eb575a115cf /baked/asr/vocabulary.txt \
+    | sha256sum -c -
 COPY transcribe.py /usr/local/bin/transcribe
 RUN chmod +x /usr/local/bin/transcribe
 

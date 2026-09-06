@@ -29,8 +29,8 @@ storage_mb = 16384
 # Media is baked at build time and the answer is not online: keep this false.
 allow_internet = false
 
-[environment.env]
-HF_TOKEN = "${HF_TOKEN:-}"
+# No [environment.env]: the video and the ASR model are public downloads, so no
+# credential is needed at build time, and none should be exposed to the agent.
 
 [[steps]]
 name = "solve"

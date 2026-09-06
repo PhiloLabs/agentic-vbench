@@ -14,12 +14,17 @@ the prompt's own prohibition list ("never open ground_truth*, …") is echoed in
 conversation history every turn and a naive substring grep over the whole file
 would flag every clean run (this is the exact bug the earlier `audit_runs.sh` had).
 
-Supports two trajectory shapes:
+Supports every transcript shape shipped in calibration/rollouts/:
   * ATIF `trajectory.json`  (Harbor's normalized schema — has steps[].tool_calls)
-  * raw Gemini/Antigravity `*.trajectory.jsonl` / session jsonl (toolCalls per msg)
+  * Claude Code `--output-format stream-json` (message.content[].tool_use)
+  * Codex `codex exec --json` (item.completed → command_execution / file_change)
+  * Antigravity agy `--output-format stream-json` (step_update → tool_name)
+  * raw Gemini session jsonl (toolCalls per msg)
 
 Exit status is non-zero if any check FAILS, so it drops into CI / the calibration
-gate. Prints a one-line-per-check report plus a tool-call turn count.
+gate. It also FAILS CLOSED: a non-empty trajectory in which no tool call can be
+recognized exits 2 instead of reporting a vacuous PASS. Prints a one-line-per-check
+report plus a tool-call turn count.
 
 Usage
 -----
@@ -60,6 +65,10 @@ WEB_TOOL_PATTERNS = [
     r"open_?url",
 ]
 
+# `find ... ! -name '<pattern>'` exclusion clauses, with any run of quote characters
+# around the pattern (shell quote-juggling such as '"'ground_truth*'"' is common).
+_FIND_EXCLUDE_RE = re.compile(r"!\s*-i?name\s+['\"]*[^'\"\s]*['\"]*", re.IGNORECASE)
+
 # Substrings in the RAW transcript that betray server-side grounding having fired
 # (Gemini attaches groundingMetadata / groundingChunks when it grounds a reply).
 GROUNDING_KEYS = ["groundingMetadata", "groundingChunks", "groundingSupports",
@@ -69,9 +78,13 @@ GROUNDING_KEYS = ["groundingMetadata", "groundingChunks", "groundingSupports",
 def _iter_tool_calls(traj: dict):
     """Yield (function_name, arguments_json_string) for every tool call.
 
-    Handles three transcript shapes:
+    Handles five transcript shapes:
       * ATIF          steps[].tool_calls[].{function_name,arguments}
       * raw Gemini     messages[].toolCalls[].{name,args}
+      * Claude Code `--output-format stream-json`: records whose
+        message.content[] holds parts with type == "tool_use" ({name, input}).
+      * Codex `codex exec --json`: records with type == "item.completed" whose
+        item.type is "command_execution" ({command}) or "file_change" ({changes[]}).
       * Antigravity agy `--output-format stream-json`: JSONL of
         {event:'step_update', step_update:{step_index, tool_name, tool_info:{name,parameters}}}.
         One step emits several step_update records (running → completed); dedupe by
@@ -87,6 +100,27 @@ def _iter_tool_calls(traj: dict):
         for tc in msg.get("toolCalls") or []:
             name = tc.get("name") or ""
             yield name, json.dumps(tc.get("args", {}), ensure_ascii=False)
+        # Claude Code stream-json: tool calls live inside message.content[].
+        inner = msg.get("message")
+        content = inner.get("content") if isinstance(inner, dict) else None
+        for part in content if isinstance(content, list) else []:
+            if isinstance(part, dict) and part.get("type") == "tool_use":
+                yield part.get("name") or "", json.dumps(part.get("input", {}), ensure_ascii=False)
+        # Codex exec --json: each finished tool step is an item.completed record.
+        if msg.get("type") == "item.completed":
+            item = msg.get("item") or {}
+            kind = item.get("type")
+            if kind == "command_execution":
+                # A shell `find ... ! -name 'ground_truth*'` EXCLUDES the answer
+                # files — the opposite of accessing them. Strip those clauses on the
+                # raw command (before JSON escaping inserts backslashes) so the
+                # prohibition itself does not read as a violation. The pattern may be
+                # wrapped in quote-juggling like '"'ground_truth*'"'.
+                cmd = _FIND_EXCLUDE_RE.sub("", item.get("command", ""))
+                yield "command_execution", json.dumps({"command": cmd}, ensure_ascii=False)
+            elif kind == "file_change":
+                paths = [c.get("path", "") for c in item.get("changes") or [] if isinstance(c, dict)]
+                yield "file_change", json.dumps({"paths": paths}, ensure_ascii=False)
     seen_steps = set()
     for rec in traj.get("_agy_records", []):
         if rec.get("event") != "step_update":
@@ -110,7 +144,11 @@ def _load(path: Path):
     try:
         data = json.loads(stripped)
         if isinstance(data, dict):
-            return data, text
+            # A whole-file JSON object is either an ATIF/Gemini document or a
+            # one-record JSONL transcript; only the former is a document.
+            if "steps" in data or "messages" in data:
+                return data, text
+            return {"messages": [data], "_agy_records": [data] if "event" in data else []}, text
     except json.JSONDecodeError:
         pass
     # JSONL: one record per line. Split into agy stream-json records (have an
@@ -140,6 +178,17 @@ def main():
 
     calls = list(_iter_tool_calls(traj))
     n_turns = len(calls)
+
+    # Fail closed. The three checks below are vacuously "clean" when no calls were
+    # parsed, which would let an unrecognized transcript format sail through as
+    # PASS. A non-empty trajectory with zero recognized tool calls is an audit
+    # failure, not a clean run.
+    if n_turns == 0 and raw.strip():
+        print(f"\n  trajectory: {path}")
+        print("  tool-call turns: 0")
+        print("\nFAILED: no recognized tool calls in a non-empty trajectory "
+              "(unsupported transcript format?) — refusing to report PASS")
+        sys.exit(2)
 
     ans_re = re.compile("|".join(ANSWER_PATTERNS), re.IGNORECASE)
     web_re = re.compile("|".join(WEB_TOOL_PATTERNS), re.IGNORECASE)

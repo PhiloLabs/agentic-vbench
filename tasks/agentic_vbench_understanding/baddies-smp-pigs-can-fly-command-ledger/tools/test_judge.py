@@ -100,6 +100,22 @@ def main() -> None:
     assert f1(nd) == 1.0
     print("[ok] not_done commands need no evidence window")
 
+    # non-finite timestamps are rejected. A comparison against NaN is always False,
+    # so "reject if outside tolerance" never fired and an all-NaN ledger scored 1.0.
+    for bad in (float("nan"), float("inf"), float("-inf")):
+        for field in ("command_time_s", "execution_start_s",
+                      "evidence_start_s", "evidence_end_s"):
+            nf = copy.deepcopy(GROUND_TRUTH)
+            for row in nf:
+                row[field] = bad
+            assert f1(nf) < 1.0, f"{field}={bad!r} must not score as a full match"
+    all_nan = copy.deepcopy(GROUND_TRUTH)
+    for row in all_nan:
+        row["command_time_s"] = row["execution_start_s"] = float("nan")
+    assert f1(all_nan) == 0.0, "all-NaN timestamps must score 0.0, not 1.0"
+    assert judge.to_float(float("nan")) is None and judge.to_float("inf") is None
+    print("[ok] non-finite timestamps (NaN/inf) are rejected — no numeric bypass")
+
     print("\nALL CHECKS PASSED — deterministic core (v2 command ledger) is sound.")
 
 

@@ -39,7 +39,9 @@ concrete, externally observable in-game action. Do not count:
 ## What each entry must contain
 
 - `command_time_s` — seconds from video start at which the request is spoken.
-- `speaker` / `target` — who asks, and who is asked.
+- `speaker` / `target` — who asks, and who is asked. These two are **optional and not
+  scored** (the audio has no speaker labels, so they cannot be graded reliably); fill
+  them in if you can tell, or use `unknown`.
 - `action` / `object` — what is asked for, using the closed vocabularies below.
 - `executor` — the player who **visibly performs** the action.
 - `execution_start_s` — seconds at which the visible execution begins. By the definition
@@ -89,6 +91,8 @@ in this recording, and neither its timestamps nor its fields should appear in yo
 answer unless you independently find such a request.
 
 Times are in seconds from the start of the video. `command_time_s` is matched within
-5 seconds and `execution_start_s` within 10 seconds; your evidence interval must
-substantially overlap the interval in which the execution is actually visible. There is
-no fixed number of entries — report exactly those you find.
+5 seconds and `execution_start_s` within 10 seconds; your evidence interval
+`[evidence_start_s, evidence_end_s]` must overlap the interval in which the execution
+is actually visible with a temporal IoU (intersection over union) of at least 0.5. All
+times must be finite numbers. There is no fixed number of entries — report exactly
+those you find.

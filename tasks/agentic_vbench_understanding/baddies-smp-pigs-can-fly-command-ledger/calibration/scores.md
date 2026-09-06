@@ -1,16 +1,28 @@
 # Calibration — baddies-smp-pigs-can-fly-command-ledger
 
 Deterministic event-level F1 (`steps/solve/tests/judge.py`) against the frozen 21-row
-ground truth. The first three rows were measured 2026-08-01 on the shipped 228-min bake,
-with the offline `transcribe` tool present in every sandbox exactly as the image ships
-it. The Antigravity row was added 2026-08-26 as a host run with its own caveats — see
-"The Antigravity row" below.
+ground truth. The first three rows were measured 2026-08-01; the Antigravity row was
+added 2026-08-26 as a host run — see "The Antigravity row" below.
 
-**Verdict: this task does NOT clear the family's difficulty bar.** The strongest agent
-scores 0.1875 against a `< 0.10` gate. The long-horizon gate and every ablation gate
-pass. Everything below is as-measured; nothing was re-scored, re-tuned, or selected
-after the fact, and the section "Why the ledger cannot be enlarged into the gate"
-records a fix that was tried and did not work.
+**Verdict: the difficulty gate is currently UNDETERMINED — none of the four rows below
+is a clean measurement of the shipped task.** A re-audit of the raw trajectories
+(2026-09-05, prompted by review of PR #99; details under "Provenance and honesty
+notes") found that the three full-evidence runs did not start from the empty
+workspace the shipped image provides: all three opened on a pre-populated `work/`
+tree (transcript, diarization, ~150 extracted frames, helper scripts) left by earlier
+sessions, and ran under a host path rather than the container's `/workspace`. The two
+Claude runs additionally executed **concurrently against the same output path**, and
+each read and merged the other's `solution.json` into its own answer — so 0.1875 and
+0.1379 are not two independent measurements. The Antigravity run was quota-terminated
+before analysis and submitted nothing, so its 0.0 is the empty anchor.
+
+The numbers are retained as development records and for the ablation analysis that
+follows, which is still informative about the cross-modal structure of the task. They
+do **not** establish whether a strong agent scores above or below `< 0.10`. The next
+checkpoint is one clean Codex GPT-5.6 Sol pilot — fresh container, empty workspace,
+shipped materials only, one-hour budget, networking off, audited trajectory — and the
+gate will be re-read from that run alone. Everything below is as-measured; nothing was
+re-scored, re-tuned, or selected after the fact.
 
 ## Anchors
 
@@ -28,8 +40,12 @@ records a fix that was tried and did not work.
 | Codex CLI | 0.145.0 | GPT-5.6 Sol | xhigh | **0.0741** | 112 | `rollouts/codex-full.jsonl` |
 | Antigravity CLI | 1.1.21 | Gemini 3.5 Flash | high | **0.0** | 98 | `rollouts/antigravity-full.jsonl` |
 
-Difficulty gate (`< 0.10`): **fails** for Opus 5 and Opus 4.8; passes for Codex and
-Antigravity. Long-horizon gate (`> 50` turns): passes for all four.
+Difficulty gate (`< 0.10`): **not readable from these rows** — all four are
+contaminated or incomplete measurements (see the verdict above and "Provenance and
+honesty notes"). Taken at face value they would read as fails for Opus 5 and Opus 4.8
+and passes for Codex and Antigravity, but the two Claude scores absorbed each other's
+answers and none started from the shipped empty workspace. Long-horizon gate (`> 50`
+turns): passes for all four.
 
 ### The Antigravity row — how it was run, and what 0.0 means here
 
@@ -246,13 +262,40 @@ narrower one than the task was designed to probe.
 
 ## Provenance and honesty notes
 
-- **Contamination audit, re-run on these exact trajectories.** Zero of Opus 5's 115
-  tool calls, Opus 4.8's 51, and Codex's 112 touch any answer-key path. A naive grep
-  flags all of them, because the prompt's own prohibition list ("never open
-  `ground_truth*`, `oracle*`, …") is echoed in the conversation history every turn;
-  `media/annotation/audit_runs.sh` now inspects `tool_use` inputs only. That script
-  previously reported "all clean" while auditing *zero* Opus runs — bare run names fell
-  through its file-existence test — and it now fails loudly instead.
+- **Workspace contamination, found on re-audit (2026-09-05) and not previously
+  disclosed here.** The answer-key audit below is true but was not the whole story.
+  Reading the trajectories rather than grepping them shows: (1) **Codex** — its very
+  first tool call (`find . -maxdepth 2`) already lists `work/transcript.txt`,
+  `full_transcript.txt`, `diarized.txt`, `diarize.py`, `run_tr.sh` and ~156 extracted
+  frames, and the agent says so: *"The sandbox already contains a usable transcript
+  through 10,800 seconds plus prior frame samplings, so I'm preserving and auditing that
+  work rather than rerunning three hours."* Its first ASR call starts at 10 800 s.
+  (2) **Opus 4.8** — `output/` was empty at its first listing; its own 2-entry answer was
+  then refused (*File has not been read yet*), it read back a 6-entry `solution.json`
+  with different content, and wrote the 8-entry union (*"merge into the complete
+  8-entry answer"*). Its SessionStart hook also injected prior-session memory naming
+  candidate answers. (3) **Opus 5** — opened on the same pre-populated `work/` tree,
+  and stated *"A concurrent run wrote to the shared output path"*; `pgrep` in its own
+  transcript shows two `claude -p` processes running this task at once, and its final
+  answer incorporates the other run's hill/light/flower_pot/spyglass rows. All three
+  ran at a host path (`media/annotation/solve`), not `/workspace`. The "prior session"
+  the Claude runs saw was in fact each other. **Consequence:** these scores do not
+  measure the shipped task and are excluded from the difficulty-gate reading (see the
+  verdict at the top).
+- **Answer-key audit, re-run on these exact trajectories.** Zero of Opus 5's 115 tool
+  calls, Opus 4.8's 51, Codex's 112, and Antigravity's 98 touch any answer-key path
+  (`scripts/understanding/audit_trajectory.py`, which now parses all four transcript
+  formats and fails closed on an unrecognized one; an earlier version reported 0 calls
+  and PASS for the Codex and Claude formats). A naive grep flags all of them, because
+  the prompt's own prohibition list ("never open `ground_truth*`, `oracle*`, …") is
+  echoed in the conversation history every turn; the auditor inspects tool-call inputs
+  only, and treats a shell `find … ! -name 'ground_truth*'` exclusion as what it is.
+- **Scorer hardening (2026-09-05).** `judge.py` now rejects non-finite timestamps —
+  a ledger with every timestamp set to JSON `NaN` previously scored 1.0, because a
+  comparison against NaN is always False and the checks are written as "reject if
+  outside tolerance" (regression in `tools/test_judge.py`). `speaker`/`target` are
+  declared optional and unscored in the prompt, matching the judge, which never scored
+  them; and the prompt now states the enforced evidence threshold (temporal IoU ≥ 0.5).
 - **A leak was found and the affected runs were discarded**, not re-scored. An earlier
   `instruction.md` used a REAL ground-truth row as its worked example; Codex copied it
   verbatim for a free true positive. The example is now fictional (a request at 5500 s)
