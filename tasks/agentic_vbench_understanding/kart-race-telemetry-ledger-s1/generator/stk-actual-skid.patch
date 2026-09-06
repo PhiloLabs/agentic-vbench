@@ -1,0 +1,152 @@
+diff --git a/src/karts/kart_with_stats.cpp b/src/karts/kart_with_stats.cpp
+index 14aafb0..d0198e7 100644
+--- a/src/karts/kart_with_stats.cpp
++++ b/src/karts/kart_with_stats.cpp
+@@ -18,6 +18,10 @@
+ 
+ #include "karts/kart_with_stats.hpp"
+ 
++#include "karts/skidding.hpp"
++#include "utils/time.hpp"
++#include "utils/log.hpp"
++
+ #include "karts/explosion_animation.hpp"
+ #include "karts/rescue_animation.hpp"
+ #include "items/item.hpp"
+@@ -41,6 +45,12 @@ void KartWithStats::reset()
+     m_explosion_time    = 0.0f;
+     m_explosion_count   = 0;
+     m_skidding_time     = 0.0f;
++    m_actual_skid_time  = 0.0f;
++    m_actual_skid_wall  = 0.0;
++    m_showgfx_skid_time = 0.0f;
++    m_last_wall_ms      = StkTime::getMonoTimeMs();
++    m_race_start_wall_ms = m_last_wall_ms;
++    m_episode_start_wall_ms = 0;
+     m_rescue_count      = 0;
+     m_rescue_time       = 0.0f;
+     m_bonus_count       = 0;
+@@ -64,6 +74,42 @@ void KartWithStats::update(int ticks)
+     if(getSpeed()>m_top_speed        ) m_top_speed = getSpeed();
+     float dt = stk_config->ticks2Time(ticks);
+     if(getControls().getSkidControl()) m_skidding_time += dt;
++
++    // AgenticVBench GT instrumentation: accumulate the ACTUAL skid duration. The visible spark
++    // spray / skid marks / skid sound are driven by SKID_ACCUMULATE_* while not jumping, whereas
++    // m_skidding_time above only tracks the skid INPUT. Integrated in both game seconds and
++    // wall-clock seconds (the latter equals recorded-video seconds).
++    // NB: deliberately keyed on the PHYSICS skid state only. Skidding::isJumping() reads
++    // m_graphical_remaining_jump_time, which is decremented in Skidding::updateGraphics() and is
++    // therefore never cleared in a headless build; and the tyre skid marks (graphics/skid_marks.cpp)
++    // are likewise keyed on SKID_ACCUMULATE_* alone.
++    const Skidding *sk = getSkidding();
++    const Skidding::SkidState ss = sk->getSkidState();
++    const uint64_t now_ms = StkTime::getMonoTimeMs();
++    const double wall_dt = (double)(now_ms - m_last_wall_ms) / 1000.0;
++    if (ss == Skidding::SKID_ACCUMULATE_LEFT || ss == Skidding::SKID_ACCUMULATE_RIGHT)
++    {
++        m_actual_skid_time += dt;
++        m_actual_skid_wall += wall_dt;
++        if (m_episode_start_wall_ms == 0) m_episode_start_wall_ms = m_last_wall_ms;
++    }
++    else if (ss == Skidding::SKID_SHOW_GFX_LEFT || ss == Skidding::SKID_SHOW_GFX_RIGHT)
++    {
++        // The post-skid "bonus available" phase; the emitter drops to its minimum rate here, so
++        // this is tracked separately rather than counted as drift.
++        m_showgfx_skid_time += dt;
++    }
++    if (m_episode_start_wall_ms != 0 &&
++        ss != Skidding::SKID_ACCUMULATE_LEFT && ss != Skidding::SKID_ACCUMULATE_RIGHT)
++    {
++        // Auditable drift timeline: episode start/end in seconds since race start, i.e. in the
++        // recorded video's own clock. Lets any reviewer jump to a timestamp and see the sparks.
++        Log::verbose("profile", "skidep %s %.3f %.3f", getIdent().c_str(),
++                     (double)(m_episode_start_wall_ms - m_race_start_wall_ms) / 1000.0,
++                     (double)(m_last_wall_ms          - m_race_start_wall_ms) / 1000.0);
++        m_episode_start_wall_ms = 0;
++    }
++    m_last_wall_ms = now_ms;
+     if(getControls().getBrake()      ) m_brake_count ++;
+     LinearWorld *world = dynamic_cast<LinearWorld*>(World::getWorld());
+     if(world && !world->isOnRoad(getWorldKartId()))
+diff --git a/src/karts/kart_with_stats.hpp b/src/karts/kart_with_stats.hpp
+index 26f885d..6f0daae 100644
+--- a/src/karts/kart_with_stats.hpp
++++ b/src/karts/kart_with_stats.hpp
+@@ -70,6 +70,34 @@ private:
+     /** How much time this kart was skidding. */
+     float        m_skidding_time;
+ 
++    /** AgenticVBench GT instrumentation. Time (GAME seconds) the kart was ACTUALLY skidding, i.e.
++     *  the skid state machine is in SKID_ACCUMULATE_* -- the state
++     *  that drives the visible spark spray, the tyre skid marks and the skid sound
++     *  (kart.cpp:2637, graphics/skid_marks.cpp:162). This is deliberately DIFFERENT from
++     *  m_skidding_time above, which accumulates whenever the skid INPUT is held even if the kart
++     *  is too slow or airborne to actually skid (Skidding::update, SKID_NONE case). */
++    float        m_actual_skid_time;
++
++    /** As m_actual_skid_time, but integrated in WALL-CLOCK seconds. The race suite is captured
++     *  with ffmpeg x11grab at a constant wall-clock frame rate, so this is the drift duration as
++     *  it appears in the recorded VIDEO -- it needs no game->video rescaling. */
++    double       m_actual_skid_wall;
++
++    /** Monotonic wall clock (ms) at the previous update, to integrate m_actual_skid_wall. */
++    uint64_t     m_last_wall_ms;
++
++    /** Wall clock (ms) at race reset, so drift episodes can be logged relative to race start
++     *  (i.e. in recorded-video seconds). */
++    uint64_t     m_race_start_wall_ms;
++
++    /** Wall clock (ms) at which the current drift episode began, 0 when not drifting. Used to
++     *  emit an auditable per-episode drift timeline. */
++    uint64_t     m_episode_start_wall_ms;
++
++    /** Time (GAME seconds) in the post-skid SKID_SHOW_GFX_* phase, where the spark emitter drops
++     *  to its minimum "bonus available" rate. Tracked for transparency; not counted as drift. */
++    float        m_showgfx_skid_time;
++
+ public:
+                  KartWithStats(const std::string& ident,
+                                unsigned int world_kart_id,
+@@ -93,6 +121,16 @@ public:
+     /** Returns how much time this kart spent skidding. */
+     float getSkiddingTime() const { return m_skidding_time; }
+     // ------------------------------------------------------------------------
++    /** Returns the time (GAME seconds) the kart was actually skidding. */
++    float getActualSkidTime() const { return m_actual_skid_time; }
++    // ------------------------------------------------------------------------
++    /** Returns the time (WALL-CLOCK seconds, i.e. recorded-video seconds) the kart was actually
++     *  skidding. */
++    double getActualSkidWall() const { return m_actual_skid_wall; }
++    // ------------------------------------------------------------------------
++    /** Returns the time in the post-skid SKID_SHOW_GFX_* phase (GAME seconds). */
++    float getShowGfxSkidTime() const { return m_showgfx_skid_time; }
++    // ------------------------------------------------------------------------
+     /** Returns how often the kart braked. */
+     unsigned int getBrakeCount() const { return m_brake_count; }
+     // ------------------------------------------------------------------------
+diff --git a/src/modes/profile_world.cpp b/src/modes/profile_world.cpp
+index 1c6f6d1..220a07e 100644
+--- a/src/modes/profile_world.cpp
++++ b/src/modes/profile_world.cpp
+@@ -226,7 +226,8 @@ void ProfileWorld::enterRaceOverState()
+     Log::verbose("profile", "name start_position end_position time average_speed top_speed "
+            "skid_time rescue_time rescue_count brake_count "
+            "explosion_time explosion_count bonus_count banana_count "
+-           "small_nitro_count large_nitro_count bubblegum_count");
++           "small_nitro_count large_nitro_count bubblegum_count off_track_count "
++           "actual_skid_time actual_skid_wall showgfx_skid_time");
+ 
+     std::set<std::string> all_groups;
+ 
+@@ -254,6 +255,10 @@ void ProfileWorld::enterRaceOverState()
+         ss << kart->getBonusCount() << " " << kart->getBananaCount() << " ";
+         ss << kart->getSmallNitroCount() << " " << kart->getLargeNitroCount() << " ";
+         ss << kart->getBubblegumCount() << " " << kart->getOffTrackCount() << " ";
++        // AgenticVBench GT: actual (visible) skid duration, in game seconds and in wall-clock
++        // (= recorded-video) seconds. See KartWithStats::m_actual_skid_time.
++        ss << kart->getActualSkidTime() << " " << kart->getActualSkidWall() << " "
++           << kart->getShowGfxSkidTime() << " ";
+         Log::verbose("profile", ss.str().c_str());
+     }
+ 
