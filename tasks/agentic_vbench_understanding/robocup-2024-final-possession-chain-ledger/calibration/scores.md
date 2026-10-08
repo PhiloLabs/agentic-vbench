@@ -7,12 +7,15 @@ reward and difficulty gate is **exact order-preserving full-chain IoU (Jaccard)*
 recall are reported only as diagnostics. Do not mix results from earlier weighted or
 partial-credit scorer revisions into this table.
 
-Every row below was re-scored under the finalized judge
-(`steps/solve/tests/judge.py`, SHA256
-`4e7a7a9e565a39fa552a057f94ebf9c4945022f46f64f81d6fd728fef3ae6866`) against the
-submitted `solution.json` recorded in each retained job. Submitted solutions and
-trajectories were not modified. The final re-score outputs, manifests, and copied
-submitted answers are published in the immutable
+The immutable v4 re-score archive records the judge SHA256
+`4e7a7a9e565a39fa552a057f94ebf9c4945022f46f64f81d6fd728fef3ae6866`. That archive
+is preserved as the historical re-score record. The checked-in judge currently has
+SHA256 `328283c0ab99d4aa9e248c3ec60088adaf4b9b96bf50364a3c8dcdf0a4039efb`; all seven
+retained answers were re-scored with that file as well. Their solution SHA256 values
+and results are recorded in
+[the current-judge re-score record](rescore-current-judge-20261008.json). All seven
+results match the v4 archive; submitted solutions and trajectories were not modified.
+The v4 re-score outputs, manifests, and copied submitted answers remain published in the immutable
 [re-score bundle](https://github.com/shengjun-zhang/agentic-vbench/releases/download/robocup-possession-chain-iou-20260911-evidence-v4/rescored-retained-answers.tar.gz)
 (`92e6bbe2927cd4dfcbe0c34834e398e316b051771885ac6815a6b3955734b1b2`).
 
@@ -99,7 +102,8 @@ Record these once the final image is built and do not change the task between ro
 |---|---|
 | task commit | `990711fbe7be8854dfa07007f7a60810b1f9f064` |
 | Harbor version | `0.20.0` |
-| verifier judge SHA256 | `1ff25ed4e3a3721906950f035704ee2e6a5c8553b4f601e76291e3a39b6cdbcd` |
+| original qualification judge SHA256 | `1ff25ed4e3a3721906950f035704ee2e6a5c8553b4f601e76291e3a39b6cdbcd` |
+| current checked-in judge SHA256 | `328283c0ab99d4aa9e248c3ec60088adaf4b9b96bf50364a3c8dcdf0a4039efb` |
 | Codex image ID | `sha256:ae98225846c1c83bb058392f1582e14b1dffea753d3a0ed2d38832a831631a39` |
 | Claude image ID | `sha256:ed8de26cfd100adf229adad2e0b8d70984d4ba002ef218b6145f57885e5937dc` |
 | Antigravity image ID | `sha256:b0d91055dca04597508994f693c9cc00b16bfeb5bfa2130a349fde0e66a7eeee` |
