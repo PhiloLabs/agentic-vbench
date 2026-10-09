@@ -1,0 +1,49 @@
+{
+  "trade_episodes": [
+    {
+      "round": 1,
+      "initial_kill": {
+        "t": 29.72,
+        "killer": "P5",
+        "victim": "P9",
+        "weapon": "usps"
+      },
+      "trade_kill": {
+        "t": 31.94,
+        "killer": "P7",
+        "victim": "P5",
+        "weapon": "glock18"
+      }
+    },
+    {
+      "round": 1,
+      "initial_kill": {
+        "t": 51.81,
+        "killer": "P3",
+        "victim": "P8",
+        "weapon": "usps"
+      },
+      "trade_kill": {
+        "t": 54.09,
+        "killer": "P10",
+        "victim": "P3",
+        "weapon": "glock18"
+      }
+    },
+    {
+      "round": 2,
+      "initial_kill": {
+        "t": 143.61,
+        "killer": "P8",
+        "victim": "P2",
+        "weapon": "mac10"
+      },
+      "trade_kill": {
+        "t": 146.08,
+        "killer": "P3",
+        "victim": "P8",
+        "weapon": "ppbizon"
+      }
+    }
+  ]
+}
