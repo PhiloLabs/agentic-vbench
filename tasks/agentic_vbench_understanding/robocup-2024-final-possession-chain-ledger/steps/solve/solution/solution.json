@@ -1,0 +1,168 @@
+{
+  "chains": [
+    {
+      "half": 1,
+      "team": "white",
+      "kick_count": 4,
+      "zone_path": [
+        "defensive",
+        "middle",
+        "attacking"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 1,
+      "team": "white",
+      "kick_count": 3,
+      "zone_path": [
+        "middle"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 1,
+      "team": "white",
+      "kick_count": 3,
+      "zone_path": [
+        "middle",
+        "attacking"
+      ],
+      "terminal": "stoppage"
+    },
+    {
+      "half": 1,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "attacking"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 1,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "attacking"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 1,
+      "team": "white",
+      "kick_count": 6,
+      "zone_path": [
+        "defensive",
+        "middle",
+        "defensive",
+        "attacking",
+        "middle"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 1,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "defensive"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 2,
+      "zone_path": [
+        "middle"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 2,
+      "team": "black",
+      "kick_count": 6,
+      "zone_path": [
+        "middle",
+        "attacking"
+      ],
+      "terminal": "stoppage"
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 3,
+      "zone_path": [
+        "middle",
+        "attacking"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 3,
+      "zone_path": [
+        "attacking",
+        "middle"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 2,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "middle"
+      ],
+      "terminal": "stoppage"
+    },
+    {
+      "half": 2,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "attacking",
+        "middle"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 2,
+      "zone_path": [
+        "defensive"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 2,
+      "team": "black",
+      "kick_count": 2,
+      "zone_path": [
+        "defensive"
+      ],
+      "terminal": "turnover"
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 2,
+      "zone_path": [
+        "middle"
+      ],
+      "terminal": "stoppage"
+    },
+    {
+      "half": 2,
+      "team": "white",
+      "kick_count": 2,
+      "zone_path": [
+        "defensive"
+      ],
+      "terminal": "stoppage"
+    }
+  ]
+}

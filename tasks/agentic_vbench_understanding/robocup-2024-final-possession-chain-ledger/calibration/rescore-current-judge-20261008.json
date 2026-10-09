@@ -1,0 +1,124 @@
+{
+  "record_type": "retained_answer_rescore",
+  "recorded_on": "2026-10-08",
+  "metric": "exact order-preserving full-chain IoU",
+  "judge": {
+    "path": "steps/solve/tests/judge.py",
+    "sha256": "328283c0ab99d4aa9e248c3ec60088adaf4b9b96bf50364a3c8dcdf0a4039efb"
+  },
+  "ground_truth_sha256": "d3c3de7f93c68ef5e7c7cc326fbc28e0469330c1bc2efa1eebc9165685b7ca7c",
+  "rows": [
+    {
+      "row_id": "codex-e2e",
+      "source_bundle": "https://github.com/shengjun-zhang/agentic-vbench/releases/download/robocup-possession-chain-iou-20260909-evidence-v2/codex-e2e.tar.gz",
+      "source_bundle_sha256": "73d01016602e6f57f2c8eda118530ec27498cc8a8a584fa586520b3356dbbce7",
+      "solution_sha256": "afee9f6410e373338350c10c537658f786b3212abe40fcdceee7a2d73a68abf0",
+      "reward": 0.0,
+      "details": {
+        "n_ground_truth": 17,
+        "n_predicted": 8,
+        "n_schema_valid": 8,
+        "exact_matches": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "exact_iou": 0.0
+      }
+    },
+    {
+      "row_id": "claude-e2e",
+      "source_bundle": "https://github.com/shengjun-zhang/agentic-vbench/releases/download/robocup-possession-chain-iou-20260909-evidence-v2/claude-e2e.tar.gz",
+      "source_bundle_sha256": "b38a63503c592c43c7684c2e613ce0d404089c6d73e0241d1373a455e05df97c",
+      "solution_sha256": "87e7c7b1e2b7389919e855c376d6971356f3b5c2ecd5351a952f45b48e8e3173",
+      "reward": 0.0571,
+      "details": {
+        "n_ground_truth": 17,
+        "n_predicted": 20,
+        "n_schema_valid": 20,
+        "exact_matches": 2,
+        "precision": 0.1,
+        "recall": 0.1176,
+        "exact_iou": 0.0571
+      }
+    },
+    {
+      "row_id": "antigravity-e2e",
+      "source_bundle": "https://github.com/shengjun-zhang/agentic-vbench/releases/download/robocup-possession-chain-iou-20260911-evidence-v4/antigravity-e2e.tar.gz",
+      "source_bundle_sha256": "5368b2aff2514da8a06d4c7f1dedc6487bb0fa64f90c95637414342e7aa1ad3d",
+      "solution_sha256": "60da63f332e4938076aa347f3010d95b8cfeda2abde97fa2ed19b60800dbc768",
+      "reward": 0.0213,
+      "details": {
+        "n_ground_truth": 17,
+        "n_predicted": 79,
+        "n_schema_valid": 79,
+        "exact_matches": 2,
+        "precision": 0.0253,
+        "recall": 0.1176,
+        "exact_iou": 0.0213
+      }
+    },
+    {
+      "row_id": "ablation-nomedia-forced",
+      "source_bundle": "https://github.com/shengjun-zhang/agentic-vbench/releases/download/robocup-possession-chain-iou-20260909-evidence-v2/ablation-nomedia-forced.tar.gz",
+      "source_bundle_sha256": "7750ae2d6b578020ab5877d141a15a3e1bf23b9774ebfa2393450eda6874b524",
+      "solution_sha256": "490ea7261dbb462549fcd4851488373b27cfed659192833ea3bad85329353b33",
+      "reward": 0.0,
+      "details": {
+        "n_ground_truth": 17,
+        "n_predicted": 1,
+        "n_schema_valid": 1,
+        "exact_matches": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "exact_iou": 0.0
+      }
+    },
+    {
+      "row_id": "ablation-single-frame-forced",
+      "source_bundle": "https://github.com/shengjun-zhang/agentic-vbench/releases/download/robocup-possession-chain-iou-20260909-evidence-v2/ablation-single-frame-forced.tar.gz",
+      "source_bundle_sha256": "5506fc4fa50bdca06ad2d4fe8b9451c0b66e844d249f710ad81ee63d1a50d66f",
+      "solution_sha256": "490ea7261dbb462549fcd4851488373b27cfed659192833ea3bad85329353b33",
+      "reward": 0.0,
+      "details": {
+        "n_ground_truth": 17,
+        "n_predicted": 1,
+        "n_schema_valid": 1,
+        "exact_matches": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "exact_iou": 0.0
+      }
+    },
+    {
+      "row_id": "ablation-ocr-forced",
+      "source_bundle": "https://github.com/shengjun-zhang/agentic-vbench/releases/download/robocup-possession-chain-iou-20260909-evidence-v2/ablation-ocr-forced.tar.gz",
+      "source_bundle_sha256": "f3aae9b201a5db27e70170ef4e9ba4a4e5d1d65cb6e641573c6d09f1d16a2389",
+      "solution_sha256": "490ea7261dbb462549fcd4851488373b27cfed659192833ea3bad85329353b33",
+      "reward": 0.0,
+      "details": {
+        "n_ground_truth": 17,
+        "n_predicted": 1,
+        "n_schema_valid": 1,
+        "exact_matches": 0,
+        "precision": 0.0,
+        "recall": 0.0,
+        "exact_iou": 0.0
+      }
+    },
+    {
+      "row_id": "ablation-allframes-notools",
+      "source_bundle": "https://github.com/shengjun-zhang/agentic-vbench/releases/download/robocup-possession-chain-iou-20260909-evidence-v2/ablation-allframes-notools.tar.gz",
+      "source_bundle_sha256": "32e0c7e0445c661572d8d9e4b3e0f2380a06cf052213c93abb4bda2e3a5a0002",
+      "solution_sha256": "5a742a028ad47371ddfec461e4d7d1518dc739b36b88f0f76bb8aa9eb729fd43",
+      "reward": 0.0185,
+      "details": {
+        "n_ground_truth": 17,
+        "n_predicted": 38,
+        "n_schema_valid": 38,
+        "exact_matches": 1,
+        "precision": 0.0263,
+        "recall": 0.0588,
+        "exact_iou": 0.0185
+      }
+    }
+  ]
+}
