@@ -1,0 +1,219 @@
+{
+  "break_points": [
+    {
+      "set": 1, "medvedev_games": 1, "de_minaur_games": 1,
+      "medvedev_points": "30", "de_minaur_points": "40",
+      "server": "Daniil Medvedev", "opportunity": 1,
+      "first_serve_in": true, "outcome": "saved", "serve_direction": "unknown",
+      "rally_shots": 1, "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 1, "medvedev_games": 2, "de_minaur_games": 2,
+      "medvedev_points": "30", "de_minaur_points": "40",
+      "server": "Daniil Medvedev", "opportunity": 1,
+      "first_serve_in": true, "outcome": "converted", "serve_direction": "unknown",
+      "rally_shots": 2, "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 1, "medvedev_games": 2, "de_minaur_games": 4,
+      "medvedev_points": "15", "de_minaur_points": "40",
+      "server": "Daniil Medvedev", "opportunity": 1,
+      "first_serve_in": true, "outcome": "converted", "serve_direction": "unknown",
+      "rally_shots": 2, "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 2, "medvedev_games": 2, "de_minaur_games": 1,
+      "medvedev_points": "40", "de_minaur_points": "15",
+      "server": "Alex De Minaur", "opportunity": 1,
+      "first_serve_in": true, "outcome": "saved", "serve_direction": "unknown",
+      "rally_shots": 1, "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 2, "medvedev_games": 2, "de_minaur_games": 1,
+      "medvedev_points": "40", "de_minaur_points": "30",
+      "server": "Alex De Minaur", "opportunity": 2,
+      "first_serve_in": true, "outcome": "saved", "serve_direction": "unknown",
+      "rally_shots": 1, "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 2, "medvedev_games": 2, "de_minaur_games": 1,
+      "medvedev_points": "AD", "de_minaur_points": "40",
+      "server": "Alex De Minaur", "opportunity": 3,
+      "first_serve_in": true, "outcome": "saved", "serve_direction": "unknown",
+      "rally_shots": 1, "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 2, "medvedev_games": 2, "de_minaur_games": 1,
+      "medvedev_points": "AD", "de_minaur_points": "40",
+      "server": "Alex De Minaur", "opportunity": 4,
+      "first_serve_in": true, "outcome": "saved", "serve_direction": "unknown",
+      "rally_shots": 1, "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 2, "medvedev_games": 2, "de_minaur_games": 1,
+      "medvedev_points": "AD", "de_minaur_points": "40",
+      "server": "Alex De Minaur", "opportunity": 5,
+      "first_serve_in": true, "outcome": "saved", "serve_direction": "unknown",
+      "rally_shots": 1, "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 2, "medvedev_games": 5, "de_minaur_games": 4,
+      "medvedev_points": "40", "de_minaur_points": "15",
+      "server": "Alex De Minaur", "opportunity": 1,
+      "first_serve_in": true, "outcome": "converted", "serve_direction": "unknown",
+      "rally_shots": 2, "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 3, "medvedev_games": 2, "de_minaur_games": 1,
+      "medvedev_points": "AD", "de_minaur_points": "40",
+      "server": "Alex De Minaur", "opportunity": 1,
+      "first_serve_in": true, "outcome": "converted", "serve_direction": "unknown",
+      "rally_shots": 2, "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 3, "medvedev_games": 4, "de_minaur_games": 1,
+      "medvedev_points": "40", "de_minaur_points": "30",
+      "server": "Alex De Minaur", "opportunity": 1,
+      "first_serve_in": true, "outcome": "converted", "serve_direction": "unknown",
+      "rally_shots": 2, "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 4, "medvedev_games": 0, "de_minaur_games": 1,
+      "medvedev_points": "30", "de_minaur_points": "40",
+      "server": "Daniil Medvedev", "opportunity": 1,
+      "first_serve_in": true, "outcome": "saved", "serve_direction": "unknown",
+      "rally_shots": 1, "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 4, "medvedev_games": 1, "de_minaur_games": 1,
+      "medvedev_points": "40", "de_minaur_points": "0",
+      "server": "Alex De Minaur", "opportunity": 1,
+      "first_serve_in": true, "outcome": "converted", "serve_direction": "unknown",
+      "rally_shots": 2, "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 4, "medvedev_games": 3, "de_minaur_games": 1,
+      "medvedev_points": "40", "de_minaur_points": "0",
+      "server": "Alex De Minaur", "opportunity": 1,
+      "first_serve_in": true, "outcome": "converted", "serve_direction": "unknown",
+      "rally_shots": 2, "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 4, "medvedev_games": 4, "de_minaur_games": 1,
+      "medvedev_points": "30", "de_minaur_points": "40",
+      "server": "Daniil Medvedev", "opportunity": 1,
+      "first_serve_in": true, "outcome": "saved", "serve_direction": "unknown",
+      "rally_shots": 1, "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    },
+    {
+      "set": 4, "medvedev_games": 4, "de_minaur_games": 1,
+      "medvedev_points": "40", "de_minaur_points": "AD",
+      "server": "Daniil Medvedev", "opportunity": 2,
+      "first_serve_in": true, "outcome": "saved", "serve_direction": "unknown",
+      "rally_shots": 1, "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "unknown", "terminal_court_position": "unknown",
+      "terminal_result": "error_unknown", "terminal_error": "unknown",
+      "shots": [
+        {"stroke": "serve", "direction": "unknown"},
+        {"stroke": "unknown", "direction": "unknown"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schema_version": "agentic-vbench-calibration-no-score-v1",
+  "harness": "Antigravity CLI",
+  "harness_version": "1.1.22",
+  "requested_model": "Gemini 3.5 Flash",
+  "reasoning": null,
+  "status": "NO_SCORE",
+  "inference_started": true,
+  "trajectory_valid": false,
+  "score": null,
+  "turns": null,
+  "failure_stage": "phase1.segment0.classification",
+  "reason_code": "terminal_only_finish_without_active_pair",
+  "terminal_reason": "phase1_segment0_classification_failed",
+  "launcher_exit_status": 86,
+  "sanitization_manifest_sha256": "8b8f3bc372b9645f8abf64081c4c8db21179427df9abc477c6b9ee64818494f7",
+  "sanitized_tree_sha256": "0b177b786ee713b45d3d1382f908757cb8292d56081475f53ac68995a4c73923",
+  "prelaunch_report_sha256": "134fd4c0cd0bdb5867045d5b9347c8677734d03e3e98c0b221d426d1d8bc828f",
+  "raw_committed": false
+}

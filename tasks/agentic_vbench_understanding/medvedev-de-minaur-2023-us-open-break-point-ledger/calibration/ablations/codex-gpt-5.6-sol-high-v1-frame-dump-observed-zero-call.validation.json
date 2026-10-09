@@ -1,0 +1,177 @@
+{
+  "agent": {
+    "name": "codex",
+    "version": "0.149.1"
+  },
+  "agent_import_path": "avb_frame_dump_no_tools_codex:PreinstalledCodexFrameDumpNoTools",
+  "claim_boundary": {
+    "backend_tool_choice_none": "not_proven",
+    "backend_tools_array_empty": "not_proven",
+    "model_tool_calls_observed": 0,
+    "policy_is_not_backend_tools_empty_proof": true,
+    "proved": "observed_zero_model_tool_calls_in_preserved_raw_session"
+  },
+  "finished_at": "2026-08-27T06:39:01.730843Z",
+  "formula": "2 * exact_ordered_event_matches / (n_predicted + n_reference)",
+  "frame_evidence": {
+    "claim_scope": "ordered_session_image_payloads",
+    "codex_cli_preprocessing": "2560x1080_to_2048x864",
+    "cryptographic_source-to-processed_mapping": "not_reconstructed_post_run",
+    "frame_sheet_count": 179,
+    "original_dimensions": [
+      2560,
+      1080
+    ],
+    "original_hash_manifest_line_count": 179,
+    "original_hash_manifest_sha256": "4ee2dbfef29fd9da705d5e84452c9b4b5837d06e1162edaa844356ec298b0ed1",
+    "original_to_session_byte_equality": false,
+    "original_to_session_hash_match_count": 0,
+    "processed_first_sha256": "cd59f9c1a4c2a115d43bdb16cd78ba293774820c8de3eaf5606470800414caac",
+    "processed_image_manifest_sha256": "d79c946a23bad83bf02c576cd3a0c9c6b542f45f29a478959d7971f38d42dbcf",
+    "processed_image_total_bytes": 143782029,
+    "processed_last_sha256": "047cbac27ec5831eb5a8f13906409f38aa79087c52d965694175cc57143b0891",
+    "session_dimensions": [
+      2048,
+      864
+    ],
+    "session_jpeg_decoder": "Pillow 11.3.0",
+    "session_jpeg_full_decode_passed": true
+  },
+  "gateway": {
+    "allow": 21,
+    "broken_pipe": 6,
+    "close": 21,
+    "closed_world_line_count": 59,
+    "connection_accounting": "ordered_unmatched-ALLOW_conservation",
+    "connection_ids_present": false,
+    "connection_reset": 2,
+    "deny": 8,
+    "error": 0,
+    "last_close_timestamp": "2026-08-27T06:38:38.713745+00:00",
+    "max_concurrent_open_connections": 2,
+    "relay_block_count": 7,
+    "sha256": "1b23d924889a5116304899aa3477e341d26e5b45d6181f590cd7d00f8a8133e9",
+    "start": 1
+  },
+  "hashes": {
+    "adapter_source": "035034322a96a3ad2a4a755fb254c1528fda0ce45b9eaac8921601144087fdfe",
+    "artifact_manifest": "74e23daa039ba00190dae93bf955ac487e1a7598da085c2c974cb980be084042",
+    "base_adapter_source": "39b8c9d70870627f8e95c2c69655cc476748fd2fcda310e65a8d860553983690",
+    "config_json": "cae98b52b2475bf1474e5c3bb271b601612df678418aa8721188840ef9fdf12a",
+    "frame_dump_sha256": "4ee2dbfef29fd9da705d5e84452c9b4b5837d06e1162edaa844356ec298b0ed1",
+    "frozen_task_files": {
+      "steps/solve/instruction.md": "2b025b557a17f2443e9b8f5951ee19562eee570038d092a7757b957555d1cd55",
+      "steps/solve/solution/solve.sh": "75c03d3084ebc3670ffbf77ee2ca5b0a46f16f8a4feb6b1d834c80aaa3a4c5c5",
+      "steps/solve/tests/judge.py": "3ece409c4c223c2bf2120fb1ef251d76c88bc6150fb59b4d0b6963bcf69c4b40",
+      "steps/solve/tests/test_judge.py": "6b1801277acdc2b73ee13c4a0f51b0ef90a2860edd43d834c872aec623cda5b4"
+    },
+    "input_manifest": "8fd3d4a01117d3a6d328679b9d66436c2962ce0f6b57c0bc08de01b3981950a7",
+    "materials_listing": "6aba76cdb32eef492e1bfa6518c8dbfe5399453c2f91f4e2682c20a5f84da2a8",
+    "result_json": "1bbc98fecd2d3b4cd041d6e65df2e38d3bb153d8dca68f5dbbd87252919f3e50",
+    "reward_json": "55f9214eb23969158ec32b4bcb0eddc3d451739a01f843fea3a6caea0a2556b3",
+    "submitted_solution": "845b3ae14fdd23ff264b5ee37bbc791a9c7c63d20069eb50c778eb41419d8c2c"
+  },
+  "image": {
+    "architecture": "arm64",
+    "id": "sha256:390fb56051fafb49b5b4b797cb15704469294f816255994e9ee0fd21fe2da06b",
+    "os": "linux",
+    "reference": "avb-medvedev-codex@sha256:390fb56051fafb49b5b4b797cb15704469294f816255994e9ee0fd21fe2da06b",
+    "size": 1085220502
+  },
+  "metadata": {
+    "ablation": "frame_dump_no_tools",
+    "frame_sheet_count": 179,
+    "model_tool_calls": 0,
+    "solution_materialized_by": "harbor_adapter",
+    "tool_absence_guarantee": "post_hoc_zero_call_audit"
+  },
+  "model": "gpt-5.6-sol",
+  "native_codex_stream": {
+    "event_type_counts": {
+      "error": 5,
+      "item.completed": 3,
+      "thread.started": 1,
+      "turn.completed": 1,
+      "turn.started": 1
+    },
+    "json_event_count": 11,
+    "native_tool_operations": 0,
+    "passive_item_type_counts": {
+      "agent_message": 1,
+      "error": 2
+    },
+    "sha256": "5c02facdcf4cc8397eb41d2616da139fe3e817204792304644ef76d038650fcd",
+    "usage": {
+      "cache_write_input_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 385525,
+      "output_tokens": 5539,
+      "reasoning_output_tokens": 3330
+    }
+  },
+  "overlay_task_checksum_recomputed": "b9af704673c53cfbdda71ded6e5c5c0a9874f19ebba55cba6a173d1a774e9f25",
+  "raw_session": {
+    "active_or_unknown_event_msg_items": 0,
+    "active_or_unknown_top_level_events": 0,
+    "active_response_items": 0,
+    "event_count": 28,
+    "event_msg_type_counts": {
+      "item_completed": 9,
+      "task_complete": 1,
+      "task_started": 1,
+      "token_count": 1
+    },
+    "event_type_counts": {
+      "event_msg": 12,
+      "response_item": 13,
+      "session_meta": 1,
+      "turn_context": 1,
+      "world_state": 1
+    },
+    "exact_ordered_image_path_tags": true,
+    "input_image_count": 179,
+    "model_tool_calls_observed": 0,
+    "non_execution_context_payloads_exact_schema": false,
+    "operation_bearing_layers_closed_world": true,
+    "passive_event_item_type_counts": {
+      "AgentMessage": 1,
+      "Reasoning": 7,
+      "UserMessage": 1
+    },
+    "response_item_type_counts": {
+      "message": 6,
+      "reasoning": 7
+    },
+    "sha256": "f6f275834e2c3f727f022eb4d0fa11d4de1b935f5bb5761e50103c4df7e46018",
+    "single_image_bearing_user_message": true,
+    "strict_jsonl": true
+  },
+  "reasoning_effort": "high",
+  "reward": 0.0,
+  "reward_independently_recomputed_from_frozen_judge": true,
+  "reward_inputs": {
+    "exact_event_matches_ordered": 0,
+    "n_ground_truth": 16,
+    "n_predicted": 14,
+    "reward_denominator": 30
+  },
+  "schema_version": "avb-frame-dump-run-validation-v2",
+  "soft_event_f1": 0.0111,
+  "solution_materialization": {
+    "materialized_by": "harbor_adapter",
+    "normalized_byte_equality": true,
+    "post_hoc_after_zero_call_audit": true,
+    "predicted_events": 14,
+    "submitted_bytes": 13253,
+    "submitted_solution_sha256": "845b3ae14fdd23ff264b5ee37bbc791a9c7c63d20069eb50c778eb41419d8c2c"
+  },
+  "started_at": "2026-08-27T06:26:14.328740Z",
+  "step_exception": null,
+  "stored_reward_equals_independent_regrade": true,
+  "task_checksum": "b9af704673c53cfbdda71ded6e5c5c0a9874f19ebba55cba6a173d1a774e9f25",
+  "trial_exception": null,
+  "trial_name": "frame-dump-no-tools__uRwKB2a",
+  "valid": true,
+  "validation_policy": "avb-frame-dump-observed-zero-call-strict-v2",
+  "validator_sha256": "412f521e83e96a7d70651b6f348c3855619c94b7005acaf5b11f9bed94187007"
+}

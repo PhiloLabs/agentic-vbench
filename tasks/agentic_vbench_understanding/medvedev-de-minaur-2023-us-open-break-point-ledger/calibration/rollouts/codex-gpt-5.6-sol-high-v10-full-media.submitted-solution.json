@@ -1,0 +1,1140 @@
+{
+  "break_points": [
+    {
+      "set": 1,
+      "medvedev_games": 1,
+      "de_minaur_games": 1,
+      "medvedev_points": "30",
+      "de_minaur_points": "40",
+      "server": "Daniil Medvedev",
+      "opportunity": 1,
+      "first_serve_in": true,
+      "outcome": "saved",
+      "serve_direction": "body",
+      "rally_shots": 13,
+      "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "backhand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "winner",
+      "terminal_error": "none",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "body"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        }
+      ]
+    },
+    {
+      "set": 1,
+      "medvedev_games": 2,
+      "de_minaur_games": 2,
+      "medvedev_points": "30",
+      "de_minaur_points": "40",
+      "server": "Daniil Medvedev",
+      "opportunity": 1,
+      "first_serve_in": true,
+      "outcome": "converted",
+      "serve_direction": "wide",
+      "rally_shots": 4,
+      "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "winner",
+      "terminal_error": "none",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        }
+      ]
+    },
+    {
+      "set": 1,
+      "medvedev_games": 2,
+      "de_minaur_games": 4,
+      "medvedev_points": "15",
+      "de_minaur_points": "40",
+      "server": "Daniil Medvedev",
+      "opportunity": 1,
+      "first_serve_in": false,
+      "outcome": "converted",
+      "serve_direction": "wide",
+      "rally_shots": 4,
+      "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "forehand_drop_shot",
+      "terminal_court_position": "baseline",
+      "terminal_result": "winner",
+      "terminal_error": "none",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_drop_shot",
+          "direction": "middle"
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "medvedev_games": 2,
+      "de_minaur_games": 1,
+      "medvedev_points": "40",
+      "de_minaur_points": "15",
+      "server": "Alex De Minaur",
+      "opportunity": 1,
+      "first_serve_in": false,
+      "outcome": "saved",
+      "serve_direction": "wide",
+      "rally_shots": 17,
+      "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "unforced_error",
+      "terminal_error": "net",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "medvedev_games": 2,
+      "de_minaur_games": 1,
+      "medvedev_points": "40",
+      "de_minaur_points": "30",
+      "server": "Alex De Minaur",
+      "opportunity": 2,
+      "first_serve_in": true,
+      "outcome": "saved",
+      "serve_direction": "wide",
+      "rally_shots": 7,
+      "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "forehand_volley",
+      "terminal_court_position": "net",
+      "terminal_result": "winner",
+      "terminal_error": "none",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_volley",
+          "direction": "receiver_backhand"
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "medvedev_games": 2,
+      "de_minaur_games": 1,
+      "medvedev_points": "AD",
+      "de_minaur_points": "40",
+      "server": "Alex De Minaur",
+      "opportunity": 3,
+      "first_serve_in": false,
+      "outcome": "saved",
+      "serve_direction": "wide",
+      "rally_shots": 33,
+      "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "forced_error",
+      "terminal_error": "wide",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "medvedev_games": 2,
+      "de_minaur_games": 1,
+      "medvedev_points": "AD",
+      "de_minaur_points": "40",
+      "server": "Alex De Minaur",
+      "opportunity": 4,
+      "first_serve_in": true,
+      "outcome": "saved",
+      "serve_direction": "wide",
+      "rally_shots": 1,
+      "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "backhand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "forced_error",
+      "terminal_error": "deep",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "medvedev_games": 2,
+      "de_minaur_games": 1,
+      "medvedev_points": "AD",
+      "de_minaur_points": "40",
+      "server": "Alex De Minaur",
+      "opportunity": 5,
+      "first_serve_in": true,
+      "outcome": "saved",
+      "serve_direction": "body",
+      "rally_shots": 5,
+      "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "winner",
+      "terminal_error": "none",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "body"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        }
+      ]
+    },
+    {
+      "set": 2,
+      "medvedev_games": 5,
+      "de_minaur_games": 4,
+      "medvedev_points": "40",
+      "de_minaur_points": "15",
+      "server": "Alex De Minaur",
+      "opportunity": 1,
+      "first_serve_in": true,
+      "outcome": "converted",
+      "serve_direction": "wide",
+      "rally_shots": 18,
+      "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "forced_error",
+      "terminal_error": "net",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "medvedev_games": 1,
+      "de_minaur_games": 1,
+      "medvedev_points": "30",
+      "de_minaur_points": "40",
+      "server": "Daniil Medvedev",
+      "opportunity": 1,
+      "first_serve_in": false,
+      "outcome": "saved",
+      "serve_direction": "wide",
+      "rally_shots": 5,
+      "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "winner",
+      "terminal_error": "none",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "medvedev_games": 2,
+      "de_minaur_games": 1,
+      "medvedev_points": "AD",
+      "de_minaur_points": "40",
+      "server": "Alex De Minaur",
+      "opportunity": 1,
+      "first_serve_in": true,
+      "outcome": "converted",
+      "serve_direction": "down_the_t",
+      "rally_shots": 2,
+      "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "unforced_error",
+      "terminal_error": "deep",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "down_the_t"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        }
+      ]
+    },
+    {
+      "set": 3,
+      "medvedev_games": 4,
+      "de_minaur_games": 1,
+      "medvedev_points": "40",
+      "de_minaur_points": "30",
+      "server": "Alex De Minaur",
+      "opportunity": 1,
+      "first_serve_in": false,
+      "outcome": "converted",
+      "serve_direction": "wide",
+      "rally_shots": 8,
+      "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "winner",
+      "terminal_error": "none",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        }
+      ]
+    },
+    {
+      "set": 4,
+      "medvedev_games": 0,
+      "de_minaur_games": 1,
+      "medvedev_points": "30",
+      "de_minaur_points": "40",
+      "server": "Daniil Medvedev",
+      "opportunity": 1,
+      "first_serve_in": true,
+      "outcome": "saved",
+      "serve_direction": "body",
+      "rally_shots": 21,
+      "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "winner",
+      "terminal_error": "none",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "body"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        }
+      ]
+    },
+    {
+      "set": 4,
+      "medvedev_games": 1,
+      "de_minaur_games": 1,
+      "medvedev_points": "40",
+      "de_minaur_points": "0",
+      "server": "Alex De Minaur",
+      "opportunity": 1,
+      "first_serve_in": false,
+      "outcome": "converted",
+      "serve_direction": "wide",
+      "rally_shots": 10,
+      "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "forehand_volley",
+      "terminal_court_position": "net",
+      "terminal_result": "winner",
+      "terminal_error": "none",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_volley",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_volley",
+          "direction": "receiver_forehand"
+        }
+      ]
+    },
+    {
+      "set": 4,
+      "medvedev_games": 3,
+      "de_minaur_games": 1,
+      "medvedev_points": "40",
+      "de_minaur_points": "0",
+      "server": "Alex De Minaur",
+      "opportunity": 1,
+      "first_serve_in": true,
+      "outcome": "converted",
+      "serve_direction": "wide",
+      "rally_shots": 42,
+      "terminal_player": "Daniil Medvedev",
+      "terminal_stroke": "backhand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "winner",
+      "terminal_error": "none",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "middle"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_forehand"
+        },
+        {
+          "stroke": "forehand_volley",
+          "direction": "receiver_backhand"
+        },
+        {
+          "stroke": "backhand_groundstroke",
+          "direction": "receiver_forehand"
+        }
+      ]
+    },
+    {
+      "set": 4,
+      "medvedev_games": 4,
+      "de_minaur_games": 1,
+      "medvedev_points": "30",
+      "de_minaur_points": "40",
+      "server": "Daniil Medvedev",
+      "opportunity": 1,
+      "first_serve_in": false,
+      "outcome": "saved",
+      "serve_direction": "down_the_t",
+      "rally_shots": 1,
+      "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "unforced_error",
+      "terminal_error": "deep",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "down_the_t"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        }
+      ]
+    },
+    {
+      "set": 4,
+      "medvedev_games": 4,
+      "de_minaur_games": 1,
+      "medvedev_points": "40",
+      "de_minaur_points": "AD",
+      "server": "Daniil Medvedev",
+      "opportunity": 2,
+      "first_serve_in": false,
+      "outcome": "saved",
+      "serve_direction": "wide",
+      "rally_shots": 1,
+      "terminal_player": "Alex De Minaur",
+      "terminal_stroke": "forehand_groundstroke",
+      "terminal_court_position": "baseline",
+      "terminal_result": "forced_error",
+      "terminal_error": "shank",
+      "shots": [
+        {
+          "stroke": "serve",
+          "direction": "wide"
+        },
+        {
+          "stroke": "forehand_groundstroke",
+          "direction": "receiver_backhand"
+        }
+      ]
+    }
+  ]
+}

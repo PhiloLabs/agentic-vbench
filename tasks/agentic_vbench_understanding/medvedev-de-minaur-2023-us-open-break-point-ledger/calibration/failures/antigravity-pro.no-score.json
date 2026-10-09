@@ -1,0 +1,20 @@
+{
+  "schema_version": "agentic-vbench-calibration-no-score-v1",
+  "harness": "Antigravity CLI",
+  "harness_version": "1.1.22",
+  "requested_model": "Gemini 3.1 Pro",
+  "reasoning": null,
+  "status": "NO_SCORE",
+  "inference_started": true,
+  "trajectory_valid": false,
+  "score": null,
+  "turns": null,
+  "failure_stage": "phase2.attempt1.classification",
+  "reason_code": "checkpoint_truncation_warning_pair_outside_exact_stream_response_context",
+  "terminal_reason": "phase2_failed",
+  "launcher_exit_status": 87,
+  "sanitization_manifest_sha256": "6fbc4138db3bf0e03717be17defa3af13e6906ec403c6d83e83745fcdca3aac7",
+  "sanitized_tree_sha256": "0e5a14e4678708c8753bdd840406b7fec6a2e44ad54391659d8a683edf50ae4b",
+  "terminal_report_sha256": "b3f54f1f275468e9abc47839107f93eff40f112c2cb95f9a12f140f7a29130de",
+  "raw_committed": false
+}

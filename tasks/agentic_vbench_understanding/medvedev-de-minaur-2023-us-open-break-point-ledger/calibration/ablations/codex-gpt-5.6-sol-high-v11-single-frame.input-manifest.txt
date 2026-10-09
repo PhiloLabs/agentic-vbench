@@ -1,0 +1,18 @@
+ablation=single_frame
+source_validation=passed
+encoding=libx264_qp_0_lossless
+source_timestamp_seconds=3576.289383
+source_sha256=d61bee17596a28dbc8f8b607e4fc0dd6542885dbe9cdad18e1953e89363b0860
+source_bytes=685013111
+source_duration_seconds=7152.578767
+source_frames=214363
+output_duration_seconds=0.033367
+output_duration_assertion=0<duration<=1001/30000+1e-6
+05cb0ea84e24a151a99053da9b81a7fcf1f1d873d2bd2e23088561c39d1bb6af  /workspace/materials/match.mp4
+codec_name=h264
+width=1280
+height=720
+avg_frame_rate=30000/1001
+nb_read_frames=1
+duration=0.033367
+size=150645
