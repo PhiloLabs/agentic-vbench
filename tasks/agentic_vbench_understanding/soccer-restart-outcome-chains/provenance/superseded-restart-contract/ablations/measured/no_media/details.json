@@ -1,0 +1,18 @@
+{
+  "f1": 0.0265,
+  "n_predicted": 79,
+  "n_ground_truth": 72,
+  "true_positives_full_play": 2,
+  "type_team_time_only_matches": 2,
+  "ran_at": "2026-09-14T15:31:27+00:00",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "harness_version": "codex-cli 0.153.4",
+  "mode": "no_media",
+  "exit_code": 0,
+  "prompt_sha256": "34b99448d9ea98519190d802e2ac6a724f447da5c15fe2a4cefc84bfa2f2826d",
+  "shipped_prompt_sha256": "eabef48c6d986baaf75b0289f73b0b3767bb87e0fd75741e6e209cac88b32506",
+  "images": 0,
+  "image_sha256": {},
+  "shell_calls": 0
+}

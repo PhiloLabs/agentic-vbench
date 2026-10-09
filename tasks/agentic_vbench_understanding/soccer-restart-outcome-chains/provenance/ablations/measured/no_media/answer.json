@@ -1,0 +1,14 @@
+{
+ "sequence": [
+  {
+   "t": 72,
+   "action": "Kick-off",
+   "team": "away"
+  },
+  {
+   "t": 3421,
+   "action": "Kick-off",
+   "team": "home"
+  }
+ ]
+}

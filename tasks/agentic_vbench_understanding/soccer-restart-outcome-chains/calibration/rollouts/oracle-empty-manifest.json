@@ -1,0 +1,19 @@
+{
+ "image": "avb-soccer-lev:dev",
+ "image_id": "sha256:196e1fd7fcdcf6cff4dff561e2f48a3b5a9c2aef0ac8dc3f8a962a5e51d42dfd",
+ "ran_at": "2026-09-15T03:19:49+00:00",
+ "cases": {
+  "oracle": {
+   "prepare": "bash /solution/solve.sh",
+   "then": "bash /tests/test.sh",
+   "reward_json": "oracle-reward.json",
+   "reward": 1.0
+  },
+  "empty": {
+   "prepare": "mkdir -p /workspace/output && printf '{\"sequence\": []}' > /workspace/output/solution.json",
+   "then": "bash /tests/test.sh",
+   "reward_json": "empty-reward.json",
+   "reward": 0.0
+  }
+ }
+}

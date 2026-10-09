@@ -1,1 +1,9 @@
-{"sequence": [{"t": 826, "restart_type": 2, "team": "away", "outcome": 0}]}
+{
+ "sequence": [
+  {
+   "t": 1787,
+   "action": "Ball out of play",
+   "team": "none"
+  }
+ ]
+}

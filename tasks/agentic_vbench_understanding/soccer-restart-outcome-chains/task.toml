@@ -7,29 +7,30 @@ name = "agentic-vbench/soccer-restart-outcome-chains"
 difficulty = "hard"
 category = "video-understanding"
 tags = ["video-understanding", "sports-analytics", "soccer", "event-timeline", "agentic-vbench-understanding"]
-# Full 90-minute broadcast, both halves concatenated. Bundesliga 2016-17, Mainz 05 vs
-# Borussia Dortmund (1-1). Ground truth: SoccerNet-v2 published multi-annotator
-# Labels-v2.json (free, no NDA), transformed mechanically by build_gt.py.
-source = "SoccerNet-v2 germany_bundesliga/2016-2017 Mainz 05 - Borussia Dortmund (Labels-v2.json)"
+# The Bundesliga's own full-game upload of Borussia Dortmund 6-2 Bayer 04 Leverkusen,
+# 2016-17 matchday 23. Ground truth: SoccerNet-v2's published multi-annotator
+# Labels-v2.json for the same match (free, no NDA), placed on the clip's timeline by
+# provenance/align_halves.py and transformed mechanically by provenance/build_gt.py.
+source = "YouTube U-Glif5abSY (Bundesliga) + SoccerNet-v2 germany_bundesliga/2016-2017 Dortmund 6 - 2 Bayer Leverkusen (Labels-v2.json)"
 
 [environment]
 build_timeout_sec = 2400.0
 cpus = 4
 memory_mb = 8192
-# A full ~90-min broadcast re-encoded to 720p is a few GB; give the build and trial room.
+# The baked broadcast is 1.84 GB; give the build and trial room.
 storage_mb = 16384
 # The clip is baked at build time and the answer is not online: keep this false.
 allow_internet = false
-
-[environment.env]
-HF_TOKEN = "${HF_TOKEN:-}"
 
 [[steps]]
 name = "solve"
 
 [steps.agent]
-# A full match is long: give the agent real time to sample and tally 80+ restarts.
-timeout_sec = 3600.0
+# The broadcast runs 107 minutes and holds 72 restarts. The first in-image calibration ran
+# at 3600 s, and Codex and Claude Code both reached it during their final checks with no
+# answer written, so the agent gets three hours. It is not told the budget and stops when
+# it is done.
+timeout_sec = 10800.0
 
 [steps.verifier]
 timeout_sec = 600.0

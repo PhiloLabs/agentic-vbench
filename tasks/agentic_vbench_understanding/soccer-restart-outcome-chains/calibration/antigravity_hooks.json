@@ -1,0 +1,16 @@
+{
+  "one-agent-protocol": {
+    "PreToolUse": [
+      {
+        "matcher": ".*subagent.*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cat >/dev/null; printf '%s' '{\"decision\":\"deny\",\"reason\":\"Subagents are not available in this environment.\"}'",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}

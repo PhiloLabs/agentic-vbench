@@ -1,0 +1,11 @@
+tool calls: 242 across 1 rollout file(s)
+  Read             184
+  Bash             58
+
+controls: 6 passed, so a zero below is a real zero
+network tool calls (WebSearch, WebFetch): 0
+absolute paths touched outside /workspace: 0
+
+SHORTCUT PATTERNS FOUND:
+  the source dataset by name: SoccerNet
+VERDICT: REVIEW REQUIRED

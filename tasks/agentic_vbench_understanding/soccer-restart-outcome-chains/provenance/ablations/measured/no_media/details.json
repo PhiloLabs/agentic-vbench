@@ -1,0 +1,93 @@
+{
+  "f1": 0.0,
+  "precision": 0.0,
+  "recall": 0.0,
+  "n_predicted": 2,
+  "n_ground_truth": 216,
+  "true_positives": 0,
+  "action_time_matches": 0,
+  "unreadable_entries": 0,
+  "per_action": {
+    "Ball out of play": {
+      "key": 62,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Throw-in": {
+      "key": 48,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Foul": {
+      "key": 29,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Direct free-kick": {
+      "key": 1,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Indirect free-kick": {
+      "key": 14,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Corner": {
+      "key": 9,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Clearance": {
+      "key": 4,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Shots on target": {
+      "key": 19,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Shots off target": {
+      "key": 8,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Goal": {
+      "key": 8,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Kick-off": {
+      "key": 1,
+      "predicted": 2,
+      "matched": 0
+    },
+    "Offside": {
+      "key": 2,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Yellow card": {
+      "key": 5,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Substitution": {
+      "key": 6,
+      "predicted": 0,
+      "matched": 0
+    }
+  },
+  "ran_at": "2026-09-14T20:05:47+00:00",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "harness_version": "codex-cli 0.153.4",
+  "mode": "no_media",
+  "exit_code": 0,
+  "prompt_sha256": "b3bd173f13fb0322a5b407fca499e7939cd029b2e141094bf630a9e91bc6a732",
+  "shipped_prompt_sha256": "e882e8fa873e0c1edc624470b99aa87b9b9b232ba93b2772a6c956b2f81ecfbb",
+  "images": 0,
+  "image_sha256": {},
+  "shell_calls": 0
+}

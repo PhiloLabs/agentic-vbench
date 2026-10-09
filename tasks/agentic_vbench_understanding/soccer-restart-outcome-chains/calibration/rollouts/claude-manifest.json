@@ -1,0 +1,124 @@
+{
+ "arm": "claude",
+ "model": "claude-opus-4-8",
+ "reasoning_effort": "xhigh",
+ "harness_version": "2.1.270 (Claude Code), run inside the task image",
+ "harness_version_source": "the CLI inside the container, read after the run",
+ "image": "avb-soccer-lev:dev",
+ "image_id": "sha256:196e1fd7fcdcf6cff4dff561e2f48a3b5a9c2aef0ac8dc3f8a962a5e51d42dfd",
+ "one_session": true,
+ "budget_sec": 10800.0,
+ "budget_source": "task.toml steps.agent.timeout_sec",
+ "cpus": 4,
+ "memory_mb": 8192,
+ "resources_source": "task.toml [environment]",
+ "container_created": "2026-09-14T21:09:53Z",
+ "running_at_start": {
+  "quizzical_heyrovsky (avb-soccer-lev:dev)": 4.0
+ },
+ "running_at_start_source": "not recorded by the runner. Docker's event log shows the Antigravity trial's containers destroyed at 21:08:46Z, 67 s before this container was created, and the Codex arm's container ran on past this arm's end",
+ "cli_install": "npm install -g @anthropic-ai/claude-code@2.1.270 >/dev/null 2>&1",
+ "egress_restricted_after_install": true,
+ "egress_allowed_hosts": [
+  "api.anthropic.com",
+  "platform.claude.com"
+ ],
+ "argv": [
+  "docker",
+  "exec",
+  "-u",
+  "agent",
+  "<container>",
+  "sh",
+  "-lc",
+  "cd /workspace && claude -p \"$(cat /workspace/instruction.md)\" --model claude-opus-4-8 --effort xhigh --output-format stream-json --verbose --permission-mode bypassPermissions --disallowedTools Agent Task Monitor SendMessage ToolSearch WebFetch WebSearch"
+ ],
+ "create_argv": [
+  "docker",
+  "run",
+  "-d",
+  "--platform",
+  "linux/arm64",
+  "--label",
+  "avb.calibration.arm=claude",
+  "--cpus",
+  "4",
+  "--memory",
+  "8192m",
+  "<image>",
+  "sleep",
+  "infinity"
+ ],
+ "prompt_sha256": "e882e8fa873e0c1edc624470b99aa87b9b9b232ba93b2772a6c956b2f81ecfbb",
+ "ran_inside_the_task_image": true,
+ "run_dir": "/workspace",
+ "materials": "/workspace/materials",
+ "trajectory": "claude.jsonl",
+ "session_record": "claude-sessions",
+ "egress_check": {
+  "before_the_run": "passed and not written down. run_in_image.py exits before launching the agent when either direction fails, and the agent was launched",
+  "after_the_run": {
+   "http_codes": {
+    "api.anthropic.com": "404",
+    "platform.claude.com": "200",
+    "example.com": "000"
+   },
+   "resolv_conf": "nameserver 127.0.0.1",
+   "hosts_pins": [
+    "160.79.104.10 api.anthropic.com",
+    "160.79.104.10 platform.claude.com"
+   ],
+   "checked_at": "2026-09-15T00:49:06Z"
+  }
+ },
+ "preflight_answered": [
+  "network open",
+  "egress restricted"
+ ],
+ "preflight_evidence": "both preflight sessions in the session record answer 42",
+ "credential_refreshed": [
+  "during the run, written back to the host credential file by hand after it"
+ ],
+ "agent_rows_utc": [
+  "2026-09-14T21:15:43.312Z",
+  "2026-09-15T00:37:36.488Z"
+ ],
+ "wall_sec": 12113.2,
+ "wall_sec_source": "the first to the last row of the session record",
+ "budget_clock_sec": 9972.8,
+ "budget_clock_source": "the container's own clock, which stops while the host sleeps as the monotonic clock run_in_image.py times the budget with does: 12113.2 s less 2140.4 s paused, 2140.4 s paused on this container's clock since it was created, all of it inside the run",
+ "host_sleep_during_run_utc": [
+  [
+   "2026-09-14T23:01:42Z",
+   "2026-09-14T23:36:58Z"
+  ]
+ ],
+ "exit_code": null,
+ "budget_bound": false,
+ "ended": "the session record ends with the model's closing message that the solution is complete",
+ "solution_written": true,
+ "solution_entries": 129,
+ "solution_sha256": "d76732b98f167505307d61ccca51c459fa0c155b290edd8e28f1b0e8b3e3a7ab",
+ "runner_interrupted": {
+  "at": "2026-09-14T21:25:51Z",
+  "what": "the Claude Code session that launched run_in_image.py was restarted, which killed the runner and its docker exec client. The agent inside the container was not signalled and ran on to its own end. Nothing enforced the budget after that, and budget_clock_sec stays under it.",
+  "stream_stops_at": "2026-09-14T21:25:50Z",
+  "exit_code": "not observed. The docker exec that would report it died with the runner, and the daemon kept no exec record",
+  "collected_by_hand_at": "2026-09-15T00:49:06Z",
+  "collected": [
+   "/workspace/output/solution.json",
+   "/home/agent/.claude/projects"
+  ],
+  "copies_match_the_container_by_sha256": true,
+  "credential_written_back_before_removal": true,
+  "container_removed_after_collection": true
+ },
+ "api_errors_in_session_record_utc": [
+  "2026-09-14T23:10:47Z",
+  "2026-09-14T23:26:18Z",
+  "2026-09-14T23:36:47Z",
+  "2026-09-14T23:36:48Z"
+ ],
+ "events": "claude-events.jsonl",
+ "session_record_file": "109cac84-d8ae-4664-9b13-1afbebf08c06.jsonl"
+}

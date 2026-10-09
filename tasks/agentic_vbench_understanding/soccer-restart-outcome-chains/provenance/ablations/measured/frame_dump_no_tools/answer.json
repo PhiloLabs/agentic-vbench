@@ -1,10 +1,44 @@
 {
-  "sequence": [
-    {"t": 824, "restart_type": 2, "team": "home", "outcome": 0},
-    {"t": 1362, "restart_type": 4, "team": "away", "outcome": 0},
-    {"t": 3132, "restart_type": 1, "team": "away", "outcome": 0},
-    {"t": 3634, "restart_type": 2, "team": "away", "outcome": 0},
-    {"t": 3768, "restart_type": 1, "team": "home", "outcome": 0},
-    {"t": 4948, "restart_type": 4, "team": "home", "outcome": 2}
-  ]
+ "sequence": [
+  {
+   "t": 1782,
+   "action": "Throw-in",
+   "team": "away"
+  },
+  {
+   "t": 1883,
+   "action": "Corner",
+   "team": "home"
+  },
+  {
+   "t": 4142,
+   "action": "Foul",
+   "team": "away"
+  },
+  {
+   "t": 4594,
+   "action": "Indirect free-kick",
+   "team": "home"
+  },
+  {
+   "t": 5046,
+   "action": "Substitution",
+   "team": "home"
+  },
+  {
+   "t": 5096,
+   "action": "Direct free-kick",
+   "team": "away"
+  },
+  {
+   "t": 5096,
+   "action": "Shots on target",
+   "team": "away"
+  },
+  {
+   "t": 5097,
+   "action": "Goal",
+   "team": "away"
+  }
+ ]
 }

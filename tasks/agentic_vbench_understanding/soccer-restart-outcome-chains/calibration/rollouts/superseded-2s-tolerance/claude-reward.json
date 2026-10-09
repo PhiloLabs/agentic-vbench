@@ -1,0 +1,87 @@
+{
+  "reward": 0.159,
+  "details": {
+    "reason": "ok",
+    "f1": 0.159,
+    "precision": 0.2342,
+    "recall": 0.1204,
+    "n_predicted": 111,
+    "n_ground_truth": 216,
+    "true_positives": 26,
+    "action_time_matches": 29,
+    "unreadable_entries": 0,
+    "per_action": {
+      "Ball out of play": {
+        "key": 62,
+        "predicted": 0,
+        "matched": 0
+      },
+      "Throw-in": {
+        "key": 48,
+        "predicted": 21,
+        "matched": 7
+      },
+      "Foul": {
+        "key": 29,
+        "predicted": 16,
+        "matched": 5
+      },
+      "Direct free-kick": {
+        "key": 1,
+        "predicted": 3,
+        "matched": 0
+      },
+      "Indirect free-kick": {
+        "key": 14,
+        "predicted": 12,
+        "matched": 0
+      },
+      "Corner": {
+        "key": 9,
+        "predicted": 9,
+        "matched": 0
+      },
+      "Clearance": {
+        "key": 4,
+        "predicted": 7,
+        "matched": 0
+      },
+      "Shots on target": {
+        "key": 19,
+        "predicted": 6,
+        "matched": 0
+      },
+      "Shots off target": {
+        "key": 8,
+        "predicted": 5,
+        "matched": 0
+      },
+      "Goal": {
+        "key": 8,
+        "predicted": 8,
+        "matched": 6
+      },
+      "Kick-off": {
+        "key": 1,
+        "predicted": 10,
+        "matched": 0
+      },
+      "Offside": {
+        "key": 2,
+        "predicted": 2,
+        "matched": 0
+      },
+      "Yellow card": {
+        "key": 5,
+        "predicted": 6,
+        "matched": 3
+      },
+      "Substitution": {
+        "key": 6,
+        "predicted": 6,
+        "matched": 5
+      }
+    },
+    "time_tolerance_s": 2
+  }
+}

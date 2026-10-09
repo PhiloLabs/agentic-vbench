@@ -1,0 +1,114 @@
+{
+ "arm": "codex",
+ "model": "gpt-5.6-sol",
+ "reasoning_effort": "xhigh",
+ "harness_version": "codex-cli 0.154.0, run inside the task image",
+ "harness_version_source": "the CLI inside the container, read after the run",
+ "image": "avb-soccer-lev:dev",
+ "image_id": "sha256:196e1fd7fcdcf6cff4dff561e2f48a3b5a9c2aef0ac8dc3f8a962a5e51d42dfd",
+ "one_session": true,
+ "budget_sec": 10800.0,
+ "budget_source": "task.toml steps.agent.timeout_sec",
+ "cpus": 4,
+ "memory_mb": 8192,
+ "resources_source": "task.toml [environment]",
+ "container_created": "2026-09-14T20:14:01Z",
+ "running_at_start": {},
+ "running_at_start_source": "not recorded by the runner. The Antigravity attempt that took its lock 5 s after this container was created recorded this container alone",
+ "cli_install": "npm install -g @openai/codex@0.154.0 >/dev/null 2>&1",
+ "egress_restricted_after_install": true,
+ "egress_allowed_hosts": [
+  "chatgpt.com",
+  "auth.openai.com"
+ ],
+ "argv": [
+  "docker",
+  "exec",
+  "-u",
+  "agent",
+  "<container>",
+  "sh",
+  "-lc",
+  "cd /workspace && codex exec --json -m gpt-5.6-sol -c model_reasoning_effort=\"xhigh\" --dangerously-bypass-approvals-and-sandbox --skip-git-repo-check --cd /workspace < /workspace/instruction.md"
+ ],
+ "create_argv": [
+  "docker",
+  "run",
+  "-d",
+  "--platform",
+  "linux/arm64",
+  "--label",
+  "avb.calibration.arm=codex",
+  "--cpus",
+  "4",
+  "--memory",
+  "8192m",
+  "<image>",
+  "sleep",
+  "infinity"
+ ],
+ "prompt_sha256": "e882e8fa873e0c1edc624470b99aa87b9b9b232ba93b2772a6c956b2f81ecfbb",
+ "ran_inside_the_task_image": true,
+ "run_dir": "/workspace",
+ "materials": "/workspace/materials",
+ "trajectory": "codex.jsonl",
+ "session_record": "codex-sessions",
+ "egress_check": {
+  "before_the_run": "passed and not written down. run_in_image.py exits before launching the agent when either direction fails, and the agent was launched",
+  "after_the_run": {
+   "http_codes": {
+    "chatgpt.com": "403",
+    "auth.openai.com": "403",
+    "example.com": "000"
+   },
+   "resolv_conf": "nameserver 127.0.0.1",
+   "hosts_pins": [
+    "172.64.155.209 chatgpt.com",
+    "104.18.41.241 auth.openai.com"
+   ],
+   "checked_at": "2026-09-15T00:48:58Z"
+  }
+ },
+ "preflight_answered": [
+  "network open",
+  "egress restricted"
+ ],
+ "preflight_evidence": "both preflight sessions in the session record answer 42",
+ "credential_refreshed": [],
+ "agent_rows_utc": [
+  "2026-09-14T20:15:38.723Z",
+  "2026-09-14T21:56:34.318Z"
+ ],
+ "wall_sec": 6055.6,
+ "wall_sec_source": "the first to the last row of the session record",
+ "budget_clock_sec": 4288.4,
+ "budget_clock_source": "the container's own clock, which stops while the host sleeps as the monotonic clock run_in_image.py times the budget with does: 6055.6 s less 1767.2 s paused, 3907.6 s paused on this container's clock since it was created, less the 2140.4 s the Claude Code container measured for the later sleep, which began after this arm had ended",
+ "host_sleep_during_run_utc": [
+  [
+   "2026-09-14T20:37:32Z",
+   "2026-09-14T21:14:36Z"
+  ]
+ ],
+ "exit_code": null,
+ "budget_bound": false,
+ "ended": "the session record ends with task_complete and the message that the 165-action ledger was completed and validated",
+ "solution_written": true,
+ "solution_entries": 165,
+ "solution_sha256": "19ed9b2089cb135d6c96069bfcd745c8f5218cee44076d0d602889c16351214b",
+ "runner_interrupted": {
+  "at": "2026-09-14T21:25:51Z",
+  "what": "the Claude Code session that launched run_in_image.py was restarted, which killed the runner and its docker exec client. The agent inside the container was not signalled and ran on to its own end. Nothing enforced the budget after that, and budget_clock_sec stays under it.",
+  "stream_stops_at": "2026-09-14T21:25:14Z",
+  "exit_code": "not observed. The docker exec that would report it died with the runner, and the daemon kept no exec record",
+  "collected_by_hand_at": "2026-09-15T00:48:58Z",
+  "collected": [
+   "/workspace/output/solution.json",
+   "/home/agent/.codex/sessions"
+  ],
+  "copies_match_the_container_by_sha256": true,
+  "credential_written_back_before_removal": false,
+  "container_removed_after_collection": true
+ },
+ "events": "codex-events.jsonl",
+ "session_record_file": "rollout-2026-09-14T20-15-38-01a0a18f-9cc1-73b0-a797-caa6cacd5731.jsonl"
+}

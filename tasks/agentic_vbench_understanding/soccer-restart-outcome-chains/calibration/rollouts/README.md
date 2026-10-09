@@ -1,39 +1,37 @@
 # Rollouts
 
-One folder per agent. Every folder has three layers of evidence:
+What every calibration run left behind, sanitized for the repository. The numbers these
+files back are in `../scores.md`, and `../verify_scores.py` recomputes each of them from here.
 
-1. `rollout.json` — the machine-readable summary: the agent's final answer,
-   `model`, `num_tool_calls`, and `sampling_trace` (every frame time it sampled,
-   one per tool-call turn).
-2. `requests.txt` — the harness-side log of the same sampled timestamps, one per
-   line, written by the sampling tool itself, for an independent turn count.
-3. `transcripts/` — the raw transcript of the run, so tool use and the absence of
-   web access can be audited directly. Image payloads inside transcripts are
-   replaced with `[image elided: N bytes]` placeholders; everything else
-   (reasoning, tool calls, tool results, timestamps) is verbatim.
+## Layout
 
-Per agent:
+| files | what they are |
+|---|---|
+| `<arm>.jsonl` | the arm's trajectory. For Codex it is the session record the CLI keeps itself, with the `--json` event stream beside it as `codex-events.jsonl`. For Claude Code it is also the session record, with the `stream-json` output beside it as `claude-events.jsonl`. For Antigravity it is agy's `transcript_full.jsonl` for the one session it ran. |
+| `<arm>-solution.json` | what the arm submitted |
+| `<arm>-reward.json` | the shipped judge's output for that submission |
+| `<arm>-manifest.json` | how the arm was run: model, effort, harness version, budget, resources, argv, prompt digest, egress checks, and what was already running |
+| `<arm>-audit.txt` | `../audit_trajectory.py` run on the shipped trajectory |
+| `not-reported/antigravity-1s-attempt/` | an Antigravity attempt on this contract that ended without an answer after the host slept, with its trajectory, manifest and audit |
+| `superseded-2s-tolerance/` | the ledger runs made while the tolerance was 2 s, graded by the archived scorer in `../../provenance/superseded-2s-tolerance/` |
+| `superseded-restart-contract/` | every run made against the first contract, which scored restarts only: the Codex run whose 0.3529 replaced that contract, the runs under the first budget, the runs stopped when the budget or the contract changed, and the first Codex and Antigravity attempts, which failed on the harness. They are graded by the archived scorer in `../../provenance/superseded-restart-contract/`, and `../scores.md` explains each. |
+| `oracle-reward.json`, `empty-reward.json`, `oracle-empty-manifest.json` | the oracle and an empty submission, graded inside the image by `../run_oracle_empty.py` |
+| `antigravity-hook-probe.json` | the result of `../probe_antigravity_hook.py`, which checks that the subagent hook holds |
 
-- **claude-code** — `transcripts/opus48-full-capped.jsonl`: the raw Claude Code
-  subagent transcript of the 110-call run (model `claude-opus-4-8`, recorded in
-  every assistant message of the file).
-- **claude-code-fable5** — a second, independent Claude Code run with the newest
-  model (`claude-fable-5`, recorded in every assistant message): 118 calls, 13
-  reported restarts, score 0.0. `transcripts/fable5-full-run.jsonl` is the raw
-  transcript; `reward.json` the scored result.
-- **codex** — four `transcripts/rollout-2026-07-13T02-4*.jsonl` files: the raw
-  Codex CLI session logs of one MCP run with network access disabled
-  (`sandbox_workspace_write.network_access: false`); the 02-41-41 file is the
-  main thread, the other three are worker threads it spawned. Model
-  `gpt-5.6-sol`, recorded in the session headers.
-- **antigravity** — `transcripts/conversation-210bdb70.db`: the raw SQLite
-  conversation database the Antigravity desktop app wrote for this run (open with
-  `sqlite3`, table `steps`, 300 steps), plus `steps-extracted.txt`, a readable
-  per-step string extraction for convenience. Model recorded in the payloads:
-  `Gemini 3.5 Flash (Medium)`. The run used Antigravity's Sandbox Mode with the
-  browser disabled and file access outside the working folder denied.
+## What differs from the raw files
 
-An additional integrity check that needs no transcript: frames were only ever
-served at integer seconds, so any answer containing a non-integer `t` (like the
-ground truth's millisecond values) could only have come from the label file. All
-rollouts here contain integer times only.
+Three things. Base64 image blobs of 2000 characters or more, including those inside data
+URLs, are replaced by a placeholder that records their length. Local absolute paths are
+rewritten to their in-image form. Email addresses, which a CLI can record for the account it
+is signed in with, become `<email>`. Every command, tool call and word is left as the agent
+produced it, so a turn count can be recounted here instead of taken from a table. The frames
+the agents looked at are not included; each trajectory holds the command that cut them from
+the pinned video.
+
+## Re-checking a row
+
+```bash
+python3 ../../steps/solve/tests/judge.py --solution codex-solution.json \
+    --reward-json /tmp/reward.json --reward-txt /tmp/reward.txt
+python3 ../audit_trajectory.py --run-dir /workspace --rollout codex.jsonl
+```

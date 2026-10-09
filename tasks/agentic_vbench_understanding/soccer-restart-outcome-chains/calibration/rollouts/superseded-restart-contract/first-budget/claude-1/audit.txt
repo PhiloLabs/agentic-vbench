@@ -1,0 +1,10 @@
+tool calls: 226 across 1 rollout file(s)
+  Read             158
+  Bash             68
+
+controls: 6 passed, so a zero below is a real zero
+network tool calls (WebSearch, WebFetch): 0
+absolute paths touched outside /workspace: 0
+shortcut patterns found: none of answer key or grader, the source dataset by name, the task package, and no network command among the 68 shell commands it ran
+
+VERDICT: clean

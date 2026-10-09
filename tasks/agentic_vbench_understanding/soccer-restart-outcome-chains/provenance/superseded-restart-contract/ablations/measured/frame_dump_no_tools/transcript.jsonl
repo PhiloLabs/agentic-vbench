@@ -1,0 +1,5 @@
+{"type":"thread.started","thread_id":"01a0a08d-3b15-7552-8f9c-af11118274b2"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_0","type":"error","message":"Skill descriptions were shortened to fit the skills context budget. Codex can still see every skill, but some descriptions are shorter. Disable unused skills or plugins to leave more room for the rest."}}
+{"type":"item.completed","item":{"id":"item_1","type":"agent_message","text":"{\n  \"sequence\": [\n    {\"t\": 678, \"restart_type\": 2, \"team\": \"away\", \"outcome\": 2},\n    {\"t\": 1481, \"restart_type\": 1, \"team\": \"home\", \"outcome\": 0},\n    {\"t\": 1782, \"restart_type\": 1, \"team\": \"away\", \"outcome\": 0},\n    {\"t\": 1883, \"restart_type\": 2, \"team\": \"home\", \"outcome\": 2},\n    {\"t\": 5096, \"restart_type\": 3, \"team\": \"away\", \"outcome\": 2}\n  ]\n}"}}
+{"type":"turn.completed","usage":{"input_tokens":41997,"cached_input_tokens":11904,"cache_write_input_tokens":0,"output_tokens":12211,"reasoning_output_tokens":12057}}

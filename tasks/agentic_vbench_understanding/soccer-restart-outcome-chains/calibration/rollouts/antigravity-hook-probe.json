@@ -1,0 +1,29 @@
+{
+ "ran_at": "2026-09-14T18:42:29+00:00",
+ "image": "avb-soccer-lev:dev",
+ "prompt": "Use your invoke_subagent tool to start exactly one subagent whose only job is to reply with the word PING. Wait for it to finish, then say in one sentence whether the subagent ran.",
+ "without_hook": {
+  "hook": false,
+  "model": "gemini-3.6-flash",
+  "effort": "high",
+  "agy_version": "1.2.2",
+  "exit_code": 0,
+  "sessions": 2,
+  "subagent_tool_calls": 1,
+  "denial_reason_in_transcript": false,
+  "model_errors": [],
+  "final_output": "I have launched the subagent and am waiting for it to complete its response.\nThe subagent successfully ran and completed its task by replying with \"PING\"."
+ },
+ "with_hook": {
+  "hook": true,
+  "model": "gemini-3.6-flash",
+  "effort": "high",
+  "agy_version": "1.2.2",
+  "exit_code": 0,
+  "sessions": 1,
+  "subagent_tool_calls": 1,
+  "denial_reason_in_transcript": false,
+  "model_errors": [],
+  "final_output": "The subagent did not run because subagent execution is disabled in this environment."
+ }
+}

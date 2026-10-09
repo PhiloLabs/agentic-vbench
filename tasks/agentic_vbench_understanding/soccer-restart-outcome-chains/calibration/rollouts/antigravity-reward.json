@@ -1,0 +1,106 @@
+{
+  "reward": 0.0333,
+  "details": {
+    "reason": "ok",
+    "f1": 0.0333,
+    "classes_in_key": 14,
+    "n_predicted": 218,
+    "n_ground_truth": 216,
+    "true_positives": 11,
+    "action_time_matches": 13,
+    "unreadable_entries": 0,
+    "per_action": {
+      "Ball out of play": {
+        "key": 62,
+        "predicted": 59,
+        "matched": 2,
+        "f1": 0.0331
+      },
+      "Throw-in": {
+        "key": 48,
+        "predicted": 50,
+        "matched": 1,
+        "f1": 0.0204
+      },
+      "Foul": {
+        "key": 29,
+        "predicted": 31,
+        "matched": 5,
+        "f1": 0.1667
+      },
+      "Direct free-kick": {
+        "key": 1,
+        "predicted": 6,
+        "matched": 0,
+        "f1": 0.0
+      },
+      "Indirect free-kick": {
+        "key": 14,
+        "predicted": 28,
+        "matched": 1,
+        "f1": 0.0476
+      },
+      "Corner": {
+        "key": 9,
+        "predicted": 2,
+        "matched": 0,
+        "f1": 0.0
+      },
+      "Penalty": {
+        "key": 0,
+        "predicted": 1,
+        "matched": 0,
+        "f1": 0.0
+      },
+      "Clearance": {
+        "key": 4,
+        "predicted": 8,
+        "matched": 0,
+        "f1": 0.0
+      },
+      "Shots on target": {
+        "key": 19,
+        "predicted": 8,
+        "matched": 1,
+        "f1": 0.0741
+      },
+      "Shots off target": {
+        "key": 8,
+        "predicted": 2,
+        "matched": 0,
+        "f1": 0.0
+      },
+      "Goal": {
+        "key": 8,
+        "predicted": 8,
+        "matched": 1,
+        "f1": 0.125
+      },
+      "Kick-off": {
+        "key": 1,
+        "predicted": 10,
+        "matched": 0,
+        "f1": 0.0
+      },
+      "Offside": {
+        "key": 2,
+        "predicted": 1,
+        "matched": 0,
+        "f1": 0.0
+      },
+      "Yellow card": {
+        "key": 5,
+        "predicted": 1,
+        "matched": 0,
+        "f1": 0.0
+      },
+      "Substitution": {
+        "key": 6,
+        "predicted": 3,
+        "matched": 0,
+        "f1": 0.0
+      }
+    },
+    "time_tolerance_s": 1
+  }
+}

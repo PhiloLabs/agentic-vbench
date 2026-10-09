@@ -1,0 +1,17 @@
+tool calls: 351 across 1 rollout file(s)
+  Bash             167
+  Read             119
+  manage_task      44
+  Write            20
+  Glob             1
+
+controls: 6 passed, so a zero below is a real zero
+network tool calls (WebSearch, WebFetch): 0
+absolute paths touched outside /workspace: 0
+  (2 more are the agent harness's own runtime state, listed below rather than counted against the run)
+      /root/.gemini/antigravity-cli/brain/8e56620a-3045-4176-ad6e-cd923c929360/.system_generated/tasks/task-450.log
+      /root/.gemini/antigravity-cli/brain/8e56620a-3045-4176-ad6e-cd923c929360/.system_generated/tasks/task-477.log
+
+SHORTCUT PATTERNS FOUND:
+  a network command it actually ran: pip install
+VERDICT: REVIEW REQUIRED

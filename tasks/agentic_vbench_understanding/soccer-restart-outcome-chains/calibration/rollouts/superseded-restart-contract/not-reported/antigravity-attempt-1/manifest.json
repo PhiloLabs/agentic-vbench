@@ -1,0 +1,43 @@
+{
+ "arm": "antigravity",
+ "attempt": 1,
+ "harness_version": "Harbor 0.21.0 / Antigravity CLI 1.2.2, run inside the task image",
+ "model": "google/gemini-3.6-flash",
+ "reasoning_effort": "high",
+ "prompt_sha256": "eabef48c6d986baaf75b0289f73b0b3767bb87e0fd75741e6e209cac88b32506",
+ "harbor_job": "antigravity-20260914T155409Z",
+ "trial_started_at": "2026-09-14T15:54:12Z",
+ "invoke_subagent_at": "2026-09-14T16:02:06Z",
+ "subagents_started": 4,
+ "stopped_at": "2026-09-14T16:18:16Z",
+ "how_stopped": "SIGTERM to the agy processes inside the container, after every session transcript was copied out",
+ "not_reported_because": "the main session handed the match to four subagents, which breaks the one-agent protocol",
+ "sessions": {
+  "main-e8476dcc-a3b2-414d-98ad-a7a64a079e6a.jsonl": {
+   "first_row": "2026-09-14T15:54:29Z",
+   "last_row": "2026-09-14T16:16:49Z",
+   "rows": 234
+  },
+  "subagent-2a82b2c8-6125-41a3-b914-86f6d8a556db.jsonl": {
+   "first_row": "2026-09-14T16:02:07Z",
+   "last_row": "2026-09-14T16:16:45Z",
+   "rows": 93
+  },
+  "subagent-b04f1e77-77b6-411e-a284-9d4207c5f3cf.jsonl": {
+   "first_row": "2026-09-14T16:02:07Z",
+   "last_row": "2026-09-14T16:11:53Z",
+   "rows": 101
+  },
+  "subagent-bb39c7dc-4daf-42fb-a562-ab0b5083c0d7.jsonl": {
+   "first_row": "2026-09-14T16:02:07Z",
+   "last_row": "2026-09-14T16:11:58Z",
+   "rows": 94
+  },
+  "subagent-d5a2b779-3981-4603-a37d-f96fb693cc8f.jsonl": {
+   "first_row": "2026-09-14T16:02:07Z",
+   "last_row": "2026-09-14T16:11:41Z",
+   "rows": 94
+  }
+ },
+ "main_session_audit": "main-audit.txt"
+}

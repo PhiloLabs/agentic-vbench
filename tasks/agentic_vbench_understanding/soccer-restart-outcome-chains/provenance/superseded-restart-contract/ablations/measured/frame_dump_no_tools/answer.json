@@ -1,0 +1,34 @@
+{
+ "sequence": [
+  {
+   "t": 678,
+   "restart_type": 2,
+   "team": "away",
+   "outcome": 2
+  },
+  {
+   "t": 1481,
+   "restart_type": 1,
+   "team": "home",
+   "outcome": 0
+  },
+  {
+   "t": 1782,
+   "restart_type": 1,
+   "team": "away",
+   "outcome": 0
+  },
+  {
+   "t": 1883,
+   "restart_type": 2,
+   "team": "home",
+   "outcome": 2
+  },
+  {
+   "t": 5096,
+   "restart_type": 3,
+   "team": "away",
+   "outcome": 2
+  }
+ ]
+}

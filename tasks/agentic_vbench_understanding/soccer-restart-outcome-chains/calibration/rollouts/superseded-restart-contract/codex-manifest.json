@@ -1,0 +1,75 @@
+{
+ "arm": "codex",
+ "model": "gpt-5.6-sol",
+ "reasoning_effort": "xhigh",
+ "harness_version": "codex-cli 0.154.0, run inside the task image",
+ "harness_version_source": "the CLI inside the container, after install",
+ "image": "avb-soccer-lev:dev",
+ "image_id": "sha256:196e1fd7fcdcf6cff4dff561e2f48a3b5a9c2aef0ac8dc3f8a962a5e51d42dfd",
+ "one_session": true,
+ "budget_sec": 10800.0,
+ "budget_source": "task.toml steps.agent.timeout_sec",
+ "cpus": 4,
+ "memory_mb": 8192,
+ "resources_source": "task.toml [environment]",
+ "running_at_start": {},
+ "cli_install": "npm install -g @openai/codex@0.154.0 >/dev/null 2>&1",
+ "egress_restricted_after_install": true,
+ "egress_allowed_hosts": [
+  "chatgpt.com",
+  "auth.openai.com"
+ ],
+ "argv": [
+  "docker",
+  "exec",
+  "-u",
+  "agent",
+  "<container>",
+  "sh",
+  "-lc",
+  "cd /workspace && codex exec --json -m gpt-5.6-sol -c model_reasoning_effort=\"xhigh\" --dangerously-bypass-approvals-and-sandbox --skip-git-repo-check --cd /workspace < /workspace/instruction.md"
+ ],
+ "create_argv": [
+  "docker",
+  "run",
+  "-d",
+  "--platform",
+  "linux/arm64",
+  "--label",
+  "avb.calibration.arm=codex",
+  "--cpus",
+  "4",
+  "--memory",
+  "8192m",
+  "<image>",
+  "sleep",
+  "infinity"
+ ],
+ "prompt_sha256": "eabef48c6d986baaf75b0289f73b0b3767bb87e0fd75741e6e209cac88b32506",
+ "ran_inside_the_task_image": true,
+ "run_dir": "/workspace",
+ "materials": "/workspace/materials",
+ "trajectory": "codex.jsonl",
+ "session_record": "codex-sessions",
+ "egress_check": {
+  "allowed_reachable": {
+   "chatgpt.com": true,
+   "auth.openai.com": true
+  },
+  "denied_host": "example.com",
+  "denied_reachable": false
+ },
+ "preflight_answered": [
+  "network open",
+  "egress restricted"
+ ],
+ "credential_refreshed": [],
+ "wall_sec": 2786.7,
+ "exit_code": 0,
+ "budget_bound": false,
+ "solution_written": true,
+ "solution_entries": 30,
+ "solution_sha256": "db54a714c2b32f56ea769932df9c06345e95b161473020d0963070b0a26bca71",
+ "events": "codex-events.jsonl",
+ "session_record_file": "rollout-2026-09-14T17-32-51-01a0a0fa-91fa-7b43-9583-6c6c1582c657.jsonl"
+}

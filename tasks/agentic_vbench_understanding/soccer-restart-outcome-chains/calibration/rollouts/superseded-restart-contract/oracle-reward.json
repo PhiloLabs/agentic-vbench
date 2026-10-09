@@ -1,0 +1,14 @@
+{
+  "reward": 1.0,
+  "details": {
+    "reason": "ok",
+    "n_ground_truth": 72,
+    "n_predicted": 72,
+    "true_positives_full_play": 72,
+    "type_team_time_only_matches": 72,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "time_tolerance_s": 3
+  }
+}

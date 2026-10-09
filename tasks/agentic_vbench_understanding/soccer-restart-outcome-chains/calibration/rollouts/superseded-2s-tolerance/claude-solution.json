@@ -1,0 +1,559 @@
+{
+  "sequence": [
+    {
+      "t": 351,
+      "action": "Kick-off",
+      "team": "home"
+    },
+    {
+      "t": 486,
+      "action": "Foul",
+      "team": "home"
+    },
+    {
+      "t": 516,
+      "action": "Indirect free-kick",
+      "team": "away"
+    },
+    {
+      "t": 696,
+      "action": "Goal",
+      "team": "home"
+    },
+    {
+      "t": 720,
+      "action": "Kick-off",
+      "team": "away"
+    },
+    {
+      "t": 739,
+      "action": "Shots on target",
+      "team": "away"
+    },
+    {
+      "t": 813,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 816,
+      "action": "Indirect free-kick",
+      "team": "home"
+    },
+    {
+      "t": 1032,
+      "action": "Corner",
+      "team": "away"
+    },
+    {
+      "t": 1054,
+      "action": "Throw-in",
+      "team": "away"
+    },
+    {
+      "t": 1072,
+      "action": "Foul",
+      "team": "home"
+    },
+    {
+      "t": 1178,
+      "action": "Corner",
+      "team": "away"
+    },
+    {
+      "t": 1193,
+      "action": "Clearance",
+      "team": "home"
+    },
+    {
+      "t": 1216,
+      "action": "Shots on target",
+      "team": "home"
+    },
+    {
+      "t": 1218,
+      "action": "Offside",
+      "team": "home"
+    },
+    {
+      "t": 1271,
+      "action": "Yellow card",
+      "team": "away"
+    },
+    {
+      "t": 1298,
+      "action": "Indirect free-kick",
+      "team": "home"
+    },
+    {
+      "t": 1335,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 1385,
+      "action": "Clearance",
+      "team": "away"
+    },
+    {
+      "t": 1446,
+      "action": "Corner",
+      "team": "away"
+    },
+    {
+      "t": 1481,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 1634,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 1656,
+      "action": "Throw-in",
+      "team": "away"
+    },
+    {
+      "t": 1810,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 1842,
+      "action": "Corner",
+      "team": "home"
+    },
+    {
+      "t": 1849,
+      "action": "Goal",
+      "team": "home"
+    },
+    {
+      "t": 1925,
+      "action": "Kick-off",
+      "team": "away"
+    },
+    {
+      "t": 1937,
+      "action": "Corner",
+      "team": "home"
+    },
+    {
+      "t": 1981,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 1995,
+      "action": "Direct free-kick",
+      "team": "home"
+    },
+    {
+      "t": 2112,
+      "action": "Corner",
+      "team": "home"
+    },
+    {
+      "t": 2200,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 2340,
+      "action": "Corner",
+      "team": "home"
+    },
+    {
+      "t": 2468,
+      "action": "Clearance",
+      "team": "home"
+    },
+    {
+      "t": 2496,
+      "action": "Indirect free-kick",
+      "team": "home"
+    },
+    {
+      "t": 2556,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 2560,
+      "action": "Yellow card",
+      "team": "away"
+    },
+    {
+      "t": 2570,
+      "action": "Indirect free-kick",
+      "team": "home"
+    },
+    {
+      "t": 2622,
+      "action": "Substitution",
+      "team": "away"
+    },
+    {
+      "t": 2772,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 2856,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 2960,
+      "action": "Substitution",
+      "team": "home"
+    },
+    {
+      "t": 3074,
+      "action": "Throw-in",
+      "team": "away"
+    },
+    {
+      "t": 3146,
+      "action": "Clearance",
+      "team": "away"
+    },
+    {
+      "t": 3173,
+      "action": "Clearance",
+      "team": "home"
+    },
+    {
+      "t": 3208,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 3224,
+      "action": "Yellow card",
+      "team": "away"
+    },
+    {
+      "t": 3401,
+      "action": "Kick-off",
+      "team": "away"
+    },
+    {
+      "t": 3478,
+      "action": "Shots off target",
+      "team": "away"
+    },
+    {
+      "t": 3522,
+      "action": "Goal",
+      "team": "away"
+    },
+    {
+      "t": 3543,
+      "action": "Kick-off",
+      "team": "home"
+    },
+    {
+      "t": 3560,
+      "action": "Shots off target",
+      "team": "away"
+    },
+    {
+      "t": 3699,
+      "action": "Throw-in",
+      "team": "away"
+    },
+    {
+      "t": 3758,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 3780,
+      "action": "Indirect free-kick",
+      "team": "home"
+    },
+    {
+      "t": 3870,
+      "action": "Shots on target",
+      "team": "home"
+    },
+    {
+      "t": 3885,
+      "action": "Shots on target",
+      "team": "away"
+    },
+    {
+      "t": 3886,
+      "action": "Offside",
+      "team": "away"
+    },
+    {
+      "t": 3937,
+      "action": "Shots off target",
+      "team": "home"
+    },
+    {
+      "t": 3990,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 4000,
+      "action": "Shots off target",
+      "team": "away"
+    },
+    {
+      "t": 4032,
+      "action": "Clearance",
+      "team": "home"
+    },
+    {
+      "t": 4056,
+      "action": "Throw-in",
+      "team": "away"
+    },
+    {
+      "t": 4090,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 4111,
+      "action": "Throw-in",
+      "team": "away"
+    },
+    {
+      "t": 4162,
+      "action": "Shots on target",
+      "team": "home"
+    },
+    {
+      "t": 4194,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 4274,
+      "action": "Indirect free-kick",
+      "team": "home"
+    },
+    {
+      "t": 4330,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 4440,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 4446,
+      "action": "Yellow card",
+      "team": "away"
+    },
+    {
+      "t": 4450,
+      "action": "Indirect free-kick",
+      "team": "home"
+    },
+    {
+      "t": 4538,
+      "action": "Corner",
+      "team": "home"
+    },
+    {
+      "t": 4554,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 4644,
+      "action": "Shots on target",
+      "team": "away"
+    },
+    {
+      "t": 4651,
+      "action": "Substitution",
+      "team": "away"
+    },
+    {
+      "t": 4666,
+      "action": "Indirect free-kick",
+      "team": "home"
+    },
+    {
+      "t": 4719,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 4776,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 4784,
+      "action": "Yellow card",
+      "team": "away"
+    },
+    {
+      "t": 4787,
+      "action": "Indirect free-kick",
+      "team": "home"
+    },
+    {
+      "t": 4830,
+      "action": "Corner",
+      "team": "home"
+    },
+    {
+      "t": 4834,
+      "action": "Goal",
+      "team": "home"
+    },
+    {
+      "t": 4889,
+      "action": "Kick-off",
+      "team": "away"
+    },
+    {
+      "t": 4912,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 4999,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 5044,
+      "action": "Substitution",
+      "team": "home"
+    },
+    {
+      "t": 5070,
+      "action": "Foul",
+      "team": "home"
+    },
+    {
+      "t": 5118,
+      "action": "Direct free-kick",
+      "team": "away"
+    },
+    {
+      "t": 5121,
+      "action": "Goal",
+      "team": "away"
+    },
+    {
+      "t": 5159,
+      "action": "Kick-off",
+      "team": "home"
+    },
+    {
+      "t": 5184,
+      "action": "Throw-in",
+      "team": "away"
+    },
+    {
+      "t": 5290,
+      "action": "Goal",
+      "team": "home"
+    },
+    {
+      "t": 5329,
+      "action": "Kick-off",
+      "team": "away"
+    },
+    {
+      "t": 5388,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 5459,
+      "action": "Foul",
+      "team": "home"
+    },
+    {
+      "t": 5478,
+      "action": "Indirect free-kick",
+      "team": "away"
+    },
+    {
+      "t": 5520,
+      "action": "Substitution",
+      "team": "home"
+    },
+    {
+      "t": 5666,
+      "action": "Clearance",
+      "team": "home"
+    },
+    {
+      "t": 5697,
+      "action": "Throw-in",
+      "team": "home"
+    },
+    {
+      "t": 5728,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 5730,
+      "action": "Yellow card",
+      "team": "away"
+    },
+    {
+      "t": 5754,
+      "action": "Direct free-kick",
+      "team": "home"
+    },
+    {
+      "t": 5755,
+      "action": "Goal",
+      "team": "home"
+    },
+    {
+      "t": 5818,
+      "action": "Substitution",
+      "team": "away"
+    },
+    {
+      "t": 5823,
+      "action": "Kick-off",
+      "team": "away"
+    },
+    {
+      "t": 6002,
+      "action": "Foul",
+      "team": "away"
+    },
+    {
+      "t": 6084,
+      "action": "Indirect free-kick",
+      "team": "home"
+    },
+    {
+      "t": 6161,
+      "action": "Goal",
+      "team": "home"
+    },
+    {
+      "t": 6189,
+      "action": "Kick-off",
+      "team": "away"
+    },
+    {
+      "t": 6248,
+      "action": "Shots off target",
+      "team": "away"
+    }
+  ]
+}

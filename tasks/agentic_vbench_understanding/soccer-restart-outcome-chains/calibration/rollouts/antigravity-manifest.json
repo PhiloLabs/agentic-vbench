@@ -1,0 +1,114 @@
+{
+ "arm": "antigravity",
+ "model": "google/gemini-3.6-flash",
+ "reasoning_effort": "high",
+ "harness_version": "Harbor 0.21.0 / Antigravity CLI 1.2.2, run inside the task image",
+ "harness_agent": "calibration.harbor_agents:AntigravityCliWithEffort",
+ "one_session": true,
+ "sessions_recorded": 1,
+ "subagent_hook": {
+  "one-agent-protocol": {
+   "PreToolUse": [
+    {
+     "matcher": ".*subagent.*",
+     "hooks": [
+      {
+       "type": "command",
+       "command": "cat >/dev/null; printf '%s' '{\"decision\":\"deny\",\"reason\":\"Subagents are not available in this environment.\"}'",
+       "timeout": 10
+      }
+     ]
+    }
+   ]
+  }
+ },
+ "subagent_hook_path": "~/.gemini/config/hooks.json",
+ "subagent_tool_calls_attempted": 0,
+ "budget_sec": 10800.0,
+ "budget_source": "task.toml steps.agent.timeout_sec",
+ "print_timeout": "10800s",
+ "cpus": 4,
+ "memory_mb": 8192,
+ "resources_source": "task.toml [environment], applied by Harbor",
+ "running_at_start": {},
+ "argv": [
+  "uvx",
+  "--from",
+  "harbor==0.21.0",
+  "harbor",
+  "run",
+  "--path",
+  "<task>",
+  "--agent",
+  "calibration.harbor_agents:AntigravityCliWithEffort",
+  "--model",
+  "google/gemini-3.6-flash",
+  "--ak",
+  "reasoning_effort=high",
+  "--ak",
+  "print_timeout=10800s",
+  "--env",
+  "docker",
+  "--n-concurrent",
+  "1",
+  "--n-attempts",
+  "1",
+  "--jobs-dir",
+  "<run>/jobs",
+  "--job-name",
+  "antigravity-20260915T005721Z",
+  "--yes",
+  "--allow-environment-host",
+  "antigravity.google",
+  "--allow-environment-host",
+  "antigravity-cli-auto-updater-974169037036.us-central1.run.app",
+  "--allow-environment-host",
+  "storage.googleapis.com",
+  "--allow-agent-host",
+  "daily-cloudcode-pa.googleapis.com",
+  "--allow-agent-host",
+  "cloudcode-pa.googleapis.com",
+  "--allow-agent-host",
+  "generativelanguage.googleapis.com",
+  "--allow-agent-host",
+  "oauth2.googleapis.com",
+  "--allow-agent-host",
+  "accounts.google.com",
+  "--allow-agent-host",
+  "www.googleapis.com",
+  "--allow-agent-host",
+  "lh3.googleusercontent.com",
+  "--allow-agent-host",
+  "antigravity.google"
+ ],
+ "prompt_sha256": "e882e8fa873e0c1edc624470b99aa87b9b9b232ba93b2772a6c956b2f81ecfbb",
+ "ran_inside_the_task_image": true,
+ "egress": {
+  "environment_phase": [
+   "antigravity.google",
+   "antigravity-cli-auto-updater-974169037036.us-central1.run.app",
+   "storage.googleapis.com"
+  ],
+  "agent_phase": [
+   "daily-cloudcode-pa.googleapis.com",
+   "cloudcode-pa.googleapis.com",
+   "generativelanguage.googleapis.com",
+   "oauth2.googleapis.com",
+   "accounts.google.com",
+   "www.googleapis.com",
+   "lh3.googleusercontent.com",
+   "antigravity.google"
+  ],
+  "policy": "task.toml allow_internet=false, with Harbor phase overrides"
+ },
+ "trajectory": "antigravity.jsonl",
+ "harbor_job": "antigravity-20260915T005721Z",
+ "harbor_exit_code": 0,
+ "wall_sec": 8362.8,
+ "solution_written": true,
+ "solution_entries": 218,
+ "verifier_reward": 0.0507,
+ "run_dir": "/workspace",
+ "materials": "/workspace/materials",
+ "solution_sha256": "9c5bc738c84ebb922770611b3434f3941febdf8cbec2a6043b501f7289388977"
+}

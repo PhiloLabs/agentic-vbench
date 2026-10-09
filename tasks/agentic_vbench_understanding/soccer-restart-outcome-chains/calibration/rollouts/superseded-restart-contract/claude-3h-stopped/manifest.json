@@ -1,0 +1,77 @@
+{
+ "arm": "claude",
+ "model": "claude-opus-4-8",
+ "reasoning_effort": "xhigh",
+ "harness_version": "2.1.270 (Claude Code), run inside the task image",
+ "harness_version_source": "the CLI inside the container, after install",
+ "image": "avb-soccer-lev:dev",
+ "image_id": "sha256:196e1fd7fcdcf6cff4dff561e2f48a3b5a9c2aef0ac8dc3f8a962a5e51d42dfd",
+ "one_session": true,
+ "budget_sec": 10800.0,
+ "budget_source": "task.toml steps.agent.timeout_sec",
+ "cpus": 4,
+ "memory_mb": 8192,
+ "resources_source": "task.toml [environment]",
+ "running_at_start": {
+  "zen_knuth (avb-soccer-lev:dev)": 4.0
+ },
+ "cli_install": "npm install -g @anthropic-ai/claude-code@2.1.270 >/dev/null 2>&1",
+ "egress_restricted_after_install": true,
+ "egress_allowed_hosts": [
+  "api.anthropic.com",
+  "platform.claude.com"
+ ],
+ "argv": [
+  "docker",
+  "exec",
+  "-u",
+  "agent",
+  "<container>",
+  "sh",
+  "-lc",
+  "cd /workspace && claude -p \"$(cat /workspace/instruction.md)\" --model claude-opus-4-8 --effort xhigh --output-format stream-json --verbose --permission-mode bypassPermissions --disallowedTools Agent Task Monitor SendMessage ToolSearch WebFetch WebSearch"
+ ],
+ "create_argv": [
+  "docker",
+  "run",
+  "-d",
+  "--platform",
+  "linux/arm64",
+  "--label",
+  "avb.calibration.arm=claude",
+  "--cpus",
+  "4",
+  "--memory",
+  "8192m",
+  "<image>",
+  "sleep",
+  "infinity"
+ ],
+ "prompt_sha256": "eabef48c6d986baaf75b0289f73b0b3767bb87e0fd75741e6e209cac88b32506",
+ "ran_inside_the_task_image": true,
+ "run_dir": "/workspace",
+ "materials": "/workspace/materials",
+ "trajectory": "claude.jsonl",
+ "session_record": "claude-sessions",
+ "egress_check": {
+  "allowed_reachable": {
+   "api.anthropic.com": true,
+   "platform.claude.com": true
+  },
+  "denied_host": "example.com",
+  "denied_reachable": false
+ },
+ "preflight_answered": [
+  "network open",
+  "egress restricted"
+ ],
+ "credential_refreshed": [],
+ "wall_sec": 4120.4,
+ "exit_code": 137,
+ "budget_bound": false,
+ "solution_written": false,
+ "solution_entries": null,
+ "reward": "reward.json",
+ "graded_by": "provenance/superseded-restart-contract/judge.py",
+ "outcome": "stopped at 68.7 min with no answer written, when the restart contract was replaced by the action ledger: SIGKILL to the agent user's processes, after which run_in_image.py finished its own record"
+}

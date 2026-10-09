@@ -1,0 +1,102 @@
+{
+  "f1": 0.0,
+  "precision": 0.0,
+  "recall": 0.0,
+  "n_predicted": 8,
+  "n_ground_truth": 216,
+  "true_positives": 0,
+  "action_time_matches": 0,
+  "unreadable_entries": 0,
+  "per_action": {
+    "Ball out of play": {
+      "key": 62,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Throw-in": {
+      "key": 48,
+      "predicted": 1,
+      "matched": 0
+    },
+    "Foul": {
+      "key": 29,
+      "predicted": 1,
+      "matched": 0
+    },
+    "Direct free-kick": {
+      "key": 1,
+      "predicted": 1,
+      "matched": 0
+    },
+    "Indirect free-kick": {
+      "key": 14,
+      "predicted": 1,
+      "matched": 0
+    },
+    "Corner": {
+      "key": 9,
+      "predicted": 1,
+      "matched": 0
+    },
+    "Clearance": {
+      "key": 4,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Shots on target": {
+      "key": 19,
+      "predicted": 1,
+      "matched": 0
+    },
+    "Shots off target": {
+      "key": 8,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Goal": {
+      "key": 8,
+      "predicted": 1,
+      "matched": 0
+    },
+    "Kick-off": {
+      "key": 1,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Offside": {
+      "key": 2,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Yellow card": {
+      "key": 5,
+      "predicted": 0,
+      "matched": 0
+    },
+    "Substitution": {
+      "key": 6,
+      "predicted": 1,
+      "matched": 0
+    }
+  },
+  "ran_at": "2026-09-14T20:14:00+00:00",
+  "model": "gpt-5.6-sol",
+  "reasoning_effort": "xhigh",
+  "harness_version": "codex-cli 0.153.4",
+  "mode": "frame_dump",
+  "exit_code": 0,
+  "prompt_sha256": "0bfb9e9fde8628d5194f5db80bbd50e82bf3e546d26e243377f9a8b3b92789c4",
+  "shipped_prompt_sha256": "e882e8fa873e0c1edc624470b99aa87b9b9b232ba93b2772a6c956b2f81ecfbb",
+  "images": 8,
+  "image_sha256": {
+    "sheet_0.jpg": "fdf4cecd086b4e38f89815dc6c4985385b016e3a3eed10b20f80a0e903fbddfa",
+    "sheet_1.jpg": "76cb9af44240581a85a15315f22aacdd01ff7a087d642424ed3bc7cd87493730",
+    "sheet_2.jpg": "7dc73e19904e8c630623f81deb07f21b790cf9f50de99de54f48d8402c0dd0a7",
+    "sheet_3.jpg": "a35b385c732698c3963e1751b545c514b9aeb45d25cddb2200ad6e45b7dc3f48",
+    "sheet_4.jpg": "5a214aacb7332453c48a876793454850b734d436cc1ab8ece6f89516a6ec4cad",
+    "sheet_5.jpg": "a12a23396434107b468732ba4d37d531948aa8590596503312963ef93a85a697",
+    "sheet_6.jpg": "086868463c29e7b1493eb95632f720fc78754e61c49ba239da3876c3c6aeef22",
+    "sheet_7.jpg": "82985b3823a9fd4ae9621d50bd234fed99d9fa8c5c2e8c56b1f3bd5bab2e0d41"
+  },
+  "shell_calls": 0
+}

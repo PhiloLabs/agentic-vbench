@@ -1,0 +1,14 @@
+{
+ "sequence": [
+  {
+   "t": 2680,
+   "action": "Ball out of play",
+   "team": "none"
+  },
+  {
+   "t": 2694,
+   "action": "Throw-in",
+   "team": "home"
+  }
+ ]
+}

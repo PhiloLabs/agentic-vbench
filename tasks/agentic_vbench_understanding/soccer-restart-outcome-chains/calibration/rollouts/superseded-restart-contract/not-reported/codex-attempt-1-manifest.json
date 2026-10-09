@@ -1,0 +1,69 @@
+{
+ "arm": "codex",
+ "model": "gpt-5.6-sol",
+ "reasoning_effort": "xhigh",
+ "harness_version": "codex-cli 0.154.0, run inside the task image",
+ "harness_version_source": "the CLI inside the container, after install",
+ "image": "avb-soccer-lev:dev",
+ "image_id": "sha256:196e1fd7fcdcf6cff4dff561e2f48a3b5a9c2aef0ac8dc3f8a962a5e51d42dfd",
+ "one_session": true,
+ "budget_sec": 3600.0,
+ "budget_source": "task.toml steps.agent.timeout_sec",
+ "cpus": 4,
+ "memory_mb": 8192,
+ "resources_source": "task.toml [environment]",
+ "cli_install": "npm install -g @openai/codex@0.154.0 >/dev/null 2>&1",
+ "egress_restricted_after_install": true,
+ "argv": [
+  "docker",
+  "exec",
+  "-u",
+  "agent",
+  "<container>",
+  "sh",
+  "-lc",
+  "cd /workspace && codex exec --json -m gpt-5.6-sol -c model_reasoning_effort=\"xhigh\" --dangerously-bypass-approvals-and-sandbox --skip-git-repo-check --cd /workspace < /workspace/instruction.md"
+ ],
+ "create_argv": [
+  "docker",
+  "run",
+  "-d",
+  "--platform",
+  "linux/arm64",
+  "--cpus",
+  "4",
+  "--memory",
+  "8192m",
+  "<image>",
+  "sleep",
+  "infinity"
+ ],
+ "prompt_sha256": "eabef48c6d986baaf75b0289f73b0b3767bb87e0fd75741e6e209cac88b32506",
+ "ran_inside_the_task_image": true,
+ "run_dir": "/workspace",
+ "materials": "/workspace/materials",
+ "trajectory": "codex-attempt-1.jsonl",
+ "egress_check": {
+  "allowed_host": "chatgpt.com",
+  "allowed_reachable": true,
+  "denied_host": "example.com",
+  "denied_reachable": false
+ },
+ "preflight_answered": [
+  "network open",
+  "egress restricted"
+ ],
+ "credential_refreshed": [
+  "after the run"
+ ],
+ "wall_sec": 4889.4,
+ "exit_code": 1,
+ "budget_bound": false,
+ "solution_written": false,
+ "solution_entries": null,
+ "events": "codex-attempt-1-events.jsonl",
+ "stderr": "codex-attempt-1-stderr.txt",
+ "session_record_file": "rollout-2026-09-14T14-32-12-01a0a055-2e2d-77c2-bfac-fee782ec20a2.jsonl",
+ "session_record_copied": "appended out of the running container every 3 s by a copier started during the run, because this version of run_in_image.py did not copy it; the copy ends with the session's task_complete row",
+ "not_reported_because": "the access token expired at 15:49:30 UTC and auth.openai.com was not reachable after the egress cut, so the run ended with no solution"
+}
