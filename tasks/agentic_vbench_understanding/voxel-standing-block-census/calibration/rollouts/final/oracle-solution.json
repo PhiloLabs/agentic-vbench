@@ -1,0 +1,245 @@
+{
+ "offset": 4.13,
+ "census": {
+  "60": {
+   "birchwood": 15,
+   "bookshelf": 5,
+   "brick_block": 6,
+   "gravel": 4,
+   "hardened_clay_orange": 4,
+   "mossycobble": 3
+  },
+  "120": {
+   "birchwood": 23,
+   "bookshelf": 17,
+   "brick_block": 8,
+   "gravel": 12,
+   "hardened_clay_orange": 11,
+   "mossycobble": 9
+  },
+  "180": {
+   "birchwood": 26,
+   "bookshelf": 20,
+   "brick_block": 17,
+   "gravel": 18,
+   "hardened_clay_orange": 24,
+   "mossycobble": 10
+  },
+  "240": {
+   "birchwood": 31,
+   "bookshelf": 23,
+   "brick_block": 31,
+   "gravel": 24,
+   "hardened_clay_orange": 31,
+   "mossycobble": 12
+  },
+  "300": {
+   "birchwood": 37,
+   "bookshelf": 34,
+   "brick_block": 38,
+   "gravel": 24,
+   "hardened_clay_orange": 38,
+   "mossycobble": 15
+  },
+  "360": {
+   "birchwood": 41,
+   "bookshelf": 49,
+   "brick_block": 44,
+   "gravel": 29,
+   "hardened_clay_orange": 39,
+   "mossycobble": 20
+  },
+  "420": {
+   "birchwood": 46,
+   "bookshelf": 54,
+   "brick_block": 50,
+   "gravel": 39,
+   "hardened_clay_orange": 43,
+   "mossycobble": 22
+  },
+  "480": {
+   "birchwood": 52,
+   "bookshelf": 59,
+   "brick_block": 55,
+   "gravel": 48,
+   "hardened_clay_orange": 47,
+   "mossycobble": 26
+  },
+  "540": {
+   "birchwood": 56,
+   "bookshelf": 60,
+   "brick_block": 60,
+   "gravel": 53,
+   "hardened_clay_orange": 51,
+   "mossycobble": 28
+  },
+  "600": {
+   "birchwood": 60,
+   "bookshelf": 61,
+   "brick_block": 70,
+   "gravel": 54,
+   "hardened_clay_orange": 54,
+   "mossycobble": 29
+  },
+  "660": {
+   "birchwood": 64,
+   "bookshelf": 59,
+   "brick_block": 70,
+   "gravel": 56,
+   "hardened_clay_orange": 64,
+   "mossycobble": 36
+  },
+  "720": {
+   "birchwood": 65,
+   "bookshelf": 61,
+   "brick_block": 73,
+   "gravel": 58,
+   "hardened_clay_orange": 72,
+   "mossycobble": 43
+  },
+  "780": {
+   "birchwood": 66,
+   "bookshelf": 64,
+   "brick_block": 75,
+   "gravel": 62,
+   "hardened_clay_orange": 71,
+   "mossycobble": 48
+  },
+  "840": {
+   "birchwood": 67,
+   "bookshelf": 66,
+   "brick_block": 78,
+   "gravel": 66,
+   "hardened_clay_orange": 71,
+   "mossycobble": 62
+  },
+  "900": {
+   "birchwood": 74,
+   "bookshelf": 73,
+   "brick_block": 82,
+   "gravel": 69,
+   "hardened_clay_orange": 70,
+   "mossycobble": 62
+  },
+  "960": {
+   "birchwood": 85,
+   "bookshelf": 75,
+   "brick_block": 87,
+   "gravel": 70,
+   "hardened_clay_orange": 73,
+   "mossycobble": 64
+  },
+  "1020": {
+   "birchwood": 97,
+   "bookshelf": 81,
+   "brick_block": 90,
+   "gravel": 77,
+   "hardened_clay_orange": 74,
+   "mossycobble": 69
+  },
+  "1080": {
+   "birchwood": 106,
+   "bookshelf": 84,
+   "brick_block": 89,
+   "gravel": 78,
+   "hardened_clay_orange": 74,
+   "mossycobble": 68
+  },
+  "1140": {
+   "birchwood": 108,
+   "bookshelf": 86,
+   "brick_block": 91,
+   "gravel": 74,
+   "hardened_clay_orange": 75,
+   "mossycobble": 73
+  },
+  "1200": {
+   "birchwood": 103,
+   "bookshelf": 86,
+   "brick_block": 96,
+   "gravel": 74,
+   "hardened_clay_orange": 78,
+   "mossycobble": 79
+  },
+  "1260": {
+   "birchwood": 102,
+   "bookshelf": 85,
+   "brick_block": 105,
+   "gravel": 71,
+   "hardened_clay_orange": 80,
+   "mossycobble": 85
+  },
+  "1320": {
+   "birchwood": 101,
+   "bookshelf": 85,
+   "brick_block": 113,
+   "gravel": 69,
+   "hardened_clay_orange": 80,
+   "mossycobble": 87
+  },
+  "1380": {
+   "birchwood": 97,
+   "bookshelf": 91,
+   "brick_block": 113,
+   "gravel": 68,
+   "hardened_clay_orange": 80,
+   "mossycobble": 90
+  },
+  "1440": {
+   "birchwood": 94,
+   "bookshelf": 91,
+   "brick_block": 116,
+   "gravel": 70,
+   "hardened_clay_orange": 76,
+   "mossycobble": 92
+  },
+  "1500": {
+   "birchwood": 89,
+   "bookshelf": 86,
+   "brick_block": 121,
+   "gravel": 75,
+   "hardened_clay_orange": 77,
+   "mossycobble": 92
+  },
+  "1560": {
+   "birchwood": 86,
+   "bookshelf": 87,
+   "brick_block": 119,
+   "gravel": 80,
+   "hardened_clay_orange": 80,
+   "mossycobble": 90
+  },
+  "1620": {
+   "birchwood": 83,
+   "bookshelf": 87,
+   "brick_block": 121,
+   "gravel": 79,
+   "hardened_clay_orange": 81,
+   "mossycobble": 90
+  },
+  "1680": {
+   "birchwood": 83,
+   "bookshelf": 88,
+   "brick_block": 122,
+   "gravel": 80,
+   "hardened_clay_orange": 81,
+   "mossycobble": 88
+  },
+  "1740": {
+   "birchwood": 82,
+   "bookshelf": 90,
+   "brick_block": 119,
+   "gravel": 82,
+   "hardened_clay_orange": 81,
+   "mossycobble": 87
+  },
+  "1800": {
+   "birchwood": 82,
+   "bookshelf": 95,
+   "brick_block": 113,
+   "gravel": 86,
+   "hardened_clay_orange": 80,
+   "mossycobble": 91
+  }
+ }
+}

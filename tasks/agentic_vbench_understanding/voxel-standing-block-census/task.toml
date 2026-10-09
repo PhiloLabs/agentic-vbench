@@ -1,0 +1,41 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/voxel-standing-block-census"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "game-analysis", "voxel", "first-person",
+        "state-tracking", "long-horizon", "synthetic-ground-truth",
+        "agentic-vbench-understanding"]
+# 30-minute first-person flight over a generated VoxeLibre world. A scripted
+# camera rig places blocks from a six-type palette on the terrain and later
+# removes blocks it placed earlier; nothing else in the world ever changes.
+# The agent reports, at thirty one-minute checkpoints, how many camera-placed
+# blocks of each type are standing. GT is the rig's own event log replayed
+# forward, machine-exact, with the camera pose recorded at every event so that
+# each one can be projected back onto its own frame and checked to be in shot.
+# The answer at any checkpoint depends on every event before it, so a missed
+# placement is wrong there and at every later checkpoint.
+source = "synthetic: Luanti 5.x + VoxeLibre, scripted rig mod (worldmods/avbcam), mapgen v7 fixed_map_seed=7, Xvfb + llvmpipe, x11grab at 12 fps"
+
+[environment]
+build_timeout_sec = 2400.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 8192
+# The video is baked into the image at build time. Nothing about this world is
+# public -- it is generated from a private seed by a mod written for this task
+# -- so there is nothing online for an agent to look up, and no network is
+# needed to build or grade.
+allow_internet = false
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+timeout_sec = 14400.0
+
+[steps.verifier]
+timeout_sec = 600.0

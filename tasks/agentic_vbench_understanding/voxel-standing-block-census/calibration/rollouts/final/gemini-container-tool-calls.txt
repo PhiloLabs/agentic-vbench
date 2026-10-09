@@ -1,0 +1,331 @@
+daemon up, container=avb_ag
+run 1790088102_83278_31589: 'echo BRIDGE_OK; pwd; ls materials; ffmpeg -version | head -1'
+done 1790088102_83278_31589: exit 0, 110 bytes
+run 1790088108_83298_10633: 'mkdir -p /workspace/work/frames && ffmpeg -y -loglevel error -ss 300 -i /workspace/materials/session.mp4 -frames:v 1 -q:v 2 /workspace/work/frames/t300.jpg && ls -l /workspace/work/frames/'
+done 1790088108_83298_10633: exit 0, 62 bytes
+run 1790088109_83310_155: 'python3 -c "import socket;socket.gethostbyname(\\"huggingface.co\\")"'
+done 1790088109_83310_155: exit 1, 155 bytes
+run 1790089362_85002_10984: 'ls -la /workspace/materials'
+done 1790089362_85002_10984: exit 0, 172 bytes
+run 1790089374_85033_14135: 'ffprobe -v error -show_format -show_streams /workspace/materials/session.mp4'
+done 1790089374_85033_14135: exit 0, 1745 bytes
+run 1790089379_85056_26855: 'ls -la /workspace'
+done 1790089379_85056_26855: exit 0, 241 bytes
+run 1790089384_85076_21829: 'ls -la /workspace/output'
+done 1790089384_85076_21829: exit 0, 96 bytes
+run 1790089390_85095_16803: 'mkdir -p /workspace/work/frames && ffmpeg -y -loglevel error -ss 0 -i /workspace/materials/session.mp4 -frames:v 1 -q:v 2 /workspace/work/frames/t0.jpg && ffmpeg -y -loglevel error -ss 10 -i /workspac'
+done 1790089390_85095_16803: exit 0, 0 bytes
+run 1790089411_85126_7659: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nfps = cap.get(cv2.CAP_PROP_FPS)\ncount = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))\nprint(f\\"FPS: {fps}, Frame count: {c'
+done 1790089411_85126_7659: exit 0, 62 bytes
+run 1790089416_85140_32674: 'python3 -c "\nimport cv2, time\nt0 = time.time()\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nn = 0\nwhile n < 1000:\n    ret, frame = cap.read()\n    if not ret: break\n    n += 1\ndt = time'
+done 1790089416_85140_32674: exit 0, 38 bytes
+run 1790089426_85168_17170: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nfor i in range(60):\n    ret, frame = cap.read()\n    if not ret: break\n    # check bottom right corner\n    # frame i'
+done 1790089426_85168_17170: exit 0, 113 bytes
+run 1790089429_85185_26256: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nfor sec in range(0, 11):\n    cap.set(cv2.CAP_PROP_POS_MSEC, sec * 1000)\n    ret, frame = cap.read()\n    if ret:\n   '
+done 1790089429_85185_26256: exit 0, 23 bytes
+run 1790089449_85254_17537: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nret, prev = cap.read()\nidx = 0\nwhile True:\n    ret, curr = cap.read()\n    if not ret: break\n   '
+done 1790089449_85254_17537: exit 0, 2884 bytes
+run 1790089453_85280_31167: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nfor i in range(46):\n    ret, frame = cap.read()\n    if 37 <= i <= 44:\n        cv2.imwrite(f\\"/workspace/work/frames'
+done 1790089453_85280_31167: exit 0, 23 bytes
+run 1790089467_85356_6518: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n# let us inspect the pixel under the crosshair:\n# image is 720 high, 1280 wide.\n# crosshair cen'
+done 1790089467_85356_6518: exit 0, 270 bytes
+run 1790089482_85403_1917: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nret, prev = cap.read()\nfor i in range(1, 150):\n    ret, curr = cap.read()\n    if not ret: break'
+done 1790089482_85403_1917: exit 0, 1558 bytes
+run 1790089492_85421_14638: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nret, f0 = cap.read()\nfor i in range(1, 39):\n    ret, fi = cap.read()\n    diff = np.abs(fi.astyp'
+done 1790089492_85421_14638: exit 0, 1390 bytes
+run 1790089497_85438_24632: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nret, f0 = cap.read()\nret, f38 = False, None\nfor _ in range(38): ret, f38 = cap.read()\ndiff = np'
+done 1790089497_85438_24632: exit 0, 43 bytes
+run 1790089502_85451_42: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nfor i in range(46):\n    ret, f = cap.read()\n    if 38 <= i <= 44:\n        print(f\\"i={i}, mean={f.mean():.1f}, std='
+done 1790089502_85451_42: exit 0, 189 bytes
+run 1790089506_85463_7311: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Let us track optical flow or frame differences over 500 frames\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAME'
+done 1790089506_85463_7311: exit 0, 615 bytes
+run 1790089531_85520_11796: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nfor i in range(50):\n    ret, frame = cap.read()\n    if 35 <= i <= 45:\n        # sample center pixel BGR\n        c ='
+done 1790089531_85520_11796: exit 0, 473 bytes
+run 1790089536_85533_19974: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncuts = []\nprev = None\nidx = 0\nstep = 12 # check every 1 second first\nwhile True:\n    ret, frame'
+done 1790089536_85533_19974: exit 0, 624 bytes
+run 1790089636_85854_31013: 'python3 -c "\nimport cv2\ntimes = [60, 120, 180, 240, 300, 360, 420, 480, 540, 600,\n         660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200,\n         1260, 1320, 1380, 1440, 1500, 1560, 1620, 1680'
+done 1790089636_85854_31013: exit 0, 28 bytes
+run 1790089663_85906_17751: 'python3 -c "\n# Let us inspect how the blocks appear.\n# Does a block suddenly pop into existence?\n# Is there a sound? (Wait, mp4 has audio?)\nimport cv2\nimport subprocess\n\n# Check if session.mp4 has aud'
+done 1790089663_85906_17751: exit 0, 15 bytes
+run 1790089668_85918_9090: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\nfor f in range(43, 85):\n    ret, frame = cap.read()\n    cv2.imwrite(f\\"/worksp'
+done 1790089668_85918_9090: exit 0, 26 bytes
+run 1790089686_85991_1280: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nidx = 0\nsky_frames = []\nwhile True:\n    ret, frame = cap.read()\n    if not ret: break\n    # che'
+done 1790089686_85991_1280: exit 0, 84 bytes
+run 1790089778_86234_6016: 'python3 -c "\n# Let us check when blocks are placed between frame 43 and frame 500\n# In a moving camera, background moves according to camera motion (homography / optical flow).\n# But wait! Does the ca'
+done 1790089778_86234_6016: exit 0, 277 bytes
+run 1790089790_86263_8259: 'python3 -c "\nimport cv2\nimport glob\n\ntimes = [60, 120, 180, 240, 300, 360, 420, 480, 540, 600,\n         660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200,\n         1260, 1320, 1380, 1440, 1500, 156'
+done 1790089790_86263_8259: exit 0, 414 bytes
+run 1790089811_86323_28674: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncount = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))\ncap.set(cv2.CAP_PROP_POS_FRAMES, count - 1)\nret, frame = cap.read()\n'
+done 1790089811_86323_28674: exit 0, 31 bytes
+run 1790089822_86341_25465: 'python3 -c "\n# Let us compare the horizon/sky/terrain features across checkpoints or find the rotation period.\n# Specifically, let us take the top 100 lines (sky + distant horizon) or features,\n# or m'
+done 1790089822_86341_25465: exit 0, 440 bytes
+run 1790089836_86358_23164: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 50)\nret, prev = cap.read()\nprev_gray = cv2.cvtColor(prev, cv2.'
+done 1790089836_86358_23164: exit 0, 568 bytes
+run 1790089846_86378_4025: 'python3 -c "\n# Let us find where and when the first block appears.\n# Between frame 0 and frame 717:\n# Let us check frames around 40 to 80.\n# In frame 43, was there a block?\n# Let us compare frame 42 a'
+done 1790089846_86378_4025: exit 0, 0 bytes
+run 1790089850_86391_28133: 'python3 -c "\nimport cv2\nimg = cv2.imread(\\"/workspace/work/frames/step_043.jpg\\")\n# Center is (360, 640)\ncrop = img[360-100:360+100, 640-100:640+100]\ncv2.imwrite(\\"/workspace/work/frames/crop_43.jpg\\"'
+done 1790089850_86391_28133: exit 0, 0 bytes
+run 1790089860_86407_7177: 'python3 -c "\n# Let us check every 10 frames or frame by frame between 43 and 200\n# What is under the crosshair?\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4'
+done 1790089860_86407_7177: exit 0, 684 bytes
+run 1790089869_86422_18080: 'python3 -c "\n# Let us crop the area around the fallen log in frames 43, 44, 45, 46, 47\n# In step_047, where is the fallen log?\n# Let us check the pixel differences or save crops\nimport cv2\nfor f in ra'
+done 1790089869_86422_18080: exit 0, 16 bytes
+run 1790089884_86453_6210: 'python3 -c "\nimport cv2\nimg = cv2.imread(\\"/workspace/work/frames/step_047.jpg\\")\ncv2.imwrite(\\"/workspace/work/frames/step_047_crop.jpg\\", img[340:480, 470:560])\n"'
+done 1790089884_86453_6210: exit 0, 0 bytes
+run 1790089894_86474_3909: 'python3 -c "\nimport cv2\nimport numpy as np\n\nimg = cv2.imread(\\"/workspace/work/frames/step_047.jpg\\")\n# birchwood RGB is roughly R: 215, G: 200, B: 155 (in BGR: ~155, 200, 215)\n# let us find all pixel'
+done 1790089894_86474_3909: exit 0, 3061 bytes
+run 1790089900_86491_30743: 'python3 -c "\nimport cv2\nimport numpy as np\n\nimg = cv2.imread(\\"/workspace/work/frames/step_047.jpg\\")\n# let us find connected components of pixels that look like birchwood\nmask = (img[:, :, 0] > 130) '
+done 1790089900_86491_30743: exit 0, 196 bytes
+run 1790089906_86509_8878: 'python3 -c "\nimport cv2\nimg = cv2.imread(\\"/workspace/work/frames/step_047.jpg\\")\n# let us crop bottom center: [600:720, 450:550]\ncv2.imwrite(\\"/workspace/work/frames/step_047_bottom.jpg\\", img[600:72'
+done 1790089906_86509_8878: exit 0, 0 bytes
+run 1790089916_86524_3852: 'python3 -c "\n# Let us inspect the exact frames where blocks are placed between frame 43 and 100.\n# How to detect a block placement?\n# When a block is placed, does it pop into existence in a single fra'
+done 1790089916_86524_3852: exit 0, 5 bytes
+run 1790089923_86571_28384: 'python3 -c "\n# Let us inspect the camera movement over time.\n# Does the camera continuously orbit this central area?\n# Let us track the center of the world or feature points across the 30 checkpoints.'
+done 1790089923_86571_28384: exit 0, 39 bytes
+run 1790089932_86590_8337: 'python3 -c "\n# Let us inspect the exact frames where blocks appear.\n# In frame 43: birchwood was at crosshair.\n# When did it appear?\n# Was it placed at frame 43?\n# What about between frame 43 and 60?\n'
+done 1790089932_86590_8337: exit 0, 6 bytes
+run 1790089941_86605_19240: 'python3 -c "\n# Let us inspect frames 0 to 70.\n# Let us find WHEN the first block appears.\n# In frame 0 to 38, camera was stationary looking at the clearing.\n# In frame 38, was there ANY placed block?\n'
+done 1790089941_86605_19240: exit 0, 0 bytes
+run 1790089948_86620_29235: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\n# Let us sample frames every 12 frames (every 1 second) f'
+done 1790089948_86620_29235: exit 0, 533 bytes
+run 1790089974_86697_26876: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 84)\nfor f in range(84, 97):\n    ret, frame = cap.read()\n    # '
+done 1790089974_86697_26876: exit 0, 429 bytes
+run 1790089981_86726_10463: 'python3 -c "\nimport cv2\nimport numpy as np\n\nimg = cv2.imread(\\"/workspace/work/frames/sec_08.jpg\\")\n# brick is red: R is high, G and B are low\nmask = (img[:, :, 2] > 120) & (img[:, :, 0] < 80) & (img['
+done 1790089981_86726_10463: exit 0, 988 bytes
+run 1790089987_86741_3620: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 75)\nfor f in range(75, 100):\n    ret, frame = cap.read()\n    #'
+done 1790089987_86741_3620: exit 0, 729 bytes
+run 1790089992_86754_11797: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 91)\nfor f in [91, 92, 93, 94]:\n    ret, frame = cap.read()\n    # save full frame o'
+done 1790089992_86754_11797: exit 0, 24 bytes
+run 1790090017_86777_836: 'python3 -c "\n# Let us track when that other brick block (at the bottom right in sec_07) appeared!\n# In sec_07, it was under the pine tree.\n# In sec_08, it was at bbox=(1090, 640).\n# When did it appear'
+done 1790090017_86777_836: exit 0, 0 bytes
+run 1790090023_86792_26760: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\nfor f in range(43, 85):\n    ret, frame = cap.read()\n    #'
+done 1790090023_86792_26760: exit 0, 838 bytes
+run 1790090027_86804_1261: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 62)\nfor f in [62, 63, 64, 65]:\n    ret, frame = cap.read()\n   '
+done 1790090027_86804_1261: exit 0, 29 bytes
+run 1790090046_86868_22585: 'python3 -c "\n# Let us inspect the camera motion and actions from frame 43 to frame 600.\n# In frame 43: action 1 (birchwood placed). Camera pause? (frames 43-44)\n# What happened around frame 50-60?\n# I'
+done 1790090046_86868_22585: exit 0, 1368 bytes
+run 1790090051_86883_31671: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\nret, prev = cap.read()\ndups = 0\ntotal = 0\nfor f in range('
+done 1790090051_86883_31671: exit 0, 32 bytes
+run 1790090059_86903_11623: 'python3 -c "\n# Let us find when each block appeared in the first 120 frames.\n# We know:\n# 1. birchwood at spruce tree (seen at frame 43)\n# 2. birchwood at fallen log (seen at frame 47)\n# 3. brick at s'
+done 1790090059_86903_11623: exit 0, 17 bytes
+run 1790090066_86923_7506: 'python3 -c "\n# Let us track where the camera goes between frame 93 and 200,\n# and check every frame to see what block appears at the crosshair!\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"'
+done 1790090066_86923_7506: exit 0, 0 bytes
+run 1790090074_86939_18409: 'python3 -c "\n# Let us write a detector for block appearance/disappearance.\n# What are the visual features of the six block types?\n# 1. birchwood: pale wood texture, RGB ~(215, 200, 155), BGR ~(155, 20'
+done 1790090074_86939_18409: exit 0, 1358 bytes
+run 1790090082_86959_31130: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Create a contact sheet of frames t=0 to t=59 (1 per second)\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nthumbs = []\nfor sec in range(60):'
+done 1790090082_86959_31130: exit 0, 42 bytes
+run 1790090104_87077_29197: 'python3 -c "\nimport cv2\nimport numpy as np\n\nf92 = cv2.imread(\\"/workspace/work/frames/f_92_full.jpg\\")\nf93 = cv2.imread(\\"/workspace/work/frames/f_93_full.jpg\\")\n\n# Estimate affine or homography betwe'
+done 1790090104_87077_29197: exit 0, 123 bytes
+run 1790090112_87110_31439: 'python3 -c "\nimport cv2\nimport numpy as np\n\nf92 = cv2.imread(\\"/workspace/work/frames/f_92_full.jpg\\")\nf93 = cv2.imread(\\"/workspace/work/frames/f_93_full.jpg\\")\n\ndiff = cv2.absdiff(f93, f92)\nprint(\\"'
+done 1790090112_87110_31439: exit 0, 109 bytes
+run 1790090117_87122_22778: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 100) # t ~ 8.36s\nret, ref = cap.read()\nref_small = cv2.resize('
+done 1790090117_87122_22778: exit 0, 366 bytes
+run 1790090124_87142_18661: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 100)\nret, ref = cap.read()\nref_small = cv2.resize(ref, (160, 9'
+done 1790090124_87142_18661: exit 0, 404 bytes
+run 1790090130_87165_15451: 'python3 -c "\n# Let us find WHEN that brick block under the pine tree was placed.\n# Was it placed before frame 43?\n# In frame 0: was it there? Let us check t0.jpg!\n# In f_63.jpg: was it visible?\n# In f'
+done 1790090130_87165_15451: exit 0, 129 bytes
+run 1790090135_87181_8608: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 63)\nfor f in range(63, 81):\n    ret, frame = cap.read()\n    # '
+done 1790090135_87181_8608: exit 0, 324 bytes
+run 1790090143_87197_19511: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 74)\nfor f in [74, 75, 76, 77, 78]:\n    ret, frame = cap.read()\n    cv2.imwrite(f\\"'
+done 1790090143_87197_19511: exit 0, 27 bytes
+run 1790090162_87269_11701: 'python3 -c "\n# Let us check what happens near the crosshair from frame 93 to 250.\n# Specifically, let us track a window around the crosshair, say 100x100 pixels,\n# or better: let us look at the 6 bloc'
+done 1790090162_87269_11701: exit 0, 23 bytes
+run 1790090187_87315_27573: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 90)\nret, f90 = cap.read()\n\ndiffs = []\nfor f in range(140, 160)'
+done 1790090187_87315_27573: exit 0, 139 bytes
+run 1790090200_87366_23880: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 90)\nret, f90 = cap.read()\n\ndiffs = []\nfor f in range(91, 250):'
+done 1790090200_87366_23880: exit 0, 335 bytes
+run 1790090212_87386_5650: 'python3 -c "\nimport json\n\ntimes = [60, 120, 180, 240, 300, 360, 420, 480, 540, 600,\n         660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200,\n         1260, 1320, 1380, 1440, 1500, 1560, 1620, 16'
+done 1790090212_87386_5650: exit 0, 53 bytes
+run 1790090235_87408_9710: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Let us inspect frames 40 to 220 sequentially\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 40)\n\n# Save cen'
+done 1790090235_87408_9710: exit 0, 750 bytes
+run 1790090250_87434_11953: 'python3 -c "\nimport cv2\n\nimg = cv2.imread(\\"/workspace/work/frames/cp_120.jpg\\")\n# In cp_120:\n# crosshair is at (360, 640)\n# Below crosshair: orange cube at roughly y in [360, 420], x in [620, 680]\ncv'
+done 1790090250_87434_11953: exit 0, 31 bytes
+run 1790090310_87551_10445: 'python3 -c "\nimport cv2\n\nimg = cv2.imread(\\"/workspace/work/frames/cp_240.jpg\\")\n# In cp_240:\n# crosshair is at (360, 640)\n# To the right of orange clay: (390:460, 600:660) and (400:470, 750:820)\ncv2.'
+done 1790090310_87551_10445: exit 0, 36 bytes
+run 1790090343_87659_25350: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 98)\n\n# In sheet_90_205, at f=105, birchwood was at crosshair!\n'
+done 1790090343_87659_25350: exit 0, 241 bytes
+run 1790090358_87676_7120: 'python3 -c "\n# Let us check how many blocks exist at frame 43, 50, 60, 70, etc.\n# In frame 43:\n# Let us search for candidate blocks in frame 43!\nimport cv2\nimport numpy as np\n\nf43 = cv2.imread(\\"/work'
+done 1790090358_87676_7120: exit 0, 50 bytes
+run 1790090380_87702_28927: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\n# Search for birchwood pixels (excluding clouds at y < 50'
+done 1790090380_87702_28927: exit 0, 883 bytes
+run 1790090395_87728_31169: 'python3 -c "\nimport cv2\n\nimg = cv2.imread(\\"/workspace/work/frames/cp_60.jpg\\")\nh, w, _ = img.shape # 720, 1280\n\n# 3x3 grid with some overlap\nfor r in range(3):\n    for c in range(3):\n        y1 = int'
+done 1790090395_87728_31169: exit 0, 21 bytes
+run 1790090503_87918_2712: 'python3 -c "\nimport cv2\nimg = cv2.imread(\\"/workspace/work/frames/cp_60.jpg\\")\ncv2.imwrite(\\"/workspace/work/frames/cp60_left_edge.jpg\\", img[250:450, 0:150])\n"'
+done 1790090503_87918_2712: exit 0, 0 bytes
+run 1790090529_88026_30821: 'python3 -c "\n# Let us check if there is any chat or text on screen\n# In Minecraft, chat appears at bottom-left: y in [500, 700], x in [0, 400]\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/'
+done 1790090529_88026_30821: exit 0, 28 bytes
+run 1790090611_88226_27864: 'python3 -c "\n# Let us find the next block placed after frame 93.\n# Where and when does it appear?\n# Let us check frames 94 to 250.\n# We know that when a block appears, it is one of the 6 types:\n# birc'
+done 1790090611_88226_27864: exit 0, 190 bytes
+run 1790090635_88253_1881: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 143)\nfor f in range(143, 149):\n    ret, frame = cap.read()\n   '
+done 1790090635_88253_1881: exit 0, 114 bytes
+run 1790090652_88304_6: 'python3 -c "\n# Let us detect ALL blocks appearing anywhere in the frame from frame 43 to 250!\n# How?\n# We have frames 43 to 250.\n# Let us check when any pixel of the 6 block types appears for the firs'
+done 1790090652_88304_6: exit 0, 1104 bytes
+run 1790091606_89418_22008: 'pwd && ls -la /workspace && ls -la /workspace/work'
+done 1790091606_89418_22008: exit 0, 740 bytes
+run 1790091615_89465_14681: 'ffprobe -v error -show_entries format=duration,size,bit_rate:stream=codec_name,width,height,r_frame_rate,nb_frames -of default=noprint_wrappers=1 /workspace/materials/session.mp4'
+done 1790091615_89465_14681: exit 0, 127 bytes
+run 1790091619_89477_21950: 'ffprobe -v error -show_streams /workspace/materials/session.mp4'
+done 1790091619_89477_21950: exit 0, 1370 bytes
+run 1790091652_89559_25043: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nret, prev = cap.read()\n# Let us check the first 200 frames: frame-by-frame difference\ndiffs = ['
+done 1790091652_89559_25043: exit 0, 1206 bytes
+run 1790091664_89577_5904: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\n# Let us check 300 frames: print frame number and what is happening\n# Is the camera moving con'
+done 1790091664_89577_5904: exit 0, 0 bytes
+run 1790091695_89609_18142: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\n# Let us check how many frames there are, and inspect frames 35 to 55 frame by frame.\ncap.set('
+done 1790091695_89609_18142: exit 0, 1111 bytes
+run 1790091702_89639_18567: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nfor f in range(38, 44):\n    cap.set(cv2.CAP_PROP_POS_FRAMES, f)\n    ret, frame = cap.read()\n    # print some stats:'
+done 1790091702_89639_18567: exit 0, 388 bytes
+run 1790091707_89656_28562: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nret, prev = cap.read()\nf = 1\nlow_diff_frames = []\nwhile True:\n    ret, curr = cap.read()\n    if'
+done 1790091707_89656_28562: exit 0, 240 bytes
+run 1790091723_89727_18934: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\n# Let us read frame 0 to 100\nframes = []\nfor i in range(100):\n    ret, frame = cap.read()\n    '
+done 1790091723_89727_18934: exit 0, 1003 bytes
+run 1790091730_89747_14817: 'python3 -c "\nimport cv2\nimport numpy as np\n\nt0 = cv2.imread(\\"/workspace/work/frames/t0.jpg\\")\n# In t0, there is a spruce tree at the center bottom? Or center?\n# Let us check where the spruce tree in '
+done 1790091730_89747_14817: exit 0, 41 bytes
+run 1790091737_89764_25720: 'python3 -c "\nimport cv2\nimport numpy as np\n\ns43 = cv2.imread(\\"/workspace/work/frames/step_043.jpg\\")\nmask = (s43[:, :, 0] > 130) & (s43[:, :, 0] < 180) & (s43[:, :, 1] > 180) & (s43[:, :, 2] > 190)\np'
+done 1790091737_89764_25720: exit 0, 81 bytes
+run 1790091741_89775_16151: 'python3 -c "\nimport cv2\nimport numpy as np\n\ns43 = cv2.imread(\\"/workspace/work/frames/step_043.jpg\\")\n# crosshair is at (360, 640)\n# what is around (360, 640)?\ncrop = s43[340:420, 620:700]\nprint(\\"Cen'
+done 1790091741_89775_16151: exit 0, 138 bytes
+run 1790091756_89794_31597: 'python3 -c "\nimport cv2\ns47 = cv2.imread(\\"/workspace/work/frames/step_047.jpg\\")\nprint(\\"Center pixel:\\", s47[360, 640])\nprint(\\"Block below crosshair (y=380, x=635):\\", s47[380, 635])\n"'
+done 1790091756_89794_31597: exit 0, 77 bytes
+run 1790091762_89812_9732: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\nfor f in range(43, 49):\n    ret, frame = cap.read()\n    #'
+done 1790091762_89812_9732: exit 0, 222 bytes
+run 1790091769_89827_19727: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 0)\n\n# Check frame by frame motion from 40 to 200\n# Calculate m'
+done 1790091769_89827_19727: exit 0, 585 bytes
+run 1790091775_89844_13792: 'python3 -c "\nimport cv2, time\nt0 = time.time()\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nn = 0\nwhile n < 500:\n    ret, frame = cap.read()\n    if not ret: break\n    n += 1\ndt = time.'
+done 1790091775_89844_13792: exit 0, 37 bytes
+run 1790091782_89863_25604: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nret, prev = cap.read()\n# downscale for speed\nprev_small = cv2.resize(prev, (160, 90))\nidx = 0\nc'
+done 1790091782_89863_25604: exit 0, 616 bytes
+run 1790091898_90174_6601: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\n# Let us inspect the video playback. How fast does the camera move?\n# Let us check 10 evenly s'
+done 1790091898_90174_6601: exit 0, 499 bytes
+run 1790091914_90197_7935: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncp60 = cv2.imread(\\"/workspace/work/frames/cp_60.jpg\\")\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\n# Check frame 60\ncap.set(cv2.CAP_PROP_'
+done 1790091914_90197_7935: exit 0, 120 bytes
+run 1790091922_90213_18838: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\n# Let us read all frames from 0 to 720\nframes = []\nfor i in range(725):\n    ret, frame = cap.r'
+done 1790091922_90213_18838: exit 0, 50 bytes
+run 1790091930_90235_32467: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 40)\n\n# Check frame 43, 44, 45, 46, 47, 48...\n# When does a blo'
+done 1790091930_90235_32467: exit 0, 1049 bytes
+run 1790091941_90255_30167: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\nframes = [cap.read()[1] for _ in range(6)]\n# f=43, 44, 45'
+done 1790091941_90255_30167: exit 0, 12 bytes
+run 1790091956_90293_5093: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\nprev = None\nstationary_spans = []\ncur_start = None\n\nfor f'
+done 1790091956_90293_5093: exit 0, 87 bytes
+run 1790091971_90356_7761: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 35)\n\n# In frame 38, camera was stationary.\n# In frame 39, came'
+done 1790091971_90356_7761: exit 0, 800 bytes
+run 1790091978_90373_18664: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\n# Let us track the blocks that appear between frame 43 an'
+done 1790091978_90373_18664: exit 0, 0 bytes
+run 1790091984_90387_27751: 'python3 -c "\nimport cv2\n\ns43 = cv2.imread(\\"/workspace/work/frames/step_043.jpg\\")\n# In step_043, where is the fallen log?\n# It is at y in [400, 460], x in [490, 530]\ncv2.imwrite(\\"/workspace/work/fra'
+done 1790091984_90387_27751: exit 0, 0 bytes
+run 1790091995_90407_25450: 'python3 -c "\nimport cv2\nimport numpy as np\n\ns43 = cv2.imread(\\"/workspace/work/frames/step_043.jpg\\")\n# Where is the birchwood block in step_043?\n# birchwood has high B, G, R: e.g. R>150, G>140, B>100'
+done 1790091995_90407_25450: exit 0, 21 bytes
+run 1790092001_90422_18606: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\nfor f in range(43, 48):\n    ret, frame = cap.read()\n    #'
+done 1790092001_90422_18606: exit 0, 327 bytes
+run 1790092018_90450_22666: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 90)\n\nfor f in range(90, 100):\n    ret, frame = cap.read()\n    '
+done 1790092018_90450_22666: exit 0, 350 bytes
+run 1790092039_90477_11705: 'python3 -c "\nimport cv2\nimport numpy as np\n\nf92 = cv2.imread(\\"/workspace/work/frames/f_92_full.jpg\\")\nf93 = cv2.imread(\\"/workspace/work/frames/f_93_full.jpg\\")\n\ndiff = cv2.absdiff(f93, f92)\nprint(\\"'
+done 1790092039_90477_11705: exit 0, 114 bytes
+run 1790092060_90513_21216: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Let us check frames 70 to 80 around that tree (y in [450, 520], x in [540, 590] or similar)\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\nc'
+done 1790092060_90513_21216: exit 0, 386 bytes
+run 1790092064_90527_29394: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 74)\n\nfor f in range(74, 79):\n    ret, frame = cap.read()\n    r'
+done 1790092064_90527_29394: exit 0, 305 bytes
+run 1790092068_90542_21642: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 55)\n\nfor f in range(55, 71):\n    ret, frame = cap.read()\n    r'
+done 1790092068_90542_21642: exit 0, 561 bytes
+run 1790092075_90556_14798: 'ffprobe -v error -select_streams v -show_entries frame=key_frame,pts_time -of csv=p=0 /workspace/materials/session.mp4 | head -20'
+done 1790092075_90556_14798: exit 0, 221 bytes
+run 1790092080_90602_21584: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\n# Let us read frame 0 to 300 sequentially\nframes = []\nfor i in range(300):\n    ret, frame = ca'
+done 1790092080_90602_21584: exit 0, 2425 bytes
+run 1790092124_90694_17833: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\n# Let us load frames 0 to 720\nframes = []\nfor i in range(725):\n    ret, f = cap.read()\n    if '
+done 1790092124_90694_17833: exit 0, 0 bytes
+run 1790092136_90757_2754: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 45)\nret, f45 = cap.read()\nret, f46 = cap.read()\nret, f47 = cap'
+done 1790092136_90757_2754: exit 0, 12 bytes
+run 1790092151_90786_22744: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 48)\nret, f48 = cap.read()\nret, f49 = cap.read()\nret, f50 = cap'
+done 1790092151_90786_22744: exit 0, 103 bytes
+run 1790092165_90818_10874: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 50)\n\n# We want to find the exact frame between 50 and 85 where'
+done 1790092165_90818_10874: exit 0, 2690 bytes
+run 1790092171_90833_4030: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 118)\nfor f in range(118, 125):\n    ret, frame = cap.read()\n   '
+done 1790092171_90833_4030: exit 0, 241 bytes
+run 1790092177_90857_17660: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 120)\nret, frame = cap.read()\ncv2.imwrite(\\"/workspace/work/frames/f_120.jpg\\", fra'
+done 1790092177_90857_17660: exit 0, 0 bytes
+run 1790092190_90902_11241: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\n# Let us determine the camera orbit period.\n# The camera looks at the center of the world whil'
+done 1790092190_90902_11241: exit 0, 136 bytes
+run 1790092214_90997_16152: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 95)\n\n# In sheet_90_205:\n# at f=100, the block is NOT there.\n# '
+done 1790092214_90997_16152: exit 0, 25 bytes
+run 1790092223_91024_32507: 'python3 -c "\nimport cv2\nimport numpy as np\n\nfor f in range(98, 105):\n    img = cv2.imread(f\\"/workspace/work/frames/test_f_{f}.jpg\\")\n    # birchwood mask: yellowish wood\n    # B in [80, 160], G in [1'
+done 1790092223_91024_32507: exit 0, 215 bytes
+run 1790092236_91047_16094: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n# Start at frame 700 (t ~ 58.5s)\ncap.set(cv2.CAP_PROP_POS_FRAMES, 700)\n\n# Orange clay sample co'
+done 1790092236_91047_16094: exit 0, 80 bytes
+run 1790092241_91063_9250: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 700)\nret, frame = cap.read()\n\nb = frame[:,:,0].astype(int)\ng ='
+done 1790092241_91063_9250: exit 0, 493 bytes
+run 1790092247_91085_21971: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 700)\nret, frame = cap.read()\ncv2.imwrite(\\"/workspace/work/frames/test_comp8.jpg\\"'
+done 1790092247_91085_21971: exit 0, 0 bytes
+run 1790092257_91112_22396: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\n# Scan from 43 to 700 sequentially\nfor f in range(43, 700'
+done 1790092257_91112_22396: exit 0, 99 bytes
+run 1790092264_91128_16461: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 326)\n\nfor f in range(326, 332):\n    ret, frame = cap.read()\n  '
+done 1790092264_91128_16461: exit 0, 222 bytes
+run 1790092280_91152_1866: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 329)\nret, frame = cap.read()\n\nb = frame[:,:,0].astype(int)\ng ='
+done 1790092280_91152_1866: exit 0, 346 bytes
+run 1790092285_91170_28699: 'python3 -c "\nimport cv2\nimport numpy as np\n\nimg = cv2.imread(\\"/workspace/work/frames/test_comp8.jpg\\")\n# let us inspect the RGB / HSV of this actual orange clay cube:\nprint(\\"Shape:\\", img.shape)\n# p'
+done 1790092285_91170_28699: exit 0, 118 bytes
+run 1790092292_91183_5017: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\n# Let us check every 20 frames from 700 backwards to 350\n# If the block is present anywhere in'
+done 1790092292_91183_5017: exit 0, 676 bytes
+run 1790092299_91208_19555: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 400)\n\nfor f in range(400, 425):\n    ret, frame = cap.read()\n  '
+done 1790092299_91208_19555: exit 0, 576 bytes
+run 1790092304_91241_4050: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 412)\nret, f412 = cap.read()\nret, f413 = cap.read()\nret, f414 = cap.read()\nret, f41'
+done 1790092304_91241_4050: exit 0, 18 bytes
+run 1790092315_91262_18588: 'python3 -c "\nimport cv2\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 408)\nfor f in range(408, 414):\n    ret, frame = cap.read()\n    cv2.imwrite(f\\"/wor'
+done 1790092315_91262_18588: exit 0, 5 bytes
+run 1790092319_91319_29917: 'python3 -c "\nimport cv2\nimport numpy as np\n\nfor f in range(408, 414):\n    img = cv2.imread(f\\"/workspace/work/frames/check_{f}.jpg\\")\n    # check orange clay pixels\n    b, g, r = img[:,:,0], img[:,:,1'
+done 1790092319_91319_29917: exit 0, 157 bytes
+run 1790092335_91348_1208: 'python3 -c "\nimport cv2\nimport numpy as np\n\nf46 = cv2.imread(\\"/workspace/work/frames/f_46.jpg\\")\nf47 = cv2.imread(\\"/workspace/work/frames/f_47.jpg\\")\n\ndiff = cv2.absdiff(f47, f46)\n# find where diff '
+done 1790092335_91348_1208: exit 0, 140 bytes
+run 1790092340_91360_25316: 'python3 -c "\nimport cv2\nimport numpy as np\n\nf47 = cv2.imread(\\"/workspace/work/frames/f_47.jpg\\")\n# birchwood: R in [160, 240], G in [130, 210], B in [80, 160]\nb = f47[:,:,0]\ng = f47[:,:,1]\nr = f47[:,'
+done 1790092340_91360_25316: exit 0, 0 bytes
+run 1790092347_91377_3451: 'python3 -c "\nimport cv2\ns = cv2.imread(\\"/workspace/work/frames/sample_birch.jpg\\")\nprint(\\"Mean BGR:\\", s.mean(axis=(0,1)))\nprint(\\"Center 10x10:\\", s[20:30, 20:30].mean(axis=(0,1)))\nprint(\\"Min BGR:'
+done 1790092347_91377_3451: exit 0, 122 bytes
+run 1790092356_91395_32101: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\n# Let us track the center patch (60x60 around crosshair)\n'
+done 1790092356_91395_32101: exit 0, 2187 bytes
+run 1790092405_91445_27926: 'python3 -c "import torch; print(torch.__version__)"'
+done 1790092405_91445_27926: exit 1, 135 bytes
+run 1790092409_91459_3335: 'python3 -m pip list'
+done 1790092409_91459_3335: exit 0, 613 bytes
+run 1790092419_91478_126: 'python3 -c "\n# Let us check if any placed block disappears in the first 120 seconds.\n# We know the first few blocks placed:\n# 1. Birchwood at spruce tree (f=43)\n# 2. Birchwood at fallen log (f=47)\n# 3'
+done 1790092419_91478_126: exit 0, 0 bytes
+run 1790092426_91500_29685: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Load t0.jpg (frame 0)\nt0 = cv2.imread(\\"/workspace/work/frames/t0.jpg\\")\nt0_gray = cv2.cvtColor(t0, cv2.COLOR_BGR2GRAY)\n\ncap = cv2.VideoCapture(\\"/workspa'
+done 1790092426_91500_29685: exit 0, 128 bytes
+run 1790092473_91630_28177: 'python3 -c "\nimport cv2\n\nt0 = cv2.imread(\\"/workspace/work/frames/t0.jpg\\")\n# In t0, there is a grey patch to the left of the spruce tree:\n# y in [350, 420], x in [250, 360]\ncv2.imwrite(\\"/workspace/w'
+done 1790092473_91630_28177: exit 0, 15 bytes
+run 1790092483_91649_24968: 'python3 -c "\nimport cv2\nt0 = cv2.imread(\\"/workspace/work/frames/t0.jpg\\")\ncv2.imwrite(\\"/workspace/work/frames/t0_patch2.jpg\\", t0[550:650, 350:500])\nprint(\\"Saved t0_patch2\\")\n"'
+done 1790092483_91649_24968: exit 0, 16 bytes
+run 1790092504_91671_28119: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 43)\n\n# Read frames 43 to 450\nframes = []\nfor f in range(43, 45'
+done 1790092504_91671_28119: exit 0, 7072 bytes
+run 1790092530_91709_24427: 'python3 -c "\n# Let us check if any of the blocks visible in cp_60 disappear by cp_600 or cp_1800!\n# In cp_60, we have:\n# - birchwood at fallen log\n# - brick under pine tree\n# - 2 bookshelves in cleari'
+done 1790092530_91709_24427: exit 0, 0 bytes
+run 1790092541_91726_4379: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Let us verify this on frames 40 to 450 where we already know some events:\n# - f=43: birchwood\n# - f=47: birchwood\n# - f=50: brick\n# - f=81: brick\n# - f=12'
+done 1790092541_91726_4379: exit 0, 0 bytes
+run 1790092548_91743_15283: 'python3 -c "\nimport cv2\nimport numpy as np\n\nfor name in [\\"birch\\", \\"bookshelf\\", \\"brick\\", \\"orange\\", \\"mossycobble\\"]:\n    img = cv2.imread(f\\"/workspace/work/frames/sample_{name}.jpg\\")\n    hsv '
+done 1790092548_91743_15283: exit 0, 585 bytes
+run 1790092553_91756_23460: 'python3 -c "\nimport cv2\nimport numpy as np\n\nfor name in [\\"birch\\", \\"bookshelf\\", \\"brick\\", \\"orange\\", \\"mossycobble\\"]:\n    img = cv2.imread(f\\"/workspace/work/frames/sample_{name}.jpg\\")\n    h, w'
+done 1790092553_91756_23460: exit 0, 355 bytes
+run 1790092564_91807_18859: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 40)\n\n# Let us read frames 40 to 720 sequentially\n# For each fr'
+done 1790092564_91807_18859: exit 0, 4563 bytes
+run 1790092576_91828_17467: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Load cp_60 and cp_120\ncp60 = cv2.imread(\\"/workspace/work/frames/cp_60.jpg\\")\ncp120 = cv2.imread(\\"/workspace/work/frames/cp_120.jpg\\")\n\n# Let us build de'
+done 1790092576_91828_17467: exit 0, 27 bytes
+run 1790092584_91842_27462: 'python3 -c "\nimport cv2\nimport numpy as np\n\nimg = cv2.imread(\\"/workspace/work/frames/cp_60.jpg\\")\nhsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)\n\n# Grass is green: Hue in [35, 85], Saturation > 30\n# Sky '
+done 1790092584_91842_27462: exit 0, 650 bytes
+run 1790092592_91856_4689: 'python3 -c "\nimport cv2\nimport numpy as np\n\nimg = cv2.imread(\\"/workspace/work/frames/cp_60.jpg\\")\n# Crop at [1010:1080, 670:720]\ncrop = img[670:720, 1010:1080]\nprint(\\"Mean BGR of [1010, 670]:\\", cro'
+done 1790092592_91856_4689: exit 0, 88 bytes
+run 1790092600_91877_1480: 'python3 -c "\nimport cv2\nimport numpy as np\n\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\ncap.set(cv2.CAP_PROP_POS_FRAMES, 40)\n\n# Crosshair is at (360, 640).\n# Let us define a box aroun'
+done 1790092600_91877_1480: exit 0, 3546 bytes
+run 1790092613_91912_23286: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Let us test an improved multi-feature block detector on cp_60, cp_120, cp_180, cp_240, cp_300\ntimes = [60, 120, 180, 240, 300]\n\ndef detect_blocks(img):\n  '
+done 1790092613_91912_23286: exit 0, 137 bytes
+run 1790092626_91934_22803: 'python3 -c "\nimport cv2\nimport numpy as np\n\ntimes = [60, 120, 180, 240, 300, 360, 420, 480, 540, 600,\n         660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200,\n         1260, 1320, 1380, 1440, 15'
+done 1790092626_91934_22803: exit 0, 1470 bytes
+run 1790092636_91954_3664: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Sample 10 frames between 40s and 60s:\ncap = cv2.VideoCapture(\\"/workspace/materials/session.mp4\\")\n\nframes = []\nfor sec in range(40, 61, 2):\n    cap.set(c'
+done 1790092636_91954_3664: exit 0, 39 bytes
+run 1790092652_91971_2272: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Let us build a fine-tuned detector for each block type on cp_60 and cp_120\nimg60 = cv2.imread(\\"/workspace/work/frames/cp_60.jpg\\")\nimg120 = cv2.imread(\\"'
+done 1790092652_91971_2272: exit 0, 217 bytes
+run 1790092669_92003_8149: 'python3 -c "\nimport cv2\nimport numpy as np\n\nTIMES = [\n    60, 120, 180, 240, 300, 360, 420, 480, 540, 600,\n    660, 720, 780, 840, 900, 960, 1020, 1080, 1140, 1200,\n    1260, 1320, 1380, 1440, 1500, 1'
+done 1790092669_92003_8149: exit 0, 1151 bytes
+run 1790092676_92019_2214: 'python3 -c "\nimport cv2\nimport numpy as np\n\n# Load cp_1200 (where camera was close)\nimg = cv2.imread(\\"/workspace/work/frames/cp_1200.jpg\\")\nhsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)\nb, g, r = img[:,'
+done 1790092676_92019_2214: exit 0, 58 bytes
+run 1790092684_92068_11726: 'python3 -c "\nimport cv2\nimport numpy as np\n\nimg = cv2.imread(\\"/workspace/work/frames/cp_60.jpg\\")\nhsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)\nb, g, r = img[:,:,0].astype(float), img[:,:,1].astype(floa'
+done 1790092684_92068_11726: exit 0, 34 bytes
+run 1790092706_92097_18512: 'python3 /workspace/work/compute_census.py'
+done 1790092706_92097_18512: exit 0, 4581 bytes
+run 1790092721_92117_18028: 'ls -la /workspace/output && head -20 /workspace/output/solution.json'
+done 1790092721_92117_18028: exit 0, 535 bytes
