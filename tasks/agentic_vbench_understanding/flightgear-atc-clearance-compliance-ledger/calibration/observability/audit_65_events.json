@@ -1,0 +1,1943 @@
+{
+  "method": "independent numpy-only instrument reader, leg-safe sampling",
+  "events_audited": 65,
+  "snapshots_audited": 235,
+  "tolerance_packages": [
+    {
+      "altitude_ft": 25.0,
+      "heading_deg": 2.0,
+      "airspeed_kt": 2.0,
+      "snapshots_within": 83,
+      "snapshots_total": 235,
+      "events_fully_within": 5,
+      "events_total": 65
+    },
+    {
+      "altitude_ft": 50.0,
+      "heading_deg": 4.0,
+      "airspeed_kt": 3.0,
+      "snapshots_within": 229,
+      "snapshots_total": 235,
+      "events_fully_within": 59,
+      "events_total": 65
+    },
+    {
+      "altitude_ft": 75.0,
+      "heading_deg": 6.0,
+      "airspeed_kt": 3.0,
+      "snapshots_within": 232,
+      "snapshots_total": 235,
+      "events_fully_within": 62,
+      "events_total": 65
+    },
+    {
+      "altitude_ft": 100.0,
+      "heading_deg": 8.0,
+      "airspeed_kt": 3.0,
+      "snapshots_within": 232,
+      "snapshots_total": 235,
+      "events_fully_within": 62,
+      "events_total": 65
+    },
+    {
+      "altitude_ft": 150.0,
+      "heading_deg": 10.0,
+      "airspeed_kt": 5.0,
+      "snapshots_within": 232,
+      "snapshots_total": 235,
+      "events_fully_within": 62,
+      "events_total": 65
+    },
+    {
+      "altitude_ft": 200.0,
+      "heading_deg": 12.0,
+      "airspeed_kt": 6.0,
+      "snapshots_within": 232,
+      "snapshots_total": 235,
+      "events_fully_within": 62,
+      "events_total": 65
+    }
+  ],
+  "snapshots": [
+    {
+      "clearance_index": 1,
+      "snapshot": "issue",
+      "time_s": 20.0,
+      "altitude_error_ft": 22.288,
+      "heading_error_deg": 2.184,
+      "airspeed_error_kt": 0.458
+    },
+    {
+      "clearance_index": 1,
+      "snapshot": "execution",
+      "time_s": 24.475,
+      "altitude_error_ft": 22.266,
+      "heading_error_deg": 0.239,
+      "airspeed_error_kt": 0.458
+    },
+    {
+      "clearance_index": 1,
+      "snapshot": "completion",
+      "time_s": 29.017,
+      "altitude_error_ft": 22.081,
+      "heading_error_deg": 1.113,
+      "airspeed_error_kt": 0.458
+    },
+    {
+      "clearance_index": 1,
+      "snapshot": "ending",
+      "time_s": 169.0,
+      "altitude_error_ft": 25.339,
+      "heading_error_deg": 2.479,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 2,
+      "snapshot": "issue",
+      "time_s": 70.0,
+      "altitude_error_ft": 22.073,
+      "heading_error_deg": 2.481,
+      "airspeed_error_kt": 0.458
+    },
+    {
+      "clearance_index": 2,
+      "snapshot": "execution",
+      "time_s": 74.808,
+      "altitude_error_ft": 24.938,
+      "heading_error_deg": 2.48,
+      "airspeed_error_kt": 0.458
+    },
+    {
+      "clearance_index": 2,
+      "snapshot": "completion",
+      "time_s": 97.917,
+      "altitude_error_ft": 37.919,
+      "heading_error_deg": 2.484,
+      "airspeed_error_kt": 0.458
+    },
+    {
+      "clearance_index": 2,
+      "snapshot": "ending",
+      "time_s": 224.0,
+      "altitude_error_ft": 25.339,
+      "heading_error_deg": 2.327,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 3,
+      "snapshot": "issue",
+      "time_s": 120.0,
+      "altitude_error_ft": 25.339,
+      "heading_error_deg": 2.478,
+      "airspeed_error_kt": 0.458
+    },
+    {
+      "clearance_index": 3,
+      "snapshot": "execution",
+      "time_s": 124.175,
+      "altitude_error_ft": 25.339,
+      "heading_error_deg": 2.478,
+      "airspeed_error_kt": 0.239
+    },
+    {
+      "clearance_index": 3,
+      "snapshot": "completion",
+      "time_s": 139.167,
+      "altitude_error_ft": 25.339,
+      "heading_error_deg": 2.478,
+      "airspeed_error_kt": 0.082
+    },
+    {
+      "clearance_index": 3,
+      "snapshot": "ending",
+      "time_s": 299.0,
+      "altitude_error_ft": 16.341,
+      "heading_error_deg": 2.336,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 4,
+      "snapshot": "issue",
+      "time_s": 170.0,
+      "altitude_error_ft": 25.339,
+      "heading_error_deg": 2.479,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 4,
+      "snapshot": "execution",
+      "time_s": 192.5,
+      "altitude_error_ft": 25.339,
+      "heading_error_deg": 4.039,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 4,
+      "snapshot": "completion",
+      "time_s": 199.208,
+      "altitude_error_ft": 25.339,
+      "heading_error_deg": 3.942,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 4,
+      "snapshot": "ending",
+      "time_s": 359.0,
+      "altitude_error_ft": 34.732,
+      "heading_error_deg": 2.327,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 5,
+      "snapshot": "issue",
+      "time_s": 225.0,
+      "altitude_error_ft": 25.339,
+      "heading_error_deg": 2.327,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 5,
+      "snapshot": "execution",
+      "time_s": 230.6,
+      "altitude_error_ft": 28.766,
+      "heading_error_deg": 2.327,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 5,
+      "snapshot": "completion",
+      "time_s": 337.617,
+      "altitude_error_ft": 10.269,
+      "heading_error_deg": 2.326,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 5,
+      "snapshot": "ending",
+      "time_s": 429.0,
+      "altitude_error_ft": 28.02,
+      "heading_error_deg": 0.001,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 6,
+      "snapshot": "issue",
+      "time_s": 300.0,
+      "altitude_error_ft": 21.69,
+      "heading_error_deg": 2.335,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 6,
+      "snapshot": "execution",
+      "time_s": 303.975,
+      "altitude_error_ft": 21.662,
+      "heading_error_deg": 2.335,
+      "airspeed_error_kt": 1.053
+    },
+    {
+      "clearance_index": 6,
+      "snapshot": "completion",
+      "time_s": 329.25,
+      "altitude_error_ft": 17.792,
+      "heading_error_deg": 2.328,
+      "airspeed_error_kt": 0.428
+    },
+    {
+      "clearance_index": 6,
+      "snapshot": "ending",
+      "time_s": 539.0,
+      "altitude_error_ft": 32.928,
+      "heading_error_deg": 0.732,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 7,
+      "snapshot": "issue",
+      "time_s": 360.0,
+      "altitude_error_ft": 29.076,
+      "heading_error_deg": 2.327,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 7,
+      "snapshot": "execution",
+      "time_s": 364.458,
+      "altitude_error_ft": 32.507,
+      "heading_error_deg": 0.437,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 7,
+      "snapshot": "ending",
+      "time_s": 377.0,
+      "altitude_error_ft": 32.639,
+      "heading_error_deg": 2.5,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 8,
+      "snapshot": "issue",
+      "time_s": 378.0,
+      "altitude_error_ft": 32.584,
+      "heading_error_deg": 0.468,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 8,
+      "snapshot": "execution",
+      "time_s": 382.45,
+      "altitude_error_ft": 30.604,
+      "heading_error_deg": 0.947,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 8,
+      "snapshot": "completion",
+      "time_s": 382.45,
+      "altitude_error_ft": 30.604,
+      "heading_error_deg": 0.947,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 8,
+      "snapshot": "ending",
+      "time_s": 484.0,
+      "altitude_error_ft": 32.679,
+      "heading_error_deg": 0.002,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 9,
+      "snapshot": "issue",
+      "time_s": 430.0,
+      "altitude_error_ft": 28.02,
+      "heading_error_deg": 0.001,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 9,
+      "snapshot": "ending",
+      "time_s": 719.0,
+      "altitude_error_ft": 32.617,
+      "heading_error_deg": 0.045,
+      "airspeed_error_kt": 15.0
+    },
+    {
+      "clearance_index": 10,
+      "snapshot": "issue",
+      "time_s": 485.0,
+      "altitude_error_ft": 32.679,
+      "heading_error_deg": 0.002,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 10,
+      "snapshot": "execution",
+      "time_s": 489.717,
+      "altitude_error_ft": 32.692,
+      "heading_error_deg": 1.669,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 10,
+      "snapshot": "completion",
+      "time_s": 498.908,
+      "altitude_error_ft": 32.848,
+      "heading_error_deg": 0.519,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 10,
+      "snapshot": "ending",
+      "time_s": 599.0,
+      "altitude_error_ft": 32.918,
+      "heading_error_deg": 0.731,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 11,
+      "snapshot": "issue",
+      "time_s": 540.0,
+      "altitude_error_ft": 32.928,
+      "heading_error_deg": 0.732,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 11,
+      "snapshot": "execution",
+      "time_s": 544.283,
+      "altitude_error_ft": 32.928,
+      "heading_error_deg": 0.732,
+      "airspeed_error_kt": 0.717
+    },
+    {
+      "clearance_index": 11,
+      "snapshot": "completion",
+      "time_s": 556.133,
+      "altitude_error_ft": 32.928,
+      "heading_error_deg": 0.732,
+      "airspeed_error_kt": 0.137
+    },
+    {
+      "clearance_index": 11,
+      "snapshot": "ending",
+      "time_s": 649.0,
+      "altitude_error_ft": 32.645,
+      "heading_error_deg": 0.047,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 12,
+      "snapshot": "issue",
+      "time_s": 600.0,
+      "altitude_error_ft": 32.918,
+      "heading_error_deg": 0.731,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 12,
+      "snapshot": "execution",
+      "time_s": 604.45,
+      "altitude_error_ft": 32.94,
+      "heading_error_deg": 2.048,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 12,
+      "snapshot": "completion",
+      "time_s": 616.267,
+      "altitude_error_ft": 31.503,
+      "heading_error_deg": 0.843,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 12,
+      "snapshot": "ending",
+      "time_s": 719.0,
+      "altitude_error_ft": 32.617,
+      "heading_error_deg": 0.045,
+      "airspeed_error_kt": 15.0
+    },
+    {
+      "clearance_index": 13,
+      "snapshot": "issue",
+      "time_s": 650.0,
+      "altitude_error_ft": 32.637,
+      "heading_error_deg": 0.046,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 13,
+      "snapshot": "ending",
+      "time_s": 719.0,
+      "altitude_error_ft": 32.617,
+      "heading_error_deg": 0.045,
+      "airspeed_error_kt": 15.0
+    },
+    {
+      "clearance_index": 14,
+      "snapshot": "issue",
+      "time_s": 748.0,
+      "altitude_error_ft": 38.538,
+      "heading_error_deg": 2.107,
+      "airspeed_error_kt": 0.375
+    },
+    {
+      "clearance_index": 14,
+      "snapshot": "execution",
+      "time_s": 753.667,
+      "altitude_error_ft": 35.596,
+      "heading_error_deg": 2.112,
+      "airspeed_error_kt": 0.375
+    },
+    {
+      "clearance_index": 14,
+      "snapshot": "completion",
+      "time_s": 773.333,
+      "altitude_error_ft": 16.63,
+      "heading_error_deg": 2.114,
+      "airspeed_error_kt": 0.375
+    },
+    {
+      "clearance_index": 14,
+      "snapshot": "ending",
+      "time_s": 984.0,
+      "altitude_error_ft": 22.266,
+      "heading_error_deg": 1.727,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 15,
+      "snapshot": "issue",
+      "time_s": 804.0,
+      "altitude_error_ft": 22.264,
+      "heading_error_deg": 2.111,
+      "airspeed_error_kt": 0.375
+    },
+    {
+      "clearance_index": 15,
+      "snapshot": "execution",
+      "time_s": 826.517,
+      "altitude_error_ft": 22.259,
+      "heading_error_deg": 2.108,
+      "airspeed_error_kt": 0.417
+    },
+    {
+      "clearance_index": 15,
+      "snapshot": "completion",
+      "time_s": 841.442,
+      "altitude_error_ft": 22.265,
+      "heading_error_deg": 2.108,
+      "airspeed_error_kt": 0.046
+    },
+    {
+      "clearance_index": 15,
+      "snapshot": "ending",
+      "time_s": 902.0,
+      "altitude_error_ft": 22.267,
+      "heading_error_deg": 1.729,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 16,
+      "snapshot": "issue",
+      "time_s": 859.0,
+      "altitude_error_ft": 22.263,
+      "heading_error_deg": 2.107,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 16,
+      "snapshot": "execution",
+      "time_s": 863.583,
+      "altitude_error_ft": 22.254,
+      "heading_error_deg": 4.077,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 16,
+      "snapshot": "completion",
+      "time_s": 869.017,
+      "altitude_error_ft": 22.252,
+      "heading_error_deg": 3.447,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 16,
+      "snapshot": "ending",
+      "time_s": 1044.0,
+      "altitude_error_ft": 26.716,
+      "heading_error_deg": 1.729,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 17,
+      "snapshot": "issue",
+      "time_s": 903.0,
+      "altitude_error_ft": 22.266,
+      "heading_error_deg": 1.727,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 17,
+      "snapshot": "execution",
+      "time_s": 907.267,
+      "altitude_error_ft": 22.266,
+      "heading_error_deg": 1.727,
+      "airspeed_error_kt": 0.63
+    },
+    {
+      "clearance_index": 17,
+      "snapshot": "ending",
+      "time_s": 920.0,
+      "altitude_error_ft": 22.266,
+      "heading_error_deg": 1.726,
+      "airspeed_error_kt": 1.11
+    },
+    {
+      "clearance_index": 18,
+      "snapshot": "issue",
+      "time_s": 921.0,
+      "altitude_error_ft": 22.266,
+      "heading_error_deg": 1.726,
+      "airspeed_error_kt": 0.068
+    },
+    {
+      "clearance_index": 18,
+      "snapshot": "execution",
+      "time_s": 924.9,
+      "altitude_error_ft": 22.266,
+      "heading_error_deg": 1.726,
+      "airspeed_error_kt": 1.182
+    },
+    {
+      "clearance_index": 18,
+      "snapshot": "completion",
+      "time_s": 938.992,
+      "altitude_error_ft": 22.266,
+      "heading_error_deg": 1.727,
+      "airspeed_error_kt": 0.326
+    },
+    {
+      "clearance_index": 18,
+      "snapshot": "ending",
+      "time_s": 1159.0,
+      "altitude_error_ft": 22.811,
+      "heading_error_deg": 0.556,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 19,
+      "snapshot": "issue",
+      "time_s": 985.0,
+      "altitude_error_ft": 22.266,
+      "heading_error_deg": 1.727,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 19,
+      "snapshot": "execution",
+      "time_s": 990.567,
+      "altitude_error_ft": 17.625,
+      "heading_error_deg": 1.723,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 19,
+      "snapshot": "completion",
+      "time_s": 1060.917,
+      "altitude_error_ft": 28.313,
+      "heading_error_deg": 1.502,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 19,
+      "snapshot": "ending",
+      "time_s": 1101.0,
+      "altitude_error_ft": 24.89,
+      "heading_error_deg": 0.574,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 20,
+      "snapshot": "issue",
+      "time_s": 1045.0,
+      "altitude_error_ft": 23.643,
+      "heading_error_deg": 1.729,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 20,
+      "snapshot": "execution",
+      "time_s": 1049.592,
+      "altitude_error_ft": 25.211,
+      "heading_error_deg": 0.204,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 20,
+      "snapshot": "completion",
+      "time_s": 1081.808,
+      "altitude_error_ft": 24.95,
+      "heading_error_deg": 0.292,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 20,
+      "snapshot": "ending",
+      "time_s": 1219.0,
+      "altitude_error_ft": 22.813,
+      "heading_error_deg": 0.553,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 21,
+      "snapshot": "issue",
+      "time_s": 1102.0,
+      "altitude_error_ft": 24.89,
+      "heading_error_deg": 0.574,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 21,
+      "snapshot": "execution",
+      "time_s": 1107.642,
+      "altitude_error_ft": 29.596,
+      "heading_error_deg": 0.561,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 21,
+      "snapshot": "completion",
+      "time_s": 1132.217,
+      "altitude_error_ft": 20.811,
+      "heading_error_deg": 0.565,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 21,
+      "snapshot": "ending",
+      "time_s": 1277.0,
+      "altitude_error_ft": 23.02,
+      "heading_error_deg": 0.0,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 22,
+      "snapshot": "issue",
+      "time_s": 1160.0,
+      "altitude_error_ft": 22.811,
+      "heading_error_deg": 0.556,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 22,
+      "snapshot": "execution",
+      "time_s": 1164.333,
+      "altitude_error_ft": 22.811,
+      "heading_error_deg": 0.556,
+      "airspeed_error_kt": 0.795
+    },
+    {
+      "clearance_index": 22,
+      "snapshot": "completion",
+      "time_s": 1176.3,
+      "altitude_error_ft": 22.813,
+      "heading_error_deg": 0.553,
+      "airspeed_error_kt": 0.064
+    },
+    {
+      "clearance_index": 22,
+      "snapshot": "ending",
+      "time_s": 1439.0,
+      "altitude_error_ft": 33.692,
+      "heading_error_deg": 0.0,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 23,
+      "snapshot": "issue",
+      "time_s": 1220.0,
+      "altitude_error_ft": 22.809,
+      "heading_error_deg": 0.557,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 23,
+      "snapshot": "execution",
+      "time_s": 1224.525,
+      "altitude_error_ft": 22.818,
+      "heading_error_deg": 1.111,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 23,
+      "snapshot": "completion",
+      "time_s": 1235.175,
+      "altitude_error_ft": 23.026,
+      "heading_error_deg": 1.426,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 23,
+      "snapshot": "ending",
+      "time_s": 1339.0,
+      "altitude_error_ft": 25.011,
+      "heading_error_deg": 0.0,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 24,
+      "snapshot": "issue",
+      "time_s": 1278.0,
+      "altitude_error_ft": 23.02,
+      "heading_error_deg": 0.0,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 24,
+      "snapshot": "execution",
+      "time_s": 1283.55,
+      "altitude_error_ft": 20.472,
+      "heading_error_deg": 0.0,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 24,
+      "snapshot": "completion",
+      "time_s": 1301.442,
+      "altitude_error_ft": 27.894,
+      "heading_error_deg": 0.003,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 24,
+      "snapshot": "ending",
+      "time_s": 1399.0,
+      "altitude_error_ft": 25.011,
+      "heading_error_deg": 0.001,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 25,
+      "snapshot": "issue",
+      "time_s": 1340.0,
+      "altitude_error_ft": 25.011,
+      "heading_error_deg": 0.0,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 25,
+      "snapshot": "ending",
+      "time_s": 1439.0,
+      "altitude_error_ft": 33.692,
+      "heading_error_deg": 0.0,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 26,
+      "snapshot": "issue",
+      "time_s": 1400.0,
+      "altitude_error_ft": 25.011,
+      "heading_error_deg": 0.001,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 26,
+      "snapshot": "ending",
+      "time_s": 1439.0,
+      "altitude_error_ft": 33.692,
+      "heading_error_deg": 0.0,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 27,
+      "snapshot": "issue",
+      "time_s": 1458.0,
+      "altitude_error_ft": 27.17,
+      "heading_error_deg": 1.279,
+      "airspeed_error_kt": 0.292
+    },
+    {
+      "clearance_index": 27,
+      "snapshot": "execution",
+      "time_s": 1463.025,
+      "altitude_error_ft": 27.17,
+      "heading_error_deg": 1.279,
+      "airspeed_error_kt": 0.632
+    },
+    {
+      "clearance_index": 27,
+      "snapshot": "completion",
+      "time_s": 1477.708,
+      "altitude_error_ft": 27.164,
+      "heading_error_deg": 1.277,
+      "airspeed_error_kt": 0.049
+    },
+    {
+      "clearance_index": 27,
+      "snapshot": "ending",
+      "time_s": 1615.0,
+      "altitude_error_ft": 21.752,
+      "heading_error_deg": 0.597,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 28,
+      "snapshot": "issue",
+      "time_s": 1505.0,
+      "altitude_error_ft": 27.154,
+      "heading_error_deg": 1.277,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 28,
+      "snapshot": "execution",
+      "time_s": 1509.475,
+      "altitude_error_ft": 27.16,
+      "heading_error_deg": 2.636,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 28,
+      "snapshot": "completion",
+      "time_s": 1514.425,
+      "altitude_error_ft": 26.848,
+      "heading_error_deg": 1.425,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 28,
+      "snapshot": "ending",
+      "time_s": 1677.0,
+      "altitude_error_ft": 33.031,
+      "heading_error_deg": 0.594,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 29,
+      "snapshot": "issue",
+      "time_s": 1566.0,
+      "altitude_error_ft": 26.884,
+      "heading_error_deg": 0.595,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 29,
+      "snapshot": "execution",
+      "time_s": 1589.617,
+      "altitude_error_ft": 30.896,
+      "heading_error_deg": 0.597,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 29,
+      "snapshot": "completion",
+      "time_s": 1614.0,
+      "altitude_error_ft": 26.524,
+      "heading_error_deg": 0.597,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 29,
+      "snapshot": "ending",
+      "time_s": 1731.0,
+      "altitude_error_ft": 32.914,
+      "heading_error_deg": 0.168,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 30,
+      "snapshot": "issue",
+      "time_s": 1616.0,
+      "altitude_error_ft": 26.927,
+      "heading_error_deg": 0.597,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 30,
+      "snapshot": "execution",
+      "time_s": 1621.0,
+      "altitude_error_ft": 26.562,
+      "heading_error_deg": 0.597,
+      "airspeed_error_kt": 0.297
+    },
+    {
+      "clearance_index": 30,
+      "snapshot": "completion",
+      "time_s": 1660.667,
+      "altitude_error_ft": 32.953,
+      "heading_error_deg": 0.594,
+      "airspeed_error_kt": 2.999
+    },
+    {
+      "clearance_index": 30,
+      "snapshot": "ending",
+      "time_s": 1789.0,
+      "altitude_error_ft": 25.544,
+      "heading_error_deg": 0.163,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 31,
+      "snapshot": "issue",
+      "time_s": 1678.0,
+      "altitude_error_ft": 33.031,
+      "heading_error_deg": 0.594,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 31,
+      "snapshot": "execution",
+      "time_s": 1682.467,
+      "altitude_error_ft": 33.071,
+      "heading_error_deg": 0.603,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 31,
+      "snapshot": "completion",
+      "time_s": 1703.408,
+      "altitude_error_ft": 32.919,
+      "heading_error_deg": 0.882,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 31,
+      "snapshot": "ending",
+      "time_s": 1839.0,
+      "altitude_error_ft": 25.542,
+      "heading_error_deg": 0.166,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 32,
+      "snapshot": "issue",
+      "time_s": 1732.0,
+      "altitude_error_ft": 32.914,
+      "heading_error_deg": 0.168,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 32,
+      "snapshot": "execution",
+      "time_s": 1737.642,
+      "altitude_error_ft": 24.825,
+      "heading_error_deg": 0.161,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 32,
+      "snapshot": "completion",
+      "time_s": 1754.942,
+      "altitude_error_ft": 20.995,
+      "heading_error_deg": 0.156,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 32,
+      "snapshot": "ending",
+      "time_s": 1894.0,
+      "altitude_error_ft": 25.274,
+      "heading_error_deg": 0.404,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 33,
+      "snapshot": "issue",
+      "time_s": 1790.0,
+      "altitude_error_ft": 25.556,
+      "heading_error_deg": 0.168,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 33,
+      "snapshot": "execution",
+      "time_s": 1794.95,
+      "altitude_error_ft": 25.556,
+      "heading_error_deg": 0.168,
+      "airspeed_error_kt": 0.71
+    },
+    {
+      "clearance_index": 33,
+      "snapshot": "completion",
+      "time_s": 1806.5,
+      "altitude_error_ft": 25.556,
+      "heading_error_deg": 0.167,
+      "airspeed_error_kt": 0.154
+    },
+    {
+      "clearance_index": 33,
+      "snapshot": "ending",
+      "time_s": 2031.0,
+      "altitude_error_ft": 24.311,
+      "heading_error_deg": 0.155,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 34,
+      "snapshot": "issue",
+      "time_s": 1840.0,
+      "altitude_error_ft": 25.553,
+      "heading_error_deg": 0.166,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 34,
+      "snapshot": "execution",
+      "time_s": 1844.508,
+      "altitude_error_ft": 25.546,
+      "heading_error_deg": 1.586,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 34,
+      "snapshot": "completion",
+      "time_s": 1854.917,
+      "altitude_error_ft": 25.177,
+      "heading_error_deg": 0.546,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 34,
+      "snapshot": "ending",
+      "time_s": 1969.0,
+      "altitude_error_ft": 24.037,
+      "heading_error_deg": 0.404,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 35,
+      "snapshot": "issue",
+      "time_s": 1895.0,
+      "altitude_error_ft": 25.274,
+      "heading_error_deg": 0.404,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 35,
+      "snapshot": "execution",
+      "time_s": 1900.725,
+      "altitude_error_ft": 29.592,
+      "heading_error_deg": 0.402,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 35,
+      "snapshot": "ending",
+      "time_s": 1912.0,
+      "altitude_error_ft": 18.928,
+      "heading_error_deg": 0.399,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 36,
+      "snapshot": "issue",
+      "time_s": 1913.0,
+      "altitude_error_ft": 27.995,
+      "heading_error_deg": 0.399,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 36,
+      "snapshot": "execution",
+      "time_s": 1918.558,
+      "altitude_error_ft": 24.485,
+      "heading_error_deg": 0.4,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 36,
+      "snapshot": "completion",
+      "time_s": 1918.558,
+      "altitude_error_ft": 24.485,
+      "heading_error_deg": 0.4,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 36,
+      "snapshot": "ending",
+      "time_s": 2094.0,
+      "altitude_error_ft": 24.308,
+      "heading_error_deg": 0.157,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 37,
+      "snapshot": "issue",
+      "time_s": 1970.0,
+      "altitude_error_ft": 24.037,
+      "heading_error_deg": 0.404,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 37,
+      "snapshot": "execution",
+      "time_s": 1974.717,
+      "altitude_error_ft": 23.952,
+      "heading_error_deg": 1.989,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 37,
+      "snapshot": "completion",
+      "time_s": 1986.458,
+      "altitude_error_ft": 24.288,
+      "heading_error_deg": 1.095,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 37,
+      "snapshot": "ending",
+      "time_s": 2159.0,
+      "altitude_error_ft": 32.386,
+      "heading_error_deg": 0.156,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 38,
+      "snapshot": "issue",
+      "time_s": 2032.0,
+      "altitude_error_ft": 24.311,
+      "heading_error_deg": 0.155,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 38,
+      "snapshot": "ending",
+      "time_s": 2159.0,
+      "altitude_error_ft": 32.386,
+      "heading_error_deg": 0.156,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 39,
+      "snapshot": "issue",
+      "time_s": 2095.0,
+      "altitude_error_ft": 24.308,
+      "heading_error_deg": 0.157,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 39,
+      "snapshot": "ending",
+      "time_s": 2159.0,
+      "altitude_error_ft": 32.386,
+      "heading_error_deg": 0.156,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 40,
+      "snapshot": "issue",
+      "time_s": 2192.0,
+      "altitude_error_ft": 26.154,
+      "heading_error_deg": 1.741,
+      "airspeed_error_kt": 0.208
+    },
+    {
+      "clearance_index": 40,
+      "snapshot": "execution",
+      "time_s": 2214.708,
+      "altitude_error_ft": 26.024,
+      "heading_error_deg": 3.431,
+      "airspeed_error_kt": 0.208
+    },
+    {
+      "clearance_index": 40,
+      "snapshot": "completion",
+      "time_s": 2219.675,
+      "altitude_error_ft": 26.35,
+      "heading_error_deg": 1.872,
+      "airspeed_error_kt": 0.208
+    },
+    {
+      "clearance_index": 40,
+      "snapshot": "ending",
+      "time_s": 2364.0,
+      "altitude_error_ft": 24.477,
+      "heading_error_deg": 0.711,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 41,
+      "snapshot": "issue",
+      "time_s": 2252.0,
+      "altitude_error_ft": 26.376,
+      "heading_error_deg": 0.71,
+      "airspeed_error_kt": 0.208
+    },
+    {
+      "clearance_index": 41,
+      "snapshot": "execution",
+      "time_s": 2256.875,
+      "altitude_error_ft": 22.681,
+      "heading_error_deg": 0.721,
+      "airspeed_error_kt": 0.208
+    },
+    {
+      "clearance_index": 41,
+      "snapshot": "completion",
+      "time_s": 2276.258,
+      "altitude_error_ft": 22.004,
+      "heading_error_deg": 0.724,
+      "airspeed_error_kt": 0.208
+    },
+    {
+      "clearance_index": 41,
+      "snapshot": "ending",
+      "time_s": 2425.0,
+      "altitude_error_ft": 24.487,
+      "heading_error_deg": 0.176,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 42,
+      "snapshot": "issue",
+      "time_s": 2305.0,
+      "altitude_error_ft": 24.474,
+      "heading_error_deg": 0.713,
+      "airspeed_error_kt": 0.208
+    },
+    {
+      "clearance_index": 42,
+      "snapshot": "execution",
+      "time_s": 2309.55,
+      "altitude_error_ft": 24.483,
+      "heading_error_deg": 0.712,
+      "airspeed_error_kt": 0.582
+    },
+    {
+      "clearance_index": 42,
+      "snapshot": "completion",
+      "time_s": 2324.458,
+      "altitude_error_ft": 24.49,
+      "heading_error_deg": 0.711,
+      "airspeed_error_kt": 0.245
+    },
+    {
+      "clearance_index": 42,
+      "snapshot": "ending",
+      "time_s": 2509.0,
+      "altitude_error_ft": 24.503,
+      "heading_error_deg": 0.172,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 43,
+      "snapshot": "issue",
+      "time_s": 2365.0,
+      "altitude_error_ft": 24.477,
+      "heading_error_deg": 0.711,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 43,
+      "snapshot": "execution",
+      "time_s": 2369.542,
+      "altitude_error_ft": 24.445,
+      "heading_error_deg": 1.112,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 43,
+      "snapshot": "completion",
+      "time_s": 2401.9,
+      "altitude_error_ft": 24.438,
+      "heading_error_deg": 1.614,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 43,
+      "snapshot": "ending",
+      "time_s": 2569.0,
+      "altitude_error_ft": 24.529,
+      "heading_error_deg": 0.173,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 44,
+      "snapshot": "issue",
+      "time_s": 2426.0,
+      "altitude_error_ft": 24.487,
+      "heading_error_deg": 0.176,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 44,
+      "snapshot": "execution",
+      "time_s": 2431.642,
+      "altitude_error_ft": 22.061,
+      "heading_error_deg": 0.179,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 44,
+      "snapshot": "ending",
+      "time_s": 2443.0,
+      "altitude_error_ft": 51.657,
+      "heading_error_deg": 0.183,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 45,
+      "snapshot": "issue",
+      "time_s": 2444.0,
+      "altitude_error_ft": 37.07,
+      "heading_error_deg": 0.183,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 45,
+      "snapshot": "execution",
+      "time_s": 2448.783,
+      "altitude_error_ft": 41.504,
+      "heading_error_deg": 0.171,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 45,
+      "snapshot": "completion",
+      "time_s": 2460.058,
+      "altitude_error_ft": 38.06,
+      "heading_error_deg": 0.171,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 45,
+      "snapshot": "ending",
+      "time_s": 2627.0,
+      "altitude_error_ft": 24.457,
+      "heading_error_deg": 0.792,
+      "airspeed_error_kt": 0.4
+    },
+    {
+      "clearance_index": 46,
+      "snapshot": "issue",
+      "time_s": 2510.0,
+      "altitude_error_ft": 24.543,
+      "heading_error_deg": 0.173,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 46,
+      "snapshot": "execution",
+      "time_s": 2513.892,
+      "altitude_error_ft": 24.543,
+      "heading_error_deg": 0.173,
+      "airspeed_error_kt": 0.765
+    },
+    {
+      "clearance_index": 46,
+      "snapshot": "completion",
+      "time_s": 2539.033,
+      "altitude_error_ft": 24.468,
+      "heading_error_deg": 0.173,
+      "airspeed_error_kt": 0.026
+    },
+    {
+      "clearance_index": 46,
+      "snapshot": "ending",
+      "time_s": 2684.0,
+      "altitude_error_ft": 30.171,
+      "heading_error_deg": 0.796,
+      "airspeed_error_kt": 0.4
+    },
+    {
+      "clearance_index": 47,
+      "snapshot": "issue",
+      "time_s": 2570.0,
+      "altitude_error_ft": 24.529,
+      "heading_error_deg": 0.173,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 47,
+      "snapshot": "execution",
+      "time_s": 2574.558,
+      "altitude_error_ft": 24.483,
+      "heading_error_deg": 2.08,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 47,
+      "snapshot": "completion",
+      "time_s": 2585.25,
+      "altitude_error_ft": 24.57,
+      "heading_error_deg": 1.087,
+      "airspeed_error_kt": 0.4
+    },
+    {
+      "clearance_index": 47,
+      "snapshot": "ending",
+      "time_s": 2739.0,
+      "altitude_error_ft": 30.168,
+      "heading_error_deg": 0.792,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 48,
+      "snapshot": "issue",
+      "time_s": 2628.0,
+      "altitude_error_ft": 24.457,
+      "heading_error_deg": 0.792,
+      "airspeed_error_kt": 0.4
+    },
+    {
+      "clearance_index": 48,
+      "snapshot": "execution",
+      "time_s": 2633.483,
+      "altitude_error_ft": 22.645,
+      "heading_error_deg": 0.79,
+      "airspeed_error_kt": 0.4
+    },
+    {
+      "clearance_index": 48,
+      "snapshot": "completion",
+      "time_s": 2641.733,
+      "altitude_error_ft": 34.086,
+      "heading_error_deg": 0.789,
+      "airspeed_error_kt": 0.4
+    },
+    {
+      "clearance_index": 48,
+      "snapshot": "ending",
+      "time_s": 2849.0,
+      "altitude_error_ft": 33.018,
+      "heading_error_deg": 0.177,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 49,
+      "snapshot": "issue",
+      "time_s": 2685.0,
+      "altitude_error_ft": 30.171,
+      "heading_error_deg": 0.796,
+      "airspeed_error_kt": 0.4
+    },
+    {
+      "clearance_index": 49,
+      "snapshot": "execution",
+      "time_s": 2689.467,
+      "altitude_error_ft": 30.171,
+      "heading_error_deg": 0.796,
+      "airspeed_error_kt": 0.459
+    },
+    {
+      "clearance_index": 49,
+      "snapshot": "completion",
+      "time_s": 2701.175,
+      "altitude_error_ft": 30.168,
+      "heading_error_deg": 0.794,
+      "airspeed_error_kt": 0.087
+    },
+    {
+      "clearance_index": 49,
+      "snapshot": "ending",
+      "time_s": 2794.0,
+      "altitude_error_ft": 33.014,
+      "heading_error_deg": 0.176,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 50,
+      "snapshot": "issue",
+      "time_s": 2740.0,
+      "altitude_error_ft": 30.168,
+      "heading_error_deg": 0.792,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 50,
+      "snapshot": "execution",
+      "time_s": 2744.683,
+      "altitude_error_ft": 30.163,
+      "heading_error_deg": 2.343,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 50,
+      "snapshot": "completion",
+      "time_s": 2756.433,
+      "altitude_error_ft": 32.756,
+      "heading_error_deg": 1.115,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 50,
+      "snapshot": "ending",
+      "time_s": 2879.0,
+      "altitude_error_ft": 26.121,
+      "heading_error_deg": 0.172,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 51,
+      "snapshot": "issue",
+      "time_s": 2795.0,
+      "altitude_error_ft": 33.014,
+      "heading_error_deg": 0.176,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 51,
+      "snapshot": "ending",
+      "time_s": 2879.0,
+      "altitude_error_ft": 26.121,
+      "heading_error_deg": 0.172,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 52,
+      "snapshot": "issue",
+      "time_s": 2850.0,
+      "altitude_error_ft": 33.018,
+      "heading_error_deg": 0.177,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 52,
+      "snapshot": "ending",
+      "time_s": 2879.0,
+      "altitude_error_ft": 26.121,
+      "heading_error_deg": 0.172,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 53,
+      "snapshot": "issue",
+      "time_s": 2904.0,
+      "altitude_error_ft": 17.931,
+      "heading_error_deg": 1.951,
+      "airspeed_error_kt": 0.125
+    },
+    {
+      "clearance_index": 53,
+      "snapshot": "execution",
+      "time_s": 2909.475,
+      "altitude_error_ft": 19.135,
+      "heading_error_deg": 1.954,
+      "airspeed_error_kt": 0.125
+    },
+    {
+      "clearance_index": 53,
+      "snapshot": "completion",
+      "time_s": 2935.592,
+      "altitude_error_ft": 22.912,
+      "heading_error_deg": 1.946,
+      "airspeed_error_kt": 0.125
+    },
+    {
+      "clearance_index": 53,
+      "snapshot": "ending",
+      "time_s": 3073.0,
+      "altitude_error_ft": 24.883,
+      "heading_error_deg": 0.762,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 54,
+      "snapshot": "issue",
+      "time_s": 2956.0,
+      "altitude_error_ft": 25.205,
+      "heading_error_deg": 1.94,
+      "airspeed_error_kt": 0.125
+    },
+    {
+      "clearance_index": 54,
+      "snapshot": "execution",
+      "time_s": 2960.792,
+      "altitude_error_ft": 25.261,
+      "heading_error_deg": 3.046,
+      "airspeed_error_kt": 0.125
+    },
+    {
+      "clearance_index": 54,
+      "snapshot": "completion",
+      "time_s": 2965.542,
+      "altitude_error_ft": 24.931,
+      "heading_error_deg": 1.555,
+      "airspeed_error_kt": 0.125
+    },
+    {
+      "clearance_index": 54,
+      "snapshot": "ending",
+      "time_s": 3127.0,
+      "altitude_error_ft": 20.688,
+      "heading_error_deg": 0.753,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 55,
+      "snapshot": "issue",
+      "time_s": 3014.0,
+      "altitude_error_ft": 24.9,
+      "heading_error_deg": 0.761,
+      "airspeed_error_kt": 0.125
+    },
+    {
+      "clearance_index": 55,
+      "snapshot": "execution",
+      "time_s": 3036.925,
+      "altitude_error_ft": 24.906,
+      "heading_error_deg": 0.761,
+      "airspeed_error_kt": 0.61
+    },
+    {
+      "clearance_index": 55,
+      "snapshot": "completion",
+      "time_s": 3051.583,
+      "altitude_error_ft": 24.906,
+      "heading_error_deg": 0.761,
+      "airspeed_error_kt": 0.244
+    },
+    {
+      "clearance_index": 55,
+      "snapshot": "ending",
+      "time_s": 3189.0,
+      "altitude_error_ft": 32.138,
+      "heading_error_deg": 0.546,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 56,
+      "snapshot": "issue",
+      "time_s": 3074.0,
+      "altitude_error_ft": 24.883,
+      "heading_error_deg": 0.762,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 56,
+      "snapshot": "execution",
+      "time_s": 3079.633,
+      "altitude_error_ft": 30.92,
+      "heading_error_deg": 0.756,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 56,
+      "snapshot": "completion",
+      "time_s": 3185.858,
+      "altitude_error_ft": 23.666,
+      "heading_error_deg": 0.546,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 56,
+      "snapshot": "ending",
+      "time_s": 3249.0,
+      "altitude_error_ft": 23.956,
+      "heading_error_deg": 0.541,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 57,
+      "snapshot": "issue",
+      "time_s": 3128.0,
+      "altitude_error_ft": 29.102,
+      "heading_error_deg": 0.753,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 57,
+      "snapshot": "execution",
+      "time_s": 3132.425,
+      "altitude_error_ft": 28.957,
+      "heading_error_deg": 0.118,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 57,
+      "snapshot": "completion",
+      "time_s": 3153.283,
+      "altitude_error_ft": 24.962,
+      "heading_error_deg": 1.7,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 57,
+      "snapshot": "ending",
+      "time_s": 3309.0,
+      "altitude_error_ft": 42.188,
+      "heading_error_deg": 0.539,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 58,
+      "snapshot": "issue",
+      "time_s": 3190.0,
+      "altitude_error_ft": 24.607,
+      "heading_error_deg": 0.544,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 58,
+      "snapshot": "execution",
+      "time_s": 3195.033,
+      "altitude_error_ft": 24.996,
+      "heading_error_deg": 0.544,
+      "airspeed_error_kt": 0.865
+    },
+    {
+      "clearance_index": 58,
+      "snapshot": "completion",
+      "time_s": 3208.15,
+      "altitude_error_ft": 21.82,
+      "heading_error_deg": 0.543,
+      "airspeed_error_kt": 0.025
+    },
+    {
+      "clearance_index": 58,
+      "snapshot": "ending",
+      "time_s": 3359.0,
+      "altitude_error_ft": 40.898,
+      "heading_error_deg": 0.553,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 59,
+      "snapshot": "issue",
+      "time_s": 3250.0,
+      "altitude_error_ft": 23.956,
+      "heading_error_deg": 0.541,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 59,
+      "snapshot": "execution",
+      "time_s": 3255.592,
+      "altitude_error_ft": 21.371,
+      "heading_error_deg": 0.543,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 59,
+      "snapshot": "completion",
+      "time_s": 3271.45,
+      "altitude_error_ft": 22.071,
+      "heading_error_deg": 0.546,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 59,
+      "snapshot": "ending",
+      "time_s": 3489.0,
+      "altitude_error_ft": 42.968,
+      "heading_error_deg": 0.553,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 60,
+      "snapshot": "issue",
+      "time_s": 3310.0,
+      "altitude_error_ft": 42.188,
+      "heading_error_deg": 0.539,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 60,
+      "snapshot": "execution",
+      "time_s": 3314.625,
+      "altitude_error_ft": 42.155,
+      "heading_error_deg": 2.375,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 60,
+      "snapshot": "completion",
+      "time_s": 3325.217,
+      "altitude_error_ft": 40.965,
+      "heading_error_deg": 0.932,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 60,
+      "snapshot": "ending",
+      "time_s": 3404.0,
+      "altitude_error_ft": 40.998,
+      "heading_error_deg": 0.553,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 61,
+      "snapshot": "issue",
+      "time_s": 3360.0,
+      "altitude_error_ft": 40.898,
+      "heading_error_deg": 0.553,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 61,
+      "snapshot": "execution",
+      "time_s": 3364.675,
+      "altitude_error_ft": 41.029,
+      "heading_error_deg": 0.552,
+      "airspeed_error_kt": 0.812
+    },
+    {
+      "clearance_index": 61,
+      "snapshot": "completion",
+      "time_s": 3376.4,
+      "altitude_error_ft": 41.029,
+      "heading_error_deg": 0.552,
+      "airspeed_error_kt": 0.152
+    },
+    {
+      "clearance_index": 61,
+      "snapshot": "ending",
+      "time_s": 3549.0,
+      "altitude_error_ft": 42.996,
+      "heading_error_deg": 0.551,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 62,
+      "snapshot": "issue",
+      "time_s": 3405.0,
+      "altitude_error_ft": 40.998,
+      "heading_error_deg": 0.553,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 62,
+      "snapshot": "execution",
+      "time_s": 3409.508,
+      "altitude_error_ft": 40.998,
+      "heading_error_deg": 0.962,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 62,
+      "snapshot": "ending",
+      "time_s": 3422.0,
+      "altitude_error_ft": 42.209,
+      "heading_error_deg": 2.472,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 63,
+      "snapshot": "issue",
+      "time_s": 3423.0,
+      "altitude_error_ft": 42.141,
+      "heading_error_deg": 0.589,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 63,
+      "snapshot": "execution",
+      "time_s": 3427.8,
+      "altitude_error_ft": 43.034,
+      "heading_error_deg": 0.608,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 63,
+      "snapshot": "completion",
+      "time_s": 3427.8,
+      "altitude_error_ft": 43.034,
+      "heading_error_deg": 0.608,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 63,
+      "snapshot": "ending",
+      "time_s": 3599.0,
+      "altitude_error_ft": 42.875,
+      "heading_error_deg": 0.552,
+      "airspeed_error_kt": 1.0
+    },
+    {
+      "clearance_index": 64,
+      "snapshot": "issue",
+      "time_s": 3490.0,
+      "altitude_error_ft": 42.968,
+      "heading_error_deg": 0.553,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 64,
+      "snapshot": "ending",
+      "time_s": 3599.0,
+      "altitude_error_ft": 42.875,
+      "heading_error_deg": 0.552,
+      "airspeed_error_kt": 1.0
+    },
+    {
+      "clearance_index": 65,
+      "snapshot": "issue",
+      "time_s": 3550.0,
+      "altitude_error_ft": 42.996,
+      "heading_error_deg": 0.551,
+      "airspeed_error_kt": 0.0
+    },
+    {
+      "clearance_index": 65,
+      "snapshot": "ending",
+      "time_s": 3599.0,
+      "altitude_error_ft": 42.875,
+      "heading_error_deg": 0.552,
+      "airspeed_error_kt": 1.0
+    }
+  ]
+}
