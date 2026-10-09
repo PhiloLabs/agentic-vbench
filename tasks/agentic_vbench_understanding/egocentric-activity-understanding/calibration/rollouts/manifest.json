@@ -1,0 +1,54 @@
+{
+  "hosting": "local-only; not yet published to LFS or an immutable external revision",
+  "local_copy_dir": "jobs/egocentric-rollout-archive/",
+  "artifacts": [
+    {
+      "file": "codex-gpt-5.6-sol.jsonl",
+      "sha256": "a60a05467aae5d0f12aa84572d76abf34b818ba69919e1f793ec4475989220c6",
+      "bytes": 78692505,
+      "format": "Harbor ATIF trajectory, one JSON record per line (session metadata, 82 steps, final metrics)",
+      "harness": "Codex CLI 0.153.3 via Harbor 0.22.0",
+      "model": "gpt-5.6-sol",
+      "reasoning": "high",
+      "job": "egocentric-gpt-5-6-sol-high-clean-20260904-r1",
+      "tool_calls": 76,
+      "official_reward": 0.0,
+      "solution": "codex-gpt-5.6-sol.solution.json",
+      "reward": "codex-gpt-5.6-sol.reward.json",
+      "status": "pre-contract evidence: run before the boundary-tolerance and prompt fixes"
+    },
+    {
+      "file": "claude-opus-4.8.jsonl.gz",
+      "sha256": "5689d2dbfce56fcb89062702091e85994451bf51ff341adcd6c01fcad23853bf",
+      "bytes": 122089747,
+      "uncompressed_bytes": 164568716,
+      "format": "gzip of Claude Code stream-json, initial and resumed segments delimited by harbor_rollout_marker records",
+      "harness": "Claude Code CLI 2.1.246 via Harbor 0.22.0",
+      "model": "claude-opus-4-8",
+      "reasoning": "high",
+      "jobs": ["egocentric-claude-opus-4.8-high-rerun", "egocentric-claude-opus-4.8-high-resume3"],
+      "tool_calls": 302,
+      "salvaged_reward": 0.033613,
+      "solution": "claude-opus-4.8.solution.json",
+      "reward": "claude-opus-4.8.reward.json",
+      "status": "interrupted diagnostic: both segments ended at provider rate limits; salvaged partial ledger"
+    }
+  ],
+  "branch_history_only": [
+    {
+      "file": "claude-opus-4.8.partial.jsonl",
+      "sha256": "be8c6e76225db57454fcc87f6b61abf9ba9d3548cde33dc5b11f37abd1fe0c75",
+      "bytes": 39911775,
+      "added_in": "157e7b4",
+      "status": "superseded interrupted Claude diagnostic"
+    },
+    {
+      "file": "codex-gpt-5.6-sol.pre-rerun.jsonl",
+      "path_in_history": "codex-gpt-5.6-sol.jsonl",
+      "sha256": "c8c9a5e0149522c63ed694a261d62df454ebf0c5ef9e2ca722dd2f820d4b2f73",
+      "bytes": 38968728,
+      "added_in": "157e7b4",
+      "status": "superseded Codex run"
+    }
+  ]
+}
