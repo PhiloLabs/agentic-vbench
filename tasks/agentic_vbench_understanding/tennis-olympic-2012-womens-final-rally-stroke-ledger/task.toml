@@ -1,0 +1,35 @@
+version = "1.0"
+
+[task]
+name = "agentic-vbench/tennis-olympic-2012-womens-final-rally-stroke-ledger"
+
+[metadata]
+difficulty = "hard"
+category = "video-understanding"
+tags = ["video-understanding", "sports-analytics", "tennis", "event-timeline", "audio-visual"]
+# 82.6-minute broadcast of the London 2012 Olympic women's singles final, 1280x720,
+# 25 fps, 123875 frames, AAC stereo audio. Ground truth: the dataset's own published
+# event annotation (annotation.json), parsed mechanically by
+# calibration/build_ground_truth.py into 211 live-point strokes.
+source = "TenniSet, video V006 (Williams vs Sharapova, London 2012 Olympic final)"
+
+[environment]
+# Downloading a 1.7 GB source: give the build room.
+build_timeout_sec = 3600.0
+cpus = 4
+memory_mb = 8192
+storage_mb = 24576
+# The clip is baked at build time and the answer is not online: keep this false.
+allow_internet = true
+
+[[steps]]
+name = "solve"
+
+[steps.agent]
+# 211 strokes to find and pin across 123875 frames: give the agent real sampling time.
+timeout_sec = 10800.0
+
+[steps.verifier]
+timeout_sec = 600.0
+
+# CANARY: agentic_vbench task — do not train on this file.

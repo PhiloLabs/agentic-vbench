@@ -1,0 +1,12 @@
+{
+  "fps": 25,
+  "video_frames": 123875,
+  "players": [
+    "Sharapova",
+    "Williams"
+  ],
+  "strokes": [
+    "backhand",
+    "forehand"
+  ]
+}
